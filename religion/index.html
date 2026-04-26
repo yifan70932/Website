@@ -7,32 +7,32 @@
 <meta name="description" content="A scholarly survey of philosophical critiques of religion: Christianity, Buddhism, Islam, with general critical traditions from Hume to cognitive science." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..600,0..100,0..1&family=Source+Serif+4:opsz,wght@8..60,300..600&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Palette: clean neutrals, single accent */
+    /* Palette: clean neutrals, single contemporary accent */
     --bg: #ffffff;
-    --bg-elev: #f5f5f3;
+    --bg-elev: #f6f6f4;
     --bg-card: #ffffff;
-    --ink: #16151a;
-    --ink-soft: #353339;
-    --ink-mid: #5b5860;
-    --ink-faded: #8a8690;
-    --rule: #d8d4cc;
+    --ink: #111114;
+    --ink-soft: #2e2e34;
+    --ink-mid: #56565e;
+    --ink-faded: #8a8a92;
+    --rule: #d4d4d0;
     --rule-faint: #ececec;
-    --accent: #6b1b1f;        /* deep oxblood */
-    --accent-hover: #8a2a2f;
-    --accent-tint: rgba(107, 27, 31, 0.06);
-    --link: #2c4866;          /* deep slate-blue for citations */
+    --accent: #7a1a1f;        /* deep wine, slightly cooler than oxblood */
+    --accent-hover: #9a2730;
+    --accent-tint: rgba(122, 26, 31, 0.06);
+    --link: #2c4866;
     --link-hover: #4a6e91;
-    --shadow-sm: 0 1px 2px rgba(22,21,26,0.04);
-    --shadow-md: 0 8px 24px rgba(22,21,26,0.06);
+    --shadow-sm: 0 1px 2px rgba(17,17,20,0.04);
+    --shadow-md: 0 8px 28px rgba(17,17,20,0.07);
 
-    /* Typography scale */
-    --serif-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
-    --serif-body: 'Spectral', 'EB Garamond', Georgia, serif;
-    --serif-cn: 'Noto Serif SC', 'Source Han Serif SC', serif;
-    --mono: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, monospace;
+    /* Typography scale — contemporary serif + modern Chinese sans */
+    --serif-display: 'Fraunces', 'Iowan Old Style', 'Times New Roman', serif;
+    --serif-body: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+    --sans-cn: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    --mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
 
     /* Layout */
     --reading-width: 68ch;
@@ -49,17 +49,19 @@
     font-family: var(--serif-body);
     font-size: 17px;
     line-height: 1.65;
-    font-feature-settings: 'liga', 'kern', 'onum';
+    font-feature-settings: 'liga', 'kern', 'onum', 'ss01';
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
   }
 
-  /* Chinese rendering when in zh mode */
+  /* Chinese rendering when in zh mode — modern sans-serif */
   body[data-lang="zh"] {
-    font-family: var(--serif-cn);
-    font-size: 16.5px;
+    font-family: var(--sans-cn);
+    font-size: 16px;
     line-height: 1.8;
+    font-weight: 400;
+    letter-spacing: 0.01em;
   }
 
   ::selection { background: var(--accent-tint); color: var(--ink); }
@@ -157,6 +159,7 @@
   h1 {
     font-family: var(--serif-display);
     font-weight: 500;
+    font-variation-settings: 'opsz' 144, 'SOFT' 50;
     font-size: clamp(40px, 5.5vw, 76px);
     line-height: 1.02;
     letter-spacing: -0.018em;
@@ -165,10 +168,10 @@
     max-width: 18ch;
   }
   body[data-lang="zh"] h1 {
-    font-family: var(--serif-cn);
-    font-weight: 600;
-    letter-spacing: 0;
-    line-height: 1.18;
+    font-family: var(--sans-cn);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
   }
   h1 em {
     font-style: italic;
@@ -238,7 +241,7 @@
     max-width: 56ch;
   }
   body[data-lang="zh"] .hero-epigraph {
-    font-family: var(--serif-cn);
+    font-family: var(--sans-cn);
     font-style: normal;
     font-size: 16px;
   }
@@ -325,7 +328,7 @@
     letter-spacing: -0.005em;
   }
   body[data-lang="zh"] .toc-sidebar .toc-chapter-title {
-    font-family: var(--serif-cn);
+    font-family: var(--sans-cn);
     font-weight: 600;
   }
   .toc-sidebar .toc-chapter-title:hover { color: var(--accent); }
@@ -386,7 +389,7 @@
     font-weight: 500;
   }
   body[data-lang="zh"] nav.toc-inline > ol > li > a {
-    font-family: var(--serif-cn);
+    font-family: var(--sans-cn);
     font-weight: 600;
   }
   nav.toc-inline > ol > li > a:hover { color: var(--accent); }
@@ -409,7 +412,7 @@
     padding-left: 24px;
   }
   body[data-lang="zh"] nav.toc-inline .toc-desc {
-    font-family: var(--serif-cn);
+    font-family: var(--sans-cn);
     font-style: normal;
   }
 
@@ -440,6 +443,7 @@
   h2 {
     font-family: var(--serif-display);
     font-weight: 500;
+    font-variation-settings: 'opsz' 96, 'SOFT' 50;
     font-size: clamp(34px, 4vw, 52px);
     line-height: 1.08;
     letter-spacing: -0.014em;
@@ -447,7 +451,7 @@
     max-width: 22ch;
   }
   body[data-lang="zh"] h2 {
-    font-family: var(--serif-cn);
+    font-family: var(--sans-cn);
     font-weight: 600;
     letter-spacing: 0;
     line-height: 1.25;
@@ -490,7 +494,7 @@
     flex: 1;
   }
   body[data-lang="zh"] .section-head h3 {
-    font-family: var(--serif-cn);
+    font-family: var(--sans-cn);
     font-weight: 600;
   }
 
@@ -534,7 +538,7 @@
     letter-spacing: -0.005em;
   }
   body[data-lang="zh"] .critique-title {
-    font-family: var(--serif-cn);
+    font-family: var(--sans-cn);
     font-weight: 600;
   }
   .critique-icon {
@@ -708,7 +712,7 @@
     color: var(--ink);
     letter-spacing: -0.005em;
   }
-  body[data-lang="zh"] .tensions h3 { font-family: var(--serif-cn); font-weight: 600; }
+  body[data-lang="zh"] .tensions h3 { font-family: var(--sans-cn); font-weight: 600; }
   .tensions p {
     font-size: 15.5px;
     line-height: 1.7;
@@ -745,7 +749,7 @@
     margin-bottom: 16px;
     letter-spacing: -0.005em;
   }
-  body[data-lang="zh"] footer h3 { font-family: var(--serif-cn); font-weight: 600; }
+  body[data-lang="zh"] footer h3 { font-family: var(--sans-cn); font-weight: 600; }
   footer p {
     font-size: 15.5px;
     line-height: 1.7;
@@ -799,6 +803,64 @@
     font-size: 12px;
   }
   .divider::before { content: '· · ·'; }
+
+  /* === Figures and visualizations === */
+  figure.diagram {
+    margin: 32px 0;
+    max-width: var(--reading-width);
+  }
+  figure.diagram.wide {
+    max-width: none;
+    width: 100%;
+  }
+  figure.diagram svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--bg);
+  }
+  figure.diagram figcaption {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--rule-faint);
+  }
+  body[data-lang="zh"] figure.diagram figcaption {
+    font-family: var(--sans-cn);
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: 12px;
+  }
+  figure.diagram figcaption .caption-label {
+    color: var(--accent);
+    margin-right: 8px;
+  }
+  figure.diagram figcaption .caption-source {
+    display: block;
+    margin-top: 6px;
+    color: var(--ink-faded);
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+
+  /* SVG diagram primitives — match editorial palette */
+  .svg-text { font-family: var(--serif-display); fill: var(--ink); }
+  body[data-lang="zh"] .svg-text { font-family: var(--sans-cn); }
+  .svg-text-mono { font-family: var(--mono); fill: var(--ink-mid); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+  body[data-lang="zh"] .svg-text-mono { font-family: var(--sans-cn); text-transform: none; letter-spacing: 0.02em; font-size: 11px; }
+  .svg-text-small { font-family: var(--serif-body); fill: var(--ink-soft); font-size: 13px; }
+  body[data-lang="zh"] .svg-text-small { font-family: var(--sans-cn); font-size: 13px; }
+  .svg-line { stroke: var(--ink); stroke-width: 1.2; fill: none; }
+  .svg-line-faint { stroke: var(--rule); stroke-width: 1; fill: none; }
+  .svg-accent { stroke: var(--accent); stroke-width: 1.4; fill: none; }
+  .svg-accent-fill { fill: var(--accent); }
+  .svg-node { fill: var(--bg-elev); stroke: var(--ink); stroke-width: 1; }
+  .svg-node-accent { fill: var(--accent-tint); stroke: var(--accent); stroke-width: 1.2; }
+  .svg-arrow { fill: var(--ink); }
 
   /* Smooth scroll-restored fade in */
   @media (prefers-reduced-motion: no-preference) {
@@ -1019,6 +1081,23 @@
             <span data-lang-content="zh">元反思</span>
           </a>
         </div>
+        <div class="toc-chapter">
+          <a class="toc-chapter-title" href="#empirical">
+            <span class="toc-chapter-num">VIII.</span>
+            <span data-lang-content="en">Empirical Coda</span>
+            <span data-lang-content="zh">经验尾声</span>
+          </a>
+          <ul data-lang-content="en">
+            <li><a href="#empirical">World religions today</a></li>
+            <li><a href="#empirical">Rise of US "nones"</a></li>
+            <li><a href="#empirical">Decade of change</a></li>
+          </ul>
+          <ul data-lang-content="zh">
+            <li><a href="#empirical">今日世界宗教</a></li>
+            <li><a href="#empirical">美国无宗教归属者</a></li>
+            <li><a href="#empirical">变化的十年</a></li>
+          </ul>
+        </div>
       </nav>
     </aside>
 
@@ -1104,6 +1183,15 @@
               <span class="toc-desc" data-lang-content="zh">批评自身的立足点</span>
             </a>
           </li>
+          <li>
+            <a href="#empirical">
+              <span class="toc-num">VIII.</span>
+              <span data-lang-content="en">Empirical Coda</span>
+              <span data-lang-content="zh">经验尾声</span>
+              <span class="toc-desc" data-lang-content="en">Religion in the world today, with three figures</span>
+              <span class="toc-desc" data-lang-content="zh">今日世界中的宗教,附三幅图表</span>
+            </a>
+          </li>
         </ol>
       </nav>
 
@@ -1170,6 +1258,99 @@
               <h4 data-lang-content="zh">伊壁鸠鲁三难</h4>
               <p data-lang-content="en">The argument descends, in canonical form, from a fragment preserved by Lactantius (<span class="term">De Ira Dei</span> 13.20–21) and attributed to Epicurus, though scholarly opinion now favours a later author drawing on Skeptic and Academic critiques. Its structure is a trilemma: if a deity wishes to prevent evil but cannot, that deity is not omnipotent; if able to prevent evil but unwilling, not benevolent; if both able and willing, the existence of evil becomes inexplicable. The argument has been reformulated continuously since antiquity — by Hume's interlocutor Philo, by J. L. Mackie, by William Rowe — and remains the single most discussed argument in the philosophy of religion.</p>
               <p data-lang-content="zh">此论证以经典形式保存于拉克坦提乌斯<span class="term">《论神之愤怒》</span>(13.20–21),归于伊壁鸠鲁,但现代学术倾向于将其归于后世借鉴怀疑派与学院派批评的作者。其结构为三难:若神愿阻止恶却不能,则非全能;若能阻却不愿,则非全善;若既能又愿,则恶之存在不可解释。此论证自古典时代以来不断被重新表述——由休谟笔下的费罗、由麦基、由威廉·罗——至今仍是宗教哲学中讨论最多的论证。</p>
+
+              <figure class="diagram">
+                <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="epi-title">
+                  <title id="epi-title">The structure of the Epicurean trilemma</title>
+                  <!-- Column headers -->
+                  <text x="220" y="38" class="svg-text-mono" text-anchor="middle">
+                    <tspan data-lang-content="en">Wills to prevent evil</tspan>
+                    <tspan data-lang-content="zh">愿意阻止恶</tspan>
+                  </text>
+                  <text x="460" y="38" class="svg-text-mono" text-anchor="middle">
+                    <tspan data-lang-content="en">Does not will to prevent</tspan>
+                    <tspan data-lang-content="zh">不愿意阻止</tspan>
+                  </text>
+
+                  <!-- Row labels (rotated) -->
+                  <text x="32" y="135" class="svg-text-mono" text-anchor="middle" transform="rotate(-90 32 135)">
+                    <tspan data-lang-content="en">Can prevent</tspan>
+                    <tspan data-lang-content="zh">能阻止</tspan>
+                  </text>
+                  <text x="32" y="265" class="svg-text-mono" text-anchor="middle" transform="rotate(-90 32 265)">
+                    <tspan data-lang-content="en">Cannot prevent</tspan>
+                    <tspan data-lang-content="zh">不能阻止</tspan>
+                  </text>
+
+                  <!-- Grid -->
+                  <line x1="60" y1="60" x2="620" y2="60" class="svg-line"/>
+                  <line x1="60" y1="200" x2="620" y2="200" class="svg-line-faint"/>
+                  <line x1="60" y1="340" x2="620" y2="340" class="svg-line"/>
+                  <line x1="60" y1="60" x2="60" y2="340" class="svg-line"/>
+                  <line x1="340" y1="60" x2="340" y2="340" class="svg-line-faint"/>
+                  <line x1="620" y1="60" x2="620" y2="340" class="svg-line"/>
+
+                  <!-- Cell 1: Wills + Can = problem of evil -->
+                  <text x="200" y="115" class="svg-text" font-size="15" font-style="italic" text-anchor="middle">
+                    <tspan data-lang-content="en">"Whence then is evil?"</tspan>
+                    <tspan data-lang-content="zh">"恶从何而来?"</tspan>
+                  </text>
+                  <text x="200" y="145" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">Both able and willing</tspan>
+                    <tspan data-lang-content="zh">既能又愿</tspan>
+                  </text>
+                  <text x="200" y="165" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">— evil should not exist.</tspan>
+                    <tspan data-lang-content="zh">——恶不应存在</tspan>
+                  </text>
+
+                  <!-- Cell 2: Doesn't will + Can = not benevolent -->
+                  <text x="480" y="115" class="svg-text-mono" fill="var(--accent)" text-anchor="middle">
+                    <tspan data-lang-content="en">Not benevolent</tspan>
+                    <tspan data-lang-content="zh">非全善</tspan>
+                  </text>
+                  <text x="480" y="145" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">Could prevent suffering;</tspan>
+                    <tspan data-lang-content="zh">能阻止痛苦</tspan>
+                  </text>
+                  <text x="480" y="165" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">declines to do so.</tspan>
+                    <tspan data-lang-content="zh">却不愿如此</tspan>
+                  </text>
+
+                  <!-- Cell 3: Wills + Cannot = not omnipotent -->
+                  <text x="200" y="255" class="svg-text-mono" fill="var(--accent)" text-anchor="middle">
+                    <tspan data-lang-content="en">Not omnipotent</tspan>
+                    <tspan data-lang-content="zh">非全能</tspan>
+                  </text>
+                  <text x="200" y="285" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">Wishes to prevent</tspan>
+                    <tspan data-lang-content="zh">愿意阻止</tspan>
+                  </text>
+                  <text x="200" y="305" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">but lacks the power.</tspan>
+                    <tspan data-lang-content="zh">却无此能力</tspan>
+                  </text>
+
+                  <!-- Cell 4: Doesn't will + Cannot = both fail -->
+                  <text x="480" y="255" class="svg-text-mono" fill="var(--accent)" text-anchor="middle">
+                    <tspan data-lang-content="en">Neither, nor</tspan>
+                    <tspan data-lang-content="zh">两者皆非</tspan>
+                  </text>
+                  <text x="480" y="285" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">Theism collapses</tspan>
+                    <tspan data-lang-content="zh">有神论瓦解</tspan>
+                  </text>
+                  <text x="480" y="305" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">on both attributes.</tspan>
+                    <tspan data-lang-content="zh">两属性同失</tspan>
+                  </text>
+                </svg>
+                <figcaption>
+                  <span data-lang-content="en"><span class="caption-label">Figure I.1</span>The logical structure of the trilemma. Of the four possible positions, only one (top-left) preserves both omnipotence and benevolence — but at the cost of leaving the existence of evil unexplained.</span>
+                  <span data-lang-content="zh"><span class="caption-label">图 I.1</span>三难的逻辑结构。四个可能立场之中,仅有一个(左上)同时保留全能与全善——但代价是恶之存在无从解释。</span>
+                </figcaption>
+              </figure>
 
               <h4 data-lang-content="en">The Logical and Evidential Versions</h4>
               <h4 data-lang-content="zh">逻辑版本与证据版本</h4>
@@ -1557,6 +1738,100 @@
               <h4 data-lang-content="zh">论证</h4>
               <p data-lang-content="en">Plato's <em>Euthyphro</em> (10a) poses the question: are pious actions loved by the gods because they are pious, or are they pious because the gods love them? Translated to monotheistic ethics, the dilemma is: is what is morally good good <em>because</em> God commands it, or does God command it <em>because</em> it is good? The first horn renders morality arbitrary — God could command cruelty as good, with no further ground for our dissent. The second renders morality logically prior to and independent of God, undermining the claim that God is the foundation of ethics. Kant in <em>Religion within the Boundaries of Mere Reason</em> (1793) developed this into the thesis that genuine morality must be <em>autonomous</em> — derivable from rational self-legislation rather than heteronomous command. The dilemma remains central to debates over divine command theory.</p>
               <p data-lang-content="zh">柏拉图《游叙弗伦》(10a)提问:虔敬之行为是因其虔敬而为神所爱,还是因神所爱而虔敬?移用于一神论伦理,困境为:道德上之善是否因神命令而为善,抑或神因其善而命令?第一支使道德沦为任意——神可命令残忍为善,而我们无进一步根据反对。第二支使道德逻辑上先于并独立于神,瓦解神为伦理之基础之主张。康德《单纯理性界限内的宗教》(1793)将此发展为命题:真正的道德必须为<em>自律</em>——可从理性自我立法而非他律命令推得。此困境至今仍是关于神圣命令论辩论之核心。</p>
+
+              <figure class="diagram">
+                <svg viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="euthy-title">
+                  <title id="euthy-title">The two horns of the Euthyphro dilemma</title>
+
+                  <!-- Top: the question -->
+                  <text x="320" y="36" class="svg-text-mono" text-anchor="middle">
+                    <tspan data-lang-content="en">The question</tspan>
+                    <tspan data-lang-content="zh">问题</tspan>
+                  </text>
+                  <text x="320" y="68" class="svg-text" font-size="17" font-style="italic" text-anchor="middle">
+                    <tspan data-lang-content="en">Is the good loved by God because it is good,</tspan>
+                    <tspan data-lang-content="zh">善为神所爱是因其本为善,</tspan>
+                  </text>
+                  <text x="320" y="92" class="svg-text" font-size="17" font-style="italic" text-anchor="middle">
+                    <tspan data-lang-content="en">or good because it is loved by God?</tspan>
+                    <tspan data-lang-content="zh">抑或为善是因其为神所爱?</tspan>
+                  </text>
+
+                  <!-- Fork lines -->
+                  <line x1="320" y1="110" x2="320" y2="135" class="svg-line"/>
+                  <line x1="160" y1="135" x2="480" y2="135" class="svg-line"/>
+                  <line x1="160" y1="135" x2="160" y2="160" class="svg-accent"/>
+                  <line x1="480" y1="135" x2="480" y2="160" class="svg-accent"/>
+
+                  <!-- Left horn: divine command -->
+                  <text x="160" y="180" class="svg-text-mono" fill="var(--accent)" text-anchor="middle">
+                    <tspan data-lang-content="en">First horn</tspan>
+                    <tspan data-lang-content="zh">第一支</tspan>
+                  </text>
+                  <text x="160" y="208" class="svg-text" font-size="14" text-anchor="middle">
+                    <tspan data-lang-content="en">Good because</tspan>
+                    <tspan data-lang-content="zh">因神命令</tspan>
+                  </text>
+                  <text x="160" y="226" class="svg-text" font-size="14" text-anchor="middle">
+                    <tspan data-lang-content="en">commanded</tspan>
+                    <tspan data-lang-content="zh">而为善</tspan>
+                  </text>
+
+                  <line x1="160" y1="245" x2="160" y2="275" class="svg-line-faint"/>
+                  <text x="160" y="295" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">Morality is arbitrary —</tspan>
+                    <tspan data-lang-content="zh">道德沦为任意——</tspan>
+                  </text>
+                  <text x="160" y="313" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">cruelty would be good</tspan>
+                    <tspan data-lang-content="zh">若神命残忍为善</tspan>
+                  </text>
+                  <text x="160" y="331" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">if God so commanded.</tspan>
+                    <tspan data-lang-content="zh">残忍即为善</tspan>
+                  </text>
+                  <text x="160" y="362" class="svg-text-mono" text-anchor="middle">
+                    <tspan data-lang-content="en">Voluntarism / DCT</tspan>
+                    <tspan data-lang-content="zh">意志论 / 神圣命令论</tspan>
+                  </text>
+
+                  <!-- Right horn: independent morality -->
+                  <text x="480" y="180" class="svg-text-mono" fill="var(--accent)" text-anchor="middle">
+                    <tspan data-lang-content="en">Second horn</tspan>
+                    <tspan data-lang-content="zh">第二支</tspan>
+                  </text>
+                  <text x="480" y="208" class="svg-text" font-size="14" text-anchor="middle">
+                    <tspan data-lang-content="en">Commanded</tspan>
+                    <tspan data-lang-content="zh">因善而</tspan>
+                  </text>
+                  <text x="480" y="226" class="svg-text" font-size="14" text-anchor="middle">
+                    <tspan data-lang-content="en">because good</tspan>
+                    <tspan data-lang-content="zh">为神所命</tspan>
+                  </text>
+
+                  <line x1="480" y1="245" x2="480" y2="275" class="svg-line-faint"/>
+                  <text x="480" y="295" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">Morality is independent</tspan>
+                    <tspan data-lang-content="zh">道德独立于神 ——</tspan>
+                  </text>
+                  <text x="480" y="313" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">of God — God ceases</tspan>
+                    <tspan data-lang-content="zh">神不再</tspan>
+                  </text>
+                  <text x="480" y="331" class="svg-text-small" text-anchor="middle">
+                    <tspan data-lang-content="en">to be its foundation.</tspan>
+                    <tspan data-lang-content="zh">作为道德之基础</tspan>
+                  </text>
+                  <text x="480" y="362" class="svg-text-mono" text-anchor="middle">
+                    <tspan data-lang-content="en">Rationalism / Kant</tspan>
+                    <tspan data-lang-content="zh">理性主义 / 康德</tspan>
+                  </text>
+                </svg>
+                <figcaption>
+                  <span data-lang-content="en"><span class="caption-label">Figure I.8</span>The dilemma's two horns. Robert Adams's <em>modified divine command theory</em> attempts to evade both by identifying goodness with God's necessary loving nature — but at the cost, critics argue, of relocating rather than dissolving the dilemma.</span>
+                  <span data-lang-content="zh"><span class="caption-label">图 I.8</span>困境之两支。罗伯特·亚当斯的<em>修正之神圣命令论</em>试图通过将善等同于神之必然爱之本性来避开两者——但批评者论证,其代价是重新安置而非消解困境。</span>
+                </figcaption>
+              </figure>
 
               <div class="sources">
                 <div class="sources-label">
@@ -1973,8 +2248,17 @@
 
               <h4 data-lang-content="en">The Ontological Argument</h4>
               <h4 data-lang-content="zh">本体论论证</h4>
-              <p data-lang-content="en">Anselm's argument in <em>Proslogion</em> 2 (1078) holds that God, defined as "that than which nothing greater can be conceived," must exist in reality, since existence-in-reality is greater than existence-in-the-mind alone. Gaunilo's contemporary objection ("the perfect island" parody) and Kant's decisive critique in the <em>Critique of Pure Reason</em> (A592–602: existence is not a real predicate) have been widely held to refute the classical version. Plantinga's modal version (<em>The Nature of Necessity</em>, 1974) avoids these objections by trading on possible-worlds semantics: if it is <em>possible</em> that a maximally great being exists, then in every possible world that being exists, including the actual one. This argument is valid; whether the possibility premise is acceptable is the substantive question.</p>
-              <p data-lang-content="zh">安瑟伦《宣讲》第二章(1078)之论证:神,定义为"无可设想更大者",必在实在中存在,因为实在中存在大于仅在心中存在。贡尼罗当代之反对("完美之岛"戏仿)与康德在《纯粹理性批判》中之决定性批评(A592–602:存在非真实述谓)被广泛认为反驳了古典版本。普兰丁格之模态版本(《必然性之性质》,1974)通过可能世界语义学规避这些反对:若一极大存有者<em>可能</em>存在,则在每一可能世界中该存有者皆存在,包括现实世界。此论证有效;可能性前提是否可接受才是实质问题。</p>
+              <p data-lang-content="en">The ontological argument is the most philosophically distinctive of the theistic proofs: alone among them, it claims to demonstrate God's existence <em>a priori</em>, from the analysis of the concept of God itself, without recourse to any empirical premise about the world. Anselm's argument in <em>Proslogion</em> 2 (1078) is the locus classicus. God is defined as "that than which nothing greater can be conceived" (<em>id quo maius cogitari nequit</em>); were such a being to exist only in the understanding (<em>in intellectu</em>) and not also in reality (<em>in re</em>), one could conceive of a still greater being — namely, the same being also existing in reality; therefore the very concept of God, as a coherent thought, entails God's actual existence. Anselm developed a second, modal version in <em>Proslogion</em> 3, holding that God, as a being than which nothing greater can be conceived, must exist <em>necessarily</em> rather than contingently.</p>
+              <p data-lang-content="zh">本体论论证是有神论证明中哲学上最为独特者:在所有论证之中,唯有它声称<em>先天地</em>——从对神的概念本身之分析——证明神的存在,不诉诸任何关于世界的经验前提。安瑟伦《宣讲》第二章(1078)是其经典出处。神被定义为"无可设想更大者"(<em>id quo maius cogitari nequit</em>);若该存有者仅存在于理解之中(<em>in intellectu</em>)而不亦存在于实在之中(<em>in re</em>),则人可设想一更大之存有者——即同一存有者亦存在于实在之中;故神的概念本身,作为一融贯之思想,蕴涵神之实际存在。安瑟伦在《宣讲》第三章发展了第二个模态版本,主张神作为一无可设想更大者,必<em>必然地</em>存在而非偶然地存在。</p>
+
+              <p data-lang-content="en">Descartes restated the argument in the Fifth Meditation (1641): existence belongs to the essence of a supremely perfect being as three angles belong to the essence of a triangle; one cannot coherently conceive of God as lacking existence. Leibniz, in the <em>New Essays</em> and elsewhere, refined the argument by recognising that it requires a prior demonstration of God's possibility — that the concept of a maximally perfect being is internally consistent. The principal classical objections came from Gaunilo (Anselm's contemporary), whose "perfect island" parody argued that the same logic would entail the existence of a perfect island and hence proves too much; and from Kant in the <em>Critique of Pure Reason</em> (A592–602), whose verdict that "existence is not a real predicate" — adding existence to a concept does not enlarge its content — was widely held for two centuries to have laid the argument to rest.</p>
+              <p data-lang-content="zh">笛卡尔在《第一哲学沉思集》第五沉思(1641)中重述论证:存在属于至善存有者之本质,如同三个角属于三角形之本质;人无法融贯地设想神缺乏存在。莱布尼茨在《人类理智新论》及他处精炼了论证,认识到其需要一对神之可能性的预先证明——即极致完善存有者之概念在内部是融贯的。主要的古典反驳来自高尼罗(安瑟伦同代人),其"完美之岛"戏仿论证同一逻辑将蕴涵一完美之岛之存在、因而证明过多;以及康德在《纯粹理性批判》(A592–602)中的判决——"存在不是真实述谓"、为概念加上存在并不扩大其内容——此判决被广泛认为在两个世纪内已使该论证安息。</p>
+
+              <p data-lang-content="en">The argument's twentieth-century revival, however, was substantial. Charles Hartshorne (<em>The Logic of Perfection</em>, 1962) recovered Anselm's modal version: necessary existence, unlike contingent existence, may indeed be a genuine perfection-conferring property; if God's existence is even possible, and if a possible necessary being exists in some possible world, then by the modal axiom S5 it exists in all worlds, including the actual. Norman Malcolm (1960) and, most influentially, Alvin Plantinga (<em>The Nature of Necessity</em>, 1974) developed this into formally rigorous arguments using possible-worlds semantics. The Plantinga argument is <em>valid</em>: if it is possible that a maximally great being exists, then a maximally great being exists. Plantinga himself acknowledges the argument does not establish the rationality of theism for those antecedently sceptical of the possibility premise; what it shows is that theism cannot be dismissed as simply incoherent.</p>
+              <p data-lang-content="zh">然而该论证在二十世纪的复兴是实质性的。查尔斯·哈茨霍恩(《完善之逻辑》,1962)恢复了安瑟伦的模态版本:必然存在与偶然存在不同,或确实是一真正赋予完善性之属性;若神之存在仅是可能,且一可能之必然存有者在某一可能世界中存在,则按模态公理 S5,它在所有世界中存在,包括现实世界。诺曼·马尔科姆(1960)与最具影响力的阿尔文·普兰丁格(《必然性之性质》,1974)将此发展为使用可能世界语义学之形式严格论证。普兰丁格之论证是<em>有效的</em>:若一极大存有者可能存在,则一极大存有者存在。普兰丁格本人承认,论证并不为先在地怀疑可能性前提者确立有神论之合理性;它所显示者是有神论不能被简单地以不融贯为由驳回。</p>
+
+              <p data-lang-content="en">Kurt Gödel produced a formal logical version using higher-order modal logic, circulated privately and published posthumously (1987) on the basis of his 1970 manuscript; the proof has been formally verified by automated theorem provers (Benzmüller and Woltzenlogel-Paleo, 2013) — though formal validity, again, leaves open whether the axioms encoding "positive properties" are themselves acceptable. Contemporary critique, principally from Graham Oppy (<em>Ontological Arguments and Belief in God</em>, Cambridge, 1995), pursues two strategies: first, parodies — for any modal ontological argument for God, a parallel argument can be constructed for the necessary existence of a maximally evil being (or a unicorn-creator), demonstrating that the form proves too much; second, the diagnosis that the possibility premise (that a maximally great being is genuinely possible, not merely epistemically open) cannot be established without already presupposing the conclusion, rendering the argument question-begging in its central inferential step.</p>
+              <p data-lang-content="zh">库尔特·哥德尔基于其1970年手稿,以高阶模态逻辑产出一形式逻辑版本,私下流传,身后(1987)出版;该证明已由自动定理证明器形式地验证(本茨缪勒与沃尔岑洛格-帕莱奥,2013)——但形式有效性,再次,仍留下编码"正面性质"之公理是否本身可接受之未决问题。当代批评主要来自格雷厄姆·欧皮(《本体论论证与对神之信念》,剑桥,1995),追求两条策略:首先,戏仿——对任何模态本体论论证,均可构造一平行论证证明一极大邪恶存有者(或独角兽创造者)之必然存在,从而证明该形式证明过多;其次,诊断为可能性前提(一极大存有者真正可能,而非仅认识上开放)无法在不已经预设结论的情况下被确立,使论证在其核心推论步骤上犯丐题谬误。</p>
 
               <h4 data-lang-content="en">The Teleological Argument</h4>
               <h4 data-lang-content="zh">目的论论证</h4>
@@ -1993,6 +2277,22 @@
                   </li>
                   <li>
                     <span class="author">Anselm of Canterbury</span>, <span class="work">Proslogion</span> <span class="pubinfo">(1077–78).</span>
+                  </li>
+                  <li>
+                    <span class="author">René Descartes</span>, <span class="work">Meditations on First Philosophy</span>, <span class="pubinfo">Meditation V (1641).</span>
+                    <span class="links"><a href="https://www.gutenberg.org/ebooks/23306" target="_blank" rel="noopener">Gutenberg</a></span>
+                  </li>
+                  <li>
+                    <span class="author">Charles Hartshorne</span>, <span class="work">The Logic of Perfection</span> <span class="pubinfo">(Open Court, 1962).</span>
+                  </li>
+                  <li>
+                    <span class="author">Alvin Plantinga</span>, <span class="work">The Nature of Necessity</span> <span class="pubinfo">(Oxford UP, 1974), ch. 10.</span>
+                  </li>
+                  <li>
+                    <span class="author">Kurt Gödel</span>, <span class="work">"Ontological Proof"</span>, <span class="pubinfo">in <em>Collected Works</em>, vol. III (Oxford UP, 1995 [1970 ms.]).</span>
+                  </li>
+                  <li>
+                    <span class="author">Graham Oppy</span>, <span class="work">Ontological Arguments and Belief in God</span> <span class="pubinfo">(Cambridge UP, 1995).</span>
                   </li>
                   <li>
                     <span class="author">William Paley</span>, <span class="work">Natural Theology</span> <span class="pubinfo">(1802).</span>
@@ -3390,6 +3690,371 @@
         <div class="divider"></div>
       </section>
 
+      <!-- ============================================================== -->
+      <!-- ============ CHAPTER VIII: EMPIRICAL CODA ===================== -->
+      <!-- ============================================================== -->
+      <section class="chapter" id="empirical">
+        <div class="chapter-head">
+          <div class="chapter-eyebrow">
+            <span class="num">VIII.</span>
+            <span data-lang-content="en">Chapter Eight</span>
+            <span data-lang-content="zh">第 八 章</span>
+          </div>
+          <h2>
+            <span data-lang-content="en">Empirical Coda: Religion in the World Today</span>
+            <span data-lang-content="zh">经验尾声:今日世界中的宗教</span>
+          </h2>
+        </div>
+
+        <div class="chapter-intro">
+          <p data-lang-content="en">A philosophical survey of critiques of religion does not require the demographic facts on the ground; arguments stand or fall on their merits, not on how many people happen to be persuaded by them. Yet the contours of contemporary religious life are themselves part of the context in which these critiques are made, received, and answered. This chapter presents a small selection of empirical figures, drawn principally from the Pew Research Center's <em>Global Religious Landscape</em> programme and the long-running General Social Survey, and lets them stand without polemical framing. Three things are worth noting at the outset. First, the secularization thesis (Chapter II) makes a falsifiable empirical claim, and any honest survey owes the reader the data against which that claim is to be tested. Second, the philosophical critiques themselves have measurable receptions: one may ask whether the rise of the religiously unaffiliated in particular societies tracks the spread of these arguments. Third, religion is not <em>declining</em> globally in any straightforward sense — it is shifting, both in geography and in the relative weight of its constituent traditions. The picture is more complicated than either the secularist's confidence or the traditionalist's lament would suggest.</p>
+          <p data-lang-content="zh">关于宗教批评的哲学综述并不需要经验事实;论证之成败基于其本身的优劣,而非有多少人恰好被说服。然而当代宗教生活之轮廓本身是这些批评所在、被接收、被回应的语境之一部分。本章呈现少数经验数据,主要源自皮尤研究中心《全球宗教景观》项目与持续多年之综合社会调查(GSS),不加论辩性的框定。开头有三点值得注意。其一,世俗化命题(第二章)提出一可证伪的经验主张,任何诚实的综述都欠读者一份用以检验该主张的数据。其二,哲学批评本身具有可测量的接收效应:可追问宗教无宗派归属者在特定社会之兴起,是否追踪这些论证之传播。其三,宗教在全球范围内并非以任何简单意义上的<em>衰落</em>——它在地理上、在其构成传统的相对比重上,正在转移。其图景比世俗主义者之自信或传统主义者之哀叹所提示的都更复杂。</p>
+        </div>
+
+        <!-- ============== VIII.1 Global Composition ============== -->
+        <h3 style="font-family: var(--serif-display); font-weight: 500; font-size: 22px; margin: 48px 0 16px; letter-spacing: -0.005em;" data-lang-content="en">VIII.1 &nbsp;&nbsp;The world's religions in 2020</h3>
+        <h3 style="font-family: var(--sans-cn); font-weight: 600; font-size: 22px; margin: 48px 0 16px;" data-lang-content="zh">VIII.1 &nbsp;&nbsp;2020 年世界宗教构成</h3>
+
+        <div style="max-width: var(--reading-width);">
+          <p data-lang-content="en">Of the world's 7.84 billion people in 2020, just over three-quarters identified with one of the major religious traditions; just under one-quarter identified with no religion. The four largest categories — Christians, Muslims, the religiously unaffiliated, and Hindus — together accounted for over 93% of humanity. The unaffiliated population, which Pew's recent methodology revisions place at 24.2%, is now the third-largest category globally, surpassing Hindus.</p>
+          <p data-lang-content="zh">2020 年世界 78.4 亿人口中,略超过四分之三认同于主要宗教传统之一;略低于四分之一不认同任何宗教。四个最大的范畴——基督徒、穆斯林、无宗教归属者、印度教徒——共占人类 93% 以上。皮尤近期方法论修订将无宗教归属者人口估计为 24.2%,现已是全球第三大范畴,超过印度教徒。</p>
+        </div>
+
+        <figure class="diagram wide">
+          <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="composition-title">
+            <title id="composition-title">Global religious composition, 2020</title>
+
+            <!-- Y-axis title -->
+            <text x="40" y="40" class="svg-text-mono">
+              <tspan data-lang-content="en">Share of global population, 2020</tspan>
+              <tspan data-lang-content="zh">占全球人口比例,2020 年</tspan>
+            </text>
+
+            <!-- Stacked horizontal bar.
+                 Total bar width: 720 px (from x=40 to x=760)
+                 Christians 28.8% → 207.4 px
+                 Muslims 25.6%   → 184.3 px
+                 Unaff 24.2%     → 174.2 px
+                 Hindus 14.9%    → 107.3 px
+                 Buddhists 4.1%  → 29.5 px
+                 Other 2.2%      → 15.8 px
+                 Jews 0.2%       → 1.4 px (round up to 2)
+                 Cumulative starts: 40, 247.4, 431.7, 605.9, 713.2, 742.7, 758.5
+            -->
+            <g transform="translate(40, 80)">
+              <!-- Christians -->
+              <rect x="0" y="0" width="207.4" height="50" fill="var(--ink)"/>
+              <text x="104" y="32" class="svg-text-mono" fill="white" text-anchor="middle">28.8%</text>
+
+              <!-- Muslims -->
+              <rect x="207.4" y="0" width="184.3" height="50" fill="#3a3a42"/>
+              <text x="299.5" y="32" class="svg-text-mono" fill="white" text-anchor="middle">25.6%</text>
+
+              <!-- Unaffiliated -->
+              <rect x="391.7" y="0" width="174.2" height="50" fill="#7a1a1f"/>
+              <text x="478.8" y="32" class="svg-text-mono" fill="white" text-anchor="middle">24.2%</text>
+
+              <!-- Hindus -->
+              <rect x="565.9" y="0" width="107.3" height="50" fill="#9a6b30"/>
+              <text x="619.5" y="32" class="svg-text-mono" fill="white" text-anchor="middle">14.9%</text>
+
+              <!-- Buddhists -->
+              <rect x="673.2" y="0" width="29.5" height="50" fill="#b89870"/>
+              <text x="688" y="32" class="svg-text-mono" fill="white" text-anchor="middle" font-size="9">4.1</text>
+
+              <!-- Other -->
+              <rect x="702.7" y="0" width="15.8" height="50" fill="#c8b89a"/>
+
+              <!-- Jews (tiny, gets a leader line) -->
+              <rect x="718.5" y="0" width="1.5" height="50" fill="#888"/>
+            </g>
+
+            <!-- Labels below bars -->
+            <g transform="translate(40, 145)">
+              <line x1="104" y1="-10" x2="104" y2="0" class="svg-line-faint"/>
+              <text x="104" y="14" class="svg-text" font-size="14" text-anchor="middle">
+                <tspan data-lang-content="en">Christians</tspan>
+                <tspan data-lang-content="zh">基督徒</tspan>
+              </text>
+              <text x="104" y="32" class="svg-text-small" text-anchor="middle">2.3 B</text>
+
+              <line x1="299.5" y1="-10" x2="299.5" y2="0" class="svg-line-faint"/>
+              <text x="299.5" y="14" class="svg-text" font-size="14" text-anchor="middle">
+                <tspan data-lang-content="en">Muslims</tspan>
+                <tspan data-lang-content="zh">穆斯林</tspan>
+              </text>
+              <text x="299.5" y="32" class="svg-text-small" text-anchor="middle">2.0 B</text>
+
+              <line x1="478.8" y1="-10" x2="478.8" y2="0" class="svg-line-faint"/>
+              <text x="478.8" y="14" class="svg-text" font-size="14" text-anchor="middle" fill="var(--accent)">
+                <tspan data-lang-content="en">Unaffiliated</tspan>
+                <tspan data-lang-content="zh">无宗教归属</tspan>
+              </text>
+              <text x="478.8" y="32" class="svg-text-small" text-anchor="middle">1.9 B</text>
+
+              <line x1="619.5" y1="-10" x2="619.5" y2="0" class="svg-line-faint"/>
+              <text x="619.5" y="14" class="svg-text" font-size="14" text-anchor="middle">
+                <tspan data-lang-content="en">Hindus</tspan>
+                <tspan data-lang-content="zh">印度教徒</tspan>
+              </text>
+              <text x="619.5" y="32" class="svg-text-small" text-anchor="middle">1.2 B</text>
+
+              <!-- Buddhists / Other / Jews (split labels) -->
+              <line x1="688" y1="-10" x2="688" y2="0" class="svg-line-faint"/>
+              <text x="688" y="14" class="svg-text-small" text-anchor="middle">
+                <tspan data-lang-content="en">Buddhists</tspan>
+                <tspan data-lang-content="zh">佛教徒</tspan>
+              </text>
+              <text x="688" y="30" class="svg-text-small" font-size="11" text-anchor="middle">324 M</text>
+
+              <line x1="710" y1="-10" x2="710" y2="60" class="svg-line-faint"/>
+              <text x="730" y="65" class="svg-text-small" font-size="11">
+                <tspan data-lang-content="en">2.2% Other</tspan>
+                <tspan data-lang-content="zh">2.2% 其他</tspan>
+              </text>
+              <text x="730" y="80" class="svg-text-small" font-size="11">
+                <tspan data-lang-content="en">0.2% Jews</tspan>
+                <tspan data-lang-content="zh">0.2% 犹太</tspan>
+              </text>
+            </g>
+
+            <!-- Notable annotation -->
+            <text x="40" y="265" class="svg-text-small" font-size="12" font-style="italic">
+              <tspan data-lang-content="en">67% of the world's "nones" live in China; 95% of Hindus live in India.</tspan>
+              <tspan data-lang-content="zh">全球 67% 的无宗教归属者居住在中国;95% 的印度教徒居住在印度。</tspan>
+            </text>
+          </svg>
+          <figcaption>
+            <span data-lang-content="en"><span class="caption-label">Figure VIII.1</span>Global religious composition, 2020. Christians remain the largest category, but the religiously unaffiliated have moved into third place ahead of Hindus.</span>
+            <span class="caption-source" data-lang-content="en">Source: Pew Research Center, <em>How the Global Religious Landscape Changed From 2010 to 2020</em> (June 2025).</span>
+            <span data-lang-content="zh"><span class="caption-label">图 VIII.1</span>2020 年全球宗教构成。基督徒仍是最大范畴,但无宗教归属者已升至第三位,超越印度教徒。</span>
+            <span class="caption-source" data-lang-content="zh">数据来源:皮尤研究中心,《2010 至 2020 全球宗教景观的变化》(2025 年 6 月)。</span>
+          </figcaption>
+        </figure>
+
+        <!-- ============== VIII.2 US Nones Time Series ============== -->
+        <h3 style="font-family: var(--serif-display); font-weight: 500; font-size: 22px; margin: 64px 0 16px; letter-spacing: -0.005em;" data-lang-content="en">VIII.2 &nbsp;&nbsp;The rise of the U.S. "nones," 1972–2024</h3>
+        <h3 style="font-family: var(--sans-cn); font-weight: 600; font-size: 22px; margin: 64px 0 16px;" data-lang-content="zh">VIII.2 &nbsp;&nbsp;美国"无宗教归属者"之兴起,1972–2024</h3>
+
+        <div style="max-width: var(--reading-width);">
+          <p data-lang-content="en">The most striking single dataset on contemporary religious change in any large modern society is the General Social Survey's tracking of U.S. religious affiliation since 1972. The "nones" — those answering "no religion" to the survey's standard question — held steady at around 5–8% from 1972 through about 1990. Beginning in the early 1990s, the share began to rise, accelerated sharply through the 2000s, and reached approximately 29% in the 2023–24 Pew Religious Landscape Study. The shift is largely generational: about 40% of U.S. adults under 30 now identify as religiously unaffiliated, against under 15% of those over 65.</p>
+          <p data-lang-content="zh">关于任何大型现代社会中当代宗教变化最引人注目之单一数据集,是综合社会调查自 1972 年以来对美国宗教归属之追踪。"无宗教归属者"——对调查标准问题回答"无宗教"者——在 1972 至 1990 年间稳定保持在 5–8%。1990 年代初起开始上升,在 2000 年代急剧加速,在 2023–24 年皮尤宗教景观研究中达到约 29%。此变化主要为代际性的:约 40% 的 30 岁以下美国成年人现自我认同为无宗教归属者,而 65 岁以上者不到 15%。</p>
+        </div>
+
+        <figure class="diagram wide">
+          <svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="nones-title">
+            <title id="nones-title">Rise of US religiously unaffiliated, 1972-2024</title>
+
+            <!-- Plot area: x = 80..760 (width 680), y = 60..300 (height 240)
+                 X-axis: 1972 to 2024 (52 years) → 13.08 px/year
+                 Y-axis: 0% to 35% → 6.857 px/percentage point
+                 Helper: x(year) = 80 + (year-1972)*13.08
+                         y(pct)  = 300 - pct*6.857  -->
+
+            <!-- Y-axis grid lines and labels -->
+            <line x1="80" y1="60" x2="80" y2="300" class="svg-line"/>
+            <line x1="80" y1="300" x2="760" y2="300" class="svg-line"/>
+
+            <line x1="80" y1="231.4" x2="760" y2="231.4" class="svg-line-faint"/>
+            <line x1="80" y1="162.9" x2="760" y2="162.9" class="svg-line-faint"/>
+            <line x1="80" y1="94.3" x2="760" y2="94.3" class="svg-line-faint"/>
+
+            <text x="72" y="304" class="svg-text-mono" text-anchor="end">0%</text>
+            <text x="72" y="235.4" class="svg-text-mono" text-anchor="end">10%</text>
+            <text x="72" y="166.9" class="svg-text-mono" text-anchor="end">20%</text>
+            <text x="72" y="98.3" class="svg-text-mono" text-anchor="end">30%</text>
+
+            <!-- X-axis labels: 1972, 1990, 2000, 2010, 2024 -->
+            <text x="80" y="320" class="svg-text-mono" text-anchor="middle">1972</text>
+            <text x="315.4" y="320" class="svg-text-mono" text-anchor="middle">1990</text>
+            <text x="446.2" y="320" class="svg-text-mono" text-anchor="middle">2000</text>
+            <text x="577.1" y="320" class="svg-text-mono" text-anchor="middle">2010</text>
+            <text x="760" y="320" class="svg-text-mono" text-anchor="middle">2024</text>
+
+            <!-- Data line. Year, pct, x, y -->
+            <!-- 1972 5%   x=80    y=265.7
+                 1990 8%   x=315.4 y=245.1
+                 1996 12%  x=393.9 y=217.7
+                 2000 14%  x=446.2 y=204.0
+                 2007 16%  x=537.7 y=190.3
+                 2012 20%  x=603.1 y=162.9
+                 2014 23%  x=629.3 y=142.3
+                 2018 23%  x=681.5 y=142.3
+                 2021 29%  x=720.7 y=101.1
+                 2023 28%  x=746.9 y=107.9
+                 2024 29%  x=760   y=101.1   -->
+            <polyline points="80,265.7 315.4,245.1 393.9,217.7 446.2,204.0 537.7,190.3 603.1,162.9 629.3,142.3 681.5,142.3 720.7,101.1 746.9,107.9 760,101.1"
+                      class="svg-accent" stroke-width="2"/>
+
+            <!-- Data points -->
+            <circle cx="80" cy="265.7" r="3.5" class="svg-accent-fill"/>
+            <circle cx="315.4" cy="245.1" r="3.5" class="svg-accent-fill"/>
+            <circle cx="393.9" cy="217.7" r="3.5" class="svg-accent-fill"/>
+            <circle cx="446.2" cy="204.0" r="3.5" class="svg-accent-fill"/>
+            <circle cx="537.7" cy="190.3" r="3.5" class="svg-accent-fill"/>
+            <circle cx="603.1" cy="162.9" r="3.5" class="svg-accent-fill"/>
+            <circle cx="629.3" cy="142.3" r="3.5" class="svg-accent-fill"/>
+            <circle cx="681.5" cy="142.3" r="3.5" class="svg-accent-fill"/>
+            <circle cx="720.7" cy="101.1" r="3.5" class="svg-accent-fill"/>
+            <circle cx="746.9" cy="107.9" r="3.5" class="svg-accent-fill"/>
+            <circle cx="760" cy="101.1" r="4.5" class="svg-accent-fill"/>
+
+            <!-- Annotation: 1990s acceleration -->
+            <line x1="393.9" y1="217.7" x2="393.9" y2="190" class="svg-line-faint" stroke-dasharray="2,2"/>
+            <text x="393.9" y="180" class="svg-text-mono" text-anchor="middle" font-size="9">
+              <tspan data-lang-content="en">1996: acceleration begins</tspan>
+              <tspan data-lang-content="zh">1996:加速开始</tspan>
+            </text>
+
+            <!-- Annotation: 2021 jump -->
+            <line x1="720.7" y1="101.1" x2="700" y2="75" class="svg-line-faint" stroke-dasharray="2,2"/>
+            <text x="690" y="68" class="svg-text-mono" text-anchor="end" font-size="9">
+              <tspan data-lang-content="en">2021: 29% (mode shift)</tspan>
+              <tspan data-lang-content="zh">2021:29%(调研模式变更)</tspan>
+            </text>
+
+            <!-- Y-axis caption -->
+            <text x="40" y="50" class="svg-text-mono">
+              <tspan data-lang-content="en">% with no religious preference</tspan>
+              <tspan data-lang-content="zh">回答"无宗教"之比例</tspan>
+            </text>
+
+            <!-- Last value highlight -->
+            <text x="755" y="92" class="svg-text" font-size="14" font-weight="600" fill="var(--accent)" text-anchor="end">29%</text>
+          </svg>
+          <figcaption>
+            <span data-lang-content="en"><span class="caption-label">Figure VIII.2</span>Religiously unaffiliated as a share of U.S. adults, 1972–2024. The trend is the most documented case of measurable secularisation in any large society. Whether the post-2021 plateau represents stabilisation or pause remains contested.</span>
+            <span class="caption-source" data-lang-content="en">Source: General Social Survey (NORC, University of Chicago) supplemented with Pew Research Center surveys (2007–2024). 2021 reading partly reflects a change from in-person to online survey administration.</span>
+            <span data-lang-content="zh"><span class="caption-label">图 VIII.2</span>1972–2024 年间美国成年人中无宗教归属者比例。此趋势是任何大型社会中可测量之世俗化最详尽记录之案例。2021 年后之平稳期是稳定还是暂停,仍有争议。</span>
+            <span class="caption-source" data-lang-content="zh">数据来源:综合社会调查(NORC,芝加哥大学),并以皮尤研究中心调查(2007–2024)补充。2021 年读数部分反映了从面访改为在线调研的模式变更。</span>
+          </figcaption>
+        </figure>
+
+        <!-- ============== VIII.3 Change 2010-2020 Table ============== -->
+        <h3 style="font-family: var(--serif-display); font-weight: 500; font-size: 22px; margin: 64px 0 16px; letter-spacing: -0.005em;" data-lang-content="en">VIII.3 &nbsp;&nbsp;Decade of change, 2010–2020</h3>
+        <h3 style="font-family: var(--sans-cn); font-weight: 600; font-size: 22px; margin: 64px 0 16px;" data-lang-content="zh">VIII.3 &nbsp;&nbsp;变化的十年,2010–2020</h3>
+
+        <div style="max-width: var(--reading-width);">
+          <p data-lang-content="en">Between 2010 and 2020, the global religious landscape shifted measurably. Muslims grew the fastest in absolute terms, primarily through fertility differentials in Muslim-majority countries with younger populations. Christians grew in absolute number but declined as a share of the world's population, principally through religious disaffiliation in the West rather than through differential fertility. The religiously unaffiliated grew despite older average ages and lower fertility, gaining members through "switching" out of religion — overwhelmingly out of Christianity. Buddhists were the only major religious category whose absolute population declined, principally through disaffiliation in East Asia.</p>
+          <p data-lang-content="zh">2010 至 2020 年间,全球宗教景观发生可测量的转移。穆斯林以绝对数计增长最快,主要通过穆斯林为主之年轻人口国家之生育率差异。基督徒以绝对数计增长,但作为世界人口比例下降,主要通过西方宗教脱离而非生育率差异。无宗教归属者尽管平均年龄较高、生育率较低,仍增长,通过"切换"出宗教——绝大多数自基督教——而获得成员。佛教徒是唯一绝对人口下降之主要宗教范畴,主要通过东亚之脱离。</p>
+        </div>
+
+        <figure class="diagram">
+          <table style="width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--ink); border-top: 2px solid var(--ink);">
+                <th style="text-align: left; padding: 12px 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faded); font-weight: 500;">
+                  <span data-lang-content="en">Tradition</span>
+                  <span data-lang-content="zh">传统</span>
+                </th>
+                <th style="text-align: right; padding: 12px 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faded); font-weight: 500;">
+                  <span data-lang-content="en">2010 share</span>
+                  <span data-lang-content="zh">2010 占比</span>
+                </th>
+                <th style="text-align: right; padding: 12px 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faded); font-weight: 500;">
+                  <span data-lang-content="en">2020 share</span>
+                  <span data-lang-content="zh">2020 占比</span>
+                </th>
+                <th style="text-align: right; padding: 12px 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faded); font-weight: 500;">
+                  <span data-lang-content="en">2020 count</span>
+                  <span data-lang-content="zh">2020 人数</span>
+                </th>
+                <th style="text-align: right; padding: 12px 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faded); font-weight: 500;">
+                  <span data-lang-content="en">Change</span>
+                  <span data-lang-content="zh">变化</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--rule-faint);">
+                <td style="padding: 12px 8px; font-weight: 500;">
+                  <span data-lang-content="en">Christians</span>
+                  <span data-lang-content="zh">基督徒</span>
+                </td>
+                <td style="text-align: right; padding: 12px 8px;">30.6%</td>
+                <td style="text-align: right; padding: 12px 8px;">28.8%</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); font-size: 13px;">2.30 B</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); color: var(--accent);">−1.8 pp</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--rule-faint);">
+                <td style="padding: 12px 8px; font-weight: 500;">
+                  <span data-lang-content="en">Muslims</span>
+                  <span data-lang-content="zh">穆斯林</span>
+                </td>
+                <td style="text-align: right; padding: 12px 8px;">23.9%</td>
+                <td style="text-align: right; padding: 12px 8px;">25.6%</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); font-size: 13px;">2.00 B</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); color: var(--ink-mid);">+1.8 pp</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--rule-faint);">
+                <td style="padding: 12px 8px; font-weight: 500;">
+                  <span data-lang-content="en">Unaffiliated</span>
+                  <span data-lang-content="zh">无宗教归属</span>
+                </td>
+                <td style="text-align: right; padding: 12px 8px;">23.3%</td>
+                <td style="text-align: right; padding: 12px 8px;">24.2%</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); font-size: 13px;">1.90 B</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); color: var(--ink-mid);">+0.9 pp</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--rule-faint);">
+                <td style="padding: 12px 8px; font-weight: 500;">
+                  <span data-lang-content="en">Hindus</span>
+                  <span data-lang-content="zh">印度教徒</span>
+                </td>
+                <td style="text-align: right; padding: 12px 8px;">14.9%</td>
+                <td style="text-align: right; padding: 12px 8px;">14.9%</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); font-size: 13px;">1.20 B</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); color: var(--ink-mid);">stable</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--rule-faint);">
+                <td style="padding: 12px 8px; font-weight: 500;">
+                  <span data-lang-content="en">Buddhists</span>
+                  <span data-lang-content="zh">佛教徒</span>
+                </td>
+                <td style="text-align: right; padding: 12px 8px;">4.9%</td>
+                <td style="text-align: right; padding: 12px 8px;">4.1%</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); font-size: 13px;">324 M</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); color: var(--accent);">−0.8 pp</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--rule-faint);">
+                <td style="padding: 12px 8px; font-weight: 500;">
+                  <span data-lang-content="en">Other religions</span>
+                  <span data-lang-content="zh">其他宗教</span>
+                </td>
+                <td style="text-align: right; padding: 12px 8px;">2.2%</td>
+                <td style="text-align: right; padding: 12px 8px;">2.2%</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); font-size: 13px;">172 M</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); color: var(--ink-mid);">stable</td>
+              </tr>
+              <tr style="border-bottom: 2px solid var(--ink);">
+                <td style="padding: 12px 8px; font-weight: 500;">
+                  <span data-lang-content="en">Jews</span>
+                  <span data-lang-content="zh">犹太教徒</span>
+                </td>
+                <td style="text-align: right; padding: 12px 8px;">0.2%</td>
+                <td style="text-align: right; padding: 12px 8px;">0.2%</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); font-size: 13px;">15 M</td>
+                <td style="text-align: right; padding: 12px 8px; font-family: var(--mono); color: var(--ink-mid);">stable</td>
+              </tr>
+            </tbody>
+          </table>
+          <figcaption>
+            <span data-lang-content="en"><span class="caption-label">Table VIII.3</span>Religious traditions by share of global population, 2010 vs. 2020. The decade saw modest but measurable shifts. Muslims gained the largest share, Christians lost the most, and Buddhists were the only category whose absolute population declined.</span>
+            <span class="caption-source" data-lang-content="en">Source: Pew Research Center, <em>Dataset of Global Religious Composition Estimates for 2010 and 2020</em> (June 2025; rev. February 2026).</span>
+            <span data-lang-content="zh"><span class="caption-label">表 VIII.3</span>2010 与 2020 年宗教传统占全球人口比例。这十年发生了温和但可测量之转移。穆斯林获得最大份额,基督徒失去最多,佛教徒是唯一绝对人口下降之范畴。</span>
+            <span class="caption-source" data-lang-content="zh">数据来源:皮尤研究中心,《2010 与 2020 全球宗教构成数据集》(2025 年 6 月;2026 年 2 月修订)。</span>
+          </figcaption>
+        </figure>
+
+        <!-- ============== Closing reflection ============== -->
+        <div style="max-width: var(--reading-width); margin-top: 48px;">
+          <p data-lang-content="en" style="font-style: italic; font-size: 16.5px; line-height: 1.7; color: var(--ink-soft); border-left: 2px solid var(--rule); padding-left: 22px;">These data do not adjudicate the philosophical questions of the preceding chapters. The growth of the unaffiliated does not show any of religion's claims to be false; the persistence of belief does not show them to be true. What the data do show is that the secularisation thesis, in its crude form (modernity entails religious decline), holds in some places and not in others — most notably it does not hold in the world's youngest and fastest-growing populations. Any honest assessment of religion's prospects must reckon with both the data and the arguments. The arguments are the subject of this compendium; the data are its quiet companion.</p>
+          <p data-lang-content="zh" style="font-size: 15.5px; line-height: 1.85; color: var(--ink-soft); border-left: 2px solid var(--rule); padding-left: 22px;">这些数据不裁决前章的哲学问题。无宗教归属者之增长不证明宗教任何主张为假;信仰之持续不证明其为真。数据所表明的是:粗糙形式的世俗化命题(现代性蕴涵宗教衰落)在某些地方成立而在另一些地方不成立——尤其在世界上最年轻、增长最快的人口中并不成立。对宗教前景之任何诚实评估,必须同时考量数据与论证。论证是本论纲之主题;数据是其安静的同伴。</p>
+        </div>
+
+        <div class="divider"></div>
+      </section>
+
     </main>
   </div>
 </div>
@@ -3412,9 +4077,9 @@
         <span data-lang-content="en">Colophon</span>
         <span data-lang-content="zh">版本信息</span>
       </div>
-      <p data-lang-content="en">Set in EB Garamond, Spectral, and IBM Plex Mono. Bilingual presentation: English / 简体中文.</p>
+      <p data-lang-content="en">Set in Fraunces, Source Serif 4, Noto Sans SC, and JetBrains Mono. Bilingual presentation: English / 简体中文.</p>
       <p data-lang-content="en">Sources link to JSTOR, the Stanford Encyclopedia of Philosophy, university press pages, Project Gutenberg, and Marxists.org where open access is available.</p>
-      <p data-lang-content="zh">字体使用 EB Garamond、Spectral、IBM Plex Mono 与 Noto Serif SC。</p>
+      <p data-lang-content="zh">字体使用 Fraunces、Source Serif 4、Noto Sans SC 与 JetBrains Mono。</p>
       <p data-lang-content="zh">参考文献链接至 JSTOR、斯坦福哲学百科全书、各大学出版社、Project Gutenberg 与 Marxists.org 等开放获取来源。</p>
     </div>
   </div>
