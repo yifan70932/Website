@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/assets/tokens.css">
   <link rel="stylesheet" href="/assets/base.css">
   <link rel="stylesheet" href="/assets/gametree.css">
+  <link rel="stylesheet" href="/assets/chess.css">
 </head>
 
 <body>
@@ -62,6 +63,8 @@
     <p>The word <em>chess</em> names not one object but four. There is a finite combinatorial game tree of roughly 10<sup>120</sup> nodes, the object of Zermelo's 1913 theorem. There is a rule-package — a particular nineteenth-century convention that turns an otherwise-infinite activity into a finite one. There is a <em>lusory activity</em> in Bernard Suits's sense, a structure of voluntarily-accepted constraints. And there is a fifteen-hundred-year cultural-historical practice descending from <em>chaturanga</em>. The four are real, none reduces to the others, and most of the philosophical confusion about chess comes from treating one as if it were another.</p>
 
     <p>What follows is a working set of notes — half wiki, half commonplace book — arranged around these four objects but spilling beyond them. Entries are added as occasion arises.</p>
+
+    <figure class="full-bleed chess-widget" aria-label="Interactive chess board"></figure>
 
     <h2 id="sec-history">1 · History</h2>
 
@@ -161,6 +164,7 @@
     <h2 id="sec-comparison">2 · International chess and Chinese chess: a comparison</h2>
 
     <p>The two games are siblings, not translations. Both descend from the same Indian root some twelve hundred years ago and share a common deep structure — two-player, perfect-information, zero-sum, finite — but the surface rules diverged early enough, and so completely, that a master of one is a beginner at the other.</p>
+
 
     <h3>Boards and pieces</h3>
 
@@ -505,6 +509,7 @@
   new GameTree('game-tree-demo', { lang: 'en' });
 </script>
 
+<script src="/assets/chess.js"></script>
 <script src="/assets/toc.js"></script>
 
 </body>

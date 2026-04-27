@@ -633,3 +633,58 @@ html[lang^="zh"] .toc-title {
     padding: 0.35rem 0 0.35rem 0.6rem;
   }
 }
+
+/* ─── Boards comparison figure (§2) ──────────────────────
+   Side-by-side chess + xiangqi boards on desktop;
+   stacks vertically on narrow screens.
+   ─────────────────────────────────────────────────────── */
+
+.boards-figure {
+  margin: 2rem 0 2.5rem;
+}
+
+.boards-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.board-cell {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 24rem;
+}
+
+.board-cell svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 22rem;
+}
+
+.board-caption {
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  color: var(--ink-soft);
+  text-align: center;
+  margin: 0.85rem 0 0;
+  line-height: 1.45;
+  max-width: 22rem;
+}
+
+html[lang^="zh"] .board-caption {
+  font-family: var(--font-cjk), var(--font-ui);
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .boards-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+}

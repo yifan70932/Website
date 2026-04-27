@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/assets/tokens.css">
   <link rel="stylesheet" href="/assets/base.css">
   <link rel="stylesheet" href="/assets/gametree.css">
+  <link rel="stylesheet" href="/assets/chess.css">
 </head>
 
 <body>
@@ -62,6 +63,8 @@
     <p><em>国际象棋</em>这个词所指的不是一个对象，而是四个。它是一棵约 10<sup>120</sup> 节点的有限组合博弈树——策梅洛 1913 年定理所谈的那个对象；它是一份规则包——一个把原本无限的活动转换成有限的、特定的十九世纪规约；它是 Bernard Suits 意义上的<em>游戏行为</em>——一组被自愿接受的限制的结构；它是一种从印度 chaturanga 延续至今、跨越一千五百年的文化历史实践。这四者都真实存在，谁也无法化约成谁，关于国际象棋的大多数哲学混淆，正是源于把其中之一当作其他几个。</p>
 
     <p>下面是一组持续更新的笔记，围绕这四个对象组织展开，但内容会溢出它们之外。条目随机会陆续添加。</p>
+
+    <figure class="full-bleed chess-widget" aria-label="国际象棋交互式棋盘"></figure>
 
     <h2 id="sec-history">一 · 历史</h2>
 
@@ -161,6 +164,7 @@
     <h2 id="sec-comparison">二 · 国际象棋与中国象棋：一个比较</h2>
 
     <p>这两个游戏是兄弟，不是翻译的关系。它们都源自约一千二百年前同一个印度根源，共享同一深层结构——二人、完全信息、零和、有限——但表面规则的分流足够早、足够彻底，使得任何一种游戏的大师在另一种游戏中都是初学者。</p>
+
 
     <h3>棋盘与子力</h3>
 
@@ -505,6 +509,7 @@
   new GameTree('game-tree-demo', { lang: 'zh' });
 </script>
 
+<script src="/assets/chess.js"></script>
 <script src="/assets/toc.js"></script>
 
 </body>

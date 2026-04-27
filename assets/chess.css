@@ -1,0 +1,232 @@
+/* ============================================================
+   yifanova.com — interactive chess board styles (chess.css)
+   ============================================================ */
+
+.chess-widget {
+  margin: 2.5rem 0 3rem;
+}
+
+.chess-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* ─── Board ──────────────────────────────────────────────── */
+
+.chess-board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: 22rem;
+  height: 22rem;
+  max-width: 90vw;
+  max-height: 90vw;
+  border: 2px solid var(--ink);
+  background: #fdfaf3;
+  user-select: none;
+  flex: 0 0 auto;
+}
+
+.chess-sq {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.9rem;
+  line-height: 1;
+  position: relative;
+  transition: background-color 0.12s;
+  font-family: serif;
+}
+
+.chess-sq.light { background: #fdfaf3; }
+.chess-sq.dark  { background: #b58864; }
+
+.chess-sq:hover {
+  outline: 2px solid var(--sapphire);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.chess-sq.selected {
+  background: #f6dc7a !important;
+}
+
+/* Legal-move squares: subtle dot in middle. */
+.chess-sq.legal-move::after {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  background: rgba(58, 90, 64, 0.55);  /* forest with alpha */
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Legal-capture squares: ring around the existing piece. */
+.chess-sq.legal-capture::after {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border: 3px solid rgba(192, 57, 43, 0.7);  /* xiangqi red, semi-transparent */
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* King in check: red glow. */
+.chess-sq.in-check {
+  background: #f3a5a1 !important;
+}
+
+.chess-piece {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.chess-piece.w {
+  color: #fafafa;
+  text-shadow:
+    -1.5px -1.5px 0 #1f2328,
+     1.5px -1.5px 0 #1f2328,
+    -1.5px  1.5px 0 #1f2328,
+     1.5px  1.5px 0 #1f2328,
+     0    -1.5px 0 #1f2328,
+     0     1.5px 0 #1f2328,
+    -1.5px  0    0 #1f2328,
+     1.5px  0    0 #1f2328;
+}
+
+.chess-piece.b {
+  color: #1f2328;
+}
+
+/* ─── Info panel ─────────────────────────────────────────── */
+
+.chess-info {
+  flex: 1 1 18rem;
+  max-width: 24rem;
+  min-width: 16rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: var(--font-ui);
+}
+
+html[lang^="zh"] .chess-info {
+  font-family: var(--font-cjk), var(--font-ui);
+}
+
+.chess-status {
+  font-size: var(--fs-meta);
+  font-weight: 600;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.6rem 0.8rem;
+  background: var(--rule-soft);
+  border-left: 3px solid var(--sapphire);
+}
+html[lang^="zh"] .chess-status {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.chess-status.in-check {
+  border-left-color: #c0392b;
+  color: #c0392b;
+}
+
+.chess-status.game-over {
+  border-left-color: var(--forest);
+  color: var(--forest);
+}
+
+.chess-rule {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.85rem 1rem;
+  min-height: 8rem;
+}
+
+.chess-rule h4 {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+html[lang^="zh"] .chess-rule h4 {
+  font-family: var(--font-cjk), var(--font-body);
+}
+
+.chess-rule p {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.chess-rule-hint {
+  font-style: italic;
+  color: var(--ink-faint);
+}
+
+.chess-controls {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.chess-controls button {
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.9rem;
+  background: var(--bg);
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+html[lang^="zh"] .chess-controls button {
+  font-family: var(--font-cjk), var(--font-ui);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.chess-controls button:hover {
+  background: var(--pale-blue);
+  color: var(--navy);
+  border-color: var(--sapphire);
+}
+
+/* ─── Mobile ─────────────────────────────────────────────── */
+
+@media (max-width: 700px) {
+  .chess-wrap {
+    flex-direction: column;
+    align-items: center;
+  }
+  .chess-board {
+    width: 90vw;
+    height: 90vw;
+    max-width: 22rem;
+    max-height: 22rem;
+  }
+  .chess-info {
+    width: 100%;
+    max-width: 22rem;
+  }
+}
