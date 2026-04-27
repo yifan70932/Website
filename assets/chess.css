@@ -109,6 +109,26 @@
   color: #1f2328;
 }
 
+/* ─── Coordinate labels (a–h, 1–8) ──────────────────────── */
+/* Real DOM elements (not ::before/::after) so they don't conflict with
+   legal-move/capture indicators which already use ::after. */
+
+.chess-coord {
+  position: absolute;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 3;
+  line-height: 1;
+}
+.chess-coord-rank { top: 2px; left: 4px; }
+.chess-coord-file { bottom: 2px; right: 4px; }
+
+/* Light squares: labels in the dark-square color. Dark squares: labels in light. */
+.chess-sq.light .chess-coord { color: #b58864; }
+.chess-sq.dark  .chess-coord { color: #fdfaf3; }
+
 /* ─── Info bar (under board) ─────────────────────────────── */
 
 .chess-info {
@@ -263,4 +283,43 @@ html[lang^="zh"] .chess-sf {
 html[lang^="zh"] .chess-sf-detail {
   letter-spacing: 0.02em;
   text-transform: none;
+}
+
+/* ─── Caption above the chess board ──────────────────────── */
+
+.chess-widget-figure {
+  margin: 2.5rem 0 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.chess-caption {
+  max-width: 36rem;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  text-align: left;
+}
+html[lang^="zh"] .chess-caption {
+  font-family: var(--font-cjk), var(--font-body);
+  line-height: 1.7;
+}
+.chess-caption a {
+  color: var(--sapphire);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.chess-caption a:hover {
+  color: var(--navy);
+}
+
+/* The .chess-widget itself no longer needs its own outer margin
+   since .chess-widget-figure provides it. */
+.chess-widget-figure .chess-widget {
+  margin: 0;
 }

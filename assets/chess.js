@@ -551,6 +551,19 @@ document.addEventListener('DOMContentLoaded', function() {
         sq.className = 'chess-sq ' + ((r + c) % 2 === 0 ? 'light' : 'dark');
         sq.dataset.row = r;
         sq.dataset.col = c;
+        // Coordinate labels: rank on leftmost column, file on bottom row.
+        if (c === 0) {
+          const rank = document.createElement('span');
+          rank.className = 'chess-coord chess-coord-rank';
+          rank.textContent = String(8 - r);
+          sq.appendChild(rank);
+        }
+        if (r === 7) {
+          const file = document.createElement('span');
+          file.className = 'chess-coord chess-coord-file';
+          file.textContent = String.fromCharCode(97 + c);
+          sq.appendChild(file);
+        }
         sq.setAttribute('aria-label', squareLabel(r, c));
         sq.addEventListener('click', () => handleSquareClick(r, c));
         boardDiv.appendChild(sq);
@@ -602,7 +615,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const p = state.board[r][c];
       
       sq.classList.remove('selected', 'legal-move', 'legal-capture', 'in-check');
-      sq.innerHTML = '';
+      // Remove only the piece span, leaving coord labels intact.
+      const oldPiece = sq.querySelector('.chess-piece');
+      if (oldPiece) oldPiece.remove();
       
       if (p) {
         const span = document.createElement('span');
