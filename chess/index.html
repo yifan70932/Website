@@ -27,17 +27,43 @@
     </span>
   </header>
 
+
+  <nav class="toc" aria-label="Table of contents">
+    <button class="toc-mobile-toggle" aria-expanded="false">Contents</button>
+    <p class="toc-title">Contents</p>
+    <div class="toc-list-wrapper">
+      <ol>
+        <li><a href="#sec-history">1 · History</a></li>
+        <li><a href="#sec-comparison">2 · International chess and Chinese chess</a></li>
+        <li><a href="#sec-rules">3 · Modern rules and time controls</a></li>
+        <li><a href="#sec-game-theory">4 · Game theory and the tree</a></li>
+        <li><a href="#sec-engines">5 · Engines</a></li>
+        <li><a href="#sec-how-engines-decide">6 · How engines decide</a></li>
+        <li><a href="#sec-tools">7 · Tools and databases</a></li>
+        <li><a href="#sec-findings">8 · Findings from engine-driven research</a></li>
+        <li><a href="#sec-elo">9 · Elo and rating systems</a></li>
+        <li><a href="#sec-opening-theory">10 · Opening theory</a></li>
+        <li><a href="#sec-suits">11 · Suits and the philosophy of games</a></li>
+        <li><a href="#sec-literature">12 · Chess in literature and film</a></li>
+        <li><a href="#sec-tournaments">13 · Tournaments and titles</a></li>
+        <li><a href="#sec-personal-notes">14 · Personal notes</a></li>
+        <li><a href="#sec-further-reading">15 · Further reading</a></li>
+      </ol>
+    </div>
+  </nav>
+
   <article>
 
     <header class="article-header">
-      <h1>Chess</h1>
-      <p class="subtitle">Notes on the history, rules, mathematics, engines, and literary presence of a fifteen-hundred-year-old game</p>
-      <p class="article-meta">notes · english · ongoing</p>
+      <h1>An Inexhaustible Tree</h1>
+      <p class="subtitle">Chess as four distinct ontological objects, and what is at stake in conflating them</p>
     </header>
 
-    <p>An ongoing collection of notes covering the history of chess, the modern rules, the game-theoretic analysis associated with Zermelo's theorem, the engine era from Turing through AlphaZero, the Elo rating system, opening theory, the philosophy of game-playing, and the place of chess in literature. Entries are added as occasion arises.</p>
+    <p>The word <em>chess</em> names not one object but four. There is a finite combinatorial game tree of roughly 10<sup>120</sup> nodes, the object of Zermelo's 1913 theorem. There is a rule-package — a particular nineteenth-century convention that turns an otherwise-infinite activity into a finite one. There is a <em>lusory activity</em> in Bernard Suits's sense, a structure of voluntarily-accepted constraints. And there is a fifteen-hundred-year cultural-historical practice descending from <em>chaturanga</em>. The four are real, none reduces to the others, and most of the philosophical confusion about chess comes from treating one as if it were another.</p>
 
-    <h2>1 · History</h2>
+    <p>What follows is a working set of notes — half wiki, half commonplace book — arranged around these four objects but spilling beyond them. Entries are added as occasion arises.</p>
+
+    <h2 id="sec-history">1 · History</h2>
 
     <p>Chess descends from <em>chaturanga</em> (Sanskrit <span class="cjk">चतुरङ्ग</span>, "four limbs"), a north-Indian game attested in Bāṇabhaṭṭa's <em>Harshacharita</em> by the early seventh century CE. The four limbs were the divisions of the classical Indian army — infantry, cavalry, elephants, chariots — surviving on the modern board as pawn, knight, bishop, and rook. The 8×8 <em>ashtāpada</em> board was older still, originally used for race games; the war-simulation overlay was the new contribution.</p>
 
@@ -132,7 +158,35 @@
 
     <p>The first international tournament was held in London in 1851 (won by Adolf Anderssen). The World Chess Championship dates from the 1886 match between Wilhelm Steinitz and Johannes Zukertort in New Orleans. FIDE — the <em>Fédération Internationale des Échecs</em>, the game's international governing body — was founded in Paris in 1924, took over the world championship after Alekhine's death in 1946, and has codified the rules ever since.</p>
 
-    <h2>2 · Modern rules and time controls</h2>
+    <h2 id="sec-comparison">2 · International chess and Chinese chess: a comparison</h2>
+
+    <p>The two games are siblings, not translations. Both descend from the same Indian root some twelve hundred years ago and share a common deep structure — two-player, perfect-information, zero-sum, finite — but the surface rules diverged early enough, and so completely, that a master of one is a beginner at the other.</p>
+
+    <h3>Boards and pieces</h3>
+
+    <p>International chess is played on an 8×8 grid of squares, with pieces standing <em>on</em> the squares. Chinese chess (<em>xiangqi</em>, <span class="cjk">象棋</span>) is played on a 9×10 grid of <em>intersections</em>, with pieces standing <em>at</em> the intersection points. The board is bisected by a horizontal "river" (<span class="cjk">河界</span>) between the fifth and sixth ranks, and each side has a 3×3 "palace" (<span class="cjk">九宫</span>, "nine palace") centered on the back rank. Both pieces and rules are organized around these features.</p>
+
+    <p>The piece roster is also different. Each side in xiangqi has 16 pieces — one general, two advisors, two elephants, two horses, two chariots, two cannons, and five soldiers. The cannon (<span class="cjk">炮</span>) has no counterpart in international chess: it moves like a chariot (rook) but captures only by jumping <em>over</em> exactly one intervening piece (the "screen" or <span class="cjk">炮架</span>). The advisor (<span class="cjk">士</span>) is confined to the palace and moves one square diagonally; the elephant (<span class="cjk">象</span> or <span class="cjk">相</span>) moves exactly two points diagonally and cannot cross the river. The general (<span class="cjk">将</span> or <span class="cjk">帥</span>) is confined to the palace and moves one point orthogonally; an additional rule forbids the two generals from facing each other along an open file ("flying general," <span class="cjk">飞将</span>). Soldiers (<span class="cjk">卒</span> or <span class="cjk">兵</span>) move one point forward, but gain the ability to also move sideways once they cross the river — and they never promote.</p>
+
+    <h3>Tactical character</h3>
+
+    <p>The differences in mobility produce a fundamentally different tactical character. The chariots (analogous to rooks) are extremely powerful from the opening because there are no bishops or queens to compete for long files, and pawns do not block them as densely. The cannon is the most distinctive piece: its capture-by-screen rule means that placing or removing a single piece anywhere on a line can radically change which captures are legal, making cannon tactics deeply non-local. Knights, which jump as in international chess, can be blocked at the adjacent point ("hobbling the horse's leg," <span class="cjk">蹩马腿</span>) — a knight on a square with friendly or enemy pieces on its orthogonal neighbors cannot move through that direction. The result is that xiangqi tactics emphasize long-range piece coordination and screen play; international chess tactics emphasize local pawn structure and outpost squares for minor pieces.</p>
+
+    <p>Stalemate and draws are also handled differently. In xiangqi, stalemate (the side to move has no legal move) is a loss for the stalemated side, not a draw. Perpetual check is also a loss for the checking side. The rules around perpetual chasing and mutual perpetual chase are notoriously intricate — the World Xiangqi Federation manual contains 110 example diagrams adjudicating different repetition cases, and even the leading engines do not implement all of them correctly. The handling of repetition is the single most complex difference between the two rule sets.</p>
+
+    <h3>First-move advantage</h3>
+
+    <p>Both games have a measurable first-move advantage. In international chess, White scores about 54-56% in master-level decisive games (with a draw counted as half a point); the asymmetry is real but modest. In xiangqi, Red moves first and the corresponding advantage is generally estimated as somewhat larger — historical statistics from professional play put Red's score at roughly 55-58% depending on time control and era, and xiangqi opening theory explicitly speaks of Red's "initiative" (<span class="cjk">先手</span>) as a quantifiable resource of half a move to a full move that Black must spend opening moves to neutralize. There is no consensus that perfect play in either game is anything other than a draw, but the practical impact of moving first is widely thought to be larger in xiangqi.</p>
+
+    <h3>Engines and current state</h3>
+
+    <p>For most of computer-chess history, xiangqi engines lagged behind international chess engines by a wide margin — the Asian player communities were smaller, the open-source ecosystem younger, and there was no equivalent of Kasparov or Deep Blue marquee match to drive investment. This changed in the early 2020s. <span class="term"><a href="https://pikafish.org/" rel="noopener">Pikafish</a></span> — an open-source engine forked from Stockfish and adapted to xiangqi, complete with an NNUE evaluation trained on billions of xiangqi positions — emerged in 2021 and is now estimated to be hundreds of Elo above the strongest human xiangqi grandmasters. The transfer of techniques from Stockfish to Pikafish was direct: the same alpha-beta search architecture, the same NNUE incremental-update trick (with the feature set adapted to xiangqi's larger board and different piece types), the same UCI protocol. Earlier engines like <a href="https://github.com/xqbase/eleeye" rel="noopener">ElephantEye</a> (the open-source classical-evaluation engine), Cyclone, and XieXieMaster (proprietary) preceded Pikafish and remain in use, but Pikafish is now the standard reference engine.</p>
+
+    <p>Neural-network engines from the AlphaZero family also exist for xiangqi. <em>Pika Xiangqi Zero</em> trains a neural network through self-play (its data are then used to train Pikafish's NNUE). <em><a href="https://arxiv.org/abs/2308.04719" rel="noopener">JiangJun</a></em> (Wang et al., 2023) is a research engine combining Monte Carlo Tree Search with Policy-Space Response Oracles to handle the non-transitivity that arises in xiangqi self-play; deployed as a WeChat mini-program, it reported a 99.4% win rate against human players over thousands of games. The current frontier is similar to international chess's: hybrid systems that combine deep search, neural evaluation, and self-play training.</p>
+
+    <p>The state of xiangqi as a played game is robust. China alone has tens of millions of casual players and several thousand professionals; the Chinese Xiangqi Association's national tournaments are major events. Vietnam (where the game is called <em>cờ tướng</em>) has its own strong professional scene. The World Xiangqi Federation organizes international competitions; xiangqi has been included in the Asian Games (1998, 2006, 2010). Compared with international chess's globally homogeneous community, xiangqi remains overwhelmingly East and Southeast Asian, which is one reason its engine and theory development was slower to globalize but does not affect its depth as a game.</p>
+
+    <h2 id="sec-rules">3 · Modern rules and time controls</h2>
 
     <p>The basic rules are codified in the FIDE Laws of Chess, updated periodically. The board is 8×8 with alternating light and dark squares; each side begins with sixteen pieces (one king, one queen, two rooks, two bishops, two knights, eight pawns). White moves first. The game ends in checkmate, resignation, stalemate, or draw by one of several technical rules below.</p>
 
@@ -160,7 +214,7 @@
 
     <p>FIDE maintains separate rating lists for classical, rapid, and blitz play. Bullet has no FIDE rating but is rated separately on Chess.com and Lichess. Chess960 (Fischer Random) — invented by Fischer in 1996 to defeat opening preparation, in which the back rank is randomized — has its own World Championship since 2019, alongside the recently launched Freestyle Chess events.</p>
 
-    <h2>3 · Game theory and the tree</h2>
+    <h2 id="sec-game-theory">4 · Game theory and the tree</h2>
 
     <p>Chess sits at the intersection of several game-theoretic categories. It is <span class="term">two-player</span>, <span class="term">zero-sum</span>, <span class="term">perfect-information</span>, <span class="term">deterministic</span>, and — under the modern rules with stopping conventions — <span class="term">finite</span>. This cluster of properties is exactly the one for which the foundational theorems of game theory hold most cleanly.</p>
 
@@ -243,23 +297,23 @@
 
     <p>Chess remains unsolved at the start position. Only fragments are known: the Lomonosov and Syzygy tablebases give perfect play for any position with seven or fewer pieces, and have already revealed forced mates of more than 500 moves that no human could play correctly without lookup. The longest known forced mate in the seven-piece tablebase is 549 moves (ignoring the fifty-move rule). The eight-piece tablebase is partially complete; a 2022 result includes a forced mate of 584 moves.</p>
 
-    <h2>4 · Engines</h2>
+    <h2 id="sec-engines">5 · Engines</h2>
 
-    <p>The history of chess computing is, oddly, older than the history of computing. Alan Turing and David Champernowne wrote a chess-playing algorithm in 1948, before any machine existed that could run it. Turing later executed the program by hand in a 1952 game against his colleague Alick Glennie, taking up to half an hour per move; the algorithm — sometimes called <em>Turochamp</em> or "the paper machine" — lost in 29 moves, but the game is recorded and preserved. Two years earlier Claude Shannon had published <em>Programming a Computer for Playing Chess</em> (1950), which set out the basic minimax search and the evaluation-function framework that would dominate the next half century of engine design.</p>
+    <p>The history of chess computing is, oddly, older than the history of computing. Alan Turing and David Champernowne wrote a chess-playing algorithm in 1948, before any machine existed that could run it. Turing later executed the program by hand in a 1952 game against his colleague Alick Glennie, taking up to half an hour per move; the algorithm — sometimes called <em>Turochamp</em> or "the paper machine" — lost in 29 moves, but the game is recorded and preserved. Two years earlier Claude Shannon had published <em><a href="https://www.computerhistory.org/chess/doc-431614f453dde/" rel="noopener">Programming a Computer for Playing Chess</a></em> (1950), which set out the basic minimax search and the evaluation-function framework that would dominate the next half century of engine design.</p>
 
     <p>Through the 1960s and '70s engines remained weak. MIT's <em>Mac Hack VI</em> (Greenblatt, 1967) became the first program to compete in a human tournament, scoring a USCF rating around 1400. <em>Belle</em>, a custom-hardware engine built by Ken Thompson and Joe Condon at Bell Labs in the late 1970s, was the first machine to reach master strength.</p>
 
     <p>The decisive moment in human–machine chess came in May 1997, when IBM's <em>Deep Blue</em> defeated Garry Kasparov 3.5–2.5 in a six-game match in New York. Deep Blue evaluated about 200 million positions per second using custom VLSI chess chips. The match remains controversial: Kasparov accused IBM of human intervention during the games (an accusation IBM denied), refused a rematch, and IBM dismantled the machine immediately afterward. What is uncontroversial is that after 1997, the question of whether machines could outplay the world's best humans was settled.</p>
 
-    <p>The two decades after Deep Blue belonged to <span class="term">alpha-beta engines</span> with hand-tuned evaluation functions running on commodity hardware. <em>Fritz</em>, <em>Rybka</em>, <em>Houdini</em>, <em>Komodo</em>, and the open-source <em>Stockfish</em> (begun 2008, by Tord Romstad, Marco Costalba, and Joona Kiiski) traded the top of the rating lists. By the mid-2010s these engines were rated around 3300–3400 Elo, several hundred points above any human.</p>
+    <p>The two decades after Deep Blue belonged to <span class="term">alpha-beta engines</span> with hand-tuned evaluation functions running on commodity hardware. <em>Fritz</em>, <em>Rybka</em>, <em>Houdini</em>, <em>Komodo</em>, and the open-source <em><a href="https://stockfishchess.org/" rel="noopener">Stockfish</a></em> (begun 2008, by Tord Romstad, Marco Costalba, and Joona Kiiski) traded the top of the rating lists. By the mid-2010s these engines were rated around 3300–3400 Elo, several hundred points above any human.</p>
 
-    <p>December 2017 brought a discontinuity. DeepMind's <em>AlphaZero</em> — a single neural-network architecture that learned chess, shōgi, and Go from self-play, with no opening books or endgame tables, and no human knowledge beyond the rules — defeated Stockfish 8 in a 100-game match: 28 wins, 0 losses, 72 draws, with all 28 wins as White. Training took a few hours on Google's custom TPU hardware. Grandmasters who studied the games described AlphaZero's style as "Martian" — willing to sacrifice material for long-term positional pressure in ways that no engine had previously considered viable. Garry Kasparov said it was a pleasure to watch.</p>
+    <p>December 2017 brought a discontinuity. DeepMind's <em><a href="https://arxiv.org/abs/1712.01815" rel="noopener">AlphaZero</a></em> — a single neural-network architecture that learned chess, shōgi, and Go from self-play, with no opening books or endgame tables, and no human knowledge beyond the rules — defeated Stockfish 8 in a 100-game match: 28 wins, 0 losses, 72 draws, with all 28 wins as White. Training took a few hours on Google's custom TPU hardware. Grandmasters who studied the games described AlphaZero's style as "Martian" — willing to sacrifice material for long-term positional pressure in ways that no engine had previously considered viable. Garry Kasparov said it was a pleasure to watch.</p>
 
-    <p>The community's response was swift. <em>Leela Chess Zero</em> (Lc0), a distributed open-source reimplementation of AlphaZero's ideas, began training in 2018 and is now competitive with Stockfish at the top of the engine rating lists. Stockfish itself, in 2020, integrated <span class="term">NNUE</span> (Efficiently Updatable Neural Network) — a small neural network used as the evaluation function inside an otherwise classical alpha-beta search. The current top engines are hybrids of the two paradigms.</p>
+    <p>The community's response was swift. <em><a href="https://lczero.org/" rel="noopener">Leela Chess Zero</a></em> (Lc0), a distributed open-source reimplementation of AlphaZero's ideas, began training in 2018 and is now competitive with Stockfish at the top of the engine rating lists. Stockfish itself, in 2020, integrated <span class="term">NNUE</span> (Efficiently Updatable Neural Network) — a small neural network used as the evaluation function inside an otherwise classical alpha-beta search. The current top engines are hybrids of the two paradigms.</p>
 
     <p>An interesting consequence is that Stockfish and Lc0 still play differently. Stockfish, with its enormous search tree and crisp neural evaluation, plays a tactical and concrete style. Lc0, with its smaller search and full neural evaluation, plays in a long, positional, AlphaZero-flavoured idiom. The two engines sometimes disagree about which side stands better in a given position, and not by a small margin — a situation in which the game has a single mathematical truth, but two of the strongest evaluators on earth, looking at the same position, can return materially different verdicts.</p>
 
-    <h2>5 · How engines decide</h2>
+    <h2 id="sec-how-engines-decide">6 · How engines decide</h2>
 
     <p>If the chess game tree cannot be enumerated, what do engines actually do? The answer is that all modern engines combine two components — a <span class="term">search</span> over a small fraction of the tree, and an <span class="term">evaluation function</span> that assigns numerical scores to the leaf positions of that partial search — and the major engine traditions differ mainly in how each component is built.</p>
 
@@ -283,29 +337,29 @@
 
     <p>The two paradigms differ in what they are good at. Stockfish's alpha-beta + NNUE is faster and more tactical — it sees forced sequences with great precision and depth. Lc0's MCTS + deep network plays more positionally, sometimes accepting material loss for long-term structural advantages that alpha-beta search cannot easily verify within its horizon. Recent developments narrow the gap: Stockfish's NNUE imports neural evaluation into the alpha-beta tradition, and Lc0's transformer-based networks (since 2022) have substantially improved its positional and tactical accuracy. The strongest current engines are hybrids that draw from both traditions; both are estimated above 3500 Elo and well beyond any human's reach.</p>
 
-    <h2>6 · Tools and databases</h2>
+    <h2 id="sec-tools">7 · Tools and databases</h2>
 
     <p>Modern chess research and serious play depend on a small number of specialized tools.</p>
 
     <h3>Game databases</h3>
 
-    <p>Comprehensive game databases are the basic infrastructure of opening preparation, opponent research, and historical study. The two main commercial ones are <span class="term">ChessBase Mega Database</span> (~10 million games from 1560 to the present, with about 90,000 grandmaster-annotated; €190 for a one-off purchase, weekly updates by subscription) and <span class="term">ChessOK</span>. The free options have grown substantially: the <span class="term">Lichess Open Database</span> publishes the full set of games played on Lichess in standard PGN format, currently approaching seven billion games released as monthly archives; the <span class="term">Lichess Elite Database</span> filters this down to games where both players were rated above 2400; <span class="term">Caissabase</span> and <span class="term">LumbrasGigabase</span> aggregate freely available historical sources (such as TWIC and the older MillionBase) into curated collections of several million high-quality over-the-board games. The standard portable format across all of these is <span class="term">PGN</span> (Portable Game Notation), a plain-text format with a tagged metadata header followed by the moves in algebraic notation; nearly every engine, GUI, and database tool reads it.</p>
+    <p>Comprehensive game databases are the basic infrastructure of opening preparation, opponent research, and historical study. The two main commercial ones are <span class="term"><a href="https://shop.chessbase.com/en/categories/databases" rel="noopener">ChessBase Mega Database</a></span> (~10 million games from 1560 to the present, with about 90,000 grandmaster-annotated; €190 for a one-off purchase, weekly updates by subscription) and <span class="term">ChessOK</span>. The free options have grown substantially: the <span class="term"><a href="https://database.lichess.org/" rel="noopener">Lichess Open Database</a></span> publishes the full set of games played on Lichess in standard PGN format, currently approaching seven billion games released as monthly archives; the <span class="term">Lichess Elite Database</span> filters this down to games where both players were rated above 2400; <span class="term">Caissabase</span> and <span class="term"><a href="https://lumbrasgigabase.com/" rel="noopener">LumbrasGigabase</a></span> aggregate freely available historical sources (such as <a href="https://theweekinchess.com/" rel="noopener">TWIC</a> and the older MillionBase) into curated collections of several million high-quality over-the-board games. The standard portable format across all of these is <span class="term">PGN</span> (Portable Game Notation), a plain-text format with a tagged metadata header followed by the moves in algebraic notation; nearly every engine, GUI, and database tool reads it.</p>
 
-    <p>The free PGN/database tool ecosystem is centered on <span class="term">SCID</span> (Shane's Chess Information Database) and its successors — open-source GUIs that index PGN files into searchable databases. For the use case of "find me all games starting with this position" in a database of millions of games, these tools index the position graph rather than the move-list, allowing transposition-aware lookup in milliseconds.</p>
+    <p>The free PGN/database tool ecosystem is centered on <span class="term"><a href="http://scidvspc.sourceforge.net/" rel="noopener">SCID</a></span> (Shane's Chess Information Database) and its successors — open-source GUIs that index PGN files into searchable databases. For the use case of "find me all games starting with this position" in a database of millions of games, these tools index the position graph rather than the move-list, allowing transposition-aware lookup in milliseconds.</p>
 
     <h3>Endgame tablebases</h3>
 
-    <p><span class="term">Endgame tablebases</span> are exhaustive enumerations of all positions with at most a fixed number of pieces, computed by retrograde analysis from terminal positions and storing the perfect result and distance-to-conversion for every legal position. The 7-piece <span class="term">Syzygy tablebase</span> (Ronald de Man, 2013) is freely available and standard in serious engines; the <span class="term">Lomonosov 7-piece tablebase</span> (2012) was the first 7-piece project completed and includes distance-to-mate metrics. The 8-piece project began in the late 2010s and is partially complete; full 8-piece tablebases will likely require several petabytes of storage. These databases have already revealed that some technical endgames require more than 500 moves of perfect play to convert — well beyond any human's capacity without lookup, and well beyond the fifty-move rule. Lichess provides a free public API to the 7-piece Syzygy tables, allowing any user to query the perfect result of any 7-piece position in their browser.</p>
+    <p><span class="term">Endgame tablebases</span> are exhaustive enumerations of all positions with at most a fixed number of pieces, computed by retrograde analysis from terminal positions and storing the perfect result and distance-to-conversion for every legal position. The 7-piece <span class="term"><a href="https://syzygy-tables.info/" rel="noopener">Syzygy tablebase</a></span> (Ronald de Man, 2013) is freely available and standard in serious engines; the <span class="term">Lomonosov 7-piece tablebase</span> (2012) was the first 7-piece project completed and includes distance-to-mate metrics. The 8-piece project began in the late 2010s and is partially complete; full 8-piece tablebases will likely require several petabytes of storage. These databases have already revealed that some technical endgames require more than 500 moves of perfect play to convert — well beyond any human's capacity without lookup, and well beyond the fifty-move rule. Lichess provides a free public API to the 7-piece Syzygy tables, allowing any user to query the perfect result of any 7-piece position in their browser.</p>
 
     <h3>Engines and analysis tools</h3>
 
-    <p>The leading open-source engines — Stockfish and Leela Chess Zero — are freely downloadable and run on consumer hardware. Stockfish is CPU-bound and requires no specialized hardware; Lc0 is GPU-bound and benefits from a modern graphics card. Both expose the <span class="term">UCI protocol</span> (Universal Chess Interface), the de-facto API standard, which any chess GUI (ChessBase, Arena, Cute Chess, Lichess analysis) can speak to. The <span class="term">Top Chess Engine Championship</span> (TCEC) and <span class="term">Computer Chess Championship</span> (CCCC, run on Chess.com) are the two main computer-vs-computer tournament series, and their match archives are themselves a research resource — they document how the strongest available engines play in long-time-control engine-vs-engine games.</p>
+    <p>The leading open-source engines — Stockfish and Leela Chess Zero — are freely downloadable and run on consumer hardware. Stockfish is CPU-bound and requires no specialized hardware; Lc0 is GPU-bound and benefits from a modern graphics card. Both expose the <span class="term">UCI protocol</span> (Universal Chess Interface), the de-facto API standard, which any chess GUI (ChessBase, Arena, Cute Chess, Lichess analysis) can speak to. The <span class="term"><a href="https://tcec-chess.com/" rel="noopener">Top Chess Engine Championship</a></span> (TCEC) and <span class="term"><a href="https://www.chess.com/computer-chess-championship" rel="noopener">Computer Chess Championship</a></span> (CCCC, run on Chess.com) are the two main computer-vs-computer tournament series, and their match archives are themselves a research resource — they document how the strongest available engines play in long-time-control engine-vs-engine games.</p>
 
     <h3>Puzzle and training databases</h3>
 
-    <p>For tactical training, the <span class="term">Lichess Puzzle Database</span> contains over four million tactical puzzles automatically extracted from played games and re-analyzed at high depth; each puzzle has a Glicko-rated difficulty. <span class="term">ChessTempo</span> is a similar resource. For chess composition (the artistic tradition of constructed problems rather than positions from games), the <span class="term">Yacpdb</span> database aggregates historical and contemporary chess problems with structured metadata.</p>
+    <p>For tactical training, the <span class="term"><a href="https://database.lichess.org/#puzzles" rel="noopener">Lichess Puzzle Database</a></span> contains over four million tactical puzzles automatically extracted from played games and re-analyzed at high depth; each puzzle has a Glicko-rated difficulty. <span class="term"><a href="https://chesstempo.com/" rel="noopener">ChessTempo</a></span> is a similar resource. For chess composition (the artistic tradition of constructed problems rather than positions from games), the <span class="term"><a href="https://yacpdb.org/" rel="noopener">Yacpdb</a></span> database aggregates historical and contemporary chess problems with structured metadata.</p>
 
-    <h2>7 · Findings from engine-driven research</h2>
+    <h2 id="sec-findings">8 · Findings from engine-driven research</h2>
 
     <p>Stockfish and Lc0 are now both above grandmaster level by hundreds of Elo. This makes them, beyond their competitive use, instruments of empirical research into chess itself — instruments whose results have to be interpreted as data about the game, not about the engines that produced them.</p>
 
@@ -315,11 +369,11 @@
 
     <p>When DeepMind forced AlphaZero to play through twelve of the most common human openings in 1200 games against Stockfish 8, it scored 61% overall — slightly worse than its 64% in unconstrained play, suggesting modest but real preferences. Particularly striking: it scored 78% with the White side of the French Defence and remained undefeated as White in that line over 50 games. This was the kind of result that drew the chess world's attention. After more than a century of human consensus that 1.e4 was at least as good as 1.d4, an entity that had learned chess from scratch with no human bias arrived at a different verdict.</p>
 
-    <p>The PNAS paper "Acquisition of chess knowledge in AlphaZero" (McGrath et al., 2022) probed deeper. Even within a single opening, individual training runs of AlphaZero often converge to strong preferences for one move over another in positions where humans see the choice as roughly equivalent — and different training seeds converge on different preferences. The authors interpret this as evidence that those positions actually <em>are</em> roughly equivalent (otherwise different training runs would settle on the same answer), reinforcing rather than overturning the human assessment.</p>
+    <p>The PNAS paper <a href="https://www.pnas.org/doi/10.1073/pnas.2206625119" rel="noopener">"Acquisition of chess knowledge in AlphaZero"</a> (McGrath et al., 2022) probed deeper. Even within a single opening, individual training runs of AlphaZero often converge to strong preferences for one move over another in positions where humans see the choice as roughly equivalent — and different training seeds converge on different preferences. The authors interpret this as evidence that those positions actually <em>are</em> roughly equivalent (otherwise different training runs would settle on the same answer), reinforcing rather than overturning the human assessment.</p>
 
     <h3>The draw problem</h3>
 
-    <p>Engine-vs-engine play at long time controls is dominated by draws. In TCEC superfinals, the proportion of decisive games at the top level has dropped to roughly 15-25% in many seasons. The trend extends to elite human play: Carlsen and others have noted that with both sides having access to engine preparation 25-30 moves into mainline openings, the practical difficulty of generating winning positions out of standard openings has grown substantially. This is the empirical backdrop against which Vladimir Kramnik's proposal for "no-castling chess" was made — and the DeepMind paper "Assessing Game Balance with AlphaZero" (Tomašev et al., 2020) used AlphaZero precisely as a tool to study which rule modifications would restore decisiveness without breaking the game's fundamental character. They found that no-castling chess yields more decisive games while preserving most of the strategic substance, and that several pawn-mobility variants ("torpedo chess," "pawn-back chess") are interestingly different but less natural.</p>
+    <p>Engine-vs-engine play at long time controls is dominated by draws. In TCEC superfinals, the proportion of decisive games at the top level has dropped to roughly 15-25% in many seasons. The trend extends to elite human play: Carlsen and others have noted that with both sides having access to engine preparation 25-30 moves into mainline openings, the practical difficulty of generating winning positions out of standard openings has grown substantially. This is the empirical backdrop against which Vladimir Kramnik's proposal for "no-castling chess" was made — and the DeepMind paper <a href="https://cacm.acm.org/research/reimagining-chess-with-alphazero/" rel="noopener">"Assessing Game Balance with AlphaZero"</a> (Tomašev et al., 2020) used AlphaZero precisely as a tool to study which rule modifications would restore decisiveness without breaking the game's fundamental character. They found that no-castling chess yields more decisive games while preserving most of the strategic substance, and that several pawn-mobility variants ("torpedo chess," "pawn-back chess") are interestingly different but less natural.</p>
 
     <h3>Stylistic findings</h3>
 
@@ -329,7 +383,7 @@
 
     <p>The 7-piece tablebases revealed positions with forced wins requiring well over 500 moves of perfect play — sequences that look completely random to a human observer but in fact compose a single forced victory. The longest known forced mate in 7-piece is 549 moves; in the partial 8-piece project it has reached 584 moves as of 2022. These positions have no human-graspable plan; they are pure consequences of the perfect information of the database. Whether they say anything about chess as humans understand it is itself an interesting question — they exist in the game tree but lie outside any practical horizon of play.</p>
 
-    <h2>8 · Elo and rating systems</h2>
+    <h2 id="sec-elo">9 · Elo and rating systems</h2>
 
     <p>The standard chess rating system is the work of Arpad Elo (1903–1992), a Hungarian-American physics professor and US chess master. Elo's system, designed in the 1950s as an improvement on the Harkness system then in use, assumes that each player has a true skill level that produces normally-distributed performances around it; the rating is a maximum-likelihood estimate of that skill level given the player's results. The USCF adopted it in 1960; FIDE in 1970.</p>
 
@@ -339,9 +393,9 @@
 
     <p>Two technical caveats are worth noting. First, ratings are <em>relative</em>: they measure performance against other rated players, not absolute strength. Comparing ratings across eras is fraught — a 2700 in 1972 was a different population from a 2700 today. Second, the closed-loop rating pool is in principle conservative, but inflation can creep in through new players entering with overrated provisional ratings, the rating floor, and the asymmetric K-factor. Jeff Sonas's analyses suggest mild inflation since the mid-1980s; Regan and Haworth, using engine analysis to assess move quality directly, find little inflation. The debate is ongoing.</p>
 
-    <p>Online platforms use variants. Chess.com runs a Glicko-style system; Lichess uses Glicko-2 (Mark Glickman, 1995, 2012), which adds a rating deviation parameter to track confidence and a volatility parameter to track recent change. Ratings on these platforms are not directly comparable with FIDE ratings — Lichess tends to run several hundred points higher than FIDE for the same player; Chess.com somewhere between.</p>
+    <p>Online platforms use variants. Chess.com runs a Glicko-style system; Lichess uses <a href="http://www.glicko.net/glicko.html" rel="noopener">Glicko-2</a> (Mark Glickman, 1995, 2012), which adds a rating deviation parameter to track confidence and a volatility parameter to track recent change. Ratings on these platforms are not directly comparable with FIDE ratings — Lichess tends to run several hundred points higher than FIDE for the same player; Chess.com somewhere between.</p>
 
-    <h2>9 · Opening theory</h2>
+    <h2 id="sec-opening-theory">10 · Opening theory</h2>
 
     <p>Opening theory is the codified knowledge of strong continuations from the starting position, organized around variations that have been played, analyzed, and scored over centuries. A typical strong player has prepared lines twenty or thirty moves deep in their main repertoire, with sidelines to handle deviations. The most widely-used taxonomy is the <em>Encyclopaedia of Chess Openings</em> (ECO), published in five volumes by the Yugoslav publisher Šahovski Informator from the 1960s onward; ECO codes (A00–E99) are the standard reference.</p>
 
@@ -360,9 +414,9 @@
 
     <p>Engines have shifted opening theory considerably. Many lines once thought playable have been refuted to draws or worse; conversely, lines once thought dubious (the Berlin, the Petroff) are now mainline. AlphaZero in particular preferred the Queen's Gambit and English Opening over the more popular human choices, and its games sparked a brief revival of the Queen's Indian and Catalan in elite play.</p>
 
-    <h2>10 · Suits, lusory activity, and the philosophy of games</h2>
+    <h2 id="sec-suits">11 · Suits, lusory activity, and the philosophy of games</h2>
 
-    <p>Bernard Suits's 1978 book <em>The Grasshopper: Games, Life and Utopia</em> remains the most influential analytic account of what it means to play a game. The book is structured as a Socratic dialogue between a dying Grasshopper — playful, idle, philosophically committed to play as the highest good — and his disciples. The Grasshopper proposes that game-playing has four interlocking elements.</p>
+    <p>Bernard Suits's 1978 book <em><a href="https://broadviewpress.com/product/the-grasshopper-third-edition/" rel="noopener">The Grasshopper: Games, Life and Utopia</a></em> remains the most influential analytic account of what it means to play a game. The book is structured as a Socratic dialogue between a dying Grasshopper — playful, idle, philosophically committed to play as the highest good — and his disciples. The Grasshopper proposes that game-playing has four interlocking elements.</p>
 
     <p>The <span class="term">prelusory goal</span> is a state of affairs that can be specified independently of the rules — described in terms a non-player would understand. In chess it is the geometric configuration in which one king is attacking the other with no legal escape. The configuration can be reached by any number of means; one of them is playing chess.</p>
 
@@ -376,7 +430,7 @@
 
     <p>Suits's framework gives precise language for a recurring confusion about chess. Stockfish does not "play" chess in his sense — it computes optimal moves within the lusory-means structure, but does not <em>accept</em> the structure. The distinction is not available in the language of game theory by itself.</p>
 
-    <h2>11 · Chess in literature and film</h2>
+    <h2 id="sec-literature">12 · Chess in literature and film</h2>
 
     <p>Chess is one of the most over-used metaphors in writing about thinking, war, love, and politics — and a recurring subject in serious fiction. A short, partial canon:</p>
 
@@ -388,7 +442,7 @@
 
     <p>Other notable appearances of chess in literature: Jorge Luis Borges's poem "Ajedrez" treats the chess pieces as a metaphor for the player as himself a piece in a larger game, played by a god who is in turn a piece in some larger game still. Italo Calvino's <em>Invisible Cities</em> (1972) closes with a scene in which Marco Polo and Kublai Khan read their conversations into the marquetry of an empty chessboard. Vikram Seth's <em>The Golden Gate</em> (1986) and Elena Ferrante's <em>The Days of Abandonment</em> (2002) each contain a substantial chess scene.</p>
 
-    <h2>12 · Notes on tournaments and titles</h2>
+    <h2 id="sec-tournaments">13 · Notes on tournaments and titles</h2>
 
     <p>The <span class="term">World Chess Championship</span> has been held since 1886. Champions in roughly the modern era: Botvinnik (1948–1963, with interruptions), Petrosian (1963–1969), Spassky (1969–1972), Fischer (1972–1975, who refused to defend), Karpov (1975–1985, by default), Kasparov (1985–2000), Kramnik (2000–2007), Anand (2007–2013), Carlsen (2013–2023, voluntarily relinquished), Ding Liren (2023–2024), Gukesh Dommaraju (2024–present). Carlsen's withdrawal — he said he no longer felt sufficient motivation to defend — was a significant moment. Ding's title win and Gukesh's subsequent victory at age 18 marked the entry of the championship into a post-Carlsen era.</p>
 
@@ -396,27 +450,41 @@
 
     <p>Major titles, in descending order: Grandmaster (GM, 2500+ with three norms), International Master (IM, 2400+), FIDE Master (FM, 2300+), Candidate Master (CM, 2200+). Women's titles (WGM, WIM, WFM, WCM) sit 200 points lower; titled women are not separately ranked from men in the open lists.</p>
 
-    <h2>13 · Personal notes</h2>
+    <h2 id="sec-personal-notes">14 · Personal notes</h2>
 
     <h3>On checkmate, not development</h3>
 
     <p>One observation, after a fair amount of play and engine review: most losses at the club level come from prioritizing piece development and material preservation over the actual goal of the game, which is to mate the opposing king. Stockfish review tends to confirm this — the moments where the evaluation swings against the losing side are usually moments where one player keeps maneuvering pieces into "good squares" while the other player is already coordinating an attack on the king.</p>
 
-    <p>This connects to a point worth recalling from §10 above: in Suits's analysis, the prelusory goal of chess is the geometric configuration of the opposing king under attack with no legal escape. Material is not the goal. Position is not the goal. The king is the goal. Suits's framework is sometimes accused of being too abstract; this is a case in which it gives a very practical reminder.</p>
+    <p>This connects to a point worth recalling from §11 above: in Suits's analysis, the prelusory goal of chess is the geometric configuration of the opposing king under attack with no legal escape. Material is not the goal. Position is not the goal. The king is the goal. Suits's framework is sometimes accused of being too abstract; this is a case in which it gives a very practical reminder.</p>
 
     <p>Personal preference, derived from this observation: trade pieces aggressively and head into the endgame as soon as the resulting position is no worse than equal. Endgames have a higher ratio of "what does the king actually need to do" to "where do these pieces want to be," which suits the stripped-down logic of the prelusory goal.</p>
 
-    <h2>14 · Further reading and resources</h2>
+    <h3>On chess in the engine era</h3>
+
+    <p>A more critical thought, advanced as a position rather than as a settled view. Running is something humans do that machines do differently: when humans run, the activity is not a slow approximation of what a car does. A car gets from A to B; a runner does not approximate that. This is why people still race despite the existence of cars. Chess seems to me different in kind. It is at its core an analytical activity over a finite combinatorial structure — and any analytical activity over that structure that a human performs is, in some real sense, a slower and weaker version of what an engine does. The engine is not a different way of playing chess; it is the same activity carried out with more computational throughput. The analogy with running breaks. Once Stockfish exists, what does it mean to celebrate human performance at the activity? My view is that it cannot mean what it once meant. Chess in the present is a symbol — a thing that once stood for the human capacity for thought, that produced game theory and a substantial body of philosophy along the way, and that survives now as a cultural and traditional practice. The empirical evidence is consonant with this read. Top players openly study engine output and try to internalize engine-recommended ideas; Carlsen withdrew from the World Championship in 2023 saying he no longer found sufficient motivation to defend his title; engine-vs-engine play at long time controls draws at rates that have many tournament organizers worried about competitive interest.</p>
+
+    <p>This is a strong claim and it is worth recording the strongest objections to it.</p>
+
+    <p>The first is that the "computer-equivalence" premise — that human chess analysis is the same activity as engine analysis, only slower — is exactly what <a href="https://en.wikipedia.org/wiki/Hubert_Dreyfus's_views_on_artificial_intelligence" rel="noopener">Hubert Dreyfus</a> spent his career arguing against, beginning with his 1965 RAND paper <em>Alchemy and Artificial Intelligence</em> and his 1972 book <em>What Computers Can't Do</em>. Dreyfus's case, drawn from Heidegger and Merleau-Ponty, was that human expert performance — explicitly including chess — is not a slow form of symbolic computation but a different kind of activity altogether: situated, embodied, structured by a non-formalizable understanding of relevance. He famously lost a game to MIT's Mac Hack VI in 1967, when Seymour Papert organized the match to embarrass him; but his theoretical argument did not depend on humans being able to defeat machines. It depended on the activities being phenomenologically distinct. If Dreyfus is right, the analogy with running may not break at all: human chess and engine chess are two activities that share a name, the way human running and a car share the relation of "covering ground."</p>
+
+    <p>The second is that even granting partial computer-equivalence, the argument may apply to <em>producing the strongest moves</em> rather than to <em>playing</em>. A four-hour classical game is not won by approximating Stockfish at one position per second; it is won by translating engine-derived ideas into heuristics that fit a four-hour time budget and a finite human attention span. Top players in the engine era often describe their work as the inverse of what an engine does — extracting from engines a small number of generalizable patterns that survive translation into a human player's actual cognitive resources. This connects directly to §11 above: in Suits's framework, what a player does is to voluntarily accept the lusory means and inhabit the resulting structure. The engine optimizes; it does not <em>play</em> in Suits's sense. So even if the engine produces stronger moves, that is not the activity human chess consists in.</p>
+
+    <p>The third is that "symbol" is not as deflationary a category as it sounds. <a href="https://en.wikipedia.org/wiki/The_Work_of_Art_in_the_Age_of_Mechanical_Reproduction" rel="noopener">Walter Benjamin's 1935 essay</a> on art in the age of mechanical reproduction argued that mechanical reproduction did not destroy artworks; it changed what they were for, dissolving their cultic <em>aura</em> while opening new functions. The same structure may apply here: Deep Blue and AlphaZero may have dissolved chess's aura as the symbolic apex of human thought without dissolving the game. The activity continues; the symbolic role has changed. C. Thi Nguyen's <em><a href="https://global.oup.com/academic/product/games-9780190052089" rel="noopener">Games: Agency as Art</a></em> (2020) offers a complementary view — games provide what Nguyen calls "temporary agencies," structured experiences whose value is not reducible to optimal play. The point of playing chess on this view is not to compute the best move (engines have settled that question) but to inhabit a particular kind of bounded, alternating-turn agency for the duration of a game. That value is unaffected by the existence of stronger players, human or otherwise.</p>
+
+    <p>Where this leaves the position. The deflationary part of the argument — that chess has been demoted from "site of human intellectual contest" to "cultural and traditional practice" — survives. Carlsen's withdrawal is hard to read otherwise, and the engine-era empirical situation is what it is. But the further claim that the human activity itself reduces to slow computer simulation does not survive Dreyfus, and the deflationary reading of "symbol" does not survive Benjamin and Nguyen. The cleanest way to put what remains: the four ontological objects this page opened with are still four. The combinatorial-tree object has been near-exhausted by engines (this much is conceded). The lusory activity in Suits's sense has not. The cultural-historical practice has not, though its cultural meaning has changed. To insist that all four reduce to the first is to make exactly the conflation the opening paragraph warned against.</p>
+
+    <h2 id="sec-further-reading">15 · Further reading and resources</h2>
 
     <p>Histories: Murray's <em>A History of Chess</em> (1913) is encyclopedic and unsurpassed in scope, though English-Asian transmission accounts have been refined since. Yalom's <em>Birth of the Chess Queen</em> (2004) tracks the queen piece — its rise, the 1475 reform, and the larger cultural symbolism — through a thousand years of European history.</p>
 
-    <p>Game theory: Schwalbe and Walker's <em>Zermelo and the early history of game theory</em> (Games and Economic Behavior, 2001) is the canonical reconstruction of Zermelo 1913 and includes the standard English translation. Allis's PhD thesis (Limburg, 1994) is the source for the typology of solved games. Schaeffer et al.'s <em>Checkers Is Solved</em> (Science, 2007) is the best technical writing on a real solving project.</p>
+    <p>Game theory: Schwalbe and Walker's <em><a href="https://www.sciencedirect.com/science/article/pii/S0899825601908440" rel="noopener">Zermelo and the early history of game theory</a></em> (Games and Economic Behavior, 2001) is the canonical reconstruction of Zermelo 1913 and includes the standard English translation. Allis's PhD thesis (Limburg, 1994) is the source for the typology of solved games. Schaeffer et al.'s <em><a href="https://www.science.org/doi/10.1126/science.1144079" rel="noopener">Checkers Is Solved</a></em> (Science, 2007) is the best technical writing on a real solving project.</p>
 
-    <p>Engines and AI: Silver et al.'s AlphaZero papers (2017 preprint and 2018 Science paper) are accessible reading. Matthew Sadler and Natasha Regan's <em>Game Changer</em> (2019) is the strongest book-length engagement with AlphaZero's playing style by working chess professionals. <em>Behind Deep Blue</em> by Feng-hsiung Hsu (2002) is the inside account of the 1997 match.</p>
+    <p>Engines and AI: Silver et al.'s AlphaZero papers (<a href="https://arxiv.org/abs/1712.01815" rel="noopener">2017 preprint</a> and <a href="https://www.science.org/doi/10.1126/science.aar6404" rel="noopener">2018 Science paper</a>) are accessible reading. Matthew Sadler and Natasha Regan's <em><a href="https://www.newinchess.com/game-changer" rel="noopener">Game Changer</a></em> (2019) is the strongest book-length engagement with AlphaZero's playing style by working chess professionals. <em>Behind Deep Blue</em> by Feng-hsiung Hsu (2002) is the inside account of the 1997 match.</p>
 
-    <p>Practical play and resources: <em>Lichess.org</em> is free, open source, and has the best free training tools in existence (puzzle racer, Studies, opening explorer, the seven-piece tablebase API). The Saint Louis Chess Club's YouTube channel and <em>chess24</em> archives contain decades of grandmaster commentary. ChessBase software (commercial) is the standard for opening preparation at a serious level. For pure problem-solving and the aesthetic of the chess composition tradition, the <em>Yacpdb</em> chess problem database and the journals <em>The Problemist</em> and <em>EG</em> are unmatched.</p>
+    <p>Practical play and resources: <em><a href="https://lichess.org/" rel="noopener">Lichess.org</a></em> is free, open source, and has the best free training tools in existence (puzzle racer, Studies, opening explorer, the seven-piece tablebase API). The <a href="https://www.youtube.com/@STLChessClub" rel="noopener">Saint Louis Chess Club's YouTube channel</a> and <em>chess24</em> archives contain decades of grandmaster commentary. ChessBase software (commercial) is the standard for opening preparation at a serious level. For pure problem-solving and the aesthetic of the chess composition tradition, the <em>Yacpdb</em> chess problem database and the journals <em>The Problemist</em> and <em>EG</em> are unmatched.</p>
 
-    <p>Suits and the philosophy of games: <em>The Grasshopper</em> (1978; Broadview reissue 2014, with introduction by Thomas Hurka) is the primary text. C. Thi Nguyen's <em>Games: Agency as Art</em> (2020) extends Suits in directions that are productive and disagreeable in roughly equal measure.</p>
+    <p>Suits and the philosophy of games: <em>The Grasshopper</em> (1978; Broadview reissue 2014, with introduction by Thomas Hurka) is the primary text. C. Thi Nguyen's <em><a href="https://global.oup.com/academic/product/games-9780190052089" rel="noopener">Games: Agency as Art</a></em> (2020) extends Suits in directions that are productive and disagreeable in roughly equal measure.</p>
 
     <p>Literature: Nabokov's <em>The Defense</em> (English translation by Michael Scammell with the author, 1964) and Zweig's <em>Schachnovelle</em> (any of several English translations) are the two essentials. Walter Tevis's <em>The Queen's Gambit</em> (Vintage reissue 2020) is worth reading even after the series.</p>
 
@@ -436,6 +504,8 @@
 <script>
   new GameTree('game-tree-demo', { lang: 'en' });
 </script>
+
+<script src="/assets/toc.js"></script>
 
 </body>
 </html>
