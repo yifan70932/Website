@@ -1,0 +1,413 @@
+/* ============================================================
+   yifanova.com — base styles
+   ------------------------------------------------------------
+   Loads after tokens.css. Notebook-with-Sidenotes layout.
+   ============================================================ */
+
+* { box-sizing: border-box; }
+
+html {
+  font-size: var(--fs-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: var(--rhythm);
+  font-feature-settings: "kern", "liga", "onum";
+}
+
+/* When the document is in Chinese, swap to a CJK serif. */
+html[lang^="zh"] body,
+html[lang^="zh"] h1,
+html[lang^="zh"] h2,
+html[lang^="zh"] h3 {
+  font-family: var(--font-cjk), var(--font-body);
+}
+
+html[lang^="zh"] body {
+  line-height: 1.85;
+}
+
+/* ─── Page container ─────────────────────────────────────── */
+
+.page {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+}
+
+@media (max-width: 640px) {
+  .page { padding: 2rem 1.25rem 4rem; }
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
+
+.colophon {
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.colophon a {
+  color: var(--ink-faint);
+  text-decoration: none;
+}
+.colophon a:hover { color: var(--navy); }
+
+/* ─── Language toggle ────────────────────────────────────── */
+
+.lang-toggle {
+  display: inline-flex;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.03em;
+}
+
+.lang-toggle a {
+  padding: 0.35rem 0.75rem;
+  color: var(--ink-faint);
+  text-decoration: none;
+  background: transparent;
+  border-right: 1px solid var(--rule);
+  transition: background 0.15s ease, color 0.15s ease;
+  text-transform: none;
+}
+.lang-toggle a:last-child { border-right: none; }
+.lang-toggle a:hover {
+  background: var(--rule-soft);
+  color: var(--navy);
+}
+.lang-toggle a.active {
+  background: var(--navy);
+  color: var(--bg);
+}
+
+/* ─── Article structure ──────────────────────────────────── */
+
+article {
+  max-width: var(--measure);
+}
+
+.article-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+h1 {
+  font-weight: 700;
+  font-size: clamp(var(--fs-h1-min), 4vw, var(--fs-h1-max));
+  line-height: var(--rhythm-tight);
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0 0 0.75rem;
+}
+
+.subtitle {
+  font-size: var(--fs-subtitle);
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0;
+}
+html[lang^="zh"] .subtitle { font-style: normal; }
+
+.article-meta {
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  color: var(--ink-faint);
+  margin-top: 1.25rem;
+  letter-spacing: 0.02em;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  color: var(--navy);
+  line-height: var(--rhythm-tight);
+  margin: 3rem 0 1rem;
+  letter-spacing: -0.005em;
+}
+
+h3 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin: 2rem 0 0.5rem;
+}
+html[lang^="zh"] h3 {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-family: var(--font-cjk), var(--font-ui);
+}
+
+p {
+  margin: 0 0 1.1em;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+html[lang^="zh"] p {
+  hyphens: none;
+  -webkit-hyphens: none;
+  text-align: justify;
+}
+
+/* ─── Inline elements ────────────────────────────────────── */
+
+a {
+  color: var(--navy);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.15s ease;
+}
+a:hover { text-decoration-color: var(--navy); }
+
+em { font-style: italic; }
+strong { font-weight: 700; color: var(--ink); }
+
+.term {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  color: var(--forest);
+  font-size: 0.96em;
+}
+html[lang^="zh"] .term {
+  font-family: var(--font-cjk), var(--font-ui);
+}
+
+code, .mono {
+  font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--rule-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  color: var(--ink);
+}
+
+.cjk { font-family: var(--font-cjk), var(--font-body); }
+.lat { font-family: var(--font-body); }
+
+/* ─── Sidenotes ──────────────────────────────────────────── */
+
+.sidenote {
+  font-family: var(--font-ui);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+html[lang^="zh"] .sidenote {
+  font-family: var(--font-cjk), var(--font-ui);
+  line-height: 1.7;
+}
+
+.sidenote-num {
+  font-weight: 600;
+  color: var(--sapphire);
+  margin-right: 0.4em;
+}
+
+.sn-ref {
+  font-family: var(--font-ui);
+  font-size: 0.7em;
+  vertical-align: super;
+  color: var(--sapphire);
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 1px;
+}
+
+@media (min-width: 1000px) {
+  article {
+    position: relative;
+    padding-right: calc(var(--sidenote-col) + var(--gutter));
+  }
+  .sidenote {
+    position: absolute;
+    right: 0;
+    width: var(--sidenote-col);
+    margin-top: -0.2em;
+    clear: right;
+  }
+  article > figure,
+  article > table,
+  article > .full-bleed,
+  article > .references {
+    max-width: none;
+    width: calc(var(--measure) + var(--sidenote-col) + var(--gutter));
+  }
+}
+
+@media (max-width: 999px) {
+  .sidenote {
+    display: block;
+    margin: 1rem 0 1.5rem;
+    padding: 0.85rem 1rem;
+    background: var(--rule-soft);
+    border-left: 2px solid var(--sapphire);
+    border-radius: 0 3px 3px 0;
+  }
+}
+
+/* ─── Block elements ─────────────────────────────────────── */
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0.85rem 1.25rem;
+  border-left: 3px solid var(--navy);
+  background: var(--pale-blue);
+  border-radius: 0 3px 3px 0;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+blockquote p:last-child { margin-bottom: 0; }
+html[lang^="zh"] blockquote { font-style: normal; }
+
+ul, ol {
+  margin: 0 0 1.1em;
+  padding-left: 1.4em;
+}
+li { margin-bottom: 0.3em; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 3rem 0;
+}
+
+/* ─── Figures ────────────────────────────────────────────── */
+
+figure {
+  margin: 2.5rem 0;
+  text-align: center;
+}
+
+figure svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+figcaption {
+  font-family: var(--font-ui);
+  font-size: var(--fs-small);
+  color: var(--ink-faint);
+  margin-top: 0.85rem;
+  text-align: left;
+  line-height: 1.5;
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+}
+html[lang^="zh"] figcaption {
+  font-family: var(--font-cjk), var(--font-ui);
+  line-height: 1.7;
+}
+
+/* ─── Tables ─────────────────────────────────────────────── */
+
+table {
+  font-family: var(--font-ui);
+  font-size: var(--fs-small);
+  border-collapse: collapse;
+  width: 100%;
+  margin: 2rem 0;
+}
+html[lang^="zh"] table {
+  font-family: var(--font-cjk), var(--font-ui);
+  font-size: 0.9rem;
+}
+
+th, td {
+  padding: 0.65rem 0.8rem;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+th {
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+
+tbody tr:hover { background: var(--rule-soft); }
+
+td .status {
+  display: inline-block;
+  padding: 0.15em 0.55em;
+  border-radius: 3px;
+  font-size: 0.85em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.status-strong   { background: var(--forest);    color: var(--bg); }
+.status-weak     { background: var(--sapphire);  color: var(--bg); }
+.status-ultra    { background: var(--pale-blue); color: var(--navy); }
+.status-unsolved { background: var(--rule-soft); color: var(--ink-soft); border: 1px solid var(--rule); }
+
+/* ─── Footer ─────────────────────────────────────────────── */
+
+.page-footer {
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  color: var(--ink-faint);
+  display: flex;
+  justify-content: space-between;
+  letter-spacing: 0.02em;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.page-footer a {
+  color: var(--ink-faint);
+  text-decoration: none;
+  margin-left: 1rem;
+}
+.page-footer a:hover { color: var(--navy); }
+
+/* ─── References ─────────────────────────────────────────── */
+
+.references {
+  font-family: var(--font-ui);
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin-top: 3rem;
+}
+html[lang^="zh"] .references {
+  font-family: var(--font-cjk), var(--font-ui);
+  line-height: 1.75;
+}
+
+.references h3 { margin-bottom: 1rem; }
+.references ol { padding-left: 1.6em; }
+.references li { margin-bottom: 0.65em; }
+.references li::marker {
+  color: var(--sapphire);
+  font-weight: 600;
+}
