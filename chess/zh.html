@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>国际象棋是什么 — yifanova.com</title>
-  <meta name="description" content="从历史、博弈论、策梅洛定理与已解游戏的类型学，以及 Suits 的游戏本体论四个维度，分析国际象棋这一对象。">
+  <title>一棵无法穷尽的树 — yifanova.com</title>
+  <meta name="description" content="国际象棋同时是四种不同的对象——组合博弈树、规则包、Suits 意义上的游戏行为、文化历史实践。本文论证：哲学上对国际象棋的大多数混淆，源于把其中一种当作另外几种。">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
 
   <link rel="stylesheet" href="/assets/tokens.css">
   <link rel="stylesheet" href="/assets/base.css">
+  <link rel="stylesheet" href="/assets/gametree.css">
 </head>
 
 <body>
@@ -29,259 +30,155 @@
   <article>
 
     <header class="article-header">
-      <h1>国际象棋是什么</h1>
-      <p class="subtitle">从历史、博弈论、策梅洛定理，到一项有 1500 年历史的游戏的本体论</p>
+      <h1>一棵无法穷尽的树</h1>
+      <p class="subtitle">国际象棋作为四种不同的本体论对象，以及把它们混为一谈的代价</p>
       <p class="article-meta">essay · 中文</p>
     </header>
 
-    <p>国际象棋是被引用最频繁的"思考"的隐喻。它指代战争，指代政治，指代爱情，指代智力本身的追寻。但国际象棋同时也是一个数学对象——一个有限的、确定的、完全信息的、二人零和博弈——而且是少数几种同时充当流行消遣、人工智能研究工具、数理逻辑奠基性定理的对象、以及行动哲学反复使用的例子的文化产物<a href="#sn-1" class="sn-ref">1</a>。下文试图同时认真对待这些所有的层面。</p>
+    <p>本文的论点直白：<em>国际象棋</em>不是一个对象，而是四个。它是一棵约 10<sup>120</sup> 节点的有限组合博弈树——策梅洛 1913 年定理所谈的那个对象；它是一份规则包——一个把原本无限的活动转换成有限的、特定的十九世纪规约；它是 Bernard Suits 意义上的<em>游戏行为</em>——一组被自愿接受的限制的结构；它是一种从印度 chaturanga 延续至今、跨越一千五百年的文化历史实践。这四者都真实存在，谁也无法化约成谁，关于国际象棋的大多数哲学混淆，正是源于把其中之一当作其他几个<a href="#sn-1" class="sn-ref">1</a>。</p>
 
     <aside class="sidenote" id="sn-1">
-      <span class="sidenote-num">1</span>本文不是棋史学意义上的"国际象棋史"。系统的棋史可参考 Murray 的 <em>A History of Chess</em>（1913），至今仍未被超越。
+      <span class="sidenote-num">1</span>这种混淆往多个方向蔓延。人们说引擎"在下棋"（把行为塌陷到树上）；说解出国际象棋会"了结"这个游戏（把文化实践塌陷到它的数学对象上）。两种推论都不合法。
     </aside>
 
-    <h2>一 · 简史</h2>
+    <p>论证依次展开这四种对象——但顺序是从最具体到最抽象，因为真正有意思的问题是：理解了第二项之后，第一项作为人类实际投入的对象是否还<em>可能</em>。</p>
 
-    <p>我们今天所称的"国际象棋"，源于古印度的 <em>chaturanga</em>（梵文 <span class="cjk">चतुरङ्ग</span>，"四肢"或"四军"）<a href="#sn-2" class="sn-ref">2</a>。这个名字指印度古代军队的四个兵种——步兵、骑兵、象兵、战车——它们今日仍以兵、马、象、车的形式存在于棋盘上。最早不容置疑的文献证据出现在 Bāṇabhaṭṭa（巴纳）公元 625 年前后写就的《Harshacharita》，其中以"只有 <em>ashtāpada</em>（八格盘）上才能见到 <em>chaturanga</em> 的对垒"赞颂哈尔沙王朝的太平。</p>
+    <h2>一 · 文化对象</h2>
+
+    <p>今天我们所称的"国际象棋"，源于古印度的 <em>chaturanga</em>（梵文 <span class="cjk">चतुरङ्ग</span>，"四肢"或"四军"），最早不容置疑的文献证据出现在 Bāṇabhaṭṭa（巴纳）公元七世纪初写就的《Harshacharita》。这个名字指印度古代军队的四个兵种——步兵、骑兵、象兵、战车——它们今日仍以兵、马、象、车的形式存在于棋盘上<a href="#sn-2" class="sn-ref">2</a>。从印度向西，游戏进入萨珊波斯（chatrang）、阿拉伯世界（shatranj，七世纪后），约公元十世纪经摩尔人统治的西班牙和西西里进入中世纪欧洲。同时它也向东扩散：演化为中国的 <span class="cjk">象棋</span>（xiangqi）、日本的 <span class="cjk">将棋</span>（shōgi）、朝鲜的 <em>janggi</em>、泰国的 <em>makruk</em>，每一支都是平行的后裔。</p>
 
     <aside class="sidenote" id="sn-2">
-      <span class="sidenote-num">2</span><em>ashtāpada</em>（八格盘）出现的时间早于 chaturanga，最初用于其他赛跑类游戏。chaturanga 是否曾经是骰子驱动的四人游戏，至今有争议。
+      <span class="sidenote-num">2</span>Murray（1913）至今仍是规范的棋史。8×8 的 <em>ashtāpada</em>（八格盘）出现得比 chaturanga 更早，最初用于赛跑类游戏——棋盘是继承的；战争模拟的覆盖层是新的。
     </aside>
 
-    <p>从印度向西，这个游戏进入萨珊波斯，称为 <em>chatrang</em>；七世纪阿拉伯征服波斯之后，传入伊斯兰世界，称为 <em>shatranj</em>；约公元十世纪，经由摩尔人统治的西班牙（al-Andalus）和西西里酋长国进入中世纪欧洲。另有一条北线——经伏尔加—里海贸易路线和拜占庭，于九世纪传入基辅罗斯，维京人最终把这一游戏带到了冰岛和苏格兰外赫布里底群岛，著名的"刘易斯棋子"即在那里于十二世纪埋藏<a href="#sn-3" class="sn-ref">3</a>。</p>
+    <figure>
+      <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="国际象棋自印度向东西方传播的时间轴，6至15世纪">
+        <defs>
+          <style>
+            .axis { stroke: var(--ink-soft); stroke-width: 1; }
+            .tick { stroke: var(--ink-faint); stroke-width: 0.7; }
+            .tick-label { font-family: 'Inter', sans-serif; font-size: 9.5px; fill: var(--ink-faint); }
+            .lane-label { font-family: 'Noto Serif SC', serif; font-size: 11px; fill: var(--ink-soft); }
+            .node-w { fill: var(--bg); stroke: var(--navy); stroke-width: 1.5; }
+            .node-origin { fill: var(--navy); stroke: var(--navy); stroke-width: 1.5; }
+            .node-label { font-family: 'Noto Serif SC', serif; font-size: 11px; fill: var(--ink); font-weight: 500; }
+            .node-soft { font-family: 'Inter', sans-serif; font-size: 9px; fill: var(--ink-faint); font-style: italic; }
+            .conn { stroke: var(--sapphire); stroke-width: 1.4; fill: none; stroke-dasharray: 3 3; }
+            .conn-east { stroke: var(--forest); }
+          </style>
+        </defs>
+
+        <line x1="40" y1="180" x2="680" y2="180" class="axis"/>
+        <g class="ticks">
+          <line x1="40"  y1="178" x2="40"  y2="184" class="tick"/>
+          <line x1="168" y1="178" x2="168" y2="184" class="tick"/>
+          <line x1="296" y1="178" x2="296" y2="184" class="tick"/>
+          <line x1="424" y1="178" x2="424" y2="184" class="tick"/>
+          <line x1="552" y1="178" x2="552" y2="184" class="tick"/>
+          <line x1="680" y1="178" x2="680" y2="184" class="tick"/>
+          <text x="40"  y="198" text-anchor="middle" class="tick-label">6世纪</text>
+          <text x="168" y="198" text-anchor="middle" class="tick-label">8世纪</text>
+          <text x="296" y="198" text-anchor="middle" class="tick-label">10世纪</text>
+          <text x="424" y="198" text-anchor="middle" class="tick-label">12世纪</text>
+          <text x="552" y="198" text-anchor="middle" class="tick-label">14世纪</text>
+          <text x="680" y="198" text-anchor="middle" class="tick-label">16世纪</text>
+        </g>
+
+        <text x="40" y="35" class="lane-label">向西</text>
+        <circle cx="55" cy="80" r="6" class="node-origin"/>
+        <text x="55" y="62" text-anchor="middle" class="node-label">印度</text>
+        <text x="55" y="100" text-anchor="middle" class="node-soft">chaturanga</text>
+
+        <circle cx="105" cy="80" r="4.5" class="node-w"/>
+        <text x="105" y="62" text-anchor="middle" class="node-label">波斯</text>
+        <text x="105" y="100" text-anchor="middle" class="node-soft">chatrang</text>
+
+        <circle cx="170" cy="80" r="4.5" class="node-w"/>
+        <text x="170" y="62" text-anchor="middle" class="node-label">阿拉伯世界</text>
+        <text x="170" y="100" text-anchor="middle" class="node-soft">shatranj</text>
+
+        <circle cx="265" cy="80" r="4.5" class="node-w"/>
+        <text x="265" y="62" text-anchor="middle" class="node-label">安达卢斯、西西里</text>
+
+        <circle cx="380" cy="80" r="4.5" class="node-w"/>
+        <text x="380" y="62" text-anchor="middle" class="node-label">拉丁欧洲</text>
+
+        <circle cx="555" cy="80" r="5.5" class="node-origin"/>
+        <text x="555" y="62" text-anchor="middle" class="node-label">疯王后改革</text>
+        <text x="555" y="100" text-anchor="middle" class="node-soft">1475 (伊比利亚 / 意大利)</text>
+
+        <path d="M 61 80 L 100 80" class="conn"/>
+        <path d="M 110 80 L 165 80" class="conn"/>
+        <path d="M 175 80 L 260 80" class="conn"/>
+        <path d="M 270 80 L 375 80" class="conn"/>
+        <path d="M 385 80 L 549 80" class="conn"/>
+
+        <text x="40" y="155" class="lane-label">向东</text>
+
+        <circle cx="170" cy="135" r="4.5" class="node-w"/>
+        <text x="170" y="127" text-anchor="end" class="node-label" dx="-7">中国</text>
+        <text x="170" y="155" text-anchor="end" class="node-soft" dx="-7">象棋</text>
+
+        <circle cx="265" cy="135" r="4.5" class="node-w"/>
+        <text x="265" y="127" text-anchor="end" class="node-label" dx="-7">日本</text>
+        <text x="265" y="155" text-anchor="end" class="node-soft" dx="-7">将棋</text>
+
+        <circle cx="295" cy="135" r="4.5" class="node-w"/>
+        <text x="320" y="127" class="node-label">东南亚</text>
+        <text x="320" y="155" class="node-soft">makruk</text>
+
+        <path d="M 55 86 Q 55 110 90 122 Q 130 132 165 134" class="conn conn-east"/>
+        <path d="M 175 135 L 260 135" class="conn conn-east"/>
+        <path d="M 175 135 L 290 135" class="conn conn-east"/>
+
+        <text x="350" y="20" text-anchor="middle" class="lane-label" style="font-weight:600;font-size:11px;fill:var(--ink)">国际象棋自印度的传播，6–15 世纪</text>
+      </svg>
+      <figcaption>从印度的同一起点出发的两条平行扩散路线。所标年代为最早可考的存在年代；东西两支早在中世纪就分流，此后基本独立发展。1475 年的"疯王后"改革——后与象获得长程能力——才造就了我们今天所玩的欧洲版本。</figcaption>
+    </figure>
+
+    <p>欧洲游戏本身的决定性变革发生在 1475 年前后的伊比利亚或意大利北部。改革之前，后只能斜走一格、象只能斜跳两格；改革之后两者都获得长程能力，棋局节奏剧烈加速。意大利人当时称之为 <em>scacchi alla rabiosa</em>——"疯王后象棋"。王车易位、吃过路兵、兵升变在此后两个世纪内逐步定型。下文马上将看到、对数学论证至关重要的那两条规则——五十步规则与三次重复局面规则——则是十九世纪的补充<a href="#sn-3" class="sn-ref">3</a>。所以，我们所谓的"国际象棋"在这一千五百年的历史中并不是一个稳定的目标；它是大约 150 年前才被定型的某个规则包。</p>
 
     <aside class="sidenote" id="sn-3">
-      <span class="sidenote-num">3</span>1831 年在刘易斯岛发现的 93 件海象牙雕棋子，一般归于约 1150–1200 年的挪威工坊。其中"象"（bishop）已经被表现为戴主教冠的人物，说明此时该子在欧洲已被彻底基督教化。
+      <span class="sidenote-num">3</span>规则在 1924 年 FIDE 成立后被国际化标准化；五十步规则后来又作过几次调整，以处理特定残局——表数据库分析表明那些残局存在需要更多步数的强制取胜。
     </aside>
 
-    <p>chaturanga 也向东传播：演化为中国的 <span class="cjk">象棋</span>（<em>xiangqi</em>）、日本的 <span class="cjk">将棋</span>（<em>shōgi</em>）、朝鲜的 <span class="cjk">장기</span>（<em>janggi</em>）、泰国的 <em>makruk</em> 等等。每一支都根据本地军事传统和审美偏好作了适应性改造。这些东方变体与印度祖先之间的关系，部分是谱系性的，部分是平行演化的；广义的"象棋"，更像是一个游戏家族，而不是单一对象。</p>
+    <h2>二 · 组合对象</h2>
 
-    <figure>
-      <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="国际象棋自印度向东西传播的示意图">
-        <defs>
-          <style>
-            .land  { fill: #f6f4ef; stroke: var(--rule); stroke-width: 0.8; }
-            .route { fill: none; stroke: var(--sapphire); stroke-width: 1.6; stroke-dasharray: 4 3; }
-            .route-east { stroke: var(--forest); }
-            .node  { fill: var(--bg); stroke: var(--navy); stroke-width: 1.5; }
-            .node-origin { fill: var(--navy); stroke: var(--navy); }
-            .lbl-zh   { font-family: 'Noto Serif SC', serif; font-size: 11px; fill: var(--ink); font-weight: 500; }
-            .lbl-soft { font-family: 'Inter', sans-serif; font-size: 9.5px; fill: var(--ink-faint); font-style: italic; }
-            .arrow-w { fill: var(--sapphire); }
-            .arrow-e { fill: var(--forest); }
-          </style>
-          <marker id="arrowW2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-w"/>
-          </marker>
-          <marker id="arrowE2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-e"/>
-          </marker>
-        </defs>
-
-        <path d="M 20 80 Q 80 40 180 60 T 380 50 Q 520 60 620 90 T 700 130 L 700 260 Q 600 290 480 270 T 280 280 Q 140 270 40 240 Z" class="land"/>
-
-        <!-- Westward -->
-        <path d="M 460 175 Q 410 150 360 165" class="route" marker-end="url(#arrowW2)"/>
-        <path d="M 350 165 Q 310 150 270 165" class="route" marker-end="url(#arrowW2)"/>
-        <path d="M 260 165 Q 200 145 130 165" class="route" marker-end="url(#arrowW2)"/>
-        <path d="M 270 175 Q 240 200 195 215" class="route" marker-end="url(#arrowW2)"/>
-        <path d="M 320 155 Q 290 110 240 90" class="route" marker-end="url(#arrowW2)"/>
-
-        <!-- Eastward -->
-        <path d="M 475 175 Q 530 165 580 175" class="route route-east" marker-end="url(#arrowE2)"/>
-        <path d="M 595 175 Q 635 160 660 175" class="route route-east" marker-end="url(#arrowE2)"/>
-        <path d="M 470 185 Q 510 220 555 230" class="route route-east" marker-end="url(#arrowE2)"/>
-
-        <!-- Nodes with Chinese labels -->
-        <circle cx="468" cy="180" r="7" class="node-origin"/>
-        <text x="468" y="205" text-anchor="middle" class="lbl-zh">印度</text>
-        <text x="468" y="218" text-anchor="middle" class="lbl-soft">chaturanga, 6c</text>
-
-        <circle cx="355" cy="167" r="5" class="node"/>
-        <text x="355" y="155" text-anchor="middle" class="lbl-zh">波斯</text>
-        <text x="355" y="143" text-anchor="middle" class="lbl-soft">chatrang, 600</text>
-
-        <circle cx="265" cy="170" r="5" class="node"/>
-        <text x="265" y="190" text-anchor="middle" class="lbl-zh">阿拉伯世界</text>
-        <text x="265" y="202" text-anchor="middle" class="lbl-soft">shatranj, 7c+</text>
-
-        <circle cx="125" cy="167" r="5" class="node"/>
-        <text x="125" y="155" text-anchor="middle" class="lbl-zh">安达卢斯</text>
-        <text x="125" y="143" text-anchor="middle" class="lbl-soft">10c</text>
-
-        <circle cx="190" cy="220" r="5" class="node"/>
-        <text x="190" y="245" text-anchor="middle" class="lbl-zh">西西里</text>
-        <text x="190" y="257" text-anchor="middle" class="lbl-soft">10c</text>
-
-        <circle cx="237" cy="88" r="5" class="node"/>
-        <text x="237" y="78" text-anchor="middle" class="lbl-zh">罗斯 / 维京</text>
-        <text x="237" y="66" text-anchor="middle" class="lbl-soft">9–11c</text>
-
-        <circle cx="585" cy="178" r="5" class="node"/>
-        <text x="585" y="200" text-anchor="middle" class="lbl-zh">中国</text>
-        <text x="585" y="212" text-anchor="middle" class="lbl-soft">象棋</text>
-
-        <circle cx="665" cy="175" r="5" class="node"/>
-        <text x="665" y="155" text-anchor="middle" class="lbl-zh">日本</text>
-        <text x="665" y="143" text-anchor="middle" class="lbl-soft">将棋</text>
-
-        <circle cx="560" cy="232" r="5" class="node"/>
-        <text x="560" y="255" text-anchor="middle" class="lbl-zh">东南亚</text>
-        <text x="560" y="267" text-anchor="middle" class="lbl-soft">makruk</text>
-
-        <g transform="translate(40, 285)">
-          <line x1="0" y1="0" x2="22" y2="0" class="route"/>
-          <text x="28" y="3" class="lbl-soft">向西（chatrang → shatranj → 欧洲）</text>
-        </g>
-        <g transform="translate(420, 285)">
-          <line x1="0" y1="0" x2="22" y2="0" class="route route-east"/>
-          <text x="28" y="3" class="lbl-soft">向东（象棋 / 将棋 / makruk）</text>
-        </g>
-      </svg>
-      <figcaption>国际象棋自印度向东西两个方向传播的示意。所标年代为最早可考的存在年代；实际扩散是渐进的、双向的，尤其在中世纪伊斯兰世界内部。地理高度示意化——这是一张文化谱系图，不是地理地图。</figcaption>
-    </figure>
-
-    <p>欧洲游戏本身的决定性变革发生在 1475 年前后的西班牙或意大利。改革之前，后只能斜走一格；象只能斜走两格并可跳越。改革之后两者都获得了长程能力，棋局节奏剧烈加速。意大利人当时称之为 <em>scacchi alla rabiosa</em>——"疯王后象棋"。Murray（1913）和 Yalom（2004）把后的赋权与同时期欧洲女性君主（尤其是卡斯蒂利亚的伊莎贝拉）的崛起联系起来<a href="#sn-4" class="sn-ref">4</a>。王车易位、吃过路兵、兵升变在此后两个世纪逐步定型。五十步规则与三次重复局面规则——下文将看到，它们在数学上至关重要——则是十九世纪的补充，目的是确保对局有限地结束。</p>
+    <p>博弈论以多个维度对游戏分类。国际象棋恰好坐落在几个分类轴的一个特别干净的交点上：<span class="term">二人</span>、<span class="term">零和</span>、<span class="term">完全信息</span>、<span class="term">确定</span>，并在现代规则包下是<span class="term">有限</span>的。这一组性质恰好对应着古典博弈论中最锋利的几个定理最有力地适用的范围。这些定理中最早也最优美的一条出自策梅洛——他 1913 年发表的论文 <em>Über eine Anwendung der Mengenlehre auf die Theorie des Schachspiels</em>（《集合论在国际象棋理论中的一个应用》）<a href="#sn-4" class="sn-ref">4</a>，现在公认是数理博弈论的奠基论文。</p>
 
     <aside class="sidenote" id="sn-4">
-      <span class="sidenote-num">4</span>这个论断有启发但有争议。物质条件（印刷术、城市精英的闲暇增多）的作用可能不亚于任何单一的政治符号。
+      <span class="sidenote-num">4</span>Schwalbe 与 Walker（2001）提供了规范的英译与历史重构，并纠正了把"逆向归纳"归于策梅洛本人的长期误解：策梅洛的实际证明并未使用它。逆向归纳是后来的现代重构。
     </aside>
 
-    <h2>二 · 作为博弈论对象的国际象棋</h2>
+    <p>定理说：在任何有限的、确定的、二人、完全信息、零和博弈中，下列三种情况必有且仅有一种成立——白方有面对黑方任何走法都能强制取胜的策略；黑方有这样的策略；或双方都至少能强制和棋。这个游戏拥有一个确定的<span class="term">博弈论值</span>。关于"完美博弈结果"存在一个事实——尽管没有任何人类或机器知道这个事实是什么。</p>
 
-    <p>博弈论以多个维度对游戏分类。国际象棋恰好坐落在几个分类轴的一个特别干净的交点上。它是 <span class="term">二人</span>博弈：只有白方与黑方。它是 <span class="term">零和</span>博弈：一方所得严格等于另一方所失，不存在共赢。它是 <span class="term">完全信息</span>博弈：每一个合法局面、每一步历史走子、每一个可选项都为双方完全所知；没有暗牌，没有战争迷雾，没有藏匿子力。它是 <span class="term">确定</span>博弈：无骰子，无随机洗牌，无任何随机元素。在现代规则下，它还是 <span class="term">有限</span>博弈：必须在有界步数内结束<a href="#sn-5" class="sn-ref">5</a>。</p>
+    <p>证明很短。考虑博弈树：一棵有限的、分叉的树，每个节点是一个局面，每条边是一步合法走子。由有限性，每条从根出发的路径都终止于某个叶节点——白胜、黑胜、或和——给定值 +1、0、或 −1。现在用<span class="term">逆向归纳</span>把值自下而上传播：在轮到白方走的节点，白方选择值最高的子节点；在轮到黑方的节点，黑方选择值最低的。归纳保证根节点获得唯一的值。这个值<em>就是</em>国际象棋的博弈论值。</p>
+
+    <p>一图胜千言。下方是一棵分支因子为 3、深度为 3 层的示意博弈树——小到全部 40 个节点都能展示，大到逆向归纳能做实事。点击按钮观察值如何从叶子传播到根。</p>
+
+    <div id="game-tree-demo" class="full-bleed"></div>
+
+    <p>演示的重点不在根的具体取值，而在于这个程序是<em>确定的</em>——无论以何种方式运行，它对根产生唯一一个值——并且<em>只依赖于叶子的标签和 max/min 的交替</em>。一旦你接受树是有限的、且每个叶子都有确定的结果，根的值就被强制了。这就是策梅洛定理。</p>
+
+    <p>现在把这棵树乘以约 10<sup>118</sup> 倍。Claude Shannon 1950 年估算的国际象棋博弈树规模约为 10<sup>120</sup> 节点——所谓的<span class="term">香农数</span>——比可观测宇宙中的原子数还多约四十个数量级。状态空间（不计走子历史的、彼此不同的合法局面）较小，约为 10<sup>43</sup>–10<sup>50</sup>，但仍远超任何可设想的枚举<a href="#sn-5" class="sn-ref">5</a>。在这样规模的树上做逆向归纳，不是慢，而是物理上不可能。</p>
 
     <aside class="sidenote" id="sn-5">
-      <span class="sidenote-num">5</span>"有限"这一点比表面看起来微妙得多。如果没有五十步规则和三次重复局面规则，国际象棋可以无限对走。下文将回到这一点。
+      <span class="sidenote-num">5</span>Shannon（1950）；状态空间的界来自 Allis（1994）及后续工作。Allis 同时正式刻画了下文将用到的"已解游戏"分类。
     </aside>
 
-    <p>"有限—确定—完全信息—二人—零和"这一组性质叠加在一起，恰好是古典博弈论中最锋利的几个定理最有力地适用的范围。这也是为什么自二十世纪初以来，国际象棋一直被当作"在抽象意义上思考策略"的试金石。</p>
-
-    <h2>三 · 策梅洛定理</h2>
-
-    <p>1912 年，Ernst Zermelo（恩斯特·策梅洛）——今天主要因公理化集合论的奠基性工作而被记住——在剑桥举办的第五届国际数学家大会上做了一场关于国际象棋的报告。次年他发表了 <em>Über eine Anwendung der Mengenlehre auf die Theorie des Schachspiels</em>（《集合论在国际象棋理论中的一个应用》），现在公认是数理博弈论的第一篇论文<a href="#sn-6" class="sn-ref">6</a>。</p>
-
-    <aside class="sidenote" id="sn-6">
-      <span class="sidenote-num">6</span>Schwalbe 与 Walker（2001）提供了规范的英译与历史重构，并纠正了对原始论证的若干长期误解。
-    </aside>
-
-    <p>定理的现代表述如下：在任何有限的、确定的、二人、完全信息、零和博弈中，下列三种情况必有且仅有一种成立。</p>
-
-    <ol>
-      <li>白方有一个面对黑方任何走法都能强制取胜的策略；</li>
-      <li>黑方有一个面对白方任何走法都能强制取胜的策略；</li>
-      <li>双方都有一个至少能强制和棋的策略。</li>
-    </ol>
-
-    <p>换言之，这个游戏拥有一个确定的 <span class="term">博弈论值</span>。关于"完美博弈结果"存在一个事实——尽管没有任何人类或机器知道这个事实是什么<a href="#sn-7" class="sn-ref">7</a>。</p>
-
-    <aside class="sidenote" id="sn-7">
-      <span class="sidenote-num">7</span>这个定理是纯粹存在性的：它保证<em>存在</em>一个必胜或必和策略，但不告诉我们如何找到它。
-    </aside>
-
-    <p>证明既短且美。考虑博弈树：一棵有限的、分叉的树，每个节点是一个局面，每条边是一步合法走子。由有限性假设，从根出发的每一条路径都终止于某个叶节点——白胜、黑胜、或和。现在用 <span class="term">逆向归纳</span> 把值自下而上传播：在轮到白方走的节点，白方选择对自己最有利的子节点；在轮到黑方的节点，黑方选择对自己最有利的（即对白方最不利的）子节点。归纳保证根节点获得唯一的值<a href="#sn-8" class="sn-ref">8</a>。</p>
-
-    <aside class="sidenote" id="sn-8">
-      <span class="sidenote-num">8</span>一个细微的修正：策梅洛 1913 年的原始证明实际上并没有使用现今标准形式的逆向归纳。这种解读是后来作者们追加的。详见 Schwalbe &amp; Walker（2001）。
-    </aside>
-
-    <figure>
-      <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="逆向归纳的博弈树示意图">
-        <defs>
-          <style>
-            .node-w { fill: var(--bg); stroke: var(--navy); stroke-width: 1.5; }
-            .node-b { fill: var(--navy); stroke: var(--navy); stroke-width: 1.5; }
-            .edge { stroke: var(--rule); stroke-width: 1.2; fill: none; }
-            .edge-chosen { stroke: var(--forest); stroke-width: 2; fill: none; }
-            .leaf-w { fill: var(--bg); stroke: var(--forest); stroke-width: 1.5; }
-            .leaf-d { fill: var(--bg); stroke: var(--ink-faint); stroke-width: 1.5; }
-            .leaf-l { fill: var(--bg); stroke: #b85450; stroke-width: 1.5; }
-            .lbl   { font-family: 'Inter', sans-serif; font-size: 11px; fill: var(--ink-soft); }
-            .lbl-w { font-family: 'Inter', sans-serif; font-size: 11px; fill: var(--bg); font-weight: 600; }
-            .lbl-zh-small { font-family: 'Noto Serif SC', serif; font-size: 11px; fill: var(--ink-soft); }
-            .val   { font-family: 'Inter', sans-serif; font-size: 13px; fill: var(--ink); font-weight: 600; }
-          </style>
-        </defs>
-
-        <circle cx="300" cy="40" r="14" class="node-w"/>
-        <text x="300" y="44" text-anchor="middle" class="lbl">W</text>
-        <text x="320" y="34" class="val">+1</text>
-
-        <circle cx="120" cy="140" r="14" class="node-b"/>
-        <text x="120" y="144" text-anchor="middle" class="lbl-w">B</text>
-        <text x="140" y="134" class="val">−1</text>
-
-        <circle cx="300" cy="140" r="14" class="node-b"/>
-        <text x="300" y="144" text-anchor="middle" class="lbl-w">B</text>
-        <text x="320" y="134" class="val">+1</text>
-
-        <circle cx="480" cy="140" r="14" class="node-b"/>
-        <text x="480" y="144" text-anchor="middle" class="lbl-w">B</text>
-        <text x="500" y="134" class="val">0</text>
-
-        <path d="M 300 54 L 120 126" class="edge"/>
-        <path d="M 300 54 L 300 126" class="edge-chosen"/>
-        <path d="M 300 54 L 480 126" class="edge"/>
-
-        <rect x="60" y="240" width="40" height="32" rx="3" class="leaf-l"/>
-        <text x="80" y="260" text-anchor="middle" class="val">−1</text>
-        <rect x="140" y="240" width="40" height="32" rx="3" class="leaf-w"/>
-        <text x="160" y="260" text-anchor="middle" class="val">+1</text>
-        <path d="M 120 154 L 80 240" class="edge-chosen"/>
-        <path d="M 120 154 L 160 240" class="edge"/>
-
-        <rect x="240" y="240" width="40" height="32" rx="3" class="leaf-w"/>
-        <text x="260" y="260" text-anchor="middle" class="val">+1</text>
-        <rect x="320" y="240" width="40" height="32" rx="3" class="leaf-w"/>
-        <text x="340" y="260" text-anchor="middle" class="val">+1</text>
-        <path d="M 300 154 L 260 240" class="edge-chosen"/>
-        <path d="M 300 154 L 340 240" class="edge"/>
-
-        <rect x="420" y="240" width="40" height="32" rx="3" class="leaf-d"/>
-        <text x="440" y="260" text-anchor="middle" class="val">0</text>
-        <rect x="500" y="240" width="40" height="32" rx="3" class="leaf-w"/>
-        <text x="520" y="260" text-anchor="middle" class="val">+1</text>
-        <path d="M 480 154 L 440 240" class="edge-chosen"/>
-        <path d="M 480 154 L 520 240" class="edge"/>
-
-        <text x="20" y="44" class="lbl-zh-small">白方走</text>
-        <text x="20" y="144" class="lbl-zh-small">黑方走</text>
-        <text x="20" y="260" class="lbl-zh-small">叶节点（结果）</text>
-      </svg>
-      <figcaption>三层的玩具博弈树。白方（○）取最大值；黑方（●）取最小值。逆向归纳从叶节点向上传播：最左子树值为 −1（黑方选择让白方亏损），中间为 +1，最右为 0。白方在根节点选择，取中间分支，整棵树的值为 +1。国际象棋的结构与此完全相同——只是树的规模约为 10<sup>120</sup> 个节点。</figcaption>
-    </figure>
-
-    <p>这个定理是纯粹存在性的胜利：它告诉我们国际象棋<em>存在</em>一个答案，但不告诉我们这个答案是什么。博弈树的规模才是让结果在实践中无效的真正原因。Claude Shannon 估计国际象棋不同对局的总数约为 10<sup>120</sup>——所谓的"香农数"——比可观测宇宙的原子总数还要多约四十个数量级。合法局面的数目较小，约为 10<sup>43</sup> 至 10<sup>50</sup>，但仍远超穷举计算的可能<a href="#sn-9" class="sn-ref">9</a>。在这样规模的树上做逆向归纳，不是慢，而是物理上不可能。</p>
-
-    <aside class="sidenote" id="sn-9">
-      <span class="sidenote-num">9</span>Shannon（1950），<em>Programming a Computer for Playing Chess</em>。10<sup>120</sup> 是博弈树规模的估计；状态空间估计来自 Allis（1994）等后续工作。
-    </aside>
+    <p>因此，国际象棋作为组合对象<em>所拥有的</em>，是一个<em>确定但无法访问</em>的博弈论值。我们知道它存在；我们不能计算它。这正是策梅洛定理作为"纯粹存在性"对"构造性"的胜利的精确含义——它告诉我们国际象棋有答案，但不告诉我们答案是什么。</p>
 
     <h3>有限性的脚注</h3>
 
-    <p>有一处微妙之处值得强调。如果没有五十步规则（连续五十步无吃子无走兵则判和）和三次重复局面规则（同一局面出现三次则判和），国际象棋本身并不是有限博弈——双方理论上可以无限来回。在没有这些终止规则的情况下，策梅洛定理的标准形式并不直接适用<a href="#sn-10" class="sn-ref">10</a>。</p>
+    <p>有一处微妙之处值得标出：国际象棋之所以有限，仅仅因为五十步规则与三次重复局面规则。如果没有这些终止规约，双方理论上可以无限来回，博弈树将是无限的，策梅洛定理的标准形式就不直接适用<a href="#sn-6" class="sn-ref">6</a>。所以国际象棋的"确定性"并不是关于子力与规则的某种先验事实，而是十九世纪才补充的终止规约带来的后果。不同的规约会产生不同的数学对象。策梅洛定理所谈的"国际象棋"，是某一个特定的十九世纪人造物，而非永恒本质。</p>
 
-    <aside class="sidenote" id="sn-10">
-      <span class="sidenote-num">10</span>König（1927）和 Kalmár（1928–29）扩展了策梅洛的论证以处理这种情况，但都是通过其他方式重新引入有限性。严格说，没有现代终止规则的"国际象棋"是无限博弈。
+    <aside class="sidenote" id="sn-6">
+      <span class="sidenote-num">6</span>König（1927）和 Kalmár（1928–29）扩展了策梅洛的论证以处理无限情形，但都是通过其他方式重新引入有限性。
     </aside>
 
-    <p>这意味着：国际象棋的"确定性"并不是关于该游戏子力与规则的某种先验形而上学事实，而是十九世纪才补充的终止规则带来的后果。不同的终止规则会产生不同的数学对象。所以策梅洛定理所谈的"国际象棋"，是一个特定的十九世纪规则包，而不是这一活动的某种永恒本质。</p>
+    <h3>已解与未解</h3>
 
-    <h2>四 · 已解游戏的类型学</h2>
-
-    <p>国际象棋至今未解。我们不知道完美博弈究竟产生白胜、黑胜、还是和棋——尽管几乎所有强力的人类与机器棋手相信结果是和棋。但"已解"本身不是单一概念。荷兰计算机科学家 Victor Allis 在他 1994 年的博士论文中区分了三个层次，此后成为标准类型学<a href="#sn-11" class="sn-ref">11</a>。</p>
-
-    <aside class="sidenote" id="sn-11">
-      <span class="sidenote-num">11</span>Allis（1994），<em>Searching for Solutions in Games and Artificial Intelligence</em>。林堡大学博士论文。
-    </aside>
-
-    <ul>
-      <li><span class="term">超弱解</span>（ultra-weakly solved）：知道初始局面的博弈论值。即知道完美博弈的结果，但不知道具体如何下。</li>
-      <li><span class="term">弱解</span>（weakly solved）：从初始局面出发，存在一个能在面对任何对手时达到博弈论值的可执行算法。</li>
-      <li><span class="term">强解</span>（strongly solved）：存在一个对<em>任何</em>合法局面（包括双方已经走错的局面）都能给出最优应对的算法。</li>
-    </ul>
-
-    <p>这三层强度递增。超弱解有时可以通过非构造性论证获得——窃取策略法、奇偶性论证之类。弱解几乎总要求大规模计算。强解则要求遍历整个状态空间。</p>
+    <p>国际象棋至今未解。我们不知道完美博弈究竟产生白胜、黑胜、还是和棋——尽管几乎所有强力的人类与机器棋手相信结果是和棋。但"已解"本身有三层含义，由 Victor Allis 于 1994 年区分。<span class="term">超弱解</span>：博弈论值已知但未给出策略。<span class="term">弱解</span>：存在从初始局面出发执行最优应对的算法。<span class="term">强解</span>：存在对任何合法局面给出最优应对的算法。三层强度递增；只有远比国际象棋小的游戏被强解。</p>
 
     <table>
       <thead>
@@ -321,13 +218,13 @@
           <td>Hex（一般 N×N）</td>
           <td>—</td>
           <td><span class="status status-ultra">超弱解</span></td>
-          <td>先手胜（Nash，1949，窃取策略法）</td>
+          <td>先手胜（Nash，1949）</td>
         </tr>
         <tr>
           <td>国际象棋<br><span class="lat" style="font-size:0.85em;color:var(--ink-faint)">Chess</span></td>
           <td>10<sup>43</sup>–10<sup>50</sup></td>
           <td><span class="status status-unsolved">未解</span></td>
-          <td>七子残局已强解（Lomonosov, 2012；Syzygy, 2018）；初始局面推测为和棋</td>
+          <td>七子残局已强解（Lomonosov, 2012）；初始局面推测为和棋</td>
         </tr>
         <tr>
           <td>围棋（19×19）<br><span class="lat" style="font-size:0.85em;color:var(--ink-faint)">Go</span></td>
@@ -338,92 +235,63 @@
       </tbody>
     </table>
 
-    <p>2007 年 Schaeffer 团队对跳棋的弱解结果尤其值得停下来看一眼。阿尔伯塔大学的这个团队为这个证明工作了近二十年，最高峰时有约 200 台机器并行运行。最终发表在 2007 年《Science》上的结果：从标准开局出发，双方完美博弈下，英式跳棋的结果是和棋。证明结合了一个 39 万亿局面的残局数据库（自终局向前回溯计算）与一棵自开局向前的证明树<a href="#sn-12" class="sn-ref">12</a>。这是迄今被解出的最复杂的游戏。</p>
+    <p>2007 年 Schaeffer 团队对跳棋的弱解，是这张表中最复杂的成果。阿尔伯塔大学的他们为这个证明工作了近二十年，最高峰时有约 200 台机器并行运行；最终的证明结合了一个 39 万亿局面的残局数据库（自终局向前回溯计算）与一棵自开局向前的证明树。对于国际象棋，至今只有片段被解出——七子的 Syzygy 与 Lomonosov 表给出了任何七子或更少局面下的完美应对，并已揭示了一些超过 500 步的强制将杀，没有任何人类能在不查表的情况下走对<a href="#sn-7" class="sn-ref">7</a>。</p>
 
-    <aside class="sidenote" id="sn-12">
-      <span class="sidenote-num">12</span>Schaeffer 等（2007），"Checkers Is Solved"，<em>Science</em> 317, 1518–1522。
+    <aside class="sidenote" id="sn-7">
+      <span class="sidenote-num">7</span>七子残局表中已知最长的强制将杀为 549 步（不计五十步规则）。八子表部分完成；2022 年发现的最长强制将杀为 584 步。
     </aside>
 
-    <p>对于国际象棋，至今只有片段被解出。七子残局表——2012 年完成的 Lomonosov 表，以及之后更紧凑的 Syzygy 表——给出了任何七子或更少局面下的完美应对。它们已经揭示了一些反直觉的发现：原本被认为是理论和棋的局面，实际是需要超过五百步完美应对的胜局，远远超出任何人类棋手的能力。这是否构成"知道国际象棋"，是一个我们留待开放的问题<a href="#sn-13" class="sn-ref">13</a>。</p>
+    <h2>三 · 游戏行为对象</h2>
 
-    <aside class="sidenote" id="sn-13">
-      <span class="sidenote-num">13</span>七子残局表中已知最长的强制将杀为 549 步（不计五十步规则）。八子表部分完成；其中 2022 年发现的最长强制将杀为 584 步。两者都是没有表的辅助任何人类无法走对的局面。
+    <p>到此我们一直把国际象棋当作组合对象来处理。但国际象棋同时也是人们<em>所做</em>的某件事，而博弈论对"什么是玩"保持沉默。加拿大哲学家 Bernard Suits 在 1978 年的著作《<em>The Grasshopper: Games, Life and Utopia</em>》（《蚱蜢：游戏、生命与乌托邦》）中，给出了至今最有影响力的"游戏行为"分析定义<a href="#sn-8" class="sn-ref">8</a>。这本书采用苏格拉底对话的形式，主角是濒死的蚱蜢——一只游戏成性、悠闲、在哲学上把"玩"视作至善的昆虫——和他的几位弟子。蚱蜢提出，"玩游戏"包含四个相互嵌套的要素：前三者构成游戏本身，第四者构成玩家与游戏的关系。</p>
+
+    <aside class="sidenote" id="sn-8">
+      <span class="sidenote-num">8</span>Suits（1978/2014）。这本书是对维特根斯坦《哲学研究》§66 的延续性回应——维特根斯坦曾著名地论证"游戏"无法定义，只能依靠"家族相似性"。Suits 认为维特根斯坦只是没有看得足够仔细。
     </aside>
 
-    <h2>五 · Suits 视角：作为"游戏行为"的国际象棋</h2>
+    <p><span class="term">前游戏目标</span>是一种不依赖游戏规则就能描述的事态——一个非玩家也能听懂的状态。在国际象棋中，前游戏目标是一种几何状态：一方的王正受到另一方的王（及其子力）的攻击且无合法逃路。这种状态可以通过任何方式达成；下棋只是其中的一种。</p>
 
-    <p>到目前为止我们一直把国际象棋当作数学对象来处理。但国际象棋同时也是人们<em>所做</em>的某件事，而博弈论对"什么是玩"保持沉默。加拿大哲学家 Bernard Suits 在 1978 年的著作 <em>The Grasshopper: Games, Life and Utopia</em>（《蚱蜢：游戏、生命与乌托邦》）中给出了至今最有影响力的"游戏行为"分析定义<a href="#sn-14" class="sn-ref">14</a>。</p>
+    <p><span class="term">游戏手段</span>指为达成前游戏目标而被允许使用的手段。在国际象棋中，这是各子的合法走法、轮流走子、不得让己方王处于被攻击状态、王车易位、吃过路兵。重要的是，游戏手段比"直接追求前游戏目标"的手段要<em>更受限制</em>。你完全可以伸手把对方的王拿走，从而达成那个几何状态。游戏手段排除了这种做法。</p>
 
-    <aside class="sidenote" id="sn-14">
-      <span class="sidenote-num">14</span>Suits（1978/2014）。维特根斯坦在《哲学研究》§66 中曾著名地论证："游戏"无法定义，只能依靠"家族相似性"。Suits 这本书在很大程度上是一个延续性的回应：他认为维特根斯坦只是没有看得足够仔细。
+    <p>Suits 的核心洞见是：游戏的规则不是任意的限制，而是<em>构成性</em>限制。游戏手段不仅仅在你已经决定下棋之后告诉你怎么下；它们使"下棋"这种活动得以存在。如果没有这套规则结构，棋盘和棋子不过是棋盘和棋子，根本没有"游戏"可言。</p>
+
+    <p>第三个要素在哲学上是最有意思的。<span class="term">游戏态度</span>指玩家自愿接受游戏手段——之所以接受，正是因为这些手段使得活动得以存在。如果你的目标只是把对方的王从棋盘上拿走，最高效的方式是伸手把它拿起来。国际象棋的规则禁止这样做——而你，作为棋手，自愿接受这个禁令。你接受必须以更难的方式达成目标，因为只有更难的方式才构成"下棋"。Suits 给出了一个著名的浓缩定义：</p>
+
+    <blockquote>玩游戏，就是去尝试达成某个特定状态，使用规则允许的手段，其中规则禁止较高效手段而支持较低效手段，且规则之所以被接受，正因为它们使该活动得以可能<a href="#sn-9" class="sn-ref">9</a>。</blockquote>
+
+    <aside class="sidenote" id="sn-9">
+      <span class="sidenote-num">9</span>Suits（1978/2014, p. 54）。技术词汇——<em>lusory</em> 出自拉丁文 <em>ludus</em>（"游戏"）——是他的造词。
     </aside>
 
-    <p>这本书采用苏格拉底对话的形式，主角是濒死的蚱蜢——一只游戏成性、悠闲、在哲学上把"玩"视作至善的昆虫——和他的几位弟子。蚱蜢提出，"玩游戏"是某种特定类型的活动，并区分出四个相互嵌套的要素。前三者定义"什么是游戏"；第四者，"游戏态度"，区分"<em>玩</em>游戏"与"以其他方式达成同一结果"。</p>
+    <p>Suits 的精炼概括是：游戏是"自愿尝试克服不必要障碍"。障碍之所以"不必要"，是因为存在更容易达成前游戏目标的途径；它们之所以被接受，是因为没有这些障碍，我们所珍视的那个活动根本不会存在。</p>
 
-    <h3>前游戏目标（prelusory goal）</h3>
+    <p>这本书在一个 Suits 详细展开的悖论中收尾。设想"乌托邦"：一个一切工具性需求都被满足、不需要劳动、所有可直接达成的前游戏目标都已被达成的世界。Suits 论证：在这样的世界里，游戏行为将是唯一仍然保留意义的活动。我们不<em>需要</em>做任何事，但仍然可以为了"克服"本身而自愿接纳不必要的障碍。游戏行为不是从真实生活中分散注意力的轻浮，而恰恰是必然性被消除之后仍然存活下来的活动。蚱蜢——那个夏天里只玩耍而不像蚂蚁一样为冬天做准备的家伙——其实比他勤劳的兄弟们更深刻地理解了人之处境。</p>
 
-    <p><span class="term">前游戏目标</span>是一种不依赖游戏规则就能描述的事态——一个非玩家也能听懂的状态。在国际象棋中，前游戏目标是一种几何状态：一方的王正受到另一方的王（及其子力）的攻击且无合法逃路。你完全可以不提"轮到谁走"或"什么算合法走子"，只用棋子在棋盘上的几何排列来描述这种状态。高尔夫的前游戏目标是球停在某个洞里。短跑的前游戏目标是第一个越过某条线。关键在于：前游戏目标在原则上可以通过游戏之外的方式达到。</p>
+    <h2>四 · 三种混淆</h2>
 
-    <h3>游戏手段（lusory means）</h3>
+    <p>有了这四种对象——博弈树、规则包、游戏行为、文化历史实践——平时关于国际象棋的言谈中那些不被察觉的混淆就显形了。有三种值得点名。</p>
 
-    <p><span class="term">游戏手段</span>指为达成前游戏目标而被允许使用的手段。在国际象棋中，这是各子的合法走法、轮流走子、不得让己方王处于被攻击状态、王车易位与吃过路兵等规则。重要的是，游戏手段比"直接追求前游戏目标"的手段要<em>更受限制</em>。你完全可以伸手把对方的王拿走，或者催眠对方让其投降，或者通过一千种其他方式让对方将杀。游戏手段排除了这一切。</p>
+    <p>第一种是<em>引擎混淆</em>。Stockfish 并不"在 Suits 意义上"下棋。它在游戏手段所规定的结构内计算最优解；但它没有"接受"那些手段——在任何有意义的层面上都没有。问"Stockfish 是不是真的在下棋"，在 Suits 看来，是一种与"问计算器是否真的像做作业的孩子那样在做算术"同类的范畴错误。引擎是游戏手段结构的非凡计算者；"它们是否在某种规范性丰富的意义上下棋"是另一个问题，Suits 给我们提供了把两者分开来谈的语言<a href="#sn-10" class="sn-ref">10</a>。</p>
 
-    <p>Suits 的核心洞见是：游戏的规则不是任意的限制，而是<em>构成性</em>限制。游戏手段不仅仅在"你已经决定下棋之后"告诉你怎么下；它们使"下棋"这种活动得以存在。如果没有这套规则结构，棋盘和棋子不过是棋盘和棋子，根本没有"游戏"可言。</p>
-
-    <h3>游戏态度（lusory attitude）</h3>
-
-    <p>第三个要素在哲学上是最有意思的。<span class="term">游戏态度</span>指玩家自愿接受游戏手段——之所以接受，正是因为这些手段使得活动得以存在。这是 Suits 所说的"心理要素"，也是把"游戏"与"单纯的目的追求"区分开的东西。</p>
-
-    <p>如果你的目标只是把对方的王从棋盘上拿走，最高效的方式是伸手把它拿起来。国际象棋的规则禁止这样做——而你，作为棋手，自愿接受这个禁令。你接受必须以更难的方式达到目标，因为只有更难的方式才构成"下棋"。Suits 给出了一个著名的浓缩定义：</p>
-
-    <blockquote>玩游戏，就是去尝试达成某个特定状态，使用规则允许的手段，其中规则禁止较高效手段而支持较低效手段，且规则之所以被接受，正因为它们使该活动得以可能<a href="#sn-15" class="sn-ref">15</a>。</blockquote>
-
-    <aside class="sidenote" id="sn-15">
-      <span class="sidenote-num">15</span>Suits（1978/2014, p. 54）。Suits 从拉丁文 <em>ludus</em>（"游戏"）造出 <em>lusory</em> 一词，由此形成 lusory goal、lusory means、lusory attitude 这一整套术语。整个技术词汇都是他的发明。
+    <aside class="sidenote" id="sn-10">
+      <span class="sidenote-num">10</span>这不是对引擎的贬低。重点是：人类意义上的"玩"和算法意义上的"计算最优应对"，是与同一个游戏手段结构的两种不同关系。
     </aside>
 
-    <p>把四个要素拼起来：游戏是<em>自愿尝试克服不必要障碍的活动</em>。障碍之所以"不必要"，是因为存在更容易达成前游戏目标的途径；它们之所以被接受，是因为没有这些障碍，我们所珍视的那个活动——游戏本身——根本不会存在。</p>
+    <p>第二种是<em>解出混淆</em>。如果国际象棋明天被强解、且结果是和棋，会发生什么？Suits 的框架给出一个锋利的回答：在双方完美博弈下，前游戏目标对双方都将不可达；但游戏行为不会瓦解。毕竟人们仍在玩井字棋，明知它是和棋。博弈树值的数学闭合，与游戏作为活动的瓦解，不是同一件事——因为活动只在那些继续采取游戏态度的玩家身上存在。<em>会</em>变化的是文化历史实践——国际象棋在过去五百年里一直是人类智力的象征性领地，"完美博弈是和棋"的证明会改变这种象征角色，即便在形式上活动本身保持不变<a href="#sn-11" class="sn-ref">11</a>。</p>
 
-    <h3>蚱蜢悖论</h3>
-
-    <p>这本书在一个 Suits 详细展开的悖论中收尾。设想"乌托邦"：一个一切工具性需求都被满足、不需要劳动、所有可直接达成的前游戏目标都已被达成的世界。Suits 论证：在这样的世界里，游戏行为将是唯一仍然保留意义的活动。我们不<em>需要</em>做任何事，但仍然可以为了"克服"本身而自愿接纳不必要的障碍。这意味着，游戏行为不是从真实生活中分散注意力的轻浮，而恰恰是必然性被消除之后仍然存活下来的活动。蚱蜢——那个夏天里只玩耍而不像蚂蚁一样为冬天做准备的家伙——其实比他勤劳的兄弟们更深刻地理解了人之处境<a href="#sn-16" class="sn-ref">16</a>。</p>
-
-    <aside class="sidenote" id="sn-16">
-      <span class="sidenote-num">16</span>这一论证比此处概括的更精细。Suits 小心翼翼地把游戏与其他自愿活动（艺术、友谊、沉思）区分开，乌托邦论证的目标是说明在那样的世界里游戏是<em>核心的</em>，而非<em>穷尽的</em>。
+    <aside class="sidenote" id="sn-11">
+      <span class="sidenote-num">11</span>与井字棋的差别正是文化层面的。井字棋显然到无人会把"我是玩这个的"作为某种身份认同。要在数学上"解决"国际象棋，就是在数学上闭合一个其开放性本身具有文化构成意义的问题。
     </aside>
 
-    <h3>把这套框架放回国际象棋</h3>
+    <p>第三种是<em>本质混淆</em>。本文开篇 Murray–Yalom 的谱系学并不是说，chaturanga、shatranj、十五世纪欧洲国际象棋、与今天 Stockfish 计算的国际象棋共享某种单一本质——它们由一系列历史传递的链条相连，链条的每一环都涉及规则的变化（有时是激烈的变化）。1475 年的"疯王后"改革产生了一个不同于此前的游戏；十九世纪的终止规则产生了一个不同于十七世纪的游戏；现代国际象棋引擎所计算的，是一个特定的十九世纪规则包，而不是 1960 年塔尔与博特维尼克对弈时所玩的那个游戏（极接近，但不完全相同）。问"哪一个才是真正的国际象棋"，是把链条中的某一刻物化了。</p>
 
-    <p>把 Suits 的三要素（加上乌托邦悖论）应用到国际象棋上，几个博弈论视角看不到的东西就显现出来了。</p>
+    <h2>五 · 回到那棵树</h2>
 
-    <p>第一，<em>作为博弈论对象的国际象棋</em>与<em>作为游戏行为的国际象棋</em>不是同一回事。策梅洛定理所谈的数学国际象棋，由前游戏目标和游戏手段——胜负条件与合法走子结构——完全刻画。但它没有玩家、没有"接受"、没有"态度"。它是一棵树，不是一项活动。活动只有在某人对那棵树采取游戏态度时才存在。</p>
+    <p>本文的标题命名了核心意象。国际象棋作为组合对象，是一棵约 10<sup>120</sup> 节点的树，其根有一个我们永远无法计算的确定值。这不是一棵我们能通过<em>下</em>它来穷尽的树——每一局国际象棋都只是树中的一条路径——也不是一棵我们能通过分析穷尽的树：七子残局表占用 18 太字节；八子残局表无法存放于任何可预见的硬盘；完整树的规模在物理上比可计算的多出多个数量级。</p>
 
-    <p>第二，这澄清了国际象棋引擎在做什么。Stockfish 并不"在 Suits 意义上"下棋。它在游戏手段所规定的结构内计算最优解；但它没有"接受"那些手段——在任何有意义的层面上都没有。问"Stockfish 是不是真的在下棋"，在 Suits 看来，是一种与"问计算器是否真的像做作业的孩子那样在做算术"同类的范畴错误<a href="#sn-17" class="sn-ref">17</a>。</p>
+    <p>但"无法穷尽"并不是这篇文章想停留的地方。真正的关键是：这棵树只是我们一直在讨论的四种对象中的<em>一个</em>，而且很可能是最不重要的一个。玩家并不与博弈树打交道；他们在游戏态度下与游戏手段打交道。文化并不传递博弈树；它们传递规则包和一脉游戏传统。当我们问"国际象棋被解出了吗？"，我们问的是对象一，答案是没有，且大概会一直没有。当我们问"国际象棋值得下吗？"，我们问的是对象三和四，答案与第一个对象毫无关系。</p>
 
-    <aside class="sidenote" id="sn-17">
-      <span class="sidenote-num">17</span>这不是对引擎的贬低。它们是游戏手段结构的非凡计算者。但"它们是否在某种规范性丰富的意义上下棋"是另一个问题，Suits 给我们提供了把两者分开来谈的语言。
-    </aside>
-
-    <p>第三，已解游戏的存在以一种有意思的方式给游戏态度施加了压力。如果国际象棋被强解、且结果是和棋，那么在双方都完美博弈的前提下，前游戏目标对双方都是不可达的。这是否瓦解了游戏？Suits 会说不：活动仍然存在，因为玩家仍然接受规则、仍然投身于规则所构成的结构。毕竟，人们仍在玩井字棋，明知它是和棋。但"已解"与"有意义的玩"之间的关系本身确实有趣：这正是"解出国际象棋"在棋界引发情感张力（"解出四子棋"则没有）的原因之一<a href="#sn-18" class="sn-ref">18</a>。</p>
-
-    <aside class="sidenote" id="sn-18">
-      <span class="sidenote-num">18</span>差异在于：井字棋显然到无人会把"我是玩这个的"作为某种身份认同。国际象棋则在过去五百年里一直是人类智力的象征性领地。要在数学上把它"解决"，就是在数学上闭合一个其开放性本身具有文化构成意义的问题。
-    </aside>
-
-    <h2>六 · 结语：国际象棋是哪一种对象？</h2>
-
-    <p>我们现在可以回答标题的问题——但只能通过拒绝把它视作一个单一问题来回答。国际象棋至少同时是四种不同的对象，混乱往往发生在把其中一层当作另外几层时。</p>
-
-    <ol>
-      <li>一棵约 10<sup>120</sup> 个节点的<em>有限组合博弈树</em>，其博弈论值由策梅洛定理保证存在但未知。</li>
-      <li>一个<em>规则包</em>——具体说，是一个含有终止规则的十九世纪规约，把原本无限的游戏转换为有限的。</li>
-      <li>Suits 意义上的<em>游戏行为</em>：一组规则结构，由玩家自愿接受其限制以让活动得以存在。</li>
-      <li>一项<em>文化历史实践</em>，从六世纪印度延续至今，经十五世纪欧洲改革变形，由俱乐部、协会、棋手们的持续投入维系——正是这种投入赋予前面三个层次以意义。</li>
-    </ol>
-
-    <p>这四者都是真实的。没有任何一个可以化约为其他三个。策梅洛与香农的数学国际象棋，不是 1960 年塔尔与博特维尼克对弈时的国际象棋；后者也不是 2026 年 Stockfish 计算的国际象棋；以上任何一个都不等同于它们共同的祖先 chaturanga。把它们维系在一起的，是一种类似维特根斯坦"家族相似性"的东西——尽管 Suits 会说，这毋宁是一种共享的"前游戏目标—游戏手段—游戏态度"结构，在不同的历史中由不同的存在者以不同的"与规则的关系"来例化。</p>
-
-    <p>选择维特根斯坦的相似性还是 Suits 的结构性定义，本身是一个实质性的哲学选择。但无论选哪一种，"国际象棋是什么？"都不是一个问题。它至少是四个；任何假装它是一个问题的回答，都是在对这个游戏施加比它应得的更大的暴力。</p>
+    <p>这四个对象都真实存在。谁也无法化约成谁。组合对象是策梅洛证明定理的对象；规则包是 FIDE 所规约的对象；游戏行为是咖啡馆里两个棋友在棋盘前所采取的对象；文化历史实践是把 chaturanga 从印度带到这里的对象。把它们一并称为"国际象棋"是方便的，但我们应当诚实承认：这个词在做四份工，不是一份。</p>
 
     <hr>
 
@@ -443,14 +311,17 @@
 
     <footer class="page-footer">
       <span>yifanova.com / chess</span>
-      <span>
-        <a href="/religion">/religion</a>
-      </span>
+      <span><a href="/religion">/religion</a></span>
     </footer>
 
   </article>
 
 </div>
+
+<script src="/assets/gametree.js"></script>
+<script>
+  new GameTree('game-tree-demo', { lang: 'zh' });
+</script>
 
 </body>
 </html>

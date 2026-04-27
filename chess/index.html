@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What Is Chess? — yifanova.com</title>
-  <meta name="description" content="A philosophical and game-theoretic essay on chess: history, Zermelo's theorem, the typology of solved games, and Suits's lusory ontology of game.">
+  <title>An Inexhaustible Tree — yifanova.com</title>
+  <meta name="description" content="An essay arguing that chess is at least four distinct kinds of object — a combinatorial game tree, a rule-package, a lusory activity in Suits's sense, and a cultural-historical practice — and that the conflations among them produce most of the philosophical confusion about the game.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
 
   <link rel="stylesheet" href="/assets/tokens.css">
   <link rel="stylesheet" href="/assets/base.css">
+  <link rel="stylesheet" href="/assets/gametree.css">
 </head>
 
 <body>
@@ -29,277 +30,171 @@
   <article>
 
     <header class="article-header">
-      <h1>What Is Chess?</h1>
-      <p class="subtitle">History, game theory, Zermelo's theorem, and the lusory ontology of a 1500-year-old game</p>
+      <h1>An Inexhaustible Tree</h1>
+      <p class="subtitle">Chess as four distinct ontological objects, and what is at stake in conflating them</p>
       <p class="article-meta">essay · english</p>
     </header>
 
-    <p>Chess is the game most often used as a metaphor for thinking. It stands in for war, for politics, for love, for the pursuit of intelligence itself. But chess is also a mathematical object — a finite, deterministic, perfect-information, two-player, zero-sum game — and one of the few cultural artifacts that has been simultaneously a popular pastime, a research instrument in artificial intelligence, the subject of a foundational theorem in mathematical logic, and a recurring example in the philosophy of action.<a href="#sn-1" class="sn-ref">1</a> What follows is an attempt to take all of these registers seriously at once.</p>
+    <p>The thesis of this essay is plain. <em>Chess</em> names not one object but four. There is a finite combinatorial game tree of roughly 10<sup>120</sup> nodes, the object of Zermelo's 1913 theorem. There is a rule-package — a particular nineteenth-century convention that turns an otherwise infinite activity into a finite one. There is a <em>lusory activity</em> in Bernard Suits's sense, a structure of voluntarily-accepted constraints. And there is a fifteen-hundred-year cultural-historical practice descending from <em>chaturanga</em>. The four are real, none reduces to the others, and most of the philosophical confusion about chess comes from treating one as if it were another.<a href="#sn-1" class="sn-ref">1</a></p>
 
     <aside class="sidenote" id="sn-1">
-      <span class="sidenote-num">1</span>This essay is not a history of the game in the chronicler's sense. For that, see Murray (1913), still unsurpassed in scope.
+      <span class="sidenote-num">1</span>The conflation runs in all directions. Engines are said to "play chess" (collapsing the activity into the tree). Solving chess is said to "settle" the game (collapsing the cultural practice into its mathematical object). Neither inference is licit.
     </aside>
 
-    <h2>1 · A short history</h2>
+    <p>The argument unfolds by walking through each of the four in turn — but in an order that begins with the most concrete and ends with the most abstract, because the interesting question is whether the first is even <em>possible</em> as an object of human engagement once you understand the second.</p>
 
-    <p>The game we now call chess descends from <em>chaturanga</em> (Sanskrit <span class="cjk">चतुरङ्ग</span>, "four limbs"), a game attested in northern India by the sixth or seventh century CE.<a href="#sn-2" class="sn-ref">2</a> Its name refers to the four divisions of the classical Indian army — infantry, cavalry, elephants, chariots — which survive today as pawn, knight, bishop, and rook. The earliest unambiguous reference is in Bāṇabhaṭṭa's <em>Harshacharita</em>, written around 625 CE, which praises the peace of King Harsha's reign with the line "only <em>ashtāpadas</em> teach the position of the <em>chaturanga</em>."</p>
+    <h2>1 · The cultural object</h2>
+
+    <p>The game now called chess descends from <em>chaturanga</em> (Sanskrit <span class="cjk">चतुरङ्ग</span>, "four limbs"), attested in northern India by the seventh century CE in Bāṇabhaṭṭa's <em>Harshacharita</em>. Its name refers to the four divisions of the classical Indian army — infantry, cavalry, elephants, chariots — which survive on the modern board as pawn, knight, bishop, and rook.<a href="#sn-2" class="sn-ref">2</a> The game travelled west into Sasanian Persia as <em>chatrang</em>, into the Arab world as <em>shatranj</em> after the seventh-century conquests, and through Moorish Spain and Sicily into medieval Europe by roughly 900 CE. It also travelled east, becoming Chinese <em>xiangqi</em> <span class="cjk">象棋</span>, Japanese <em>shōgi</em> <span class="cjk">将棋</span>, Korean <em>janggi</em>, and Thai <em>makruk</em>, each a parallel descendant.</p>
 
     <aside class="sidenote" id="sn-2">
-      <span class="sidenote-num">2</span>The 8×8 <em>ashtāpada</em> board predates chaturanga and was used for older race games. Whether chaturanga was ever a four-player dice game, as some traditions claim, is debated.
+      <span class="sidenote-num">2</span>Murray (1913) remains the canonical history. The 8×8 <em>ashtāpada</em> board predates chaturanga and was used for older race games — the board was inherited; the war-simulation overlay was new.
     </aside>
 
-    <p>From India the game travelled west into Sasanian Persia as <em>chatrang</em>, then to the Arab world as <em>shatranj</em> after the Islamic conquest of Persia in the seventh century, then onward through Moorish al-Andalus and the Emirate of Sicily into medieval Europe by the tenth century. A separate northern route — through the Volga–Caspian trade and Byzantine contact — carried the game to Kievan Rus' by the ninth century, and Viking traders eventually took it as far as Iceland and the Hebrides, where the famous Lewis chessmen were buried in the twelfth century.<a href="#sn-3" class="sn-ref">3</a></p>
+    <figure>
+      <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Timeline of chess transmission from India westward and eastward, 6th to 15th century">
+        <defs>
+          <style>
+            .axis { stroke: var(--ink-soft); stroke-width: 1; }
+            .tick { stroke: var(--ink-faint); stroke-width: 0.7; }
+            .tick-label { font-family: 'Inter', sans-serif; font-size: 9.5px; fill: var(--ink-faint); }
+            .lane-label { font-family: 'Inter', sans-serif; font-size: 10.5px; fill: var(--ink-soft); font-style: italic; }
+            .node-w { fill: var(--bg); stroke: var(--navy); stroke-width: 1.5; }
+            .node-origin { fill: var(--navy); stroke: var(--navy); stroke-width: 1.5; }
+            .node-label { font-family: 'Inter', sans-serif; font-size: 10.5px; fill: var(--ink); font-weight: 500; }
+            .node-soft { font-family: 'Inter', sans-serif; font-size: 9px; fill: var(--ink-faint); font-style: italic; }
+            .conn { stroke: var(--sapphire); stroke-width: 1.4; fill: none; stroke-dasharray: 3 3; }
+            .conn-east { stroke: var(--forest); }
+          </style>
+        </defs>
+
+        <!-- Time axis at bottom -->
+        <line x1="40" y1="180" x2="680" y2="180" class="axis"/>
+        <!-- Century ticks: 6c, 8c, 10c, 12c, 14c, 16c -->
+        <g class="ticks">
+          <line x1="40"  y1="178" x2="40"  y2="184" class="tick"/>
+          <line x1="168" y1="178" x2="168" y2="184" class="tick"/>
+          <line x1="296" y1="178" x2="296" y2="184" class="tick"/>
+          <line x1="424" y1="178" x2="424" y2="184" class="tick"/>
+          <line x1="552" y1="178" x2="552" y2="184" class="tick"/>
+          <line x1="680" y1="178" x2="680" y2="184" class="tick"/>
+          <text x="40"  y="198" text-anchor="middle" class="tick-label">6c</text>
+          <text x="168" y="198" text-anchor="middle" class="tick-label">8c</text>
+          <text x="296" y="198" text-anchor="middle" class="tick-label">10c</text>
+          <text x="424" y="198" text-anchor="middle" class="tick-label">12c</text>
+          <text x="552" y="198" text-anchor="middle" class="tick-label">14c</text>
+          <text x="680" y="198" text-anchor="middle" class="tick-label">16c</text>
+        </g>
+
+        <!-- Westward lane (top) -->
+        <text x="40" y="35" class="lane-label">westward</text>
+        <!-- India origin -->
+        <circle cx="55" cy="80" r="6" class="node-origin"/>
+        <text x="55" y="62" text-anchor="middle" class="node-label">India</text>
+        <text x="55" y="100" text-anchor="middle" class="node-soft">chaturanga</text>
+
+        <!-- Persia ~600 -->
+        <circle cx="105" cy="80" r="4.5" class="node-w"/>
+        <text x="105" y="62" text-anchor="middle" class="node-label">Persia</text>
+        <text x="105" y="100" text-anchor="middle" class="node-soft">chatrang</text>
+
+        <!-- Arab world ~700 -->
+        <circle cx="170" cy="80" r="4.5" class="node-w"/>
+        <text x="170" y="62" text-anchor="middle" class="node-label">Arab world</text>
+        <text x="170" y="100" text-anchor="middle" class="node-soft">shatranj</text>
+
+        <!-- al-Andalus / Sicily ~900 -->
+        <circle cx="265" cy="80" r="4.5" class="node-w"/>
+        <text x="265" y="62" text-anchor="middle" class="node-label">al-Andalus, Sicily</text>
+
+        <!-- Latin Europe ~1100 -->
+        <circle cx="380" cy="80" r="4.5" class="node-w"/>
+        <text x="380" y="62" text-anchor="middle" class="node-label">Latin Europe</text>
+
+        <!-- "mad queen" reform 1475 -->
+        <circle cx="555" cy="80" r="5.5" class="node-origin"/>
+        <text x="555" y="62" text-anchor="middle" class="node-label">queen reform</text>
+        <text x="555" y="100" text-anchor="middle" class="node-soft">1475 (Iberia/Italy)</text>
+
+        <!-- Connect westward nodes -->
+        <path d="M 61 80 L 100 80" class="conn"/>
+        <path d="M 110 80 L 165 80" class="conn"/>
+        <path d="M 175 80 L 260 80" class="conn"/>
+        <path d="M 270 80 L 375 80" class="conn"/>
+        <path d="M 385 80 L 549 80" class="conn"/>
+
+        <!-- Eastward lane (bottom) -->
+        <text x="40" y="155" class="lane-label">eastward</text>
+
+        <!-- China ~700 -->
+        <circle cx="170" cy="135" r="4.5" class="node-w"/>
+        <text x="170" y="127" text-anchor="end" class="node-label" dx="-7">China</text>
+        <text x="170" y="155" text-anchor="end" class="node-soft" dx="-7">xiangqi</text>
+
+        <!-- Japan ~900 -->
+        <circle cx="265" cy="135" r="4.5" class="node-w"/>
+        <text x="265" y="127" text-anchor="end" class="node-label" dx="-7">Japan</text>
+        <text x="265" y="155" text-anchor="end" class="node-soft" dx="-7">shōgi</text>
+
+        <!-- SE Asia ~900 -->
+        <circle cx="295" cy="135" r="4.5" class="node-w"/>
+        <text x="320" y="127" class="node-label">SE Asia</text>
+        <text x="320" y="155" class="node-soft">makruk</text>
+
+        <!-- Connect from India down then rightward -->
+        <path d="M 55 86 Q 55 110 90 122 Q 130 132 165 134" class="conn conn-east"/>
+        <path d="M 175 135 L 260 135" class="conn conn-east"/>
+        <path d="M 175 135 L 290 135" class="conn conn-east"/>
+
+        <!-- Title note -->
+        <text x="350" y="20" text-anchor="middle" class="lane-label" style="font-style:normal;font-weight:600;font-size:11px;fill:var(--ink)">Transmission of chess from India, 6th–15th century</text>
+      </svg>
+      <figcaption>Two parallel diffusion lanes from a common Indian origin. Dates are first attestation; westward and eastward traditions diverged early and developed largely independently. The 1475 "mad queen" reform — when the queen and bishop acquired their long-range moves — is what made the European game we now play.</figcaption>
+    </figure>
+
+    <p>The decisive transformation of the European game happened around 1475 in Iberia or northern Italy. Before, the queen could move only one square diagonally and the bishop could leap two squares; after the reform — Italians called it <em>scacchi alla rabiosa</em>, "mad chess" — both became long-range pieces and the game's tempo accelerated dramatically. Castling, <em>en passant</em>, and pawn promotion stabilized over the next two centuries. The fifty-move rule and threefold repetition, which we are about to see are doing crucial mathematical work, were nineteenth-century additions.<a href="#sn-3" class="sn-ref">3</a> What we mean by "chess" is therefore not a stable target across the millennium and a half of this history; it is the rule-package codified roughly 150 years ago.</p>
 
     <aside class="sidenote" id="sn-3">
-      <span class="sidenote-num">3</span>The Lewis chessmen, ninety-three pieces of walrus ivory found on the Isle of Lewis in 1831, are usually attributed to Norwegian workshops c. 1150–1200. They depict the bishop already as a figure with a mitre — evidence that by then the piece had been thoroughly Christianized.
+      <span class="sidenote-num">3</span>The rules were standardized internationally with the founding of FIDE in 1924; the fifty-move rule has been adjusted several times since to handle particular endgames where tablebase analysis has shown forced wins requiring more moves.
     </aside>
 
-    <p>Chaturanga also went east, where it became Chinese <em>xiangqi</em> <span class="cjk">象棋</span>, Japanese <em>shōgi</em> <span class="cjk">将棋</span>, Korean <em>janggi</em> <span class="cjk">장기</span>, Thai <em>makruk</em>, and others — each branch adapting to local military and aesthetic traditions. The relation between these eastern variants and their Indian ancestor is partly genealogical and partly convergent; chess, in the broadest sense, is a family of games rather than a single object.</p>
+    <h2>2 · The combinatorial object</h2>
 
-    <figure>
-      <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic transmission of chess from India westward and eastward">
-        <defs>
-          <style>
-            .land  { fill: #f6f4ef; stroke: var(--rule); stroke-width: 0.8; }
-            .route { fill: none; stroke: var(--sapphire); stroke-width: 1.6; stroke-dasharray: 4 3; }
-            .route-east { stroke: var(--forest); }
-            .node  { fill: var(--bg); stroke: var(--navy); stroke-width: 1.5; }
-            .node-origin { fill: var(--navy); stroke: var(--navy); }
-            .lbl   { font-family: 'Inter', sans-serif; font-size: 10.5px; fill: var(--ink); font-weight: 500; }
-            .lbl-soft { font-family: 'Inter', sans-serif; font-size: 9.5px; fill: var(--ink-faint); font-style: italic; }
-            .arrow-w { fill: var(--sapphire); }
-            .arrow-e { fill: var(--forest); }
-          </style>
-          <marker id="arrowW" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-w"/>
-          </marker>
-          <marker id="arrowE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-e"/>
-          </marker>
-        </defs>
-
-        <!-- Stylized land mass background -->
-        <path d="M 20 80 Q 80 40 180 60 T 380 50 Q 520 60 620 90 T 700 130 L 700 260 Q 600 290 480 270 T 280 280 Q 140 270 40 240 Z" class="land"/>
-
-        <!-- Westward routes (blue dashed) -->
-        <!-- India → Persia -->
-        <path d="M 460 175 Q 410 150 360 165" class="route" marker-end="url(#arrowW)"/>
-        <!-- Persia → Arab world (Baghdad) -->
-        <path d="M 350 165 Q 310 150 270 165" class="route" marker-end="url(#arrowW)"/>
-        <!-- Arab → al-Andalus (Spain) -->
-        <path d="M 260 165 Q 200 145 130 165" class="route" marker-end="url(#arrowW)"/>
-        <!-- Arab → Sicily / Italy -->
-        <path d="M 270 175 Q 240 200 195 215" class="route" marker-end="url(#arrowW)"/>
-        <!-- Northern: Byzantium → Kievan Rus' / Vikings -->
-        <path d="M 320 155 Q 290 110 240 90" class="route" marker-end="url(#arrowW)"/>
-
-        <!-- Eastward routes (green dashed) -->
-        <!-- India → China -->
-        <path d="M 475 175 Q 530 165 580 175" class="route route-east" marker-end="url(#arrowE)"/>
-        <!-- China → Japan -->
-        <path d="M 595 175 Q 635 160 660 175" class="route route-east" marker-end="url(#arrowE)"/>
-        <!-- India → SE Asia -->
-        <path d="M 470 185 Q 510 220 555 230" class="route route-east" marker-end="url(#arrowE)"/>
-
-        <!-- Nodes -->
-        <!-- India (origin) -->
-        <circle cx="468" cy="180" r="7" class="node-origin"/>
-        <text x="468" y="205" text-anchor="middle" class="lbl">India</text>
-        <text x="468" y="218" text-anchor="middle" class="lbl-soft">chaturanga, c.6c</text>
-
-        <!-- Persia -->
-        <circle cx="355" cy="167" r="5" class="node"/>
-        <text x="355" y="155" text-anchor="middle" class="lbl">Persia</text>
-        <text x="355" y="143" text-anchor="middle" class="lbl-soft">chatrang, c.600</text>
-
-        <!-- Arab / Baghdad -->
-        <circle cx="265" cy="170" r="5" class="node"/>
-        <text x="265" y="190" text-anchor="middle" class="lbl">Arab world</text>
-        <text x="265" y="202" text-anchor="middle" class="lbl-soft">shatranj, 7c+</text>
-
-        <!-- al-Andalus -->
-        <circle cx="125" cy="167" r="5" class="node"/>
-        <text x="125" y="155" text-anchor="middle" class="lbl">al-Andalus</text>
-        <text x="125" y="143" text-anchor="middle" class="lbl-soft">10c</text>
-
-        <!-- Sicily -->
-        <circle cx="190" cy="220" r="5" class="node"/>
-        <text x="190" y="245" text-anchor="middle" class="lbl">Sicily</text>
-        <text x="190" y="257" text-anchor="middle" class="lbl-soft">10c</text>
-
-        <!-- Byzantium / Rus' -->
-        <circle cx="237" cy="88" r="5" class="node"/>
-        <text x="237" y="78" text-anchor="middle" class="lbl">Rus' / Vikings</text>
-        <text x="237" y="66" text-anchor="middle" class="lbl-soft">9–11c</text>
-
-        <!-- China -->
-        <circle cx="585" cy="178" r="5" class="node"/>
-        <text x="585" y="200" text-anchor="middle" class="lbl">China</text>
-        <text x="585" y="212" text-anchor="middle" class="lbl-soft">xiangqi</text>
-
-        <!-- Japan -->
-        <circle cx="665" cy="175" r="5" class="node"/>
-        <text x="665" y="155" text-anchor="middle" class="lbl">Japan</text>
-        <text x="665" y="143" text-anchor="middle" class="lbl-soft">shōgi</text>
-
-        <!-- SE Asia -->
-        <circle cx="560" cy="232" r="5" class="node"/>
-        <text x="560" y="255" text-anchor="middle" class="lbl">SE Asia</text>
-        <text x="560" y="267" text-anchor="middle" class="lbl-soft">makruk</text>
-
-        <!-- Legend -->
-        <g transform="translate(40, 285)">
-          <line x1="0" y1="0" x2="22" y2="0" class="route"/>
-          <text x="28" y="3" class="lbl-soft">westward (chatrang → shatranj → European)</text>
-        </g>
-        <g transform="translate(420, 285)">
-          <line x1="0" y1="0" x2="22" y2="0" class="route route-east"/>
-          <text x="28" y="3" class="lbl-soft">eastward (xiangqi, shōgi, makruk)</text>
-        </g>
-      </svg>
-      <figcaption>Approximate transmission of chess from India along its westward and eastward routes. Dates are first attested presence; the actual diffusion was gradual and bidirectional, especially within the medieval Islamic world. Geography is highly schematic — this is a diagram of cultural genealogy, not a map.</figcaption>
-    </figure>
-
-    <p>The decisive transformation of the European game happened around 1475, in either Spain or Italy. Before this reform the queen could move only one square diagonally; the bishop, only two squares diagonally and could leap. After the reform they became long-range pieces, and the game accelerated dramatically. Italian players called it <em>scacchi alla rabiosa</em> — "mad chess." Murray (1913) and Yalom (2004) link the queen's empowerment to the contemporaneous rise of powerful European queens such as Isabella of Castile.<a href="#sn-4" class="sn-ref">4</a> Castling, <em>en passant</em>, and pawn promotion stabilized over the next two centuries. The fifty-move rule and threefold repetition — which, as we shall see, are doing crucial mathematical work — were nineteenth-century additions, codified to ensure that games actually terminate.</p>
+    <p>Game theorists classify games along several axes. Chess sits at a particularly clean intersection: <span class="term">two-player</span>, <span class="term">zero-sum</span>, <span class="term">perfect-information</span>, <span class="term">deterministic</span>, and — under the modern rule-package — <span class="term">finite</span>. This cluster is exactly the one for which classical game-theoretic theorems are sharpest. The earliest and most beautiful of those theorems, due to Ernst Zermelo, was published in 1913 in a paper called <em>Über eine Anwendung der Mengenlehre auf die Theorie des Schachspiels</em>, "On an application of set theory to the theory of the game of chess."<a href="#sn-4" class="sn-ref">4</a> It is now generally regarded as the founding paper of mathematical game theory.</p>
 
     <aside class="sidenote" id="sn-4">
-      <span class="sidenote-num">4</span>The thesis is suggestive but contested. Material conditions — the printing press, growing leisure among urban elites — likely mattered as much as any single political symbol.
+      <span class="sidenote-num">4</span>Schwalbe and Walker (2001) provide the canonical English translation and historical reconstruction. Their commentary corrects the persistent attribution of backward induction to Zermelo himself: Zermelo's actual proof did not use it. Backward induction is the modern reconstruction.
     </aside>
 
-    <h2>2 · Chess as a game-theoretic object</h2>
+    <p>The theorem says that in any finite, deterministic, two-player, perfect-information, zero-sum game, exactly one of the following holds: White has a strategy that forces a win against any Black play; Black has such a strategy; or both sides can force at least a draw. The game has a determinate <span class="term">game-theoretic value</span>. There is a fact of the matter about what perfect play yields, even though no human and no computer knows what that fact is.</p>
 
-    <p>Game theorists classify games along several axes. Chess sits at a particularly clean intersection of them. It is <span class="term">two-player</span>: only White and Black act. It is <span class="term">zero-sum</span>: one player's gain is precisely the other's loss; there is no possibility of joint benefit. It is of <span class="term">perfect information</span>: every legal position, every prior move, every option available to either player is fully known to both. There is no hidden hand of cards, no fog of war, no concealed pieces. It is <span class="term">deterministic</span>: no dice, no shuffling, no stochastic element. And, with the modern stopping rules, it is <span class="term">finite</span>: the game must terminate after a bounded number of moves.<a href="#sn-5" class="sn-ref">5</a></p>
+    <p>The proof is short. Consider the game tree: a finite, branching tree where each node is a position and each edge is a legal move. By finiteness, every path terminates in a leaf labelled win-for-White, win-for-Black, or draw — say, +1, 0, or −1. Now propagate values upward by <span class="term">backward induction</span>: at any node where White moves, White picks the child node with the highest value; at any node where Black moves, Black picks the lowest. By induction the root receives a unique value. That value <em>is</em> the game-theoretic value of chess.</p>
+
+    <p>It will help to see this happen. The figure below is a schematic game tree with branching factor three and three plies — small enough to display all forty nodes, large enough that backward induction does real work. Press the button to watch values propagate from the leaves to the root.</p>
+
+    <div id="game-tree-demo" class="full-bleed"></div>
+
+    <p>The point of the demonstration is not the particular outcome at the root. The point is that the procedure is <em>deterministic</em> — it produces a single value for the root no matter how it is run — and <em>conditional only on the leaf labels and the alternation of max/min</em>. Once you accept that the tree is finite and every leaf has a determinate outcome, the value of the root is forced. That is Zermelo's theorem.</p>
+
+    <p>Now multiply this tree by a factor of about 10<sup>118</sup>. Claude Shannon's 1950 estimate of the chess game tree puts it at roughly 10<sup>120</sup> nodes — the <span class="term">Shannon number</span> — which dwarfs the count of atoms in the observable universe by some forty orders of magnitude. The state space (distinct legal positions, ignoring move history) is smaller, on the order of 10<sup>43</sup>–10<sup>50</sup>, but still vastly beyond any conceivable enumeration.<a href="#sn-5" class="sn-ref">5</a> Backward induction over a tree of that size is not slow; it is physically impossible.</p>
 
     <aside class="sidenote" id="sn-5">
-      <span class="sidenote-num">5</span>This last point is more subtle than it sounds. Without the fifty-move rule and threefold repetition, chess admits infinite play and is therefore not strictly finite. We return to this below.
+      <span class="sidenote-num">5</span>Shannon (1950); state-space bounds are due to Allis (1994) and refinements thereafter. Allis also formalized the typology of solved games we use below.
     </aside>
 
-    <p>This unusual cluster — finite, deterministic, perfect-information, two-player, zero-sum — is exactly the cluster for which the central theorems of classical game theory are sharpest. It is the reason chess has served, since the early twentieth century, as a touchstone case for thinking about strategy in the abstract.</p>
-
-    <h2>3 · Zermelo's theorem</h2>
-
-    <p>In 1912, at the Fifth International Congress of Mathematicians in Cambridge, Ernst Zermelo — best known today as a foundational figure in axiomatic set theory — gave a talk on chess. The following year he published <em>Über eine Anwendung der Mengenlehre auf die Theorie des Schachspiels</em> ("On an application of set theory to the theory of the game of chess"), which is now generally regarded as the first paper in mathematical game theory.<a href="#sn-6" class="sn-ref">6</a></p>
-
-    <aside class="sidenote" id="sn-6">
-      <span class="sidenote-num">6</span>Schwalbe and Walker (2001) provide the canonical English translation and historical reconstruction. Their commentary corrects several persistent misreadings of the original argument.
-    </aside>
-
-    <p>The theorem, in its modern formulation, says: in any finite, deterministic, two-player, perfect-information, zero-sum game, exactly one of the following must be true.</p>
-
-    <ol>
-      <li>White has a strategy that forces a win against any Black play.</li>
-      <li>Black has a strategy that forces a win against any White play.</li>
-      <li>Both sides have a strategy that forces at least a draw.</li>
-    </ol>
-
-    <p>In other words, the game has a determinate <span class="term">game-theoretic value</span>. There is a fact of the matter about what perfect play yields, even though no human and no computer knows what that fact is.<a href="#sn-7" class="sn-ref">7</a></p>
-
-    <aside class="sidenote" id="sn-7">
-      <span class="sidenote-num">7</span>The theorem is purely existential. It guarantees that <em>a</em> winning or drawing strategy exists; it gives no way of finding one.
-    </aside>
-
-    <p>The proof is short and beautiful. Consider the game tree: a finite, branching tree where each node is a position and each edge is a legal move. By the assumption of finiteness, every path from the root terminates in a leaf labelled win-for-White, win-for-Black, or draw. Now propagate values upward by <span class="term">backward induction</span>: at any node where it is White's turn, White will choose the child node with the value most favourable to White; at any node where it is Black's turn, Black will choose the child most favourable to Black. By induction the root receives a unique value.<a href="#sn-8" class="sn-ref">8</a></p>
-
-    <aside class="sidenote" id="sn-8">
-      <span class="sidenote-num">8</span>One subtle correction: Zermelo's own 1913 proof did not in fact use backward induction in the form now standard. The backward-induction reading was retroactively imposed by later authors. See Schwalbe &amp; Walker (2001).
-    </aside>
-
-    <figure>
-      <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic game tree illustrating backward induction">
-        <defs>
-          <style>
-            .node-w { fill: var(--bg); stroke: var(--navy); stroke-width: 1.5; }
-            .node-b { fill: var(--navy); stroke: var(--navy); stroke-width: 1.5; }
-            .edge { stroke: var(--rule); stroke-width: 1.2; fill: none; }
-            .edge-chosen { stroke: var(--forest); stroke-width: 2; fill: none; }
-            .leaf-w { fill: var(--bg); stroke: var(--forest); stroke-width: 1.5; }
-            .leaf-d { fill: var(--bg); stroke: var(--ink-faint); stroke-width: 1.5; }
-            .leaf-l { fill: var(--bg); stroke: #b85450; stroke-width: 1.5; }
-            .lbl   { font-family: 'Inter', sans-serif; font-size: 11px; fill: var(--ink-soft); }
-            .lbl-w { font-family: 'Inter', sans-serif; font-size: 11px; fill: var(--bg); font-weight: 600; }
-            .val   { font-family: 'Inter', sans-serif; font-size: 13px; fill: var(--ink); font-weight: 600; }
-          </style>
-        </defs>
-
-        <circle cx="300" cy="40" r="14" class="node-w"/>
-        <text x="300" y="44" text-anchor="middle" class="lbl">W</text>
-        <text x="320" y="34" class="val">+1</text>
-
-        <circle cx="120" cy="140" r="14" class="node-b"/>
-        <text x="120" y="144" text-anchor="middle" class="lbl-w">B</text>
-        <text x="140" y="134" class="val">−1</text>
-
-        <circle cx="300" cy="140" r="14" class="node-b"/>
-        <text x="300" y="144" text-anchor="middle" class="lbl-w">B</text>
-        <text x="320" y="134" class="val">+1</text>
-
-        <circle cx="480" cy="140" r="14" class="node-b"/>
-        <text x="480" y="144" text-anchor="middle" class="lbl-w">B</text>
-        <text x="500" y="134" class="val">0</text>
-
-        <path d="M 300 54 L 120 126" class="edge"/>
-        <path d="M 300 54 L 300 126" class="edge-chosen"/>
-        <path d="M 300 54 L 480 126" class="edge"/>
-
-        <rect x="60" y="240" width="40" height="32" rx="3" class="leaf-l"/>
-        <text x="80" y="260" text-anchor="middle" class="val">−1</text>
-        <rect x="140" y="240" width="40" height="32" rx="3" class="leaf-w"/>
-        <text x="160" y="260" text-anchor="middle" class="val">+1</text>
-        <path d="M 120 154 L 80 240" class="edge-chosen"/>
-        <path d="M 120 154 L 160 240" class="edge"/>
-
-        <rect x="240" y="240" width="40" height="32" rx="3" class="leaf-w"/>
-        <text x="260" y="260" text-anchor="middle" class="val">+1</text>
-        <rect x="320" y="240" width="40" height="32" rx="3" class="leaf-w"/>
-        <text x="340" y="260" text-anchor="middle" class="val">+1</text>
-        <path d="M 300 154 L 260 240" class="edge-chosen"/>
-        <path d="M 300 154 L 340 240" class="edge"/>
-
-        <rect x="420" y="240" width="40" height="32" rx="3" class="leaf-d"/>
-        <text x="440" y="260" text-anchor="middle" class="val">0</text>
-        <rect x="500" y="240" width="40" height="32" rx="3" class="leaf-w"/>
-        <text x="520" y="260" text-anchor="middle" class="val">+1</text>
-        <path d="M 480 154 L 440 240" class="edge-chosen"/>
-        <path d="M 480 154 L 520 240" class="edge"/>
-
-        <text x="20" y="44" class="lbl">White to move</text>
-        <text x="20" y="144" class="lbl">Black to move</text>
-        <text x="20" y="260" class="lbl">Leaves (outcomes)</text>
-      </svg>
-      <figcaption>A toy game tree with three plies. White (○) maximizes; Black (●) minimizes. Backward induction propagates values from the leaves upward: the leftmost subtree is worth −1 (Black picks the loss for White), the middle is +1, the rightmost is 0. White, choosing at the root, takes the middle branch, and the game's value is +1. Chess has the same structure — only the tree is roughly 10<sup>120</sup> nodes deep.</figcaption>
-    </figure>
-
-    <p>The theorem is a triumph of pure existence: it tells us chess <em>has</em> an answer without telling us anything about what the answer is. The size of the game tree is what makes the result inert in practice. Claude Shannon estimated the number of distinct chess games at roughly 10<sup>120</sup> — the so-called Shannon number — which dwarfs the number of atoms in the observable universe by some forty orders of magnitude. The set of legal positions is smaller, on the order of 10<sup>43</sup>–10<sup>50</sup>, but still vastly beyond exhaustive computation.<a href="#sn-9" class="sn-ref">9</a> Backward induction over a tree of that size is not slow; it is physically impossible.</p>
-
-    <aside class="sidenote" id="sn-9">
-      <span class="sidenote-num">9</span>Shannon (1950), "Programming a Computer for Playing Chess." The 10<sup>120</sup> figure is an estimate of game-tree size; state-space estimates are due to subsequent work by Allis (1994) and others.
-    </aside>
+    <p>What chess as a combinatorial object <em>has</em>, then, is a game-theoretic value that is <em>determinate but inaccessible</em>. We know it exists; we cannot compute it. This is the precise sense in which Zermelo's theorem is a triumph of pure existence over construction. It tells us chess has an answer without telling us anything about what the answer is.</p>
 
     <h3>The finiteness footnote</h3>
 
-    <p>There is a wrinkle. Without the fifty-move rule (a draw if no pawn moves and no capture occur in fifty consecutive moves) and threefold repetition (a draw if the same position arises three times), chess is not a finite game. Players could in principle shuffle pieces back and forth indefinitely. Without these stopping rules, Zermelo's theorem in its standard form does not directly apply.<a href="#sn-10" class="sn-ref">10</a></p>
+    <p>One subtlety worth flagging: chess is finite only because of the fifty-move rule and threefold repetition. Without these stopping conventions, players could in principle shuffle pieces indefinitely, the game tree would be infinite, and Zermelo's theorem in its standard form would not directly apply.<a href="#sn-6" class="sn-ref">6</a> The determinacy of chess is therefore not an a priori fact about pieces and rules; it is a consequence of stopping conventions added in the nineteenth century. Different conventions would produce a different mathematical object. The chess of Zermelo's theorem is a particular nineteenth-century artifact, not a timeless essence.</p>
 
-    <aside class="sidenote" id="sn-10">
-      <span class="sidenote-num">10</span>König (1927) and Kalmár (1928–29) extended Zermelo's argument to handle this case, but only by re-imposing finiteness through other means. Strictly speaking, "chess" without modern stopping rules is an infinite game.
+    <aside class="sidenote" id="sn-6">
+      <span class="sidenote-num">6</span>König (1927) and Kalmár (1928–29) extended Zermelo's argument to handle the infinite case, but only by re-imposing finiteness through other means.
     </aside>
 
-    <p>What this means is that the determinacy of chess is not an a priori metaphysical fact about the game's pieces and rules; it is a consequence of stopping conventions added in the nineteenth century. Different conventions would yield a different mathematical object. The "chess" of Zermelo's theorem is thus a particular nineteenth-century rule-package, not the timeless essence of the activity.</p>
+    <h3>Solved and unsolved</h3>
 
-    <h2>4 · Solved games and the typology of solution</h2>
-
-    <p>Chess is unsolved. We do not know whether perfect play yields a White win, a Black win, or a draw — though essentially every strong human and computer player believes the answer is a draw. But "solved" is not a single concept. The Dutch computer scientist Victor Allis distinguished three senses in his 1994 dissertation, and the typology has since become standard.<a href="#sn-11" class="sn-ref">11</a></p>
-
-    <aside class="sidenote" id="sn-11">
-      <span class="sidenote-num">11</span>Allis (1994), <em>Searching for Solutions in Games and Artificial Intelligence</em>. PhD thesis, University of Limburg.
-    </aside>
-
-    <ul>
-      <li><span class="term">Ultra-weakly solved</span>: the game-theoretic value of the initial position is known. We know who wins under perfect play, but not how.</li>
-      <li><span class="term">Weakly solved</span>: an algorithm is known that, from the initial position, plays out an optimal line and achieves the game-theoretic value against any opponent.</li>
-      <li><span class="term">Strongly solved</span>: an algorithm is known that plays optimally from <em>any</em> legal position, including positions that arise after one or both players have made mistakes.</li>
-    </ul>
-
-    <p>The three senses are progressively stronger. Ultra-weak solutions can sometimes be obtained by clever non-constructive argument — strategy-stealing, parity considerations, and similar. Weak solutions almost always require massive computation. Strong solutions require the entire state space to be evaluated.</p>
+    <p>Chess is unsolved. We do not know whether perfect play yields a White win, a Black win, or a draw — though essentially every strong human and computer player believes it is a draw. But "solved" admits three senses, distinguished by Victor Allis in 1994. <span class="term">Ultra-weakly solved</span>: the game-theoretic value is known but no strategy is given. <span class="term">Weakly solved</span>: an algorithm plays optimally from the initial position. <span class="term">Strongly solved</span>: an algorithm plays optimally from any legal position. The senses are progressively stronger; only games much smaller than chess are strongly solved.</p>
 
     <table>
       <thead>
@@ -339,13 +234,13 @@
           <td>Hex (general N×N)</td>
           <td>varies</td>
           <td><span class="status status-ultra">ultra-weakly solved</span></td>
-          <td>First-player win (Nash, 1949, by strategy-stealing)</td>
+          <td>First-player win (Nash, 1949)</td>
         </tr>
         <tr>
           <td>Chess<br><span class="cjk" style="font-size:0.85em;color:var(--ink-faint)">国际象棋</span></td>
           <td>10<sup>43</sup>–10<sup>50</sup></td>
           <td><span class="status status-unsolved">unsolved</span></td>
-          <td>7-piece endgames strongly solved (Lomonosov, 2012; Syzygy, 2018); start position conjectured draw</td>
+          <td>7-piece endgames strongly solved (Lomonosov, 2012); start position conjectured draw</td>
         </tr>
         <tr>
           <td>Go (19×19)<br><span class="cjk" style="font-size:0.85em;color:var(--ink-faint)">围棋</span></td>
@@ -356,92 +251,63 @@
       </tbody>
     </table>
 
-    <p>The Schaeffer et al. result on checkers is worth pausing over. Their team at the University of Alberta worked on the proof for nearly two decades, with up to 200 machines running in parallel. The final published result, in <em>Science</em> in 2007, weakly solved the game from the standard opening: with perfect play on both sides, English draughts is a draw. The proof combined a 39-trillion-position endgame database (computed backwards from terminal positions) with a forward proof tree from the opening.<a href="#sn-12" class="sn-ref">12</a> It is currently the most complex game ever solved.</p>
+    <p>Schaeffer's 2007 weak solution of checkers is the most complex result in this table. His Alberta team worked on it for nearly two decades, with up to 200 machines running in parallel; the final proof combined a 39-trillion-position endgame database with a forward proof tree from the opening. For chess, only fragments are solved — the seven-piece Syzygy and Lomonosov tablebases give perfect play for any position with seven or fewer pieces, and have already revealed forced mates of more than 500 moves that no human could play correctly without lookup.<a href="#sn-7" class="sn-ref">7</a></p>
 
-    <aside class="sidenote" id="sn-12">
-      <span class="sidenote-num">12</span>Schaeffer, Burch, Björnsson, Kishimoto, Müller, Lake, Lu, &amp; Sutphen (2007), "Checkers Is Solved," <em>Science</em> 317, 1518–1522.
+    <aside class="sidenote" id="sn-7">
+      <span class="sidenote-num">7</span>The longest known forced mate in the 7-piece tablebase is 549 moves (ignoring the fifty-move rule). The 8-piece tablebase is partially complete; as of 2022 it contains a forced mate of 584 moves.
     </aside>
 
-    <p>For chess, only fragments are solved. The seven-piece endgame tablebases — the Lomonosov tablebase, completed in 2012, and the more compact Syzygy tablebases that followed — give perfect play for any position with seven or fewer pieces on the board. They have already revealed surprises: positions previously thought to be theoretical draws turn out to be wins requiring more than five hundred moves of perfect play, far beyond any human capacity. Whether this counts as "knowing chess" is a question we leave open.<a href="#sn-13" class="sn-ref">13</a></p>
+    <h2>3 · The lusory object</h2>
 
-    <aside class="sidenote" id="sn-13">
-      <span class="sidenote-num">13</span>The longest known forced mate in the 7-piece tablebase is 549 moves (ignoring the fifty-move rule). The 8-piece tablebase is partially complete; the longest forced mate found there as of 2022 is 584 moves. Both are positions no human could play correctly without tablebase access.
+    <p>So far we have treated chess as a combinatorial object. But chess is also a thing people <em>do</em>, and game theory is silent on what playing means. The Canadian philosopher Bernard Suits, in his 1978 book <em>The Grasshopper: Games, Life and Utopia</em>, gave what is still the most influential analytic definition of game-playing.<a href="#sn-8" class="sn-ref">8</a> The book is structured as a Socratic dialogue between a dying Grasshopper — playful, idle, philosophically committed to play as the highest good — and his disciples. The Grasshopper proposes that game-playing has four interlocking components, three of which constitute the game and one of which constitutes the player's relation to it.</p>
+
+    <aside class="sidenote" id="sn-8">
+      <span class="sidenote-num">8</span>Suits (1978/2014). The book is a sustained reply to Wittgenstein's claim in <em>Philosophical Investigations</em> §66 that "game" admits no definition, only a "family resemblance." Suits thinks Wittgenstein simply did not look hard enough.
     </aside>
 
-    <h2>5 · The Suitsian view: chess as a lusory activity</h2>
+    <p>The <span class="term">prelusory goal</span> is a state of affairs that can be specified independently of the rules — described in terms a non-player would understand. In chess it is the geometric configuration in which one king attacks the other with no legal escape. The configuration can be reached by any number of means; one of them is playing chess.</p>
 
-    <p>So far we have treated chess as a mathematical object. But chess is also a thing people <em>do</em>, and game theory is silent on what it means to play. The Canadian philosopher Bernard Suits, in his 1978 book <em>The Grasshopper: Games, Life and Utopia</em>, gave what is still the most influential analytic definition of game-playing.<a href="#sn-14" class="sn-ref">14</a></p>
+    <p>The <span class="term">lusory means</span> are the means permitted for reaching that goal. In chess they are the legal moves of each piece, the alternation of turns, the prohibition on moving into check, castling, <em>en passant</em>. Crucially, they are <em>more restrictive</em> than the means available to one who simply pursued the prelusory goal directly. You could put your opponent's king in checkmate by reaching across the board and rearranging pieces. The lusory means rule this out.</p>
 
-    <aside class="sidenote" id="sn-14">
-      <span class="sidenote-num">14</span>Suits (1978/2014). Wittgenstein had famously argued in the <em>Philosophical Investigations</em> §66 that "game" admits no definition, only a "family resemblance." Suits's book is, among other things, a sustained reply: he thinks Wittgenstein simply did not look hard enough.
+    <p>Suits's central insight is that the rules of a game are not arbitrary restrictions but <em>constitutive</em> ones. The lusory means do not merely tell you how to play chess after you have decided to play; they make it possible for the activity of chess to exist at all. Without the rule structure there is just a board with pieces; there is no game.</p>
+
+    <p>The third component is the philosophically distinctive one. The <span class="term">lusory attitude</span> is the player's voluntary acceptance of the lusory means, accepted just because they make the activity possible. If your goal were simply to remove your opponent's king from the board, the most efficient means would be to reach across the table. The rules of chess prohibit this — and you, as a chess player, voluntarily accept the prohibition. You accept that you must achieve the goal in the harder way, because only the harder way constitutes <em>playing chess</em>. Suits's compact formulation is famous:</p>
+
+    <blockquote>To play a game is to attempt to achieve a specific state of affairs, using only means permitted by rules, where the rules prohibit more efficient in favour of less efficient means, and where the rules are accepted just because they make the activity possible.<a href="#sn-9" class="sn-ref">9</a></blockquote>
+
+    <aside class="sidenote" id="sn-9">
+      <span class="sidenote-num">9</span>Suits (1978/2014, p. 54). The technical vocabulary — <em>lusory</em> from Latin <em>ludus</em>, "game" — is his coinage.
     </aside>
 
-    <p>The book is structured as a Socratic dialogue between a dying Grasshopper — playful, idle, philosophically committed to play as the highest good — and his disciples. The Grasshopper proposes that to play a game is to engage in a particular kind of activity, and he isolates four interlocking elements. Three of them define what a game is; the fourth, the lusory attitude, distinguishes <em>playing</em> a game from merely producing the same outcome by other means.</p>
+    <p>A game, in Suits's compact summary, is the voluntary attempt to overcome unnecessary obstacles. The obstacles are unnecessary because there are easier paths to the prelusory goal; they are accepted because, without them, the activity we value would not exist.</p>
 
-    <h3>The prelusory goal</h3>
+    <p>The book ends in a paradox Suits develops at length. Imagine Utopia: a world in which all instrumental needs are met, no work is necessary, and every prelusory goal achievable directly is already achieved. Suits argues that in such a world, game-playing would be the only activity left that retained any point. We would not need to <em>do</em> anything, but we could still take up unnecessary obstacles for the sake of overcoming them. Game-playing, on this view, is not a frivolous distraction from real life; it is the activity that survives the elimination of necessity. The Grasshopper, who plays through the summer while the Ants prepare for winter, turns out to have understood the human condition more deeply than his industrious cousins.</p>
 
-    <p>The <span class="term">prelusory goal</span> is a state of affairs that can be specified independently of the rules of the game — described in terms a non-player would understand. In chess, the prelusory goal is the geometric configuration in which one player's king is attacking the other's king with no legal escape. You can describe this configuration without saying anything about whose <em>turn</em> it is, or what counts as a legal <em>move</em>; it is just a pattern of pieces on a board. The prelusory goal in golf is having one's ball come to rest in a hole. In a footrace, it is being the first to cross a particular line. The point is that prelusory goals can in principle be achieved by means other than the game.</p>
+    <h2>4 · Three confusions</h2>
 
-    <h3>The lusory means</h3>
+    <p>With the four objects in hand — game tree, rule-package, lusory activity, cultural-historical practice — the conflations that ordinarily pass unnoticed in talk about chess become visible. Three are worth naming.</p>
 
-    <p>The <span class="term">lusory means</span> are the means permitted for achieving the prelusory goal. In chess, these are the legal moves of each piece, the alternation of turns, the prohibition on moving into check, the rules of castling and <em>en passant</em>. Crucially, the lusory means are <em>more restrictive</em> than the means available to one who simply pursued the prelusory goal directly. You could put your opponent's king in checkmate by reaching across the board and rearranging pieces, or by hypnotizing them into resigning, or by a thousand other routes. The lusory means rule these out.</p>
+    <p>The first is the <em>engine confusion</em>. Stockfish does not play chess in Suits's sense. It computes optimal play within the lusory-means structure; it does not, in any meaningful sense, <em>accept</em> those means. Asking whether Stockfish is "really playing" chess is, on this view, a category mistake of the same kind as asking whether a calculator is "really doing" arithmetic in the way a child doing homework is. The engine is an extraordinary calculator of the lusory means; the question of whether it plays in any normatively rich sense is a different question, and Suits gives us the language to keep it separate.<a href="#sn-10" class="sn-ref">10</a></p>
 
-    <p>Suits's central insight is that the rules of a game are not arbitrary restrictions; they are <em>constitutive</em> restrictions. The lusory means do not merely tell you how to play chess after you have decided to play; they make it possible for the activity of chess to exist at all. Without the rule structure there is just a board with pieces — there is no game.</p>
-
-    <h3>The lusory attitude</h3>
-
-    <p>The third element is the philosophically distinctive one. The <span class="term">lusory attitude</span> is the player's voluntary acceptance of the lusory means — accepted just because they make the activity possible. This is what Suits calls the "psychological element," and it is what distinguishes a game from mere goal-pursuit.</p>
-
-    <p>If your goal were simply to remove your opponent's king from the board, the most efficient means would be to reach across and pick it up. The rules of chess prohibit this — and you, as a chess player, voluntarily accept the prohibition. You accept that you must achieve the goal in the harder way, because only the harder way constitutes <em>playing chess</em>. Suits's compact formulation is famous:</p>
-
-    <blockquote>To play a game is to attempt to achieve a specific state of affairs, using only means permitted by rules, where the rules prohibit more efficient in favour of less efficient means, and where the rules are accepted just because they make the activity possible.<a href="#sn-15" class="sn-ref">15</a></blockquote>
-
-    <aside class="sidenote" id="sn-15">
-      <span class="sidenote-num">15</span>Suits (1978/2014, p. 54). Suits coins the term <em>lusory</em> from Latin <em>ludus</em>, "game" — hence "lusory goal," "lusory means," "lusory attitude." The whole technical vocabulary is his invention.
+    <aside class="sidenote" id="sn-10">
+      <span class="sidenote-num">10</span>This is not a knock on engines. The point is that "play" in the human sense and "compute optimal play" in the algorithmic sense are different relations to the same lusory-means structure.
     </aside>
 
-    <p>Putting the four elements together: a game is the voluntary attempt to overcome unnecessary obstacles. The obstacles are unnecessary because there are easier ways to reach the prelusory goal; they are accepted because, without them, the activity that we value — the game — would not exist.</p>
+    <p>The second is the <em>solution confusion</em>. If chess were strongly solved tomorrow and the answer turned out to be a draw, what would happen? Suits's framework gives a sharp answer: the prelusory goal would become unreachable for both sides under perfect play, but the lusory activity would not dissolve. People still play tic-tac-toe knowing it is a draw. The mathematical settlement of the game-tree's value is not the same event as the dissolution of the activity, because the activity exists only in players who continue to take up the lusory attitude. What <em>would</em> change is the cultural-historical practice — chess has been the symbolic terrain of human intelligence for half a millennium, and a proof that perfect play is a draw would alter that symbolic role even if it left the activity formally intact.<a href="#sn-11" class="sn-ref">11</a></p>
 
-    <h3>The Grasshopper's paradox</h3>
-
-    <p>The book ends in a paradox that Suits develops at length. Imagine Utopia: a world in which all instrumental needs are met, no work is necessary, and every prelusory goal achievable directly is already achieved. Suits argues that in such a world, game-playing would be the only activity left that retained any point. We would not need to <em>do</em> anything, but we could still take up unnecessary obstacles for the sake of overcoming them. Game-playing, on this view, is not a frivolous distraction from real life; it is the activity that survives the elimination of necessity. The Grasshopper, who plays through the summer while the Ants prepare for winter, turns out to have understood the human condition more deeply than his industrious cousins.<a href="#sn-16" class="sn-ref">16</a></p>
-
-    <aside class="sidenote" id="sn-16">
-      <span class="sidenote-num">16</span>The argument is more delicate than my summary suggests. Suits is careful to distinguish games from other voluntary activities (art, friendship, contemplation), and the Utopia argument is meant to show that games would be central, not exhaustive, in such a world.
+    <aside class="sidenote" id="sn-11">
+      <span class="sidenote-num">11</span>The disanalogy with tic-tac-toe is precisely cultural. Tic-tac-toe is so transparently solvable that no one ever invested an identity in playing it. To solve chess would be to mathematically settle a question whose openness has been culturally constitutive.
     </aside>
 
-    <h3>Where this lands chess</h3>
+    <p>The third is the <em>essence confusion</em>. The Murray-Yalom genealogy that opened this essay does not link <em>chaturanga</em>, <em>shatranj</em>, fifteenth-century European chess, and the chess Stockfish computes by way of a single shared essence. They are connected by a chain of historical transmissions, each link of which involved rule changes — sometimes radical ones. The "mad queen" reform of 1475 produced a different game from the one that preceded it; the nineteenth-century stopping rules produced a different game from the seventeenth-century one; modern chess engines, in turn, are computing on a particular nineteenth-century rule-package, not on whatever Tal and Botvinnik were playing in 1960 (which was very nearly that package, but not quite). Asking what the "real" chess is reifies one moment in the chain.</p>
 
-    <p>Applying this triad to chess brings several things into focus that the game-theoretic picture cannot see.</p>
+    <h2>5 · Back to the tree</h2>
 
-    <p>First, <em>chess as a game-theoretic object and chess as a lusory activity are not the same thing</em>. The mathematical chess of Zermelo's theorem is fully specified by its prelusory goal and its lusory means — the win condition and the legal-move structure. But it has no players, no acceptance, no attitude. It is a tree, not an activity. The activity exists only when someone takes up the lusory attitude toward that tree.</p>
+    <p>The title of this essay names the core image. Chess, considered as a combinatorial object, is a tree of about 10<sup>120</sup> nodes whose root has a determinate value none of us will ever compute. It is not a tree we will exhaust by playing — every chess game is a single path through it — and not a tree we will exhaust by analysis: the seven-piece tablebases occupy 18 terabytes; the eight-piece tablebases will not fit on any foreseeable disk; the full tree is many orders of magnitude beyond physical computation.</p>
 
-    <p>Second, this clarifies what computer chess engines are doing. Stockfish does not play chess in Suits's sense. It computes optimal play within the lusory means; it does not, in any meaningful sense, accept those means. Asking whether Stockfish is "really playing" chess is, on this view, a category mistake of the same kind as asking whether a calculator is "really doing" arithmetic in the way a child doing homework is.<a href="#sn-17" class="sn-ref">17</a></p>
+    <p>But the inexhaustibility is the wrong place to land. What matters is that this tree is only <em>one</em> of the four objects we have been discussing, and arguably the least important one. Players do not engage with the game tree; they engage with the lusory means under the lusory attitude. Cultures do not transmit the game tree; they transmit a rule-package and a tradition of play. When we ask, "is chess solved?" we are asking about object 1, and the answer is no, and probably will remain so. When we ask, "is chess worth playing?" we are asking about objects 3 and 4, and the answer has nothing to do with the first.</p>
 
-    <aside class="sidenote" id="sn-17">
-      <span class="sidenote-num">17</span>This is not a knock on engines. They are extraordinary calculators of the lusory-means structure. But the question of whether they play in any normatively rich sense is a different question, and Suits gives us the language to keep it separate.
-    </aside>
-
-    <p>Third, the existence of solved games puts pressure on the lusory attitude in an interesting way. If we strongly solve chess and the result is a draw, the prelusory goal becomes — under perfect play — unreachable for both sides. Does this dissolve the game? Suits would say no: the activity remains, because the players still accept the rules and engage with the structure they constitute. People still play tic-tac-toe, after all, knowing it is a draw. But the relation between solvedness and meaningful play is genuinely interesting: it is part of what makes the prospect of solving chess emotionally fraught for the chess world in a way the prospect of solving Connect Four was not.<a href="#sn-18" class="sn-ref">18</a></p>
-
-    <aside class="sidenote" id="sn-18">
-      <span class="sidenote-num">18</span>The disanalogy: tic-tac-toe is so transparently solvable that no one ever invested an identity in playing it. Chess has been the symbolic terrain of human intelligence for half a millennium. To solve it would be to mathematically settle a question whose openness has been culturally constitutive.
-    </aside>
-
-    <h2>6 · Coda: what kind of object is chess?</h2>
-
-    <p>We are now in a position to answer the title question, though only by refusing the singular. Chess is at least four distinct kinds of object, and confusion arises whenever we treat one as if it were the others.</p>
-
-    <ol>
-      <li>A <em>finite combinatorial game tree</em>, of size roughly 10<sup>120</sup>, whose game-theoretic value is determinate by Zermelo's theorem but unknown.</li>
-      <li>A <em>rule-package</em> — a particular nineteenth-century convention with stopping rules — that turns the otherwise infinite game into the finite one.</li>
-      <li>A <em>lusory activity</em> in Suits's sense: a structure of rules taken up by players who voluntarily accept its restrictions in order to make the activity possible.</li>
-      <li>A <em>cultural-historical practice</em> with a continuous tradition from sixth-century India, transformed by the fifteenth-century European reform, sustained by clubs and federations and players whose engagement gives the previous three layers their meaning.</li>
-    </ol>
-
-    <p>Each of these is real. None of them is reducible to the others. The mathematical chess of Zermelo and Shannon is not the chess that Tal played against Botvinnik in 1960; that chess is not the chess that Stockfish computes in 2026; and none of those is identical to the chaturanga from which they all descend. What unites them is something like a Wittgensteinian family resemblance — though Suits, as we noted, would say it is rather a shared structure of prelusory goal, lusory means, and lusory attitude, instantiated in different histories by different beings with different relations to the rules.</p>
-
-    <p>Whether one prefers Wittgenstein's resemblance or Suits's structural definition is itself a substantive philosophical choice. But on either reading, "What is chess?" is not a single question. It is at least four, and any answer that pretends otherwise is doing more violence to the game than the game deserves.</p>
+    <p>The four objects are real. None reduces to the others. The combinatorial object is what Zermelo proved a theorem about; the rule-package is what FIDE codifies; the lusory activity is what two players in a café take up across a board; the cultural-historical practice is what carried <em>chaturanga</em> from India to here. To call all four "chess" is convenient, but we should be honest that the word is doing four jobs, not one.</p>
 
     <hr>
 
@@ -461,14 +327,17 @@
 
     <footer class="page-footer">
       <span>yifanova.com / chess</span>
-      <span>
-        <a href="/religion">/religion</a>
-      </span>
+      <span><a href="/religion">/religion</a></span>
     </footer>
 
   </article>
 
 </div>
+
+<script src="/assets/gametree.js"></script>
+<script>
+  new GameTree('game-tree-demo', { lang: 'en' });
+</script>
 
 </body>
 </html>
