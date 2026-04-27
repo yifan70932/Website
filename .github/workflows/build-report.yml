@@ -1,0 +1,74 @@
+name: Generate watchlist report
+
+# Triggers:
+#   1. Daily at 1:00 AM UTC (~9 PM ET previous day, after US close).
+#   2. Manually via the "Run workflow" button on the Actions tab.
+#   3. On every push to main that touches the analyzer code, so changes
+#      go live without waiting for the next scheduled run.
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '_analyzer/**'
+      - '.github/workflows/build-report.yml'
+      - 'requirements.txt'
+
+# Permissions: contents:write so the action can commit the generated
+# report back to the repo.
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # NumPy pinned below 2.0 because some transitive deps still ship
+          # NumPy 1.x wheels and trigger _ARRAY_API_not_found with NumPy 2.x.
+          python -m pip install -r requirements.txt
+
+      - name: Generate report
+        # Run the analyzer from inside _analyzer/ so its relative paths
+        # (./watchlist_output/) work as expected, then we copy out.
+        # --no-open prevents trying to launch a browser on the headless runner.
+        # --backtest enables the strategy backtest section, which is meaningful
+        # given 18 names in the universe.
+        run: |
+          cd _analyzer
+          python -m quant_watchlist --backtest --no-open
+
+      - name: Stage report into watchlist/
+        # Copy the generated report into the watchlist/ subfolder at the
+        # repo root, preserving the existing index.html navigation page.
+        # Only report.html gets overwritten; index.html is left untouched.
+        run: |
+          cp _analyzer/watchlist_output/report.html watchlist/report.html
+
+      - name: Commit and push
+        # Only commit if the report actually changed. Skipping no-op commits
+        # keeps git history clean.
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add watchlist/report.html
+          if git diff --staged --quiet; then
+            echo "No report changes to commit."
+          else
+            git commit -m "Update watchlist report ($(date -u +%Y-%m-%d))"
+            git push
+          fi
