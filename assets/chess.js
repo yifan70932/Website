@@ -48,6 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
     moveHistory: [],    // array of move records for undo
     gameOver: null,     // null | 'checkmate-w' | 'checkmate-b' | 'stalemate' | 'draw'
   };
+  
+  // View-only state, not part of game state.
+  let flipped = false;
 
   // ─── Piece movement: pseudo-legal moves (not yet checking for own king in check) ──
   
@@ -534,31 +537,31 @@ document.addEventListener('DOMContentLoaded', function() {
     'bk': '♚', 'bq': '♛', 'br': '♜', 'bb': '♝', 'bn': '♞', 'bp': '♟',
   };
   
-  function buildBoardDOM() {
-    root.innerHTML = '';
-    
-    // Container with two parts: board on left, info panel on right
-    const wrap = document.createElement('div');
-    wrap.className = 'chess-wrap';
-    
-    const boardDiv = document.createElement('div');
-    boardDiv.className = 'chess-board';
-    
-    for (let r = 0; r < 8; r++) {
-      for (let c = 0; c < 8; c++) {
+  // Build the 64 chess-sq buttons inside boardDiv, respecting `flipped` view.
+  // Called both during initial setup and after toggling flip.
+  function populateBoardSquares(boardDiv) {
+    boardDiv.innerHTML = '';
+    // When `flipped`, iterate from bottom-up, right-to-left in row/col order
+    // (so the DOM places h1 first → a8 last, putting Black at the bottom).
+    const rs = flipped ? [7,6,5,4,3,2,1,0] : [0,1,2,3,4,5,6,7];
+    const cs = flipped ? [7,6,5,4,3,2,1,0] : [0,1,2,3,4,5,6,7];
+    // Coord labels live on the visual-left column and visual-bottom row.
+    const rankCol = flipped ? 7 : 0;
+    const fileRow = flipped ? 0 : 7;
+    for (const r of rs) {
+      for (const c of cs) {
         const sq = document.createElement('button');
         sq.type = 'button';
         sq.className = 'chess-sq ' + ((r + c) % 2 === 0 ? 'light' : 'dark');
         sq.dataset.row = r;
         sq.dataset.col = c;
-        // Coordinate labels: rank on leftmost column, file on bottom row.
-        if (c === 0) {
+        if (c === rankCol) {
           const rank = document.createElement('span');
           rank.className = 'chess-coord chess-coord-rank';
           rank.textContent = String(8 - r);
           sq.appendChild(rank);
         }
-        if (r === 7) {
+        if (r === fileRow) {
           const file = document.createElement('span');
           file.className = 'chess-coord chess-coord-file';
           file.textContent = String.fromCharCode(97 + c);
@@ -569,12 +572,33 @@ document.addEventListener('DOMContentLoaded', function() {
         boardDiv.appendChild(sq);
       }
     }
+  }
+  
+  function flipBoard() {
+    flipped = !flipped;
+    const boardDiv = root.querySelector('.chess-board');
+    if (!boardDiv) return;
+    populateBoardSquares(boardDiv);
+    render();
+  }
+  
+  function buildBoardDOM() {
+    root.innerHTML = '';
+    
+    // Container with two parts: board on left, info panel on right
+    const wrap = document.createElement('div');
+    wrap.className = 'chess-wrap';
+    
+    const boardDiv = document.createElement('div');
+    boardDiv.className = 'chess-board';
+    populateBoardSquares(boardDiv);
     
     const info = document.createElement('div');
     info.className = 'chess-info';
     info.innerHTML = `
       <div class="chess-status" data-role="status"></div>
       <div class="chess-controls">
+        <button type="button" data-role="flip">${t.flipBoard}</button>
         <button type="button" data-role="undo">${t.undo}</button>
         <button type="button" data-role="reset">${t.reset}</button>
       </div>
@@ -598,6 +622,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     info.querySelector('[data-role="reset"]').addEventListener('click', resetGame);
     info.querySelector('[data-role="undo"]').addEventListener('click', undoMove);
+    info.querySelector('[data-role="flip"]').addEventListener('click', flipBoard);
   }
   
   function squareLabel(r, c) {
@@ -634,10 +659,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Highlight selected piece + its legal moves
     if (state.selected) {
-      const selSq = squares[state.selected.row * 8 + state.selected.col];
+      const selSq = root.querySelector(`.chess-sq[data-row="${state.selected.row}"][data-col="${state.selected.col}"]`);
       if (selSq) selSq.classList.add('selected');
       for (const m of state.legalMoves) {
-        const tSq = squares[m.row * 8 + m.col];
+        const tSq = root.querySelector(`.chess-sq[data-row="${m.row}"][data-col="${m.col}"]`);
         if (!tSq) continue;
         if (state.board[m.row][m.col] || m.special === 'en-passant') {
           tSq.classList.add('legal-capture');
@@ -771,6 +796,7 @@ const STRINGS = {
   en: {
     undo: 'Undo',
     reset: 'Reset',
+    flipBoard: 'Flip',
     whiteTurn: "White to move",
     blackTurn: "Black to move",
     inCheck: 'in check',
@@ -789,6 +815,7 @@ const STRINGS = {
   zh: {
     undo: '悔棋',
     reset: '重新开始',
+    flipBoard: '翻转',
     whiteTurn: '白方走子',
     blackTurn: '黑方走子',
     inCheck: '被将军',
