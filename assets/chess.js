@@ -3,16 +3,11 @@
    ------------------------------------------------------------
    A single chess board widget that:
    - Displays the standard 8×8 starting position.
-   - Highlights legal moves when the user clicks a piece.
-   - Shows a description of the selected piece's movement rules.
-   - Lets two humans play out a full game (no AI).
-   - Supports check, checkmate, stalemate, and basic draws.
+   - Lets two humans play out a full game.
+   - Supports check, checkmate, stalemate.
+   - Streams a Stockfish (WASM) analysis of the current position
+     in the panel below the board: evaluation + best move.
    - Bilingual UI (English / Chinese) via lang attribute.
-
-   This is designed to teach the rules visually, not to be a
-   competitive playing surface. Castling, en passant, and pawn
-   promotion are implemented; threefold repetition and the
-   fifty-move rule are not (kept simple).
    ============================================================ */
 
 (function() {
@@ -287,6 +282,251 @@ document.addEventListener('DOMContentLoaded', function() {
     return false;
   }
   
+  // ─── FEN conversion ───────────────────────────────────
+  // Build a FEN string describing the current state, for Stockfish.
+  
+  function toFEN(state) {
+    const FEN_MAP = { p:'p', n:'n', b:'b', r:'r', q:'q', k:'k' };
+    let fenRows = [];
+    for (let r = 0; r < 8; r++) {
+      let row = '';
+      let empty = 0;
+      for (let c = 0; c < 8; c++) {
+        const p = state.board[r][c];
+        if (!p) {
+          empty++;
+        } else {
+          if (empty > 0) { row += empty; empty = 0; }
+          let ch = FEN_MAP[p.type];
+          row += p.color === 'w' ? ch.toUpperCase() : ch;
+        }
+      }
+      if (empty > 0) row += empty;
+      fenRows.push(row);
+    }
+    const board = fenRows.join('/');
+    const turn = state.turn;
+    const cr = state.castlingRights;
+    let castle = '';
+    if (cr.wK) castle += 'K';
+    if (cr.wQ) castle += 'Q';
+    if (cr.bK) castle += 'k';
+    if (cr.bQ) castle += 'q';
+    if (!castle) castle = '-';
+    let ep = '-';
+    if (state.enPassantTarget) {
+      const file = String.fromCharCode(97 + state.enPassantTarget.col);
+      const rank = 8 - state.enPassantTarget.row;
+      ep = file + rank;
+    }
+    // Halfmove clock and fullmove number — we don't track these, set defaults.
+    return `${board} ${turn} ${castle} ${ep} 0 1`;
+  }
+
+  // ─── Stockfish (WASM) integration ──────────────────────
+  
+  // Stockfish files are self-hosted at /assets/sf/. We detect WebAssembly
+  // support and pick the WASM build (smaller + faster) or fall back to
+  // the asm.js single-file build for browsers without WASM.
+  const SF_BASE = '/assets/sf/';
+  const WASM_SUPPORTED = (typeof WebAssembly === 'object'
+    && typeof WebAssembly.validate === 'function'
+    && WebAssembly.validate(Uint8Array.of(0x00,0x61,0x73,0x6d,0x01,0x00,0x00,0x00)));
+  const SF_URL = SF_BASE + (WASM_SUPPORTED ? 'stockfish.wasm.js' : 'stockfish.js');
+  
+  let sfWorker = null;
+  let sfReady = false;
+  let sfFailed = false;
+  let sfPendingFen = null;  // queued analysis request
+  let sfAnalyzing = false;
+  let sfLastInfo = null;    // {evalCp, mateIn, depth, bestMove, bestSan}
+  
+  function initStockfish() {
+    try {
+      sfWorker = new Worker(SF_URL);
+      sfWorker.addEventListener('message', onSfMessage);
+      sfWorker.addEventListener('error', () => {
+        sfFailed = true;
+        renderSf();
+      });
+      sfWorker.postMessage('uci');
+    } catch (e) {
+      sfFailed = true;
+      renderSf();
+    }
+  }
+  
+  function onSfMessage(e) {
+    const line = (typeof e.data === 'string') ? e.data : '';
+    if (!line) return;
+    
+    if (line === 'uciok') {
+      sfWorker.postMessage('setoption name Hash value 16');
+      sfWorker.postMessage('isready');
+      return;
+    }
+    if (line === 'readyok') {
+      sfReady = true;
+      renderSf();
+      // Kick off any queued analysis
+      if (sfPendingFen) {
+        const fen = sfPendingFen;
+        sfPendingFen = null;
+        analyze(fen);
+      } else {
+        // Default: analyze current position
+        analyze(toFEN(state));
+      }
+      return;
+    }
+    
+    // Parse "info ... depth N ... score cp X" or "score mate Y" lines, also "pv ..."
+    if (line.startsWith('info ')) {
+      const m = line.match(/\bdepth\s+(\d+)/);
+      const cp = line.match(/\bscore\s+cp\s+(-?\d+)/);
+      const mate = line.match(/\bscore\s+mate\s+(-?\d+)/);
+      const pv = line.match(/\bpv\s+(\S+)/);
+      if (m) {
+        const info = { depth: parseInt(m[1], 10) };
+        if (cp) info.evalCp = parseInt(cp[1], 10);
+        if (mate) info.mateIn = parseInt(mate[1], 10);
+        if (pv) info.bestMove = pv[1];
+        sfLastInfo = Object.assign({}, sfLastInfo, info);
+        renderSf();
+      }
+      return;
+    }
+    if (line.startsWith('bestmove')) {
+      const parts = line.split(/\s+/);
+      if (parts[1]) {
+        sfLastInfo = sfLastInfo || {};
+        sfLastInfo.bestMove = parts[1];
+      }
+      sfAnalyzing = false;
+      renderSf();
+      // If a new request came in while analyzing, run it now
+      if (sfPendingFen) {
+        const fen = sfPendingFen;
+        sfPendingFen = null;
+        analyze(fen);
+      }
+      return;
+    }
+  }
+  
+  function analyze(fen) {
+    if (!sfWorker || !sfReady || sfFailed) return;
+    if (sfAnalyzing) {
+      sfPendingFen = fen;
+      sfWorker.postMessage('stop');
+      return;
+    }
+    sfLastInfo = { depth: 0 };
+    sfAnalyzing = true;
+    sfWorker.postMessage('position fen ' + fen);
+    sfWorker.postMessage('go depth 15');
+    renderSf();
+  }
+  
+  function uciToSan(uci) {
+    // Just return the UCI move (e.g., "e2e4"); rendering it as SAN would
+    // require re-running the engine on the position, which is more work
+    // than necessary. UCI is readable enough for users.
+    if (!uci || uci === '(none)') return '';
+    // Pretty up the move slightly: e2e4 -> e2-e4
+    if (uci.length === 4) return uci.slice(0, 2) + '–' + uci.slice(2, 4);
+    if (uci.length === 5) return uci.slice(0, 2) + '–' + uci.slice(2, 4) + '=' + uci.slice(4).toUpperCase();
+    return uci;
+  }
+  
+  function formatEval(info, turn) {
+    if (!info) return '—';
+    if (info.mateIn != null) {
+      // mate score is from side-to-move's perspective; convert to white-positive
+      const m = info.mateIn;
+      const sign = turn === 'w' ? (m > 0 ? '+' : '-') : (m > 0 ? '-' : '+');
+      return sign + 'M' + Math.abs(m);
+    }
+    if (info.evalCp != null) {
+      // engine returns from side-to-move's perspective; convert to always-white-positive
+      const fromWhite = turn === 'w' ? info.evalCp : -info.evalCp;
+      const v = fromWhite / 100;
+      return (v >= 0 ? '+' : '') + v.toFixed(2);
+    }
+    return '—';
+  }
+  
+  function evalToBarPercent(info, turn) {
+    // Returns 0..100 representing white's share of the bar (from white-perspective).
+    if (!info) return 50;
+    if (info.mateIn != null) {
+      const m = info.mateIn;
+      const fromWhite = turn === 'w' ? m : -m;
+      return fromWhite > 0 ? 100 : 0;
+    }
+    if (info.evalCp != null) {
+      const fromWhite = turn === 'w' ? info.evalCp : -info.evalCp;
+      // Map [-1000, +1000] cp to [0, 100] with sigmoid-ish smoothing.
+      const cp = Math.max(-1000, Math.min(1000, fromWhite));
+      // Linear-ish but compressed near extremes
+      const t = cp / 1000;  // -1..1
+      const pct = 50 + 50 * Math.sign(t) * Math.min(1, Math.abs(t) * 1.4);
+      return Math.max(0, Math.min(100, pct));
+    }
+    return 50;
+  }
+  
+  function renderSf() {
+    const evalEl = root.querySelector('[data-role="sf-eval"]');
+    const detailEl = root.querySelector('[data-role="sf-detail"]');
+    const barEl = root.querySelector('[data-role="sf-bar-fill"]');
+    if (!evalEl || !detailEl || !barEl) return;
+    
+    if (sfFailed) {
+      evalEl.textContent = '—';
+      detailEl.textContent = t.sfFailed;
+      barEl.style.width = '50%';
+      return;
+    }
+    if (!sfReady) {
+      evalEl.textContent = '—';
+      detailEl.textContent = t.sfLoading;
+      barEl.style.width = '50%';
+      return;
+    }
+    if (state.gameOver) {
+      // Don't analyze finished games — show terminal eval
+      let pct = 50;
+      let lbl = '—';
+      if (state.gameOver === 'checkmate-w') { pct = 0; lbl = '0–1'; }
+      else if (state.gameOver === 'checkmate-b') { pct = 100; lbl = '1–0'; }
+      else { pct = 50; lbl = '½–½'; }
+      evalEl.textContent = lbl;
+      detailEl.textContent = '';
+      barEl.style.width = pct + '%';
+      return;
+    }
+    
+    const info = sfLastInfo;
+    evalEl.textContent = formatEval(info, state.turn);
+    barEl.style.width = evalToBarPercent(info, state.turn) + '%';
+    
+    let detail = '';
+    if (info && info.depth) {
+      detail = `${t.sfDepth} ${info.depth}`;
+      if (info.bestMove) {
+        detail += ` · ${t.sfBestMove} ${uciToSan(info.bestMove)}`;
+      }
+    } else if (sfAnalyzing) {
+      detail = t.sfThinking;
+    } else {
+      detail = t.sfReady;
+    }
+    detailEl.textContent = detail;
+  }
+
+
+  
   // ─── Rendering ─────────────────────────────────────────
   
   const PIECE_GLYPHS = {
@@ -321,17 +561,26 @@ document.addEventListener('DOMContentLoaded', function() {
     info.className = 'chess-info';
     info.innerHTML = `
       <div class="chess-status" data-role="status"></div>
-      <div class="chess-rule" data-role="rule">
-        <p class="chess-rule-hint">${t.hint}</p>
-      </div>
       <div class="chess-controls">
         <button type="button" data-role="undo">${t.undo}</button>
         <button type="button" data-role="reset">${t.reset}</button>
       </div>
     `;
     
+    // Stockfish analysis panel — separate row below status/controls
+    const sf = document.createElement('div');
+    sf.className = 'chess-sf';
+    sf.innerHTML = `
+      <div class="chess-sf-bar"><div class="chess-sf-bar-fill" data-role="sf-bar-fill"></div></div>
+      <div class="chess-sf-readout">
+        <span class="chess-sf-eval" data-role="sf-eval">—</span>
+        <span class="chess-sf-detail" data-role="sf-detail">${t.sfLoading}</span>
+      </div>
+    `;
+    
     wrap.appendChild(boardDiv);
     wrap.appendChild(info);
+    wrap.appendChild(sf);
     root.appendChild(wrap);
     
     info.querySelector('[data-role="reset"]').addEventListener('click', resetGame);
@@ -383,9 +632,8 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     
-    // Update status + rule panel
+    // Update status
     const statusEl = root.querySelector('[data-role="status"]');
-    const ruleEl = root.querySelector('[data-role="rule"]');
     
     if (state.gameOver === 'checkmate-w') {
       statusEl.textContent = t.blackWins;
@@ -401,20 +649,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const checkText = isInCheck(state.board, state.turn) ? ' — ' + t.inCheck : '';
       statusEl.textContent = turnText + checkText;
       statusEl.className = 'chess-status' + (checkText ? ' in-check' : '');
-    }
-    
-    // Rule description
-    if (state.selected) {
-      const p = state.board[state.selected.row][state.selected.col];
-      if (p) {
-        const ruleData = t.rules[p.type];
-        ruleEl.innerHTML = `
-          <h4>${PIECE_GLYPHS[p.color + p.type]} ${ruleData.name}</h4>
-          <p>${ruleData.desc}</p>
-        `;
-      }
-    } else {
-      ruleEl.innerHTML = `<p class="chess-rule-hint">${t.hint}</p>`;
     }
   }
   
@@ -478,6 +712,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     render();
+    if (!state.gameOver) analyze(toFEN(state));
+    else renderSf();
   }
   
   function undoMove() {
@@ -491,6 +727,7 @@ document.addEventListener('DOMContentLoaded', function() {
     state.legalMoves = [];
     state.gameOver = null;
     render();
+    analyze(toFEN(state));
   }
   
   function resetGame() {
@@ -505,17 +742,18 @@ document.addEventListener('DOMContentLoaded', function() {
       gameOver: null,
     };
     render();
+    analyze(toFEN(state));
   }
   
   // ─── Bootstrap ─────────────────────────────────────────
   buildBoardDOM();
   render();
+  initStockfish();
 });
 
 // ─── Bilingual strings ────────────────────────────────────
 const STRINGS = {
   en: {
-    hint: 'Click any piece to see how it moves. Click a highlighted square to play that move. Two players share the board.',
     undo: 'Undo',
     reset: 'Reset',
     whiteTurn: "White to move",
@@ -524,17 +762,16 @@ const STRINGS = {
     whiteWins: 'White wins by checkmate',
     blackWins: 'Black wins by checkmate',
     stalemate: 'Stalemate — draw',
-    rules: {
-      p: { name: 'Pawn', desc: 'Moves forward one square; on its first move it may advance two. Captures diagonally forward, never straight ahead. Reaching the far rank, it promotes (this widget auto-promotes to a queen). Special: <em>en passant</em> capture of an adjacent pawn that has just moved two squares.' },
-      n: { name: 'Knight', desc: 'Moves in an L-shape: two squares along one axis and one along the other. Uniquely, the knight can jump over other pieces.' },
-      b: { name: 'Bishop', desc: 'Moves any number of squares diagonally. Cannot jump over pieces. Each side has one light-square bishop and one dark-square bishop, and these two never trade squares with each other.' },
-      r: { name: 'Rook', desc: 'Moves any number of squares orthogonally — along ranks or files. Cannot jump. Participates in castling with the king.' },
-      q: { name: 'Queen', desc: 'Moves any number of squares orthogonally or diagonally — combining rook and bishop. The most powerful piece on the board, but not the goal of the game.' },
-      k: { name: 'King', desc: 'Moves one square in any direction. Cannot move to a square attacked by an enemy piece. May castle once per game with an unmoved rook if no piece sits between them, the king is not in check, and does not pass through or land on an attacked square. Checkmating the king ends the game.' },
-    },
+    sfLoading: 'Loading Stockfish…',
+    sfReady: 'Stockfish ready',
+    sfThinking: 'Stockfish thinking…',
+    sfBestMove: 'best',
+    sfDepth: 'depth',
+    sfMate: 'mate in',
+    sfEvalLabel: 'eval',
+    sfFailed: 'Stockfish failed to load',
   },
   zh: {
-    hint: '点击任意棋子查看它的走法；点击高亮格落子。两位玩家共用一个棋盘。',
     undo: '悔棋',
     reset: '重新开始',
     whiteTurn: '白方走子',
@@ -543,14 +780,14 @@ const STRINGS = {
     whiteWins: '白方将杀获胜',
     blackWins: '黑方将杀获胜',
     stalemate: '逼和——和棋',
-    rules: {
-      p: { name: '兵 (Pawn)', desc: '每次向前一格；首次走子可前进两格。斜向前一格吃子，不能沿直线吃子。到达对方底线时升变（此处自动升变为后）。特殊走法：<em>吃过路兵</em>——对方相邻一兵刚走两格时，可以斜前吃之。' },
-      n: { name: '马 (Knight)', desc: '走"L"形——一个方向两格、垂直方向一格。马是棋盘上唯一可以越过其他棋子的子。' },
-      b: { name: '象 (Bishop)', desc: '沿斜线任意距离移动，不能越子。每方有一个白格象、一个黑格象，两象终生不会换格。' },
-      r: { name: '车 (Rook)', desc: '沿横线或竖线任意距离移动，不能越子。参与王车易位。' },
-      q: { name: '后 (Queen)', desc: '沿横线、竖线或斜线任意距离移动，相当于车与象的组合。是棋盘上最强的子，但不是游戏的目标。' },
-      k: { name: '王 (King)', desc: '向任一方向走一格。不能走到对方控制的格上。每局可与未走过的车做一次"王车易位"，前提是它们之间无子、王不在被将军中、王不会经过或停在受攻击格上。王被将杀即为终局。' },
-    },
+    sfLoading: 'Stockfish 加载中…',
+    sfReady: 'Stockfish 就绪',
+    sfThinking: 'Stockfish 思考中…',
+    sfBestMove: '最佳着法',
+    sfDepth: '深度',
+    sfMate: '将杀',
+    sfEvalLabel: '评估',
+    sfFailed: 'Stockfish 加载失败',
   },
 };
 

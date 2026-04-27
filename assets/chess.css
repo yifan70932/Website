@@ -1,5 +1,6 @@
 /* ============================================================
    yifanova.com — interactive chess board styles (chess.css)
+   Layout: large centered board with status + controls below.
    ============================================================ */
 
 .chess-widget {
@@ -8,10 +9,9 @@
 
 .chess-wrap {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  align-items: flex-start;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* ─── Board ──────────────────────────────────────────────── */
@@ -20,14 +20,14 @@
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
-  width: 22rem;
-  height: 22rem;
-  max-width: 90vw;
-  max-height: 90vw;
+  width: 32rem;
+  height: 32rem;
+  max-width: min(90vw, 32rem);
+  max-height: min(90vw, 32rem);
+  aspect-ratio: 1 / 1;
   border: 2px solid var(--ink);
   background: #fdfaf3;
   user-select: none;
-  flex: 0 0 auto;
 }
 
 .chess-sq {
@@ -40,7 +40,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.9rem;
+  font-size: clamp(1.6rem, 5.6vw, 2.6rem);
   line-height: 1;
   position: relative;
   transition: background-color 0.12s;
@@ -66,7 +66,7 @@
   position: absolute;
   width: 30%;
   height: 30%;
-  background: rgba(58, 90, 64, 0.55);  /* forest with alpha */
+  background: rgba(58, 90, 64, 0.55);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -76,12 +76,11 @@
   content: "";
   position: absolute;
   inset: 6%;
-  border: 3px solid rgba(192, 57, 43, 0.7);  /* xiangqi red, semi-transparent */
+  border: 3px solid rgba(192, 57, 43, 0.7);
   border-radius: 50%;
   pointer-events: none;
 }
 
-/* King in check: red glow. */
 .chess-sq.in-check {
   background: #f3a5a1 !important;
 }
@@ -110,15 +109,16 @@
   color: #1f2328;
 }
 
-/* ─── Info panel ─────────────────────────────────────────── */
+/* ─── Info bar (under board) ─────────────────────────────── */
 
 .chess-info {
-  flex: 1 1 18rem;
-  max-width: 24rem;
-  min-width: 16rem;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
+  width: 100%;
+  max-width: 32rem;
   font-family: var(--font-ui);
 }
 
@@ -127,14 +127,16 @@ html[lang^="zh"] .chess-info {
 }
 
 .chess-status {
+  flex: 1 1 auto;
   font-size: var(--fs-meta);
   font-weight: 600;
   color: var(--ink-soft);
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 0.6rem 0.8rem;
+  padding: 0.5rem 0.9rem;
   background: var(--rule-soft);
   border-left: 3px solid var(--sapphire);
+  text-align: center;
 }
 html[lang^="zh"] .chess-status {
   letter-spacing: 0.02em;
@@ -151,40 +153,10 @@ html[lang^="zh"] .chess-status {
   color: var(--forest);
 }
 
-.chess-rule {
-  background: var(--bg);
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  padding: 0.85rem 1rem;
-  min-height: 8rem;
-}
-
-.chess-rule h4 {
-  margin: 0 0 0.5rem;
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--navy);
-}
-html[lang^="zh"] .chess-rule h4 {
-  font-family: var(--font-cjk), var(--font-body);
-}
-
-.chess-rule p {
-  margin: 0;
-  font-size: var(--fs-small);
-  line-height: 1.55;
-  color: var(--ink-soft);
-}
-
-.chess-rule-hint {
-  font-style: italic;
-  color: var(--ink-faint);
-}
-
 .chess-controls {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
+  flex: 0 0 auto;
 }
 
 .chess-controls button {
@@ -215,18 +187,80 @@ html[lang^="zh"] .chess-controls button {
 /* ─── Mobile ─────────────────────────────────────────────── */
 
 @media (max-width: 700px) {
-  .chess-wrap {
-    flex-direction: column;
-    align-items: center;
-  }
   .chess-board {
     width: 90vw;
     height: 90vw;
-    max-width: 22rem;
-    max-height: 22rem;
   }
   .chess-info {
-    width: 100%;
-    max-width: 22rem;
+    flex-direction: column;
   }
+  .chess-status {
+    width: 100%;
+  }
+}
+
+/* ─── Stockfish analysis panel ───────────────────────────── */
+
+.chess-sf {
+  width: 100%;
+  max-width: 32rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+  font-family: var(--font-ui);
+}
+html[lang^="zh"] .chess-sf {
+  font-family: var(--font-cjk), var(--font-ui);
+}
+
+.chess-sf-bar {
+  width: 100%;
+  height: 6px;
+  background: #1f2328;
+  border-radius: 1px;
+  overflow: hidden;
+  position: relative;
+}
+
+.chess-sf-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: #fafafa;
+  border-right: 1px solid var(--rule);
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chess-sf-readout {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: var(--fs-meta);
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.chess-sf-eval {
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+  font-size: 1rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+.chess-sf-detail {
+  flex: 1;
+  text-align: right;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: var(--fs-small);
+  color: var(--ink-faint);
+}
+html[lang^="zh"] .chess-sf-detail {
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
