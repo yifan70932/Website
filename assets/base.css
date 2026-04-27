@@ -1,7 +1,10 @@
 /* ============================================================
    yifanova.com — base styles
    ------------------------------------------------------------
-   Loads after tokens.css. Notebook-with-Sidenotes layout.
+   Loads after tokens.css.
+   Layout: CSS Grid two-column on wide screens
+           (text + gutter + sidenote rail),
+           single column on narrow screens.
    ============================================================ */
 
 * { box-sizing: border-box; }
@@ -20,7 +23,7 @@ body {
   font-feature-settings: "kern", "liga", "onum";
 }
 
-/* When the document is in Chinese, swap to a CJK serif. */
+/* CJK swap. */
 html[lang^="zh"] body,
 html[lang^="zh"] h1,
 html[lang^="zh"] h2,
@@ -97,11 +100,66 @@ html[lang^="zh"] body {
   color: var(--bg);
 }
 
-/* ─── Article structure ──────────────────────────────────── */
+/* ─── Article: grid layout ───────────────────────────────── */
+/* On wide screens, article is a 3-column grid:
+     [ text-col | gutter | sidenote-col ]
+   Children default to text-col. Sidenotes are explicitly placed
+   in sidenote-col. Full-bleed elements span all three columns. */
 
 article {
+  display: block;  /* mobile default — single column */
+}
+
+/* All direct children sit in the text column on mobile. */
+article > * {
   max-width: var(--measure);
 }
+
+/* Specific exception: full-bleed elements should NOT be capped on
+   mobile either, so they can use the full available width. */
+article > figure,
+article > table,
+article > .references,
+article > .full-bleed {
+  max-width: 100%;
+}
+
+@media (min-width: 1000px) {
+  article {
+    display: grid;
+    grid-template-columns:
+      var(--measure)
+      var(--gutter)
+      var(--sidenote-col);
+    column-gap: 0;
+    align-items: start;
+  }
+
+  /* Default: every child goes in the text column (column 1). */
+  article > * {
+    grid-column: 1;
+    max-width: none;
+  }
+
+  /* Sidenotes go in the rail (column 3). */
+  article > .sidenote {
+    grid-column: 3;
+    /* Pull each sidenote up so its top aligns with where the
+       reference numeral appears in flowing text. The exact offset
+       cannot be perfect with pure CSS — we approximate. */
+    margin-top: 0.2rem;
+  }
+
+  /* Full-bleed: figures, tables, references span all three columns. */
+  article > figure,
+  article > table,
+  article > .references,
+  article > .full-bleed {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ─── Article header ─────────────────────────────────────── */
 
 .article-header {
   margin-bottom: 3rem;
@@ -236,27 +294,7 @@ html[lang^="zh"] .sidenote {
   margin-left: 1px;
 }
 
-@media (min-width: 1000px) {
-  article {
-    position: relative;
-    padding-right: calc(var(--sidenote-col) + var(--gutter));
-  }
-  .sidenote {
-    position: absolute;
-    right: 0;
-    width: var(--sidenote-col);
-    margin-top: -0.2em;
-    clear: right;
-  }
-  article > figure,
-  article > table,
-  article > .full-bleed,
-  article > .references {
-    max-width: none;
-    width: calc(var(--measure) + var(--sidenote-col) + var(--gutter));
-  }
-}
-
+/* On narrow screens, sidenotes appear inline as styled callouts. */
 @media (max-width: 999px) {
   .sidenote {
     display: block;
@@ -405,7 +443,7 @@ html[lang^="zh"] .references {
 }
 
 .references h3 { margin-bottom: 1rem; }
-.references ol { padding-left: 1.6em; }
+.references ol { padding-left: 1.6em; max-width: var(--measure); }
 .references li { margin-bottom: 0.65em; }
 .references li::marker {
   color: var(--sapphire);
