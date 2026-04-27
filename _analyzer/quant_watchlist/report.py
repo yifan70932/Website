@@ -745,7 +745,30 @@ def build_html_report(tickers, features_dict, prices, bench_returns, period,
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 {make_css()}
+<style>
+  /* Slim site-navigation strip linking back to the parent yifanova.com
+     entry page. Kept minimal so it doesn't visually fight the dashboard;
+     just a breadcrumb in the top-left at the same scale as the disclaimer.
+     This is the only element on the page that links back to the rest of
+     the site — without it, deep-linking visitors have no way back. */
+  .site-nav {{ font-family:'Inter',-apple-system,sans-serif; font-size:12px;
+    color:var(--muted); margin-bottom:14px; letter-spacing:0.04em;
+    text-transform:uppercase; }}
+  .site-nav a {{ color:var(--muted); text-decoration:none;
+    border-bottom:1px solid transparent; padding-bottom:1px;
+    transition:color 0.15s, border-color 0.15s; }}
+  .site-nav a:hover {{ color:var(--accent); border-bottom-color:var(--accent); }}
+  .site-nav .sep {{ margin:0 0.5em; opacity:0.5; }}
+</style>
 </head><body><div class="container">
+
+<div class="site-nav">
+  <a href="https://yifanova.com/">yifanova.com</a>
+  <span class="sep">/</span>
+  <a href="../watchlist/">Watchlist</a>
+  <span class="sep">/</span>
+  <span>Report</span>
+</div>
 
 <header>
   <h1>Quantitative Watchlist Analysis</h1>

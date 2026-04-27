@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>量化观察清单 · yifanova.com</title>
+  <meta name="description" content="一份每日自动更新的横截面定量分析,覆盖一组美股大盘股票与 ETF。">
+
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/base.css">
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="colophon">
+      <a href="/">yifanova.com</a>
+      <nav class="lang-toggle">
+        <a href="./">EN</a>
+        <a href="./zh.html" class="active">中文</a>
+      </nav>
+    </header>
+
+    <article>
+
+      <header class="article-header">
+        <h1>量化观察清单</h1>
+        <p class="subtitle">
+          针对一组公开股票的横截面定量分析,以静态网页形式呈现,通过 GitHub
+          Actions 每日凌晨自动重新生成。
+        </p>
+        <p class="article-meta">
+          每日更新 · 源代码托管于
+          <a href="https://github.com/yifan70932/Website/tree/main/_analyzer">GitHub</a>
+        </p>
+      </header>
+
+      <p>
+        这个页面是一次自我设定的练习:把现代多因子选股的方法论从头到尾走一遍。
+        MSCI、AQR 这类机构在数十万只股票上做的分析,这里被刻意压缩到一个
+        十八只 well-known 美股代码组成的小宇宙。重点不是发现交易机会,而是
+        把方法<em>实际做完</em>,并把输出作为一份仪表盘交付。观察清单本身固定
+        在代码中,所有下游计算来自 <a href="https://github.com/ranaroussi/yfinance">Yahoo Finance</a>
+        的日频价格。
+      </p>
+
+      <p>
+        分析涵盖了当代股票量化的主要工具——有效前沿优化、QVM+L 因子打分
+        体系、层次聚类的相关矩阵,以及把观察清单作为股票池的六种规则化
+        策略回测。报告中每一节都在文末的文献附录中链回它的学术原始来源。
+      </p>
+
+      <h2 id="report">报告</h2>
+
+      <p>
+        仪表盘是一个完全自包含的 HTML 页面,内含约三十个可交互的 Plotly
+        图表。开篇是一张可排序的横截面 screener 表,结尾是约二十五条
+        参考文献。移动端会折叠为带粘性导航的单栏布局;桌面端使用较宽的
+        画布——这是有意为之,因为高密度的量化仪表盘需要横向空间。
+      </p>
+
+      <p>
+        <a href="report.html">→ 打开最新报告</a>
+      </p>
+
+      <h2 id="contents">报告内容</h2>
+
+      <p>仪表盘按顺序包含以下内容:</p>
+
+      <ol>
+        <li>一段文字<span class="term">横截面摘要</span>——表现最佳/最差
+            标的、收益分散度、平均两两相关性</li>
+        <li>一张可排序的 <span class="term">screener 表</span>,每只标的
+            十二个指标(Sharpe、Sortino、Calmar、最大回撤、回撤恢复天数、
+            相对 SPY 的 β、VaR<sub>95</sub>、CVaR<sub>95</sub> 等)</li>
+        <li><span class="term">QVM+L 因子分解</span>:质量(Quality)、
+            价值(Value)、动量(Momentum)、低波(Low-Volatility)四个
+            维度的百分位排名,加上加权综合分。质量因子构造参照
+            Asness/Frazzini/Pedersen,动量按 Jegadeesh/Titman 12-1,
+            低波按 Frazzini/Pedersen</li>
+        <li>把每只标的的累计收益重新归一化到起点 100 的曲线对比图,行尾
+            带数值标注以便直接读出相对表现排名</li>
+        <li>风险-收益散点图,辅以 Sharpe = 0.5 / 1.0 / 1.5 / 2.0 的等值线——
+            这是横截面对比风险调整后表现最干净的方式之一</li>
+        <li>所有标的最大回撤水下曲线的叠加比较图</li>
+        <li>层次聚类排序的相关性热图(scipy 在 1−ρ 距离上做 linkage),
+            相邻行/列共享因子暴露</li>
+        <li>观察清单宇宙的 <span class="term">长仓有效前沿</span>(Markowitz
+            1952),标注最小方差(GMV)、切线、等权、风险平价四个参考组合,
+            以及资本市场线</li>
+        <li>六种规则化策略的回测——buy &amp; hold、等权、风险平价、
+            SMA 交叉、12-1 动量、布林反转均值回归——含真实交易成本与
+            信号延迟一日(避免前视偏差)</li>
+        <li>每只标的单独的技术面分析(SMA、布林带、RSI、MACD)</li>
+        <li>约二十条原始文献的附录</li>
+      </ol>
+
+      <h2 id="architecture">实现方式</h2>
+
+      <p>
+        架构刻意保持简单。一个 Python 包(本仓库的 <code>_analyzer/quant_watchlist/</code>)
+        负责生成报告。一个 GitHub Actions workflow 在每天 UTC 1:00 运行
+        这个包(用免费的 Ubuntu runner),把生成的 <code>report.html</code>
+        提交回仓库,GitHub Pages 直接以静态文件提供服务。访问者打开页面
+        时不存在"实时运行 Python"这一环节。整个方案的运行成本为零,唯一
+        的失败模式是 Yahoo Finance 偶发的服务中断——下一次定时任务会
+        自动恢复。
+      </p>
+
+      <p>
+        仪表盘自身的视觉风格与 yifanova.com 其他部分不同。这个站点是写作
+        空间,而仪表盘是一种工具。两者的人体工学需求不同——长篇散文需要
+        窄的版心和衬线字体;三十图的仪表盘需要横向空间和高数据墨水比。
+        这种风格上的对比是有意的。
+      </p>
+
+      <h2 id="caveats">注意事项</h2>
+
+      <p>
+        这是一个学习性项目,不是交易工具。以下是不应将这些数字作为交易
+        信号的若干理由(并不穷尽):
+      </p>
+
+      <ul>
+        <li><strong>未修正幸存者偏差。</strong>观察清单是今天还活着的
+            标的;在历史区间内退市/合并的公司不会出现在数据里</li>
+        <li><strong>股票池太小。</strong>横截面方法是为几百只标的设计的;
+            十八只低于动量、低波排名能产生统计意义的门槛</li>
+        <li><strong>单一时间窗口。</strong>两年窗口只是噪声过程的一次实现。
+            同样的代码放在 2008 vs. 2021,会讲完全不同的故事</li>
+        <li><strong>多重检验问题。</strong>测试五十个策略,总有一个看起来
+            很好。Harvey、Liu、Zhu(2016)论证当考虑研究者的"钓鱼"行为时,
+            一个真正的因子需要 <em>t&nbsp;&gt;&nbsp;3</em></li>
+        <li><strong>过往表现不预测未来收益。</strong>这句经典免责声明在
+            字面意义上也成立</li>
+      </ul>
+
+      <p>
+        以上注意事项在报告内部有更详细的展开。
+      </p>
+
+    </article>
+
+    <footer class="page-footer">
+      <span>© 2026 王逸凡</span>
+      <span>
+        <a href="/">主页</a>
+        <a href="https://github.com/yifan70932/Website">源代码</a>
+      </span>
+    </footer>
+
+  </div>
+</body>
+</html>

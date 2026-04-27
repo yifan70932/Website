@@ -3,138 +3,174 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Quant Watchlist · Yifan</title>
-  <meta name="description" content="Daily-updating quantitative analysis of a watchlist of US equities and ETFs.">
-  <style>
-    /* Self-contained styles so this page doesn't depend on /assets/.
-       Adjust freely to match the rest of yifanova.com if you have a global stylesheet. */
-    * { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
-                   Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-      line-height: 1.6;
-      color: #2c3138;
-      background: #fafbfc;
-      padding: 60px 24px;
-    }
-    .container { max-width: 720px; margin: 0 auto; }
-    a { color: #0366d6; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .breadcrumb {
-      font-size: 13px;
-      color: #6a737d;
-      margin-bottom: 32px;
-    }
-    h1 {
-      font-size: 28px;
-      font-weight: 600;
-      margin: 0 0 14px;
-      color: #1c2128;
-    }
-    .subtitle {
-      font-size: 15px;
-      color: #586069;
-      margin-bottom: 36px;
-    }
-    .cta {
-      display: inline-block;
-      padding: 12px 22px;
-      background: #0366d6;
-      color: white;
-      border-radius: 6px;
-      font-weight: 500;
-      font-size: 15px;
-      margin-bottom: 36px;
-      transition: background 0.15s;
-    }
-    .cta:hover {
-      background: #0256b3;
-      text-decoration: none;
-    }
-    h2 {
-      font-size: 18px;
-      font-weight: 600;
-      margin: 36px 0 12px;
-      color: #1c2128;
-    }
-    ul { padding-left: 22px; }
-    li { margin-bottom: 6px; }
-    .meta {
-      font-size: 13px;
-      color: #6a737d;
-      padding-top: 20px;
-      margin-top: 36px;
-      border-top: 1px solid #eaeef2;
-    }
-    .meta p { margin: 4px 0; }
-    code {
-      background: #f3f4f6;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-family: "SF Mono", Monaco, Consolas, monospace;
-      font-size: 13px;
-    }
-  </style>
+  <title>Quant Watchlist · yifanova.com</title>
+  <meta name="description" content="A daily-updating cross-sectional quantitative analysis of a watchlist of US large-cap equities and ETFs.">
+
+  <!-- Site theme. Order matters: tokens before base. -->
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/base.css">
 </head>
+
 <body>
-  <div class="container">
-    <div class="breadcrumb">
-      <a href="/">Yifan</a> &nbsp;·&nbsp; Quant Watchlist
-    </div>
+  <div class="page">
 
-    <h1>Quant Watchlist</h1>
-    <p class="subtitle">
-      Daily-updating quantitative cross-sectional analysis of a watchlist of
-      US large-cap equities and ETFs. Built as a learning exercise in modern
-      multi-factor screening practices.
-    </p>
+    <!-- ─── Site-wide colophon (matches chess/, religion/) ─── -->
+    <header class="colophon">
+      <a href="/">yifanova.com</a>
+      <nav class="lang-toggle">
+        <a href="./" class="active">EN</a>
+        <a href="./zh.html">中文</a>
+      </nav>
+    </header>
 
-    <a href="report.html" class="cta">View latest report &rarr;</a>
+    <article>
 
-    <h2>What's in the report</h2>
-    <ul>
-      <li><strong>Cross-sectional screener</strong> &mdash; sortable table of
-          risk and return metrics across the watchlist</li>
-      <li><strong>QVM+L factor scores</strong> &mdash; Quality, Value, Momentum,
-          Low-Vol percentile rankings as practiced by MSCI, S&amp;P, and AQR</li>
-      <li><strong>Cross-sectional charts</strong> &mdash; normalized cumulative
-          returns, risk vs. return scatter with Sharpe iso-lines, drawdown
-          comparison, hierarchically-clustered correlation heatmap</li>
-      <li><strong>Mean-variance optimization</strong> &mdash; long-only efficient
-          frontier with GMV, tangency, equal-weight, and risk-parity reference
-          portfolios</li>
-      <li><strong>Strategy backtest</strong> &mdash; six rule-based strategies
-          (buy &amp; hold, equal weight, risk parity, SMA crossover, 12-1
-          momentum, mean reversion) with realistic transaction costs</li>
-      <li><strong>Per-ticker technical drilldowns</strong> with SMA, Bollinger
-          bands, RSI, and MACD</li>
-      <li><strong>Curated academic literature</strong> linking each method to
-          its primary source</li>
-    </ul>
+      <!-- ─── Article header ───────────────────────────────── -->
+      <header class="article-header">
+        <h1>Quant Watchlist</h1>
+        <p class="subtitle">
+          A daily cross-sectional analysis of a public-equity watchlist,
+          rendered as static HTML and refreshed nightly via GitHub Actions.
+        </p>
+        <p class="article-meta">
+          Updated daily · Source on
+          <a href="https://github.com/yifan70932/Website/tree/main/_analyzer">GitHub</a>
+        </p>
+      </header>
 
-    <h2>How it's built</h2>
-    <p>
-      A Python analyzer runs daily on GitHub Actions, generates a static HTML
-      report, and commits it to this repo. GitHub Pages serves it directly.
-      No server, no live computation per visitor &mdash; just a static file
-      that gets refreshed once a day.
-    </p>
-    <p>
-      Source code lives in <code>_analyzer/</code> in the repo root. The
-      workflow definition is at
-      <code>.github/workflows/build-report.yml</code>.
-    </p>
+      <!-- ─── Lede ─────────────────────────────────────────── -->
+      <p>
+        This page is a self-imposed exercise in modern multi-factor screening
+        practice — the kind of analysis MSCI and AQR run on hundreds of
+        thousands of names, applied here to a deliberately small universe of
+        eighteen well-known US tickers. The point isn't to discover trade
+        ideas; it's to <em>do</em> the methodology end-to-end and ship the
+        output as a dashboard. The watchlist is fixed in code; everything
+        downstream is computed from <a href="https://github.com/ranaroussi/yfinance">Yahoo Finance</a>
+        daily prices.
+      </p>
 
-    <div class="meta">
-      <p><strong>Disclaimer:</strong> Educational and demonstrative use only.
-      Past performance does not predict future returns. Single-period rankings
-      are noisy estimates subject to multiple-testing concerns
-      (Harvey, Liu &amp; Zhu 2016). Not investment advice.</p>
-      <p>Data: Yahoo Finance via yfinance. Last update reflected in the report
-      timestamp.</p>
-    </div>
+      <p>
+        The analysis touches most of the standard tools of contemporary quant
+        equity work — efficient-frontier optimization, factor scoring on the
+        QVM+L decomposition, hierarchically-clustered correlation, and a
+        backtest of six rule-based strategies on the watchlist as universe.
+        Each section in the report links back to its primary academic source
+        in a curated literature appendix.
+      </p>
+
+      <h2 id="the-report">The report</h2>
+
+      <p>
+        The dashboard renders as a single self-contained HTML page with about
+        thirty interactive Plotly figures. It opens with a sortable
+        cross-sectional screener and ends with a list of ~25 references.
+        On mobile, sections collapse into a sticky-nav layout; on desktop
+        the rendering takes a wide canvas, intentionally — quant dashboards
+        need horizontal room.
+      </p>
+
+      <p>
+        <a href="report.html">→ Open the latest report</a>
+      </p>
+
+      <h2 id="whats-in-it">What's in it</h2>
+
+      <p>The dashboard contains, in order:</p>
+
+      <ol>
+        <li>A textual <span class="term">cross-sectional summary</span> —
+            best/worst performer, dispersion, average pairwise correlation</li>
+        <li>A sortable <span class="term">screener</span> with twelve metrics
+            per ticker (Sharpe, Sortino, Calmar, max drawdown, drawdown
+            duration, β vs. SPY, VaR<sub>95</sub>, CVaR<sub>95</sub>, etc.)</li>
+        <li>A <span class="term">QVM+L factor decomposition</span>: percentile
+            ranks on Quality, Value, Momentum, and Low-Volatility, plus a
+            composite score. Implementation follows
+            Asness/Frazzini/Pedersen on quality, Jegadeesh/Titman 12-1
+            on momentum, and Frazzini/Pedersen on low-vol</li>
+        <li>Cumulative-return curves rebased to 100, with end-of-line
+            annotations for direct visual ranking</li>
+        <li>A risk vs. return scatter with Sharpe iso-lines at 0.5, 1.0, 1.5,
+            and 2.0 — one of the cleaner ways to read relative risk-adjusted
+            performance across a universe</li>
+        <li>Drawdown comparison overlaying every name's underwater curve</li>
+        <li>Hierarchically-clustered correlation heatmap (scipy linkage on
+            1−ρ distance), so adjacent rows in the matrix share factor
+            exposure</li>
+        <li>A long-only Markowitz <span class="term">efficient frontier</span>
+            of the watchlist universe with GMV, tangency, equal-weight,
+            and risk-parity reference portfolios marked, plus the capital
+            market line</li>
+        <li>A backtest of six strategies — buy &amp; hold, equal weight,
+            risk parity, SMA crossover, 12-1 momentum, mean reversion via
+            Bollinger reversal — with realistic transaction costs and a
+            one-day signal lag to prevent look-ahead bias</li>
+        <li>Per-ticker drilldowns with SMA/Bollinger/RSI/MACD</li>
+        <li>A literature appendix with twenty-odd primary references</li>
+      </ol>
+
+      <h2 id="how-its-built">How it's built</h2>
+
+      <p>
+        Architecture is deliberately simple. A Python package
+        (<code>_analyzer/quant_watchlist/</code> in this repo) computes the
+        report. A GitHub Actions workflow runs the package nightly at 1:00
+        UTC on a free Ubuntu runner, commits the generated <code>report.html</code>
+        back to the repo, and GitHub Pages serves it as a static file.
+        There is no live server interpreting Python on each visit. The cost
+        is zero and the only failure mode is a Yahoo Finance outage,
+        which the next scheduled run heals automatically.
+      </p>
+
+      <p>
+        The dashboard's own visual style differs from the rest of yifanova.com.
+        The site is a writing space; the dashboard is a tool. They have
+        different ergonomic needs — long-form prose wants a narrow measure
+        and a serif body face; a thirty-figure dashboard wants horizontal
+        room and high data-ink density. The contrast is intentional.
+      </p>
+
+      <h2 id="caveats">Caveats</h2>
+
+      <p>
+        This is for learning, not trading. A non-exhaustive list of reasons
+        the numbers shouldn't be used as signals:
+      </p>
+
+      <ul>
+        <li><strong>Survivorship bias is not corrected.</strong> The
+            watchlist is today's list; companies that delisted between then
+            and now are silently absent</li>
+        <li><strong>The universe is tiny.</strong> Cross-sectional methods
+            were designed for hundreds of names; eighteen is below where
+            momentum and low-vol rankings become statistically meaningful</li>
+        <li><strong>Single sample period.</strong> A two-year window is one
+            realization of a noisy process. The same code, run in 2008 vs.
+            2021, would tell different stories</li>
+        <li><strong>Multiple-testing.</strong> Try fifty strategies; one
+            looks great. Harvey, Liu &amp; Zhu (2016) argue
+            <em>t&nbsp;&gt;&nbsp;3</em> is the right bar for a "real" factor
+            once you account for the fishing</li>
+        <li><strong>Past performance does not predict future returns.</strong>
+            The classic disclaimer is also literally true</li>
+      </ul>
+
+      <p>
+        These caveats are repeated, more extensively, inside the report itself.
+      </p>
+
+    </article>
+
+    <!-- ─── Site-wide footer (matches chess/, religion/) ─── -->
+    <footer class="page-footer">
+      <span>© 2026 Yifan Wang</span>
+      <span>
+        <a href="/">Home</a>
+        <a href="https://github.com/yifan70932/Website">Source</a>
+      </span>
+    </footer>
+
   </div>
 </body>
 </html>

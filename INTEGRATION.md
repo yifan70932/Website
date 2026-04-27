@@ -13,7 +13,8 @@ yifan70932/Website/
 ├── LICENSE                    ← 你现有的，不动
 │
 ├── watchlist/                 ← 新增！(yifanova.com/watchlist/)
-│   ├── index.html               入口页面（手写，固定不变）
+│   ├── index.html               入口页面 (英文,套用站点主题)
+│   ├── zh.html                  入口页面 (中文,套用站点主题)
 │   └── report.html              workflow 自动生成、自动更新
 │
 ├── _analyzer/                 ← 新增！分析器代码（不会被 GitHub Pages 服务）
@@ -40,6 +41,10 @@ yifan70932/Website/
 2. **`_analyzer/` 的下划线前缀**：以下划线开头的目录是 Jekyll 的"忽略"约定。即使你将来给站点加了 Jekyll 主题，它也不会把 `_analyzer/` 当作网页内容来处理。当前你的站点是纯静态 HTML，没用 Jekyll，所以这层防护更多是为了未来兼容。
 
 3. **`.github/` 不是网页内容**：这是 GitHub 的元数据目录，里面的 workflow 不会出现在 yifanova.com 的任何 URL 下。
+
+4. **关于视觉风格**:
+   - **入口页面 (`watchlist/index.html` 和 `watchlist/zh.html`)** 完全套用了你站点的主题——引用 `../assets/tokens.css` 和 `../assets/base.css`,使用 `.colophon`、`<article>`、`.term`、`.page-footer` 等你已有的语义类。视觉上和 `chess/`、`religion/` 完全一致
+   - **报告页面 (`watchlist/report.html`)** 保留了它原本的深色仪表盘风格——这是有意为之的:30 个 Plotly 互动图表加 1600px 宽布局,和 36rem 的散文版心人体工学需求不同。报告顶部加了一行 `yifanova.com / Watchlist / Report` 的面包屑导航,确保从任何路径进入报告都能一键返回主站。入口页面里也明确说明了这种风格对比是有意的设计选择
 
 ## 集成步骤
 
