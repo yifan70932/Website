@@ -26,7 +26,7 @@
   max-height: min(90vw, 32rem);
   aspect-ratio: 1 / 1;
   border: 2px solid var(--ink);
-  background: #fdfaf3;
+  background: #f0ece1;
   user-select: none;
 }
 
@@ -47,8 +47,8 @@
   font-family: serif;
 }
 
-.chess-sq.light { background: #fdfaf3; }
-.chess-sq.dark  { background: #b58864; }
+.chess-sq.light { background: #f0ece1; }
+.chess-sq.dark  { background: #0a3d62; }
 
 .chess-sq:hover {
   outline: 2px solid var(--sapphire);
@@ -95,18 +95,23 @@
 .chess-piece.w {
   color: #fafafa;
   text-shadow:
-    -1.5px -1.5px 0 #1f2328,
-     1.5px -1.5px 0 #1f2328,
-    -1.5px  1.5px 0 #1f2328,
-     1.5px  1.5px 0 #1f2328,
-     0    -1.5px 0 #1f2328,
-     0     1.5px 0 #1f2328,
-    -1.5px  0    0 #1f2328,
-     1.5px  0    0 #1f2328;
+    -1.5px -1.5px 0 #0a3d62,
+     1.5px -1.5px 0 #0a3d62,
+    -1.5px  1.5px 0 #0a3d62,
+     1.5px  1.5px 0 #0a3d62,
+     0    -1.5px 0 #0a3d62,
+     0     1.5px 0 #0a3d62,
+    -1.5px  0    0 #0a3d62,
+     1.5px  0    0 #0a3d62;
 }
 
 .chess-piece.b {
   color: #1f2328;
+  text-shadow:
+    -0.5px -0.5px 0 #f0ece1,
+     0.5px -0.5px 0 #f0ece1,
+    -0.5px  0.5px 0 #f0ece1,
+     0.5px  0.5px 0 #f0ece1;
 }
 
 /* ─── Coordinate labels (a–h, 1–8) ──────────────────────── */
@@ -125,9 +130,9 @@
 .chess-coord-rank { top: 2px; left: 4px; }
 .chess-coord-file { bottom: 2px; right: 4px; }
 
-/* Light squares: labels in the dark-square color. Dark squares: labels in light. */
-.chess-sq.light .chess-coord { color: #b58864; }
-.chess-sq.dark  .chess-coord { color: #fdfaf3; }
+/* On light cream squares: navy labels. On navy squares: cream labels. */
+.chess-sq.light .chess-coord { color: #0a3d62; }
+.chess-sq.dark  .chess-coord { color: #f0ece1; }
 
 /* ─── Info bar (under board) ─────────────────────────────── */
 

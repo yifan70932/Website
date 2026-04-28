@@ -65,7 +65,7 @@
     <p>下面是一组持续更新的笔记，围绕这四个对象组织展开，但内容会溢出它们之外。条目随机会陆续添加。</p>
 
     <figure class="full-bleed chess-widget-figure" aria-label="国际象棋交互式棋盘">
-      <p class="chess-caption">一个嵌入了 <a href="https://stockfishchess.org/" rel="noopener">Stockfish</a> 引擎的交互式棋盘，引擎直接在你的浏览器里运行。两位棋手可以轮流走子；每走一步，引擎会评估当前局面并给出它认为最强的着法。下方的数值（以兵为单位，正值表示白方占优）与"最佳着法"是自深蓝以来已经解决了"谁能下出最强棋"这一问题的那种输出。本页所要论证的是：这只是<em>象棋</em>所能意指的四个对象中的一个——而且不是最有意思的那一个。</p>
+      <p class="chess-caption">一个嵌入了 <a href="https://stockfishchess.org/" rel="noopener">Stockfish</a> 引擎的交互式棋盘。</p>
       <div class="chess-widget"></div>
     </figure>
 
@@ -179,7 +179,11 @@
 
     <p>子力机动性的差异造就了完全不同的战术风格。车（与国际象棋的车类似）从开局起就极其强力，因为没有相、后与之争夺长直线，兵的密度也较低、不会构成同样多的阻挡。炮是最具特色的子：它的"隔山打牛"规则意味着，棋盘上任何一线上单子的放置或移除，都可能根本性地改变哪些吃子是合法的——这使得炮的战术深度具有非局部性。马的走法与国际象棋一致（日字）但可被"蹩腿"——若与马呈直线相邻的位置上有任何子，马便不能从该方向起跳。结果是中国象棋的战术着重于长距子力协同与隔架配合；国际象棋的战术着重于局部兵形与轻子据点。</p>
 
-    <p>逼和与和棋的处理方式也不同。在中国象棋中，逼和（轮到走子的一方无合法走子）算被逼和方负。"长将"亦判将方负。围绕"长捉"与"互不变着"的规则极为复杂——世界象棋联合会的规则手册罗列了 110 个例图来裁定不同的重复局面，即便顶级引擎也未能正确实现全部情形。重复局面的处理是两套规则间最复杂的差异。</p>
+    <p>逼和与和棋的处理方式也不同。在中国象棋中，逼和（轮到走子的一方无合法走子）算被逼和方负。"长将"亦判将方负。围绕"长捉"与"互不变着"的规则极为复杂——世界象棋联合会的规则手册罗列了 110 个例图来裁定不同的重复局面，即便顶级引擎也未能正确实现全部情形<a href="#sn-2" class="sn-ref">2</a>。重复局面的处理是两套规则间最复杂的差异。</p>
+
+    <aside class="sidenote" id="sn-2">
+      <span class="sidenote-num">2</span>这种不对称是结构性的，而非约定性的：国际象棋把三次重复视作双方都无法取得进展的证据，因此判和；中国象棋把对对方某一子的持续骚扰（"长捉"）视作一种判负的着法。两套规则因此编码了关于"重复"<em>意味着什么</em>的两种不同理论，而不仅仅是两种不同的约定。
+    </aside>
 
     <h3>先手优势</h3>
 
@@ -205,7 +209,11 @@
 
     <h3>时间控制</h3>
 
-    <p>FIDE 根据每方时间，将正式比赛分为四档，记为"基础分钟+每步加秒"。"加秒"（增量）是现代默认设置——由 Bobby Fischer 于 1988 年发明并申请专利——每方走完一步后向其时钟添加规定秒数，避免双方在两小时的相互时间压力后以"超时"告终。</p>
+    <p>FIDE 根据每方时间，将正式比赛分为四档，记为"基础分钟+每步加秒"。"加秒"（增量）是现代默认设置——由 Bobby Fischer 于 1988 年发明并申请专利——每方走完一步后向其时钟添加规定秒数，避免双方在两小时的相互时间压力后以"超时"告终<a href="#sn-3" class="sn-ref">3</a>。</p>
+
+    <aside class="sidenote" id="sn-3">
+      <span class="sidenote-num">3</span>更早的 Bronstein 延时（1973）有时与 Fischer 的增量被混为一谈。两者差别其实重要：Bronstein 延时在每步开始时先冻结时钟 <em>n</em> 秒，只对超出该秒数的部分扣时——未用完的时间不能累积；Fischer 增量则<em>无条件</em>添加完整的 <em>n</em> 秒，无论是否使用，时间因此可以累积。某些不希望选手"囤时间"的赛事，至今仍指定使用 Bronstein 模式。
+    </aside>
 
     <table>
       <thead>
@@ -306,7 +314,11 @@
 
     <h2 id="sec-engines">五 · 引擎</h2>
 
-    <p>下棋计算的历史很奇怪——比"计算机"本身的历史还要早。Alan Turing 与 David Champernowne 在 1948 年写出了一个下棋算法，那时还没有任何机器能运行它。1952 年 Turing 在一局对弈中亲自手工执行算法（对手是他的同事 Alick Glennie），每步耗时约半小时；这个算法——有时叫 <em>Turochamp</em> 或"纸上机器"——以 29 步落败，但棋局被记录下来保存至今。两年前 Claude Shannon 已发表 <a href="https://www.computerhistory.org/chess/doc-431614f453dde/" rel="noopener">《Programming a Computer for Playing Chess》</a>（1950），奠定了未来半个世纪引擎设计的两大支柱：极小化极大搜索与评估函数。</p>
+    <p>下棋计算的历史很奇怪——比"计算机"本身的历史还要早。Alan Turing 与 David Champernowne 在 1948 年写出了一个下棋算法，那时还没有任何机器能运行它。1952 年 Turing 在一局对弈中亲自手工执行算法（对手是他的同事 Alick Glennie），每步耗时约半小时；这个算法——有时叫 <em>Turochamp</em> 或"纸上机器"——以 29 步落败，但棋局被记录下来保存至今<a href="#sn-4" class="sn-ref">4</a>。两年前 Claude Shannon 已发表 <a href="https://www.computerhistory.org/chess/doc-431614f453dde/" rel="noopener">《Programming a Computer for Playing Chess》</a>（1950），奠定了未来半个世纪引擎设计的两大支柱：极小化极大搜索与评估函数。</p>
+
+    <aside class="sidenote" id="sn-4">
+      <span class="sidenote-num">4</span>Turochamp 进行 2 层（two-ply）搜索，配以人工调校的"子力 + 机动性"评估函数；Turing 与 Glennie 那盘对局的完整 PGN 至今<a href="https://en.chessbase.com/post/rebuilding-turing-s-paper-machine" rel="noopener">仍有保存</a>。Kasparov 在 2012 年图灵百年诞辰时曾与算法的模拟版本短暂对弈，轻松取胜——但历史意义在于：在任何机器能运行它之前的整整三年，这个程序就已经存在了。
+    </aside>
 
     <p>整个 1960、70 年代，引擎仍然弱。MIT 的 <em>Mac Hack VI</em>（Greenblatt，1967）成为第一个参加人类比赛的程序，USCF 评分约 1400。贝尔实验室的 Ken Thompson 与 Joe Condon 在 1970 年代末用专用硬件做的 <em>Belle</em>，是第一个达到大师强度的机器。</p>
 
@@ -314,7 +326,11 @@
 
     <p>深蓝之后的二十年属于<span class="term">α-β 引擎</span>——在通用硬件上运行的、带有手工调优评估函数的搜索程序。<em>Fritz</em>、<em>Rybka</em>、<em>Houdini</em>、<em>Komodo</em>、与开源的 <em><a href="https://stockfishchess.org/" rel="noopener">Stockfish</a></em>（始于 2008，由 Tord Romstad、Marco Costalba、Joona Kiiski 启动）轮流占据评分榜首。到 2010 年代中期，这些引擎评分已达 3300–3400 Elo，比任何人类高出数百分。</p>
 
-    <p>2017 年 12 月出现了一个断点。DeepMind 的 <em><a href="https://arxiv.org/abs/1712.01815" rel="noopener">AlphaZero</a></em>——一个统一的神经网络架构，仅靠自我对弈学习国际象棋、将棋、围棋，没有开局库、没有残局表、除规则外没有任何人类知识——在 100 局比赛中击败 Stockfish 8：28 胜 0 负 72 和，全部 28 胜均执白。训练耗时数小时，运行在 Google 的专用 TPU 硬件上。研究过比赛的特级大师们形容 AlphaZero 的风格"像火星人"——以前没有任何引擎认为可行的、用子力换长期空间压力的牺牲手法，AlphaZero 把它们当作家常便饭。Garry Kasparov 说看 AlphaZero 下棋是一种享受。</p>
+    <p>2017 年 12 月出现了一个断点。DeepMind 的 <em><a href="https://arxiv.org/abs/1712.01815" rel="noopener">AlphaZero</a></em>——一个统一的神经网络架构，仅靠自我对弈学习国际象棋、将棋、围棋，没有开局库、没有残局表、除规则外没有任何人类知识——在 100 局比赛中击败 Stockfish 8：28 胜 0 负 72 和，全部 28 胜均执白<a href="#sn-5" class="sn-ref">5</a>。训练耗时数小时，运行在 Google 的专用 TPU 硬件上。研究过比赛的特级大师们形容 AlphaZero 的风格"像火星人"——以前没有任何引擎认为可行的、用子力换长期空间压力的牺牲手法，AlphaZero 把它们当作家常便饭。Garry Kasparov 说看 AlphaZero 下棋是一种享受。</p>
+
+    <aside class="sidenote" id="sn-5">
+      <span class="sidenote-num">5</span>这场比赛的条件后来受到广泛批评。Stockfish 在 1 GB 哈希表（对正式比赛而言偏小）下运行，没用开局库、没用残局表，硬件也未对其调优——而 AlphaZero 跑在为它专门设计的 TPU 上。2018 年发表在 <em>Science</em> 的后续论文在更公平的条件下重做实验，AlphaZero 仍然占绝对优势，因此结论本身站得住；但 2017 年最初公布的比分并不衡量它所声称要衡量的东西。
+    </aside>
 
     <p>社区的回应迅速。<em><a href="https://lczero.org/" rel="noopener">Leela Chess Zero</a></em>（Lc0）——AlphaZero 思路的分布式开源实现——2018 年开始训练，现已与 Stockfish 在引擎评分榜顶端胶着。Stockfish 自身在 2020 年集成了 <span class="term">NNUE</span>（Efficiently Updatable Neural Network，可高效更新的神经网络）——在原本古典的 α-β 搜索内部使用一个小型神经网络作为评估函数。当前顶级引擎是这两种范式的混合体。</p>
 
@@ -392,7 +408,11 @@
 
     <h2 id="sec-elo">九 · Elo 与评分系统</h2>
 
-    <p>标准的国际象棋评分系统出自 Arpad Elo（1903–1992），匈牙利裔美国物理教授兼美国国际象棋大师。他设计的系统在 1950 年代提出，以改进当时使用的 Harkness 系统；其假设是：每位棋手都有一个真实的实力水平，围绕该水平产生正态分布的表现值；评分则是给定历史成绩下对该水平的极大似然估计。USCF 1960 年采纳；FIDE 1970 年跟进。</p>
+    <p>标准的国际象棋评分系统出自 Arpad Elo（1903–1992），匈牙利裔美国物理教授兼美国国际象棋大师。他设计的系统在 1950 年代提出，以改进当时使用的 Harkness 系统；其假设是：每位棋手都有一个真实的实力水平，围绕该水平产生正态分布的表现值；评分则是给定历史成绩下对该水平的极大似然估计<a href="#sn-6" class="sn-ref">6</a>。USCF 1960 年采纳；FIDE 1970 年跟进。</p>
+
+    <aside class="sidenote" id="sn-6">
+      <span class="sidenote-num">6</span>正态分布假设是经验上的便利之选，并非定理推论。FIDE 实际计算预期得分时使用<em>逻辑斯蒂</em>分布（尾部更厚、查表更方便）；USCF 至今仍沿用正态曲线公式。两套公式在大评分差时会出现可量度的偏离。严格说，"Elo"指评分程序本身，而非某个特定统计模型——不同组织在实现 Elo 时，关于"表现服从什么分布"可以有不同选择。
+    </aside>
 
     <p>机制简述。每局对弈是评分点的零和交换。开局前，根据双方评分差计算<em>预期得分</em>（差 200 分时高分方预期约 76%；差 400 分时约 92%）。赛后将实际得分（胜 1、和 0.5、负 0）与预期得分相减，乘以 K 系数得到评分变化。<em>K 系数</em>控制波动幅度。FIDE 当前规则：新人（不足 30 局）用 K=40；评分低于 2400 的成熟棋手用 K=20；2400 及以上的精英棋手用 K=10。</p>
 
@@ -423,7 +443,11 @@
 
     <h2 id="sec-suits">十一 · Suits 与游戏哲学</h2>
 
-    <p>Bernard Suits 1978 年的著作《<em><a href="https://broadviewpress.com/product/the-grasshopper-third-edition/" rel="noopener">The Grasshopper: Games, Life and Utopia</a></em>》（《蚱蜢：游戏、生命与乌托邦》）至今仍是关于"玩游戏意味着什么"最有影响力的分析性论述。这本书采用苏格拉底对话的形式，主角是濒死的蚱蜢——一只游戏成性、悠闲、在哲学上把"玩"视作至善的昆虫——和他的几位弟子。蚱蜢提出，"玩游戏"包含四个相互嵌套的要素。</p>
+    <p>Bernard Suits 1978 年的著作《<em><a href="https://broadviewpress.com/product/the-grasshopper-third-edition/" rel="noopener">The Grasshopper: Games, Life and Utopia</a></em>》（《蚱蜢：游戏、生命与乌托邦》）至今仍是关于"玩游戏意味着什么"最有影响力的分析性论述<a href="#sn-7" class="sn-ref">7</a>。这本书采用苏格拉底对话的形式，主角是濒死的蚱蜢——一只游戏成性、悠闲、在哲学上把"玩"视作至善的昆虫——和他的几位弟子。蚱蜢提出，"玩游戏"包含四个相互嵌套的要素。</p>
+
+    <aside class="sidenote" id="sn-7">
+      <span class="sidenote-num">7</span>Suits 在某种程度上是在回应<a href="https://en.wikipedia.org/wiki/Family_resemblance" rel="noopener">维特根斯坦《哲学研究》</a>§66–67——在那里，"游戏"概念恰是"家族相似性"学说的核心例子：游戏没有任何唯一共同特征，只有一张交叠相似性的网络。Suits 的工程是反驳这一点——给出一个能涵盖全部游戏、且仅涵盖游戏的封闭定义。他是否成功，本身仍是一个开放的哲学问题。当代游戏哲学界大多把 Suits 的分析视作针对维特根斯坦"游戏"这个具体例子的最有力反例，但对该论证能否扩展到其他概念则保持谨慎。
+    </aside>
 
     <p><span class="term">前游戏目标</span>是一种不依赖游戏规则就能描述的事态——一个非玩家也能听懂的状态。在国际象棋中，前游戏目标是一种几何状态：一方的王正受到另一方的王（及其子力）的攻击且无合法逃路。这种状态可以通过任何方式达成；下棋只是其中的一种。</p>
 

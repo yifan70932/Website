@@ -65,7 +65,7 @@
     <p>What follows is a working set of notes — half wiki, half commonplace book — arranged around these four objects but spilling beyond them. Entries are added as occasion arises.</p>
 
     <figure class="full-bleed chess-widget-figure" aria-label="Interactive chess board">
-      <p class="chess-caption">An interactive board with a <a href="https://stockfishchess.org/" rel="noopener">Stockfish</a> engine running in your browser. Two players can play moves; after each move the engine evaluates the position and reports its best line. The numerical evaluation (in pawns, with positive values favouring White) and the suggested move are the same kind of output that has, since Deep Blue, settled the question of who plays the strongest chess. What this page argues is that this is one of four distinct things <em>chess</em> can mean — and not the most interesting one.</p>
+      <p class="chess-caption">An interactive board with a <a href="https://stockfishchess.org/" rel="noopener">Stockfish</a> engine running in your browser.</p>
       <div class="chess-widget"></div>
     </figure>
 
@@ -179,7 +179,11 @@
 
     <p>The differences in mobility produce a fundamentally different tactical character. The chariots (analogous to rooks) are extremely powerful from the opening because there are no bishops or queens to compete for long files, and pawns do not block them as densely. The cannon is the most distinctive piece: its capture-by-screen rule means that placing or removing a single piece anywhere on a line can radically change which captures are legal, making cannon tactics deeply non-local. Knights, which jump as in international chess, can be blocked at the adjacent point ("hobbling the horse's leg," <span class="cjk">蹩马腿</span>) — a knight on a square with friendly or enemy pieces on its orthogonal neighbors cannot move through that direction. The result is that xiangqi tactics emphasize long-range piece coordination and screen play; international chess tactics emphasize local pawn structure and outpost squares for minor pieces.</p>
 
-    <p>Stalemate and draws are also handled differently. In xiangqi, stalemate (the side to move has no legal move) is a loss for the stalemated side, not a draw. Perpetual check is also a loss for the checking side. The rules around perpetual chasing and mutual perpetual chase are notoriously intricate — the World Xiangqi Federation manual contains 110 example diagrams adjudicating different repetition cases, and even the leading engines do not implement all of them correctly. The handling of repetition is the single most complex difference between the two rule sets.</p>
+    <p>Stalemate and draws are also handled differently. In xiangqi, stalemate (the side to move has no legal move) is a loss for the stalemated side, not a draw. Perpetual check is also a loss for the checking side. The rules around perpetual chasing and mutual perpetual chase are notoriously intricate — the World Xiangqi Federation manual contains 110 example diagrams adjudicating different repetition cases, and even the leading engines do not implement all of them correctly.<a href="#sn-2" class="sn-ref">2</a> The handling of repetition is the single most complex difference between the two rule sets.</p>
+
+    <aside class="sidenote" id="sn-2">
+      <span class="sidenote-num">2</span>The asymmetry is structural, not arbitrary: international chess treats threefold repetition as evidence of mutual inability to make progress, hence a draw; xiangqi treats persistent harassment of an opponent's piece (the "chase") as a losing pattern for the chaser. The rule package therefore encodes two different theories of what repetition <em>means</em>, not just two different conventions.
+    </aside>
 
     <h3>First-move advantage</h3>
 
@@ -205,7 +209,11 @@
 
     <h3>Time controls</h3>
 
-    <p>FIDE classifies competitive games into four bands based on time per side, expressed as base minutes plus increment seconds per move. Increment is the modern default — invented and patented by Bobby Fischer in 1988 — and adds the specified seconds to the player's clock after each move, ensuring no game ends in a flag-fall after two hours of mutual time-pressure.</p>
+    <p>FIDE classifies competitive games into four bands based on time per side, expressed as base minutes plus increment seconds per move. Increment is the modern default — invented and patented by Bobby Fischer in 1988 — and adds the specified seconds to the player's clock after each move, ensuring no game ends in a flag-fall after two hours of mutual time-pressure.<a href="#sn-3" class="sn-ref">3</a></p>
+
+    <aside class="sidenote" id="sn-3">
+      <span class="sidenote-num">3</span>The earlier Bronstein delay (1973) is sometimes confused with Fischer's increment. The difference is consequential: Bronstein delay holds the clock for the first <em>n</em> seconds of each move and only deducts time used beyond that — so unused time is forfeited move-to-move; Fischer increment <em>adds</em> the full <em>n</em> seconds whether or not they were used, allowing time to accumulate. Tournaments wanting to discourage time-banking still occasionally specify Bronstein.
+    </aside>
 
     <table>
       <thead>
@@ -306,7 +314,11 @@
 
     <h2 id="sec-engines">5 · Engines</h2>
 
-    <p>The history of chess computing is, oddly, older than the history of computing. Alan Turing and David Champernowne wrote a chess-playing algorithm in 1948, before any machine existed that could run it. Turing later executed the program by hand in a 1952 game against his colleague Alick Glennie, taking up to half an hour per move; the algorithm — sometimes called <em>Turochamp</em> or "the paper machine" — lost in 29 moves, but the game is recorded and preserved. Two years earlier Claude Shannon had published <em><a href="https://www.computerhistory.org/chess/doc-431614f453dde/" rel="noopener">Programming a Computer for Playing Chess</a></em> (1950), which set out the basic minimax search and the evaluation-function framework that would dominate the next half century of engine design.</p>
+    <p>The history of chess computing is, oddly, older than the history of computing. Alan Turing and David Champernowne wrote a chess-playing algorithm in 1948, before any machine existed that could run it. Turing later executed the program by hand in a 1952 game against his colleague Alick Glennie, taking up to half an hour per move; the algorithm — sometimes called <em>Turochamp</em> or "the paper machine" — lost in 29 moves, but the game is recorded and preserved.<a href="#sn-4" class="sn-ref">4</a> Two years earlier Claude Shannon had published <em><a href="https://www.computerhistory.org/chess/doc-431614f453dde/" rel="noopener">Programming a Computer for Playing Chess</a></em> (1950), which set out the basic minimax search and the evaluation-function framework that would dominate the next half century of engine design.</p>
+
+    <aside class="sidenote" id="sn-4">
+      <span class="sidenote-num">4</span>Turochamp searched two ply with a hand-tuned material-and-mobility evaluation; the move sequence Turing executed against Glennie is preserved as <a href="https://en.chessbase.com/post/rebuilding-turing-s-paper-machine" rel="noopener">a complete PGN</a>. Kasparov played a brief simulation of the algorithm in 2012 to mark the centenary of Turing's birth, and won easily — but the historical interest is that the program existed at all, three years before any machine could run it.
+    </aside>
 
     <p>Through the 1960s and '70s engines remained weak. MIT's <em>Mac Hack VI</em> (Greenblatt, 1967) became the first program to compete in a human tournament, scoring a USCF rating around 1400. <em>Belle</em>, a custom-hardware engine built by Ken Thompson and Joe Condon at Bell Labs in the late 1970s, was the first machine to reach master strength.</p>
 
@@ -314,7 +326,11 @@
 
     <p>The two decades after Deep Blue belonged to <span class="term">alpha-beta engines</span> with hand-tuned evaluation functions running on commodity hardware. <em>Fritz</em>, <em>Rybka</em>, <em>Houdini</em>, <em>Komodo</em>, and the open-source <em><a href="https://stockfishchess.org/" rel="noopener">Stockfish</a></em> (begun 2008, by Tord Romstad, Marco Costalba, and Joona Kiiski) traded the top of the rating lists. By the mid-2010s these engines were rated around 3300–3400 Elo, several hundred points above any human.</p>
 
-    <p>December 2017 brought a discontinuity. DeepMind's <em><a href="https://arxiv.org/abs/1712.01815" rel="noopener">AlphaZero</a></em> — a single neural-network architecture that learned chess, shōgi, and Go from self-play, with no opening books or endgame tables, and no human knowledge beyond the rules — defeated Stockfish 8 in a 100-game match: 28 wins, 0 losses, 72 draws, with all 28 wins as White. Training took a few hours on Google's custom TPU hardware. Grandmasters who studied the games described AlphaZero's style as "Martian" — willing to sacrifice material for long-term positional pressure in ways that no engine had previously considered viable. Garry Kasparov said it was a pleasure to watch.</p>
+    <p>December 2017 brought a discontinuity. DeepMind's <em><a href="https://arxiv.org/abs/1712.01815" rel="noopener">AlphaZero</a></em> — a single neural-network architecture that learned chess, shōgi, and Go from self-play, with no opening books or endgame tables, and no human knowledge beyond the rules — defeated Stockfish 8 in a 100-game match: 28 wins, 0 losses, 72 draws, with all 28 wins as White.<a href="#sn-5" class="sn-ref">5</a> Training took a few hours on Google's custom TPU hardware. Grandmasters who studied the games described AlphaZero's style as "Martian" — willing to sacrifice material for long-term positional pressure in ways that no engine had previously considered viable. Garry Kasparov said it was a pleasure to watch.</p>
+
+    <aside class="sidenote" id="sn-5">
+      <span class="sidenote-num">5</span>The match conditions were widely criticised. Stockfish ran with a 1 GB hash table (small for a serious time control), without an opening book, without endgame tablebases, on hardware that did not match its tuning — while AlphaZero ran on TPUs designed for it. The 2018 Science follow-up paper repeated the experiment under fairer conditions and AlphaZero still won decisively, so the result holds; but the original 2017 score was not measuring what was claimed.
+    </aside>
 
     <p>The community's response was swift. <em><a href="https://lczero.org/" rel="noopener">Leela Chess Zero</a></em> (Lc0), a distributed open-source reimplementation of AlphaZero's ideas, began training in 2018 and is now competitive with Stockfish at the top of the engine rating lists. Stockfish itself, in 2020, integrated <span class="term">NNUE</span> (Efficiently Updatable Neural Network) — a small neural network used as the evaluation function inside an otherwise classical alpha-beta search. The current top engines are hybrids of the two paradigms.</p>
 
@@ -392,7 +408,11 @@
 
     <h2 id="sec-elo">9 · Elo and rating systems</h2>
 
-    <p>The standard chess rating system is the work of Arpad Elo (1903–1992), a Hungarian-American physics professor and US chess master. Elo's system, designed in the 1950s as an improvement on the Harkness system then in use, assumes that each player has a true skill level that produces normally-distributed performances around it; the rating is a maximum-likelihood estimate of that skill level given the player's results. The USCF adopted it in 1960; FIDE in 1970.</p>
+    <p>The standard chess rating system is the work of Arpad Elo (1903–1992), a Hungarian-American physics professor and US chess master. Elo's system, designed in the 1950s as an improvement on the Harkness system then in use, assumes that each player has a true skill level that produces normally-distributed performances around it; the rating is a maximum-likelihood estimate of that skill level given the player's results.<a href="#sn-6" class="sn-ref">6</a> The USCF adopted it in 1960; FIDE in 1970.</p>
+
+    <aside class="sidenote" id="sn-6">
+      <span class="sidenote-num">6</span>The normal-distribution assumption was an empirical convenience, not a result. FIDE in fact computes expected scores using the <em>logistic</em> distribution (its tails are heavier and the curve is easier to tabulate); USCF retains a normal-curve formulation. The two diverge measurably at large rating gaps. Strictly, "Elo" denotes the rating procedure, not the statistical model — different organisations implementing Elo can disagree about what the underlying performance distribution is.
+    </aside>
 
     <p>The mechanics. Each game is a zero-sum exchange of rating points. Before the game, each player has an <em>expected score</em> based on the rating difference (a 200-point gap implies roughly 76 % for the higher-rated player; a 400-point gap implies 92 %). After the game, the actual score (1 for a win, 0.5 for a draw, 0 for a loss) is compared with the expected score; the rating moves by <em>K</em> times the difference. The <em>K-factor</em> controls volatility. FIDE currently uses K = 40 for new players (under 30 rated games), K = 20 for established players under 2400, and K = 10 for players rated 2400 and above.</p>
 
@@ -423,7 +443,11 @@
 
     <h2 id="sec-suits">11 · Suits, lusory activity, and the philosophy of games</h2>
 
-    <p>Bernard Suits's 1978 book <em><a href="https://broadviewpress.com/product/the-grasshopper-third-edition/" rel="noopener">The Grasshopper: Games, Life and Utopia</a></em> remains the most influential analytic account of what it means to play a game. The book is structured as a Socratic dialogue between a dying Grasshopper — playful, idle, philosophically committed to play as the highest good — and his disciples. The Grasshopper proposes that game-playing has four interlocking elements.</p>
+    <p>Bernard Suits's 1978 book <em><a href="https://broadviewpress.com/product/the-grasshopper-third-edition/" rel="noopener">The Grasshopper: Games, Life and Utopia</a></em> remains the most influential analytic account of what it means to play a game.<a href="#sn-7" class="sn-ref">7</a> The book is structured as a Socratic dialogue between a dying Grasshopper — playful, idle, philosophically committed to play as the highest good — and his disciples. The Grasshopper proposes that game-playing has four interlocking elements.</p>
+
+    <aside class="sidenote" id="sn-7">
+      <span class="sidenote-num">7</span>Suits is in part responding to <a href="https://en.wikipedia.org/wiki/Family_resemblance" rel="noopener">Wittgenstein's <em>Philosophical Investigations</em></a> §66–67, where the concept of "game" is the central example of the doctrine of family resemblance: there is no single feature common to all games, only a network of overlapping similarities. Suits's project is to refute this — to provide a single closed definition that captures all and only games. Whether he succeeds is itself a substantive philosophical question. Most contemporary philosophers of games take Suits's analysis as the strongest counterexample to Wittgenstein on this particular concept, while remaining agnostic about how far the argument generalises.
+    </aside>
 
     <p>The <span class="term">prelusory goal</span> is a state of affairs that can be specified independently of the rules — described in terms a non-player would understand. In chess it is the geometric configuration in which one king is attacking the other with no legal escape. The configuration can be reached by any number of means; one of them is playing chess.</p>
 
