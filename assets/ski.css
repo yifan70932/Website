@@ -1,0 +1,229 @@
+/* ====================================================================
+   ski-specific styles
+   ==================================================================== */
+
+/* Five Fundamentals — numbered cards */
+.fundamentals {
+  margin: 2rem 0 3rem 0;
+  max-width: var(--measure-wide);
+}
+
+.fundamental {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+.fundamental:first-child { border-top: 2px solid var(--ink); }
+.fundamental:last-child { border-bottom: 1px solid var(--rule); }
+
+.fundamental .num {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 200;
+  color: var(--navy);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.fundamental .body h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: var(--fs-md);
+}
+
+.fundamental .body .official {
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-bottom: 0.75rem;
+  border-left: 2px solid var(--rule);
+  padding-left: 0.75rem;
+}
+
+body[data-lang="zh"] .fundamental .body .official {
+  font-family: var(--font-cn);
+  font-style: normal;
+  font-size: 0.95rem;
+}
+
+.fundamental .body p { font-size: var(--fs-base); }
+
+.fundamental .body .cue {
+  margin-top: 0.5rem;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  color: var(--forest);
+  background: var(--pale-forest);
+  padding: 0.5rem 0.75rem;
+  border-radius: 3px;
+  display: block;
+  max-width: var(--measure);
+}
+
+body[data-lang="zh"] .fundamental .body .cue { font-family: var(--font-cn); }
+
+.fundamental .body .cue::before {
+  content: 'Cue —';
+  font-weight: 600;
+  margin-right: 0.4rem;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+body[data-lang="zh"] .fundamental .body .cue::before {
+  content: '口令 —';
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+@media (max-width: 600px) {
+  .fundamental { grid-template-columns: 2.5rem 1fr; gap: 0.75rem; }
+  .fundamental .num { font-size: 1.75rem; }
+}
+
+/* Progression network diagram container */
+.progression-figure {
+  margin: 2rem 0 3rem;
+  background: var(--paper-deep);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 2rem 1rem;
+}
+
+.progression-figure svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.progression-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+  font-family: var(--font-ui);
+  font-size: var(--fs-xs);
+  color: var(--ink-soft);
+}
+
+body[data-lang="zh"] .progression-legend { font-family: var(--font-cn); }
+
+.progression-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.progression-legend .swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* Code of conduct — numbered list */
+.code-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  counter-reset: code-counter;
+  max-width: var(--measure);
+}
+
+.code-list li {
+  counter-increment: code-counter;
+  padding: 0.6rem 0 0.6rem 2.5rem;
+  position: relative;
+  border-bottom: 1px dotted var(--rule);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+}
+
+.code-list li:last-child { border-bottom: 0; }
+
+.code-list li::before {
+  content: counter(code-counter, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--navy);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* ACL mechanism table — wider */
+.mechanism-table { font-size: var(--fs-sm); }
+.mechanism-table th { white-space: nowrap; }
+
+/* Snow-condition glossary */
+.glossary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 1.5rem 0;
+  max-width: var(--measure-wide);
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+
+.glossary dt {
+  font-weight: 600;
+  color: var(--navy);
+  font-family: var(--font-body);
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: var(--fs-base);
+}
+.glossary dt:first-child { border-top: 0; margin-top: 0; padding-top: 0.5rem; }
+
+body[data-lang="zh"] .glossary dt { font-family: var(--font-cn); }
+
+.glossary dt .alt {
+  font-family: var(--font-ui);
+  font-size: var(--fs-xs);
+  color: var(--ink-faint);
+  font-weight: 400;
+  margin-left: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+body[data-lang="zh"] .glossary dt .alt { font-family: var(--font-ui); }
+
+.glossary dd {
+  margin: 0.25rem 0 0.5rem 0;
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  max-width: var(--measure);
+}
+
+body[data-lang="zh"] .glossary dd { font-size: 0.95rem; line-height: 1.7; }
+
+/* References */
+.refs {
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+
+body[data-lang="zh"] .refs { font-family: var(--font-cn); font-size: 0.95rem; }
+
+.refs li {
+  margin-bottom: 0.6rem;
+  padding-left: 0.5rem;
+}
+
+.refs cite {
+  font-style: italic;
+  color: var(--ink);
+}
+body[data-lang="zh"] .refs cite { font-style: normal; }
