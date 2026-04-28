@@ -227,3 +227,31 @@ body[data-lang="zh"] .refs { font-family: var(--font-cn); font-size: 0.95rem; }
   color: var(--ink);
 }
 body[data-lang="zh"] .refs cite { font-style: normal; }
+
+/* ====================================================================
+   Section number spacing — scoped to ski page only.
+   (Prevents cross-page margin changes if base.css is shared.)
+   ==================================================================== */
+#preface .section-num,
+#fundamentals .section-num,
+#progression .section-num,
+#equipment .section-num,
+#snow .section-num,
+#philosophy .section-num,
+#safety .section-num,
+#teaching .section-num,
+#refs .section-num {
+  margin-top: 4rem;
+}
+
+#preface .section-num + h2,
+#fundamentals .section-num + h2,
+#progression .section-num + h2,
+#equipment .section-num + h2,
+#snow .section-num + h2,
+#philosophy .section-num + h2,
+#safety .section-num + h2,
+#teaching .section-num + h2,
+#refs .section-num + h2 {
+  margin-top: 0;
+}
