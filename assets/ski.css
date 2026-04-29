@@ -115,7 +115,7 @@ body.ski-page[data-lang="zh"] {
 
 /* ─── Two-column layout: TOC sidebar + main content ──────────────── */
 .ski-page .layout {
-  max-width: 84rem;
+  max-width: 96rem;
   margin: 0 auto;
   padding: 0 1.5rem 6rem;
 }
@@ -130,8 +130,20 @@ body.ski-page[data-lang="zh"] {
 }
 
 .ski-page .main {
-  max-width: 44rem;
+  /* Wider reading column with right-side gutter for sidenotes on wide screens */
+  max-width: 64rem;
   padding-top: 3rem;
+  position: relative;
+}
+
+/* On wide screens, reserve right gutter for floating sidenotes.
+   Main text stays bounded so line length is comfortable; sidenotes
+   live in the gutter to the right. */
+@media (min-width: 1280px) {
+  .ski-page .main {
+    max-width: 64rem;
+    padding-right: 0;
+  }
 }
 
 /* ─── Hero ───────────────────────────────────────────────────────── */
@@ -154,7 +166,7 @@ body.ski-page[data-lang="zh"] {
   font-size: 1.125rem;
   color: var(--ski-ink-soft);
   font-style: italic;
-  max-width: 36rem;
+  max-width: 48rem;
   line-height: 1.5;
   margin: 0 0 1.25rem 0;
 }
@@ -305,7 +317,7 @@ body.ski-page[data-lang="zh"] {
 /* ─── Body text ──────────────────────────────────────────────────── */
 .ski-page p {
   margin: 0 0 1rem 0;
-  max-width: 36rem;
+  max-width: 48rem;
 }
 
 .ski-page p.lede {
@@ -332,6 +344,9 @@ body.ski-page[data-lang="zh"] {
 .ski-page sup.ref a:hover { text-decoration: underline; }
 
 /* ─── Sidenotes (margin notes) ───────────────────────────────────── */
+/* Sidenote: stacked under triggering paragraph on narrow screens.
+   On wide screens (≥1280px), float right into the margin gutter so it
+   sits beside the related paragraph without breaking the reading flow. */
 .ski-page .sidenote {
   display: block;
   font-family: var(--ski-font-ui);
@@ -344,7 +359,22 @@ body.ski-page[data-lang="zh"] {
   max-width: 32rem;
 }
 
+@media (min-width: 1280px) {
+  .ski-page .sidenote {
+    float: right;
+    clear: right;
+    width: 18rem;
+    max-width: 18rem;
+    margin: 0.25rem -19rem 1rem 1.25rem;
+    padding: 0.25rem 0 0.25rem 0.85rem;
+    font-size: 0.78rem;
+  }
+}
+
 .ski-page[data-lang="zh"] .sidenote { font-family: var(--ski-font-cn); font-size: 0.88rem; }
+@media (min-width: 1280px) {
+  .ski-page[data-lang="zh"] .sidenote { font-size: 0.84rem; }
+}
 
 /* ─── Term highlight, opinion flag ───────────────────────────────── */
 .ski-page .term {
@@ -376,7 +406,7 @@ body.ski-page[data-lang="zh"] {
   border-left: 3px solid var(--ski-navy);
   background: var(--ski-pale-blue);
   color: var(--ski-ink);
-  max-width: 36rem;
+  max-width: 48rem;
   font-size: 0.95rem;
 }
 
@@ -385,7 +415,7 @@ body.ski-page[data-lang="zh"] {
 /* ─── Tables ─────────────────────────────────────────────────────── */
 .ski-page table {
   width: 100%;
-  max-width: 36rem;
+  max-width: 48rem;
   border-collapse: collapse;
   font-family: var(--ski-font-ui);
   font-size: 0.85rem;
@@ -411,7 +441,7 @@ body.ski-page[data-lang="zh"] {
 
 /* ─── Lists ──────────────────────────────────────────────────────── */
 .ski-page ul, .ski-page ol {
-  max-width: 36rem;
+  max-width: 48rem;
   padding-left: 1.5rem;
 }
 .ski-page ul li, .ski-page ol li { margin-bottom: 0.4rem; }
@@ -422,7 +452,7 @@ body.ski-page[data-lang="zh"] {
   border-left: 3px solid var(--ski-forest);
   padding: 0.85rem 1.1rem;
   margin: 1.25rem 0;
-  max-width: 36rem;
+  max-width: 48rem;
   font-size: 0.95rem;
 }
 .ski-page .def .label {
@@ -438,7 +468,7 @@ body.ski-page[data-lang="zh"] {
 .ski-page[data-lang="zh"] .def .label { text-transform: none; letter-spacing: 0.02em; }
 
 /* ─── Five Fundamentals — numbered cards ─────────────────────────── */
-.ski-page .fundamentals { margin: 1.5rem 0 2rem 0; max-width: 44rem; }
+.ski-page .fundamentals { margin: 1.5rem 0 2rem 0; max-width: 56rem; }
 
 .ski-page .fundamental {
   display: grid;
@@ -489,7 +519,7 @@ body.ski-page[data-lang="zh"] {
   border-left: 2px dotted var(--ski-rule);
   padding: 0.1rem 0 0.1rem 0.7rem;
   display: block;
-  max-width: 36rem;
+  max-width: 48rem;
   font-style: italic;
 }
 
@@ -502,7 +532,7 @@ body.ski-page[data-lang="zh"] {
   border: 1px solid var(--ski-rule);
   border-radius: 4px;
   padding: 1.5rem 1rem;
-  max-width: 44rem;
+  max-width: 56rem;
 }
 
 .ski-page .progression-figure svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
@@ -529,7 +559,7 @@ body.ski-page[data-lang="zh"] {
   padding: 0;
   margin: 1.25rem 0;
   counter-reset: code-counter;
-  max-width: 36rem;
+  max-width: 48rem;
 }
 
 .ski-page .code-list li {
@@ -564,7 +594,7 @@ body.ski-page[data-lang="zh"] {
   grid-template-columns: 1fr;
   gap: 0;
   margin: 1.25rem 0;
-  max-width: 44rem;
+  max-width: 56rem;
   border-top: 2px solid var(--ski-ink);
   border-bottom: 1px solid var(--ski-rule);
 }
@@ -599,7 +629,7 @@ body.ski-page[data-lang="zh"] {
   color: var(--ski-ink-soft);
   font-size: 0.85rem;
   line-height: 1.55;
-  max-width: 36rem;
+  max-width: 48rem;
 }
 
 .ski-page[data-lang="zh"] .glossary dd { font-size: 0.9rem; line-height: 1.7; }
@@ -610,7 +640,7 @@ body.ski-page[data-lang="zh"] {
   font-size: 0.82rem;
   line-height: 1.55;
   color: var(--ski-ink-soft);
-  max-width: 36rem;
+  max-width: 48rem;
   list-style: none;
   padding-left: 0;
   counter-reset: ref-counter;
@@ -650,7 +680,7 @@ body.ski-page[data-lang="zh"] {
   font-family: var(--ski-font-ui);
   font-size: 0.82rem;
   color: var(--ski-ink-faint);
-  max-width: 36rem;
+  max-width: 48rem;
 }
 
 .ski-page footer.page-footer .colophon-label {
@@ -694,14 +724,56 @@ body.ski-page[data-lang="zh"] {
   .ski-page * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
 
-/* ─── Carving figure (model-viewer + caption) ──────────────────── */
+/* ─── Carving figure (model-viewer + tabs) ─────────────────────── */
 .ski-page .carving-figure {
   margin: 1.5rem 0 2rem;
   background: var(--ski-paper-deep);
   border: 1px solid var(--ski-rule);
   border-radius: 4px;
-  padding: 1.25rem 1rem 1rem;
+  padding: 1rem 1rem 1rem;
   max-width: 48rem;
+}
+
+.ski-page .carving-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid var(--ski-rule);
+  padding-bottom: 0;
+}
+
+.ski-page .carving-tab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.45rem 0.9rem;
+  font-family: var(--ski-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--ski-ink-soft);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+}
+
+.ski-page[data-lang="zh"] .carving-tab {
+  font-family: var(--ski-font-cn);
+  letter-spacing: 0.02em;
+  font-size: 0.85rem;
+}
+
+.ski-page .carving-tab:hover {
+  color: var(--ski-ink);
+}
+
+.ski-page .carving-tab.active {
+  color: var(--ski-navy);
+  border-bottom-color: var(--ski-navy);
+  font-weight: 600;
+}
+
+.ski-page .carving-pane[hidden] {
+  display: none;
 }
 
 .ski-page model-viewer {
@@ -718,21 +790,38 @@ body.ski-page[data-lang="zh"] {
   .ski-page model-viewer { height: 380px; }
 }
 
-.ski-page .carving-legend {
+.ski-page .carving-figure-label {
   font-family: var(--ski-font-ui);
-  font-size: 0.7rem;
-  color: var(--ski-ink-faint);
+  font-size: 0.78rem;
+  color: var(--ski-ink-soft);
   text-align: center;
-  margin-top: 0.7rem;
+  margin: 0.6rem 0 0;
   font-style: italic;
-  max-width: 42rem;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.45;
+  letter-spacing: 0.02em;
 }
 
-.ski-page[data-lang="zh"] .carving-legend {
+.ski-page[data-lang="zh"] .carving-figure-label {
   font-family: var(--ski-font-cn);
   font-style: normal;
-  font-size: 0.78rem;
+  font-size: 0.85rem;
+}
+
+/* ─── NSAA skier-visits figure ─────────────────────────────────── */
+.ski-page .nsaa-figure {
+  margin: 1.5rem 0 2rem;
+  background: var(--ski-paper-deep);
+  border: 1px solid var(--ski-rule);
+  border-radius: 4px;
+  padding: 1rem 1rem 0.75rem;
+  max-width: 56rem;
+  overflow-x: auto;
+}
+
+.ski-page .nsaa-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 600px;
+  max-width: 760px;
+  margin: 0 auto;
 }
