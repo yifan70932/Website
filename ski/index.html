@@ -338,16 +338,12 @@
     rotation-per-second="20deg"
     shadow-intensity="0.8"
     exposure="1.05"
-    camera-orbit="35deg 75deg auto"
-    interaction-prompt="auto"
-    loading="lazy"
-    reveal="auto">
+    camera-orbit="35deg 75deg auto">
+    <div slot="error" style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-style:italic;text-align:center;padding:1rem;">
+      <span data-lang-content="en">Could not load the 3D model. Check that <code>models/carving.glb</code> exists in this directory.</span>
+      <span data-lang-content="zh">无法加载 3D 模型。请确认 <code>models/carving.glb</code> 文件存在于该目录下。</span>
+    </div>
   </model-viewer>
-
-  <p class="carving-legend">
-    <span data-lang-content="en">3D figure posed in <a href="https://boytchev.github.io/mannequin.js/" target="_blank" rel="noopener">mannequin.js</a> (Boytchev), exported as glTF; corresponds to the GoPro reference photo of the apex moment.</span>
-    <span data-lang-content="zh">3D 人偶使用 <a href="https://boytchev.github.io/mannequin.js/" target="_blank" rel="noopener">mannequin.js</a>（Boytchev）摆出，导出为 glTF；对应 apex 时刻的 GoPro 参考照片。</span>
-  </p>
 </div>
 
 <div data-lang-content="en">
