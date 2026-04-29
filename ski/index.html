@@ -1794,15 +1794,19 @@ const FRAMES = ['f1', 'f2', 'f3', 'f4'];
 const scenes = {};
 
 function applyPose(figure, pose) {
-  // Apply pose object's properties to figure parts.
-  // Use absolute assignment.
+  // Apply pose object's properties to figure parts via mannequin's setters.
   for (const partName in pose) {
     const part = figure[partName];
-    if (!part) continue;
+    if (!part) {
+      console.warn('[carving] applyPose: missing part', partName);
+      continue;
+    }
     const spec = pose[partName];
     for (const prop in spec) {
-      if (typeof part[prop] !== 'undefined' || prop in Object.getPrototypeOf(part)) {
-        try { part[prop] = spec[prop]; } catch (e) {}
+      try {
+        part[prop] = spec[prop];
+      } catch (e) {
+        console.warn('[carving] applyPose set', partName, prop, '=', spec[prop], 'failed:', e.message);
       }
     }
   }
@@ -1825,65 +1829,88 @@ function makeSki(figure, side) {
 
 function buildScene(frameKey, canvas) {
   const scene = new THREE.Scene();
-  scene.background = null;  // transparent so CSS gradient shows
 
   const w = canvas.clientWidth || 200;
   const h = canvas.clientHeight || 260;
+  console.log('[carving]', frameKey, 'canvas size', w, 'x', h);
 
-  const camera = new THREE.PerspectiveCamera(35, w / h, 1, 500);
-  // 3/4 view: slightly off-axis, looking down a bit
-  camera.position.set(35, 25, 60);
-  camera.lookAt(0, 12, 0);
-
+  // Renderer FIRST so we can set a proper clear color
   const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     antialias: true,
-    alpha: true,
+    alpha: false,
   });
+  renderer.setClearColor(0xf5f4ee, 1);  // page paper-deep
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(w, h, false);
 
-  // Lighting
-  const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+  // Lighting (generous, mannequin doesn't have ambient by default)
+  const ambient = new THREE.AmbientLight(0xffffff, 0.85);
   scene.add(ambient);
-  const dir = new THREE.DirectionalLight(0xffffff, 0.8);
-  dir.position.set(20, 40, 30);
+  const dir = new THREE.DirectionalLight(0xffffff, 0.6);
+  dir.position.set(2, 4, 3);
   scene.add(dir);
 
   // Add the figure
   const figure = new Male();
-  // Recolor to match page palette: muted navy / tan
   try {
     figure.recolor(
-      'antiquewhite',  // head
-      '#0a3d62',       // shoes
-      '#1f2328',       // pelvis
-      '#1e5fa8',       // joints
-      '#1f2328',       // limbs
-      '#0a3d62',       // torso
-      'antiquewhite'   // nails
+      'antiquewhite', '#0a3d62', '#1f2328', '#1e5fa8',
+      '#1f2328', '#0a3d62', 'antiquewhite'
     );
-  } catch (e) {}
+  } catch (e) { console.warn('[carving] recolor failed', e); }
 
   // Apply pose
   applyPose(figure, POSES[frameKey]);
 
-  // Attach skis to both ankles
+  // Attach skis
   makeSki(figure, 'l');
   makeSki(figure, 'r');
 
   scene.add(figure);
 
-  // OrbitControls — but we don't need full controls, just rotation.
+  // Force scene to update transforms so we can measure bounding box
+  scene.updateMatrixWorld(true);
+
+  // Compute figure bounding box to drive camera positioning
+  const bbox = new THREE.Box3().setFromObject(figure);
+  const center = bbox.getCenter(new THREE.Vector3());
+  const size = bbox.getSize(new THREE.Vector3());
+  const maxDim = Math.max(size.x, size.y, size.z);
+  console.log('[carving]', frameKey, 'figure bbox center', center, 'size', size, 'max', maxDim);
+
+  // If bbox is empty (figure didn't render geometry), fall back to known good values
+  let camDist, target;
+  if (!isFinite(maxDim) || maxDim === 0) {
+    console.warn('[carving]', frameKey, 'empty bbox — using fallback camera');
+    target = new THREE.Vector3(0, 12, 0);
+    camDist = 80;
+  } else {
+    target = center;
+    camDist = maxDim * 2.5;
+  }
+
+  // 3/4 perspective camera
+  const aspect = w / h;
+  const camera = new THREE.PerspectiveCamera(35, aspect, 0.1, camDist * 10);
+  // Position camera at 3/4 view: front-right-above target
+  camera.position.set(
+    target.x + camDist * 0.55,
+    target.y + camDist * 0.35,
+    target.z + camDist * 0.85
+  );
+  camera.lookAt(target);
+
+  // OrbitControls
   const controls = new OrbitControls(camera, canvas);
   controls.enableZoom = false;
   controls.enablePan = false;
-  controls.target.set(0, 12, 0);
+  controls.target.copy(target);
   controls.minPolarAngle = Math.PI * 0.2;
   controls.maxPolarAngle = Math.PI * 0.7;
   controls.update();
 
-  return { scene, camera, renderer, figure, controls };
+  return { scene, camera, renderer, figure, controls, target };
 }
 
 // ─── Project 3D point to overlay 2D coordinates ───────────────────
@@ -1992,6 +2019,10 @@ function boot() {
     return;
   }
 
+  // CRITICAL: remove `hidden` before measuring, otherwise clientWidth/Height = 0.
+  if (loading) loading.style.display = 'none';
+  grid.removeAttribute('hidden');
+
   let successCount = 0;
   FRAMES.forEach(frameKey => {
     try {
@@ -2002,18 +2033,15 @@ function boot() {
         return;
       }
 
-      // Size the canvas based on the wrap (which has aspect-ratio set)
       const wrap = canvas.parentElement;
       const w = wrap.clientWidth || 200;
       const h = wrap.clientHeight || 260;
-      canvas.style.width = w + 'px';
-      canvas.style.height = h + 'px';
+      console.log('[carving]', frameKey, 'wrap measured', w, 'x', h);
 
       const ctx = buildScene(frameKey, canvas);
       const anchors = jointAnchors(frameKey);
       const dots = buildDots(frameKey, overlay);
 
-      // Bind interactivity
       JOINT_KEYS.forEach(joint => {
         bindDot(dots[joint], joint, frameKey, dots);
       });
@@ -2027,14 +2055,14 @@ function boot() {
   });
 
   if (successCount === 0) {
-    console.error('[carving] no frames built; leaving loading state visible');
-    if (loading) loading.textContent = '3D figures failed to load. See console.';
+    console.error('[carving] no frames built');
+    if (loading) {
+      loading.style.display = '';
+      loading.textContent = '3D figures failed to load. See console.';
+    }
+    grid.setAttribute('hidden', '');
     return;
   }
-
-  // Hide loader, show grid even if some frames failed
-  if (loading) loading.style.display = 'none';
-  grid.removeAttribute('hidden');
 
   // Render loop
   function tick() {
