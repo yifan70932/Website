@@ -363,9 +363,9 @@ body.ski-page[data-lang="zh"] {
   .ski-page .sidenote {
     float: right;
     clear: right;
-    width: 18rem;
-    max-width: 18rem;
-    margin: 0.25rem -19rem 1rem 1.25rem;
+    width: 14rem;
+    max-width: 14rem;
+    margin: 0.25rem 0 1rem 1.25rem;
     padding: 0.25rem 0 0.25rem 0.85rem;
     font-size: 0.78rem;
   }
