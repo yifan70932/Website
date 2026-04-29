@@ -1817,7 +1817,9 @@ function makeSki(figure, side) {
   ski.castShadow = true;
   ski.receiveShadow = true;
   const ankle = side === 'l' ? figure.l_ankle : figure.r_ankle;
-  ankle.attach(ski);
+  // Use .add() rather than .attach() because Three.js .attach() preserves
+  // world transform, which is wrong here — we want the ski to follow the ankle.
+  ankle.add(ski);
   return ski;
 }
 
@@ -1887,12 +1889,34 @@ function buildScene(frameKey, canvas) {
 // ─── Project 3D point to overlay 2D coordinates ───────────────────
 function projectPoint(figure, partName, offset, camera, canvas) {
   const part = figure[partName];
-  if (!part || typeof part.point !== 'function') return null;
-  const worldPos = part.point(offset[0], offset[1], offset[2]);
-  // worldPos is a THREE.Vector3 in world coords
+  if (!part) return null;
+
+  let worldPos;
+  if (typeof part.point === 'function') {
+    try {
+      const result = part.point(offset[0], offset[1], offset[2]);
+      // mannequin.js .point() may return THREE.Vector3 or a plain object
+      if (result && typeof result.project === 'function') {
+        worldPos = result;
+      } else if (result && typeof result.x === 'number') {
+        worldPos = new THREE.Vector3(result.x, result.y, result.z);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      console.warn('[carving] .point() failed for', partName, e);
+      return null;
+    }
+  } else if (part.getWorldPosition) {
+    // Fallback: use Object3D.getWorldPosition for the part itself
+    worldPos = new THREE.Vector3();
+    part.getWorldPosition(worldPos);
+  } else {
+    return null;
+  }
+
   const v = worldPos.clone().project(camera);
-  // v.x/v.y/v.z in NDC [-1,1]
-  if (v.z > 1 || v.z < -1) return null;  // off-screen
+  if (v.z > 1 || v.z < -1) return null;
   const x = (v.x * 0.5 + 0.5) * canvas.clientWidth;
   const y = (v.y * -0.5 + 0.5) * canvas.clientHeight;
   return { x, y };
@@ -1960,37 +1984,55 @@ function bindDot(dot, joint, frameKey, allDots) {
 
 // ─── Boot ─────────────────────────────────────────────────────────
 function boot() {
+  console.log('[carving] boot() starting');
   const grid = document.getElementById('carving-3d');
   const loading = document.getElementById('carving-loading');
-  if (!grid) return;
+  if (!grid) {
+    console.error('[carving] #carving-3d not found');
+    return;
+  }
 
+  let successCount = 0;
   FRAMES.forEach(frameKey => {
-    const canvas  = document.querySelector(`[data-frame-canvas="${frameKey}"]`);
-    const overlay = document.querySelector(`[data-frame-overlay="${frameKey}"]`);
-    if (!canvas || !overlay) return;
+    try {
+      const canvas  = document.querySelector(`[data-frame-canvas="${frameKey}"]`);
+      const overlay = document.querySelector(`[data-frame-overlay="${frameKey}"]`);
+      if (!canvas || !overlay) {
+        console.warn('[carving] missing canvas or overlay for', frameKey);
+        return;
+      }
 
-    // Size the canvas based on the wrap (which has aspect-ratio set)
-    const wrap = canvas.parentElement;
-    const w = wrap.clientWidth;
-    const h = wrap.clientHeight;
-    canvas.width = Math.round(w * Math.min(window.devicePixelRatio, 2));
-    canvas.height = Math.round(h * Math.min(window.devicePixelRatio, 2));
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
+      // Size the canvas based on the wrap (which has aspect-ratio set)
+      const wrap = canvas.parentElement;
+      const w = wrap.clientWidth || 200;
+      const h = wrap.clientHeight || 260;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
 
-    const ctx = buildScene(frameKey, canvas);
-    const anchors = jointAnchors(frameKey);
-    const dots = buildDots(frameKey, overlay);
+      const ctx = buildScene(frameKey, canvas);
+      const anchors = jointAnchors(frameKey);
+      const dots = buildDots(frameKey, overlay);
 
-    // Bind interactivity
-    JOINT_KEYS.forEach(joint => {
-      bindDot(dots[joint], joint, frameKey, dots);
-    });
+      // Bind interactivity
+      JOINT_KEYS.forEach(joint => {
+        bindDot(dots[joint], joint, frameKey, dots);
+      });
 
-    scenes[frameKey] = { ...ctx, anchors, dots, overlay };
+      scenes[frameKey] = { ...ctx, anchors, dots, overlay };
+      successCount++;
+      console.log('[carving] frame', frameKey, 'built OK');
+    } catch (e) {
+      console.error('[carving] failed to build frame', frameKey, e);
+    }
   });
 
-  // Hide loader, show grid
+  if (successCount === 0) {
+    console.error('[carving] no frames built; leaving loading state visible');
+    if (loading) loading.textContent = '3D figures failed to load. See console.';
+    return;
+  }
+
+  // Hide loader, show grid even if some frames failed
   if (loading) loading.style.display = 'none';
   grid.removeAttribute('hidden');
 
@@ -1998,20 +2040,24 @@ function boot() {
   function tick() {
     for (const k in scenes) {
       const s = scenes[k];
-      s.controls.update();
-      s.renderer.render(s.scene, s.camera);
-      // Update dot positions
-      JOINT_KEYS.forEach(joint => {
-        const a = s.anchors[joint];
-        const p = projectPoint(s.figure, a.part, a.offset, s.camera, s.renderer.domElement);
-        if (p) {
-          s.dots[joint].style.left = p.x + 'px';
-          s.dots[joint].style.top  = p.y + 'px';
-          s.dots[joint].style.display = '';
-        } else {
-          s.dots[joint].style.display = 'none';
-        }
-      });
+      try {
+        s.controls.update();
+        s.renderer.render(s.scene, s.camera);
+        // Update dot positions
+        JOINT_KEYS.forEach(joint => {
+          const a = s.anchors[joint];
+          const p = projectPoint(s.figure, a.part, a.offset, s.camera, s.renderer.domElement);
+          if (p) {
+            s.dots[joint].style.left = p.x + 'px';
+            s.dots[joint].style.top  = p.y + 'px';
+            s.dots[joint].style.display = '';
+          } else {
+            s.dots[joint].style.display = 'none';
+          }
+        });
+      } catch (e) {
+        console.error('[carving] tick error in', k, e);
+      }
     }
     requestAnimationFrame(tick);
   }
@@ -2029,13 +2075,22 @@ function boot() {
       s.camera.updateProjectionMatrix();
     }
   });
+
+  console.log('[carving] boot complete, scenes:', Object.keys(scenes));
 }
 
-// Start once DOM is ready
+// Start once DOM is ready, with global error catching
+window.addEventListener('error', (e) => {
+  if (e.filename && (e.filename.includes('mannequin') || e.filename.includes('three'))) {
+    console.error('[carving] global error:', e.message, e.filename, e.lineno);
+  }
+});
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', boot);
 } else {
-  boot();
+  // DOM already ready — start immediately, but wrap in try
+  try { boot(); } catch (e) { console.error('[carving] boot threw:', e); }
 }
 </script>
 
