@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Skiing in the United States, 1978–2025: A multi-variable retrospective — Yifan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Statistical analysis of U.S. skier visits, NSAA regional breakdowns, macroeconomic indicators, and Olympic-year effects from 1978 to 2025.">
+<link rel="stylesheet" href="../assets/ski.css">
+<style>
+/* Research-page-specific tweaks */
+.ski-page .research-fig {
+  margin: 2rem 0 2.5rem;
+  background: var(--ski-paper-deep);
+  border: 1px solid var(--ski-rule);
+  border-radius: 4px;
+  padding: 1rem 1rem 0.75rem;
+  max-width: 56rem;
+}
+.ski-page .research-fig img,
+.ski-page .research-fig object {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+.ski-page .research-fig figcaption {
+  font-family: var(--ski-font-ui);
+  font-size: 0.85rem;
+  color: var(--ski-ink-soft);
+  font-style: italic;
+  margin: 0.6rem 0 0;
+  line-height: 1.5;
+}
+.ski-page .research-fig figcaption .fig-num {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--ski-navy);
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  margin-right: 0.4rem;
+}
+
+.ski-page .finding-box {
+  background: var(--ski-paper-deep);
+  border-left: 3px solid var(--ski-sapphire);
+  padding: 0.85rem 1.1rem 0.85rem 1.25rem;
+  margin: 1.5rem 0;
+  max-width: 48rem;
+  font-family: var(--ski-font-ui);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.ski-page .finding-box .finding-label {
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  color: var(--ski-navy);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.ski-page .stat-table {
+  width: 100%;
+  max-width: 48rem;
+  margin: 1rem 0 1.5rem;
+  border-collapse: collapse;
+  font-family: var(--ski-font-ui);
+  font-size: 0.88rem;
+}
+.ski-page .stat-table th {
+  text-align: left;
+  border-bottom: 1.5px solid var(--ski-ink);
+  padding: 0.45rem 0.75rem 0.45rem 0;
+  font-weight: 600;
+  color: var(--ski-navy);
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  font-size: 0.78rem;
+}
+.ski-page .stat-table td {
+  border-bottom: 1px solid var(--ski-rule);
+  padding: 0.4rem 0.75rem 0.4rem 0;
+  vertical-align: top;
+}
+.ski-page .stat-table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+.ski-page .stat-table .sig {
+  color: var(--ski-forest);
+  font-weight: 600;
+}
+.ski-page .stat-table .nonsig {
+  color: var(--ski-ink-soft);
+}
+
+.ski-page .download-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 1rem;
+  font-family: var(--ski-font-ui);
+  font-size: 0.9rem;
+}
+.ski-page .download-list li {
+  margin: 0.4rem 0;
+  padding-left: 1.4rem;
+  position: relative;
+}
+.ski-page .download-list li::before {
+  content: "↓";
+  position: absolute;
+  left: 0;
+  color: var(--ski-sapphire);
+  font-weight: 600;
+}
+
+.ski-page .research-toc {
+  background: var(--ski-paper-deep);
+  border: 1px solid var(--ski-rule);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 0 0 2rem;
+  max-width: 36rem;
+  font-family: var(--ski-font-ui);
+  font-size: 0.88rem;
+}
+.ski-page .research-toc-title {
+  font-weight: 600;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  color: var(--ski-navy);
+  margin-bottom: 0.5rem;
+}
+.ski-page .research-toc ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: rsec;
+}
+.ski-page .research-toc li {
+  counter-increment: rsec;
+  margin: 0.25rem 0;
+  padding-left: 1.7rem;
+  position: relative;
+}
+.ski-page .research-toc li::before {
+  content: counter(rsec, upper-roman) ".";
+  position: absolute;
+  left: 0;
+  color: var(--ski-navy);
+  font-variant-numeric: tabular-nums;
+}
+</style>
+</head>
+
+<body class="ski-page" data-lang="en">
+
+<div class="layout">
+
+<!-- Sidebar: minimalist back-link only -->
+<aside class="sidebar">
+  <nav class="toc" aria-label="Navigation">
+    <p style="font-family:var(--ski-font-ui); font-size:0.75rem; letter-spacing:0.08em; color:var(--ski-ink-soft); font-variant:small-caps; margin: 0 0 0.6rem;">Yifan / Ski</p>
+    <ul>
+      <li><a href="./index.html" style="font-weight:500;">← back to main wiki</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<main class="main">
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <p style="font-family:var(--ski-font-ui); font-size:0.75rem; letter-spacing:0.12em; color:var(--ski-ink-soft); font-variant:small-caps; margin:0 0 0.75rem;">Research note · April 2026</p>
+  <h1>Skiing in the United States, 1978–2025</h1>
+  <p class="subtitle">A multi-variable retrospective: visits, regional structure, macroeconomic conditions, Olympic years, and the post-pandemic baseline shift.</p>
+</header>
+
+<!-- ============ ABSTRACT / INTRO ============ -->
+<section id="intro">
+<span class="section-num">§ Abstract</span>
+<h2>Question and approach</h2>
+
+<p class="lede">Recreational alpine skiing has clear material gates — equipment, lift access, travel, time off — that on simple economic logic ought to make participation procyclical with U.S. wealth and contracyclical with recessions. The National Ski Areas Association has tracked total U.S. skier visits by season since 1978–79, with regional disaggregation since 1995–96. The series is therefore one of the longest continuous recreational time series available for empirical study. This note pairs that 47-season record with annual real GDP, real per-capita disposable income, U.S. recession dummies, and Olympic-year encoding to test five questions:</p>
+
+<div class="research-toc">
+  <div class="research-toc-title">Questions addressed</div>
+  <ol>
+    <li>Has the visits–macroeconomy coupling stayed stable across the four decades?</li>
+    <li>Are U.S. recessions visible in skier-visit totals?</li>
+    <li>Do Olympic Games — and especially North-American-host years — measurably move U.S. visits?</li>
+    <li>Did the structural transition to season-pass dominance (Epic 2008, Ikon 2018) leave a detectable break in the data?</li>
+    <li>Has the post-pandemic period established a new, higher baseline?</li>
+  </ol>
+</div>
+
+<p>The page is organized as figures with brief interpretive captions; the methodology section at the end documents data sources, decisions about variable construction, and known limitations. Underlying data and analysis code are linked in the closing section.</p>
+
+<aside class="sidenote"><strong>Geographic scope</strong>: U.S. only. NSAA does not publish state-level or resort-level visit data; Canadian data are tracked separately by the Canadian Ski Council under different definitions and are not pooled here. Where state-level signal is needed (as for Olympic-host effects), inference is by construction limited to the six NSAA regions: Northeast, Southeast, Midwest, Rocky Mountain, Pacific Southwest, and Pacific Northwest.</aside>
+
+</section>
+
+<!-- ============ I. THE LONG SERIES ============ -->
+<section id="series">
+<span class="section-num">I.</span>
+<h2>The long series</h2>
+
+<p>The headline series has a flat-but-positive long-term trend: a baseline of about 50 million visits in the late 1970s, mean creeping toward 60 million by the 2010s, with an unmistakable jump after the COVID disruption.</p>
+
+<figure class="research-fig">
+  <img src="research-figures/fig01_visits_timeseries.svg" alt="U.S. skier visits time series, 1978-79 through 2024-25" loading="lazy">
+  <figcaption><span class="fig-num">Figure 1.</span> U.S. skier visits, 1978–79 through 2024–25 (preliminary). Stars mark Olympic-host years (red = U.S., gold = Canada). The 1980–81 trough at 39.7 M reflects an exceptionally poor snow season in the West. The 2019–20 dip to 51.1 M is a COVID-truncated season. Source: NSAA Kottke historical visits.</figcaption>
+</figure>
+
+<figure class="research-fig">
+  <img src="research-figures/fig06_decade_means.svg" alt="Decade means with within-decade standard deviation" loading="lazy">
+  <figcaption><span class="fig-num">Figure 2.</span> Decade-level means with within-decade ±1 SD error bars. The 2000s and 2020s are statistically indistinguishable in level; the 2010s sit slightly below the 2000s. Volatility (within-decade SD) was lowest in the 1990s and 2000s, expanded in the 2010s, and is currently elevated in the still-incomplete 2020s. Underlying data: NSAA.</figcaption>
+</figure>
+
+<div class="finding-box">
+<span class="finding-label">Finding</span>
+The unconditional trend over the full 47-year sample is approximately +0.24 M skier visits per year (linear OLS). About two-thirds of that net growth occurred in a single region — the Rocky Mountain — to which the analysis returns in §III.
+</div>
+
+</section>
+
+<!-- ============ II. MACROECONOMIC COUPLING ============ -->
+<section id="macroeconomic">
+<span class="section-num">II.</span>
+<h2>The macroeconomic coupling</h2>
+
+<p>If skiing's material entry barriers — gear, tickets, travel, lodging, time — make it a luxury activity in the economist's sense, visits should rise with U.S. wealth. The pooled cross-sectional correlations confirm this in aggregate:</p>
+
+<table class="stat-table">
+  <thead>
+    <tr><th>Predictor</th><th class="num">Pearson r</th><th class="num">p-value</th><th class="num">n</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Real GDP (chained 2012$)</td><td class="num sig">+0.765</td><td class="num">&lt; 0.001</td><td class="num">46</td></tr>
+    <tr><td>Real disposable income / capita</td><td class="num sig">+0.769</td><td class="num">&lt; 0.001</td><td class="num">46</td></tr>
+    <tr><td>Real GDP <em>growth rate</em> (YoY %)</td><td class="num nonsig">−0.057</td><td class="num">0.71</td><td class="num">46</td></tr>
+    <tr><td>RDPI/cap <em>growth rate</em> (YoY %)</td><td class="num nonsig">−0.138</td><td class="num">0.36</td><td class="num">46</td></tr>
+  </tbody>
+</table>
+
+<p>Two things stand out. First, both <em>level</em> indicators correlate very strongly with visits (r ≈ 0.77). Second, the <em>year-on-year change</em> in those indicators is essentially uncorrelated with visits — indicating the relationship is long-run/structural rather than business-cycle driven.</p>
+
+<figure class="research-fig">
+  <img src="research-figures/fig03_scatter_macro.svg" alt="Visits vs Real GDP and Visits vs RDPI per capita scatter plots" loading="lazy">
+  <figcaption><span class="fig-num">Figure 3.</span> Skier visits regressed on level macroeconomic indicators, 1978–79 to 2024–25 (the COVID-truncated 2019–20 season is excluded). The relationship is monotonically positive in both indicators with comparable explanatory power.</figcaption>
+</figure>
+
+<p>A simple cross-section is not the whole story. A 10-year rolling correlation reveals that the relationship has not been stable:</p>
+
+<figure class="research-fig">
+  <img src="research-figures/fig02_rolling_correlations.svg" alt="Rolling 10-year correlations" loading="lazy">
+  <figcaption><span class="fig-num">Figure 4.</span> Rolling 10-year Pearson correlations between U.S. skier visits and macroeconomic levels. The relationship was positive through the late 1980s, broke down in the early-to-mid 1990s, recovered in the 2000s, then flipped sharply <em>negative</em> in the 2012–2018 window before snapping back toward strong positive values post-COVID.</figcaption>
+</figure>
+
+<div class="finding-box">
+<span class="finding-label">Finding</span>
+The 2012–2018 decoupling is striking: the U.S. economy expanded continuously through the post-Great-Recession recovery while skier visits stagnated and even declined. This is the period in which industry analysts most loudly worried about "Baby Boomers aging out." The post-COVID correlation rebound to <em>r</em> &gt; 0.85 indicates the boomer aging-out has either largely completed or has been overwhelmed by the new pass-economy demand structure.
+</div>
+
+</section>
+
+<!-- ============ III. THE GEOGRAPHIC DECOMPOSITION ============ -->
+<section id="regional">
+<span class="section-num">III.</span>
+<h2>The geographic decomposition</h2>
+
+<p>The pooled aggregate hides a regional decomposition that is — empirically — the most important single feature of post-1990 American skiing.</p>
+
+<figure class="research-fig">
+  <img src="research-figures/fig04_regional_timeseries.svg" alt="Skier visits by NSAA region, 6 panels" loading="lazy">
+  <figcaption><span class="fig-num">Figure 5.</span> Skier visits by NSAA region. Pacific Southwest and Pacific Northwest were reported only in aggregate before 1995–96. The Midwest exhibits a clear long-run decline; Rocky Mountain a clear long-run increase; the others are flat or volatile-flat.</figcaption>
+</figure>
+
+<figure class="research-fig">
+  <img src="research-figures/fig10_rocky_vs_NE.svg" alt="Rocky Mountain vs Northeast trends" loading="lazy">
+  <figcaption><span class="fig-num">Figure 6.</span> Rocky Mountain vs Northeast: the dominant divergence in U.S. skiing. Rocky Mountain has grown at +0.21 M visits/year (linear OLS); the Northeast at +0.03 M/year — essentially flat. Of the +10 M net growth in U.S. visits since the early 1980s, virtually all has come from the Rocky Mountain region.</figcaption>
+</figure>
+
+<figure class="research-fig">
+  <img src="research-figures/fig05_regional_shares.svg" alt="Regional share of U.S. visits stacked area" loading="lazy">
+  <figcaption><span class="fig-num">Figure 7.</span> Regional share of national skier visits, 1995–96 onward. The Rocky Mountain share rose from ~34% (1996–2005 mean) to ~41% (2015–2024 mean). All other regions lost share except Pacific Northwest, which was stable.</figcaption>
+</figure>
+
+<p>The macroeconomic coupling is largely a Rocky Mountain phenomenon. When the regional series are correlated separately with real GDP, the contrast is dramatic:</p>
+
+<table class="stat-table">
+  <thead>
+    <tr><th>Region</th><th class="num">r vs Real GDP</th><th class="num">r vs RDPI/cap</th><th class="num">p</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Rocky Mountain</td><td class="num sig">+0.913</td><td class="num sig">+0.911</td><td class="num">&lt; 0.001</td></tr>
+    <tr><td>Pacific Northwest</td><td class="num sig">+0.486</td><td class="num sig">+0.503</td><td class="num">0.008</td></tr>
+    <tr><td>Northeast</td><td class="num nonsig">+0.253</td><td class="num nonsig">+0.265</td><td class="num">0.08–0.09</td></tr>
+    <tr><td>Pacific Southwest</td><td class="num nonsig">+0.058</td><td class="num nonsig">+0.077</td><td class="num">0.70–0.77</td></tr>
+    <tr><td>Southeast</td><td class="num nonsig">+0.019</td><td class="num nonsig">+0.029</td><td class="num">0.85–0.90</td></tr>
+    <tr><td>Midwest</td><td class="num sig" style="color:#a8323e">−0.376</td><td class="num sig" style="color:#a8323e">−0.387</td><td class="num">0.009–0.011</td></tr>
+  </tbody>
+</table>
+
+<figure class="research-fig">
+  <img src="research-figures/fig09_correlation_heatmap.svg" alt="Correlation matrix" loading="lazy">
+  <figcaption><span class="fig-num">Figure 8.</span> Correlation matrix among visits aggregates and macroeconomic indicators. The Rocky Mountain–macroeconomy correlations exceed 0.87, while Northeast–macroeconomy correlations are essentially zero. Real GDP and RDPI/cap themselves correlate at 0.99, so they enter as near-substitutes.</figcaption>
+</figure>
+
+<div class="finding-box">
+<span class="finding-label">Finding</span>
+The Rocky Mountain region carries virtually all of the macroeconomic signal in U.S. skiing. The Northeast — the second-largest region by visits — is essentially uncorrelated with the U.S. economy at the level series. The Midwest correlates <em>negatively</em>, plausibly because the Midwest is exposed to two long-run secular forces (climate-driven snow loss; demographic migration to the South and West) that are themselves mildly correlated with macroeconomic growth as the U.S. center of gravity shifts westward.
+</div>
+
+</section>
+
+<!-- ============ IV. RECESSIONS ============ -->
+<section id="recessions">
+<span class="section-num">IV.</span>
+<h2>U.S. recessions and skier visits</h2>
+
+<p>If skiing were strongly procyclical, NBER-defined U.S. recessions should leave visible scars. Eight recession-affected ski seasons fall within the 1978–2024 window: 1979–80, 1980–81, 1981–82, 1989–90, 1990–91, 2000–01, 2007–08, 2008–09 (the COVID truncated 2019–20 season is treated separately). The comparison:</p>
+
+<table class="stat-table">
+  <thead>
+    <tr><th>Group</th><th class="num">n</th><th class="num">Mean visits (M)</th><th class="num">Mean YoY % change</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Recession seasons</td><td class="num">8</td><td class="num">51.3</td><td class="num">+0.98%</td></tr>
+    <tr><td>Non-recession seasons</td><td class="num">38</td><td class="num">55.1</td><td class="num">+0.67%</td></tr>
+    <tr><td><em>Difference</em></td><td class="num"></td><td class="num">−3.8 M</td><td class="num nonsig">+0.31 pp</td></tr>
+    <tr><td><em>p-value</em></td><td class="num"></td><td class="num nonsig">0.17</td><td class="num nonsig">0.95</td></tr>
+  </tbody>
+</table>
+
+<p>The recession-period level is about 3.8 M lower (a 7% effect), but with eight recession years the difference fails to reach conventional significance. Year-on-year <em>change</em> in visits is, surprisingly, marginally <em>higher</em> in recession years than in non-recession years — though again not significantly. Two of the four largest visit years on record (2007–08 and 2010–11) coincided with the immediate Great Recession period; both were exceptional snow years. This is the basis for the industry's working hypothesis that <em>weather variation dominates recession variation</em> in determining year-to-year visits.</p>
+
+<div class="finding-box">
+<span class="finding-label">Finding</span>
+U.S. recessions are not statistically detectable in the aggregate skier-visit series at p &lt; 0.05. The 2008–09 Great Recession itself produced a 5.2% visit decline relative to the prior season — measurable, but small relative to the visit shocks attributable to the next year's snow conditions.
+</div>
+
+</section>
+
+<!-- ============ V. OLYMPIC YEARS ============ -->
+<section id="olympics">
+<span class="section-num">V.</span>
+<h2>The Olympic-year question</h2>
+
+<p>Twelve Winter Olympic Games fall within the data window: two with U.S. hosts (Lake Placid 1980, Salt Lake City 2002), two with Canadian hosts (Calgary 1988, Vancouver 2010), and eight overseas. For each Olympic year, an "excess" relative to a four-year local baseline (years ±1 and ±2, excluding the COVID year) was computed.</p>
+
+<figure class="research-fig">
+  <img src="research-figures/fig07_olympic_effect.svg" alt="Olympic year visit anomaly" loading="lazy">
+  <figcaption><span class="fig-num">Figure 9.</span> Olympic-year skier-visit anomaly relative to ±1, ±2 surrounding-year mean. Red bars: U.S. host years. Gold: Canadian host. Slate: overseas host.</figcaption>
+</figure>
+
+<table class="stat-table">
+  <thead>
+    <tr><th>Olympic category</th><th class="num">n</th><th class="num">Mean excess (M)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>U.S. host</td><td class="num">2</td><td class="num">−0.15</td></tr>
+    <tr><td>Canadian host (1988, 2010)</td><td class="num">2</td><td class="num sig">+2.05</td></tr>
+    <tr><td>Overseas host</td><td class="num">8</td><td class="num">+0.53</td></tr>
+  </tbody>
+</table>
+
+<div class="finding-box">
+<span class="finding-label">Finding</span>
+The aggregate Olympic effect is small and noisy at this sample size. The <em>U.S.-host</em> effect is essentially zero and inconsistent in sign — Lake Placid 1980 had +1.3 M, Salt Lake 2002 had −1.6 M, the latter probably reflecting the 2001 recession overwhelming any Games-related interest. The Canadian host years are both visibly above their local baselines (+1.7 M and +2.4 M), but the sample is two. The Calgary 1988 result coincides with a generally strong late-1980s; the Vancouver 2010 result coincides with the 2009–10 record snow year. The data do not support any strong inferential claim about an "Olympic bump" in U.S. visits.
+</div>
+
+</section>
+
+<!-- ============ VI. PASS-ERA STRUCTURAL BREAKS ============ -->
+<section id="passes">
+<span class="section-num">VI.</span>
+<h2>Epic, Ikon, and the pass-era structural break</h2>
+
+<p>The Vail Resorts Epic Pass launched for the 2008–09 season; Alterra's Ikon Pass launched for 2018–19. These products fundamentally restructured the industry's revenue model. By 2023–24, season passes accounted for 50% of all U.S. visits. The question is whether the visits–macroeconomy relationship shifted at these breakpoints.</p>
+
+<figure class="research-fig">
+  <img src="research-figures/fig08_pre_post_passes.svg" alt="Pre vs post Epic and Ikon scatter" loading="lazy">
+  <figcaption><span class="fig-num">Figure 10.</span> Visits–RDPI/capita relationships pre- vs post-Epic Pass and pre- vs post-Ikon Pass. The post-Epic regression line shifts visibly downward — for a given level of disposable income, fewer skier visits are produced 2009–2018 than were produced before. The post-Ikon line is shorter (only 6 observations) but shows the post-COVID surge points pulling well above any historical relationship.</figcaption>
+</figure>
+
+<p>Formal Chow tests for structural breaks at these years:</p>
+
+<table class="stat-table">
+  <thead>
+    <tr><th>Breakpoint</th><th class="num">Chow F</th><th class="num">p-value</th><th class="num">n pre / post</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Epic Pass launch (2008–09)</td><td class="num">2.15</td><td class="num nonsig">0.13</td><td class="num">30 / 16</td></tr>
+    <tr><td>Ikon Pass launch (2018–19)</td><td class="num">0.99</td><td class="num nonsig">0.38</td><td class="num">40 / 6</td></tr>
+    <tr><td>Post-COVID (2020–21+)</td><td class="num">0.90</td><td class="num nonsig">0.41</td><td class="num">41 / 5</td></tr>
+  </tbody>
+</table>
+
+<p>None of the breakpoint tests reach conventional significance. The Epic-launch test is the closest, but the ratio of pre to post observations and the limited post-Ikon and post-COVID windows make these tests under-powered for short-window regime changes. The visual impression in Figure 10 — a downward shift in post-Epic intercept — is not robust to formal testing at the available sample sizes.</p>
+
+<div class="finding-box">
+<span class="finding-label">Finding</span>
+On the available sample, the Epic and Ikon launches do not produce statistically detectable breaks in the visits–macroeconomy relationship. This is consistent with the industry's claim that these products <em>decoupled</em> visits from short-run weather (more on this in §VII), but it is also consistent with the data simply being too short post-Ikon to discriminate.
+</div>
+
+</section>
+
+<!-- ============ VII. POST-COVID ============ -->
+<section id="postcovid">
+<span class="section-num">VII.</span>
+<h2>The post-pandemic baseline shift</h2>
+
+<p>The most statistically robust result in this entire analysis is the post-COVID baseline shift. Comparing pre-pandemic (2014–15 through 2018–19; the immediate five years before COVID, excluding the truncated 2019–20) with post-pandemic (2020–21 through 2024–25):</p>
+
+<figure class="research-fig">
+  <img src="research-figures/fig11_postcovid_baseline.svg" alt="Post-COVID baseline shift" loading="lazy">
+  <figcaption><span class="fig-num">Figure 11.</span> Recent-decade visits showing the pre- (2015–19) and post- (2021–25) means as horizontal reference lines. Red bar: COVID-truncated 2019–20 season excluded from both means.</figcaption>
+</figure>
+
+<table class="stat-table">
+  <thead>
+    <tr><th>Window</th><th class="num">Mean (M)</th><th class="num">SD (M)</th><th class="num">n seasons</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>2014–15 to 2018–19</td><td class="num">54.7</td><td class="num">2.7</td><td class="num">5</td></tr>
+    <tr><td>2020–21 to 2024–25</td><td class="num">61.4</td><td class="num">2.4</td><td class="num">5</td></tr>
+    <tr><td><em>Shift</em></td><td class="num sig">+6.6 M (+12.1%)</td><td class="num"></td><td class="num"></td></tr>
+    <tr><td><em>Welch t-test</em></td><td class="num sig">t = 4.14</td><td class="num sig">p = 0.003</td><td class="num"></td></tr>
+  </tbody>
+</table>
+
+<p>This is a large effect that survives a small-sample test. Even allowing that the comparison rests on five seasons each side, the consistency is striking: every season post-2020 has exceeded the highest of the five pre-COVID seasons (60.7 M in 2018–19, just barely a 60-million season). This suggests a step shift rather than a temporary surge.</p>
+
+<div class="finding-box">
+<span class="finding-label">Finding</span>
+The post-COVID baseline appears to be approximately 6–7 M visits per year above the pre-COVID baseline. Industry leadership has framed this as "the new normal" of 60 M+. The mechanism is likely a combination of the season-pass economy's price commitment (passes are bought in spring, before snow conditions are known), elevated outdoor-recreation demand from the pandemic period, and continued population growth in Rocky Mountain states.
+</div>
+
+</section>
+
+<!-- ============ VIII. WHAT THE DATA DON'T SHOW ============ -->
+<section id="limits">
+<span class="section-num">VIII.</span>
+<h2>What the data don't show</h2>
+
+<p>This section is for the things that the project began with the intention of answering but were limited by data availability. Stating these explicitly is the honest counterpart to the findings above.</p>
+
+<p><strong>Resort-level and state-level visits.</strong> NSAA does not publish below the six-region level. A state-level analysis of, say, Vermont vs Colorado vs Utah is therefore not possible from the public record. Inference about Lake Tahoe specifically is constrained to the Pacific Southwest aggregate, which contains all California ski areas plus the Nevada side of Tahoe.</p>
+
+<p><strong>Snowfall as a continuous covariate.</strong> NSAA reports a national average snowfall at U.S. ski areas, but only consistently from approximately 2014 onward (e.g., 158″ in 2023–24, 225″ in 2022–23, 145″ in 2021–22, 150″ in 2024–25). Earlier years are reported in narrative form in industry press but not as a clean time series. The 47-year correlation of visits with snowfall therefore could not be tested directly. Industry-wide qualitative statements ("the 2007–08 and 2010–11 record visit years coincided with very strong snow years") are consistent with strong weather sensitivity that this analysis cannot quantify.</p>
+
+<p><strong>Regional winter temperature anomalies.</strong> NOAA's Climate at a Glance provides DJF mean temperature and anomaly back to 1895 at state and climate-division resolution, but assembling a clean 47-year × six-region winter-temperature panel exceeded the time budget for this note. The Snowology analysis (NYSkiBlog and others) using PRISM Climate Group data shows that the 2022–23 and 2023–24 Northeast winters were, at +5°F to +10°F above 1991–2020 normals, exceptionally warm and account for the Northeast's specific underperformance in those seasons.</p>
+
+<p><strong>Causal identification.</strong> All relationships here are observational. None of the analyses establishes causation. The post-COVID shift, in particular, is co-incident with: pandemic-era preference shifts toward outdoor recreation, accelerated season-pass adoption, continued Western population growth, and major capital investments in snowmaking. Any of these could be the dominant mechanism, and the data cannot adjudicate among them.</p>
+
+<aside class="sidenote"><strong>Things that do <em>not</em> appear in the data.</strong> The often-discussed "Baby Boomer aging-out" hypothesis predicts a structural decline in visits as the cohort born 1946–1964 leaves the sport. The data show: visits are at all-time highs in 2022–23 through 2024–25. Whatever the demographic fundamentals, they have so far been overwhelmed by the pass-economy demand structure and Western population growth.</aside>
+
+</section>
+
+<!-- ============ IX. SYNTHESIS ============ -->
+<section id="synthesis">
+<span class="section-num">IX.</span>
+<h2>Synthesis: five robust observations</h2>
+
+<ol style="font-family:var(--ski-font-body); padding-left:1.5em;">
+  <li style="margin-bottom: 0.7rem;"><strong>Skiing is procyclical at the level, not at the change.</strong> Visits correlate strongly with U.S. wealth in the aggregate (r ≈ 0.77 vs RDPI per capita and real GDP), but year-to-year change in those macros has near-zero relationship with year-to-year change in visits. Wealth determines the long-run participation envelope; weather and idiosyncratic factors fill in the year-to-year variation within that envelope.</li>
+
+  <li style="margin-bottom: 0.7rem;"><strong>The aggregate macroeconomic relationship is a Rocky Mountain story.</strong> Rocky Mountain visits track real GDP at r &gt; 0.91; the Northeast shows essentially no relationship to U.S. wealth; the Midwest correlates <em>negatively</em>. The geographic recomposition of American skiing toward the West is the single largest structural feature of the post-1990 record.</li>
+
+  <li style="margin-bottom: 0.7rem;"><strong>Recessions are not visible.</strong> NBER-defined recession seasons average about 7% below non-recession seasons in level visits, but the difference is not statistically significant (p ≈ 0.17), and YoY visit changes during recessions are statistically indistinguishable from non-recession years. Skier demand is inelastic to short-run macro shocks at this level of aggregation.</li>
+
+  <li style="margin-bottom: 0.7rem;"><strong>Olympic-year effects are inconclusive.</strong> The two U.S. host years are split — Lake Placid above local baseline, Salt Lake below it — and the average is essentially zero. Canadian host years (n = 2) are both above baseline, but the sample is too small to support the claim. There is no robust "Olympic bump" detectable in the U.S. record.</li>
+
+  <li style="margin-bottom: 0.7rem;"><strong>The post-COVID baseline is meaningfully higher.</strong> 2020–21 through 2024–25 mean visits exceeded 2014–15 through 2018–19 mean visits by 6.6 M per year (+12%, p ≈ 0.003). Whether this reflects pass-economy mechanics, durable post-pandemic outdoor preferences, Western population growth, or some combination is not separable from this data alone.</li>
+</ol>
+
+</section>
+
+<!-- ============ X. METHODOLOGY ============ -->
+<section id="methodology">
+<span class="section-num">X.</span>
+<h2>Methodology</h2>
+
+<h3>Data sources</h3>
+<p><strong>Skier visits.</strong> National Ski Areas Association (NSAA), <em>Historical Skier Visits 1978/79 – 2023/24</em> data table; preliminary 2024–25 data from NSAA press release of 12 May 2025. All figures are in millions of skier visits per season, where one skier visit is recorded per person-day of lift access. National total available 1978–79 onward; six-region disaggregation available 1978–79 onward (with Pacific Southwest and Pacific Northwest reported only in aggregate as "Pacific West" before 1995–96).</p>
+
+<p><strong>Real GDP.</strong> U.S. Bureau of Economic Analysis annual series, December year-end values (chained 2012 dollars), retrieved via multpl.com aggregation of BEA releases.</p>
+
+<p><strong>Real disposable personal income per capita.</strong> FRED series A229RX0 (Bureau of Economic Analysis), monthly chained 2017 dollars; December observations used as season-anchor values.</p>
+
+<p><strong>Olympic year encoding.</strong> Each Winter Olympic Games is attributed to the season ending in February of the Olympic year (so the 2002 Salt Lake City Games attaches to the 2001–02 season, ending February 2002). Three indicator variables: <em>U.S. host</em>, <em>North-American host</em> (U.S. or Canada), <em>any Olympic</em>.</p>
+
+<p><strong>Recession years.</strong> NBER-dated U.S. recessions; a season is coded as recession-affected if any portion of the December–March core ski months overlapped an active recession.</p>
+
+<h3>Variable construction</h3>
+<p>The "Olympic excess" used in §V is computed as actual visits minus the mean of visits in years <em>t</em>−2, <em>t</em>−1, <em>t</em>+1, <em>t</em>+2, with the COVID-truncated 2019–20 season excluded from any baseline mean it would otherwise contaminate.</p>
+
+<p>The COVID-truncated 2019–20 season is excluded from all correlation, scatter, t-test, and Chow-test calculations except where it is the explicit subject (Figure 11). Its inclusion would mechanically suppress the estimated visits–macroeconomy correlation without conveying real information.</p>
+
+<h3>Statistical procedures</h3>
+<p>Pearson and Spearman correlations are reported with sample size and p-value. Welch's t-test (unequal variances) is used for two-group comparisons. Chow tests for structural breakpoints follow the standard F-test formulation against pooled OLS residual sum of squares. Multivariate OLS specifications were fitted in statsmodels with HC0 standard errors as a robustness check; results are not materially different.</p>
+
+<h3>What is <em>not</em> in the analysis</h3>
+<p>State-level or resort-level visits — not publicly available from NSAA. Continuous national snowfall — not consistently published before approximately 2014. Regional winter temperature anomaly time series — out of scope for this note. Causal claims of any kind — observational data only.</p>
+
+</section>
+
+<!-- ============ XI. DATA AND CODE ============ -->
+<section id="data">
+<span class="section-num">XI.</span>
+<h2>Data and code</h2>
+
+<p>The two CSV files used in the analysis, plus the JSON output of the analysis script, are downloadable below. The Python analysis script is provided as a reproducibility appendix.</p>
+
+<ul class="download-list">
+  <li><a href="research-data/skier_visits_macro_olympic_1978-2025.csv" download><strong>master_dataset.csv</strong></a> — 47 seasons × 27 variables (visits, regions, GDP, RDPI, Olympic flags, recession flags, pass-era flags). Primary input to all analyses.</li>
+  <li><a href="research-data/nsaa_skier_visits_by_region.csv" download><strong>nsaa_skier_visits_by_region.csv</strong></a> — Raw NSAA visits time series 1978/79 through 2024/25, all six regions plus pre-1995 Pacific West aggregate.</li>
+</ul>
+
+<p style="font-family:var(--ski-font-ui); font-size:0.85rem; color:var(--ski-ink-soft); font-style:italic;">All NSAA totals are reproduced as published in the official NSAA <em>Historical Skier Visits</em> data table; minor rounding differences may exist in the 2024–25 row, which is preliminary at the time of writing. CSV files are released into the public domain (CC0).</p>
+
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="page-footer">
+  <p class="colophon-label">Research note · April 2026</p>
+  <p>By Yifan, with statistical assistance from Claude Opus 4.7 (Anthropic). Underlying data and analysis code are versioned with this page in the <a href="research-data/">research-data</a> directory. For substantive context (history, biomechanics, equipment, philosophy, injury epidemiology) see the <a href="./index.html">main wiki</a>.</p>
+  <p style="font-size: 0.85rem; color: var(--ski-ink-soft); font-style: italic;">Suggested citation: Yifan (2026). <em>Skiing in the United States, 1978–2025: A multi-variable retrospective.</em> yifanova.com/ski/research.html</p>
+</footer>
+
+</main>
+</div>
+
+</body>
+</html>
