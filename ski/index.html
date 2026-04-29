@@ -11,6 +11,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="../assets/ski.css">
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/",
+    "mannequin": "https://cdn.jsdelivr.net/npm/mannequin-js@latest/src/mannequin.js"
+  }
+}
+</script>
 </head>
 
 <body class="ski-page" data-lang="en">
@@ -316,294 +326,101 @@
 <span class="section-num">III.</span>
 <h2>Anatomy of a high-level carved turn</h2>
 
-<p class="lede">High-level carving is the most coordinated articulation of all five fundamentals at once (§II). It is most clearly understood not as a single posture but as a <em>transition</em> — the body moves continuously between two carved arcs, and the skill lives in the bridge that connects them. The figure below diagrams that bridge in four frames: passing the previous apex, the cross-under (where the center of mass moves under the body and over to the new turn's side), entering the new turn, and reaching the new apex. Hovering over a joint reveals what is happening at that joint at that moment.</p>
-
-<p>The view is from the side — the convention for this kind of teaching diagram, because the bridge between turns is most clearly read laterally. Angulation, which is best read from a 3/4 view, is signposted in the joint detail rather than precisely rendered in the line drawing.</p>
-
-<div class="carving-figure">
-
-<div class="carving-frames">
-
-  <!-- FRAME 1: Past previous apex, releasing -->
-  <div class="frame-panel">
-    <div class="frame-num">1</div>
-    <div class="frame-svg-wrap">
-      <svg class="frame-svg" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Frame 1: past previous apex, releasing">
-        <line x1="0" y1="232" x2="200" y2="248" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3 3"/>
-        <line x1="20" y1="220" x2="160" y2="232" stroke="#0a3d62" stroke-width="3" stroke-linecap="round"/>
-        <line x1="60" y1="220" x2="125" y2="226" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="125" y1="226" x2="115" y2="160" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="100" y1="222" x2="115" y2="160" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
-        <line x1="115" y1="160" x2="105" y2="100" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="105" y1="103" x2="78" y2="118" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <line x1="105" y1="103" x2="135" y2="125" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="105" cy="88" r="11" fill="none" stroke="#1f2328" stroke-width="2"/>
-        <line x1="116" y1="86" x2="148" y2="76" stroke="#3a5a40" stroke-width="1.2" stroke-dasharray="2 2"/>
-        <polygon points="150,76 145,73 145,79" fill="#3a5a40"/>
-
-        <g class="joint-dot" data-joint="ankle" data-stage="f1"><circle class="pulse" cx="125" cy="226" r="9" fill="#0a3d62"/><circle cx="125" cy="226" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="knee" data-stage="f1"><circle class="pulse" cx="120" cy="195" r="9" fill="#0a3d62"/><circle cx="120" cy="195" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hip" data-stage="f1"><circle class="pulse" cx="115" cy="160" r="9" fill="#0a3d62"/><circle cx="115" cy="160" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="shoulder" data-stage="f1"><circle class="pulse" cx="106" cy="103" r="9" fill="#0a3d62"/><circle cx="106" cy="103" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hand" data-stage="f1"><circle class="pulse" cx="78" cy="118" r="9" fill="#0a3d62"/><circle cx="78" cy="118" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="head" data-stage="f1"><circle class="pulse" cx="105" cy="88" r="9" fill="#0a3d62"/><circle cx="105" cy="88" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-      </svg>
-    </div>
-    <p class="frame-note">Past the previous apex; release begins.</p>
-  </div>
-
-  <!-- FRAME 2: Cross-under midpoint -->
-  <div class="frame-panel">
-    <div class="frame-num">2</div>
-    <div class="frame-svg-wrap">
-      <svg class="frame-svg" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Frame 2: cross-under midpoint">
-        <line x1="0" y1="232" x2="200" y2="248" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3 3"/>
-        <line x1="40" y1="232" x2="160" y2="240" stroke="#0a3d62" stroke-width="3" stroke-linecap="round"/>
-        <line x1="95" y1="234" x2="100" y2="180" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="105" y1="232" x2="100" y2="180" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="100" y1="180" x2="100" y2="105" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="100" y1="108" x2="76" y2="128" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <line x1="100" y1="108" x2="128" y2="128" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="100" cy="93" r="11" fill="none" stroke="#1f2328" stroke-width="2"/>
-        <line x1="111" y1="91" x2="148" y2="80" stroke="#3a5a40" stroke-width="1.2" stroke-dasharray="2 2"/>
-        <polygon points="150,80 145,77 145,83" fill="#3a5a40"/>
-
-        <path d="M 35 165 Q 100 145 160 165" fill="none" stroke="#3a5a40" stroke-width="1" stroke-dasharray="2 3"/>
-        <text x="35" y="158" font-family="Inter, sans-serif" font-size="8" font-style="italic" fill="#3a5a40">CoM trajectory</text>
-
-        <g class="joint-dot" data-joint="ankle" data-stage="f2"><circle class="pulse" cx="100" cy="233" r="9" fill="#0a3d62"/><circle cx="100" cy="233" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="knee" data-stage="f2"><circle class="pulse" cx="100" cy="208" r="9" fill="#0a3d62"/><circle cx="100" cy="208" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hip" data-stage="f2"><circle class="pulse" cx="100" cy="180" r="9" fill="#0a3d62"/><circle cx="100" cy="180" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="shoulder" data-stage="f2"><circle class="pulse" cx="100" cy="108" r="9" fill="#0a3d62"/><circle cx="100" cy="108" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hand" data-stage="f2"><circle class="pulse" cx="128" cy="128" r="9" fill="#0a3d62"/><circle cx="128" cy="128" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="head" data-stage="f2"><circle class="pulse" cx="100" cy="93" r="9" fill="#0a3d62"/><circle cx="100" cy="93" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-      </svg>
-    </div>
-    <p class="frame-note">Cross-under: legs short, body upright, brief weightlessness.</p>
-  </div>
-
-  <!-- FRAME 3: New turn initiation -->
-  <div class="frame-panel">
-    <div class="frame-num">3</div>
-    <div class="frame-svg-wrap">
-      <svg class="frame-svg" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Frame 3: new turn initiation">
-        <line x1="0" y1="232" x2="200" y2="248" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3 3"/>
-        <line x1="55" y1="240" x2="180" y2="232" stroke="#0a3d62" stroke-width="3" stroke-linecap="round"/>
-        <line x1="105" y1="240" x2="115" y2="180" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="135" y1="235" x2="125" y2="195" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="115" y1="180" x2="135" y2="180" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="125" y1="180" x2="108" y2="115" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="108" y1="118" x2="58" y2="120" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <line x1="108" y1="118" x2="138" y2="135" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="111" cy="100" r="11" fill="none" stroke="#1f2328" stroke-width="2"/>
-        <line x1="122" y1="98" x2="160" y2="86" stroke="#3a5a40" stroke-width="1.2" stroke-dasharray="2 2"/>
-        <polygon points="162,86 157,83 157,89" fill="#3a5a40"/>
-
-        <g class="joint-dot" data-joint="ankle" data-stage="f3"><circle class="pulse" cx="105" cy="240" r="9" fill="#0a3d62"/><circle cx="105" cy="240" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="knee" data-stage="f3"><circle class="pulse" cx="113" cy="210" r="9" fill="#0a3d62"/><circle cx="113" cy="210" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hip" data-stage="f3"><circle class="pulse" cx="125" cy="180" r="9" fill="#0a3d62"/><circle cx="125" cy="180" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="shoulder" data-stage="f3"><circle class="pulse" cx="110" cy="118" r="9" fill="#0a3d62"/><circle cx="110" cy="118" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hand" data-stage="f3"><circle class="pulse" cx="58" cy="120" r="9" fill="#0a3d62"/><circle cx="58" cy="120" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="head" data-stage="f3"><circle class="pulse" cx="111" cy="100" r="9" fill="#0a3d62"/><circle cx="111" cy="100" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-      </svg>
-    </div>
-    <p class="frame-note">New turn initiates; outside hand leads.</p>
-  </div>
-
-  <!-- FRAME 4: New apex -->
-  <div class="frame-panel">
-    <div class="frame-num">4</div>
-    <div class="frame-svg-wrap">
-      <svg class="frame-svg" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Frame 4: new apex">
-        <line x1="0" y1="232" x2="200" y2="248" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3 3"/>
-        <line x1="48" y1="248" x2="170" y2="222" stroke="#0a3d62" stroke-width="3" stroke-linecap="round"/>
-        <line x1="80" y1="245" x2="125" y2="158" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="115" y1="232" x2="135" y2="172" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="125" y1="158" x2="142" y2="162" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="135" y1="160" x2="120" y2="105" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="120" y1="108" x2="58" y2="118" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <line x1="120" y1="108" x2="148" y2="142" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="125" cy="92" r="11" fill="none" stroke="#1f2328" stroke-width="2"/>
-        <line x1="136" y1="90" x2="172" y2="76" stroke="#3a5a40" stroke-width="1.2" stroke-dasharray="2 2"/>
-        <polygon points="174,76 169,73 169,79" fill="#3a5a40"/>
-
-        <text x="35" y="270" font-family="Inter, sans-serif" font-size="8" font-style="italic" fill="#3a5a40">max edge angle</text>
-
-        <g class="joint-dot" data-joint="ankle" data-stage="f4"><circle class="pulse" cx="80" cy="245" r="9" fill="#0a3d62"/><circle cx="80" cy="245" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="knee" data-stage="f4"><circle class="pulse" cx="103" cy="200" r="9" fill="#0a3d62"/><circle cx="103" cy="200" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hip" data-stage="f4"><circle class="pulse" cx="135" cy="160" r="9" fill="#0a3d62"/><circle cx="135" cy="160" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="shoulder" data-stage="f4"><circle class="pulse" cx="122" cy="108" r="9" fill="#0a3d62"/><circle cx="122" cy="108" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hand" data-stage="f4"><circle class="pulse" cx="58" cy="118" r="9" fill="#0a3d62"/><circle cx="58" cy="118" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="head" data-stage="f4"><circle class="pulse" cx="125" cy="92" r="9" fill="#0a3d62"/><circle cx="125" cy="92" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-      </svg>
-    </div>
-    <p class="frame-note">New apex: max angulation, max edge, outside leg fully loaded.</p>
-  </div>
-
-</div>
-
-<!-- direction-of-travel marker spanning full figure -->
-<div class="travel-arrow"><span class="arrow-line"></span><span class="arrow-text">direction of travel · downhill</span></div>
-
-<!-- Detail panel for hover content -->
-<div class="joint-detail" id="joint-detail-en" aria-live="polite">
-  <span class="joint-prompt">Hover over any blue joint to see what happens there at that moment of the transition.</span>
-</div>
-
-<p class="carving-legend">Side view, looking across the slope; skier travels left-to-right. Frame 4's posture corresponds to the GoPro reference photo (max-angulation apex).</p>
-
-</div>
-
-<h3>The cross-under transition</h3>
-
-<p>What the four-frame diagram makes visible is that the connection between two carved arcs is itself a coordinated movement, not a passive interval. At frame 1, the skier has passed the apex of the previous turn and the outside leg is still extended; pressure on the edges has begun to release. At frame 2 — the cross-under proper — the skier <strong>actively retracts the legs</strong> beneath the body. The body becomes upright and compact, the skis flatten on the snow, and there is a brief weightlessness as the center of mass passes <em>under</em> the previous body line and over toward the new turn's inside. At frame 3 the new outside leg begins to extend, the outside hand projects forward to lead the new arc, and the skis begin to engage their new edges. At frame 4 — the new apex — angulation has built to its maximum and the new outside leg is fully loaded.</p>
-
-<p>The contrast is with <em>cross-over</em> transitions, where the skier extends up between turns and the body's mass moves <em>over</em> the skis from above. Cross-over is appropriate at lower speeds; at high speeds and high edge angles, cross-under is necessary because there is no time to extend up and re-balance, and the legs must compress and re-extend underneath a relatively quiet upper body. Cross-under is what allows World Cup giant slalom skiers to link tight turns at 70 km/h without their upper body bouncing visibly.</p>
-
+<p class="lede">High-level carving is the most coordinated articulation of all five fundamentals at once (§II). It is most clearly understood not as a single posture but as a <em>transition</em> — the body moves continuously between two carved arcs, and the skill lives in the bridge that connects them. The 3D figures below diagram that bridge in four frames: passing the previous apex, the cross-under (where the center of mass moves under the body and over to the new turn's side), entering the new turn, and reaching the new apex. Hover any blue joint marker for the technical detail at that moment; drag any figure to inspect the pose from any angle.</p>
 </div>
 
 <div data-lang-content="zh">
 <span class="section-num">III.</span>
 <h2>高水平刻入弯的解剖结构</h2>
 
-<p class="lede">高水平 carving 是五大基本功（§II）同时被最协调地表达出来的形态。它最清楚的理解方式不是某个静止姿态，而是一个 <em>过渡（transition）</em>——身体在两段刻入弧之间持续移动，而技术真正的难点恰好在于把两段弧连接起来的那座桥。下图把这座桥分解为四帧：通过上一弯的 apex；cross-under（重心从下方穿过、转移到新弯一侧）；新弯起始；到达新弯的 apex。鼠标悬停在任一关节，可显示该时刻该关节的技术细节。</p>
-
-<p>视角是侧视——这类教学图的惯例，因为两弯之间的过渡在横向上最容易读懂。Angulation（折屈）从 3/4 视角看最清楚，这里以关节卡片的文字描述补足，而不在线条图上精确再现。</p>
+<p class="lede">高水平 carving 是五大基本功（§II）同时被最协调地表达出来的形态。它最清楚的理解方式不是某个静止姿态，而是一个 <em>过渡（transition）</em>——身体在两段刻入弧之间持续移动，而技术真正的难点恰好在于把两段弧连接起来的那座桥。下面四个 3D 人偶把这座桥分解为四帧：通过上一弯的 apex；cross-under（重心从下方穿过、转移到新弯一侧）；新弯起始；到达新弯的 apex。鼠标悬停在任一蓝色关节标记上可查看该时刻的技术细节；可拖动任一人偶从任意角度查看姿态。</p>
+</div>
 
 <div class="carving-figure">
 
-<div class="carving-frames">
-
-  <div class="frame-panel">
-    <div class="frame-num">1</div>
-    <div class="frame-svg-wrap">
-      <svg class="frame-svg" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="第 1 帧：刚过上一弯顶">
-        <line x1="0" y1="232" x2="200" y2="248" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3 3"/>
-        <line x1="20" y1="220" x2="160" y2="232" stroke="#0a3d62" stroke-width="3" stroke-linecap="round"/>
-        <line x1="60" y1="220" x2="125" y2="226" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="125" y1="226" x2="115" y2="160" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="100" y1="222" x2="115" y2="160" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
-        <line x1="115" y1="160" x2="105" y2="100" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="105" y1="103" x2="78" y2="118" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <line x1="105" y1="103" x2="135" y2="125" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="105" cy="88" r="11" fill="none" stroke="#1f2328" stroke-width="2"/>
-        <line x1="116" y1="86" x2="148" y2="76" stroke="#3a5a40" stroke-width="1.2" stroke-dasharray="2 2"/>
-        <polygon points="150,76 145,73 145,79" fill="#3a5a40"/>
-
-        <g class="joint-dot" data-joint="ankle" data-stage="f1"><circle class="pulse" cx="125" cy="226" r="9" fill="#0a3d62"/><circle cx="125" cy="226" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="knee" data-stage="f1"><circle class="pulse" cx="120" cy="195" r="9" fill="#0a3d62"/><circle cx="120" cy="195" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hip" data-stage="f1"><circle class="pulse" cx="115" cy="160" r="9" fill="#0a3d62"/><circle cx="115" cy="160" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="shoulder" data-stage="f1"><circle class="pulse" cx="106" cy="103" r="9" fill="#0a3d62"/><circle cx="106" cy="103" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hand" data-stage="f1"><circle class="pulse" cx="78" cy="118" r="9" fill="#0a3d62"/><circle cx="78" cy="118" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="head" data-stage="f1"><circle class="pulse" cx="105" cy="88" r="9" fill="#0a3d62"/><circle cx="105" cy="88" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-      </svg>
-    </div>
-    <p class="frame-note">刚过上一弯 apex；release 开始。</p>
+  <!-- Loading state -->
+  <div id="carving-loading" class="carving-loading">
+    <span data-lang-content="en">Loading 3D figures…</span>
+    <span data-lang-content="zh">正在加载 3D 人偶……</span>
   </div>
 
-  <div class="frame-panel">
-    <div class="frame-num">2</div>
-    <div class="frame-svg-wrap">
-      <svg class="frame-svg" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="第 2 帧：cross-under 中点">
-        <line x1="0" y1="232" x2="200" y2="248" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3 3"/>
-        <line x1="40" y1="232" x2="160" y2="240" stroke="#0a3d62" stroke-width="3" stroke-linecap="round"/>
-        <line x1="95" y1="234" x2="100" y2="180" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="105" y1="232" x2="100" y2="180" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="100" y1="180" x2="100" y2="105" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="100" y1="108" x2="76" y2="128" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <line x1="100" y1="108" x2="128" y2="128" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="100" cy="93" r="11" fill="none" stroke="#1f2328" stroke-width="2"/>
-        <line x1="111" y1="91" x2="148" y2="80" stroke="#3a5a40" stroke-width="1.2" stroke-dasharray="2 2"/>
-        <polygon points="150,80 145,77 145,83" fill="#3a5a40"/>
-
-        <path d="M 35 165 Q 100 145 160 165" fill="none" stroke="#3a5a40" stroke-width="1" stroke-dasharray="2 3"/>
-        <text x="35" y="158" font-family="Noto Serif SC, serif" font-size="9" fill="#3a5a40">重心轨迹</text>
-
-        <g class="joint-dot" data-joint="ankle" data-stage="f2"><circle class="pulse" cx="100" cy="233" r="9" fill="#0a3d62"/><circle cx="100" cy="233" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="knee" data-stage="f2"><circle class="pulse" cx="100" cy="208" r="9" fill="#0a3d62"/><circle cx="100" cy="208" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hip" data-stage="f2"><circle class="pulse" cx="100" cy="180" r="9" fill="#0a3d62"/><circle cx="100" cy="180" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="shoulder" data-stage="f2"><circle class="pulse" cx="100" cy="108" r="9" fill="#0a3d62"/><circle cx="100" cy="108" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hand" data-stage="f2"><circle class="pulse" cx="128" cy="128" r="9" fill="#0a3d62"/><circle cx="128" cy="128" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="head" data-stage="f2"><circle class="pulse" cx="100" cy="93" r="9" fill="#0a3d62"/><circle cx="100" cy="93" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-      </svg>
+  <!-- 4 stages, each with its own canvas and dot overlay -->
+  <div id="carving-3d" class="carving-3d-grid" hidden>
+    <div class="frame-panel" data-frame="f1">
+      <div class="frame-num">1</div>
+      <div class="frame-canvas-wrap">
+        <canvas class="frame-canvas" data-frame-canvas="f1"></canvas>
+        <div class="dot-overlay" data-frame-overlay="f1"></div>
+      </div>
+      <p class="frame-note">
+        <span data-lang-content="en">Past previous apex; release.</span>
+        <span data-lang-content="zh">刚过上一弯顶；release 开始。</span>
+      </p>
     </div>
-    <p class="frame-note">Cross-under：双腿收短、身体直立、瞬间失重。</p>
+    <div class="frame-panel" data-frame="f2">
+      <div class="frame-num">2</div>
+      <div class="frame-canvas-wrap">
+        <canvas class="frame-canvas" data-frame-canvas="f2"></canvas>
+        <div class="dot-overlay" data-frame-overlay="f2"></div>
+      </div>
+      <p class="frame-note">
+        <span data-lang-content="en">Cross-under: legs short, brief weightlessness.</span>
+        <span data-lang-content="zh">Cross-under：双腿收短，瞬间失重。</span>
+      </p>
+    </div>
+    <div class="frame-panel" data-frame="f3">
+      <div class="frame-num">3</div>
+      <div class="frame-canvas-wrap">
+        <canvas class="frame-canvas" data-frame-canvas="f3"></canvas>
+        <div class="dot-overlay" data-frame-overlay="f3"></div>
+      </div>
+      <p class="frame-note">
+        <span data-lang-content="en">New turn initiates; outside hand leads.</span>
+        <span data-lang-content="zh">新弯起始；外手前伸引导。</span>
+      </p>
+    </div>
+    <div class="frame-panel" data-frame="f4">
+      <div class="frame-num">4</div>
+      <div class="frame-canvas-wrap">
+        <canvas class="frame-canvas" data-frame-canvas="f4"></canvas>
+        <div class="dot-overlay" data-frame-overlay="f4"></div>
+      </div>
+      <p class="frame-note">
+        <span data-lang-content="en">New apex: max angulation, max edge.</span>
+        <span data-lang-content="zh">新弯顶：最大 angulation、最大立刃。</span>
+      </p>
+    </div>
   </div>
 
-  <div class="frame-panel">
-    <div class="frame-num">3</div>
-    <div class="frame-svg-wrap">
-      <svg class="frame-svg" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="第 3 帧：新弯起始">
-        <line x1="0" y1="232" x2="200" y2="248" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3 3"/>
-        <line x1="55" y1="240" x2="180" y2="232" stroke="#0a3d62" stroke-width="3" stroke-linecap="round"/>
-        <line x1="105" y1="240" x2="115" y2="180" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="135" y1="235" x2="125" y2="195" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="115" y1="180" x2="135" y2="180" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="125" y1="180" x2="108" y2="115" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="108" y1="118" x2="58" y2="120" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <line x1="108" y1="118" x2="138" y2="135" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="111" cy="100" r="11" fill="none" stroke="#1f2328" stroke-width="2"/>
-        <line x1="122" y1="98" x2="160" y2="86" stroke="#3a5a40" stroke-width="1.2" stroke-dasharray="2 2"/>
-        <polygon points="162,86 157,83 157,89" fill="#3a5a40"/>
-
-        <g class="joint-dot" data-joint="ankle" data-stage="f3"><circle class="pulse" cx="105" cy="240" r="9" fill="#0a3d62"/><circle cx="105" cy="240" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="knee" data-stage="f3"><circle class="pulse" cx="113" cy="210" r="9" fill="#0a3d62"/><circle cx="113" cy="210" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hip" data-stage="f3"><circle class="pulse" cx="125" cy="180" r="9" fill="#0a3d62"/><circle cx="125" cy="180" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="shoulder" data-stage="f3"><circle class="pulse" cx="110" cy="118" r="9" fill="#0a3d62"/><circle cx="110" cy="118" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hand" data-stage="f3"><circle class="pulse" cx="58" cy="120" r="9" fill="#0a3d62"/><circle cx="58" cy="120" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="head" data-stage="f3"><circle class="pulse" cx="111" cy="100" r="9" fill="#0a3d62"/><circle cx="111" cy="100" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-      </svg>
-    </div>
-    <p class="frame-note">新弯起始；外手前伸引导。</p>
+  <!-- Single hover-detail panel shared across all frames -->
+  <div class="joint-detail" id="joint-detail-en" data-lang-content="en" aria-live="polite">
+    <span class="joint-prompt">Hover any blue joint marker to see what happens there at that frame.</span>
+  </div>
+  <div class="joint-detail" id="joint-detail-zh" data-lang-content="zh" aria-live="polite">
+    <span class="joint-prompt">悬停于任一蓝色关节标记，可查看该过渡帧中该关节上发生的技术细节。</span>
   </div>
 
-  <div class="frame-panel">
-    <div class="frame-num">4</div>
-    <div class="frame-svg-wrap">
-      <svg class="frame-svg" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="第 4 帧：新弯顶">
-        <line x1="0" y1="232" x2="200" y2="248" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3 3"/>
-        <line x1="48" y1="248" x2="170" y2="222" stroke="#0a3d62" stroke-width="3" stroke-linecap="round"/>
-        <line x1="80" y1="245" x2="125" y2="158" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="115" y1="232" x2="135" y2="172" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="125" y1="158" x2="142" y2="162" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="135" y1="160" x2="120" y2="105" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="120" y1="108" x2="58" y2="118" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <line x1="120" y1="108" x2="148" y2="142" stroke="#1f2328" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="125" cy="92" r="11" fill="none" stroke="#1f2328" stroke-width="2"/>
-        <line x1="136" y1="90" x2="172" y2="76" stroke="#3a5a40" stroke-width="1.2" stroke-dasharray="2 2"/>
-        <polygon points="174,76 169,73 169,79" fill="#3a5a40"/>
-
-        <text x="35" y="270" font-family="Noto Serif SC, serif" font-size="9" fill="#3a5a40">最大立刃角度</text>
-
-        <g class="joint-dot" data-joint="ankle" data-stage="f4"><circle class="pulse" cx="80" cy="245" r="9" fill="#0a3d62"/><circle cx="80" cy="245" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="knee" data-stage="f4"><circle class="pulse" cx="103" cy="200" r="9" fill="#0a3d62"/><circle cx="103" cy="200" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hip" data-stage="f4"><circle class="pulse" cx="135" cy="160" r="9" fill="#0a3d62"/><circle cx="135" cy="160" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="shoulder" data-stage="f4"><circle class="pulse" cx="122" cy="108" r="9" fill="#0a3d62"/><circle cx="122" cy="108" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="hand" data-stage="f4"><circle class="pulse" cx="58" cy="118" r="9" fill="#0a3d62"/><circle cx="58" cy="118" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-        <g class="joint-dot" data-joint="head" data-stage="f4"><circle class="pulse" cx="125" cy="92" r="9" fill="#0a3d62"/><circle cx="125" cy="92" r="5" fill="#1e5fa8" stroke="white" stroke-width="1.5"/></g>
-      </svg>
-    </div>
-    <p class="frame-note">新弯顶：最大 angulation、最大立刃、外腿完全承重。</p>
-  </div>
+  <p class="carving-legend">
+    <span data-lang-content="en">3D mannequin posed using <a href="https://boytchev.github.io/mannequin.js/" target="_blank" rel="noopener">mannequin.js</a> (Boytchev). Frame 4 corresponds to the GoPro reference photo; Frames 1–3 reconstruct the cross-under transition by extrapolation. Drag any figure to rotate.</span>
+    <span data-lang-content="zh">3D 人偶使用 <a href="https://boytchev.github.io/mannequin.js/" target="_blank" rel="noopener">mannequin.js</a>（Boytchev）摆出。第 4 帧对应那张 GoPro 参考照片；第 1–3 帧由此外推重构 cross-under 过渡。可拖动任一人偶旋转查看。</span>
+  </p>
 
 </div>
 
-<div class="travel-arrow"><span class="arrow-line"></span><span class="arrow-text">行进方向 · 下山</span></div>
+<div data-lang-content="en">
+<h3>The cross-under transition</h3>
 
-<div class="joint-detail" id="joint-detail-zh" aria-live="polite">
-  <span class="joint-prompt">悬停于任一蓝色关节，可查看该时刻在该关节上发生的技术细节。</span>
+<p>What the four-frame diagram makes visible is that the connection between two carved arcs is itself a coordinated movement, not a passive interval. At frame 1, the skier has passed the apex of the previous turn and the outside leg is still extended; pressure on the edges has begun to release. At frame 2 — the cross-under proper — the skier <strong>actively retracts the legs</strong> beneath the body. The body becomes upright and compact, the skis flatten on the snow, and there is a brief weightlessness as the center of mass passes <em>under</em> the previous body line and over toward the new turn's inside. At frame 3 the new outside leg begins to extend, the outside hand projects forward to lead the new arc, and the skis begin to engage their new edges. At frame 4 — the new apex — angulation has built to its maximum and the new outside leg is fully loaded.</p>
+
+<p>The contrast is with <em>cross-over</em> transitions, where the skier extends up between turns and the body's mass moves <em>over</em> the skis from above. Cross-over is appropriate at lower speeds; at high speeds and high edge angles, cross-under is necessary because there is no time to extend up and re-balance, and the legs must compress and re-extend underneath a relatively quiet upper body. Cross-under is what allows World Cup giant slalom skiers to link tight turns at 70 km/h without their upper body bouncing visibly.</p>
 </div>
 
-<p class="carving-legend">侧视，目光横切坡面；滑雪者从左向右行进。第 4 帧的姿态对应那张 GoPro 参考照片（最大 angulation 的 apex 时刻）。</p>
-
-</div>
-
+<div data-lang-content="zh">
 <h3>Cross-under 过渡</h3>
 
 <p>这张四帧图所揭示的是：两段刻入弧之间的连接本身就是一个协调的动作，而不是一个被动的间隔。在第 1 帧，滑雪者已经过了上一弯的 apex，外腿仍处在伸展状态，板刃上的压力开始释放。在第 2 帧——cross-under 的核心瞬间——滑雪者<strong>主动收回双腿</strong>。身体变得直立而紧凑，双板趋平，重心从 <em>下方</em> 通过原本身体所在的那条线、转移到新弯的内侧，并伴随一段短暂的失重。在第 3 帧，新外腿开始伸长，外手前伸以引导新弧，双板开始介入新一侧的立刃。在第 4 帧——新弯顶——angulation 已达到最大，新外腿完全承重。</p>
 
 <p>与之对比的是 <em>cross-over</em> 过渡：滑雪者在两弯之间向上伸展，身体质量从上方<em>越过</em>滑板移到新一侧。Cross-over 在低速下合宜；高速、高立刃角下则必须使用 cross-under，因为没有时间向上伸展再重新平衡——双腿必须在相对安静的上半身下方完成压缩与再伸展。Cross-under 正是世界杯大回转选手能在 70 km/h 下连续完成紧密弯而上半身不可见跳动的原因。</p>
-
 </div>
 
 </section>
@@ -1871,86 +1688,355 @@ Three factors must be present for an avalanche: <strong>terrain</strong> capable
     }
   };
 
-  var dotsEn = document.querySelectorAll('#carving [data-lang-content="en"] .joint-dot');
-  var dotsZh = document.querySelectorAll('#carving [data-lang-content="zh"] .joint-dot');
-  var detailEn = document.getElementById('joint-detail-en');
-  var detailZh = document.getElementById('joint-detail-zh');
-
-  if (!detailEn || !detailZh) return;
-
-  function showJoint(lang, joint, stage) {
-    var dict = DATA[lang];
-    var key = joint + '|' + stage;
-    var text = dict.content[key] || dict.prompt;
-    var jointName = dict.joints[joint] || joint;
-    var stageName = dict.stages[stage] || stage;
-    var target = lang === 'zh' ? detailZh : detailEn;
-    target.innerHTML =
-      '<div class="joint-title">' + escapeHtml(jointName) +
-      ' <span class="joint-stage">— ' + escapeHtml(stageName) + '</span></div>' +
-      '<div class="joint-text">' + escapeHtml(text) + '</div>';
-  }
-
-  function resetDetail(lang) {
-    var dict = DATA[lang];
-    var target = lang === 'zh' ? detailZh : detailEn;
-    target.innerHTML = '<span class="joint-prompt">' + escapeHtml(dict.prompt) + '</span>';
-  }
-
-  function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, function(c) {
-      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
-    });
-  }
-
-  function bindDots(dots, lang) {
-    dots.forEach(function(dot) {
-      var joint = dot.getAttribute('data-joint');
-      var stage = dot.getAttribute('data-stage');
-
-      dot.addEventListener('mouseenter', function() {
-        showJoint(lang, joint, stage);
-        markActive(dots, dot);
-      });
-      dot.addEventListener('mouseleave', function() {
-        // keep last shown content; only clear on tap-toggle
-      });
-      dot.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (dot.classList.contains('active')) {
-          dot.classList.remove('active');
-          resetDetail(lang);
-        } else {
-          showJoint(lang, joint, stage);
-          markActive(dots, dot);
-        }
-      });
-      // Keyboard accessibility
-      dot.setAttribute('tabindex', '0');
-      dot.setAttribute('role', 'button');
-      dot.setAttribute('aria-label', DATA[lang].joints[joint] + ' — ' + DATA[lang].stages[stage]);
-      dot.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          showJoint(lang, joint, stage);
-          markActive(dots, dot);
-        }
-      });
-      dot.addEventListener('focus', function() {
-        showJoint(lang, joint, stage);
-        markActive(dots, dot);
-      });
-    });
-  }
-
-  function markActive(dots, activeDot) {
-    dots.forEach(function(d) { d.classList.remove('active'); });
-    activeDot.classList.add('active');
-  }
-
-  bindDots(dotsEn, 'en');
-  bindDots(dotsZh, 'zh');
+  // Expose DATA globally so the mannequin module can use it
+  window.CARVING_DATA = DATA;
 })();
+</script>
+
+<!-- ============ Carving 3D scenes (mannequin.js) ============ -->
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { Male } from "mannequin";
+
+const DATA = window.CARVING_DATA;
+
+// ─── Joint posture data, four frames ──────────────────────────────
+// Angles in DEGREES, applied via mannequin.js property setters.
+// Convention: turning LEFT (left turn). Outside leg = LEFT leg through frames 1.
+// At cross-under (f2), legs neutral. After f2, transitioning to RIGHT turn,
+// so new outside leg = RIGHT leg in f3, f4.
+//
+// Each frame defines absolute joint angles for: body (bend/turn/tilt),
+// torso (bend/turn/tilt), head (nod/turn/tilt), arms, legs, knees, ankles.
+//
+// These are reconstructed from the GoPro reference photo for f4 and the
+// 4-stage continuous-frame instructor sequence; absolute values are tuned
+// to read clearly at the chosen camera angle, not measured biomechanics.
+
+const POSES = {
+  f1: {
+    // Past previous (left) apex. Body still inclined left, releasing.
+    body:    { bend:  6, turn:  -8, tilt: -22 },
+    torso:   { bend:  4, turn:  10, tilt:   8 },
+    head:    { nod:   8, turn:  18, tilt:  -4 },
+    l_leg:   { raise:-10, straddle: -6, turn:   0 }, l_knee: { bend: 16 }, l_ankle: { bend:  6, turn:  0, tilt: -10 },
+    r_leg:   { raise: -2, straddle:  4, turn:   0 }, r_knee: { bend: 32 }, r_ankle: { bend: 12, turn:  0, tilt: -10 },
+    l_arm:   { raise: 60, straddle: 30, turn: -30 }, l_elbow:{ bend: 35 }, l_wrist: { bend:  0, turn:  0, tilt: 0 },
+    r_arm:   { raise: 70, straddle:-50, turn: -10 }, r_elbow:{ bend: 50 }, r_wrist: { bend:  0, turn:  0, tilt: 0 },
+  },
+  f2: {
+    // Cross-under midpoint. Body upright and compact, both legs flexed.
+    body:    { bend: 18, turn:   0, tilt:   0 },
+    torso:   { bend:  4, turn:   2, tilt:   0 },
+    head:    { nod:   6, turn:  10, tilt:   0 },
+    l_leg:   { raise:-10, straddle: -2, turn:   0 }, l_knee: { bend: 60 }, l_ankle: { bend: 18, turn:  0, tilt:  0 },
+    r_leg:   { raise:-10, straddle:  2, turn:   0 }, r_knee: { bend: 60 }, r_ankle: { bend: 18, turn:  0, tilt:  0 },
+    l_arm:   { raise: 70, straddle: 35, turn: -10 }, l_elbow:{ bend: 30 }, l_wrist: { bend:  0, turn:  0, tilt: 0 },
+    r_arm:   { raise: 70, straddle:-35, turn: -10 }, r_elbow:{ bend: 30 }, r_wrist: { bend:  0, turn:  0, tilt: 0 },
+  },
+  f3: {
+    // New (right) turn initiation. Body inclining right, new outside hand leads.
+    body:    { bend:  6, turn:  10, tilt:  20 },
+    torso:   { bend:  4, turn: -10, tilt:  -8 },
+    head:    { nod:   6, turn: -16, tilt:   0 },
+    l_leg:   { raise: -2, straddle: -4, turn:   0 }, l_knee: { bend: 32 }, l_ankle: { bend: 12, turn:  0, tilt: 10 },
+    r_leg:   { raise:-10, straddle:  6, turn:   0 }, r_knee: { bend: 16 }, r_ankle: { bend:  6, turn:  0, tilt: 10 },
+    l_arm:   { raise: 90, straddle: 60, turn:   0 }, l_elbow:{ bend: 30 }, l_wrist: { bend:  0, turn:  0, tilt: 0 },
+    r_arm:   { raise: 50, straddle:-15, turn: -20 }, r_elbow:{ bend: 50 }, r_wrist: { bend:  0, turn:  0, tilt: 0 },
+  },
+  f4: {
+    // New apex. Max angulation: hip out (right), torso counter, outside leg (right) extended,
+    // inside leg (left) compressed. Outside (left) hand leading, pole-touch position.
+    body:    { bend:  4, turn:  18, tilt:  44 },
+    torso:   { bend:  2, turn: -18, tilt: -22 },
+    head:    { nod:  10, turn: -22, tilt:  -8 },
+    // Inside (left) leg — compressed, knee bent, foot tucked
+    l_leg:   { raise: 10, straddle:-12, turn:   0 }, l_knee: { bend: 70 }, l_ankle: { bend: 14, turn:  0, tilt: 18 },
+    // Outside (right) leg — fully extended, taking load
+    r_leg:   { raise:-12, straddle: 10, turn:   0 }, r_knee: { bend: 14 }, r_ankle: { bend:  4, turn:  0, tilt: 18 },
+    // Outside (left) hand — leading and reaching forward to pole-touch
+    l_arm:   { raise:100, straddle: 60, turn:  10 }, l_elbow:{ bend: 25 }, l_wrist: { bend:  0, turn:  0, tilt: 0 },
+    // Inside (right) hand — quiet, slightly back
+    r_arm:   { raise: 40, straddle:-10, turn: -30 }, r_elbow:{ bend: 60 }, r_wrist: { bend:  0, turn:  0, tilt: 0 },
+  },
+};
+
+// ─── Joint-to-mannequin-anchor mapping ────────────────────────────
+// For each frame, which mannequin part hosts each labeled "joint" dot,
+// and the local offset (in mannequin units) from that part's origin.
+// Frames 1, 2: outside leg = LEFT (still in left turn or transition).
+// Frames 3, 4: outside leg = RIGHT (new right turn).
+
+function jointAnchors(frameKey) {
+  const isRightTurn = (frameKey === 'f3' || frameKey === 'f4');
+  const outsideAnkle = isRightTurn ? 'r_ankle' : 'l_ankle';
+  const outsideKnee  = isRightTurn ? 'r_knee'  : 'l_knee';
+  const outsideHand  = isRightTurn ? 'l_wrist' : 'r_wrist';   // outside hand opposite of outside leg in mirrored carving counter
+  // Note: in carving, the outside HAND that "leads" the turn is on the same side as the outside LEG
+  // (e.g., right turn: outside leg right, but the leading hand is also the body-front-side hand).
+  // Simplified: lead hand = the one extended forward; in our poses we set arm angles accordingly.
+  // Use the more-extended arm, which corresponds to:
+  const leadingHand = isRightTurn ? 'l_wrist' : 'l_wrist';  // f1, f3, f4 lead with l_arm; f2 doesn't matter
+  // Hip & shoulder picked as midline points; we use torso for these.
+  return {
+    ankle:    { part: outsideAnkle, offset: [0, 4, 0] },     // ankle joint center, slightly above foot
+    knee:     { part: outsideKnee,  offset: [0, 0, 0] },     // knee pivot
+    hip:      { part: 'pelvis',     offset: [0, 4, 0] },     // hip area, slightly above pelvis center
+    shoulder: { part: 'torso',      offset: [0, 14, 0] },    // top of torso (near shoulders)
+    hand:     { part: leadingHand,  offset: [0, 2, 0] },     // hand
+    head:     { part: 'head',       offset: [0, 4, 0] },     // top of head
+  };
+}
+
+// ─── Set up scenes ────────────────────────────────────────────────
+const FRAMES = ['f1', 'f2', 'f3', 'f4'];
+const scenes = {};
+
+function applyPose(figure, pose) {
+  // Apply pose object's properties to figure parts.
+  // Use absolute assignment.
+  for (const partName in pose) {
+    const part = figure[partName];
+    if (!part) continue;
+    const spec = pose[partName];
+    for (const prop in spec) {
+      if (typeof part[prop] !== 'undefined' || prop in Object.getPrototypeOf(part)) {
+        try { part[prop] = spec[prop]; } catch (e) {}
+      }
+    }
+  }
+}
+
+function makeSki(figure, side) {
+  // Attach a simple ski beneath the named ankle. Ski is a thin elongated box.
+  const skiGeom = new THREE.BoxGeometry(2.2, 0.5, 18);
+  const skiMat = new THREE.MeshLambertMaterial({ color: 0x0a3d62 });
+  const ski = new THREE.Mesh(skiGeom, skiMat);
+  ski.position.set(0, 4.5, -2);  // under foot, slightly forward
+  ski.castShadow = true;
+  ski.receiveShadow = true;
+  const ankle = side === 'l' ? figure.l_ankle : figure.r_ankle;
+  ankle.attach(ski);
+  return ski;
+}
+
+function buildScene(frameKey, canvas) {
+  const scene = new THREE.Scene();
+  scene.background = null;  // transparent so CSS gradient shows
+
+  const w = canvas.clientWidth || 200;
+  const h = canvas.clientHeight || 260;
+
+  const camera = new THREE.PerspectiveCamera(35, w / h, 1, 500);
+  // 3/4 view: slightly off-axis, looking down a bit
+  camera.position.set(35, 25, 60);
+  camera.lookAt(0, 12, 0);
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+    alpha: true,
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(w, h, false);
+
+  // Lighting
+  const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(ambient);
+  const dir = new THREE.DirectionalLight(0xffffff, 0.8);
+  dir.position.set(20, 40, 30);
+  scene.add(dir);
+
+  // Add the figure
+  const figure = new Male();
+  // Recolor to match page palette: muted navy / tan
+  try {
+    figure.recolor(
+      'antiquewhite',  // head
+      '#0a3d62',       // shoes
+      '#1f2328',       // pelvis
+      '#1e5fa8',       // joints
+      '#1f2328',       // limbs
+      '#0a3d62',       // torso
+      'antiquewhite'   // nails
+    );
+  } catch (e) {}
+
+  // Apply pose
+  applyPose(figure, POSES[frameKey]);
+
+  // Attach skis to both ankles
+  makeSki(figure, 'l');
+  makeSki(figure, 'r');
+
+  scene.add(figure);
+
+  // OrbitControls — but we don't need full controls, just rotation.
+  const controls = new OrbitControls(camera, canvas);
+  controls.enableZoom = false;
+  controls.enablePan = false;
+  controls.target.set(0, 12, 0);
+  controls.minPolarAngle = Math.PI * 0.2;
+  controls.maxPolarAngle = Math.PI * 0.7;
+  controls.update();
+
+  return { scene, camera, renderer, figure, controls };
+}
+
+// ─── Project 3D point to overlay 2D coordinates ───────────────────
+function projectPoint(figure, partName, offset, camera, canvas) {
+  const part = figure[partName];
+  if (!part || typeof part.point !== 'function') return null;
+  const worldPos = part.point(offset[0], offset[1], offset[2]);
+  // worldPos is a THREE.Vector3 in world coords
+  const v = worldPos.clone().project(camera);
+  // v.x/v.y/v.z in NDC [-1,1]
+  if (v.z > 1 || v.z < -1) return null;  // off-screen
+  const x = (v.x * 0.5 + 0.5) * canvas.clientWidth;
+  const y = (v.y * -0.5 + 0.5) * canvas.clientHeight;
+  return { x, y };
+}
+
+// ─── Build dots for each frame ────────────────────────────────────
+const JOINT_KEYS = ['ankle', 'knee', 'hip', 'shoulder', 'hand', 'head'];
+
+function buildDots(frameKey, overlay) {
+  const dots = {};
+  JOINT_KEYS.forEach(joint => {
+    const dot = document.createElement('div');
+    dot.className = 'joint-dot';
+    dot.setAttribute('data-joint', joint);
+    dot.setAttribute('data-stage', frameKey);
+    dot.setAttribute('tabindex', '0');
+    dot.setAttribute('role', 'button');
+    overlay.appendChild(dot);
+    dots[joint] = dot;
+  });
+  return dots;
+}
+
+// ─── Hover/click handlers ─────────────────────────────────────────
+function getCurrentLang() {
+  return document.body.getAttribute('data-lang') || 'en';
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
+function showJoint(joint, frameKey) {
+  const lang = getCurrentLang();
+  const dict = DATA[lang];
+  const key = joint + '|' + frameKey;
+  const text = dict.content[key] || dict.prompt;
+  const jointName = dict.joints[joint] || joint;
+  const stageName = dict.stages[frameKey] || frameKey;
+  ['en', 'zh'].forEach(l => {
+    const target = document.getElementById('joint-detail-' + l);
+    if (!target) return;
+    const ld = DATA[l];
+    target.innerHTML =
+      '<div class="joint-title">' + escapeHtml(ld.joints[joint] || joint) +
+      ' <span class="joint-stage">— ' + escapeHtml(ld.stages[frameKey] || frameKey) + '</span></div>' +
+      '<div class="joint-text">' + (ld.content[key] || escapeHtml(ld.prompt)) + '</div>';
+  });
+}
+
+function bindDot(dot, joint, frameKey, allDots) {
+  function activate() {
+    showJoint(joint, frameKey);
+    Object.values(allDots).forEach(d => d.classList.remove('active'));
+    dot.classList.add('active');
+  }
+  dot.addEventListener('mouseenter', activate);
+  dot.addEventListener('click', e => { e.stopPropagation(); activate(); });
+  dot.addEventListener('focus', activate);
+  dot.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+  });
+}
+
+// ─── Boot ─────────────────────────────────────────────────────────
+function boot() {
+  const grid = document.getElementById('carving-3d');
+  const loading = document.getElementById('carving-loading');
+  if (!grid) return;
+
+  FRAMES.forEach(frameKey => {
+    const canvas  = document.querySelector(`[data-frame-canvas="${frameKey}"]`);
+    const overlay = document.querySelector(`[data-frame-overlay="${frameKey}"]`);
+    if (!canvas || !overlay) return;
+
+    // Size the canvas based on the wrap (which has aspect-ratio set)
+    const wrap = canvas.parentElement;
+    const w = wrap.clientWidth;
+    const h = wrap.clientHeight;
+    canvas.width = Math.round(w * Math.min(window.devicePixelRatio, 2));
+    canvas.height = Math.round(h * Math.min(window.devicePixelRatio, 2));
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+
+    const ctx = buildScene(frameKey, canvas);
+    const anchors = jointAnchors(frameKey);
+    const dots = buildDots(frameKey, overlay);
+
+    // Bind interactivity
+    JOINT_KEYS.forEach(joint => {
+      bindDot(dots[joint], joint, frameKey, dots);
+    });
+
+    scenes[frameKey] = { ...ctx, anchors, dots, overlay };
+  });
+
+  // Hide loader, show grid
+  if (loading) loading.style.display = 'none';
+  grid.removeAttribute('hidden');
+
+  // Render loop
+  function tick() {
+    for (const k in scenes) {
+      const s = scenes[k];
+      s.controls.update();
+      s.renderer.render(s.scene, s.camera);
+      // Update dot positions
+      JOINT_KEYS.forEach(joint => {
+        const a = s.anchors[joint];
+        const p = projectPoint(s.figure, a.part, a.offset, s.camera, s.renderer.domElement);
+        if (p) {
+          s.dots[joint].style.left = p.x + 'px';
+          s.dots[joint].style.top  = p.y + 'px';
+          s.dots[joint].style.display = '';
+        } else {
+          s.dots[joint].style.display = 'none';
+        }
+      });
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    for (const k in scenes) {
+      const s = scenes[k];
+      const wrap = s.renderer.domElement.parentElement;
+      const w = wrap.clientWidth;
+      const h = wrap.clientHeight;
+      s.renderer.setSize(w, h, false);
+      s.camera.aspect = w / h;
+      s.camera.updateProjectionMatrix();
+    }
+  });
+}
+
+// Start once DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
+}
 </script>
 
 </body>
