@@ -694,203 +694,28 @@ body.ski-page[data-lang="zh"] {
   .ski-page * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
 
-/* ─── Carving anatomy figure (interactive 3D, mannequin.js) ─────── */
+/* ─── Carving figure (model-viewer + caption) ──────────────────── */
 .ski-page .carving-figure {
   margin: 1.5rem 0 2rem;
   background: var(--ski-paper-deep);
   border: 1px solid var(--ski-rule);
   border-radius: 4px;
-  padding: 1.5rem 1rem 1.25rem;
-  max-width: 56rem;
+  padding: 1.25rem 1rem 1rem;
+  max-width: 48rem;
 }
 
-.ski-page .carving-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 220px;
-  font-family: var(--ski-font-ui);
-  font-size: 0.85rem;
-  color: var(--ski-ink-faint);
-  font-style: italic;
-}
-.ski-page[data-lang="zh"] .carving-loading {
-  font-family: var(--ski-font-cn);
-  font-style: normal;
-}
-
-.ski-page .carving-3d-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
-}
-
-@media (max-width: 820px) {
-  .ski-page .carving-3d-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .ski-page .carving-3d-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-}
-
-.ski-page .frame-panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-
-.ski-page .frame-num {
-  font-family: var(--ski-font-mono);
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--ski-navy);
-  margin-bottom: 0.2rem;
-}
-
-.ski-page .frame-canvas-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  background: linear-gradient(to bottom, #f5f4ee 0%, #e8e6dd 100%);
-  border-radius: 3px;
-  overflow: hidden;
-  cursor: grab;
-}
-.ski-page .frame-canvas-wrap:active { cursor: grabbing; }
-
-.ski-page .frame-canvas {
+.ski-page model-viewer {
   display: block;
   width: 100%;
-  height: 100%;
-  touch-action: none;
-}
-
-.ski-page .dot-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.ski-page .joint-dot {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  margin-left: -8px;
-  margin-top: -8px;
-  border-radius: 50%;
-  background: rgba(30, 95, 168, 0.85);
-  border: 1.5px solid white;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: background 0.12s, transform 0.12s;
-  box-shadow: 0 0 0 0 rgba(10, 61, 98, 0.5);
-}
-
-.ski-page .joint-dot::before {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  border: 1px solid rgba(10, 61, 98, 0.4);
-  animation: jointPulse 2.4s ease-in-out infinite;
-}
-
-.ski-page .joint-dot:hover,
-.ski-page .joint-dot.active {
-  background: var(--ski-navy);
-  transform: scale(1.15);
-}
-
-@keyframes jointPulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0; transform: scale(1.6); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ski-page .joint-dot::before { animation: none; opacity: 0; }
-}
-
-.ski-page .frame-note {
-  font-family: var(--ski-font-ui);
-  font-size: 0.7rem;
-  color: var(--ski-ink-soft);
-  text-align: center;
-  margin-top: 0.4rem;
-  line-height: 1.35;
-  font-style: italic;
-  min-height: 2.5rem;
-}
-
-.ski-page[data-lang="zh"] .frame-note {
-  font-family: var(--ski-font-cn);
-  font-style: normal;
-  font-size: 0.78rem;
-}
-
-/* Joint detail card panel */
-.ski-page .joint-detail {
-  margin-top: 1rem;
-  padding: 0.85rem 1rem;
-  background: white;
-  border: 1px solid var(--ski-rule);
-  border-left: 3px solid var(--ski-navy);
+  height: 480px;
+  background: linear-gradient(to bottom, #f5f4ee 0%, #e8e6dd 100%);
   border-radius: 3px;
-  font-size: 0.88rem;
-  line-height: 1.5;
-  min-height: 5.5rem;
-  max-width: 44rem;
+  border: 1px solid var(--ski-rule);
+  --poster-color: transparent;
 }
 
-.ski-page .joint-detail .joint-title {
-  font-family: var(--ski-font-ui);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ski-navy);
-  font-weight: 700;
-  margin-bottom: 0.4rem;
-  display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-}
-
-.ski-page[data-lang="zh"] .joint-detail .joint-title {
-  font-family: var(--ski-font-cn);
-  letter-spacing: 0.04em;
-  text-transform: none;
-  font-size: 0.82rem;
-  font-weight: 600;
-}
-
-.ski-page .joint-detail .joint-stage {
-  font-size: 0.65rem;
-  color: var(--ski-ink-faint);
-  font-weight: 500;
-}
-
-.ski-page[data-lang="zh"] .joint-detail .joint-stage {
-  font-size: 0.78rem;
-}
-
-.ski-page .joint-detail .joint-text {
-  color: var(--ski-ink);
-}
-
-.ski-page .joint-detail .joint-prompt {
-  color: var(--ski-ink-faint);
-  font-style: italic;
-}
-
-.ski-page[data-lang="zh"] .joint-detail .joint-prompt {
-  font-style: normal;
+@media (max-width: 600px) {
+  .ski-page model-viewer { height: 380px; }
 }
 
 .ski-page .carving-legend {
@@ -898,12 +723,12 @@ body.ski-page[data-lang="zh"] {
   font-size: 0.7rem;
   color: var(--ski-ink-faint);
   text-align: center;
-  margin-top: 0.6rem;
+  margin-top: 0.7rem;
   font-style: italic;
-  max-width: 44rem;
+  max-width: 42rem;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .ski-page[data-lang="zh"] .carving-legend {
