@@ -815,6 +815,7 @@ body.ski-page[data-lang="zh"] {
   padding: 1rem 1rem 0.75rem;
   max-width: 56rem;
   overflow-x: auto;
+  clear: right; /* never overlap floated sidenotes on wide screens */
 }
 
 .ski-page .nsaa-figure svg {
