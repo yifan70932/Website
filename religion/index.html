@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Critiques of Religion · A Survey</title>
+<title>Returning the Ticket · A Survey of Critiques of Religion</title>
 <meta name="description" content="A scholarly survey of philosophical critiques of religion: Christianity, Buddhism, Islam, with general critical traditions from Hume to cognitive science." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,11 +20,11 @@
     --ink-faded: #8a8a92;
     --rule: #d4d4d0;
     --rule-faint: #ececec;
-    --accent: #0a3d62;        /* navy — primary accent, aligned with site palette */
-    --accent-hover: #1e5fa8;  /* sapphire — hover state, secondary accent */
-    --accent-tint: rgba(10, 61, 98, 0.06);
-    --link: #0a3d62;          /* unified with accent */
-    --link-hover: #1e5fa8;
+    --accent: #7a1a1f;        /* deep wine, slightly cooler than oxblood */
+    --accent-hover: #9a2730;
+    --accent-tint: rgba(122, 26, 31, 0.06);
+    --link: #2c4866;
+    --link-hover: #4a6e91;
     --shadow-sm: 0 1px 2px rgba(17,17,20,0.04);
     --shadow-md: 0 8px 28px rgba(17,17,20,0.07);
 
@@ -240,6 +240,10 @@
     margin: 22px 0;
     max-width: 56ch;
   }
+  /* Tighter spacing when two epigraphs are stacked */
+  .hero-epigraph + .hero-epigraph {
+    margin-top: 14px;
+  }
   body[data-lang="zh"] .hero-epigraph {
     font-family: var(--sans-cn);
     font-style: normal;
@@ -263,6 +267,30 @@
     color: var(--ink-faded);
     margin-top: 10px;
     text-transform: uppercase;
+  }
+
+  /* Long-form literary excerpt: roman (not italic) for legibility, wider max-width, more line-height */
+  .hero-epigraph.long {
+    font-style: normal;
+    font-size: 15.5px;
+    line-height: 1.7;
+    max-width: 64ch;
+    margin-top: 24px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  body[data-lang="zh"] .hero-epigraph.long {
+    font-size: 15px;
+    line-height: 1.85;
+  }
+  .hero-epigraph.long em {
+    font-style: italic;
+    color: var(--ink);
+  }
+  body[data-lang="zh"] .hero-epigraph.long em {
+    font-style: normal;
+    color: var(--ink);
+    font-weight: 600;
   }
 
   /* === Two-column layout for wide screens === */
@@ -880,8 +908,8 @@
   <div class="topbar-inner">
     <div class="brand">
       <span class="brand-mark">§</span>
-      <span data-lang-content="en">Critiques of Religion</span>
-      <span data-lang-content="zh">宗教批评论纲</span>
+      <span data-lang-content="en">Returning the Ticket</span>
+      <span data-lang-content="zh">归还入场券</span>
     </div>
     <div class="topbar-controls">
       <div class="lang-toggle" role="group" aria-label="Language toggle">
@@ -901,8 +929,8 @@
       <span data-lang-content="zh">学术综述 <span class="dot">·</span> 第一版</span>
     </div>
     <h1>
-      <span data-lang-content="en">Critiques of <em>Religion</em></span>
-      <span data-lang-content="zh">宗教批评<em>论纲</em></span>
+      <span data-lang-content="en">Returning the <em>Ticket</em></span>
+      <span data-lang-content="zh">归还<em>入场券</em></span>
     </h1>
     <p class="hero-deck">
       <span data-lang-content="en">A survey of philosophical, historical, and social-scientific critiques of religion — covering Christianity, Buddhism, and Islam, with the broader genealogy of critique from the Enlightenment to cognitive science.</span>
@@ -911,16 +939,32 @@
     <div class="hero-intro" data-lang-content="en">
       <p>This compendium gathers, in one place and at scholarly depth, the principal philosophical critiques that have been brought against religion — both against the doctrines particular religions teach, against the institutions that profess to transmit those doctrines, and against the religious mode of belief as such. Each of the forty entries states the argument precisely, lists primary and secondary sources with open-access links where available, and presents the principal counter-replies together with the rejoinders they have provoked. A <em>Tensions</em> section closing each chapter registers the genuine difficulties internal to the critical positions themselves: the survey aims at intellectual honesty, not at polemic on either side. The reader may consult it as a reference work, follow a single thread through the linked sources, or read it as the connected account of one of the longer arguments in modern intellectual life.</p>
       <div class="hero-epigraph">
+        From the beginning men used God to justify the unjustifiable.
+        <cite>Salman Rushdie, <em>The Satanic Verses</em> (1988)</cite>
+      </div>
+      <div class="hero-epigraph">
         <span class="latin">Sapere aude.</span> Have the courage to use your own understanding — that is the motto of enlightenment.
         <cite>Immanuel Kant, <em>Beantwortung der Frage: Was ist Aufklärung?</em> (1784)</cite>
+      </div>
+      <div class="hero-epigraph long">
+        Is there in the whole world a being who would have the right to forgive and could forgive? I don't want harmony. From love for humanity I don't want it. I would rather be left with the unavenged suffering. I would rather remain with my unavenged suffering and unsatisfied indignation, even if I were wrong. Besides, too high a price is asked for harmony; it's beyond our means to pay so much to enter on it. And so I hasten to give back my entrance ticket, and if I am an honest man I am bound to give it back as soon as possible. And that I am doing. It's not God that I don't accept, Alyosha, only <em>I most respectfully return him the ticket</em>.
+        <cite>Fyodor Dostoevsky, <em>The Brothers Karamazov</em>, Bk. V, ch. 4 (1880)</cite>
       </div>
     </div>
 
     <div class="hero-intro" data-lang-content="zh">
-      <p>本论纲在一处以学术深度汇集对宗教所提出之主要哲学批评——既针对各宗教所教导之教义,亦针对宣称传承这些教义之机构,亦针对宗教信仰模式本身。四十条条目,每条均精确陈述论证、列出主要与次级文献(凡可得者附开放获取链接),并呈现主要反驳与其所引发之再驳。每章末尾之<em>未解张力</em>部分诚实记录批评立场内部之真实困难:本综述追求学术诚实,而非任何一方之论辩立场。读者可作为参考书查询、循单一线索追踪所附文献、或将其作为现代知识生活之中较长论证之一的连贯陈述阅读。</p>
+      <p>本综述在一处以学术深度汇集对宗教所提出之主要哲学批评——既针对各宗教所教导之教义,亦针对宣称传承这些教义之机构,亦针对宗教信仰模式本身。四十条条目,每条均精确陈述论证、列出主要与次级文献(凡可得者附开放获取链接),并呈现主要反驳与其所引发之再驳。每章末尾之<em>未解张力</em>部分诚实记录批评立场内部之真实困难:本综述追求学术诚实,而非任何一方之论辩立场。读者可作为参考书查询、循单一线索追踪所附文献、或将其作为现代知识生活之中较长论证之一的连贯陈述阅读。</p>
+      <div class="hero-epigraph">
+        自古以来,人即假神之名,以辩不可辩者。
+        <cite>萨尔曼·拉什迪《撒旦诗篇》(1988)</cite>
+      </div>
       <div class="hero-epigraph">
         <span class="latin">Sapere aude.</span> 要有勇气运用你自己的理智——这是启蒙的格言。
         <cite>康德《回答这个问题:什么是启蒙?》(1784)</cite>
+      </div>
+      <div class="hero-epigraph long">
+        整个世界上,可有任何存有者既有权宽恕、又能宽恕的吗?我不要和谐。出于对人类之爱,我不要它。我宁愿留下未被报复之苦难。我宁愿守着我未被报复之苦难与未被平息之义愤,哪怕我是错的。况且,和谐索价过高;此价我们无力承担以购入其中。故我急于归还入场券——若我是个诚实之人,便有义务尽早归还。此事我正在做。我所不接受的不是上帝,阿廖沙——我只是,<em>最恭敬地,把入场券归还予他</em>。
+        <cite>陀思妥耶夫斯基《卡拉马佐夫兄弟》第五卷第四章(1880)</cite>
       </div>
     </div>
   </header>
@@ -3680,7 +3724,7 @@
                   <div class="label" data-lang-content="en">A Concluding Note</div>
                   <div class="label" data-lang-content="zh">结语</div>
                   <p data-lang-content="en">The honest standpoint is the one that argues its case, attends to its objections, and resists the temptation to mistake its own historical formation for the place from which all reasoning must begin. The critiques surveyed in this compendium are serious, often decisive against specific theses; they are also, taken collectively, the work of a particular intellectual tradition with its own debts, blind spots, and unfinished business. To survey them honestly is to register both their force and their limits.</p>
-                  <p data-lang-content="zh">诚实之立足点是这样的立场:它论证其主张、回应其反驳、抗拒将自身之历史构造误认为一切推理必须由此开始之处所之诱惑。本论纲所综述之批评是严肃的,常对特定命题具决定性;它们集合起来,亦是一具自身之负累、盲点与未竟事务之特定知识传统之产物。诚实地综述之,即是同时登记其力量与其限度。</p>
+                  <p data-lang-content="zh">诚实之立足点是这样的立场:它论证其主张、回应其反驳、抗拒将自身之历史构造误认为一切推理必须由此开始之处所之诱惑。此处所综述之批评是严肃的,常对特定命题具决定性;它们集合起来,亦是一具自身之负累、盲点与未竟事务之特定知识传统之产物。诚实地综述之,即是同时登记其力量与其限度。</p>
                 </div>
               </div>
             </div>
@@ -3751,7 +3795,7 @@
               <text x="299.5" y="32" class="svg-text-mono" fill="white" text-anchor="middle">25.6%</text>
 
               <!-- Unaffiliated -->
-              <rect x="391.7" y="0" width="174.2" height="50" fill="#3a5a40"/>
+              <rect x="391.7" y="0" width="174.2" height="50" fill="#7a1a1f"/>
               <text x="478.8" y="32" class="svg-text-mono" fill="white" text-anchor="middle">24.2%</text>
 
               <!-- Hindus -->
@@ -4049,7 +4093,7 @@
         <!-- ============== Closing reflection ============== -->
         <div style="max-width: var(--reading-width); margin-top: 48px;">
           <p data-lang-content="en" style="font-style: italic; font-size: 16.5px; line-height: 1.7; color: var(--ink-soft); border-left: 2px solid var(--rule); padding-left: 22px;">These data do not adjudicate the philosophical questions of the preceding chapters. The growth of the unaffiliated does not show any of religion's claims to be false; the persistence of belief does not show them to be true. What the data do show is that the secularisation thesis, in its crude form (modernity entails religious decline), holds in some places and not in others — most notably it does not hold in the world's youngest and fastest-growing populations. Any honest assessment of religion's prospects must reckon with both the data and the arguments. The arguments are the subject of this compendium; the data are its quiet companion.</p>
-          <p data-lang-content="zh" style="font-size: 15.5px; line-height: 1.85; color: var(--ink-soft); border-left: 2px solid var(--rule); padding-left: 22px;">这些数据不裁决前章的哲学问题。无宗教归属者之增长不证明宗教任何主张为假;信仰之持续不证明其为真。数据所表明的是:粗糙形式的世俗化命题(现代性蕴涵宗教衰落)在某些地方成立而在另一些地方不成立——尤其在世界上最年轻、增长最快的人口中并不成立。对宗教前景之任何诚实评估,必须同时考量数据与论证。论证是本论纲之主题;数据是其安静的同伴。</p>
+          <p data-lang-content="zh" style="font-size: 15.5px; line-height: 1.85; color: var(--ink-soft); border-left: 2px solid var(--rule); padding-left: 22px;">这些数据不裁决前章的哲学问题。无宗教归属者之增长不证明宗教任何主张为假;信仰之持续不证明其为真。数据所表明的是:粗糙形式的世俗化命题(现代性蕴涵宗教衰落)在某些地方成立而在另一些地方不成立——尤其在世界上最年轻、增长最快的人口中并不成立。对宗教前景之任何诚实评估,必须同时考量数据与论证。论证是本综述之主题;数据是其安静的同伴。</p>
         </div>
 
         <div class="divider"></div>
