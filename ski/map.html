@@ -226,6 +226,38 @@
   line-height: 1.4;
 }
 
+/* Catchment population block */
+.ski-page.map-page .resort-popup .resort-catchment {
+  margin-top: 0.55rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--ski-rule);
+}
+.ski-page.map-page .resort-popup .catchment-header {
+  margin: 0 0 0.3rem;
+  font-family: var(--ski-font-ui);
+  font-size: 0.7rem;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  color: var(--ski-navy);
+  font-weight: 600;
+}
+.ski-page.map-page .resort-popup .catchment-stats {
+  margin: 0 0 0.3rem;
+  font-size: 0.78rem;
+}
+.ski-page.map-page .resort-popup .catchment-rank {
+  color: var(--ski-ink-faint);
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+.ski-page.map-page .resort-popup .catchment-border-note {
+  margin: 0.35rem 0 0;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--ski-ink-faint);
+  line-height: 1.4;
+}
+
 /* CartoDB Positron tiles attribution color tweak */
 .ski-page.map-page .leaflet-control-attribution {
   background: rgba(250, 250, 247, 0.85) !important;
@@ -375,9 +407,90 @@ function popupHTML(r) {
   if (r.snowfall_in)  html += `<dt>${snowL}</dt><dd>${r.snowfall_in}″</dd>`;
   
   html += `</dl>`;
+
+  // Catchment population block — only if we have catchment data
+  if (r.catchment_total_pop != null) {
+    html += renderCatchmentBlock(r, l);
+  }
+
   if (r.note) html += `<p class="resort-note">${r.note}</p>`;
   html += `</div>`;
   return html;
+}
+
+// ───────── Catchment population rendering ─────────
+// Format large numbers as "1.2 M" or "350 K" for compact display
+function fmtPop(n) {
+  if (n == null) return '—';
+  if (n >= 1e6) return (n / 1e6).toFixed(1) + ' M';
+  if (n >= 1e3) return Math.round(n / 1e3) + ' K';
+  return n.toLocaleString();
+}
+
+function fmtIncome(n) {
+  if (n == null) return '—';
+  return '$' + Math.round(n / 1000) + 'k';
+}
+
+function renderCatchmentBlock(r, l) {
+  const headerL = l === 'zh' ? '60 分钟车程市场' : '60-min drive market';
+  const totalL  = l === 'zh' ? '总人口'         : 'Total pop';
+  const waL     = l === 'zh' ? '工作年龄人口'    : 'Working-age (15–64)';
+  const incL    = l === 'zh' ? '家庭收入中位数'  : 'Median HH income';
+  const rankL   = l === 'zh' ? '排名'           : 'rank';
+  const ofL     = l === 'zh' ? '/ 共'           : 'of';
+  const borderL = l === 'zh'
+    ? '注：仅美国境内人口。该雪场 60 分钟车程范围可能延伸至加拿大；加拿大部分未计入。'
+    : 'Note: US population only. The 60-min drive area may extend into Canada; Canadian portion not counted.';
+
+  // Compute national rank (lazily; cache on first call)
+  const ranks = computeCatchmentRanks();
+  const popRank = ranks.popRank.get(r.name);
+  const waRank  = ranks.waRank.get(r.name);
+  const incRank = ranks.incRank.get(r.name);
+  const totalCount = ranks.totalCount;
+
+  let block = `<div class="resort-catchment">
+    <p class="catchment-header">${headerL}</p>
+    <dl class="resort-stats catchment-stats">`;
+
+  block += `<dt>${totalL}</dt><dd>${fmtPop(r.catchment_total_pop)}`;
+  if (popRank) block += ` <span class="catchment-rank">(${rankL} ${popRank} ${ofL} ${totalCount})</span>`;
+  block += `</dd>`;
+
+  block += `<dt>${waL}</dt><dd>${fmtPop(r.catchment_working_age_pop)}`;
+  if (waRank) block += ` <span class="catchment-rank">(${rankL} ${waRank} ${ofL} ${totalCount})</span>`;
+  block += `</dd>`;
+
+  block += `<dt>${incL}</dt><dd>${fmtIncome(r.catchment_median_income)}`;
+  if (incRank) block += ` <span class="catchment-rank">(${rankL} ${incRank} ${ofL} ${totalCount})</span>`;
+  block += `</dd>`;
+
+  block += `</dl>`;
+
+  if (r.catchment_border_note) {
+    block += `<p class="catchment-border-note">${borderL}</p>`;
+  }
+
+  block += `</div>`;
+  return block;
+}
+
+// Cache for national rank lookups (computed once across all resorts)
+let _catchmentRanks = null;
+function computeCatchmentRanks() {
+  if (_catchmentRanks) return _catchmentRanks;
+  const items = allMarkers.map(m => m.resort).filter(r => r.catchment_total_pop != null);
+  // Rank descending: highest population/income = rank 1
+  const popSorted = items.slice().sort((a, b) => b.catchment_total_pop - a.catchment_total_pop);
+  const waSorted  = items.slice().sort((a, b) => b.catchment_working_age_pop - a.catchment_working_age_pop);
+  const incSorted = items.slice().filter(r => r.catchment_median_income != null)
+                          .sort((a, b) => b.catchment_median_income - a.catchment_median_income);
+  const popRank = new Map(popSorted.map((r, i) => [r.name, i + 1]));
+  const waRank  = new Map(waSorted.map((r, i) => [r.name, i + 1]));
+  const incRank = new Map(incSorted.map((r, i) => [r.name, i + 1]));
+  _catchmentRanks = { popRank, waRank, incRank, totalCount: items.length };
+  return _catchmentRanks;
 }
 
 function createMarker(r) {
