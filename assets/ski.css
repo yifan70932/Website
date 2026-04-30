@@ -727,7 +727,10 @@ body.ski-page[data-lang="zh"] {
 /* ─── Carving figure (model-viewer + tabs) ─────────────────────── */
 .ski-page .carving-figure {
   margin: 1.5rem 0 2rem;
-  background: var(--ski-paper-deep);
+  /* Deeper stage background so the colored 3D figure has clear contrast.
+     The default page paper (#fafaf7) is too close to off-white materials
+     in the GLB; this medium-warm-gray creates clear figure/ground separation. */
+  background: #e6e2d6;
   border: 1px solid var(--ski-rule);
   border-radius: 4px;
   padding: 1rem 1rem 1rem;
