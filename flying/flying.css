@@ -128,7 +128,7 @@ body.flying-page[data-lang="zh"] {
   .flying-page .layout {
     display: grid;
     grid-template-columns: 14rem 1fr;
-    column-gap: 3rem;
+    column-gap: 2rem;
     align-items: start;
     padding-top: 2rem;
   }
@@ -414,22 +414,23 @@ html { scroll-behavior: smooth; }
 /* ─── Table of contents ──────────────────────────────────────────── */
 .flying-page .toc {
   font-family: var(--fl-font-ui);
-  font-size: 0.78rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 .flying-page[data-lang="zh"] .toc {
   font-family: var(--fl-font-cn);
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   line-height: 1.7;
 }
 
 .flying-page .toc-title {
   font-family: var(--fl-font-ui);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--fl-ink-faint);
-  margin-bottom: 0.85rem;
+  margin-bottom: 1rem;
 }
 .flying-page[data-lang="zh"] .toc-title {
   font-family: var(--fl-font-cn);
@@ -445,7 +446,7 @@ html { scroll-behavior: smooth; }
 .flying-page .toc li { margin: 0; padding: 0; }
 .flying-page .toc a {
   display: block;
-  padding: 0.32rem 0 0.32rem 0.7rem;
+  padding: 0.4rem 0 0.4rem 0.7rem;
   color: var(--fl-ink-soft);
   text-decoration: none;
   border-left: 2px solid transparent;
