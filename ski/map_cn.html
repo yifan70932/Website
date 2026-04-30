@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>China Outdoor Ski Resorts Map — yifanova</title>
+<meta name="description" content="An interactive map of major outdoor ski resorts in China, classified by 国家级滑雪旅游度假地 designation, white book tier, and the six-region scheme of the China Ski Industry White Book.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../assets/ski.css">
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+<style>
+/* ─── Map page-specific styling (mirrors map.html) ─── */
+.ski-page.map-page { font-family: var(--ski-font-body); background: var(--ski-paper); }
+
+.ski-page.map-page .map-intro {
+  background: var(--ski-paper);
+  border-bottom: 1px solid var(--ski-rule);
+  padding: 1.25rem 1.75rem 1rem;
+  position: relative;
+  z-index: 5;
+}
+.ski-page.map-page .map-intro h1 {
+  font-family: var(--ski-font-body);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ski-navy);
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.01em;
+}
+.ski-page.map-page .map-intro p {
+  font-size: 0.92rem;
+  color: var(--ski-ink-soft);
+  margin: 0;
+  max-width: 64rem;
+  line-height: 1.5;
+}
+.ski-page.map-page .map-intro a {
+  color: var(--ski-sapphire);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.ski-page.map-page[data-lang="zh"] .map-intro h1,
+.ski-page.map-page[data-lang="zh"] .map-intro p { font-family: var(--ski-font-cn); }
+
+.ski-page.map-page #map {
+  width: 100%;
+  height: calc(100vh - 56px - 110px);
+  background: var(--ski-paper-deep);
+  position: relative;
+}
+
+.ski-page.map-page .map-filter-panel {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(250, 250, 247, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--ski-rule);
+  border-radius: 4px;
+  padding: 0.85rem 1rem;
+  z-index: 1000;
+  min-width: 195px;
+  max-width: 245px;
+  font-size: 0.84rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.ski-page.map-page .map-filter-panel h3 {
+  font-size: 0.74rem;
+  font-weight: 600;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  color: var(--ski-navy);
+  margin: 0 0 0.45rem;
+  font-family: var(--ski-font-ui);
+}
+.ski-page.map-page .map-filter-panel label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.2rem 0;
+  cursor: pointer;
+  user-select: none;
+}
+.ski-page.map-page .map-filter-panel input[type="checkbox"] {
+  margin: 0;
+  cursor: pointer;
+}
+.ski-page.map-page .map-filter-panel .swatch {
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ski-page.map-page .map-filter-panel .region-count {
+  margin-left: auto;
+  font-family: var(--ski-font-ui);
+  color: var(--ski-ink-faint);
+  font-size: 0.74rem;
+}
+.ski-page.map-page .map-filter-panel .filter-section {
+  margin-top: 0.65rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--ski-rule);
+}
+.ski-page.map-page .map-filter-panel .visible-count {
+  margin-top: 0.65rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--ski-rule);
+  font-size: 0.78rem;
+  color: var(--ski-ink-soft);
+}
+
+/* Popup styling */
+.ski-page.map-page .leaflet-popup-content-wrapper {
+  border-radius: 4px;
+  background: var(--ski-paper);
+  border: 1px solid var(--ski-rule);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.ski-page.map-page .leaflet-popup-content {
+  margin: 0.85rem 1.1rem;
+  font-family: var(--ski-font-body);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.ski-page.map-page[data-lang="zh"] .leaflet-popup-content {
+  font-family: var(--ski-font-cn);
+}
+.ski-page.map-page .resort-popup .resort-name {
+  font-family: var(--ski-font-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ski-navy);
+  margin: 0 0 0.15rem;
+  letter-spacing: -0.005em;
+}
+.ski-page.map-page[data-lang="zh"] .resort-popup .resort-name {
+  font-family: var(--ski-font-cn);
+}
+.ski-page.map-page .resort-popup .resort-region {
+  font-family: var(--ski-font-ui);
+  font-size: 0.74rem;
+  color: var(--ski-ink-faint);
+  margin: 0 0 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.ski-page.map-page .resort-popup .resort-stats {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 0.85rem;
+  margin: 0.5rem 0 0.4rem;
+  font-size: 0.82rem;
+}
+.ski-page.map-page .resort-popup .resort-stats dt {
+  color: var(--ski-ink-faint);
+  font-family: var(--ski-font-ui);
+  font-size: 0.74rem;
+}
+.ski-page.map-page .resort-popup .resort-stats dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--ski-ink);
+  font-weight: 500;
+}
+.ski-page.map-page .resort-popup .resort-note {
+  margin-top: 0.45rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--ski-rule);
+  font-size: 0.76rem;
+  color: var(--ski-ink-faint);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* National tier badge */
+.ski-page.map-page .resort-popup .national-badge {
+  display: inline-block;
+  background: var(--ski-red, #a8323e);
+  color: white;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.35rem;
+  font-family: var(--ski-font-ui);
+}
+
+.ski-page.map-page .leaflet-control-attribution {
+  background: rgba(250, 250, 247, 0.85) !important;
+  font-size: 0.65rem !important;
+}
+.ski-page.map-page .leaflet-control-attribution a { color: var(--ski-sapphire); }
+</style>
+</head>
+
+<body class="ski-page map-page" data-lang="en">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">§</span>
+      <a href="/">yifanova</a>
+      <span style="color: var(--ski-ink-faded); margin: 0 0.4rem;">/</span>
+      <a href="index.html" style="color: var(--ski-ink-soft); text-decoration: none;">
+        <span data-lang-content="en">Alpine Skiing</span>
+        <span data-lang-content="zh">高山滑雪</span>
+      </a>
+      <span style="color: var(--ski-ink-faded); margin: 0 0.4rem;">/</span>
+      <a href="map.html" style="color: var(--ski-ink-soft); text-decoration: none;">
+        <span data-lang-content="en">U.S.</span>
+        <span data-lang-content="zh">美国</span>
+      </a>
+      <span style="color: var(--ski-ink-faded); margin: 0 0.4rem;">·</span>
+      <span data-lang-content="en">China</span>
+      <span data-lang-content="zh">中国</span>
+    </div>
+    <div class="lang-toggle" role="group" aria-label="Language toggle">
+      <button data-set-lang="en" class="active" aria-pressed="true">EN</button>
+      <button data-set-lang="zh" aria-pressed="false">中</button>
+    </div>
+  </div>
+</div>
+
+<div class="map-intro">
+  <h1>
+    <span data-lang-content="en">China Outdoor Ski Resorts</span>
+    <span data-lang-content="zh">中国户外滑雪场</span>
+  </h1>
+  <p data-lang-content="en">
+    ~94 outdoor resorts representing the bulk of skier visits per the <em>2024–2025 China Ski Industry White Book</em>. Indoor resorts are excluded. Markers colored by white-book region; size indicates resort tier (destination resort &gt; peri-urban learning &gt; tourist-experience). National-tier resorts (国家级滑雪旅游度假地) ringed in red. Data sources: White Book disclosures, MCT/Sports Administration designations across three batches, resort official sites.
+  </p>
+  <p data-lang-content="zh">
+    基于《2024-2025 中国滑雪产业白皮书》的 ~94 家户外雪场，已剔除室内滑雪场。颜色按白皮书六大区分类；大小依雪场类型（目的地度假型 &gt; 城郊学习型 &gt; 旅游体验型）。国家级滑雪旅游度假地以红色外环标注。数据来源：滑雪产业白皮书、文旅部/体育总局三批国家级度假地公告、雪场官网。
+  </p>
+</div>
+
+<!-- ============ MAP ============ -->
+<div id="map"></div>
+
+<script>
+// ───────── Helpers ─────────
+function lang() { return document.body.dataset.lang || 'en'; }
+
+const allMarkers = [];
+let activeRegions = new Set();
+let nationalOnly = false;
+
+// White-book region color scheme.
+// East: cool blues; Centre/west: warmer hues. Distinct palette from US map
+// to make the two visually distinguishable at a glance.
+const REGION_COLORS = {
+  '东北':   '#0a3d62',  // navy — China's largest cluster (Heilongjiang/Jilin/Liaoning)
+  '华北':   '#a8323e',  // ski-red — the Chongli/Beijing cluster
+  '西北':   '#c08552',  // amber — Xinjiang/Shaanxi
+  '华中':   '#3a5a40',  // forest — Hubei/Henan
+  '华东':   '#7a99c2',  // muted blue — Yangtze coastal
+  '西南':   '#5e3c5c',  // muted violet — Sichuan/Yunnan
+};
+
+const REGION_EN = {
+  '东北':   'Northeast',
+  '华北':   'North China',
+  '西北':   'Northwest',
+  '华中':   'Central China',
+  '华东':   'East China',
+  '西南':   'Southwest',
+};
+
+const TIER_LABEL_ZH = {
+  '目的地度假型': '目的地度假型',
+  '城郊学习型':   '城郊学习型',
+  '旅游体验型':   '旅游体验型',
+};
+const TIER_LABEL_EN = {
+  '目的地度假型': 'Destination resort',
+  '城郊学习型':   'Peri-urban learning',
+  '旅游体验型':   'Tourist-experience',
+};
+
+// Marker radius logic — since we lack visit-volume data per resort,
+// we use the white-book tier classification as the size proxy.
+// Destination > peri-urban > tourist-experience.
+function markerRadius(tier) {
+  if (tier === '目的地度假型') return 8;
+  if (tier === '城郊学习型')   return 6;
+  if (tier === '旅游体验型')   return 4.5;
+  return 5;
+}
+
+// ───────── Map init ─────────
+// China center: ~35°N 105°E covers most of the country well.
+// Zoom 4 fits all of mainland China at standard desktop widths.
+const map = L.map('map', {
+  center: [35.5, 105],
+  zoom: 4,
+  zoomControl: true,
+  attributionControl: true,
+  preferCanvas: true,
+  worldCopyJump: true,
+});
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd',
+  maxZoom: 19,
+}).addTo(map);
+
+// ───────── Popup ─────────
+function popupHTML(r) {
+  const l = lang();
+  const provLabel = l === 'zh' ? r.province : r.province_en;
+  const regionLabel = l === 'zh' ? r.region : REGION_EN[r.region];
+  const tierLabel = l === 'zh' ? TIER_LABEL_ZH[r.tier] : TIER_LABEL_EN[r.tier];
+  const vertL  = l === 'zh' ? '垂直落差' : 'Vertical drop';
+  const trailsL = l === 'zh' ? '雪道数'  : 'Trails';
+  const liftsL  = l === 'zh' ? '索道数'  : 'Lifts';
+  const tierL   = l === 'zh' ? '类型'    : 'Tier';
+  const noteL   = l === 'zh' ? '备注'    : '';
+
+  // Bilingual name display: lead with the language being viewed,
+  // show the other in subdued text right after
+  const primaryName = l === 'zh' ? r.name_zh : r.name_en;
+  const secondaryName = l === 'zh' ? r.name_en : r.name_zh;
+
+  let html = `<div class="resort-popup">`;
+
+  // National tier badge
+  if (r.national_tier) {
+    const batchLabel = l === 'zh'
+      ? `国家级度假地 · 第${['一','二','三'][r.national_batch - 1] || ''}批`
+      : `National Resort · Batch ${r.national_batch}`;
+    html += `<div class="national-badge">${batchLabel}</div>`;
+  }
+
+  html += `<h3 class="resort-name">${primaryName}`;
+  if (secondaryName && secondaryName !== primaryName) {
+    html += ` <span style="color:var(--ski-ink-faint);font-weight:400;font-size:0.85em;">${secondaryName}</span>`;
+  }
+  html += `</h3>`;
+
+  html += `<p class="resort-region">${provLabel} · ${regionLabel}</p>`;
+
+  html += `<dl class="resort-stats">`;
+  if (r.tier)         html += `<dt>${tierL}</dt><dd>${tierLabel}</dd>`;
+  if (r.vertical_m)   html += `<dt>${vertL}</dt><dd>${r.vertical_m.toLocaleString()} m</dd>`;
+  if (r.trails)       html += `<dt>${trailsL}</dt><dd>${r.trails}</dd>`;
+  if (r.lifts)        html += `<dt>${liftsL}</dt><dd>${r.lifts}</dd>`;
+  html += `</dl>`;
+
+  // Per-language note
+  const note = l === 'zh' ? r.note_zh : r.note_en;
+  if (note) html += `<p class="resort-note">${note}</p>`;
+
+  html += `</div>`;
+  return html;
+}
+
+function createMarker(r) {
+  const radius = markerRadius(r.tier);
+  const color = REGION_COLORS[r.region] || '#666';
+
+  // National-tier resorts get a red outer ring instead of white
+  const ringColor = r.national_tier ? '#a8323e' : 'white';
+  const ringWeight = r.national_tier ? 2.5 : 1.5;
+
+  const m = L.circleMarker([r.lat, r.lon], {
+    radius: radius,
+    fillColor: color,
+    color: ringColor,
+    weight: ringWeight,
+    opacity: 1,
+    fillOpacity: 0.85,
+    className: 'ski-marker',
+  });
+
+  m.bindPopup(popupHTML(r), {
+    maxWidth: 280,
+    closeButton: true,
+    autoPan: true,
+  });
+
+  return m;
+}
+
+// ───────── Filter logic ─────────
+function applyFilters() {
+  let visibleCount = 0;
+  for (const item of allMarkers) {
+    const r = item.resort;
+    const passRegion = activeRegions.has(r.region);
+    const passNational = !nationalOnly || r.national_tier;
+    if (passRegion && passNational) {
+      if (!map.hasLayer(item.marker)) item.marker.addTo(map);
+      visibleCount++;
+    } else {
+      if (map.hasLayer(item.marker)) map.removeLayer(item.marker);
+    }
+  }
+  const counter = document.querySelector('#visible-count-num');
+  if (counter) counter.textContent = visibleCount;
+}
+
+function buildFilterPanel(regions, regionCounts) {
+  const panel = document.createElement('div');
+  panel.className = 'map-filter-panel';
+  panel.innerHTML = `
+    <h3>
+      <span data-lang-content="en">Region</span>
+      <span data-lang-content="zh">大区</span>
+    </h3>
+    <div id="region-toggles"></div>
+
+    <div class="filter-section">
+      <h3>
+        <span data-lang-content="en">Filter</span>
+        <span data-lang-content="zh">筛选</span>
+      </h3>
+      <label>
+        <input type="checkbox" id="national-toggle">
+        <span data-lang-content="en">National-tier only</span>
+        <span data-lang-content="zh">仅国家级度假地</span>
+      </label>
+    </div>
+
+    <div class="visible-count">
+      <span data-lang-content="en">Showing <span id="visible-count-num">0</span> resorts</span>
+      <span data-lang-content="zh">显示 <span id="visible-count-num">0</span> 家雪场</span>
+    </div>
+  `;
+  document.getElementById('map').appendChild(panel);
+
+  // Region toggles in white-book canonical order
+  const regionOrder = ['东北', '华北', '西北', '华中', '华东', '西南'];
+  const togglesContainer = panel.querySelector('#region-toggles');
+  for (const region of regionOrder) {
+    if (!regions.has(region)) continue;
+    activeRegions.add(region);
+    const id = `region-${region}`;
+    const label = document.createElement('label');
+    label.innerHTML = `
+      <input type="checkbox" id="${id}" data-region="${region}" checked>
+      <span class="swatch" style="background: ${REGION_COLORS[region]};"></span>
+      <span data-lang-content="en">${REGION_EN[region]}</span>
+      <span data-lang-content="zh">${region}</span>
+      <span class="region-count">${regionCounts[region] || 0}</span>
+    `;
+    togglesContainer.appendChild(label);
+    label.querySelector('input').addEventListener('change', (e) => {
+      if (e.target.checked) activeRegions.add(region);
+      else activeRegions.delete(region);
+      applyFilters();
+    });
+  }
+
+  // National-only toggle
+  panel.querySelector('#national-toggle').addEventListener('change', (e) => {
+    nationalOnly = e.target.checked;
+    applyFilters();
+  });
+}
+
+// Refresh popups when language toggles
+function refreshPopupsOnLangChange() {
+  const observer = new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      if (m.attributeName === 'data-lang') {
+        for (const item of allMarkers) {
+          item.marker.setPopupContent(popupHTML(item.resort));
+        }
+      }
+    }
+  });
+  observer.observe(document.body, { attributes: true });
+}
+
+// ───────── Bootstrap ─────────
+fetch('research-data/cn_ski_resorts.json')
+  .then(r => r.json())
+  .then(data => {
+    const resorts = data.resorts;
+    const regions = new Set();
+    const regionCounts = {};
+    for (const r of resorts) {
+      regions.add(r.region);
+      regionCounts[r.region] = (regionCounts[r.region] || 0) + 1;
+      const m = createMarker(r);
+      m.addTo(map);
+      allMarkers.push({marker: m, resort: r});
+    }
+    buildFilterPanel(regions, regionCounts);
+    applyFilters();
+    refreshPopupsOnLangChange();
+  })
+  .catch(err => {
+    console.error('Failed to load CN resort data:', err);
+    document.getElementById('map').innerHTML =
+      '<div style="padding: 2rem; text-align: center; color: var(--ski-ink-soft);">' +
+      'Could not load resort data. Please check the file path.</div>';
+  });
+
+// ───────── Language toggle ─────────
+(function() {
+  var btns = document.querySelectorAll('[data-set-lang]');
+  var body = document.body;
+  function setLang(l) {
+    body.dataset.lang = l;
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.toggle('active', btns[i].dataset.setLang === l);
+    }
+  }
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', (function(b) { return function() { setLang(b.dataset.setLang); }; })(btns[i]));
+  }
+})();
+</script>
+
+</body>
+</html>

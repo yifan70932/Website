@@ -8,8 +8,7 @@
       "NSAA region assignment by state"
     ],
     "count": 217,
-    "last_updated": "2026-04-30",
-    "catchment_method": "Areal interpolation against ACS 2023 5-year tract estimates within 60-minute drive-time isochrone (OpenRouteService). Working-age = 15-64. Median income is population-weighted across tracts. Resorts with border_note=true may be underestimates (Canadian portion not counted)."
+    "last_updated": "2026-04-30"
   },
   "resorts": [
     {
@@ -22,11 +21,7 @@
       "trails": 195,
       "lifts": 32,
       "snowfall_in": 354,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 48214,
-      "catchment_working_age_pop": 33873,
-      "catchment_median_income": 106676,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Aspen Snowmass",
@@ -39,11 +34,7 @@
       "lifts": 21,
       "snowfall_in": 300,
       "note": "Snowmass mountain only; Aspen complex has 4 mountains totaling 5,547 acres",
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 24467,
-      "catchment_working_age_pop": 16609,
-      "catchment_median_income": 101484,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Aspen Mountain (Ajax)",
@@ -55,11 +46,7 @@
       "trails": 76,
       "lifts": 8,
       "snowfall_in": 300,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 17681,
-      "catchment_working_age_pop": 12132,
-      "catchment_median_income": 103125,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Aspen Highlands",
@@ -71,11 +58,7 @@
       "trails": 144,
       "lifts": 5,
       "snowfall_in": 300,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 21622,
-      "catchment_working_age_pop": 14684,
-      "catchment_median_income": 101659,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Beaver Creek",
@@ -87,11 +70,7 @@
       "trails": 167,
       "lifts": 25,
       "snowfall_in": 325,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 27652,
-      "catchment_working_age_pop": 19405,
-      "catchment_median_income": 109083,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Breckenridge",
@@ -103,11 +82,7 @@
       "trails": 187,
       "lifts": 35,
       "snowfall_in": 366,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 32982,
-      "catchment_working_age_pop": 23518,
-      "catchment_median_income": 108698,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Keystone",
@@ -119,11 +94,7 @@
       "trails": 130,
       "lifts": 20,
       "snowfall_in": 235,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 36388,
-      "catchment_working_age_pop": 25764,
-      "catchment_median_income": 106676,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Copper Mountain",
@@ -135,11 +106,7 @@
       "trails": 140,
       "lifts": 22,
       "snowfall_in": 305,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 49551,
-      "catchment_working_age_pop": 35344,
-      "catchment_median_income": 99779,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Steamboat",
@@ -151,11 +118,7 @@
       "trails": 169,
       "lifts": 22,
       "snowfall_in": 343,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 26318,
-      "catchment_working_age_pop": 17657,
-      "catchment_median_income": 98519,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Winter Park",
@@ -167,11 +130,7 @@
       "trails": 166,
       "lifts": 25,
       "snowfall_in": 327,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 10268,
-      "catchment_working_age_pop": 7030,
-      "catchment_median_income": 85398,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Telluride",
@@ -183,11 +142,7 @@
       "trails": 148,
       "lifts": 19,
       "snowfall_in": 280,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 4380,
-      "catchment_working_age_pop": 3103,
-      "catchment_median_income": 70490,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Crested Butte",
@@ -199,11 +154,7 @@
       "trails": 121,
       "lifts": 15,
       "snowfall_in": 234,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 9463,
-      "catchment_working_age_pop": 7240,
-      "catchment_median_income": 60987,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Loveland",
@@ -215,11 +166,7 @@
       "trails": 94,
       "lifts": 11,
       "snowfall_in": 422,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 294391,
-      "catchment_working_age_pop": 203279,
-      "catchment_median_income": 99779,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Arapahoe Basin",
@@ -231,11 +178,7 @@
       "trails": 147,
       "lifts": 9,
       "snowfall_in": 350,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 42926,
-      "catchment_working_age_pop": 28982,
-      "catchment_median_income": 122004,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Wolf Creek",
@@ -247,11 +190,7 @@
       "trails": 133,
       "lifts": 7,
       "snowfall_in": 430,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 13099,
-      "catchment_working_age_pop": 7945,
-      "catchment_median_income": 74519,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Purgatory",
@@ -263,11 +202,7 @@
       "trails": 105,
       "lifts": 12,
       "snowfall_in": 260,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 31932,
-      "catchment_working_age_pop": 21764,
-      "catchment_median_income": 83731,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Powderhorn",
@@ -279,11 +214,7 @@
       "trails": 63,
       "lifts": 4,
       "snowfall_in": 250,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 77570,
-      "catchment_working_age_pop": 48684,
-      "catchment_median_income": 69792,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Sunlight Mountain",
@@ -295,11 +226,7 @@
       "trails": 72,
       "lifts": 4,
       "snowfall_in": 250,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 45973,
-      "catchment_working_age_pop": 30641,
-      "catchment_median_income": 91184,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Eldora",
@@ -312,11 +239,7 @@
       "lifts": 10,
       "snowfall_in": 300,
       "note": "Closest major resort to Denver/Boulder",
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 223273,
-      "catchment_working_age_pop": 161991,
-      "catchment_median_income": 125764,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Echo Mountain",
@@ -328,11 +251,7 @@
       "trails": 22,
       "lifts": 4,
       "snowfall_in": 250,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 764257,
-      "catchment_working_age_pop": 541125,
-      "catchment_median_income": 98073,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Howelsen Hill",
@@ -345,11 +264,7 @@
       "lifts": 5,
       "snowfall_in": 200,
       "note": "Oldest continuously operating ski area in North America (1915)",
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 29888,
-      "catchment_working_age_pop": 19895,
-      "catchment_median_income": 98472,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Ski Cooper",
@@ -361,11 +276,7 @@
       "trails": 60,
       "lifts": 4,
       "snowfall_in": 260,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 22553,
-      "catchment_working_age_pop": 16294,
-      "catchment_median_income": 95781,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Monarch Mountain",
@@ -377,11 +288,7 @@
       "trails": 67,
       "lifts": 7,
       "snowfall_in": 350,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 20693,
-      "catchment_working_age_pop": 14113,
-      "catchment_median_income": 67027,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Hesperus",
@@ -393,11 +300,7 @@
       "trails": 26,
       "lifts": 4,
       "snowfall_in": 175,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 65697,
-      "catchment_working_age_pop": 42618,
-      "catchment_median_income": 83731,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Silverton Mountain",
@@ -410,11 +313,7 @@
       "lifts": 1,
       "snowfall_in": 400,
       "note": "Single chairlift, expert-only, mostly guided",
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 2547,
-      "catchment_working_age_pop": 1744,
-      "catchment_median_income": 84410,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Kendall Mountain",
@@ -426,11 +325,7 @@
       "trails": 8,
       "lifts": 1,
       "snowfall_in": 250,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 15128,
-      "catchment_working_age_pop": 10766,
-      "catchment_median_income": 83731,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Granby Ranch",
@@ -442,11 +337,7 @@
       "trails": 41,
       "lifts": 4,
       "snowfall_in": 220,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 8995,
-      "catchment_working_age_pop": 5919,
-      "catchment_median_income": 89792,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Park City Mountain",
@@ -459,11 +350,7 @@
       "lifts": 41,
       "snowfall_in": 355,
       "note": "Combined Park City + Canyons since 2015 connection",
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 1511763,
-      "catchment_working_age_pop": 1017289,
-      "catchment_median_income": 98243,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Deer Valley",
@@ -476,11 +363,7 @@
       "lifts": 33,
       "snowfall_in": 300,
       "note": "After 2024-25 expansion; ski-only, no snowboards",
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 953773,
-      "catchment_working_age_pop": 644295,
-      "catchment_median_income": 93571,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Snowbird",
@@ -492,11 +375,7 @@
       "trails": 169,
       "lifts": 14,
       "snowfall_in": 500,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 1664393,
-      "catchment_working_age_pop": 1101130,
-      "catchment_median_income": 102500,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Alta",
@@ -509,11 +388,7 @@
       "lifts": 11,
       "snowfall_in": 545,
       "note": "Ski-only, no snowboards",
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 1579916,
-      "catchment_working_age_pop": 1048783,
-      "catchment_median_income": 101342,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Solitude",
@@ -525,11 +400,7 @@
       "trails": 80,
       "lifts": 8,
       "snowfall_in": 500,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 72,
-      "catchment_working_age_pop": 49,
-      "catchment_median_income": 134167,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Brighton",
@@ -541,11 +412,7 @@
       "trails": 66,
       "lifts": 8,
       "snowfall_in": 500,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 72,
-      "catchment_working_age_pop": 49,
-      "catchment_median_income": 134167,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Snowbasin",
@@ -557,11 +424,7 @@
       "trails": 107,
       "lifts": 12,
       "snowfall_in": 300,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 1045341,
-      "catchment_working_age_pop": 702141,
-      "catchment_median_income": 91444,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Powder Mountain",
@@ -574,11 +437,7 @@
       "lifts": 9,
       "snowfall_in": 500,
       "note": "Lift-served acres only; total acreage including hike-to and cat is ~8,500",
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 503634,
-      "catchment_working_age_pop": 329021,
-      "catchment_median_income": 97344,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Sundance",
@@ -590,11 +449,7 @@
       "trails": 45,
       "lifts": 4,
       "snowfall_in": 320,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 1362758,
-      "catchment_working_age_pop": 898615,
-      "catchment_median_income": 101731,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Brian Head",
@@ -606,11 +461,7 @@
       "trails": 71,
       "lifts": 8,
       "snowfall_in": 360,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 43339,
-      "catchment_working_age_pop": 28249,
-      "catchment_median_income": 59750,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Beaver Mountain",
@@ -622,11 +473,7 @@
       "trails": 48,
       "lifts": 5,
       "snowfall_in": 400,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 91880,
-      "catchment_working_age_pop": 63307,
-      "catchment_median_income": 77663,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Eagle Point",
@@ -638,11 +485,7 @@
       "trails": 40,
       "lifts": 5,
       "snowfall_in": 400,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 1967,
-      "catchment_working_age_pop": 1194,
-      "catchment_median_income": 87966,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Cherry Peak",
@@ -654,11 +497,7 @@
       "trails": 29,
       "lifts": 3,
       "snowfall_in": 250,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 157708,
-      "catchment_working_age_pop": 102575,
-      "catchment_median_income": 79886,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Nordic Valley",
@@ -670,11 +509,7 @@
       "trails": 23,
       "lifts": 4,
       "snowfall_in": 350,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 562969,
-      "catchment_working_age_pop": 366328,
-      "catchment_median_income": 97344,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Jackson Hole",
@@ -686,11 +521,7 @@
       "trails": 133,
       "lifts": 13,
       "snowfall_in": 459,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 20508,
-      "catchment_working_age_pop": 14117,
-      "catchment_median_income": 109375,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Grand Targhee",
@@ -702,11 +533,7 @@
       "trails": 90,
       "lifts": 5,
       "snowfall_in": 500,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 11149,
-      "catchment_working_age_pop": 7471,
-      "catchment_median_income": 100636,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Snow King",
@@ -718,11 +545,7 @@
       "trails": 32,
       "lifts": 3,
       "snowfall_in": 250,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 21594,
-      "catchment_working_age_pop": 14859,
-      "catchment_median_income": 109375,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "White Pine",
@@ -734,11 +557,7 @@
       "trails": 25,
       "lifts": 3,
       "snowfall_in": 250,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 2605,
-      "catchment_working_age_pop": 1483,
-      "catchment_median_income": 77031,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Hogadon Basin",
@@ -750,11 +569,7 @@
       "trails": 27,
       "lifts": 2,
       "snowfall_in": 165,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 74235,
-      "catchment_working_age_pop": 47323,
-      "catchment_median_income": 67292,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Big Sky",
@@ -766,11 +581,7 @@
       "trails": 300,
       "lifts": 38,
       "snowfall_in": 400,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 3971,
-      "catchment_working_age_pop": 2516,
-      "catchment_median_income": 99250,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Whitefish Mountain",
@@ -782,11 +593,7 @@
       "trails": 105,
       "lifts": 15,
       "snowfall_in": 300,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 318,
-      "catchment_working_age_pop": 154,
-      "catchment_median_income": 70769,
-      "catchment_border_note": true
+      "region": "Rocky Mountain"
     },
     {
       "name": "Bridger Bowl",
@@ -798,11 +605,7 @@
       "trails": 75,
       "lifts": 8,
       "snowfall_in": 300,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 111524,
-      "catchment_working_age_pop": 80027,
-      "catchment_median_income": 86464,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Red Lodge Mountain",
@@ -814,11 +617,7 @@
       "trails": 80,
       "lifts": 8,
       "snowfall_in": 250,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 5491,
-      "catchment_working_age_pop": 3209,
-      "catchment_median_income": 52500,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Discovery Ski Area",
@@ -830,11 +629,7 @@
       "trails": 67,
       "lifts": 7,
       "snowfall_in": 215,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 11052,
-      "catchment_working_age_pop": 7261,
-      "catchment_median_income": 51553,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Lost Trail Powder Mountain",
@@ -846,11 +641,7 @@
       "trails": 60,
       "lifts": 6,
       "snowfall_in": 325,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 10359,
-      "catchment_working_age_pop": 6208,
-      "catchment_median_income": 56250,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Montana Snowbowl",
@@ -862,11 +653,7 @@
       "trails": 50,
       "lifts": 4,
       "snowfall_in": 300,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 2562,
-      "catchment_working_age_pop": 1649,
-      "catchment_median_income": 93449,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Showdown Montana",
@@ -878,11 +665,7 @@
       "trails": 36,
       "lifts": 4,
       "snowfall_in": 240,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 438,
-      "catchment_working_age_pop": 258,
-      "catchment_median_income": 56215,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Great Divide",
@@ -894,11 +677,7 @@
       "trails": 140,
       "lifts": 6,
       "snowfall_in": 150,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 73713,
-      "catchment_working_age_pop": 45996,
-      "catchment_median_income": 73991,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Maverick Mountain",
@@ -910,11 +689,7 @@
       "trails": 24,
       "lifts": 2,
       "snowfall_in": 180,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 2223,
-      "catchment_working_age_pop": 1434,
-      "catchment_median_income": 56625,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Teton Pass Ski Resort",
@@ -926,11 +701,7 @@
       "trails": 31,
       "lifts": 2,
       "snowfall_in": 300,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": null,
-      "catchment_working_age_pop": null,
-      "catchment_median_income": null,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Sun Valley",
@@ -942,11 +713,7 @@
       "trails": 121,
       "lifts": 18,
       "snowfall_in": 220,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 14391,
-      "catchment_working_age_pop": 9135,
-      "catchment_median_income": 84082,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Schweitzer",
@@ -958,11 +725,7 @@
       "trails": 92,
       "lifts": 10,
       "snowfall_in": 300,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 33023,
-      "catchment_working_age_pop": 19710,
-      "catchment_median_income": 69120,
-      "catchment_border_note": true
+      "region": "Rocky Mountain"
     },
     {
       "name": "Bogus Basin",
@@ -974,11 +737,7 @@
       "trails": 92,
       "lifts": 10,
       "snowfall_in": 200,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 405097,
-      "catchment_working_age_pop": 271840,
-      "catchment_median_income": 85455,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Brundage",
@@ -990,11 +749,7 @@
       "trails": 46,
       "lifts": 6,
       "snowfall_in": 320,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 5130,
-      "catchment_working_age_pop": 2993,
-      "catchment_median_income": 83750,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Tamarack",
@@ -1006,11 +761,7 @@
       "trails": 50,
       "lifts": 6,
       "snowfall_in": 300,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 5034,
-      "catchment_working_age_pop": 2947,
-      "catchment_median_income": 83750,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Silver Mountain",
@@ -1022,11 +773,7 @@
       "trails": 73,
       "lifts": 7,
       "snowfall_in": 340,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 262850,
-      "catchment_working_age_pop": 163292,
-      "catchment_median_income": 80195,
-      "catchment_border_note": true
+      "region": "Rocky Mountain"
     },
     {
       "name": "Pebble Creek",
@@ -1038,11 +785,7 @@
       "trails": 54,
       "lifts": 3,
       "snowfall_in": 250,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 1112,
-      "catchment_working_age_pop": 674,
-      "catchment_median_income": 67159,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Lookout Pass",
@@ -1055,11 +798,7 @@
       "lifts": 4,
       "snowfall_in": 400,
       "note": "On ID/MT border",
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 12185,
-      "catchment_working_age_pop": 7176,
-      "catchment_median_income": 48726,
-      "catchment_border_note": true
+      "region": "Rocky Mountain"
     },
     {
       "name": "Soldier Mountain",
@@ -1071,11 +810,7 @@
       "trails": 36,
       "lifts": 3,
       "snowfall_in": 250,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 63,
-      "catchment_working_age_pop": 37,
-      "catchment_median_income": 55536,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Magic Mountain (ID)",
@@ -1087,11 +822,7 @@
       "trails": 14,
       "lifts": 2,
       "snowfall_in": 175,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 3485,
-      "catchment_working_age_pop": 2092,
-      "catchment_median_income": 74257,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Kelly Canyon",
@@ -1103,11 +834,7 @@
       "trails": 26,
       "lifts": 4,
       "snowfall_in": 200,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 223437,
-      "catchment_working_age_pop": 146478,
-      "catchment_median_income": 77092,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Taos Ski Valley",
@@ -1119,11 +846,7 @@
       "trails": 110,
       "lifts": 13,
       "snowfall_in": 305,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 18409,
-      "catchment_working_age_pop": 10621,
-      "catchment_median_income": 59959,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Ski Santa Fe",
@@ -1135,11 +858,7 @@
       "trails": 86,
       "lifts": 7,
       "snowfall_in": 225,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 117835,
-      "catchment_working_age_pop": 70574,
-      "catchment_median_income": 73786,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Angel Fire",
@@ -1151,11 +870,7 @@
       "trails": 81,
       "lifts": 7,
       "snowfall_in": 220,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 14218,
-      "catchment_working_age_pop": 7958,
-      "catchment_median_income": 56356,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Red River",
@@ -1167,11 +882,7 @@
       "trails": 67,
       "lifts": 8,
       "snowfall_in": 214,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 6799,
-      "catchment_working_age_pop": 4096,
-      "catchment_median_income": 69909,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Pajarito Mountain",
@@ -1183,11 +894,7 @@
       "trails": 44,
       "lifts": 5,
       "snowfall_in": 150,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 42030,
-      "catchment_working_age_pop": 26470,
-      "catchment_median_income": 62750,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Sipapu",
@@ -1199,11 +906,7 @@
       "trails": 41,
       "lifts": 4,
       "snowfall_in": 190,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 805,
-      "catchment_working_age_pop": 488,
-      "catchment_median_income": 65163,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Arizona Snowbowl",
@@ -1215,11 +918,7 @@
       "trails": 55,
       "lifts": 8,
       "snowfall_in": 260,
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 89057,
-      "catchment_working_age_pop": 66355,
-      "catchment_median_income": 69412,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Sunrise Park Resort",
@@ -1232,11 +931,7 @@
       "lifts": 10,
       "snowfall_in": 250,
       "note": "Owned by White Mountain Apache Tribe",
-      "region": "Rocky Mountain",
-      "catchment_total_pop": 17127,
-      "catchment_working_age_pop": 9272,
-      "catchment_median_income": 69726,
-      "catchment_border_note": false
+      "region": "Rocky Mountain"
     },
     {
       "name": "Palisades Tahoe",
@@ -1249,11 +944,7 @@
       "lifts": 42,
       "snowfall_in": 400,
       "note": "2021 merger of Squaw Valley and Alpine Meadows",
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 276059,
-      "catchment_working_age_pop": 185326,
-      "catchment_median_income": 77664,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Heavenly",
@@ -1266,11 +957,7 @@
       "lifts": 28,
       "snowfall_in": 360,
       "note": "CA/NV border resort",
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 142793,
-      "catchment_working_age_pop": 88281,
-      "catchment_median_income": 81197,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Northstar",
@@ -1282,11 +969,7 @@
       "trails": 100,
       "lifts": 20,
       "snowfall_in": 350,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 449432,
-      "catchment_working_age_pop": 295838,
-      "catchment_median_income": 85395,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Mammoth Mountain",
@@ -1298,11 +981,7 @@
       "trails": 150,
       "lifts": 28,
       "snowfall_in": 400,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 16050,
-      "catchment_working_age_pop": 10346,
-      "catchment_median_income": 77400,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Kirkwood",
@@ -1314,11 +993,7 @@
       "trails": 86,
       "lifts": 13,
       "snowfall_in": 354,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 55240,
-      "catchment_working_age_pop": 34434,
-      "catchment_median_income": 82050,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Sugar Bowl",
@@ -1330,11 +1005,7 @@
       "trails": 102,
       "lifts": 13,
       "snowfall_in": 500,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 309641,
-      "catchment_working_age_pop": 206499,
-      "catchment_median_income": 79792,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Sierra-at-Tahoe",
@@ -1346,11 +1017,7 @@
       "trails": 46,
       "lifts": 14,
       "snowfall_in": 480,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 56641,
-      "catchment_working_age_pop": 36232,
-      "catchment_median_income": 89250,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Bear Valley",
@@ -1362,11 +1029,7 @@
       "trails": 75,
       "lifts": 11,
       "snowfall_in": 359,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 3551,
-      "catchment_working_age_pop": 1753,
-      "catchment_median_income": 80375,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "June Mountain",
@@ -1378,11 +1041,7 @@
       "trails": 41,
       "lifts": 7,
       "snowfall_in": 250,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 10337,
-      "catchment_working_age_pop": 6785,
-      "catchment_median_income": 78750,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Dodge Ridge",
@@ -1394,11 +1053,7 @@
       "trails": 67,
       "lifts": 12,
       "snowfall_in": 350,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 28389,
-      "catchment_working_age_pop": 16133,
-      "catchment_median_income": 85461,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "China Peak",
@@ -1410,11 +1065,7 @@
       "trails": 47,
       "lifts": 11,
       "snowfall_in": 300,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 1655,
-      "catchment_working_age_pop": 883,
-      "catchment_median_income": 90526,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Homewood",
@@ -1426,11 +1077,7 @@
       "trails": 67,
       "lifts": 8,
       "snowfall_in": 450,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 67595,
-      "catchment_working_age_pop": 44323,
-      "catchment_median_income": 99232,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Alpine Meadows",
@@ -1443,11 +1090,7 @@
       "lifts": 13,
       "snowfall_in": 400,
       "note": "Now part of Palisades Tahoe but historically separate",
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 163342,
-      "catchment_working_age_pop": 109965,
-      "catchment_median_income": 82934,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Tahoe Donner",
@@ -1459,11 +1102,7 @@
       "trails": 16,
       "lifts": 4,
       "snowfall_in": 350,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 439821,
-      "catchment_working_age_pop": 290255,
-      "catchment_median_income": 84809,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Soda Springs",
@@ -1475,11 +1114,7 @@
       "trails": 17,
       "lifts": 5,
       "snowfall_in": 425,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 489699,
-      "catchment_working_age_pop": 316960,
-      "catchment_median_income": 82934,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Donner Ski Ranch",
@@ -1491,11 +1126,7 @@
       "trails": 52,
       "lifts": 8,
       "snowfall_in": 425,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 364820,
-      "catchment_working_age_pop": 239895,
-      "catchment_median_income": 79792,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Boreal",
@@ -1507,11 +1138,7 @@
       "trails": 41,
       "lifts": 8,
       "snowfall_in": 400,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 497722,
-      "catchment_working_age_pop": 323086,
-      "catchment_median_income": 83155,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Mt. Shasta Ski Park",
@@ -1523,11 +1150,7 @@
       "trails": 32,
       "lifts": 6,
       "snowfall_in": 275,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 18729,
-      "catchment_working_age_pop": 10388,
-      "catchment_median_income": 70337,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Mountain High",
@@ -1540,11 +1163,7 @@
       "lifts": 14,
       "snowfall_in": 100,
       "note": "Closest major resort to Los Angeles",
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 1071691,
-      "catchment_working_age_pop": 712595,
-      "catchment_median_income": 79037,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Snow Valley",
@@ -1556,11 +1175,7 @@
       "trails": 35,
       "lifts": 12,
       "snowfall_in": 90,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 1133365,
-      "catchment_working_age_pop": 762849,
-      "catchment_median_income": 81384,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Bear Mountain",
@@ -1573,11 +1188,7 @@
       "lifts": 11,
       "snowfall_in": 100,
       "note": "Big Bear area; Southern California",
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 45962,
-      "catchment_working_age_pop": 28456,
-      "catchment_median_income": 72347,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Snow Summit",
@@ -1590,11 +1201,7 @@
       "lifts": 13,
       "snowfall_in": 100,
       "note": "Big Bear area; Southern California",
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 49321,
-      "catchment_working_age_pop": 30540,
-      "catchment_median_income": 73229,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Mt. Rose",
@@ -1606,11 +1213,7 @@
       "trails": 60,
       "lifts": 8,
       "snowfall_in": 350,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 587901,
-      "catchment_working_age_pop": 381076,
-      "catchment_median_income": 86299,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Diamond Peak",
@@ -1622,11 +1225,7 @@
       "trails": 30,
       "lifts": 7,
       "snowfall_in": 325,
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 567608,
-      "catchment_working_age_pop": 369372,
-      "catchment_median_income": 83155,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Lee Canyon",
@@ -1639,11 +1238,7 @@
       "lifts": 4,
       "snowfall_in": 175,
       "note": "Closest major resort to Las Vegas",
-      "region": "Pacific Southwest",
-      "catchment_total_pop": 962406,
-      "catchment_working_age_pop": 633882,
-      "catchment_median_income": 77604,
-      "catchment_border_note": false
+      "region": "Pacific Southwest"
     },
     {
       "name": "Mt. Bachelor",
@@ -1655,11 +1250,7 @@
       "trails": 121,
       "lifts": 15,
       "snowfall_in": 462,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 154147,
-      "catchment_working_age_pop": 99784,
-      "catchment_median_income": 88389,
-      "catchment_border_note": false
+      "region": "Pacific Northwest"
     },
     {
       "name": "Mt. Hood Meadows",
@@ -1671,11 +1262,7 @@
       "trails": 87,
       "lifts": 11,
       "snowfall_in": 430,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 16617,
-      "catchment_working_age_pop": 10598,
-      "catchment_median_income": 89789,
-      "catchment_border_note": false
+      "region": "Pacific Northwest"
     },
     {
       "name": "Timberline",
@@ -1687,11 +1274,7 @@
       "trails": 41,
       "lifts": 9,
       "snowfall_in": 551,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 19940,
-      "catchment_working_age_pop": 13168,
-      "catchment_median_income": 97734,
-      "catchment_border_note": false
+      "region": "Pacific Northwest"
     },
     {
       "name": "Mt. Hood Skibowl",
@@ -1703,11 +1286,7 @@
       "trails": 65,
       "lifts": 9,
       "snowfall_in": 300,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 45280,
-      "catchment_working_age_pop": 29053,
-      "catchment_median_income": 97734,
-      "catchment_border_note": false
+      "region": "Pacific Northwest"
     },
     {
       "name": "Hoodoo",
@@ -1719,11 +1298,7 @@
       "trails": 36,
       "lifts": 5,
       "snowfall_in": 350,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 84270,
-      "catchment_working_age_pop": 53394,
-      "catchment_median_income": 89063,
-      "catchment_border_note": false
+      "region": "Pacific Northwest"
     },
     {
       "name": "Anthony Lakes",
@@ -1735,11 +1310,7 @@
       "trails": 21,
       "lifts": 3,
       "snowfall_in": 300,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 15582,
-      "catchment_working_age_pop": 9472,
-      "catchment_median_income": 59327,
-      "catchment_border_note": false
+      "region": "Pacific Northwest"
     },
     {
       "name": "Cooper Spur",
@@ -1751,11 +1322,7 @@
       "trails": 10,
       "lifts": 2,
       "snowfall_in": 300,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 17599,
-      "catchment_working_age_pop": 11284,
-      "catchment_median_income": 92917,
-      "catchment_border_note": false
+      "region": "Pacific Northwest"
     },
     {
       "name": "Crystal Mountain",
@@ -1767,11 +1334,7 @@
       "trails": 86,
       "lifts": 11,
       "snowfall_in": 486,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 9024,
-      "catchment_working_age_pop": 5644,
-      "catchment_median_income": 125035,
-      "catchment_border_note": false
+      "region": "Pacific Northwest"
     },
     {
       "name": "Stevens Pass",
@@ -1783,11 +1346,7 @@
       "trails": 52,
       "lifts": 10,
       "snowfall_in": 460,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 8629,
-      "catchment_working_age_pop": 5622,
-      "catchment_median_income": 90797,
-      "catchment_border_note": true
+      "region": "Pacific Northwest"
     },
     {
       "name": "Mission Ridge",
@@ -1799,11 +1358,7 @@
       "trails": 36,
       "lifts": 6,
       "snowfall_in": 200,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 90302,
-      "catchment_working_age_pop": 55083,
-      "catchment_median_income": 82634,
-      "catchment_border_note": true
+      "region": "Pacific Northwest"
     },
     {
       "name": "White Pass",
@@ -1815,11 +1370,7 @@
       "trails": 45,
       "lifts": 8,
       "snowfall_in": 400,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 31086,
-      "catchment_working_age_pop": 19024,
-      "catchment_median_income": 76856,
-      "catchment_border_note": false
+      "region": "Pacific Northwest"
     },
     {
       "name": "49 Degrees North",
@@ -1831,11 +1382,7 @@
       "trails": 82,
       "lifts": 7,
       "snowfall_in": 300,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 34692,
-      "catchment_working_age_pop": 20815,
-      "catchment_median_income": 58731,
-      "catchment_border_note": true
+      "region": "Pacific Northwest"
     },
     {
       "name": "Bluewood",
@@ -1847,11 +1394,7 @@
       "trails": 24,
       "lifts": 3,
       "snowfall_in": 300,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 96,
-      "catchment_working_age_pop": 55,
-      "catchment_median_income": 51970,
-      "catchment_border_note": false
+      "region": "Pacific Northwest"
     },
     {
       "name": "Mt. Spokane",
@@ -1863,11 +1406,7 @@
       "trails": 52,
       "lifts": 7,
       "snowfall_in": 300,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 72578,
-      "catchment_working_age_pop": 45771,
-      "catchment_median_income": 82410,
-      "catchment_border_note": true
+      "region": "Pacific Northwest"
     },
     {
       "name": "Summit at Snoqualmie",
@@ -1880,11 +1419,7 @@
       "lifts": 22,
       "snowfall_in": 428,
       "note": "Combined Alpental + Summit West/Central/East",
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 1192972,
-      "catchment_working_age_pop": 844945,
-      "catchment_median_income": 135862,
-      "catchment_border_note": true
+      "region": "Pacific Northwest"
     },
     {
       "name": "Alyeska",
@@ -1896,11 +1431,7 @@
       "trails": 76,
       "lifts": 9,
       "snowfall_in": 669,
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 225070,
-      "catchment_working_age_pop": 152430,
-      "catchment_median_income": 93647,
-      "catchment_border_note": true
+      "region": "Pacific Northwest"
     },
     {
       "name": "Eaglecrest",
@@ -1913,11 +1444,7 @@
       "lifts": 4,
       "snowfall_in": 350,
       "note": "Juneau community ski area",
-      "region": "Pacific Northwest",
-      "catchment_total_pop": null,
-      "catchment_working_age_pop": null,
-      "catchment_median_income": null,
-      "catchment_border_note": false
+      "region": "Pacific Northwest"
     },
     {
       "name": "Hilltop Ski Area",
@@ -1930,11 +1457,7 @@
       "lifts": 2,
       "snowfall_in": 70,
       "note": "Anchorage urban ski area",
-      "region": "Pacific Northwest",
-      "catchment_total_pop": 286622,
-      "catchment_working_age_pop": 193499,
-      "catchment_median_income": 99185,
-      "catchment_border_note": true
+      "region": "Pacific Northwest"
     },
     {
       "name": "Killington",
@@ -1946,11 +1469,7 @@
       "trails": 155,
       "lifts": 22,
       "snowfall_in": 250,
-      "region": "Northeast",
-      "catchment_total_pop": 67635,
-      "catchment_working_age_pop": 41633,
-      "catchment_median_income": 66803,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Stowe",
@@ -1962,11 +1481,7 @@
       "trails": 116,
       "lifts": 13,
       "snowfall_in": 314,
-      "region": "Northeast",
-      "catchment_total_pop": 197801,
-      "catchment_working_age_pop": 132261,
-      "catchment_median_income": 89875,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Sugarbush",
@@ -1978,11 +1493,7 @@
       "trails": 111,
       "lifts": 16,
       "snowfall_in": 260,
-      "region": "Northeast",
-      "catchment_total_pop": 107138,
-      "catchment_working_age_pop": 69003,
-      "catchment_median_income": 88447,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Jay Peak",
@@ -1994,11 +1505,7 @@
       "trails": 81,
       "lifts": 9,
       "snowfall_in": 359,
-      "region": "Northeast",
-      "catchment_total_pop": 46980,
-      "catchment_working_age_pop": 30009,
-      "catchment_median_income": 73333,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Mount Snow",
@@ -2010,11 +1517,7 @@
       "trails": 86,
       "lifts": 19,
       "snowfall_in": 156,
-      "region": "Northeast",
-      "catchment_total_pop": 913,
-      "catchment_working_age_pop": 587,
-      "catchment_median_income": 80000,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Okemo",
@@ -2026,11 +1529,7 @@
       "trails": 121,
       "lifts": 20,
       "snowfall_in": 200,
-      "region": "Northeast",
-      "catchment_total_pop": 146537,
-      "catchment_working_age_pop": 90403,
-      "catchment_median_income": 71693,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Stratton",
@@ -2042,11 +1541,7 @@
       "trails": 99,
       "lifts": 16,
       "snowfall_in": 180,
-      "region": "Northeast",
-      "catchment_total_pop": 53834,
-      "catchment_working_age_pop": 32755,
-      "catchment_median_income": 77049,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Smugglers' Notch",
@@ -2058,11 +1553,7 @@
       "trails": 78,
       "lifts": 8,
       "snowfall_in": 309,
-      "region": "Northeast",
-      "catchment_total_pop": 178656,
-      "catchment_working_age_pop": 118767,
-      "catchment_median_income": 90147,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Mad River Glen",
@@ -2075,11 +1566,7 @@
       "lifts": 5,
       "snowfall_in": 250,
       "note": "Ski-only, no snowboards; cooperatively owned",
-      "region": "Northeast",
-      "catchment_total_pop": 184855,
-      "catchment_working_age_pop": 123867,
-      "catchment_median_income": 90272,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Pico",
@@ -2091,11 +1578,7 @@
       "trails": 58,
       "lifts": 7,
       "snowfall_in": 250,
-      "region": "Northeast",
-      "catchment_total_pop": 101528,
-      "catchment_working_age_pop": 62429,
-      "catchment_median_income": 72179,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Magic Mountain (VT)",
@@ -2108,11 +1591,7 @@
       "lifts": 4,
       "snowfall_in": 145,
       "note": "Independent, throwback to 1970s skiing; cult favorite",
-      "region": "Northeast",
-      "catchment_total_pop": 113990,
-      "catchment_working_age_pop": 69515,
-      "catchment_median_income": 71693,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Bromley",
@@ -2124,11 +1603,7 @@
       "trails": 47,
       "lifts": 9,
       "snowfall_in": 145,
-      "region": "Northeast",
-      "catchment_total_pop": 85154,
-      "catchment_working_age_pop": 51418,
-      "catchment_median_income": 76307,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Burke",
@@ -2141,11 +1616,7 @@
       "lifts": 4,
       "snowfall_in": 230,
       "note": "Burke Mountain Academy, top US ski racing academy",
-      "region": "Northeast",
-      "catchment_total_pop": 39515,
-      "catchment_working_age_pop": 24738,
-      "catchment_median_income": 65690,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Bolton Valley",
@@ -2157,11 +1628,7 @@
       "trails": 71,
       "lifts": 6,
       "snowfall_in": 312,
-      "region": "Northeast",
-      "catchment_total_pop": 240850,
-      "catchment_working_age_pop": 163336,
-      "catchment_median_income": 92247,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Middlebury Snow Bowl",
@@ -2174,11 +1641,7 @@
       "lifts": 3,
       "snowfall_in": 200,
       "note": "Owned by Middlebury College",
-      "region": "Northeast",
-      "catchment_total_pop": 103963,
-      "catchment_working_age_pop": 65846,
-      "catchment_median_income": 82781,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Suicide Six",
@@ -2191,11 +1654,7 @@
       "lifts": 3,
       "snowfall_in": 175,
       "note": "Site of first US ski tow (1934)",
-      "region": "Northeast",
-      "catchment_total_pop": 128012,
-      "catchment_working_age_pop": 80568,
-      "catchment_median_income": 82781,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Cannon Mountain",
@@ -2207,11 +1666,7 @@
       "trails": 97,
       "lifts": 11,
       "snowfall_in": 160,
-      "region": "Northeast",
-      "catchment_total_pop": 77506,
-      "catchment_working_age_pop": 48886,
-      "catchment_median_income": 72201,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Bretton Woods",
@@ -2223,11 +1678,7 @@
       "trails": 102,
       "lifts": 10,
       "snowfall_in": 200,
-      "region": "Northeast",
-      "catchment_total_pop": 34413,
-      "catchment_working_age_pop": 20926,
-      "catchment_median_income": 68375,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Loon Mountain",
@@ -2239,11 +1690,7 @@
       "trails": 61,
       "lifts": 11,
       "snowfall_in": 165,
-      "region": "Northeast",
-      "catchment_total_pop": 70462,
-      "catchment_working_age_pop": 44505,
-      "catchment_median_income": 76786,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Waterville Valley",
@@ -2255,11 +1702,7 @@
       "trails": 50,
       "lifts": 11,
       "snowfall_in": 160,
-      "region": "Northeast",
-      "catchment_total_pop": 77344,
-      "catchment_working_age_pop": 48958,
-      "catchment_median_income": 78583,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Wildcat Mountain",
@@ -2271,11 +1714,7 @@
       "trails": 48,
       "lifts": 4,
       "snowfall_in": 200,
-      "region": "Northeast",
-      "catchment_total_pop": 34402,
-      "catchment_working_age_pop": 20712,
-      "catchment_median_income": 61370,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Attitash",
@@ -2287,11 +1726,7 @@
       "trails": 67,
       "lifts": 10,
       "snowfall_in": 165,
-      "region": "Northeast",
-      "catchment_total_pop": 39027,
-      "catchment_working_age_pop": 23293,
-      "catchment_median_income": 71875,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Cranmore",
@@ -2303,11 +1738,7 @@
       "trails": 56,
       "lifts": 9,
       "snowfall_in": 130,
-      "region": "Northeast",
-      "catchment_total_pop": 57363,
-      "catchment_working_age_pop": 34568,
-      "catchment_median_income": 69750,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Mount Sunapee",
@@ -2319,11 +1750,7 @@
       "trails": 67,
       "lifts": 10,
       "snowfall_in": 130,
-      "region": "Northeast",
-      "catchment_total_pop": 226640,
-      "catchment_working_age_pop": 146061,
-      "catchment_median_income": 87344,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Pat's Peak",
@@ -2335,11 +1762,7 @@
       "trails": 28,
       "lifts": 11,
       "snowfall_in": 100,
-      "region": "Northeast",
-      "catchment_total_pop": 377287,
-      "catchment_working_age_pop": 252498,
-      "catchment_median_income": 100731,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Ragged Mountain",
@@ -2351,11 +1774,7 @@
       "trails": 57,
       "lifts": 6,
       "snowfall_in": 110,
-      "region": "Northeast",
-      "catchment_total_pop": 215114,
-      "catchment_working_age_pop": 139284,
-      "catchment_median_income": 84552,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Crotched Mountain",
@@ -2367,11 +1786,7 @@
       "trails": 23,
       "lifts": 6,
       "snowfall_in": 100,
-      "region": "Northeast",
-      "catchment_total_pop": 402416,
-      "catchment_working_age_pop": 266569,
-      "catchment_median_income": 100966,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Dartmouth Skiway",
@@ -2384,11 +1799,7 @@
       "lifts": 4,
       "snowfall_in": 120,
       "note": "Owned by Dartmouth College",
-      "region": "Northeast",
-      "catchment_total_pop": 72863,
-      "catchment_working_age_pop": 46871,
-      "catchment_median_income": 91302,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Black Mountain (NH)",
@@ -2400,11 +1811,7 @@
       "trails": 45,
       "lifts": 5,
       "snowfall_in": 125,
-      "region": "Northeast",
-      "catchment_total_pop": 15283,
-      "catchment_working_age_pop": 8797,
-      "catchment_median_income": 74850,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "King Pine",
@@ -2416,11 +1823,7 @@
       "trails": 17,
       "lifts": 4,
       "snowfall_in": 100,
-      "region": "Northeast",
-      "catchment_total_pop": 141940,
-      "catchment_working_age_pop": 89665,
-      "catchment_median_income": 84510,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Sugarloaf",
@@ -2432,11 +1835,7 @@
       "trails": 162,
       "lifts": 15,
       "snowfall_in": 200,
-      "region": "Northeast",
-      "catchment_total_pop": 320,
-      "catchment_working_age_pop": 191,
-      "catchment_median_income": 67292,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Sunday River",
@@ -2448,11 +1847,7 @@
       "trails": 135,
       "lifts": 18,
       "snowfall_in": 167,
-      "region": "Northeast",
-      "catchment_total_pop": 45194,
-      "catchment_working_age_pop": 28133,
-      "catchment_median_income": 58006,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Saddleback",
@@ -2464,11 +1859,7 @@
       "trails": 68,
       "lifts": 4,
       "snowfall_in": 225,
-      "region": "Northeast",
-      "catchment_total_pop": 2274,
-      "catchment_working_age_pop": 1364,
-      "catchment_median_income": 65750,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Camden Snow Bowl",
@@ -2481,11 +1872,7 @@
       "lifts": 4,
       "snowfall_in": 100,
       "note": "Coastal Maine, ocean views",
-      "region": "Northeast",
-      "catchment_total_pop": 102007,
-      "catchment_working_age_pop": 60656,
-      "catchment_median_income": 71488,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Mt. Abram",
@@ -2497,11 +1884,7 @@
       "trails": 44,
       "lifts": 5,
       "snowfall_in": 175,
-      "region": "Northeast",
-      "catchment_total_pop": 27874,
-      "catchment_working_age_pop": 17165,
-      "catchment_median_income": 55670,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Whiteface",
@@ -2514,11 +1897,7 @@
       "lifts": 11,
       "snowfall_in": 168,
       "note": "1980 Olympics venue; highest vertical in the East",
-      "region": "Northeast",
-      "catchment_total_pop": 19610,
-      "catchment_working_age_pop": 12436,
-      "catchment_median_income": 77962,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Holiday Valley",
@@ -2531,11 +1910,7 @@
       "lifts": 13,
       "snowfall_in": 180,
       "note": "Largest ski area in Western NY; lake-effect snowbelt; ~500K visits/yr",
-      "region": "Northeast",
-      "catchment_total_pop": 361309,
-      "catchment_working_age_pop": 227179,
-      "catchment_median_income": 69049,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Hunter Mountain",
@@ -2547,11 +1922,7 @@
       "trails": 67,
       "lifts": 12,
       "snowfall_in": 121,
-      "region": "Northeast",
-      "catchment_total_pop": 143086,
-      "catchment_working_age_pop": 89715,
-      "catchment_median_income": 72387,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Belleayre",
@@ -2563,11 +1934,7 @@
       "trails": 51,
       "lifts": 8,
       "snowfall_in": 165,
-      "region": "Northeast",
-      "catchment_total_pop": 97182,
-      "catchment_working_age_pop": 59928,
-      "catchment_median_income": 71728,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Gore Mountain",
@@ -2579,11 +1946,7 @@
       "trails": 110,
       "lifts": 14,
       "snowfall_in": 150,
-      "region": "Northeast",
-      "catchment_total_pop": 108625,
-      "catchment_working_age_pop": 67910,
-      "catchment_median_income": 76250,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Windham",
@@ -2595,11 +1958,7 @@
       "trails": 60,
       "lifts": 13,
       "snowfall_in": 120,
-      "region": "Northeast",
-      "catchment_total_pop": 140399,
-      "catchment_working_age_pop": 88111,
-      "catchment_median_income": 74773,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Plattekill",
@@ -2612,11 +1971,7 @@
       "lifts": 3,
       "snowfall_in": 190,
       "note": "Independent, weekends only, expert reputation",
-      "region": "Northeast",
-      "catchment_total_pop": 30053,
-      "catchment_working_age_pop": 18633,
-      "catchment_median_income": 65368,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Greek Peak",
@@ -2628,11 +1983,7 @@
       "trails": 33,
       "lifts": 8,
       "snowfall_in": 120,
-      "region": "Northeast",
-      "catchment_total_pop": 481563,
-      "catchment_working_age_pop": 323308,
-      "catchment_median_income": 67321,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Bristol Mountain",
@@ -2645,11 +1996,7 @@
       "lifts": 6,
       "snowfall_in": 135,
       "note": "Highest vertical between Rockies and Adirondacks",
-      "region": "Northeast",
-      "catchment_total_pop": 569503,
-      "catchment_working_age_pop": 368018,
-      "catchment_median_income": 78642,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Catamount",
@@ -2662,11 +2009,7 @@
       "lifts": 7,
       "snowfall_in": 110,
       "note": "On NY/MA border",
-      "region": "Northeast",
-      "catchment_total_pop": 100413,
-      "catchment_working_age_pop": 61308,
-      "catchment_median_income": 87000,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Holiday Mountain",
@@ -2678,11 +2021,7 @@
       "trails": 17,
       "lifts": 4,
       "snowfall_in": 60,
-      "region": "Northeast",
-      "catchment_total_pop": 579801,
-      "catchment_working_age_pop": 373744,
-      "catchment_median_income": 92272,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Song Mountain",
@@ -2694,11 +2033,7 @@
       "trails": 25,
       "lifts": 4,
       "snowfall_in": 175,
-      "region": "Northeast",
-      "catchment_total_pop": 738506,
-      "catchment_working_age_pop": 480245,
-      "catchment_median_income": 76429,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Blue Mountain",
@@ -2711,11 +2046,7 @@
       "lifts": 16,
       "snowfall_in": 33,
       "note": "PA's highest vertical drop; ~75 mi NW of Philadelphia; ~300K visits/yr; 100% snowmaking",
-      "region": "Northeast",
-      "catchment_total_pop": 1187063,
-      "catchment_working_age_pop": 761150,
-      "catchment_median_income": 79833,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Camelback",
@@ -2728,11 +2059,7 @@
       "lifts": 16,
       "snowfall_in": 50,
       "note": "Largest in the Poconos; serves NYC + Philly day-trip market",
-      "region": "Northeast",
-      "catchment_total_pop": 1036005,
-      "catchment_working_age_pop": 665398,
-      "catchment_median_income": 74792,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Shawnee Mountain",
@@ -2744,11 +2071,7 @@
       "trails": 23,
       "lifts": 10,
       "snowfall_in": 50,
-      "region": "Northeast",
-      "catchment_total_pop": 573877,
-      "catchment_working_age_pop": 371915,
-      "catchment_median_income": 91875,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Whitetail",
@@ -2761,11 +2084,7 @@
       "lifts": 7,
       "snowfall_in": 36,
       "note": "Serves DC/Baltimore market",
-      "region": "Northeast",
-      "catchment_total_pop": 829206,
-      "catchment_working_age_pop": 535077,
-      "catchment_median_income": 84476,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Liberty Mountain",
@@ -2777,11 +2096,7 @@
       "trails": 16,
       "lifts": 8,
       "snowfall_in": 36,
-      "region": "Northeast",
-      "catchment_total_pop": 1067299,
-      "catchment_working_age_pop": 681034,
-      "catchment_median_income": 92596,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Roundtop Mountain",
@@ -2793,11 +2108,7 @@
       "trails": 21,
       "lifts": 9,
       "snowfall_in": 36,
-      "region": "Northeast",
-      "catchment_total_pop": 1444602,
-      "catchment_working_age_pop": 915438,
-      "catchment_median_income": 83979,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Bear Creek",
@@ -2809,11 +2120,7 @@
       "trails": 21,
       "lifts": 7,
       "snowfall_in": 40,
-      "region": "Northeast",
-      "catchment_total_pop": 1844700,
-      "catchment_working_age_pop": 1190540,
-      "catchment_median_income": 96719,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Seven Springs",
@@ -2826,11 +2133,7 @@
       "lifts": 14,
       "snowfall_in": 138,
       "note": "Largest in western PA; serves Pittsburgh",
-      "region": "Northeast",
-      "catchment_total_pop": 294601,
-      "catchment_working_age_pop": 182557,
-      "catchment_median_income": 65357,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Hidden Valley (PA)",
@@ -2842,11 +2145,7 @@
       "trails": 26,
       "lifts": 8,
       "snowfall_in": 130,
-      "region": "Northeast",
-      "catchment_total_pop": 713875,
-      "catchment_working_age_pop": 436740,
-      "catchment_median_income": 66326,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Elk Mountain",
@@ -2858,11 +2157,7 @@
       "trails": 27,
       "lifts": 6,
       "snowfall_in": 120,
-      "region": "Northeast",
-      "catchment_total_pop": 452377,
-      "catchment_working_age_pop": 285469,
-      "catchment_median_income": 64274,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Mountain Creek",
@@ -2875,11 +2170,7 @@
       "lifts": 8,
       "snowfall_in": 65,
       "note": "Closest major resort to NYC; serves NYC metro area",
-      "region": "Northeast",
-      "catchment_total_pop": 1963408,
-      "catchment_working_age_pop": 1272589,
-      "catchment_median_income": 112634,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Campgaw Mountain",
@@ -2891,11 +2182,7 @@
       "trails": 8,
       "lifts": 4,
       "snowfall_in": 25,
-      "region": "Northeast",
-      "catchment_total_pop": 8833522,
-      "catchment_working_age_pop": 5897297,
-      "catchment_median_income": 97633,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Wachusett",
@@ -2907,11 +2194,7 @@
       "trails": 27,
       "lifts": 9,
       "snowfall_in": 80,
-      "region": "Northeast",
-      "catchment_total_pop": 1380514,
-      "catchment_working_age_pop": 914236,
-      "catchment_median_income": 105227,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Berkshire East",
@@ -2924,11 +2207,7 @@
       "lifts": 7,
       "snowfall_in": 140,
       "note": "Powered by on-site solar + wind",
-      "region": "Northeast",
-      "catchment_total_pop": 146924,
-      "catchment_working_age_pop": 98691,
-      "catchment_median_income": 77043,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Jiminy Peak",
@@ -2940,11 +2219,7 @@
       "trails": 45,
       "lifts": 9,
       "snowfall_in": 150,
-      "region": "Northeast",
-      "catchment_total_pop": 494894,
-      "catchment_working_age_pop": 327720,
-      "catchment_median_income": 83951,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Mohawk Mountain",
@@ -2957,11 +2232,7 @@
       "lifts": 7,
       "snowfall_in": 65,
       "note": "First snowmaking ski resort in the world (1949)",
-      "region": "Northeast",
-      "catchment_total_pop": 854617,
-      "catchment_working_age_pop": 552044,
-      "catchment_median_income": 95970,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Mount Southington",
@@ -2973,11 +2244,7 @@
       "trails": 14,
       "lifts": 6,
       "snowfall_in": 55,
-      "region": "Northeast",
-      "catchment_total_pop": 2550590,
-      "catchment_working_age_pop": 1669899,
-      "catchment_median_income": 95970,
-      "catchment_border_note": false
+      "region": "Northeast"
     },
     {
       "name": "Lutsen Mountains",
@@ -2989,11 +2256,7 @@
       "trails": 95,
       "lifts": 8,
       "snowfall_in": 110,
-      "region": "Midwest",
-      "catchment_total_pop": 4240,
-      "catchment_working_age_pop": 2343,
-      "catchment_median_income": 72113,
-      "catchment_border_note": true
+      "region": "Midwest"
     },
     {
       "name": "Spirit Mountain",
@@ -3005,11 +2268,7 @@
       "trails": 22,
       "lifts": 9,
       "snowfall_in": 80,
-      "region": "Midwest",
-      "catchment_total_pop": 206116,
-      "catchment_working_age_pop": 135492,
-      "catchment_median_income": 75117,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Welch Village",
@@ -3021,11 +2280,7 @@
       "trails": 60,
       "lifts": 9,
       "snowfall_in": 50,
-      "region": "Midwest",
-      "catchment_total_pop": 627533,
-      "catchment_working_age_pop": 407606,
-      "catchment_median_income": 107000,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Buck Hill",
@@ -3038,11 +2293,7 @@
       "lifts": 8,
       "snowfall_in": 50,
       "note": "Where Lindsey Vonn learned to ski",
-      "region": "Midwest",
-      "catchment_total_pop": 3359617,
-      "catchment_working_age_pop": 2207547,
-      "catchment_median_income": 99408,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Afton Alps",
@@ -3054,11 +2305,7 @@
       "trails": 50,
       "lifts": 18,
       "snowfall_in": 50,
-      "region": "Midwest",
-      "catchment_total_pop": 2946639,
-      "catchment_working_age_pop": 1944852,
-      "catchment_median_income": 96058,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Granite Peak",
@@ -3070,11 +2317,7 @@
       "trails": 75,
       "lifts": 7,
       "snowfall_in": 60,
-      "region": "Midwest",
-      "catchment_total_pop": 258419,
-      "catchment_working_age_pop": 164544,
-      "catchment_median_income": 74267,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Wilmot Mountain",
@@ -3086,11 +2329,7 @@
       "trails": 23,
       "lifts": 7,
       "snowfall_in": 50,
-      "region": "Midwest",
-      "catchment_total_pop": 2146377,
-      "catchment_working_age_pop": 1385818,
-      "catchment_median_income": 96563,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Tyrol Basin",
@@ -3102,11 +2341,7 @@
       "trails": 18,
       "lifts": 6,
       "snowfall_in": 50,
-      "region": "Midwest",
-      "catchment_total_pop": 646966,
-      "catchment_working_age_pop": 439940,
-      "catchment_median_income": 92219,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Cascade Mountain",
@@ -3118,11 +2353,7 @@
       "trails": 47,
       "lifts": 11,
       "snowfall_in": 45,
-      "region": "Midwest",
-      "catchment_total_pop": 519331,
-      "catchment_working_age_pop": 351765,
-      "catchment_median_income": 81103,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Trollhaugen",
@@ -3134,11 +2365,7 @@
       "trails": 24,
       "lifts": 11,
       "snowfall_in": 50,
-      "region": "Midwest",
-      "catchment_total_pop": 892055,
-      "catchment_working_age_pop": 570212,
-      "catchment_median_income": 95913,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Alpine Valley (WI)",
@@ -3150,11 +2377,7 @@
       "trails": 20,
       "lifts": 11,
       "snowfall_in": 45,
-      "region": "Midwest",
-      "catchment_total_pop": 2065930,
-      "catchment_working_age_pop": 1350600,
-      "catchment_median_income": 85568,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Chestnut Mountain",
@@ -3166,11 +2389,7 @@
       "trails": 19,
       "lifts": 9,
       "snowfall_in": 50,
-      "region": "Midwest",
-      "catchment_total_pop": 128741,
-      "catchment_working_age_pop": 80236,
-      "catchment_median_income": 72850,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Sundown Mountain",
@@ -3182,11 +2401,7 @@
       "trails": 21,
       "lifts": 5,
       "snowfall_in": 35,
-      "region": "Midwest",
-      "catchment_total_pop": 134767,
-      "catchment_working_age_pop": 84366,
-      "catchment_median_income": 77880,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Boyne Mountain",
@@ -3198,11 +2413,7 @@
       "trails": 60,
       "lifts": 12,
       "snowfall_in": 140,
-      "region": "Midwest",
-      "catchment_total_pop": 125886,
-      "catchment_working_age_pop": 76147,
-      "catchment_median_income": 68807,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Boyne Highlands",
@@ -3214,11 +2425,7 @@
       "trails": 53,
       "lifts": 9,
       "snowfall_in": 140,
-      "region": "Midwest",
-      "catchment_total_pop": 72782,
-      "catchment_working_age_pop": 43727,
-      "catchment_median_income": 78750,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Crystal Mountain (MI)",
@@ -3230,11 +2437,7 @@
       "trails": 58,
       "lifts": 9,
       "snowfall_in": 132,
-      "region": "Midwest",
-      "catchment_total_pop": 157074,
-      "catchment_working_age_pop": 96022,
-      "catchment_median_income": 68142,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Mt. Brighton",
@@ -3246,11 +2449,7 @@
       "trails": 26,
       "lifts": 7,
       "snowfall_in": 50,
-      "region": "Midwest",
-      "catchment_total_pop": 3524103,
-      "catchment_working_age_pop": 2309546,
-      "catchment_median_income": 77998,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Pine Knob",
@@ -3262,11 +2461,7 @@
       "trails": 17,
       "lifts": 7,
       "snowfall_in": 40,
-      "region": "Midwest",
-      "catchment_total_pop": 3818844,
-      "catchment_working_age_pop": 2471647,
-      "catchment_median_income": 77271,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Caberfae Peaks",
@@ -3278,11 +2473,7 @@
       "trails": 34,
       "lifts": 7,
       "snowfall_in": 130,
-      "region": "Midwest",
-      "catchment_total_pop": 129976,
-      "catchment_working_age_pop": 79769,
-      "catchment_median_income": 63286,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Mt. Bohemia",
@@ -3295,11 +2486,7 @@
       "lifts": 3,
       "snowfall_in": 273,
       "note": "Expert-only, Upper Peninsula; no grooming, ungroomed terrain",
-      "region": "Midwest",
-      "catchment_total_pop": 18143,
-      "catchment_working_age_pop": 10993,
-      "catchment_median_income": 53893,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Terry Peak",
@@ -3311,11 +2498,7 @@
       "trails": 30,
       "lifts": 5,
       "snowfall_in": 150,
-      "region": "Midwest",
-      "catchment_total_pop": 85571,
-      "catchment_working_age_pop": 54273,
-      "catchment_median_income": 59077,
-      "catchment_border_note": false
+      "region": "Midwest"
     },
     {
       "name": "Snowshoe Mountain",
@@ -3327,11 +2510,7 @@
       "trails": 60,
       "lifts": 14,
       "snowfall_in": 180,
-      "region": "Southeast",
-      "catchment_total_pop": 8540,
-      "catchment_working_age_pop": 5136,
-      "catchment_median_income": 41250,
-      "catchment_border_note": false
+      "region": "Southeast"
     },
     {
       "name": "Timberline Mountain",
@@ -3343,11 +2522,7 @@
       "trails": 39,
       "lifts": 4,
       "snowfall_in": 150,
-      "region": "Southeast",
-      "catchment_total_pop": 32371,
-      "catchment_working_age_pop": 19766,
-      "catchment_median_income": 55453,
-      "catchment_border_note": false
+      "region": "Southeast"
     },
     {
       "name": "Canaan Valley",
@@ -3359,11 +2534,7 @@
       "trails": 47,
       "lifts": 4,
       "snowfall_in": 180,
-      "region": "Southeast",
-      "catchment_total_pop": 49031,
-      "catchment_working_age_pop": 29803,
-      "catchment_median_income": 57000,
-      "catchment_border_note": false
+      "region": "Southeast"
     },
     {
       "name": "Beech Mountain",
@@ -3375,11 +2546,7 @@
       "trails": 17,
       "lifts": 8,
       "snowfall_in": 84,
-      "region": "Southeast",
-      "catchment_total_pop": 96733,
-      "catchment_working_age_pop": 66757,
-      "catchment_median_income": 49292,
-      "catchment_border_note": false
+      "region": "Southeast"
     },
     {
       "name": "Sugar Mountain",
@@ -3391,11 +2558,7 @@
       "trails": 21,
       "lifts": 8,
       "snowfall_in": 78,
-      "region": "Southeast",
-      "catchment_total_pop": 140504,
-      "catchment_working_age_pop": 94060,
-      "catchment_median_income": 52105,
-      "catchment_border_note": false
+      "region": "Southeast"
     },
     {
       "name": "Cataloochee",
@@ -3407,11 +2570,7 @@
       "trails": 18,
       "lifts": 5,
       "snowfall_in": 50,
-      "region": "Southeast",
-      "catchment_total_pop": 446130,
-      "catchment_working_age_pop": 282119,
-      "catchment_median_income": 65096,
-      "catchment_border_note": false
+      "region": "Southeast"
     },
     {
       "name": "App Ski Mountain",
@@ -3424,11 +2583,7 @@
       "lifts": 4,
       "snowfall_in": 60,
       "note": "Appalachian Ski Mountain; near Boone NC",
-      "region": "Southeast",
-      "catchment_total_pop": 284598,
-      "catchment_working_age_pop": 183161,
-      "catchment_median_income": 54655,
-      "catchment_border_note": false
+      "region": "Southeast"
     },
     {
       "name": "Wintergreen",
@@ -3440,11 +2595,7 @@
       "trails": 24,
       "lifts": 5,
       "snowfall_in": 40,
-      "region": "Southeast",
-      "catchment_total_pop": 274984,
-      "catchment_working_age_pop": 179630,
-      "catchment_median_income": 74717,
-      "catchment_border_note": false
+      "region": "Southeast"
     },
     {
       "name": "Bryce Resort",
@@ -3456,11 +2607,7 @@
       "trails": 8,
       "lifts": 4,
       "snowfall_in": 30,
-      "region": "Southeast",
-      "catchment_total_pop": 243475,
-      "catchment_working_age_pop": 158134,
-      "catchment_median_income": 67843,
-      "catchment_border_note": false
+      "region": "Southeast"
     },
     {
       "name": "Massanutten",
@@ -3473,11 +2620,7 @@
       "lifts": 6,
       "snowfall_in": 35,
       "note": "Largest in VA; serves DC market",
-      "region": "Southeast",
-      "catchment_total_pop": 289353,
-      "catchment_working_age_pop": 186983,
-      "catchment_median_income": 69074,
-      "catchment_border_note": false
+      "region": "Southeast"
     },
     {
       "name": "Wisp",
@@ -3490,11 +2633,7 @@
       "lifts": 11,
       "snowfall_in": 100,
       "note": "Maryland's only commercial ski resort",
-      "region": "Southeast",
-      "catchment_total_pop": 256604,
-      "catchment_working_age_pop": 173515,
-      "catchment_median_income": 59345,
-      "catchment_border_note": false
+      "region": "Southeast"
     },
     {
       "name": "Ober Gatlinburg",
@@ -3506,11 +2645,7 @@
       "trails": 10,
       "lifts": 4,
       "snowfall_in": 35,
-      "region": "Southeast",
-      "catchment_total_pop": 302051,
-      "catchment_working_age_pop": 199754,
-      "catchment_median_income": 61761,
-      "catchment_border_note": false
+      "region": "Southeast"
     },
     {
       "name": "Cloudmont",
@@ -3522,11 +2657,7 @@
       "trails": 2,
       "lifts": 2,
       "snowfall_in": 5,
-      "region": "Southeast",
-      "catchment_total_pop": 126921,
-      "catchment_working_age_pop": 79880,
-      "catchment_median_income": 51978,
-      "catchment_border_note": false
+      "region": "Southeast"
     }
   ]
 }
