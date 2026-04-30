@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U.S. Ski Resorts Map — yifanova</title>
+<meta name="description" content="An interactive map of major U.S. ski resorts, colored by NSAA region and sized by skiable acreage. Built with Leaflet and OpenStreetMap.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../assets/ski.css">
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+<style>
+/* ─── Map page-specific styling ─── */
+.ski-page.map-page { font-family: var(--ski-font-body); background: var(--ski-paper); }
+.ski-page.map-page .map-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: calc(100vh - 56px);  /* subtract topbar */
+  overflow: hidden;
+}
+
+/* Header / intro region */
+.ski-page.map-page .map-intro {
+  background: var(--ski-paper);
+  border-bottom: 1px solid var(--ski-rule);
+  padding: 1.25rem 1.75rem 1rem;
+  position: relative;
+  z-index: 5;
+}
+.ski-page.map-page .map-intro h1 {
+  font-family: var(--ski-font-body);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ski-navy);
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.01em;
+}
+.ski-page.map-page .map-intro p {
+  font-size: 0.92rem;
+  color: var(--ski-ink-soft);
+  margin: 0;
+  max-width: 64rem;
+  line-height: 1.5;
+}
+.ski-page.map-page .map-intro a {
+  color: var(--ski-sapphire);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.ski-page.map-page[data-lang="zh"] .map-intro h1,
+.ski-page.map-page[data-lang="zh"] .map-intro p { font-family: var(--ski-font-cn); }
+
+/* Map container */
+.ski-page.map-page #map {
+  width: 100%;
+  height: calc(100vh - 56px - 110px);  /* viewport - topbar - intro */
+  background: var(--ski-paper-deep);
+  position: relative;
+}
+
+/* Floating filter panel — top-right of map */
+.ski-page.map-page .map-filter-panel {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(250, 250, 247, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--ski-rule);
+  border-radius: 6px;
+  padding: 0.85rem 1rem 0.75rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  font-family: var(--ski-font-ui);
+  font-size: 0.83rem;
+  z-index: 1000;
+  max-width: 14rem;
+}
+.ski-page.map-page .map-filter-panel h3 {
+  font-size: 0.74rem;
+  font-weight: 600;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  color: var(--ski-navy);
+  margin: 0 0 0.6rem;
+}
+.ski-page.map-page .map-filter-panel .region-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.85rem;
+}
+.ski-page.map-page .map-filter-panel label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.83rem;
+  color: var(--ski-ink);
+}
+.ski-page.map-page .map-filter-panel input[type=checkbox] {
+  cursor: pointer;
+  accent-color: var(--ski-navy);
+}
+.ski-page.map-page .map-filter-panel .swatch {
+  display: inline-block;
+  width: 0.78rem;
+  height: 0.78rem;
+  border-radius: 50%;
+  border: 1.5px solid white;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
+  flex-shrink: 0;
+}
+.ski-page.map-page .map-filter-panel .region-count {
+  font-size: 0.72rem;
+  color: var(--ski-ink-faint);
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+.ski-page.map-page .map-filter-panel .filter-divider {
+  height: 1px;
+  background: var(--ski-rule);
+  margin: 0.6rem 0 0.7rem;
+}
+.ski-page.map-page .map-filter-panel .size-filter {
+  font-size: 0.78rem;
+  color: var(--ski-ink-soft);
+}
+.ski-page.map-page .map-filter-panel .size-filter input[type=range] {
+  width: 100%;
+  margin: 0.4rem 0 0.2rem;
+  accent-color: var(--ski-navy);
+}
+.ski-page.map-page .map-filter-panel .filter-stat {
+  font-size: 0.72rem;
+  color: var(--ski-ink-faint);
+  text-align: right;
+  margin-top: 0.5rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--ski-rule);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom marker styling */
+.ski-page.map-page .ski-marker {
+  border-radius: 50%;
+  border: 1.5px solid white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+.ski-page.map-page .ski-marker:hover {
+  transform: scale(1.18);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+
+/* Popup styling override */
+.ski-page.map-page .leaflet-popup-content-wrapper {
+  background: var(--ski-paper);
+  border: 1px solid var(--ski-rule);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+}
+.ski-page.map-page .leaflet-popup-content {
+  font-family: var(--ski-font-body);
+  font-size: 0.86rem;
+  line-height: 1.45;
+  margin: 0.85rem 1rem;
+  color: var(--ski-ink);
+}
+.ski-page.map-page .leaflet-popup-tip {
+  background: var(--ski-paper);
+  border: 1px solid var(--ski-rule);
+}
+.ski-page.map-page .resort-popup .resort-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ski-navy);
+  margin: 0 0 0.1rem;
+  letter-spacing: -0.005em;
+}
+.ski-page.map-page .resort-popup .resort-region {
+  font-family: var(--ski-font-ui);
+  font-size: 0.7rem;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  color: var(--ski-ink-soft);
+  margin: 0 0 0.6rem;
+}
+.ski-page.map-page .resort-popup .resort-stats {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 0.85rem;
+  margin: 0.5rem 0 0.4rem;
+  font-size: 0.82rem;
+}
+.ski-page.map-page .resort-popup .resort-stats dt {
+  color: var(--ski-ink-faint);
+  font-family: var(--ski-font-ui);
+  font-size: 0.74rem;
+}
+.ski-page.map-page .resort-popup .resort-stats dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--ski-ink);
+  font-weight: 500;
+}
+.ski-page.map-page .resort-popup .resort-note {
+  margin-top: 0.45rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--ski-rule);
+  font-size: 0.76rem;
+  color: var(--ski-ink-faint);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* CartoDB Positron tiles attribution color tweak */
+.ski-page.map-page .leaflet-control-attribution {
+  background: rgba(250, 250, 247, 0.85) !important;
+  font-size: 0.65rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ski-page.map-page .map-intro { padding: 0.85rem 1rem 0.7rem; }
+  .ski-page.map-page .map-intro h1 { font-size: 1.15rem; }
+  .ski-page.map-page .map-intro p { font-size: 0.84rem; }
+  .ski-page.map-page #map { height: calc(100vh - 56px - 90px); }
+  .ski-page.map-page .map-filter-panel { max-width: 11rem; padding: 0.6rem 0.75rem; font-size: 0.76rem; top: 8px; right: 8px; }
+}
+</style>
+</head>
+
+<body class="ski-page map-page" data-lang="en">
+
+<!-- ============ TOPBAR ============ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">§</span>
+      <a href="/">yifanova</a>
+      <span style="color: var(--ski-ink-faded); margin: 0 0.4rem;">/</span>
+      <a href="index.html" style="color: var(--ski-ink-soft); text-decoration: none;">
+        <span data-lang-content="en">Alpine Skiing</span>
+        <span data-lang-content="zh">高山滑雪</span>
+      </a>
+      <span style="color: var(--ski-ink-faded); margin: 0 0.4rem;">/</span>
+      <span data-lang-content="en">Resort Map</span>
+      <span data-lang-content="zh">雪场地图</span>
+    </div>
+    <div class="lang-toggle" role="group" aria-label="Language toggle">
+      <button data-set-lang="en" class="active" aria-pressed="true">EN</button>
+      <button data-set-lang="zh" aria-pressed="false">中</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ INTRO ============ -->
+<div class="map-intro">
+  <h1>
+    <span data-lang-content="en">U.S. Ski Resorts</span>
+    <span data-lang-content="zh">美国主要滑雪场</span>
+  </h1>
+  <p data-lang-content="en">
+    117 major destination resorts plotted by location, colored by NSAA region, sized by skiable acreage. Click a marker for full statistics. Companion to <a href="research.html">Forty-seven seasons</a> in the main wiki. Coverage emphasizes destination resorts; the long tail of small community hills is partial. Data sources: skinorthamerica100.com, OnTheSnow, Wikipedia, public records.
+  </p>
+  <p data-lang-content="zh">
+    117 个美国主要目的地度假村，按位置标点、按 NSAA 大区配色、按可滑雪面积调整标记大小。点击标记查看完整统计。本页是主 wiki 中 <a href="research.html">"四十七个雪季"</a> 研究的伴生页。覆盖侧重目的地度假村；小型社区雪场的长尾覆盖不完整。数据来源：skinorthamerica100.com、OnTheSnow、维基百科、公开记录。
+  </p>
+</div>
+
+<!-- ============ MAP ============ -->
+<div id="map"></div>
+
+<!-- Filter panel will be injected as map overlay via JS -->
+
+<!-- ============ JS ============ -->
+<script>
+// ───────── Configuration ─────────
+const REGION_COLORS = {
+  'Northeast':         '#0a3d62',   // ski-navy
+  'Southeast':         '#b8860b',   // gold
+  'Midwest':           '#3c6e88',   // ski-sapphire (slightly muted blue)
+  'Rocky Mountain':    '#a8323e',   // red
+  'Pacific Southwest': '#3a5a40',   // ski-forest
+  'Pacific Northwest': '#475569',   // slate
+};
+
+const REGION_ZH = {
+  'Northeast':         '东北',
+  'Southeast':         '东南',
+  'Midwest':           '中西部',
+  'Rocky Mountain':    '落基山',
+  'Pacific Southwest': '太平洋西南',
+  'Pacific Northwest': '太平洋西北',
+};
+
+const STATE_NAMES = {
+  CO: 'Colorado', UT: 'Utah', WY: 'Wyoming', MT: 'Montana', ID: 'Idaho',
+  NM: 'New Mexico', AZ: 'Arizona', NV: 'Nevada', CA: 'California',
+  OR: 'Oregon', WA: 'Washington', AK: 'Alaska',
+  VT: 'Vermont', NH: 'New Hampshire', ME: 'Maine', NY: 'New York',
+  PA: 'Pennsylvania', MA: 'Massachusetts',
+  MN: 'Minnesota', WI: 'Wisconsin', MI: 'Michigan', IL: 'Illinois',
+  SD: 'South Dakota', WV: 'West Virginia', NC: 'North Carolina',
+  VA: 'Virginia', TN: 'Tennessee', AL: 'Alabama'
+};
+
+// Marker radius scaled from acres. sqrt = area-proportional.
+function markerRadius(acres) {
+  if (!acres || acres <= 0) return 4;
+  // Scale: acres=100 → r≈4.5; acres=1000 → r≈8; acres=5000 → r≈14; acres=8000 → r≈17
+  return Math.max(4, Math.min(20, 1.5 + 1.6 * Math.sqrt(acres / 50)));
+}
+
+// ───────── Initialize map ─────────
+const map = L.map('map', {
+  center: [39.5, -100],   // CONUS center
+  zoom: 4,
+  zoomControl: true,
+  attributionControl: true,
+  preferCanvas: true,     // canvas renders 100+ markers faster than SVG
+  worldCopyJump: true,
+});
+
+// CartoDB Positron — clean, light gray. Academic feel.
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd',
+  maxZoom: 19
+}).addTo(map);
+
+// ───────── Load and render data ─────────
+const allMarkers = [];   // {marker, resort}
+const activeRegions = new Set(Object.keys(REGION_COLORS));
+let minAcres = 0;        // size filter
+
+const lang = () => document.body.getAttribute('data-lang') || 'en';
+
+function popupHTML(r) {
+  const l = lang();
+  const stateName = STATE_NAMES[r.state] || r.state;
+  const regionLabel = l === 'zh' ? REGION_ZH[r.region] : r.region;
+  const acresL  = l === 'zh' ? '可滑雪面积'  : 'Skiable area';
+  const vertL   = l === 'zh' ? '垂直落差'    : 'Vertical drop';
+  const trailsL = l === 'zh' ? '雪道数'      : 'Trails';
+  const liftsL  = l === 'zh' ? '缆车数'      : 'Lifts';
+  const snowL   = l === 'zh' ? '年降雪'      : 'Snowfall';
+  const acresU  = l === 'zh' ? '英亩'        : 'acres';
+  const ftU     = 'ft';
+  const inU     = 'in/yr';
+  
+  let html = `<div class="resort-popup">
+    <h3 class="resort-name">${r.name}</h3>
+    <p class="resort-region">${stateName} · ${regionLabel}</p>
+    <dl class="resort-stats">`;
+  
+  if (r.acres)        html += `<dt>${acresL}</dt><dd>${r.acres.toLocaleString()} ${acresU}</dd>`;
+  if (r.vertical_ft)  html += `<dt>${vertL}</dt><dd>${r.vertical_ft.toLocaleString()} ${ftU}</dd>`;
+  if (r.trails)       html += `<dt>${trailsL}</dt><dd>${r.trails}</dd>`;
+  if (r.lifts)        html += `<dt>${liftsL}</dt><dd>${r.lifts}</dd>`;
+  if (r.snowfall_in)  html += `<dt>${snowL}</dt><dd>${r.snowfall_in}″</dd>`;
+  
+  html += `</dl>`;
+  if (r.note) html += `<p class="resort-note">${r.note}</p>`;
+  html += `</div>`;
+  return html;
+}
+
+function createMarker(r) {
+  const radius = markerRadius(r.acres);
+  const color = REGION_COLORS[r.region] || '#666';
+  
+  const m = L.circleMarker([r.lat, r.lon], {
+    radius: radius,
+    fillColor: color,
+    color: 'white',
+    weight: 1.5,
+    opacity: 1,
+    fillOpacity: 0.85,
+    className: 'ski-marker'
+  });
+  
+  m.bindPopup(popupHTML(r), {
+    maxWidth: 260,
+    closeButton: true,
+    autoPan: true,
+  });
+  
+  m.bindTooltip(r.name, {
+    direction: 'top',
+    offset: [0, -radius],
+    className: 'ski-tooltip',
+    opacity: 0.92,
+  });
+  
+  return m;
+}
+
+function applyFilters() {
+  let visibleCount = 0;
+  let totalAcres = 0;
+  for (const item of allMarkers) {
+    const r = item.resort;
+    const acres = r.acres || 0;
+    const visible = activeRegions.has(r.region) && acres >= minAcres;
+    if (visible) {
+      if (!map.hasLayer(item.marker)) item.marker.addTo(map);
+      visibleCount++;
+      totalAcres += acres;
+    } else {
+      if (map.hasLayer(item.marker)) map.removeLayer(item.marker);
+    }
+  }
+  // Update counter
+  const countEl = document.getElementById('filter-stat');
+  if (countEl) {
+    const l = lang();
+    if (l === 'zh') {
+      countEl.textContent = `${visibleCount} 个雪场，共 ${(totalAcres/1000).toFixed(1)} 千英亩`;
+    } else {
+      countEl.textContent = `${visibleCount} resorts · ${(totalAcres/1000).toFixed(1)}k acres`;
+    }
+  }
+}
+
+function buildFilterPanel(regions, regionCounts) {
+  const panel = document.createElement('div');
+  panel.className = 'map-filter-panel';
+  panel.innerHTML = `
+    <h3 data-lang-content="en">Filter by region</h3>
+    <h3 data-lang-content="zh">按大区筛选</h3>
+    <div class="region-toggles" id="region-toggles"></div>
+    <div class="filter-divider"></div>
+    <div class="size-filter">
+      <label style="display: block; margin-bottom: 0.2rem;">
+        <span data-lang-content="en">Min skiable acres:</span>
+        <span data-lang-content="zh">最小面积（英亩）：</span>
+        <span id="min-acres-display" style="font-weight: 600; color: var(--ski-navy);">0</span>
+      </label>
+      <input type="range" id="min-acres-range" min="0" max="3000" step="100" value="0">
+    </div>
+    <div class="filter-stat" id="filter-stat"></div>
+  `;
+  document.getElementById('map').appendChild(panel);
+  
+  // Stop map interactions inside panel
+  L.DomEvent.disableClickPropagation(panel);
+  L.DomEvent.disableScrollPropagation(panel);
+  
+  // Region toggles
+  const togglesContainer = panel.querySelector('#region-toggles');
+  const regionOrder = ['Rocky Mountain', 'Pacific Southwest', 'Pacific Northwest', 'Northeast', 'Midwest', 'Southeast'];
+  for (const region of regionOrder) {
+    if (!regions.has(region)) continue;
+    const id = 'r-' + region.toLowerCase().replace(/\s+/g, '-');
+    const label = document.createElement('label');
+    label.innerHTML = `
+      <input type="checkbox" id="${id}" data-region="${region}" checked>
+      <span class="swatch" style="background: ${REGION_COLORS[region]};"></span>
+      <span data-lang-content="en">${region}</span>
+      <span data-lang-content="zh">${REGION_ZH[region]}</span>
+      <span class="region-count">${regionCounts[region] || 0}</span>
+    `;
+    togglesContainer.appendChild(label);
+    label.querySelector('input').addEventListener('change', (e) => {
+      if (e.target.checked) activeRegions.add(region);
+      else activeRegions.delete(region);
+      applyFilters();
+    });
+  }
+  
+  // Size filter
+  const range = panel.querySelector('#min-acres-range');
+  const display = panel.querySelector('#min-acres-display');
+  range.addEventListener('input', (e) => {
+    minAcres = parseInt(e.target.value, 10);
+    display.textContent = minAcres.toLocaleString();
+    applyFilters();
+  });
+}
+
+// Refresh popups when language toggles (so popup text updates next time it opens)
+function refreshPopupsOnLangChange() {
+  const observer = new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      if (m.attributeName === 'data-lang') {
+        // rebuild popup contents
+        for (const item of allMarkers) {
+          item.marker.setPopupContent(popupHTML(item.resort));
+        }
+        applyFilters(); // refresh count text
+      }
+    }
+  });
+  observer.observe(document.body, { attributes: true });
+}
+
+// ───────── Bootstrap ─────────
+fetch('research-data/us_ski_resorts.json')
+  .then(r => r.json())
+  .then(data => {
+    const resorts = data.resorts;
+    const regions = new Set();
+    const regionCounts = {};
+    for (const r of resorts) {
+      regions.add(r.region);
+      regionCounts[r.region] = (regionCounts[r.region] || 0) + 1;
+      const m = createMarker(r);
+      m.addTo(map);
+      allMarkers.push({marker: m, resort: r});
+    }
+    buildFilterPanel(regions, regionCounts);
+    applyFilters();
+    refreshPopupsOnLangChange();
+  })
+  .catch(err => {
+    console.error('Failed to load resort data:', err);
+    document.getElementById('map').innerHTML = 
+      '<div style="padding: 2rem; text-align: center; color: var(--ski-ink-soft);">' +
+      'Could not load resort data. Please check the file path.</div>';
+  });
+
+// ───────── Language toggle (mirrors main wiki) ─────────
+(function() {
+  var btns = document.querySelectorAll('[data-set-lang]');
+  var body = document.body;
+  var stored;
+  try { stored = localStorage.getItem('ski-lang'); } catch (e) {}
+  if (stored === 'en' || stored === 'zh') setLang(stored);
+  btns.forEach(function(b) {
+    b.addEventListener('click', function() {
+      setLang(b.getAttribute('data-set-lang'));
+    });
+  });
+  function setLang(l) {
+    body.setAttribute('data-lang', l);
+    btns.forEach(function(b) {
+      var on = b.getAttribute('data-set-lang') === l;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    try { localStorage.setItem('ski-lang', l); } catch (e) {}
+  }
+})();
+</script>
+
+</body>
+</html>
