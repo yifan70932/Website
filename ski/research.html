@@ -361,7 +361,11 @@ Between 1995–96 and 2023–24, the Theil index of regional inequality rose by 
 
 <h3>Spatial autocorrelation: Moran's I</h3>
 
-<p>The most rigorous test of spatial coupling is the Moran's I statistic: a measure of how strongly a region's deviation from its mean tracks its neighbors' deviations. With a queen-contiguity adjacency matrix appropriate to the six NSAA regions (Northeast adjacent to Midwest and Southeast; Rocky Mountain adjacent to Midwest, Pacific Southwest, Pacific Northwest; etc.), the global Moran's I was computed for each season since 1995–96. The result is unexpected:</p>
+<p>The most rigorous test of spatial coupling is the Moran's I statistic: a measure of how strongly a region's deviation from its mean tracks its neighbors' deviations. With a queen-contiguity adjacency matrix appropriate to the six NSAA regions (Northeast adjacent to Midwest and Southeast; Rocky Mountain adjacent to Midwest, Pacific Southwest, Pacific Northwest; etc.), the global Moran's I was computed for each season since 1995–96.</p>
+
+<aside class="sidenote">A six-unit sample is small for Moran's I. The point estimates carry wide pseudo-confidence intervals, and the result should be read as <em>directionally informative</em> rather than as a hypothesis test. Still, the consistent dispersion across thirty years is hard to attribute to chance alone, and it is consistent with both the bivariate map (Fig. 9) and the LISA classifications (Fig. 10).</aside>
+
+<p>The result is unexpected. The expected value of Moran's <em>I</em> under spatial randomness with <em>n</em> = 6 areal units is −1/(<em>n</em>−1) = −0.20; the observed mean of −0.48 is therefore not simply "negative" but <em>more negative than chance</em>. The pattern is also remarkably stable: the period means for 1996–2010 (−0.50) and 2011–2025 (−0.47) are essentially indistinguishable. With six regions and only 199 permutations per year, no individual year crosses standard significance thresholds, but the persistent negativity across thirty consecutive seasons is itself a structural pattern. Whether one reads this as a single highly-significant result over thirty repeated trials or as thirty individually-marginal observations, the cumulative weight is the same.</p>
 
 <table class="stat-table">
   <thead>
@@ -375,10 +379,6 @@ Between 1995–96 and 2023–24, the Theil index of regional inequality rose by 
     <tr><td>Year-by-year significance (one-sided permutation, <em>n</em> = 199 per year)</td><td class="num nonsig">no individual year reaches <em>p</em> &lt; 0.10</td></tr>
   </tbody>
 </table>
-
-<p>The interpretation deserves care. The expected value of Moran's <em>I</em> under spatial randomness with <em>n</em> = 6 areal units is −1/(<em>n</em>−1) = −0.20. The observed mean of −0.48 is therefore not simply "negative" but <em>more negative than chance</em>. With six regions and 199 permutations per year, no individual year crosses standard significance thresholds — but the persistent negativity across thirty years is itself a structural pattern.</p>
-
-<aside class="sidenote">A six-unit sample is small for Moran's I. The point estimates carry wide pseudo-confidence intervals, and the result should be read as <em>directionally informative</em> rather than as a hypothesis test. Still, the consistent dispersion across thirty years is hard to attribute to chance alone, and it is consistent with both the bivariate map (Fig. 9) and the LISA classifications (Fig. 10).</aside>
 
 <div class="finding-box">
 <span class="finding-label">Finding</span>
