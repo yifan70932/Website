@@ -331,6 +331,171 @@
       <p>这四层语言被一种共同的设计压力贯穿：媒介对普通英语不友好。无线电是嘈杂的；驾驶舱是嘈杂的；母语各不相同；注意力被分割；发话短促。这一摞语言的每一层，几十年来都在这个压力下被反复打磨——通过一个反复迭代的过程，每一次事故都从标准里去掉一种歧义。结果是一种密度极高的词汇：在它的领域之外脆弱不堪，在它的领域之内却异常可靠。</p>
     </div>
 
+    <!-- ─── Widget for §3: FMC/CDU input demo ──────────────────── -->
+    <figure class="full-bleed">
+      <div class="fmc-widget" id="fmc-widget">
+
+        <!-- Left side: the CDU itself -->
+        <div class="fmc-cdu" aria-label="FMC Control Display Unit">
+          <!-- Screen: 14 rows × 24 cols, with 6 LSKs flanking each side -->
+          <div class="fmc-screen-wrap">
+            <div class="fmc-lsk-col fmc-lsk-left">
+              <button class="fmc-lsk" data-lsk="L1" aria-label="LSK 1L">&lt;</button>
+              <button class="fmc-lsk" data-lsk="L2" aria-label="LSK 2L">&lt;</button>
+              <button class="fmc-lsk" data-lsk="L3" aria-label="LSK 3L">&lt;</button>
+              <button class="fmc-lsk" data-lsk="L4" aria-label="LSK 4L">&lt;</button>
+              <button class="fmc-lsk" data-lsk="L5" aria-label="LSK 5L">&lt;</button>
+              <button class="fmc-lsk" data-lsk="L6" aria-label="LSK 6L">&lt;</button>
+            </div>
+            <div class="fmc-screen" id="fmc-screen" aria-live="polite"></div>
+            <div class="fmc-lsk-col fmc-lsk-right">
+              <button class="fmc-lsk" data-lsk="R1" aria-label="LSK 1R">&gt;</button>
+              <button class="fmc-lsk" data-lsk="R2" aria-label="LSK 2R">&gt;</button>
+              <button class="fmc-lsk" data-lsk="R3" aria-label="LSK 3R">&gt;</button>
+              <button class="fmc-lsk" data-lsk="R4" aria-label="LSK 4R">&gt;</button>
+              <button class="fmc-lsk" data-lsk="R5" aria-label="LSK 5R">&gt;</button>
+              <button class="fmc-lsk" data-lsk="R6" aria-label="LSK 6R">&gt;</button>
+            </div>
+          </div>
+
+          <!-- Function keys: just the four pages we support, plus EXEC/CLR -->
+          <div class="fmc-fnrow">
+            <button class="fmc-fn" data-page="INIT">INIT REF</button>
+            <button class="fmc-fn" data-page="RTE">RTE</button>
+            <button class="fmc-fn" data-page="LEGS">LEGS</button>
+            <button class="fmc-fn" data-page="MENU">MENU</button>
+            <button class="fmc-fn fmc-exec" data-action="EXEC" disabled>EXEC</button>
+          </div>
+
+          <!-- Alphanumeric keypad -->
+          <div class="fmc-keypad">
+            <div class="fmc-kp-row">
+              <button class="fmc-key" data-key="A">A</button>
+              <button class="fmc-key" data-key="B">B</button>
+              <button class="fmc-key" data-key="C">C</button>
+              <button class="fmc-key" data-key="D">D</button>
+              <button class="fmc-key" data-key="E">E</button>
+              <button class="fmc-key" data-key="1">1</button>
+              <button class="fmc-key" data-key="2">2</button>
+              <button class="fmc-key" data-key="3">3</button>
+            </div>
+            <div class="fmc-kp-row">
+              <button class="fmc-key" data-key="F">F</button>
+              <button class="fmc-key" data-key="G">G</button>
+              <button class="fmc-key" data-key="H">H</button>
+              <button class="fmc-key" data-key="I">I</button>
+              <button class="fmc-key" data-key="J">J</button>
+              <button class="fmc-key" data-key="4">4</button>
+              <button class="fmc-key" data-key="5">5</button>
+              <button class="fmc-key" data-key="6">6</button>
+            </div>
+            <div class="fmc-kp-row">
+              <button class="fmc-key" data-key="K">K</button>
+              <button class="fmc-key" data-key="L">L</button>
+              <button class="fmc-key" data-key="M">M</button>
+              <button class="fmc-key" data-key="N">N</button>
+              <button class="fmc-key" data-key="O">O</button>
+              <button class="fmc-key" data-key="7">7</button>
+              <button class="fmc-key" data-key="8">8</button>
+              <button class="fmc-key" data-key="9">9</button>
+            </div>
+            <div class="fmc-kp-row">
+              <button class="fmc-key" data-key="P">P</button>
+              <button class="fmc-key" data-key="Q">Q</button>
+              <button class="fmc-key" data-key="R">R</button>
+              <button class="fmc-key" data-key="S">S</button>
+              <button class="fmc-key" data-key="T">T</button>
+              <button class="fmc-key" data-key=".">.</button>
+              <button class="fmc-key" data-key="0">0</button>
+              <button class="fmc-key" data-key="/">/</button>
+            </div>
+            <div class="fmc-kp-row">
+              <button class="fmc-key" data-key="U">U</button>
+              <button class="fmc-key" data-key="V">V</button>
+              <button class="fmc-key" data-key="W">W</button>
+              <button class="fmc-key" data-key="X">X</button>
+              <button class="fmc-key" data-key="Y">Y</button>
+              <button class="fmc-key" data-key="Z">Z</button>
+              <button class="fmc-key fmc-key-wide" data-key="SP">SP</button>
+              <button class="fmc-key fmc-key-clr" data-action="CLR">CLR</button>
+            </div>
+          </div>
+
+          <!-- Footer label: "BOEING 737 FMC CDU" — purely cosmetic -->
+          <div class="fmc-nameplate">
+            <span class="fmc-nameplate-text">BOEING 737 · FMC CDU</span>
+          </div>
+        </div>
+
+        <!-- Right side: simplified Navigation Display + tutorial sidebar -->
+        <div class="fmc-aux">
+          <svg class="fmc-nd" viewBox="0 0 280 280"
+               xmlns="http://www.w3.org/2000/svg" aria-label="Navigation display">
+            <defs>
+              <radialGradient id="fmc-nd-bg" cx="50%" cy="100%" r="100%">
+                <stop offset="0%"  stop-color="#0a1418"/>
+                <stop offset="100%" stop-color="#020608"/>
+              </radialGradient>
+            </defs>
+            <rect width="280" height="280" fill="url(#fmc-nd-bg)"/>
+            <!-- Range rings centered on display centre — informational only -->
+            <g class="fmc-nd-rings" fill="none" stroke="#1a4a3a" stroke-width="0.7" opacity="0.45">
+              <circle cx="140" cy="140" r="60"/>
+              <circle cx="140" cy="140" r="120" stroke-dasharray="2 3"/>
+            </g>
+            <!-- Heading scale at top -->
+            <g class="fmc-nd-hdg" fill="#7a9b8a" font-family="JetBrains Mono, monospace" font-size="8">
+              <text x="140" y="14" text-anchor="middle">N</text>
+              <text x="78" y="22" text-anchor="middle">330</text>
+              <text x="202" y="22" text-anchor="middle">030</text>
+            </g>
+            <!-- Aircraft symbol (positioned by JS to the active route's origin) -->
+            <g class="fmc-nd-aircraft" transform="translate(140 240)">
+              <polygon points="0,-7 -5,5 0,2 5,5" fill="#e8d147" stroke="#fff" stroke-width="0.5"/>
+            </g>
+            <!-- Route layers (filled by JS) -->
+            <g class="fmc-nd-route"></g>
+            <g class="fmc-nd-waypoints"></g>
+            <!-- Status text -->
+            <text class="fmc-nd-status" x="140" y="265" text-anchor="middle"
+                  fill="#7a9b8a" font-family="JetBrains Mono, monospace" font-size="8">NO ACTIVE ROUTE</text>
+          </svg>
+
+          <div class="fmc-hint" id="fmc-hint">
+            <strong data-lang-content="en">Try this</strong>
+            <strong data-lang-content="zh">动手试试</strong>
+            <ol data-lang-content="en">
+              <li>Press <code>RTE</code></li>
+              <li>Type <code>KBUF</code> on the keypad</li>
+              <li>Press the LSK next to <code>ORIGIN</code></li>
+              <li>Type <code>KDFW</code>, press LSK next to <code>DEST</code></li>
+              <li>On line 2, type a route like <code>SYR DCT PSB DCT AGC</code></li>
+              <li>Press <code>EXEC</code> when it lights up</li>
+            </ol>
+            <ol data-lang-content="zh">
+              <li>按 <code>RTE</code></li>
+              <li>用键盘输入 <code>KBUF</code></li>
+              <li>按 <code>ORIGIN</code> 旁边的行选择键</li>
+              <li>输入 <code>KDFW</code>，按 <code>DEST</code> 旁边的行选择键</li>
+              <li>第二行输入航路，例如 <code>SYR DCT PSB DCT AGC</code></li>
+              <li>当 <code>EXEC</code> 亮起，按下它</li>
+            </ol>
+            <p class="fmc-hint-note" data-lang-content="en">
+              Available waypoints: <code>SYR ELZ PSB JST AIR AGC HVQ APE FWA BVT TTH RZC TXK PRX SLR CVE</code> and any four-letter ICAO airport beginning with <code>K</code>.
+            </p>
+            <p class="fmc-hint-note" data-lang-content="zh">
+              可用航点：<code>SYR ELZ PSB JST AIR AGC HVQ APE FWA BVT TTH RZC TXK PRX SLR CVE</code> 以及任何以 <code>K</code> 开头的四字母 ICAO 机场代码。
+            </p>
+          </div>
+        </div>
+
+      </div>
+      <figcaption>
+        <span data-lang-content="en">Figure 2. A simplified, working Boeing-style FMC. The point is not to learn flight management — it is to feel, in your fingers, why the line-select-key + scratchpad pattern is itself a piece of constructed language.</span>
+        <span data-lang-content="zh">图 2。一台简化的、可工作的波音风格 FMC。重点不是学会飞行管理——而是用手指感受到，行选择键加草稿板的交互范式本身就是一种被构造出来的语言。</span>
+      </figcaption>
+    </figure>
+
     <h2 id="sec-instruments"><span class="sec-num">4 ·</span>
       <span data-lang-content="en">Trust the Instruments</span>
       <span data-lang-content="zh">相信仪表</span>
@@ -384,17 +549,384 @@
       <p>盲降系统正在被基于卫星的进近补充，并在某些地方被取代。在美国是 LPV（带垂直引导的航向道性能），借助广域增强系统 WAAS 实现；其他地区则有等效的卫星增强系统。LPV 可以提供与 CAT I 盲降相当的最低标准，而无需任何地面设备，只需卫星与基准站。地基增强系统（GBAS）则可以支持 CAT II 与 CAT III 等效级别。替代的经济动机是真实的：每一个跑道端的 ILS 安装成本以百万美元计，且需要定期飞行校验。但其哲学层面的争议要复杂得多。盲降是物理空间中的一束波；LPV 是机载算法基于一组卫星计算出的位置。所要求的信任本质上相同，但信任的载体已经迁移。眼下，盲降仍是每一个主要机场的标准。</p>
     </div>
 
-    <!-- Widget placeholder for §4: Approach plate annotator -->
+    <!-- Widget for §4: Interactive approach plate annotator -->
     <figure class="full-bleed">
-      <div class="widget-placeholder">
-        <strong data-lang-content="en">Approach Plate Annotator — to be implemented</strong>
-        <strong data-lang-content="zh">进近图标注器 — 待实装</strong>
-        <span data-lang-content="en">A hover-annotated FAA d-TPP chart for the ILS RWY 23 approach into Buffalo Niagara (KBUF), with each region — briefing strip, plan view, profile view, minimums box — explained on rollover.</span>
-        <span data-lang-content="zh">基于 FAA d-TPP 的 KBUF ILS 23 进近图，悬停标注各区域——通话简令带、平面图、剖面图、最低标准——并附释义。</span>
+      <div class="plate-widget" id="plate-widget">
+
+        <!-- The plate itself, in SVG. Layout follows FAA d-TPP convention:
+             briefing strip on top, plan view + scale below, profile view, minimums box. -->
+        <div class="plate-stage">
+          <svg class="plate-svg" viewBox="0 0 540 760"
+               xmlns="http://www.w3.org/2000/svg" aria-label="ILS RWY 23 approach plate, KBUF">
+
+            <defs>
+              <pattern id="plate-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f5f3ed" stroke-width="0.4"/>
+              </pattern>
+            </defs>
+
+            <!-- Paper background (no pointer events so it doesn't block hovers) -->
+            <rect width="540" height="760" fill="#fdfcf7" pointer-events="none"/>
+
+            <!-- ════════════════════════════════════════════════════════════
+                 BRIEFING STRIP (top ~140px)
+                 ════════════════════════════════════════════════════════════ -->
+            <g class="plate-region" data-key="briefing">
+              <rect x="10" y="10" width="520" height="135" fill="none"
+                    stroke="#1a1a1a" stroke-width="1"/>
+              <!-- Top header row -->
+              <line x1="10" y1="40" x2="530" y2="40" stroke="#1a1a1a" stroke-width="0.6"/>
+              <text x="20" y="30" font-family="Inter, sans-serif" font-size="10"
+                    font-weight="700" fill="#1a1a1a">BUFFALO/NIAGARA INTL (BUF)</text>
+              <text x="270" y="30" font-family="Inter, sans-serif" font-size="10"
+                    font-weight="700" fill="#1a1a1a" text-anchor="middle">BUFFALO, NEW YORK</text>
+              <text x="520" y="30" font-family="Inter, sans-serif" font-size="10"
+                    font-weight="700" fill="#1a1a1a" text-anchor="end">AL-77 (FAA)</text>
+
+              <!-- Procedure title row -->
+              <text x="270" y="62" font-family="Inter, sans-serif" font-size="14"
+                    font-weight="800" fill="#1a1a1a" text-anchor="middle">ILS or LOC RWY 23</text>
+
+              <!-- Frequency / NAVAID / minimums summary row -->
+              <line x1="10" y1="78" x2="530" y2="78" stroke="#1a1a1a" stroke-width="0.6"/>
+              <line x1="135" y1="78" x2="135" y2="145" stroke="#1a1a1a" stroke-width="0.6"/>
+              <line x1="270" y1="78" x2="270" y2="145" stroke="#1a1a1a" stroke-width="0.6"/>
+              <line x1="405" y1="78" x2="405" y2="145" stroke="#1a1a1a" stroke-width="0.6"/>
+
+              <!-- Cell 1: ILS frequency / identifier -->
+              <text x="20" y="92" font-family="Inter, sans-serif" font-size="8"
+                    fill="#5a5a5a" letter-spacing="0.05em">LOC/DME</text>
+              <text x="20" y="112" font-family="Inter, sans-serif" font-size="14"
+                    font-weight="700" fill="#1a1a1a">111.3</text>
+              <text x="20" y="128" font-family="JetBrains Mono, monospace" font-size="11"
+                    font-weight="700" fill="#1a1a1a">I-BUF</text>
+              <text x="20" y="142" font-family="Inter, sans-serif" font-size="8"
+                    fill="#5a5a5a">Chan 50</text>
+
+              <!-- Cell 2: Approach courses -->
+              <text x="145" y="92" font-family="Inter, sans-serif" font-size="8"
+                    fill="#5a5a5a" letter-spacing="0.05em">APP CRS / RWY</text>
+              <text x="145" y="112" font-family="Inter, sans-serif" font-size="14"
+                    font-weight="700" fill="#1a1a1a">227°</text>
+              <text x="145" y="128" font-family="Inter, sans-serif" font-size="9"
+                    fill="#1a1a1a">Rwy Idg 8094</text>
+              <text x="145" y="140" font-family="Inter, sans-serif" font-size="9"
+                    fill="#1a1a1a">TDZE 707  Apt Elev 728</text>
+
+              <!-- Cell 3: Missed approach summary -->
+              <text x="280" y="92" font-family="Inter, sans-serif" font-size="8"
+                    fill="#5a5a5a" letter-spacing="0.05em">MISSED APPROACH</text>
+              <text x="280" y="106" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">
+                Climb to 2500 then climbing
+              </text>
+              <text x="280" y="118" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">
+                left turn to 3000 direct
+              </text>
+              <text x="280" y="130" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">
+                BUF VOR/DME and hold.
+              </text>
+
+              <!-- Cell 4: Approach lighting / equipment -->
+              <text x="415" y="92" font-family="Inter, sans-serif" font-size="8"
+                    fill="#5a5a5a" letter-spacing="0.05em">EQUIPMENT</text>
+              <text x="415" y="108" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">ALSF-2  ⊕</text>
+              <text x="415" y="122" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">TDZ/CL</text>
+              <text x="415" y="136" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">PAPI Rwy 23</text>
+            </g>
+
+            <!-- COMM strip (small row under briefing) -->
+            <g class="plate-region" data-key="comm">
+              <rect x="10" y="148" width="520" height="22" fill="none"
+                    stroke="#1a1a1a" stroke-width="0.7"/>
+              <text x="20" y="163" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">
+                ATIS 135.55  •  BUFFALO APP 126.5  •  TOWER 120.5  •  GND 121.9  •  CLNC DEL 118.55
+              </text>
+            </g>
+
+            <!-- ════════════════════════════════════════════════════════════
+                 PLAN VIEW (middle ~300px)
+                 ════════════════════════════════════════════════════════════ -->
+            <g class="plate-region" data-key="planview">
+              <rect x="10" y="180" width="520" height="290" fill="url(#plate-grid)"
+                    stroke="#1a1a1a" stroke-width="1"/>
+
+              <!-- North arrow, top right -->
+              <g transform="translate(495 205)">
+                <line x1="0" y1="-12" x2="0" y2="12" stroke="#1a1a1a" stroke-width="1"/>
+                <polygon points="0,-12 -3,-6 3,-6" fill="#1a1a1a"/>
+                <text x="0" y="-16" font-family="Inter, sans-serif" font-size="10"
+                      font-weight="700" fill="#1a1a1a" text-anchor="middle">N</text>
+              </g>
+
+              <!-- Holding pattern at KLUMP (drawn before KLUMP so KLUMP wins hover) -->
+              <g class="plate-element" data-key="holding">
+                <path d="M 420 250
+                         a 16 8 0 0 1 32 0
+                         l 0 -28
+                         a 16 8 0 0 1 -32 0
+                         z"
+                      transform="rotate(-47 420 250)"
+                      fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+                <text x="466" y="222" font-family="Inter, sans-serif" font-size="7"
+                      fill="#5a5a5a">HOLD</text>
+              </g>
+
+              <!-- KLUMP LOM (Locator Outer Marker) — IAF, far NE.
+                   Drawn AFTER holding so its hit-rect wins hover events. -->
+              <g class="plate-element" data-key="klump" transform="translate(420 250)">
+                <rect x="-12" y="-12" width="50" height="32" fill="transparent"/>
+                <circle r="4" fill="none" stroke="#1a1a1a" stroke-width="1.2"/>
+                <circle r="1.5" fill="#1a1a1a"/>
+                <text x="8" y="2" font-family="JetBrains Mono, monospace" font-size="9"
+                      font-weight="700" fill="#1a1a1a">KLUMP</text>
+                <text x="8" y="13" font-family="Inter, sans-serif" font-size="8" fill="#5a5a5a">LOM</text>
+              </g>
+
+              <!-- Localizer ribbon: from KLUMP toward BUF, descending diagonal -->
+              <g class="plate-element" data-key="localizer">
+                <!-- Solid centreline -->
+                <line x1="420" y1="250" x2="120" y2="430"
+                      stroke="#1a1a1a" stroke-width="1.4"/>
+                <!-- Lobed marks indicating LOC sensitivity -->
+                <g stroke="#1a1a1a" stroke-width="0.6" fill="none">
+                  <line x1="350" y1="280" x2="335" y2="265"/>
+                  <line x1="350" y1="280" x2="345" y2="295"/>
+                  <line x1="280" y1="320" x2="265" y2="305"/>
+                  <line x1="280" y1="320" x2="275" y2="335"/>
+                  <line x1="210" y1="362" x2="195" y2="347"/>
+                  <line x1="210" y1="362" x2="205" y2="377"/>
+                </g>
+                <!-- Course label box near KLUMP -->
+                <g transform="translate(380 235)">
+                  <rect x="-22" y="-9" width="44" height="14" fill="#fdfcf7"
+                        stroke="#1a1a1a" stroke-width="0.5"/>
+                  <text x="0" y="2" font-family="Inter, sans-serif" font-size="9"
+                        font-weight="700" fill="#1a1a1a" text-anchor="middle">227°</text>
+                </g>
+              </g>
+
+              <!-- Missed approach track (drawn before runway/VOR so they capture hover on top) -->
+              <g class="plate-element" data-key="missed-track" stroke="#1a1a1a"
+                 stroke-width="0.8" stroke-dasharray="4 3" fill="none">
+                <path d="M 120 430 Q 130 380, 155 460"/>
+                <polygon points="0,-3 -2.5,3 2.5,3" fill="#1a1a1a"
+                         transform="translate(155 462) rotate(160)"/>
+              </g>
+
+              <!-- Airport / runway 23 symbol — BUF, at the SW end of LOC -->
+              <g class="plate-element" data-key="runway" transform="translate(120 430)">
+                <rect x="-30" y="-30" width="60" height="70" fill="transparent"/>
+                <!-- Runway 5/23 (long) — black bar at runway heading -->
+                <g transform="rotate(47)">
+                  <rect x="-30" y="-2.5" width="60" height="5" fill="#1a1a1a"/>
+                  <!-- Runway 14/32 crossing it -->
+                  <rect x="-3" y="-22" width="6" height="44" fill="#1a1a1a"
+                        transform="rotate(-90)"/>
+                </g>
+                <text x="-24" y="38" font-family="JetBrains Mono, monospace" font-size="9"
+                      font-weight="700" fill="#1a1a1a">BUF</text>
+              </g>
+
+              <!-- BUF VOR/DME — represented as a hexagon SE of the runway -->
+              <g class="plate-element" data-key="buf-vor" transform="translate(155 460)">
+                <rect x="-50" y="-15" width="60" height="30" fill="transparent"/>
+                <polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5"
+                         fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+                <circle r="1.5" fill="#1a1a1a"/>
+                <text x="-32" y="2" font-family="Inter, sans-serif" font-size="8"
+                      fill="#5a5a5a" text-anchor="end">VOR/DME</text>
+                <text x="-32" y="-8" font-family="JetBrains Mono, monospace" font-size="8"
+                      font-weight="700" fill="#1a1a1a" text-anchor="end">116.4 BUF</text>
+              </g>
+
+              <!-- MSA circle (top-left) — Minimum Safe Altitude reference -->
+              <g class="plate-element" data-key="msa">
+                <circle cx="60" cy="220" r="22" fill="none" stroke="#1a1a1a" stroke-width="0.7"/>
+                <text x="60" y="218" font-family="Inter, sans-serif" font-size="7"
+                      fill="#5a5a5a" text-anchor="middle">MSA 25 NM</text>
+                <text x="60" y="230" font-family="Inter, sans-serif" font-size="9"
+                      font-weight="700" fill="#1a1a1a" text-anchor="middle">3500</text>
+              </g>
+
+              <!-- Distance label along the LOC course -->
+              <text x="290" y="335" font-family="Inter, sans-serif" font-size="7"
+                    fill="#5a5a5a" transform="rotate(31 290 335)">5.6 NM</text>
+
+              <!-- Plan view label -->
+              <text x="20" y="195" font-family="Inter, sans-serif" font-size="7"
+                    fill="#5a5a5a" letter-spacing="0.05em">PLAN VIEW</text>
+            </g>
+
+            <!-- ════════════════════════════════════════════════════════════
+                 PROFILE VIEW (~140px)
+                 ════════════════════════════════════════════════════════════ -->
+            <g class="plate-region" data-key="profile">
+              <rect x="10" y="478" width="380" height="160" fill="none"
+                    stroke="#1a1a1a" stroke-width="1"/>
+              <text x="20" y="493" font-family="Inter, sans-serif" font-size="7"
+                    fill="#5a5a5a" letter-spacing="0.05em">PROFILE VIEW</text>
+
+              <!-- Ground line -->
+              <line x1="40" y1="600" x2="370" y2="600" stroke="#1a1a1a" stroke-width="1.2"/>
+              <!-- Runway threshold mark -->
+              <rect x="350" y="596" width="20" height="8" fill="#1a1a1a"/>
+
+              <!-- Glide slope: enters at upper left, descends to runway at right -->
+              <g class="plate-element" data-key="glideslope">
+                <line x1="60" y1="510" x2="360" y2="600"
+                      stroke="#1a1a1a" stroke-width="1.4"/>
+                <text x="200" y="540" font-family="Inter, sans-serif" font-size="9"
+                      fill="#1a1a1a" transform="rotate(15 200 540)">GS 3.00°</text>
+                <text x="200" y="552" font-family="Inter, sans-serif" font-size="8"
+                      fill="#5a5a5a" transform="rotate(15 200 552)">TCH 52</text>
+              </g>
+
+              <!-- FAF (KLUMP / glideslope intercept) -->
+              <g class="plate-element" data-key="faf" transform="translate(80 521)">
+                <rect x="-30" y="-20" width="60" height="55" fill="transparent"/>
+                <polygon points="0,-6 6,0 0,6 -6,0" fill="none"
+                         stroke="#1a1a1a" stroke-width="1"/>
+                <text x="0" y="-12" font-family="JetBrains Mono, monospace" font-size="8"
+                      font-weight="700" fill="#1a1a1a" text-anchor="middle">KLUMP</text>
+                <text x="-25" y="20" font-family="Inter, sans-serif" font-size="8"
+                      fill="#1a1a1a">2300</text>
+                <text x="-25" y="30" font-family="Inter, sans-serif" font-size="7"
+                      fill="#5a5a5a">GS INT</text>
+              </g>
+
+              <!-- DA point (Decision Altitude) -->
+              <g class="plate-element" data-key="da" transform="translate(310 588)">
+                <rect x="-30" y="-12" width="80" height="20" fill="transparent"/>
+                <line x1="-50" y1="0" x2="50" y2="0" stroke="#c0392b"
+                      stroke-width="0.7" stroke-dasharray="3 2"/>
+                <circle r="3" fill="#c0392b"/>
+                <text x="6" y="-5" font-family="Inter, sans-serif" font-size="9"
+                      font-weight="700" fill="#c0392b">DA 907</text>
+              </g>
+
+              <!-- Missed approach climb arrow -->
+              <g class="plate-element" data-key="map">
+                <path d="M 360 600 Q 365 580, 380 555 L 380 488"
+                      stroke="#1a1a1a" stroke-width="1" fill="none"
+                      stroke-dasharray="3 2"/>
+                <polygon points="0,-3 -2.5,3 2.5,3" fill="#1a1a1a"
+                         transform="translate(380 488)"/>
+              </g>
+
+              <!-- Distance scale at bottom of profile -->
+              <text x="80" y="618" font-family="Inter, sans-serif" font-size="7"
+                    fill="#5a5a5a" text-anchor="middle">FAF</text>
+              <text x="220" y="618" font-family="Inter, sans-serif" font-size="7"
+                    fill="#5a5a5a" text-anchor="middle">5.6 NM</text>
+              <text x="360" y="618" font-family="Inter, sans-serif" font-size="7"
+                    fill="#5a5a5a" text-anchor="middle">RWY</text>
+              <text x="80" y="630" font-family="Inter, sans-serif" font-size="7"
+                    fill="#5a5a5a" text-anchor="middle">2300</text>
+              <text x="360" y="630" font-family="Inter, sans-serif" font-size="7"
+                    fill="#5a5a5a" text-anchor="middle">707</text>
+            </g>
+
+            <!-- ════════════════════════════════════════════════════════════
+                 MINIMUMS BOX (bottom right)
+                 ════════════════════════════════════════════════════════════ -->
+            <g class="plate-region" data-key="minimums">
+              <rect x="395" y="478" width="135" height="160" fill="none"
+                    stroke="#1a1a1a" stroke-width="1"/>
+              <text x="405" y="493" font-family="Inter, sans-serif" font-size="7"
+                    fill="#5a5a5a" letter-spacing="0.05em">MINIMUMS</text>
+
+              <!-- Header row -->
+              <line x1="395" y1="500" x2="530" y2="500" stroke="#1a1a1a" stroke-width="0.5"/>
+              <text x="403" y="513" font-family="Inter, sans-serif" font-size="7" fill="#5a5a5a">CAT</text>
+              <text x="445" y="513" font-family="Inter, sans-serif" font-size="8" fill="#5a5a5a" text-anchor="middle">A</text>
+              <text x="467" y="513" font-family="Inter, sans-serif" font-size="8" fill="#5a5a5a" text-anchor="middle">B</text>
+              <text x="489" y="513" font-family="Inter, sans-serif" font-size="8" fill="#5a5a5a" text-anchor="middle">C</text>
+              <text x="513" y="513" font-family="Inter, sans-serif" font-size="8" fill="#5a5a5a" text-anchor="middle">D</text>
+              <line x1="395" y1="520" x2="530" y2="520" stroke="#1a1a1a" stroke-width="0.5"/>
+
+              <!-- S-ILS row -->
+              <text x="403" y="535" font-family="Inter, sans-serif" font-size="7"
+                    font-weight="700" fill="#1a1a1a">S-ILS 23</text>
+              <text x="403" y="546" font-family="Inter, sans-serif" font-size="6.5"
+                    fill="#5a5a5a">DA 907</text>
+              <text x="445" y="540" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">¼</text>
+              <text x="467" y="540" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">¼</text>
+              <text x="489" y="540" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">¼</text>
+              <text x="513" y="540" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">½</text>
+              <line x1="395" y1="555" x2="530" y2="555" stroke="#1a1a1a" stroke-width="0.4"/>
+
+              <!-- S-LOC row -->
+              <text x="403" y="570" font-family="Inter, sans-serif" font-size="7"
+                    font-weight="700" fill="#1a1a1a">S-LOC 23</text>
+              <text x="403" y="581" font-family="Inter, sans-serif" font-size="6.5"
+                    fill="#5a5a5a">MDA 1080</text>
+              <text x="445" y="575" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">½</text>
+              <text x="467" y="575" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">½</text>
+              <text x="489" y="575" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">½</text>
+              <text x="513" y="575" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">¾</text>
+              <line x1="395" y1="589" x2="530" y2="589" stroke="#1a1a1a" stroke-width="0.4"/>
+
+              <!-- Circling row -->
+              <text x="403" y="606" font-family="Inter, sans-serif" font-size="7"
+                    font-weight="700" fill="#1a1a1a">CIRCLING</text>
+              <text x="456" y="605" font-family="Inter, sans-serif" font-size="8" fill="#1a1a1a" text-anchor="middle">1240</text>
+              <text x="501" y="605" font-family="Inter, sans-serif" font-size="8" fill="#1a1a1a" text-anchor="middle">1240</text>
+              <text x="456" y="618" font-family="Inter, sans-serif" font-size="7" fill="#5a5a5a" text-anchor="middle">1</text>
+              <text x="501" y="618" font-family="Inter, sans-serif" font-size="7" fill="#5a5a5a" text-anchor="middle">1¼</text>
+            </g>
+
+            <!-- ════════════════════════════════════════════════════════════
+                 BOTTOM IDENTIFICATION STRIP
+                 ════════════════════════════════════════════════════════════ -->
+            <g>
+              <line x1="10" y1="650" x2="530" y2="650" stroke="#1a1a1a" stroke-width="0.6"/>
+              <text x="20" y="664" font-family="Inter, sans-serif" font-size="9"
+                    font-weight="700" fill="#1a1a1a">BUFFALO/NIAGARA INTL (BUF)</text>
+              <text x="270" y="664" font-family="Inter, sans-serif" font-size="9"
+                    font-weight="700" fill="#1a1a1a" text-anchor="middle">BUFFALO, NEW YORK</text>
+              <text x="520" y="664" font-family="Inter, sans-serif" font-size="9"
+                    font-weight="700" fill="#1a1a1a" text-anchor="end">42°56'N - 78°44'W</text>
+              <text x="20" y="680" font-family="Inter, sans-serif" font-size="9"
+                    font-weight="700" fill="#1a1a1a">ILS or LOC RWY 23</text>
+              <text x="520" y="680" font-family="Inter, sans-serif" font-size="9"
+                    font-weight="700" fill="#1a1a1a" text-anchor="end">Amdt 30  · 06APR2023</text>
+              <text x="270" y="700" font-family="Inter, sans-serif" font-size="8"
+                    fill="#5a5a5a" text-anchor="middle" font-style="italic">
+                Stylised reproduction. Not for navigation.
+              </text>
+            </g>
+
+          </svg>
+        </div>
+
+        <!-- Sidebar: explanation panel -->
+        <aside class="plate-side">
+          <div class="plate-help" id="plate-help">
+            <div class="plate-help-default">
+              <strong data-lang-content="en">Hover the chart</strong>
+              <strong data-lang-content="zh">悬停以查看说明</strong>
+              <p data-lang-content="en">
+                A FAA-style instrument approach plate organises about twenty distinct kinds
+                of information into one page so a flight crew can read the entire approach
+                in less than a minute. Hover any region of the chart to see what each
+                element means and why it is there.
+              </p>
+              <p data-lang-content="zh">
+                FAA 风格的仪表进近图把约二十种不同类型的信息组织在同一页上，使机组能在不到一分钟内"读完"整个进近过程。悬停图表的任何区域，可看到每个元素的含义与设置原因。
+              </p>
+            </div>
+            <div class="plate-help-detail" id="plate-help-detail" hidden>
+              <span class="plate-help-tag" id="plate-help-tag"></span>
+              <strong id="plate-help-title"></strong>
+              <p id="plate-help-text"></p>
+            </div>
+          </div>
+        </aside>
+
       </div>
       <figcaption>
-        <span data-lang-content="en">Figure 2. The information density of an instrument approach chart is itself a piece of design history. Twenty distinct categories of information are arranged on a single page so that a flight crew can read the approach in less than a minute.</span>
-        <span data-lang-content="zh">图 2。仪表进近图的信息密度本身是一段设计史。二十类不同信息被布置在一张纸上，使机组能在不到一分钟内"读完"整个进近。</span>
+        <span data-lang-content="en">Figure 3. A stylised reproduction of an FAA d-TPP instrument approach plate for KBUF ILS RWY 23. Hover any element to see what it does and why it is positioned where it is. The plate is a piece of information design as much as a piece of navigation equipment.</span>
+        <span data-lang-content="zh">图 3。一张 FAA d-TPP 风格的 KBUF ILS RWY 23 进近图的程式化复刻。悬停任意元素可查看其功能及位置原因。这张图既是导航资料，也是一件信息设计作品。</span>
       </figcaption>
     </figure>
 
@@ -444,8 +976,8 @@
         <span data-lang-content="zh">滑块：机型、仪表飞行小时、仪表配置、重心位置、自动驾驶。"1954 配置"开关一键回到原实验状态，演示标题数字如何完全依赖于其前提条件。</span>
       </div>
       <figcaption>
-        <span data-lang-content="en">Figure 3. A statistic detached from its conditions is not a finding; it is a slogan. The interactive form makes the conditional structure visible.</span>
-        <span data-lang-content="zh">图 3。一个脱离了条件的统计数字不是一项发现，而是一句口号。交互形式让条件结构可见。</span>
+        <span data-lang-content="en">Figure 4. A statistic detached from its conditions is not a finding; it is a slogan. The interactive form makes the conditional structure visible.</span>
+        <span data-lang-content="zh">图 4。一个脱离了条件的统计数字不是一项发现，而是一句口号。交互形式让条件结构可见。</span>
       </figcaption>
     </figure>
 
@@ -507,8 +1039,8 @@
         <span data-lang-content="zh">CZ3456 事故链条的瑞士奶酪图，可逐层切换"完好"，演示链条会在哪一层被打断。</span>
       </div>
       <figcaption>
-        <span data-lang-content="en">Figure 4. The point of the Swiss cheese model is not that any single layer should have caught the failure; it is that no single layer ever does.</span>
-        <span data-lang-content="zh">图 4。瑞士奶酪模型的要旨并不是任何单一层"本应"拦下失败，而是从来没有任何单一层能拦得下。</span>
+        <span data-lang-content="en">Figure 5. The point of the Swiss cheese model is not that any single layer should have caught the failure; it is that no single layer ever does.</span>
+        <span data-lang-content="zh">图 5。瑞士奶酪模型的要旨并不是任何单一层"本应"拦下失败，而是从来没有任何单一层能拦得下。</span>
       </figcaption>
     </figure>
 
@@ -653,6 +1185,887 @@
     }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
     sections.forEach(s => observer.observe(s));
   }
+})();
+</script>
+
+<!-- ─── §4 Approach plate annotator ────────────────────────────── -->
+<script>
+(function () {
+  const widget = document.getElementById('plate-widget');
+  if (!widget) return;
+
+  // ─── Annotation data: bilingual descriptions for each plate region ──
+  const ANNOTATIONS = {
+    briefing: {
+      tag: 'BRIEFING STRIP',
+      en: {
+        title: 'The briefing strip',
+        body: 'The first thing the crew reads. Compresses the procedure title, the relevant ILS frequency and identifier, the final approach course, the runway threshold elevation, the missed-approach summary, and the approach lighting installed on this runway. The intent is that a flight crew can verify they have the right chart and tune the right radio in well under a minute, without yet looking at the rest of the page.'
+      },
+      zh: {
+        title: '通话简令带',
+        body: '机组首先阅读的部分。它压缩了进近程序名称、ILS 频率与识别码、最终进近航向、跑道入口高程、复飞要点、以及该跑道安装的进近灯。目的是让机组在不到一分钟内核对图表是否正确并调好无线电，而无需看到本页其它部分。'
+      }
+    },
+    comm: {
+      tag: 'COMM FREQUENCIES',
+      en: {
+        title: 'Communication frequencies',
+        body: 'The five frequencies a crew will need from descent through landing, in the order they will be used: ATIS for current weather, then approach control, tower for landing clearance, ground for taxi, and clearance delivery for the next IFR clearance. Listed left-to-right in the order of expected handoff.'
+      },
+      zh: {
+        title: '通信频率',
+        body: '从下降到落地阶段机组需要使用的五个频率，按使用顺序排列：ATIS 获取当前天气，进近管制，塔台落地许可，地面滑行，离场放行。从左到右按预期移交顺序排列。'
+      }
+    },
+    planview: {
+      tag: 'PLAN VIEW',
+      en: {
+        title: 'The plan view',
+        body: 'A top-down map of the procedure, showing the localiser course, the locator (KLUMP), the hold for course-reversal entries, the runway, the missed-approach track, and the BUF VOR/DME used in the missed approach. Rotated so the runway and approach course point downward — the natural direction of flight — rather than to true north. North is shown by the small arrow in the upper right.'
+      },
+      zh: {
+        title: '平面图',
+        body: '程序的俯视图：航向道、KLUMP 定位台、用于反向进入的等待航线、跑道、复飞航径、以及复飞时使用的 BUF VOR/DME。该图旋转使跑道与进近航向朝下——这是飞行的自然方向——而不是真北朝上。北向由右上角的小箭头表示。'
+      }
+    },
+    klump: {
+      tag: 'IAF / FAF',
+      en: {
+        title: 'KLUMP — locator outer marker',
+        body: 'A non-directional beacon (NDB) collocated with the outer marker of the ILS. KLUMP serves a double role here: it is the Initial Approach Fix (entry into the procedure from the en-route phase) and, on the glide-slope intercept, it becomes the Final Approach Fix where the crew begins the descent below the intercept altitude.'
+      },
+      zh: {
+        title: 'KLUMP — 定位外指点标',
+        body: '一个与 ILS 外指点标共址的无方向信标（NDB）。在这里它兼具双重角色：作为初始进近定位点（IAF，从航路阶段进入进近程序的入口）；在截获下滑道时，它也是最终进近定位点（FAF），机组由此开始低于截获高度的下降。'
+      }
+    },
+    localizer: {
+      tag: 'LOCALIZER',
+      en: {
+        title: 'The localiser course',
+        body: 'The 227° magnetic course defined by the localiser transmitter at the far end of runway 23. The "feathered" tick marks along the centreline are not a stylistic choice; they indicate which side of the centreline the 90 Hz tone is dominant on, so a pilot reading the chart upside-down would still know whether a left or right correction is required to recapture the course.'
+      },
+      zh: {
+        title: '航向道',
+        body: '由 23 号跑道远端航向道发射机定义的 227° 磁航向。中线两侧的"羽毛"刻线不是装饰：它们指示中线哪一侧 90 Hz 音占主导，使飞行员即便倒着读图也能判断需要左修正还是右修正以重新截获航道。'
+      }
+    },
+    holding: {
+      tag: 'HOLDING PATTERN',
+      en: {
+        title: 'Holding pattern at KLUMP',
+        body: 'A racetrack-shaped pattern published at the IAF for course-reversal entries and for ATC holding. Direction (right turns), inbound course, and leg length are all standardised in the chart\'s graphical depiction, so the crew can fly the entry without separate written instructions.'
+      },
+      zh: {
+        title: 'KLUMP 等待航线',
+        body: '出现在 IAF 处的跑马场形等待航线，用于反向进入与 ATC 指令保持。方向（右转）、入航航向、航段长度全部以图形约定标示，机组无需额外书面指令即可执行入航程序。'
+      }
+    },
+    runway: {
+      tag: 'RUNWAY DIAGRAM',
+      en: {
+        title: 'Runway diagram',
+        body: 'The two runways at BUF — 5/23 (the long one) and 14/32 — drawn at their actual relative angle and proportion. This compact depiction lets the crew correlate the localiser course with the visible runway environment when they break out of cloud at the decision altitude.'
+      },
+      zh: {
+        title: '跑道示意',
+        body: 'BUF 的两条跑道——5/23（主跑道）和 14/32——按实际相对角度与比例绘制。这种紧凑的描绘让机组在决断高度冲出云层时，能立刻把航向道与目视的跑道环境对应起来。'
+      }
+    },
+    'buf-vor': {
+      tag: 'NAVAID',
+      en: {
+        title: 'BUF VOR/DME (116.4)',
+        body: 'A VHF Omnidirectional Range with Distance Measuring Equipment, located on the airfield. Not used for the approach itself — but used as the missed-approach holding fix. After a missed approach the aircraft climbs to 3,000 ft and proceeds direct to BUF for the published hold.'
+      },
+      zh: {
+        title: 'BUF VOR/DME (116.4)',
+        body: '位于机场内的甚高频全向信标台 / 测距设备。不直接用于进近——但被用作复飞等待定位点。复飞后飞机爬升至 3,000 英尺并直飞 BUF 执行公布的等待程序。'
+      }
+    },
+    'missed-track': {
+      tag: 'MISSED APPROACH',
+      en: {
+        title: 'Missed approach track',
+        body: 'The dashed line shows the lateral path the aircraft must fly if the runway is not in sight at the decision altitude: continue runway heading briefly, then a left climbing turn direct to BUF VOR/DME and hold. Drawn dashed because it is conditional — flown only on a missed approach.'
+      },
+      zh: {
+        title: '复飞航径',
+        body: '虚线表示当决断高度仍未看见跑道时飞机必须执行的横向航径：先短暂保持跑道航向，然后左转爬升直飞 BUF VOR/DME 并进入等待。用虚线绘制是因为它是条件性的——只在复飞时才被飞行。'
+      }
+    },
+    msa: {
+      tag: 'MSA',
+      en: {
+        title: 'Minimum Safe Altitude',
+        body: 'The MSA circle gives a single emergency-use altitude (here 3,500 ft) within 25 NM of the reference navaid that guarantees terrain and obstacle clearance in any direction. Used if the crew loses situational awareness and needs an immediately-safe altitude to climb to.'
+      },
+      zh: {
+        title: '最低安全高度（MSA）',
+        body: 'MSA 圆给出一个紧急使用高度（此处 3,500 英尺），保证在距参考导航台 25 海里范围内、任何方向上的地形与障碍物超越间隔。当机组失去情境意识、需要一个立即安全的爬升高度时使用。'
+      }
+    },
+    profile: {
+      tag: 'PROFILE VIEW',
+      en: {
+        title: 'The profile view',
+        body: 'A side view of the same procedure shown in the plan view above. The plan view answers "which direction"; the profile view answers "what altitude, when". The two are read together: cross KLUMP at 2,300 ft, follow the 3.0° glide slope, descend to a decision altitude of 907 ft, miss if not visual.'
+      },
+      zh: {
+        title: '剖面图',
+        body: '上方平面图所示同一程序的侧视图。平面图回答"往哪个方向"；剖面图回答"何时、什么高度"。两者必须一起读：在 KLUMP 上方以 2,300 英尺通过，沿 3.0° 下滑道下降，到 907 英尺决断高度——若未目视到跑道则复飞。'
+      }
+    },
+    glideslope: {
+      tag: 'GLIDE SLOPE',
+      en: {
+        title: 'The glide slope',
+        body: 'A 3.0° descending path in space, defined by the glide-slope antenna beside runway 23. Threshold Crossing Height (TCH) is 52 ft — the altitude the glide slope passes over the runway threshold. The angle is steeper than ideal at high altitudes (which is why aircraft are typically not yet on the glide slope at the FAF) and self-corrects as the aircraft descends.'
+      },
+      zh: {
+        title: '下滑道',
+        body: '由 23 号跑道旁的下滑道天线定义的 3.0° 空间下降路径。入口越障高（TCH）为 52 英尺——下滑道在跑道入口上方的高度。在高高度上，3 度角的物理下降率显得偏大（这就是为什么飞机通常不会在 FAF 已经在下滑道上），随着下降会自然校正。'
+      }
+    },
+    faf: {
+      tag: 'FAF',
+      en: {
+        title: 'Final approach fix',
+        body: 'On a precision approach, the FAF is the point where the aircraft, descending on the glide slope, passes through the published intercept altitude — here 2,300 ft over KLUMP. From this point onward, the autopilot (or the pilot) is following the glide-slope needle rather than a level altitude.'
+      },
+      zh: {
+        title: '最终进近定位点（FAF）',
+        body: '在精密进近中，FAF 是飞机沿下滑道下降时穿过公布截获高度的位置——此处为 KLUMP 上方 2,300 英尺。从这一点开始，自动驾驶（或飞行员）跟随下滑道指针，而不再保持平飞高度。'
+      }
+    },
+    da: {
+      tag: 'DA',
+      en: {
+        title: 'Decision altitude — 907 ft',
+        body: 'The single most important number on the chart. At this altitude — 907 ft MSL, 200 ft above the runway threshold — the crew must have the runway environment in sight. If not, they must immediately initiate the missed approach. The DA is not a "minimum descent altitude" with hover-time; it is a decision instant. There is no shallower descent permitted below this point on a missed approach.'
+      },
+      zh: {
+        title: '决断高度（DA）— 907 英尺',
+        body: '本图上最重要的一个数字。在此高度——907 英尺 MSL，跑道入口以上 200 英尺——机组必须看见跑道环境。若未看见，必须立即执行复飞。DA 不是允许停留的"最低下降高度"，而是一个决策瞬间。在复飞时，不允许在此点以下继续浅下降。'
+      }
+    },
+    map: {
+      tag: 'MISSED APPROACH PROFILE',
+      en: {
+        title: 'Missed approach climb',
+        body: 'The dashed climbing arrow shows the vertical profile of the missed approach: from DA, climb straight ahead to 2,500 ft, then continue climbing to 3,000 ft on the curving path back to BUF VOR/DME (depicted in the plan view above). The two views together describe one three-dimensional path.'
+      },
+      zh: {
+        title: '复飞爬升',
+        body: '虚线爬升箭头展示复飞的垂直剖面：从 DA 直前方爬升至 2,500 英尺，然后沿（上方平面图所示的）弯曲路径继续爬升至 3,000 英尺并返回 BUF VOR/DME。两个视图共同描述一条三维路径。'
+      }
+    },
+    minimums: {
+      tag: 'MINIMUMS BOX',
+      en: {
+        title: 'The minimums box',
+        body: 'Three rows for three different approach categories: a full ILS (DA 907, ¼ mile RVR — Category I), a localiser-only approach if the glide slope is unusable (a much higher minimum descent altitude, 1,080 ft), and a circling minimum for landing on a different runway. The four columns A/B/C/D are aircraft approach categories, defined by approach speed; faster categories get marginally higher minima because of their wider turning radii.'
+      },
+      zh: {
+        title: '最低标准框',
+        body: '三行对应三种不同的进近类别：全套 ILS（DA 907 英尺，跑道视程 ¼ 英里——CAT I 标准）；仅有航向道（下滑道不可用）的进近，最低下降高度更高（1,080 英尺）；以及目视盘旋至其他跑道落地的最低标准。A/B/C/D 四列是按进近速度划分的飞机进近类别——速度更快的类别由于盘旋半径更大，最低标准相应略高。'
+      }
+    }
+  };
+
+  // ─── DOM elements ──────────────────────────────────────────
+  const detailEl = widget.querySelector('#plate-help-detail');
+  const defaultEl = widget.querySelector('.plate-help-default');
+  const tagEl = widget.querySelector('#plate-help-tag');
+  const titleEl = widget.querySelector('#plate-help-title');
+  const textEl = widget.querySelector('#plate-help-text');
+
+  let activeKey = null;
+  let stickyKey = null;   // set on click; cleared on click-elsewhere
+
+  function showAnnotation(key) {
+    const ann = ANNOTATIONS[key];
+    if (!ann) return;
+    const lang = document.body.getAttribute('data-lang') || 'en';
+    const langData = ann[lang] || ann.en;
+    tagEl.textContent = ann.tag;
+    titleEl.textContent = langData.title;
+    textEl.textContent = langData.body;
+    detailEl.hidden = false;
+    defaultEl.style.display = 'none';
+    activeKey = key;
+    // Apply 'active' class to the targeted element
+    widget.querySelectorAll('.plate-region.active, .plate-element.active')
+          .forEach(el => el.classList.remove('active'));
+    const targetEl = widget.querySelector(`[data-key="${key}"]`);
+    if (targetEl) targetEl.classList.add('active');
+  }
+
+  function hideAnnotation() {
+    if (stickyKey) return; // don't auto-hide if user has clicked something
+    detailEl.hidden = true;
+    defaultEl.style.display = '';
+    activeKey = null;
+    widget.querySelectorAll('.plate-region.active, .plate-element.active')
+          .forEach(el => el.classList.remove('active'));
+  }
+
+  // Wire all hover-able elements
+  const hoverable = widget.querySelectorAll('.plate-region[data-key], .plate-element[data-key]');
+  hoverable.forEach(el => {
+    const key = el.getAttribute('data-key');
+    el.addEventListener('mouseenter', () => {
+      if (!stickyKey) showAnnotation(key);
+    });
+    el.addEventListener('mouseleave', () => {
+      if (!stickyKey) hideAnnotation();
+    });
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (stickyKey === key) {
+        // toggle off
+        stickyKey = null;
+        hideAnnotation();
+      } else {
+        stickyKey = key;
+        showAnnotation(key);
+      }
+    });
+  });
+
+  // Click outside the SVG cancels stickiness
+  document.addEventListener('click', (e) => {
+    if (!widget.contains(e.target)) {
+      stickyKey = null;
+      hideAnnotation();
+    }
+  });
+
+  // Re-render the annotation if language changes while one is shown
+  document.addEventListener('flying:langchange', () => {
+    if (activeKey) showAnnotation(activeKey);
+  });
+})();
+</script>
+
+<!-- ─── §3 FMC/CDU widget ─────────────────────────────────────── -->
+<script>
+(function () {
+  const widget = document.getElementById('fmc-widget');
+  if (!widget) return;
+
+  // ─── Waypoint database (rough lat/lon, decimal degrees) ─────
+  // Mix of airports (K-prefixed) and named en-route fixes.
+  const WAYPOINTS = {
+    // Airports — Buffalo region anchor + sample destinations
+    KBUF: { lat: 42.94, lon: -78.73, name: 'BUFFALO' },
+    KDFW: { lat: 32.90, lon: -97.04, name: 'DALLAS-FT WORTH' },
+    KORD: { lat: 41.98, lon: -87.91, name: 'CHICAGO O\'HARE' },
+    KJFK: { lat: 40.64, lon: -73.78, name: 'NEW YORK JFK' },
+    KLAX: { lat: 33.94, lon: -118.41, name: 'LOS ANGELES' },
+    KSFO: { lat: 37.62, lon: -122.38, name: 'SAN FRANCISCO' },
+    KATL: { lat: 33.64, lon: -84.43, name: 'ATLANTA' },
+    KBOS: { lat: 42.36, lon: -71.01, name: 'BOSTON' },
+    KSEA: { lat: 47.45, lon: -122.31, name: 'SEATTLE' },
+    KIAD: { lat: 38.94, lon: -77.46, name: 'WASHINGTON DULLES' },
+    KMIA: { lat: 25.79, lon: -80.29, name: 'MIAMI' },
+    KDEN: { lat: 39.86, lon: -104.67, name: 'DENVER' },
+    KIAH: { lat: 29.98, lon: -95.34, name: 'HOUSTON' },
+    KMSP: { lat: 44.88, lon: -93.22, name: 'MINNEAPOLIS' },
+    KPHX: { lat: 33.43, lon: -112.01, name: 'PHOENIX' },
+    KLAS: { lat: 36.08, lon: -115.15, name: 'LAS VEGAS' },
+    // En-route fixes/VORs roughly along common routings
+    SYR: { lat: 43.16, lon: -76.10, name: 'SYRACUSE' },
+    ELZ: { lat: 42.10, lon: -77.99, name: 'WELLSVILLE' },
+    PSB: { lat: 40.92, lon: -78.00, name: 'PHILIPSBURG' },
+    JST: { lat: 40.32, lon: -78.83, name: 'JOHNSTOWN' },
+    AIR: { lat: 40.65, lon: -79.96, name: 'AIRWAY' },
+    AGC: { lat: 40.36, lon: -79.93, name: 'PITTSBURGH' },
+    HVQ: { lat: 38.78, lon: -82.16, name: 'CHARLESTON' },
+    APE: { lat: 40.15, lon: -82.59, name: 'APPLETON' },
+    FWA: { lat: 40.97, lon: -85.20, name: 'FORT WAYNE' },
+    BVT: { lat: 39.84, lon: -87.76, name: 'BRICKYARD' },
+    TTH: { lat: 38.47, lon: -90.51, name: 'ST LOUIS' },
+    RZC: { lat: 36.27, lon: -91.77, name: 'RAZORBACK' },
+    TXK: { lat: 33.45, lon: -94.08, name: 'TEXARKANA' },
+    PRX: { lat: 33.64, lon: -95.45, name: 'PARIS' },
+    SLR: { lat: 33.02, lon: -95.40, name: 'SULPHUR SPGS' },
+    CVE: { lat: 32.81, lon: -97.04, name: 'COWBOY' }
+  };
+
+  function lookupWaypoint(code) {
+    code = code.trim().toUpperCase();
+    if (WAYPOINTS[code]) return { code, ...WAYPOINTS[code] };
+    // Synthesize a placeholder for unknown 4-letter K-airport codes
+    if (/^K[A-Z]{3}$/.test(code)) {
+      // Place at a deterministic but plausible-looking location
+      let h = 0;
+      for (const c of code) h = (h * 31 + c.charCodeAt(0)) % 1000;
+      return {
+        code,
+        lat: 30 + (h % 200) / 10,        // 30–50°N
+        lon: -120 + ((h * 7) % 600) / 10,// -120 to -60°W
+        name: code,
+        synthetic: true
+      };
+    }
+    return null;
+  }
+
+  // ─── State ─────────────────────────────────────────────────
+  const state = {
+    page: 'INIT',
+    scratchpad: '',
+    message: '',
+    route: {
+      origin: '',
+      dest: '',
+      via: []      // list of waypoint codes
+    },
+    pendingRoute: null,   // an unexecuted change that EXEC will commit
+    routeActive: false
+  };
+
+  // ─── Screen rendering ──────────────────────────────────────
+  // The screen is 14 rows × 24 chars. Header, then 6 alternating
+  // (label, data) pairs that align with LSKs L1..L6 / R1..R6, then scratchpad.
+  // We build rows as objects { L, R, type } and merge.
+
+  const SCREEN_COLS = 24;
+
+  function pad(s, n, align='left') {
+    s = String(s || '');
+    if (s.length >= n) return s.slice(0, n);
+    if (align === 'right') return ' '.repeat(n - s.length) + s;
+    return s + ' '.repeat(n - s.length);
+  }
+  function center(s, n) {
+    s = String(s || '');
+    if (s.length >= n) return s.slice(0, n);
+    const left = Math.floor((n - s.length) / 2);
+    return ' '.repeat(left) + s + ' '.repeat(n - s.length - left);
+  }
+
+  // Build a row by combining a left and right segment in 24 chars total.
+  // Left starts at col 0; right is right-aligned.
+  function lr(left, right) {
+    left = String(left || '');
+    right = String(right || '');
+    const free = SCREEN_COLS - left.length - right.length;
+    if (free < 0) return left + right; // overflow tolerated for now
+    return left + ' '.repeat(free) + right;
+  }
+
+  // Render a string with simple inline tags into HTML
+  // Tags: [Y]..[/] yellow, [W]..[/] white-data, [D]..[/] dim, [P]..[/] prompt
+  function renderSpans(s) {
+    let out = '';
+    let i = 0;
+    while (i < s.length) {
+      if (s[i] === '[' && i + 2 < s.length && s[i+2] === ']') {
+        const tag = s[i+1];
+        const cls = { Y: 'fmc-label', W: 'fmc-data', D: 'fmc-dim', P: 'fmc-prompt' }[tag];
+        // find matching [/]
+        const end = s.indexOf('[/]', i + 3);
+        if (cls && end > 0) {
+          out += '<span class="' + cls + '">' +
+                 escapeHtml(s.slice(i + 3, end)) + '</span>';
+          i = end + 3;
+          continue;
+        }
+      }
+      out += escapeHtml(s[i]);
+      i++;
+    }
+    return out;
+  }
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // ─── Page definitions ──────────────────────────────────────
+  // Each returns { rows: [string × 14], lsk: {L1,L2,...} → handler }
+
+  function pageINIT() {
+    const rows = [];
+    rows.push(center('IDENT', SCREEN_COLS));
+    rows.push(' [Y]MODEL[/]              [Y]ENG RATING[/]');
+    rows.push(' [W]737-800[/]              [W]CFM56-7B[/]');
+    rows.push(' [Y]NAV DATA[/]              [Y]ACTIVE[/]');
+    rows.push(' [W]WORLD-2604[/]      [W]26MAY-23JUN[/]');
+    rows.push(' [Y]OP PROGRAM[/]              [Y]DRAG/FF[/]');
+    rows.push(' [W]U10.8A[/]                  [W]+0.0/+0.0[/]');
+    rows.push('');
+    rows.push(' [P]<INDEX[/]            [P]POS INIT>[/]');
+    rows.push('');
+    rows.push('');
+    rows.push('');
+    rows.push('');
+    rows.push('');
+    return {
+      rows,
+      lsk: {
+        // L6 = INDEX, R6 = POS INIT — both no-op in this demo
+        // R5 placeholder advances to RTE for narrative flow
+      },
+      hint: { en: 'Press RTE to enter a flight plan.', zh: '按 RTE 进入航路录入。' }
+    };
+  }
+
+  function pageMENU() {
+    const rows = [];
+    rows.push(center('CDU MENU', SCREEN_COLS));
+    rows.push('');
+    rows.push(' [P]<FMC[/]');
+    rows.push('');
+    rows.push(' [D]<ACARS[/]');
+    rows.push('');
+    rows.push(' [D]<ATC[/]');
+    rows.push('');
+    rows.push(' [D]<DLINK[/]');
+    rows.push('');
+    rows.push('');
+    rows.push('');
+    rows.push('');
+    rows.push('');
+    return {
+      rows,
+      lsk: {
+        L1: () => { state.page = 'INIT'; }
+      },
+      hint: { en: 'This is the CDU root menu. Press L1 to enter the FMC.', zh: '这是 CDU 根菜单。按 L1 进入 FMC。' }
+    };
+  }
+
+  function pageRTE() {
+    const rows = [];
+    const r = state.route;
+    rows.push(center('RTE   1/1', SCREEN_COLS));
+    rows.push(' [Y]ORIGIN[/]                [Y]DEST[/]');
+    rows.push(' ' + lr(
+      r.origin ? '[W]' + r.origin + '[/]' : '[D]----[/]',
+      r.dest ? '[W]' + r.dest + '[/]' : '[D]----[/]'
+    ).replace(/^ /, '').padStart(SCREEN_COLS + ' '.length));
+    // We need controlled padding — rebuild manually
+    rows[2] = ' ' + (r.origin ? '[W]' + r.origin + '[/]' : '[D]----[/]') +
+              ' '.repeat(SCREEN_COLS - 1 - 4 - 4) +
+              (r.dest ? '[W]' + r.dest + '[/]' : '[D]----[/]');
+    rows.push(' [Y]CO ROUTE[/]            [Y]FLT NO[/]');
+    rows.push(' [D]----------[/]              [D]------[/]');
+    // Route legs preview
+    rows.push(' [Y]VIA[/]                  [Y]TO[/]');
+    if (r.via.length === 0) {
+      rows.push(' [D]----[/]                  [D]-----[/]');
+    } else {
+      rows.push(' [W]DIRECT[/]              [W]' + (r.via[0] || '') + '[/]');
+    }
+    if (r.via.length > 1) {
+      rows.push(' [Y]VIA[/]                  [Y]TO[/]');
+      rows.push(' [W]DIRECT[/]              [W]' + r.via[1] + '[/]');
+    } else {
+      rows.push('');
+      rows.push('');
+    }
+    if (r.via.length > 2) {
+      rows.push(' [Y]VIA[/]                  [Y]TO[/]');
+      rows.push(' [W]DIRECT[/]              [W]' + r.via[2] + '[/]');
+    } else {
+      rows.push('');
+      rows.push('');
+    }
+    rows.push('');
+    rows.push(' [P]<RTE COPY[/]      [P]ACTIVATE>[/]');
+    return {
+      rows,
+      lsk: {
+        L1: () => takeScratchpadAs('origin'),
+        R1: () => takeScratchpadAs('dest'),
+        L3: () => takeScratchpadAsRoute(),
+        R6: () => activateRoute()
+      },
+      hint: routeStepHint()
+    };
+  }
+
+  function pageLEGS() {
+    const rows = [];
+    rows.push(center('ACT RTE 1 LEGS  1/1', SCREEN_COLS));
+    const allLegs = [];
+    if (state.route.origin) allLegs.push(state.route.origin);
+    state.route.via.forEach(w => allLegs.push(w));
+    if (state.route.dest) allLegs.push(state.route.dest);
+    if (allLegs.length === 0) {
+      rows.push('');
+      rows.push(center('NO ACTIVE FLIGHT PLAN', SCREEN_COLS));
+      while (rows.length < 13) rows.push('');
+    } else {
+      // Show up to 6 legs with pseudo-distance/altitude in a Boeing-ish layout
+      let prevWp = null;
+      for (let i = 0; i < Math.min(6, allLegs.length); i++) {
+        const wp = allLegs[i];
+        const wpData = lookupWaypoint(wp);
+        rows.push(' [Y]' + (i === 0 ? '   ' : 'TRK ') +
+                  (i > 0 && prevWp ? trkBetween(prevWp, wp) : '   ') +
+                  '°  [/]');
+        let line = ' [W]' + pad(wp, 5) + '[/]';
+        if (i > 0 && prevWp) {
+          const d = Math.round(distNM(prevWp, wp));
+          line += '          [W]' + pad(d + 'NM', 6, 'right') + '[/]';
+        }
+        rows.push(line);
+        prevWp = wp;
+      }
+      while (rows.length < 13) rows.push('');
+    }
+    rows.push(' [P]<RTE DATA[/]          [P]LEGS>[/]');
+    return {
+      rows, lsk: {},
+      hint: state.routeActive
+        ? { en: 'Active flight plan. Try other entries with RTE.',
+            zh: '当前飞行计划已激活。可在 RTE 页继续编辑。' }
+        : { en: 'No active route. Go to RTE to enter one.',
+            zh: '无激活航路。请到 RTE 页录入。' }
+    };
+  }
+
+  function trkBetween(a, b) {
+    const wa = lookupWaypoint(a), wb = lookupWaypoint(b);
+    if (!wa || !wb) return '   ';
+    // Initial bearing on great circle
+    const φ1 = wa.lat * Math.PI / 180;
+    const φ2 = wb.lat * Math.PI / 180;
+    const Δλ = (wb.lon - wa.lon) * Math.PI / 180;
+    const y = Math.sin(Δλ) * Math.cos(φ2);
+    const x = Math.cos(φ1) * Math.sin(φ2) -
+              Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
+    let θ = Math.atan2(y, x) * 180 / Math.PI;
+    θ = (θ + 360) % 360;
+    return pad(Math.round(θ).toString(), 3, 'right');
+  }
+
+  function distNM(a, b) {
+    const wa = lookupWaypoint(a), wb = lookupWaypoint(b);
+    if (!wa || !wb) return 0;
+    // Haversine, in nautical miles
+    const R = 3440.065;
+    const φ1 = wa.lat * Math.PI / 180, φ2 = wb.lat * Math.PI / 180;
+    const dφ = (wb.lat - wa.lat) * Math.PI / 180;
+    const dλ = (wb.lon - wa.lon) * Math.PI / 180;
+    const aH = Math.sin(dφ / 2) ** 2 +
+               Math.cos(φ1) * Math.cos(φ2) * Math.sin(dλ / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(aH));
+  }
+
+  // ─── Scratchpad → state actions ────────────────────────────
+  function takeScratchpadAs(field) {
+    const sp = state.scratchpad.trim().toUpperCase();
+    if (!sp) {
+      state.message = 'INVALID ENTRY';
+      return;
+    }
+    // Validate as airport code (4-letter)
+    if (!/^[A-Z]{4}$/.test(sp)) {
+      state.message = 'INVALID ENTRY';
+      return;
+    }
+    if (!lookupWaypoint(sp)) {
+      state.message = 'NOT IN DATABASE';
+      return;
+    }
+    state.route[field] = sp;
+    state.scratchpad = '';
+    state.message = '';
+    updateExecArmed();
+  }
+
+  function takeScratchpadAsRoute() {
+    const sp = state.scratchpad.trim().toUpperCase();
+    if (!sp) { state.message = 'INVALID ENTRY'; return; }
+    // Accept tokens: WPT or WPT DCT WPT DCT WPT  (DCT optional/ignored)
+    const tokens = sp.split(/\s+/).filter(t => t && t !== 'DCT' && t !== '..');
+    const valid = [];
+    for (const t of tokens) {
+      const wp = lookupWaypoint(t);
+      if (!wp) {
+        state.message = t + ' NOT IN DATABASE';
+        return;
+      }
+      valid.push(t);
+    }
+    if (valid.length === 0) { state.message = 'INVALID ENTRY'; return; }
+    state.route.via = valid;
+    state.scratchpad = '';
+    state.message = '';
+    updateExecArmed();
+  }
+
+  function activateRoute() {
+    if (!state.route.origin || !state.route.dest) {
+      state.message = 'NEED ORIGIN/DEST';
+      return;
+    }
+    state.routeActive = true;
+    state.pendingRoute = null;
+    state.message = '';
+    updateND();
+  }
+
+  function updateExecArmed() {
+    // EXEC is armed whenever there is a pending change (origin/dest set
+    // but route not yet activated, OR route changed since last activation).
+    const hasContent = state.route.origin || state.route.dest || state.route.via.length;
+    const armed = hasContent && (!state.routeActive ||
+                                 JSON.stringify(state.route) !== JSON.stringify(state.lastActivated));
+    const execBtn = widget.querySelector('.fmc-exec');
+    execBtn.disabled = !armed;
+  }
+
+  function routeStepHint() {
+    if (!state.route.origin) return { en: 'Type KBUF, then press the LSK next to ORIGIN (1L).',
+                                       zh: '输入 KBUF，再按 ORIGIN 旁边的行选择键（1L）。' };
+    if (!state.route.dest) return { en: 'Type KDFW, then press the LSK next to DEST (1R).',
+                                     zh: '输入 KDFW，再按 DEST 旁边的行选择键（1R）。' };
+    if (state.route.via.length === 0) return {
+      en: 'Type a route on line 3, e.g. SYR DCT PSB DCT AGC, then press LSK 3L.',
+      zh: '在第 3 行输入航路，例如 SYR DCT PSB DCT AGC，按 3L。'
+    };
+    if (!state.routeActive) return {
+      en: 'Press EXEC to activate the route.',
+      zh: '按 EXEC 激活航路。'
+    };
+    return { en: 'Route active. Try LEGS to see the leg-by-leg breakdown.',
+             zh: '航路已激活。可按 LEGS 查看分段。' };
+  }
+
+  // ─── Navigation Display ────────────────────────────────────
+  // Project waypoints into the ND in PLAN mode: bounding box of all
+  // waypoints centered in the display, scaled to fit. Aircraft symbol
+  // is repositioned to whatever the origin lands at.
+  function updateND() {
+    const routeG = widget.querySelector('.fmc-nd-route');
+    const wpG = widget.querySelector('.fmc-nd-waypoints');
+    const status = widget.querySelector('.fmc-nd-status');
+    const acG = widget.querySelector('.fmc-nd-aircraft');
+    routeG.innerHTML = '';
+    wpG.innerHTML = '';
+
+    if (!state.routeActive || !state.route.origin) {
+      status.textContent = 'NO ACTIVE ROUTE';
+      status.style.display = '';
+      if (acG) acG.setAttribute('transform', 'translate(140 240)');
+      return;
+    }
+    status.style.display = 'none';
+
+    const codes = [state.route.origin, ...state.route.via, state.route.dest].filter(c => c);
+    const pts = codes.map(c => lookupWaypoint(c)).filter(Boolean);
+    if (pts.length < 2) return;
+
+    // Equirectangular projection centered on origin
+    const ref = pts[0];
+    function project(p) {
+      const x = (p.lon - ref.lon) * Math.cos(ref.lat * Math.PI / 180);
+      const y = (p.lat - ref.lat);
+      return { x, y };
+    }
+    const proj = pts.map(project);
+
+    // ND viewport
+    const NDW = 280, NDH = 280;
+    const padding = 22;             // leave room around edges for labels
+    const usableW = NDW - 2 * padding;
+    const usableH = NDH - 2 * padding;
+
+    // Bounding box of all projected points
+    const xs = proj.map(p => p.x);
+    const ys = proj.map(p => p.y);
+    let xMin = Math.min(...xs), xMax = Math.max(...xs);
+    let yMin = Math.min(...ys), yMax = Math.max(...ys);
+    // Avoid degenerate dims
+    if (xMax - xMin < 0.001) { xMin -= 0.5; xMax += 0.5; }
+    if (yMax - yMin < 0.001) { yMin -= 0.5; yMax += 0.5; }
+
+    // Scale to fit (preserve aspect)
+    const s = Math.min(usableW / (xMax - xMin), usableH / (yMax - yMin));
+
+    // Translate so bbox center maps to ND center
+    const cx = NDW / 2, cy = NDH / 2;
+    const bboxCx = (xMin + xMax) / 2;
+    const bboxCy = (yMin + yMax) / 2;
+
+    function toND(p) {
+      return {
+        x: cx + (p.x - bboxCx) * s,
+        y: cy - (p.y - bboxCy) * s    // SVG y inverted (north = up = smaller y)
+      };
+    }
+
+    const ndPts = proj.map(toND);
+
+    // Move aircraft symbol to origin
+    if (acG) {
+      acG.setAttribute('transform',
+        `translate(${ndPts[0].x.toFixed(1)} ${ndPts[0].y.toFixed(1)})`);
+    }
+
+    // Route line segments
+    for (let i = 0; i < ndPts.length - 1; i++) {
+      const a = ndPts[i], b = ndPts[i+1];
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', a.x.toFixed(1));
+      line.setAttribute('y1', a.y.toFixed(1));
+      line.setAttribute('x2', b.x.toFixed(1));
+      line.setAttribute('y2', b.y.toFixed(1));
+      line.setAttribute('stroke', '#e891c4');
+      line.setAttribute('stroke-width', '1.5');
+      routeG.appendChild(line);
+    }
+
+    // Waypoint dots and labels
+    // Compute label placement that avoids the previous label's bbox.
+    // Strategy: alternate labels above-right / below-left along the route
+    // to reduce overlap, and shift further if a near-neighbour is found.
+    ndPts.forEach((nd, i) => {
+      const isFirst = i === 0;
+      const isLast = i === ndPts.length - 1;
+      const pt = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      const sym = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      sym.setAttribute('points', '0,-3.5 -3,2.5 3,2.5');
+      sym.setAttribute('fill', isFirst || isLast ? '#e891c4' : 'none');
+      sym.setAttribute('stroke', '#e891c4');
+      sym.setAttribute('stroke-width', '1');
+      pt.setAttribute('transform', `translate(${nd.x.toFixed(1)} ${nd.y.toFixed(1)})`);
+      pt.appendChild(sym);
+
+      const lbl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      // Decide label side based on position in display (so labels point outward)
+      // and stagger vertically by index parity
+      const goRight = nd.x <= NDW / 2;
+      const above = (i % 2 === 0);
+      const dx = goRight ? 6 : -6;
+      const dy = above ? -5 : 9;
+      lbl.setAttribute('x', dx);
+      lbl.setAttribute('y', dy);
+      lbl.setAttribute('text-anchor', goRight ? 'start' : 'end');
+      lbl.setAttribute('fill', '#e8d147');
+      lbl.setAttribute('font-family', 'JetBrains Mono, monospace');
+      lbl.setAttribute('font-size', '9');
+      lbl.textContent = pts[i].code;
+      pt.appendChild(lbl);
+      wpG.appendChild(pt);
+    });
+  }
+
+  // ─── Render the screen ─────────────────────────────────────
+  function renderScreen() {
+    const screen = widget.querySelector('#fmc-screen');
+    let pageDef;
+    switch (state.page) {
+      case 'INIT': pageDef = pageINIT(); break;
+      case 'RTE':  pageDef = pageRTE(); break;
+      case 'LEGS': pageDef = pageLEGS(); break;
+      case 'MENU': pageDef = pageMENU(); break;
+      default:     pageDef = pageINIT();
+    }
+    state.lsk = pageDef.lsk || {};
+
+    // Pad/trim to exactly 13 content rows (we add scratchpad as row 14)
+    const rows = pageDef.rows.slice(0, 13);
+    while (rows.length < 13) rows.push('');
+
+    // Scratchpad row
+    let spRow;
+    if (state.message) {
+      spRow = '[Y]' + state.message + '[/]';
+    } else if (state.scratchpad) {
+      spRow = '[W]' + state.scratchpad + '[/]';
+    } else {
+      spRow = '';
+    }
+    rows.push(spRow);
+
+    // Render to HTML
+    screen.innerHTML = rows.map(renderSpans).join('\n');
+
+    // Update the hint
+    const hint = pageDef.hint || routeStepHint();
+    updateHint(hint);
+
+    // Update active fn key visual
+    widget.querySelectorAll('.fmc-fn[data-page]').forEach(b => {
+      b.classList.toggle('active', b.dataset.page === state.page);
+    });
+
+    updateExecArmed();
+  }
+
+  function updateHint(hint) {
+    if (!hint) return;
+    // The .fmc-hint already has bilingual <ol> blocks for the static tutorial.
+    // We don't replace those; instead we maintain a separate dynamic line.
+    let dyn = widget.querySelector('.fmc-hint-dynamic');
+    if (!dyn) {
+      dyn = document.createElement('p');
+      dyn.className = 'fmc-hint-dynamic';
+      const hintBox = widget.querySelector('.fmc-hint');
+      hintBox.appendChild(dyn);
+    }
+    const lang = document.body.getAttribute('data-lang') || 'en';
+    dyn.textContent = '→ ' + (hint[lang] || hint.en);
+  }
+
+  // ─── Wire up keys ──────────────────────────────────────────
+  widget.querySelectorAll('.fmc-fn[data-page]').forEach(b => {
+    b.addEventListener('click', () => {
+      state.page = b.dataset.page;
+      state.message = '';
+      renderScreen();
+    });
+  });
+  widget.querySelector('.fmc-exec').addEventListener('click', () => {
+    if (!widget.querySelector('.fmc-exec').disabled) {
+      activateRoute();
+      state.lastActivated = JSON.parse(JSON.stringify(state.route));
+      renderScreen();
+    }
+  });
+  widget.querySelectorAll('.fmc-key[data-key]').forEach(b => {
+    b.addEventListener('click', () => {
+      let k = b.dataset.key;
+      if (k === 'SP') k = ' ';
+      if (state.scratchpad.length < SCREEN_COLS) {
+        state.scratchpad += k;
+        state.message = '';
+        renderScreen();
+      }
+    });
+  });
+  widget.querySelector('.fmc-key-clr').addEventListener('click', () => {
+    if (state.message) {
+      state.message = '';
+    } else if (state.scratchpad.length > 0) {
+      state.scratchpad = state.scratchpad.slice(0, -1);
+    }
+    renderScreen();
+  });
+  widget.querySelectorAll('.fmc-lsk').forEach(b => {
+    b.addEventListener('click', () => {
+      const lsk = b.dataset.lsk;
+      const handler = state.lsk && state.lsk[lsk];
+      if (handler) {
+        handler();
+      }
+      // Even if no handler, render again (so message updates)
+      renderScreen();
+    });
+  });
+
+  // ─── Re-render when language changes ───────────────────────
+  document.addEventListener('flying:langchange', renderScreen);
+
+  // Initial render
+  renderScreen();
 })();
 </script>
 
@@ -927,11 +2340,15 @@
     const Cl = liftCoeff(alpha_deg);
     const stalled = isStalled(alpha_deg);
 
-    // Rotate airfoil group around mid-chord (CHORD_X0 + CHORD_PX/2, CHORD_Y0)
+    // Rotate airfoil group around mid-chord (CHORD_X0 + CHORD_PX/2, CHORD_Y0).
+    // SVG y is inverted (down = +y), so a positive rotate() value rotates
+    // clockwise on screen. With LE on the left and TE on the right, a
+    // positive AoA (nose up) corresponds to LE up / TE down — i.e. a
+    // POSITIVE SVG rotation. Hence: rotate by +alpha_deg.
     const pivotX = CHORD_X0 + CHORD_PX / 2;
     const pivotY = CHORD_Y0;
     airfoilG.setAttribute('transform',
-      'rotate(' + (-alpha_deg).toFixed(2) + ' ' + pivotX + ' ' + pivotY + ')');
+      'rotate(' + (alpha_deg).toFixed(2) + ' ' + pivotX + ' ' + pivotY + ')');
 
     // Update streamlines
     streamlineEls.forEach(({ yFar, el }) => {
@@ -958,7 +2375,8 @@
     const teLocal = surface.upper[N_PANELS]; // (1, ~0)
     const teX_unrot = CHORD_X0 + teLocal.x * CHORD_PX;
     const teY_unrot = CHORD_Y0 - teLocal.y * CHORD_PX;
-    const rad = -alpha_deg * Math.PI / 180;
+    // Match the airfoil's SVG rotate() sign: positive alpha => positive rotation
+    const rad = alpha_deg * Math.PI / 180;
     const dx = teX_unrot - pivotX, dy = teY_unrot - pivotY;
     const teX = pivotX + dx * Math.cos(rad) - dy * Math.sin(rad);
     const teY = pivotY + dx * Math.sin(rad) + dy * Math.cos(rad);
