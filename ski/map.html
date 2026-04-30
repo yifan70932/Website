@@ -274,10 +274,10 @@
     <span data-lang-content="zh">美国主要滑雪场</span>
   </h1>
   <p data-lang-content="en">
-    117 major destination resorts plotted by location, colored by NSAA region, sized by skiable acreage. Click a marker for full statistics. Companion to <a href="research.html">Forty-seven seasons</a> in the main wiki. Coverage emphasizes destination resorts; the long tail of small community hills is partial. Data sources: skinorthamerica100.com, OnTheSnow, Wikipedia, public records.
+    217 major destination resorts plotted by location, colored by NSAA region, sized by skiable acreage. Click a marker for full statistics. Companion to <a href="research.html">Forty-seven seasons</a> in the main wiki. Coverage emphasizes destination resorts; the long tail of small community hills is partial. Data sources: skinorthamerica100.com, OnTheSnow, Wikipedia, public records.
   </p>
   <p data-lang-content="zh">
-    117 个美国主要目的地度假村，按位置标点、按 NSAA 大区配色、按可滑雪面积调整标记大小。点击标记查看完整统计。本页是主 wiki 中 <a href="research.html">"四十七个雪季"</a> 研究的伴生页。覆盖侧重目的地度假村；小型社区雪场的长尾覆盖不完整。数据来源：skinorthamerica100.com、OnTheSnow、维基百科、公开记录。
+    217 个美国主要雪场，按位置标点、按 NSAA 大区配色、按可滑雪面积调整标记大小。点击标记查看完整统计。本页是主 wiki 中 <a href="research.html">"四十七个雪季"</a> 研究的伴生页。覆盖侧重目的地雪场；小型社区雪场的长尾覆盖不完整。数据来源：skinorthamerica100.com、OnTheSnow、维基百科、公开记录。
   </p>
 </div>
 
@@ -312,8 +312,9 @@ const STATE_NAMES = {
   NM: 'New Mexico', AZ: 'Arizona', NV: 'Nevada', CA: 'California',
   OR: 'Oregon', WA: 'Washington', AK: 'Alaska',
   VT: 'Vermont', NH: 'New Hampshire', ME: 'Maine', NY: 'New York',
-  PA: 'Pennsylvania', MA: 'Massachusetts',
-  MN: 'Minnesota', WI: 'Wisconsin', MI: 'Michigan', IL: 'Illinois',
+  PA: 'Pennsylvania', MA: 'Massachusetts', NJ: 'New Jersey', CT: 'Connecticut',
+  MD: 'Maryland',
+  MN: 'Minnesota', WI: 'Wisconsin', MI: 'Michigan', IL: 'Illinois', IA: 'Iowa',
   SD: 'South Dakota', WV: 'West Virginia', NC: 'North Carolina',
   VA: 'Virginia', TN: 'Tennessee', AL: 'Alabama'
 };
@@ -508,6 +509,115 @@ function refreshPopupsOnLangChange() {
   observer.observe(document.body, { attributes: true });
 }
 
+// ───────── Isochrone layer ─────────
+// Drive-time isochrones loaded from research-data/resort_isochrones.geojson
+// Generated offline by research-code/compute_isochrones.py via OpenRouteService.
+//
+// We render a single band: 60-minute drive time (the maximum supported by the
+// OpenRouteService free tier). The band represents each resort's "local market"
+// — the region from which day-trip skiers can realistically reach it.
+//
+// Showing isochrones for all 215 resorts simultaneously is too cluttered;
+// instead we let the user toggle the layer on/off and the polygons only show
+// for currently-visible (region+size filtered) resorts.
+
+// Single style for the 60-min band — region-colored fills, transparent enough to overlay
+const ISO_STYLE_BASE = { fillOpacity: 0.18, weight: 0.8, opacity: 0.55 };
+
+let isochroneFeatures = [];     // raw GeoJSON features
+let isochroneLayers = [];       // {layer, resortName, region}
+let isochronesEnabled = false;  // off by default
+let isochronesAvailable = false;
+
+function buildIsochroneLayers() {
+  for (const feat of isochroneFeatures) {
+    const region = feat.properties.region;
+    const color = REGION_COLORS[region] || '#666';
+    const style = Object.assign({}, ISO_STYLE_BASE, { fillColor: color, color: color });
+    const layer = L.geoJSON(feat, { style: () => style, interactive: false });
+    isochroneLayers.push({
+      layer,
+      resortName: feat.properties.resort_name,
+      region: region,
+    });
+  }
+  // Initially not added to map; applyIsochroneVisibility() controls that
+}
+
+function applyIsochroneVisibility() {
+  // Determine which resorts are currently visible (passing region+size filters)
+  const visibleNames = new Set();
+  for (const item of allMarkers) {
+    const r = item.resort;
+    const acres = r.acres || 0;
+    if (activeRegions.has(r.region) && acres >= minAcres) {
+      visibleNames.add(r.name);
+    }
+  }
+  // Show isochrones for visible resorts iff the toggle is on
+  for (const il of isochroneLayers) {
+    const shouldShow = isochronesEnabled && visibleNames.has(il.resortName);
+    if (shouldShow && !map.hasLayer(il.layer)) il.layer.addTo(map);
+    else if (!shouldShow && map.hasLayer(il.layer)) map.removeLayer(il.layer);
+  }
+}
+
+// Hook isochrone visibility into the existing filter machinery
+const _origApplyFilters = applyFilters;
+applyFilters = function() {
+  _origApplyFilters();
+  if (isochronesAvailable) applyIsochroneVisibility();
+};
+
+function loadIsochrones() {
+  return fetch('research-data/resort_isochrones.geojson')
+    .then(r => {
+      if (!r.ok) throw new Error('isochrone file not present');
+      return r.json();
+    })
+    .then(geojson => {
+      isochroneFeatures = geojson.features || [];
+      buildIsochroneLayers();
+      isochronesAvailable = true;
+      console.log(`Isochrones loaded: ${isochroneFeatures.length} polygons`);
+      addIsochroneToggle();
+    })
+    .catch(err => {
+      console.warn('Isochrones unavailable:', err.message);
+      // Map continues to work without isochrones — that's intentional.
+    });
+}
+
+function addIsochroneToggle() {
+  // Inject a toggle into the existing filter panel
+  const panel = document.querySelector('.map-filter-panel');
+  if (!panel) return;
+
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'border-top: 1px solid var(--ski-rule); margin-top: 0.7rem; padding-top: 0.7rem;';
+  wrap.innerHTML = `
+    <h3 style="font-size: 0.74rem; font-weight: 600; font-variant: small-caps; letter-spacing: 0.06em; color: var(--ski-navy); margin: 0 0 0.45rem;">
+      <span data-lang-content="en">Drive-time</span>
+      <span data-lang-content="zh">车程等时圈</span>
+    </h3>
+    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.83rem;">
+      <input type="checkbox" id="iso-toggle">
+      <span data-lang-content="en">Show 60-min drive area</span>
+      <span data-lang-content="zh">显示 60 分钟车程范围</span>
+    </label>
+    <div style="margin-top: 0.45rem; font-size: 0.7rem; color: var(--ski-ink-faint); line-height: 1.45;">
+      <span data-lang-content="en">Polygons show the area reachable by car within 60 minutes from each resort, computed against real road network via OpenRouteService. Color matches the resort's NSAA region.</span>
+      <span data-lang-content="zh">多边形为从每个雪场出发、按真实路网计算的 60 分钟可达区域。源数据来自 OpenRouteService。颜色与 NSAA 大区一致。</span>
+    </div>
+  `;
+  panel.appendChild(wrap);
+
+  wrap.querySelector('#iso-toggle').addEventListener('change', (e) => {
+    isochronesEnabled = e.target.checked;
+    applyIsochroneVisibility();
+  });
+}
+
 // ───────── Bootstrap ─────────
 fetch('research-data/us_ski_resorts.json')
   .then(r => r.json())
@@ -525,6 +635,8 @@ fetch('research-data/us_ski_resorts.json')
     buildFilterPanel(regions, regionCounts);
     applyFilters();
     refreshPopupsOnLangChange();
+    // Attempt to load isochrones (no-op if file missing)
+    loadIsochrones();
   })
   .catch(err => {
     console.error('Failed to load resort data:', err);
