@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flying — yifanova.com</title>
+  <meta name="description" content="A working set of notes on flying — aerodynamics, weather, instruments, language, defense in depth, the deskilling of pilots, and flight as serious leisure. Bilingual: English / 中文.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
+
+  <link rel="stylesheet" href="flying.css">
+</head>
+
+<body class="flying-page" data-lang="en">
+
+<!-- ─── Topbar ─────────────────────────────────────────────────── -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">yifanova.com</span>
+      <span>·</span>
+      <a href="/">home</a>
+      <span data-lang-content="en">·  /flying</span>
+      <span data-lang-content="zh">·  /flying</span>
+    </div>
+    <div class="lang-toggle" role="tablist" aria-label="Language">
+      <button type="button" data-lang-set="en" class="active">EN</button>
+      <button type="button" data-lang-set="zh">中文</button>
+    </div>
+  </div>
+</header>
+
+<!-- ─── Layout: TOC sidebar + main column ──────────────────────── -->
+<div class="layout">
+
+  <!-- ───── Table of contents ──────────────────────────────────── -->
+  <nav class="toc" aria-label="Table of contents">
+    <button class="toc-mobile-toggle" type="button" aria-expanded="false">
+      <span data-lang-content="en">Contents</span>
+      <span data-lang-content="zh">目录</span>
+    </button>
+    <p class="toc-title">
+      <span data-lang-content="en">Contents</span>
+      <span data-lang-content="zh">目录</span>
+    </p>
+    <div class="toc-list-wrapper">
+      <ol>
+        <li><a href="#sec-opening">
+          <span data-lang-content="en">0 · Opening</span>
+          <span data-lang-content="zh">〇 · 引</span>
+        </a></li>
+        <li><a href="#sec-heavier-than-air">
+          <span data-lang-content="en">1 · Heavier than Air</span>
+          <span data-lang-content="zh">一 · 重于空气</span>
+        </a></li>
+        <li><a href="#sec-romance">
+          <span data-lang-content="en">2 · Romance, Not Conquest</span>
+          <span data-lang-content="zh">二 · 起舞而非征服</span>
+        </a></li>
+        <li><a href="#sec-languages">
+          <span data-lang-content="en">3 · Specialized Languages</span>
+          <span data-lang-content="zh">三 · 特殊的语言</span>
+        </a></li>
+        <li><a href="#sec-instruments">
+          <span data-lang-content="en">4 · Trust the Instruments</span>
+          <span data-lang-content="zh">四 · 相信仪表</span>
+        </a></li>
+        <li><a href="#sec-178">
+          <span data-lang-content="en">5 · 178 Seconds, Reconsidered</span>
+          <span data-lang-content="zh">五 · 重审 178 秒</span>
+        </a></li>
+        <li><a href="#sec-defense">
+          <span data-lang-content="en">6 · Defense in Depth</span>
+          <span data-lang-content="zh">六 · 纵深防御</span>
+        </a></li>
+        <li><a href="#sec-engine">
+          <span data-lang-content="en">7 · The Engine That Almost Never Fails</span>
+          <span data-lang-content="zh">七 · 几乎从不失效的发动机</span>
+        </a></li>
+        <li><a href="#sec-two-bodies">
+          <span data-lang-content="en">8 · Two Bodies of the Pilot</span>
+          <span data-lang-content="zh">八 · 飞行员的两副身体</span>
+        </a></li>
+        <li><a href="#sec-leisure">
+          <span data-lang-content="en">9 · Flight as Serious Leisure</span>
+          <span data-lang-content="zh">九 · 飞行作为严肃休闲</span>
+        </a></li>
+        <li><a href="#sec-further">
+          <span data-lang-content="en">10 · Further reading</span>
+          <span data-lang-content="zh">十 · 延伸阅读</span>
+        </a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ───── Main column ────────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- ───── Article header ──────────────────────────────────── -->
+    <header class="article-header">
+      <h1>
+        <span data-lang-content="en">Romance, Not Conquest</span>
+        <span data-lang-content="zh">起舞而非征服</span>
+      </h1>
+      <p class="subtitle">
+        <span data-lang-content="en">Notes on flying, from the cockpit and the ground</span>
+        <span data-lang-content="zh">关于飞行的札记，自驾驶舱与地面</span>
+      </p>
+
+      <blockquote class="epigraph">
+        <span data-lang-content="en">
+          <em>Una volta che avrai spiccato il volo, camminerai sulla terra guardando il cielo, perché là sei stato, e là sempre desidererai tornare.</em>
+          <span class="attribution">— attributed to Leonardo da Vinci</span>
+        </span>
+        <span data-lang-content="zh">
+          <em>Una volta che avrai spiccato il volo, camminerai sulla terra guardando il cielo, perché là sei stato, e là sempre desidererai tornare.</em><br>
+          一旦尝试过飞行的滋味，再次行走在大地上时便会仰望天空，因为你到过那里，并将永远渴望归返。
+          <span class="attribution">据传为达芬奇所言</span>
+        </span>
+      </blockquote>
+
+    </header>
+
+    <!-- ───── §0 Opening ──────────────────────────────────────── -->
+    <h2 id="sec-opening"><span class="sec-num">0 ·</span>
+      <span data-lang-content="en">Opening</span>
+      <span data-lang-content="zh">引</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>The word <em>flying</em> names not one object but five. There is a physical phenomenon — a heavier-than-air vehicle remaining controllably aloft, against gravity, by deflecting a fluid downward. There is an industrial system — a worldwide lattice of airlines, manufacturers, air-traffic services and managed airspace, moving roughly four billion passenger trips a year through procedures so routinized that the unusual day is when nothing unusual happens. There is a procedural skill — a body of competencies defined by aviation authorities, certified by checkride and recurrent training, and codified in manuals, checklists, and standard callouts. There is a specialized language — a layered vocabulary of phraseology, abbreviation, and notation in which a fifty-character weather report carries fifteen independent variables and a five-syllable callsign uniquely identifies one airframe among ten thousand in the air at the same instant. And there is an emotional experience — the moment, on takeoff or in cruise above an undercast, when the body registers what the mind has known: that this should not work, and yet it does.</p>
+
+      <p>The five are real, none reduces to the others, and most of the confusion in writing about aviation comes from treating one as if it were another. A pure phenomenology mistakes the cockpit for the desert; a pure systems analysis mistakes the airline for the act of flying; a pure technical exposition mistakes the manual for the practice. What follows is a working set of notes — half wiki, half commonplace book — arranged around questions that move between these five objects rather than within any one of them. Entries are added as occasion arises.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>「飞行」这个词同时指着五件不同的事。其一是物理现象——一个重于空气的载具，靠把流体向下偏转，对抗重力，可控地停留在空中。其二是工业系统——一张全球性的网络，由航空公司、制造商、空管服务与受管制空域共同织就，每年承运约四十亿人次旅客，其程序之常规化已至于「什么异常都没发生」才算异常的一天。其三是程序化技能——一组由航空当局界定、由检定飞行与定期复训认证、并以手册、检查单、标准喊话固化下来的资格。其四是一门特殊的语言——由通话用语、缩写、记号层层堆叠而成，一份五十字符的气象报告能携带十五个独立变量，一个五音节的呼号能在同一瞬间在空中飞行的一万架飞机中精确唯一地指认其一。其五是一种情感经验——起飞那一刻，或巡航于云层之上时，身体确认了头脑早已知晓的事实：这本不该成立，但它确实成立了。</p>
+
+      <p>这五件事都是真实的，没有哪一件可以化约为另一件。关于飞行的写作之所以常常陷入混乱，多半因为把其中一件当作了另一件。纯现象学的笔法会把驾驶舱当作沙漠；纯系统分析会把航空公司当作飞行本身；纯技术陈述会把手册当作实践。下文是一份持续更新的札记——半是 wiki，半是杂记——围绕在这五者之间往返的问题展开，而非困守其中之一。条目随时增补。</p>
+    </div>
+
+    <!-- ───── §1 Heavier than Air ─────────────────────────────── -->
+    <h2 id="sec-heavier-than-air"><span class="sec-num">1 ·</span>
+      <span data-lang-content="en">Heavier than Air</span>
+      <span data-lang-content="zh">重于空气</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>For most of recorded history, the phrase <em>heavier-than-air flight</em> was a contradiction in terms. Lighter-than-air flight had been understood, in principle, since the Montgolfier balloon of 1783; a balloon displaces more air than it weighs and therefore floats, exactly as a wooden boat floats on water. A heavier-than-air machine has no such recourse. A Boeing 737 at maximum takeoff weight masses about 79,000 kilograms; at cruise it is supported, second after second, only by the way its wings are shaped and the speed at which they meet the air. There is no balloon anywhere in the explanation.</p>
+
+      <p>The standard textbook answer — that air moves faster over the top of the wing because the upper surface is longer, that faster air is at lower pressure by Bernoulli's theorem, and that the resulting pressure difference lifts the wing — is, in the form just given, wrong. The "equal-transit-time" assumption (that two fluid parcels separating at the leading edge must rejoin at the trailing edge at the same instant) has no physical basis; in real flow over a cambered airfoil the upper parcel arrives at the trailing edge well ahead of the lower one. NASA's Glenn Research Center maintains a public list of <em>incorrect</em> theories of lift, and this is the first one on it.</p>
+
+      <p>The honest explanation requires both Bernoulli and Newton, neither alone. By the third law, a wing that turns a stream of air downward must receive an equal and opposite reaction upward; this is lift, expressed in terms of momentum. By the Bernoulli relation along a streamline, the same configuration corresponds to a region of low pressure above the wing and higher pressure below; this is lift, expressed in terms of pressure. The two are not competing accounts. They are two views of one event — momentum and pressure being linked, in an inviscid flow, by Euler's equations. Lanchester (1907) and Prandtl (1918–1919) supplied the missing piece in the form of <em>circulation</em>: a wing in steady flight is mathematically equivalent to a vortex bound to the airfoil, whose strength sets the lift via the Kutta–Joukowski theorem, <em>L</em>′ = <em>ρV</em><sub>∞</sub>Γ. The Kutta condition — that real flow leaves the trailing edge smoothly, rather than wrapping around it — fixes the value of Γ uniquely and ties the inviscid mathematics to the viscous reality. This is, to a useful approximation, why airplanes fly.</p>
+
+      <p>Three further facts are worth holding alongside that picture. First, lift is roughly proportional to the square of airspeed and linearly proportional to air density; this is why a 737 needs about 145 knots to lift off a sea-level runway and why the same airframe at the same weight needs more runway in Denver than in Amsterdam. Second, the relationship between angle of attack and lift coefficient is linear up to a critical angle — typically around 15 to 18 degrees for a conventional airfoil — beyond which the boundary layer separates from the upper surface and the wing <em>stalls</em>: lift collapses, drag rises, and the airplane will fall unless the angle is reduced. Stall is a function of angle, not of speed; an airliner can stall at cruise Mach in a steep turn just as a Cessna can stall at sixty knots level. Third, the apparently flat wing of a modern jet is not flat. A supercritical airfoil is engineered to delay shock formation in transonic flow; the cross-section is nearly flat on top and visibly curved underneath, the opposite of the schoolbook teardrop. Most of the design effort in a contemporary wing goes into compressibility effects that schoolbook explanations ignore entirely.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>在人类有记录的历史中，绝大多数时候"重于空气的飞行"都是一个语义矛盾。轻于空气的飞行原理早在 1783 年蒙戈尔费埃兄弟的热气球之后便已为人理解：气球排开的空气比自身重，因此漂浮，恰如木船浮于水上。重于空气的机械没有这种退路。一架满载起飞重量的波音 737 重约 79,000 公斤；在巡航状态下，它被悬浮在空中，靠的仅仅是机翼的形状以及机翼与空气相遇时的速度——一秒接一秒地，仅靠这些。在解释里，没有任何一处出现气球。</p>
+
+      <p>教科书最常见的那个答案——上翼面更长，所以空气流过上翼面更快；空气更快意味着压力更低（伯努利定理）；上下表面的压差把机翼托起来——以这个表述方式，是错的。它依赖一个所谓"等时通过"的假设：两团空气在前缘分开后必须在后缘同时汇合。这个假设没有任何物理依据；在真实的弯度翼型流场中，上面那一团比下面那一团早得多就到达了后缘。NASA 格伦研究中心专门列出了一份"错误的升力理论"清单，这一条排在第一。</p>
+
+      <p>诚实的解释需要伯努利与牛顿两者，缺一不可。按牛顿第三定律，机翼把空气向下偏转，空气也必然以同等大小、相反方向的力把机翼向上推；这就是升力的动量表述。按伯努利沿流线的方程，同一个流场意味着上翼面区域的低压与下翼面区域的高压；这就是升力的压力表述。两者不是相互竞争的解释，而是同一事件的两种视角——在无粘流中，动量与压力由欧拉方程联系起来。兰彻斯特（1907）与普朗特（1918—1919）补上了缺失的那一块：<em>环量</em>。一架稳定飞行的机翼，在数学上等价于一个绑定在翼型上的涡，其强度通过库塔—茹科夫斯基定理决定升力，<em>L</em>′ = <em>ρV</em><sub>∞</sub>Γ。库塔条件——真实流动从后缘平滑地离开，而非绕过去——唯一地固定了 Γ 的取值，并把无粘的数学与有粘的现实接在了一起。这就是飞机为什么能飞——精确到一个足够实用的近似。</p>
+
+      <p>有三件事值得连同上述图景一起记住。其一，升力大致与空速的平方成正比，与空气密度成线性正比；这就是一架 737 在海平面跑道上需要约 145 节才能离地，而同一架飞机同样重量在丹佛需要的跑道比在阿姆斯特丹更长的原因。其二，迎角与升力系数之间的关系在到达临界迎角之前是线性的——常规翼型的临界迎角通常在 15 到 18 度之间——超过这个角度，附面层从上翼面剥离，机翼<em>失速</em>：升力骤降，阻力骤升，飞机若不减小迎角就会掉下去。失速是迎角的函数，不是速度的函数；客机在巡航马赫数下做大坡度盘旋时一样可以失速，正如塞斯纳在六十节平飞时一样可以失速。其三，现代喷气客机看似平直的机翼并不真平。超临界翼型经过专门设计以推迟跨音速流动中的激波形成；其截面上表面接近平直，下表面明显外凸，与教科书上水滴形的方向恰好相反。当代机翼大部分的设计工作花在教科书完全略而不提的压缩性效应上。</p>
+    </div>
+
+    <!-- Widget placeholder for §1: Interactive airfoil viewer -->
+    <figure class="full-bleed">
+      <div class="widget-placeholder">
+        <strong data-lang-content="en">Interactive Airfoil — coming next round</strong>
+        <strong data-lang-content="zh">交互翼型 — 下一轮将完成</strong>
+        <span data-lang-content="en">An angle-of-attack slider, particle streamlines over a NACA 2412 section, surface pressure shading, and a live <em>C</em><sub>L</sub>–α plot. Stall onset visible past ~16°.</span>
+        <span data-lang-content="zh">迎角滑块，NACA 2412 翼型上的粒子流线，表面压力分布着色，以及实时的 <em>C</em><sub>L</sub>–α 曲线。约 16° 后可见失速起始。</span>
+      </div>
+      <figcaption>
+        <span data-lang-content="en">Figure 1. The simplest interactive demonstration that for any angle of attack below stall, the wing turns the airflow downward, and the airflow turns the wing upward. The whole secret of heavier-than-air flight, in one diagram.</span>
+        <span data-lang-content="zh">图 1。最简单的交互演示：在失速之前，对任意迎角，机翼把气流向下偏转，气流把机翼向上抬起。重于空气飞行的全部秘密，尽在一图。</span>
+      </figcaption>
+    </figure>
+
+    <!-- ─── Placeholder shells for sections 2–10 ─────────────── -->
+    <h2 id="sec-romance"><span class="sec-num">2 ·</span>
+      <span data-lang-content="en">Romance, Not Conquest</span>
+      <span data-lang-content="zh">起舞而非征服</span>
+    </h2>
+    <p style="color:var(--fl-ink-faint);font-style:italic;">
+      <span data-lang-content="en">[ to be drafted next round ]</span>
+      <span data-lang-content="zh">[ 下一轮起草 ]</span>
+    </p>
+
+    <h2 id="sec-languages"><span class="sec-num">3 ·</span>
+      <span data-lang-content="en">Specialized Languages</span>
+      <span data-lang-content="zh">特殊的语言</span>
+    </h2>
+    <p style="color:var(--fl-ink-faint);font-style:italic;">
+      <span data-lang-content="en">[ METAR / TAF · ATC phraseology · NATO alphabet · FMC/CDU — to be drafted ]</span>
+      <span data-lang-content="zh">[ METAR / TAF · 通话用语 · 北约字母表 · FMC/CDU — 待起草 ]</span>
+    </p>
+
+    <h2 id="sec-instruments"><span class="sec-num">4 ·</span>
+      <span data-lang-content="en">Trust the Instruments</span>
+      <span data-lang-content="zh">相信仪表</span>
+    </h2>
+    <p style="color:var(--fl-ink-faint);font-style:italic;">
+      <span data-lang-content="en">[ ILS geometry · Doolittle 1929 · CAT I/II/III · approach-plate annotator (KBUF ILS 23) — to be drafted ]</span>
+      <span data-lang-content="zh">[ 盲降几何 · 杜立特 1929 · CAT I/II/III · 进近图标注（KBUF ILS 23）— 待起草 ]</span>
+    </p>
+
+    <h2 id="sec-178"><span class="sec-num">5 ·</span>
+      <span data-lang-content="en">178 Seconds, Reconsidered</span>
+      <span data-lang-content="zh">重审 178 秒</span>
+    </h2>
+    <p style="color:var(--fl-ink-faint);font-style:italic;">
+      <span data-lang-content="en">[ 1954 study deconstruction · graveyard spiral · decomposition calculator — to be drafted ]</span>
+      <span data-lang-content="zh">[ 1954 研究的解构 · 螺旋下坠 · 参数分解计算器 — 待起草 ]</span>
+    </p>
+
+    <h2 id="sec-defense"><span class="sec-num">6 ·</span>
+      <span data-lang-content="en">Defense in Depth</span>
+      <span data-lang-content="zh">纵深防御</span>
+    </h2>
+    <p style="color:var(--fl-ink-faint);font-style:italic;">
+      <span data-lang-content="en">[ Reason's Swiss cheese · CRM history · CZ3456 case · safety statistics — to be drafted ]</span>
+      <span data-lang-content="zh">[ Reason 的瑞士奶酪 · 机组资源管理简史 · 南航 5·8 案 · 安全统计 — 待起草 ]</span>
+    </p>
+
+    <h2 id="sec-engine"><span class="sec-num">7 ·</span>
+      <span data-lang-content="en">The Engine That Almost Never Fails</span>
+      <span data-lang-content="zh">几乎从不失效的发动机</span>
+    </h2>
+    <p style="color:var(--fl-ink-faint);font-style:italic;">
+      <span data-lang-content="en">[ piston vs. turbine · ETOPS evolution · reliability engineering — to be drafted ]</span>
+      <span data-lang-content="zh">[ 活塞与涡轮 · ETOPS 演化 · 可靠性工程 — 待起草 ]</span>
+    </p>
+
+    <h2 id="sec-two-bodies"><span class="sec-num">8 ·</span>
+      <span data-lang-content="en">Two Bodies of the Pilot</span>
+      <span data-lang-content="zh">飞行员的两副身体</span>
+    </h2>
+    <p style="color:var(--fl-ink-faint);font-style:italic;">
+      <span data-lang-content="en">[ Saint-Exupéry · Dreyfus expertise stages · checklist as encapsulated wisdom · cold-and-dark widget — to be drafted ]</span>
+      <span data-lang-content="zh">[ 圣修伯里 · 德雷福斯专长阶段 · 检查单作为封装智慧 · 冷舱启动组件 — 待起草 ]</span>
+    </p>
+
+    <h2 id="sec-leisure"><span class="sec-num">9 ·</span>
+      <span data-lang-content="en">Flight as Serious Leisure</span>
+      <span data-lang-content="zh">飞行作为严肃休闲</span>
+    </h2>
+    <p style="color:var(--fl-ink-faint);font-style:italic;">
+      <span data-lang-content="en">[ Stebbins framework · home simulation as leisure career — to be drafted ]</span>
+      <span data-lang-content="zh">[ 斯特宾斯框架 · 家用模拟作为休闲生涯 — 待起草 ]</span>
+    </p>
+
+    <h2 id="sec-further"><span class="sec-num">10 ·</span>
+      <span data-lang-content="en">Further reading</span>
+      <span data-lang-content="zh">延伸阅读</span>
+    </h2>
+    <p style="color:var(--fl-ink-faint);font-style:italic;">
+      <span data-lang-content="en">[ to be assembled at the end ]</span>
+      <span data-lang-content="zh">[ 全文完成后整理 ]</span>
+    </p>
+
+    <!-- ───── Footer ──────────────────────────────────────────── -->
+    <footer class="page-footer">
+      <span>© <span class="cjk">于凡</span> · yifanova.com</span>
+      <span>
+        <a href="/">/home</a>
+        <a href="/chess/">/chess</a>
+        <a href="/ski/">/ski</a>
+        <a href="/religion/">/religion</a>
+      </span>
+    </footer>
+
+  </main>
+</div>
+
+<!-- ─── JS: language toggle, TOC mobile drawer, active-section ── -->
+<script>
+(function () {
+  const body = document.body;
+
+  // Language toggle
+  const langButtons = document.querySelectorAll('[data-lang-set]');
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang-set');
+      body.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh' : 'en');
+      langButtons.forEach(b => b.classList.toggle('active',
+        b.getAttribute('data-lang-set') === lang));
+      try { localStorage.setItem('flying-lang', lang); } catch (e) {}
+    });
+  });
+  try {
+    const saved = localStorage.getItem('flying-lang');
+    if (saved === 'zh' || saved === 'en') {
+      const btn = document.querySelector('[data-lang-set="' + saved + '"]');
+      if (btn) btn.click();
+    }
+  } catch (e) {}
+
+  // Mobile TOC drawer
+  const toc = document.querySelector('.toc');
+  const tocToggle = document.querySelector('.toc-mobile-toggle');
+  if (tocToggle) {
+    tocToggle.addEventListener('click', () => {
+      const isExpanded = toc.classList.toggle('expanded');
+      tocToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+    });
+    // Auto-close on link click (mobile)
+    toc.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (window.innerWidth < 1100) {
+          toc.classList.remove('expanded');
+          tocToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  }
+
+  // TOC active-section highlighting via IntersectionObserver
+  const tocLinks = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('main h2[id]');
+  if ('IntersectionObserver' in window && sections.length) {
+    const linkById = {};
+    tocLinks.forEach(a => {
+      const href = a.getAttribute('href') || '';
+      if (href.startsWith('#')) linkById[href.slice(1)] = a;
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.id;
+        const link = linkById[id];
+        if (!link) return;
+        if (entry.isIntersecting) {
+          tocLinks.forEach(a => a.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    sections.forEach(s => observer.observe(s));
+  }
+})();
+</script>
+
+</body>
+</html>
