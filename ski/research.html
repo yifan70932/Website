@@ -280,8 +280,8 @@ The 2012–2018 decoupling is striking: the U.S. economy expanded continuously t
 <p>The pooled aggregate hides a regional decomposition that is — empirically — the most important single feature of post-1990 American skiing.</p>
 
 <figure class="research-fig">
-  <img src="research-figures/fig04_regional_timeseries.svg" alt="Skier visits by NSAA region, 6 panels" loading="lazy">
-  <figcaption><span class="fig-num">Figure 5.</span> Skier visits by NSAA region. Pacific Southwest and Pacific Northwest were reported only in aggregate before 1995–96. The Midwest exhibits a clear long-run decline; Rocky Mountain a clear long-run increase; the others are flat or volatile-flat.</figcaption>
+  <img src="research-figures/fig12_hexbin_time_region.svg" alt="Hexbin time-region heatmap of skier visits by NSAA region" loading="lazy">
+  <figcaption><span class="fig-num">Figure 5.</span> Forty-seven seasons across six regions in z-scores. Each cell is one region in one season, colored by deviation from that region's own historical mean. Pacific Southwest and Pacific Northwest were reported only in aggregate before 1995–96 (gaps shown in pale buff). Reading right to left along the top row reveals the Rocky Mountain story: the region has been above its own mean (warm tones) almost continuously since 2018, while every other region has trended below mean (cool tones) in the same period — a pattern of <em>negative spatial co-movement</em> taken up formally in §IV.</figcaption>
 </figure>
 
 <figure class="research-fig">
@@ -290,8 +290,8 @@ The 2012–2018 decoupling is striking: the U.S. economy expanded continuously t
 </figure>
 
 <figure class="research-fig">
-  <img src="research-figures/fig05_regional_shares.svg" alt="Regional share of U.S. visits stacked area" loading="lazy">
-  <figcaption><span class="fig-num">Figure 7.</span> Regional share of national skier visits, 1995–96 onward. The Rocky Mountain share rose from ~34% (1996–2005 mean) to ~41% (2015–2024 mean). All other regions lost share except Pacific Northwest, which was stable.</figcaption>
+  <img src="research-figures/fig13_streamgraph_shares.svg" alt="Streamgraph of regional shares" loading="lazy">
+  <figcaption><span class="fig-num">Figure 7.</span> Regional shares of national skier visits as a streamgraph, 1995–96 through 2023–24. Symmetrical fill emphasizes the relative growth of the Rocky Mountain stream — from a 34% share in the late 1990s to 44% by 2023–24. The 2015–16 expansion of the Rocky Mountain band, visible as the upward swell at left center, marks the season after which post-Epic-Pass demand became the dominant driver of national totals.</figcaption>
 </figure>
 
 <p>The macroeconomic coupling is largely a Rocky Mountain phenomenon. When the regional series are correlated separately with real GDP, the contrast is dramatic:</p>
@@ -317,14 +317,81 @@ The 2012–2018 decoupling is striking: the U.S. economy expanded continuously t
 
 <div class="finding-box">
 <span class="finding-label">Finding</span>
-The Rocky Mountain region carries virtually all of the macroeconomic signal in U.S. skiing. The Northeast — the second-largest region by visits — is essentially uncorrelated with the U.S. economy at the level series. The Midwest correlates <em>negatively</em>, plausibly because the Midwest is exposed to two long-run secular forces (climate-driven snow loss; demographic migration to the South and West) that are themselves mildly correlated with macroeconomic growth as the U.S. center of gravity shifts westward.
+The Rocky Mountain region carries virtually all of the macroeconomic signal in U.S. skiing. The Northeast — the second-largest region by visits — is essentially uncorrelated with the U.S. economy at the level series. The Midwest correlates <em>negatively</em>, plausibly because the Midwest is exposed to two long-run secular forces (climate-driven snow loss; demographic migration to the South and West) that are themselves mildly correlated with macroeconomic growth as the U.S. center of gravity shifts westward. The next section (§IV) tests this regional decomposition more formally as a spatial-statistical claim.
 </div>
 
 </section>
 
-<!-- ============ IV. RECESSIONS ============ -->
-<section id="recessions">
+<!-- ============ IV. SPATIAL STRUCTURE ============ -->
+<section id="spatial">
 <span class="section-num">IV.</span>
+<h2>Spatial structure</h2>
+
+<p>The regional decomposition raises a question that the previous section did not answer: are the six regions <em>spatially coupled</em>, or do they move independently? The intuition could go either way. A common shock — a national recession, a country-wide weather pattern like a strong El Niño, a federal policy change — should induce <em>positive</em> spatial autocorrelation: when one region is hot, its neighbors should also be hot. Conversely, a substitution effect — bad snow in the Sierra pushing California skiers to Utah — should induce <em>negative</em> spatial autocorrelation: a hot region next to a cold one. The data, surprisingly, point firmly to the latter.</p>
+
+<h3>Visualizing the spatial pattern: bivariate map and LISA cluster classification</h3>
+
+<figure class="research-fig">
+  <img src="research-figures/fig14_bivariate_choropleth.svg" alt="Bivariate choropleth: NSAA regions colored by visit growth and GDP correlation" loading="lazy">
+  <figcaption><span class="fig-num">Figure 9.</span> A stylized hex-grid map of the six NSAA regions, with each region colored by a bivariate scheme combining its 2000–2024 visit growth (horizontal axis of legend) and its correlation with U.S. real GDP (vertical axis). Rocky Mountain — and only Rocky Mountain — falls into the dark navy "high–high" cell: it grew strongly and tracks the macro economy. The Midwest occupies the grey "low–low" cell: it shrank and is uncorrelated or weakly anti-correlated with GDP. The Northeast and Southeast sit in muted intermediate cells. The map encodes <em>both</em> the geographic and economic dimensions of the regional restructuring in a single graphic.</figcaption>
+</figure>
+
+<figure class="research-fig">
+  <img src="research-figures/fig17_lisa_clusters.svg" alt="LISA cluster maps for four representative seasons" loading="lazy">
+  <figcaption><span class="fig-num">Figure 10.</span> Anselin Local Moran's I (LISA) cluster classifications for four representative seasons. Each region is classified by comparing its own z-score to the mean z-score of its geographic neighbors: <em>High–High</em> (hot region surrounded by hot), <em>Low–Low</em> (cold surrounded by cold), <em>High–Low</em> (hot outlier in cold neighborhood), <em>Low–High</em> (cold outlier in hot neighborhood). Three patterns persist across forty years: Rocky Mountain is consistently a <em>High–Low</em> hot outlier; Pacific Northwest is consistently a <em>Low–High</em> cold outlier (small region overshadowed by hot Rockies); the Northeast slips from a hot outlier in the early period to a cold outlier by 2018–19 — the visual signature of its dethronement as the second-largest region.</figcaption>
+</figure>
+
+<h3>Quantifying the inequality: the Theil index</h3>
+
+<p>The visual story can be reduced to a single number. Theil's <em>T</em> measures concentration in a population of values; for our six regions in year <em>t</em>:</p>
+
+<p style="text-align: center; font-style: italic; font-family: var(--ski-font-mono); font-size: 0.95rem;">T(t) = Σ<sub>i</sub> (x<sub>i</sub>(t) / X(t)) × ln[(x<sub>i</sub>(t) / X(t)) / (1/n)]</p>
+
+<p>where <em>x<sub>i</sub></em>(t) is region <em>i</em>'s visits, <em>X</em>(t) is the national total, and <em>n</em> = 6. Under perfect equality (all regions equal share, 1/6 each), <em>T</em> = 0. Under maximal concentration (one region holds all visits), <em>T</em> = ln(<em>n</em>) = ln(6) ≈ 1.79. The historical record:</p>
+
+<figure class="research-fig">
+  <img src="research-figures/fig18_theil_inequality.svg" alt="Theil index of regional inequality 1996-2024" loading="lazy">
+  <figcaption><span class="fig-num">Figure 11.</span> Theil's <em>T</em> applied to the six NSAA regions, 1995–96 through 2023–24. The index has risen from 0.163 to 0.265, a relative increase of <strong>+62.6%</strong>, with a linear trend slope of +0.0030 per year (<em>p</em> &lt; 0.001, R² = 0.51). Regional concentration in U.S. skier visits has unambiguously increased, and the trend is statistically robust.</figcaption>
+</figure>
+
+<div class="finding-box">
+<span class="finding-label">Finding</span>
+Between 1995–96 and 2023–24, the Theil index of regional inequality rose by 62.6% (slope +0.003/yr, <em>p</em> &lt; 0.001, R² = 0.51). The Rocky Mountain region's gains have come predominantly at the expense of regional balance, not at the expense of any single competitor. By 2023–24, RM held a single-region share roughly equal to the combined share of the four regions other than the Northeast.
+</div>
+
+<h3>Spatial autocorrelation: Moran's I</h3>
+
+<p>The most rigorous test of spatial coupling is the Moran's I statistic: a measure of how strongly a region's deviation from its mean tracks its neighbors' deviations. With a queen-contiguity adjacency matrix appropriate to the six NSAA regions (Northeast adjacent to Midwest and Southeast; Rocky Mountain adjacent to Midwest, Pacific Southwest, Pacific Northwest; etc.), the global Moran's I was computed for each season since 1995–96. The result is unexpected:</p>
+
+<table class="stat-table">
+  <thead>
+    <tr><th>Statistic</th><th class="num">Value</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Mean Moran's <em>I</em>, 1995–96 to 2024–25</td><td class="num sig">−0.48</td></tr>
+    <tr><td>Null expected value (with <em>n</em> = 6)</td><td class="num">−0.20</td></tr>
+    <tr><td>Period mean, 1996–2010</td><td class="num">−0.50</td></tr>
+    <tr><td>Period mean, 2011–2025</td><td class="num">−0.47</td></tr>
+    <tr><td>Year-by-year significance (one-sided permutation, <em>n</em> = 199 per year)</td><td class="num nonsig">no individual year reaches <em>p</em> &lt; 0.10</td></tr>
+  </tbody>
+</table>
+
+<p>The interpretation deserves care. The expected value of Moran's <em>I</em> under spatial randomness with <em>n</em> = 6 areal units is −1/(<em>n</em>−1) = −0.20. The observed mean of −0.48 is therefore not simply "negative" but <em>more negative than chance</em>. With six regions and 199 permutations per year, no individual year crosses standard significance thresholds — but the persistent negativity across thirty years is itself a structural pattern.</p>
+
+<aside class="sidenote">A six-unit sample is small for Moran's I. The point estimates carry wide pseudo-confidence intervals, and the result should be read as <em>directionally informative</em> rather than as a hypothesis test. Still, the consistent dispersion across thirty years is hard to attribute to chance alone, and it is consistent with both the bivariate map (Fig. 9) and the LISA classifications (Fig. 10).</aside>
+
+<div class="finding-box">
+<span class="finding-label">Finding</span>
+Spatial autocorrelation in U.S. regional skier visits is <em>persistently negative</em> (Moran's <em>I</em> mean ≈ −0.48 against a null expected value of −0.20). Adjacent regions tend to move <em>against</em>, not <em>with</em>, each other. The straightforward interpretation: the year-to-year drivers of skier visits — weather anomalies, regional economic conditions, idiosyncratic snow patterns — operate at <em>sub-national</em> scales, not at a national-tide scale. A "good ski year for America" rarely means good for everyone simultaneously; it usually means at least one region is having a bad year.
+</div>
+
+<p>This finding sharpens the earlier observation (§II) that visit changes are weakly coupled to year-on-year macroeconomic changes. If macroeconomic shocks were the dominant year-to-year driver, we would expect positive spatial autocorrelation — all regions should rise and fall together with the national economy. Their stubborn refusal to do so points to weather, regional policy, and capital investment as the proximate forcing variables, with the macroeconomy operating only at the slow, level-determining scale.</p>
+
+</section>
+
+<!-- ============ V. RECESSIONS ============ -->
+<section id="recessions">
+<span class="section-num">V.</span>
 <h2>U.S. recessions and skier visits</h2>
 
 <p>If skiing were strongly procyclical, NBER-defined U.S. recessions should leave visible scars. Eight recession-affected ski seasons fall within the 1978–2024 window: 1979–80, 1980–81, 1981–82, 1989–90, 1990–91, 2000–01, 2007–08, 2008–09 (the COVID truncated 2019–20 season is treated separately). The comparison:</p>
@@ -350,16 +417,16 @@ U.S. recessions are not statistically detectable in the aggregate skier-visit se
 
 </section>
 
-<!-- ============ V. OLYMPIC YEARS ============ -->
+<!-- ============ VI. OLYMPIC YEARS ============ -->
 <section id="olympics">
-<span class="section-num">V.</span>
+<span class="section-num">VI.</span>
 <h2>The Olympic-year question</h2>
 
 <p>Twelve Winter Olympic Games fall within the data window: two with U.S. hosts (Lake Placid 1980, Salt Lake City 2002), two with Canadian hosts (Calgary 1988, Vancouver 2010), and eight overseas. For each Olympic year, an "excess" relative to a four-year local baseline (years ±1 and ±2, excluding the COVID year) was computed.</p>
 
 <figure class="research-fig">
-  <img src="research-figures/fig07_olympic_effect.svg" alt="Olympic year visit anomaly" loading="lazy">
-  <figcaption><span class="fig-num">Figure 9.</span> Olympic-year skier-visit anomaly relative to ±1, ±2 surrounding-year mean. Red bars: U.S. host years. Gold: Canadian host. Slate: overseas host.</figcaption>
+  <img src="research-figures/fig16_olympic_radial.svg" alt="Olympic year visit anomaly as polar bar chart" loading="lazy">
+  <figcaption><span class="fig-num">Figure 12.</span> Olympic-year skier-visit anomaly relative to the ±2-year surrounding-season mean, plotted radially. Each angular position is one of the twelve Winter Games in the data window; bars extending outward represent positive excess (more visits than the local baseline), bars pointing inward represent negative excess. Red: U.S. host. Gold: Canadian host. Slate: overseas host. The radial layout makes visible the alternation of positive and negative anomalies that, in aggregate, leave U.S. host years near zero on average.</figcaption>
 </figure>
 
 <table class="stat-table">
@@ -380,16 +447,16 @@ The aggregate Olympic effect is small and noisy at this sample size. The <em>U.S
 
 </section>
 
-<!-- ============ VI. PASS-ERA STRUCTURAL BREAKS ============ -->
+<!-- ============ VII. PASS-ERA STRUCTURAL BREAKS ============ -->
 <section id="passes">
-<span class="section-num">VI.</span>
+<span class="section-num">VII.</span>
 <h2>Epic, Ikon, and the pass-era structural break</h2>
 
 <p>The Vail Resorts Epic Pass launched for the 2008–09 season; Alterra's Ikon Pass launched for 2018–19. These products fundamentally restructured the industry's revenue model. By 2023–24, season passes accounted for 50% of all U.S. visits. The question is whether the visits–macroeconomy relationship shifted at these breakpoints.</p>
 
 <figure class="research-fig">
   <img src="research-figures/fig08_pre_post_passes.svg" alt="Pre vs post Epic and Ikon scatter" loading="lazy">
-  <figcaption><span class="fig-num">Figure 10.</span> Visits–RDPI/capita relationships pre- vs post-Epic Pass and pre- vs post-Ikon Pass. The post-Epic regression line shifts visibly downward — for a given level of disposable income, fewer skier visits are produced 2009–2018 than were produced before. The post-Ikon line is shorter (only 6 observations) but shows the post-COVID surge points pulling well above any historical relationship.</figcaption>
+  <figcaption><span class="fig-num">Figure 13.</span> Visits–RDPI/capita relationships pre- vs post-Epic Pass and pre- vs post-Ikon Pass. The post-Epic regression line shifts visibly downward — for a given level of disposable income, fewer skier visits are produced 2009–2018 than were produced before. The post-Ikon line is shorter (only 6 observations) but shows the post-COVID surge points pulling well above any historical relationship.</figcaption>
 </figure>
 
 <p>Formal Chow tests for structural breaks at these years:</p>
@@ -405,25 +472,25 @@ The aggregate Olympic effect is small and noisy at this sample size. The <em>U.S
   </tbody>
 </table>
 
-<p>None of the breakpoint tests reach conventional significance. The Epic-launch test is the closest, but the ratio of pre to post observations and the limited post-Ikon and post-COVID windows make these tests under-powered for short-window regime changes. The visual impression in Figure 10 — a downward shift in post-Epic intercept — is not robust to formal testing at the available sample sizes.</p>
+<p>None of the breakpoint tests reach conventional significance. The Epic-launch test is the closest, but the ratio of pre to post observations and the limited post-Ikon and post-COVID windows make these tests under-powered for short-window regime changes. The visual impression in Figure 13 — a downward shift in post-Epic intercept — is not robust to formal testing at the available sample sizes.</p>
 
 <div class="finding-box">
 <span class="finding-label">Finding</span>
-On the available sample, the Epic and Ikon launches do not produce statistically detectable breaks in the visits–macroeconomy relationship. This is consistent with the industry's claim that these products <em>decoupled</em> visits from short-run weather (more on this in §VII), but it is also consistent with the data simply being too short post-Ikon to discriminate.
+On the available sample, the Epic and Ikon launches do not produce statistically detectable breaks in the visits–macroeconomy relationship. This is consistent with the industry's claim that these products <em>decoupled</em> visits from short-run weather (more on this in §VIII), but it is also consistent with the data simply being too short post-Ikon to discriminate.
 </div>
 
 </section>
 
-<!-- ============ VII. POST-COVID ============ -->
+<!-- ============ VIII. POST-COVID ============ -->
 <section id="postcovid">
-<span class="section-num">VII.</span>
+<span class="section-num">VIII.</span>
 <h2>The post-pandemic baseline shift</h2>
 
 <p>The most statistically robust result in this entire analysis is the post-COVID baseline shift. Comparing pre-pandemic (2014–15 through 2018–19; the immediate five years before COVID, excluding the truncated 2019–20) with post-pandemic (2020–21 through 2024–25):</p>
 
 <figure class="research-fig">
   <img src="research-figures/fig11_postcovid_baseline.svg" alt="Post-COVID baseline shift" loading="lazy">
-  <figcaption><span class="fig-num">Figure 11.</span> Recent-decade visits showing the pre- (2015–19) and post- (2021–25) means as horizontal reference lines. Red bar: COVID-truncated 2019–20 season excluded from both means.</figcaption>
+  <figcaption><span class="fig-num">Figure 14.</span> Recent-decade visits showing the pre- (2015–19) and post- (2021–25) means as horizontal reference lines. Red bar: COVID-truncated 2019–20 season excluded from both means.</figcaption>
 </figure>
 
 <table class="stat-table">
@@ -447,9 +514,9 @@ The post-COVID baseline appears to be approximately 6–7 M visits per year abov
 
 </section>
 
-<!-- ============ VIII. WHAT THE DATA DON'T SHOW ============ -->
+<!-- ============ IX. WHAT THE DATA DON'T SHOW ============ -->
 <section id="limits">
-<span class="section-num">VIII.</span>
+<span class="section-num">IX.</span>
 <h2>What the data don't show</h2>
 
 <p>This section is for the things that the project began with the intention of answering but were limited by data availability. Stating these explicitly is the honest counterpart to the findings above.</p>
@@ -466,9 +533,9 @@ The post-COVID baseline appears to be approximately 6–7 M visits per year abov
 
 </section>
 
-<!-- ============ IX. SYNTHESIS ============ -->
+<!-- ============ X. SYNTHESIS ============ -->
 <section id="synthesis">
-<span class="section-num">IX.</span>
+<span class="section-num">X.</span>
 <h2>Synthesis: five robust observations</h2>
 
 <ol style="font-family:var(--ski-font-body); padding-left:1.5em;">
@@ -483,11 +550,16 @@ The post-COVID baseline appears to be approximately 6–7 M visits per year abov
   <li style="margin-bottom: 0.7rem;"><strong>The post-COVID baseline is meaningfully higher.</strong> 2020–21 through 2024–25 mean visits exceeded 2014–15 through 2018–19 mean visits by 6.6 M per year (+12%, p ≈ 0.003). Whether this reflects pass-economy mechanics, durable post-pandemic outdoor preferences, Western population growth, or some combination is not separable from this data alone.</li>
 </ol>
 
+<figure class="research-fig">
+  <img src="research-figures/fig15_sparkline_grid.svg" alt="Small-multiple grid of 47 seasons" loading="lazy">
+  <figcaption><span class="fig-num">Figure 15.</span> Forty-seven seasons sorted by total skier visits, ascending — each panel is one season, six bars are the regional contributions in NSAA's order (Northeast, Southeast, Midwest, Rocky Mountain, Pacific Southwest, Pacific Northwest). U.S. host years are titled in red, Canadian host years in gold, post-COVID seasons in green. Reading the panels left-to-right and top-to-bottom: the Rocky Mountain bar (red) grows visibly as one moves toward higher-total seasons, while the Northeast bar (navy) and Midwest bar (light blue) remain nearly constant. The 2024–25 panel is incomplete — only Rocky Mountain and Pacific Northwest had reported numbers at the time of writing.</figcaption>
+</figure>
+
 </section>
 
-<!-- ============ X. METHODOLOGY ============ -->
+<!-- ============ XI. METHODOLOGY ============ -->
 <section id="methodology">
-<span class="section-num">X.</span>
+<span class="section-num">XI.</span>
 <h2>Methodology</h2>
 
 <h3>Data sources</h3>
@@ -502,7 +574,7 @@ The post-COVID baseline appears to be approximately 6–7 M visits per year abov
 <p><strong>Recession years.</strong> NBER-dated U.S. recessions; a season is coded as recession-affected if any portion of the December–March core ski months overlapped an active recession.</p>
 
 <h3>Variable construction</h3>
-<p>The "Olympic excess" used in §V is computed as actual visits minus the mean of visits in years <em>t</em>−2, <em>t</em>−1, <em>t</em>+1, <em>t</em>+2, with the COVID-truncated 2019–20 season excluded from any baseline mean it would otherwise contaminate.</p>
+<p>The "Olympic excess" used in §VI is computed as actual visits minus the mean of visits in years <em>t</em>−2, <em>t</em>−1, <em>t</em>+1, <em>t</em>+2, with the COVID-truncated 2019–20 season excluded from any baseline mean it would otherwise contaminate.</p>
 
 <p>The COVID-truncated 2019–20 season is excluded from all correlation, scatter, t-test, and Chow-test calculations except where it is the explicit subject (Figure 11). Its inclusion would mechanically suppress the estimated visits–macroeconomy correlation without conveying real information.</p>
 
@@ -514,9 +586,9 @@ The post-COVID baseline appears to be approximately 6–7 M visits per year abov
 
 </section>
 
-<!-- ============ XI. DATA AND CODE ============ -->
+<!-- ============ XII. DATA AND CODE ============ -->
 <section id="data">
-<span class="section-num">XI.</span>
+<span class="section-num">XII.</span>
 <h2>Data and code</h2>
 
 <p>The two CSV files used in the analysis, plus the JSON output of the analysis script, are downloadable below. The Python analysis script is provided as a reproducibility appendix.</p>
