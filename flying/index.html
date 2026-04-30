@@ -165,13 +165,86 @@
       <p>有三件事值得连同上述图景一起记住。其一，升力大致与空速的平方成正比，与空气密度成线性正比；这就是一架 737 在海平面跑道上需要约 145 节才能离地，而同一架飞机同样重量在丹佛需要的跑道比在阿姆斯特丹更长的原因。其二，迎角与升力系数之间的关系在到达临界迎角之前是线性的——常规翼型的临界迎角通常在 15 到 18 度之间——超过这个角度，附面层从上翼面剥离，机翼<em>失速</em>：升力骤降，阻力骤升，飞机若不减小迎角就会掉下去。失速是迎角的函数，不是速度的函数；客机在巡航马赫数下做大坡度盘旋时一样可以失速，正如塞斯纳在六十节平飞时一样可以失速。其三，现代喷气客机看似平直的机翼并不真平。超临界翼型经过专门设计以推迟跨音速流动中的激波形成；其截面上表面接近平直，下表面明显外凸，与教科书上水滴形的方向恰好相反。当代机翼大部分的设计工作花在教科书完全略而不提的压缩性效应上。</p>
     </div>
 
-    <!-- Widget placeholder for §1: Interactive airfoil viewer -->
+    <!-- Widget for §1: Interactive airfoil viewer -->
     <figure class="full-bleed">
-      <div class="widget-placeholder">
-        <strong data-lang-content="en">Interactive Airfoil — coming next round</strong>
-        <strong data-lang-content="zh">交互翼型 — 下一轮将完成</strong>
-        <span data-lang-content="en">An angle-of-attack slider, particle streamlines over a NACA 2412 section, surface pressure shading, and a live <em>C</em><sub>L</sub>–α plot. Stall onset visible past ~16°.</span>
-        <span data-lang-content="zh">迎角滑块，NACA 2412 翼型上的粒子流线，表面压力分布着色，以及实时的 <em>C</em><sub>L</sub>–α 曲线。约 16° 后可见失速起始。</span>
+      <div class="airfoil-widget" id="airfoil-widget">
+        <div class="airfoil-stage">
+          <svg class="airfoil-svg" viewBox="0 0 720 360"
+               xmlns="http://www.w3.org/2000/svg" aria-label="Interactive airfoil">
+            <defs>
+              <linearGradient id="afgrad-suction" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#c0392b" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#c0392b" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="afgrad-pressure" x1="0" x2="0" y1="1" y2="0">
+                <stop offset="0%" stop-color="#1e5fa8" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="#1e5fa8" stop-opacity="0"/>
+              </linearGradient>
+              <marker id="afmarker-arrow" viewBox="0 0 10 10" refX="8" refY="5"
+                      markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#3a5a40"/>
+              </marker>
+            </defs>
+            <g class="airfoil-streamlines"></g>
+            <g class="airfoil-pressure-region"></g>
+            <g class="airfoil-shape"></g>
+            <g class="airfoil-deflection"></g>
+            <g class="airfoil-axis-label">
+              <text x="360" y="345" text-anchor="middle"
+                    font-family="Inter, sans-serif" font-size="11"
+                    fill="#9ca3af" letter-spacing="0.05em">FREESTREAM →</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="airfoil-side">
+          <svg class="airfoil-clplot" viewBox="0 0 220 200"
+               xmlns="http://www.w3.org/2000/svg" aria-label="Lift coefficient versus angle of attack">
+            <!-- Axes -->
+            <line x1="35" y1="170" x2="210" y2="170" stroke="#9ca3af" stroke-width="1"/>
+            <line x1="35" y1="20" x2="35" y2="170" stroke="#9ca3af" stroke-width="1"/>
+            <!-- α axis ticks: -5, 0, 5, 10, 15, 20 -->
+            <!-- Mapping: x = 35 + (α + 5) * 7  →  -5↦35, 0↦70, 5↦105, 10↦140, 15↦175, 20↦210 -->
+            <g font-family="Inter, sans-serif" font-size="9" fill="#6b7280">
+              <text x="35"  y="183" text-anchor="middle">-5</text>
+              <text x="70"  y="183" text-anchor="middle">0</text>
+              <text x="105" y="183" text-anchor="middle">5</text>
+              <text x="140" y="183" text-anchor="middle">10</text>
+              <text x="175" y="183" text-anchor="middle">15</text>
+              <text x="210" y="183" text-anchor="middle">20</text>
+              <text x="122" y="197" text-anchor="middle"
+                    fill="#4a5159" letter-spacing="0.05em">α (deg)</text>
+            </g>
+            <g font-family="Inter, sans-serif" font-size="9" fill="#6b7280">
+              <text x="30" y="173" text-anchor="end">0</text>
+              <text x="30" y="113" text-anchor="end">0.8</text>
+              <text x="30" y="55"  text-anchor="end">1.6</text>
+              <text x="20" y="95"  text-anchor="middle"
+                    transform="rotate(-90 20 95)"
+                    fill="#4a5159" letter-spacing="0.05em">C_L</text>
+            </g>
+            <!-- Cl curve (drawn by JS) -->
+            <path class="airfoil-clcurve" d="" fill="none"
+                  stroke="#0a3d62" stroke-width="1.6"/>
+            <!-- Current point marker -->
+            <circle class="airfoil-clpoint" cx="63" cy="160" r="4"
+                    fill="#c0392b" stroke="#fafaf7" stroke-width="1.5"/>
+          </svg>
+        </div>
+
+        <div class="airfoil-controls">
+          <label>
+            <span data-lang-content="en">Angle of attack</span>
+            <span data-lang-content="zh">迎角</span>
+            <input type="range" id="airfoil-aoa"
+                   min="-5" max="20" step="0.5" value="4"/>
+            <span class="airfoil-readout" id="airfoil-aoa-readout">4.0°</span>
+          </label>
+          <span class="airfoil-status" id="airfoil-status"
+                data-lang-content="en">Attached flow · lift increasing with α</span>
+          <span class="airfoil-status" id="airfoil-status-zh"
+                data-lang-content="zh">附着流 · 升力随迎角增加</span>
+        </div>
       </div>
       <figcaption>
         <span data-lang-content="en">Figure 1. The simplest interactive demonstration that for any angle of attack below stall, the wing turns the airflow downward, and the airflow turns the wing upward. The whole secret of heavier-than-air flight, in one diagram.</span>
@@ -518,7 +591,7 @@
 (function () {
   const body = document.body;
 
-  // Language toggle
+  // ─── Language toggle ──────────────────────────────────────────
   const langButtons = document.querySelectorAll('[data-lang-set]');
   langButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -528,6 +601,8 @@
       langButtons.forEach(b => b.classList.toggle('active',
         b.getAttribute('data-lang-set') === lang));
       try { localStorage.setItem('flying-lang', lang); } catch (e) {}
+      // Notify widgets that lang changed (so they can re-localize their dynamic text)
+      document.dispatchEvent(new CustomEvent('flying:langchange', { detail: { lang } }));
     });
   });
   try {
@@ -538,7 +613,7 @@
     }
   } catch (e) {}
 
-  // Mobile TOC drawer
+  // ─── Mobile TOC drawer ────────────────────────────────────────
   const toc = document.querySelector('.toc');
   const tocToggle = document.querySelector('.toc-mobile-toggle');
   if (tocToggle) {
@@ -546,7 +621,6 @@
       const isExpanded = toc.classList.toggle('expanded');
       tocToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
     });
-    // Auto-close on link click (mobile)
     toc.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         if (window.innerWidth < 1100) {
@@ -557,7 +631,7 @@
     });
   }
 
-  // TOC active-section highlighting via IntersectionObserver
+  // ─── TOC active-section highlighting ──────────────────────────
   const tocLinks = document.querySelectorAll('.toc a');
   const sections = document.querySelectorAll('main h2[id]');
   if ('IntersectionObserver' in window && sections.length) {
@@ -579,6 +653,366 @@
     }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
     sections.forEach(s => observer.observe(s));
   }
+})();
+</script>
+
+<!-- ─── §1 Airfoil widget ─────────────────────────────────────── -->
+<script>
+(function () {
+  const widget = document.getElementById('airfoil-widget');
+  if (!widget) return;
+
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+
+  // ─── Geometry constants (SVG viewBox is 720 x 360) ──────────
+  const STAGE_W = 720, STAGE_H = 360;
+  const CHORD_PX = 360;             // airfoil chord in SVG px
+  const CHORD_X0 = (STAGE_W - CHORD_PX) / 2;  // 180
+  const CHORD_Y0 = STAGE_H / 2;     // 180 — pivot for AoA rotation
+  const N_PANELS = 80;              // resolution along chord
+
+  // ─── NACA 2412 generator ────────────────────────────────────
+  // m = max camber (frac of chord), p = camber position, t = thickness frac
+  const NACA = { m: 0.02, p: 0.4, t: 0.12 };
+  function nacaSurface() {
+    const upper = [], lower = [];
+    for (let i = 0; i <= N_PANELS; i++) {
+      // Cosine spacing for better leading-edge resolution
+      const beta = Math.PI * i / N_PANELS;
+      const x = 0.5 * (1 - Math.cos(beta));
+      // Thickness distribution
+      const yt = (NACA.t / 0.2) * (
+        0.2969 * Math.sqrt(x) - 0.1260 * x - 0.3516 * x * x +
+        0.2843 * x * x * x - 0.1015 * x * x * x * x
+      );
+      // Camber line
+      let yc, dyc;
+      if (x < NACA.p) {
+        yc = (NACA.m / (NACA.p * NACA.p)) * (2 * NACA.p * x - x * x);
+        dyc = (2 * NACA.m / (NACA.p * NACA.p)) * (NACA.p - x);
+      } else {
+        yc = (NACA.m / Math.pow(1 - NACA.p, 2)) *
+             (1 - 2 * NACA.p + 2 * NACA.p * x - x * x);
+        dyc = (2 * NACA.m / Math.pow(1 - NACA.p, 2)) * (NACA.p - x);
+      }
+      const theta = Math.atan(dyc);
+      upper.push({ x: x - yt * Math.sin(theta), y: yc + yt * Math.cos(theta) });
+      lower.push({ x: x + yt * Math.sin(theta), y: yc - yt * Math.cos(theta) });
+    }
+    return { upper, lower };
+  }
+  const surface = nacaSurface();
+
+  // Convert chord-fraction coords to SVG px (no rotation; rotation handled via group)
+  function toSVG(pt) {
+    return {
+      x: CHORD_X0 + pt.x * CHORD_PX,
+      // SVG y grows downward; airfoil camber is positive-up in convention
+      y: CHORD_Y0 - pt.y * CHORD_PX
+    };
+  }
+
+  // Airfoil outline path string (in unrotated chord-coords)
+  function airfoilPath() {
+    const pts = surface.upper.concat([...surface.lower].reverse());
+    let d = '';
+    pts.forEach((p, i) => {
+      const s = toSVG(p);
+      d += (i === 0 ? 'M ' : 'L ') + s.x.toFixed(2) + ' ' + s.y.toFixed(2) + ' ';
+    });
+    return d + 'Z';
+  }
+
+  // ─── Aerodynamic model (analytical, plausible, not real CFD) ─
+  // Cl from thin-airfoil theory with stall break.
+  const ALPHA_L0 = -2.0;   // zero-lift angle for NACA 2412 (deg)
+  const CL_SLOPE = 2 * Math.PI / 180; // per degree
+  const STALL_ALPHA = 16;  // degrees
+  function liftCoeff(alpha_deg) {
+    const dAlpha = alpha_deg - ALPHA_L0;
+    const linearCl = CL_SLOPE * dAlpha;
+    if (alpha_deg <= STALL_ALPHA) return linearCl;
+    // Post-stall: lift drops sharply, with smooth transition
+    const past = alpha_deg - STALL_ALPHA;
+    const peakCl = CL_SLOPE * (STALL_ALPHA - ALPHA_L0);
+    return peakCl - 0.08 * past - 0.005 * past * past;
+  }
+  function isStalled(alpha_deg) { return alpha_deg > STALL_ALPHA; }
+
+  // ─── Streamline computation ─────────────────────────────────
+  // Each streamline starts at far left at height y_far (in chord-fractions),
+  // and gets displaced near the airfoil. We compute y_offset(x) along each.
+  //
+  // Model:
+  //   Local upward push from airfoil presence (decays away from airfoil).
+  //   Net downwash behind the airfoil (proportional to Cl).
+  //   For attached flow, smooth.
+  //   For stalled flow, upper-surface streamlines develop a "separation bubble"
+  //   from a separation point that moves forward as α increases past stall.
+
+  function streamlineY(yFar_chord, x_chord, alpha_deg, Cl) {
+    // x_chord is in airfoil coords (0 at LE, 1 at TE);
+    // can be negative (upstream) or > 1 (downstream).
+
+    // Find local airfoil height at x (if 0 <= x <= 1), else 0
+    let surfaceUp = 0, surfaceLo = 0;
+    if (x_chord >= 0 && x_chord <= 1) {
+      // Interpolate from precomputed surfaces
+      const i = Math.min(Math.floor(x_chord * N_PANELS), N_PANELS - 1);
+      const f = x_chord * N_PANELS - i;
+      surfaceUp = surface.upper[i].y * (1 - f) + surface.upper[i + 1].y * f;
+      surfaceLo = surface.lower[i].y * (1 - f) + surface.lower[i + 1].y * f;
+    }
+
+    const above = yFar_chord >= 0;
+
+    // 1) Geometric blocking: streamlines wrap around the airfoil.
+    //    Strength of displacement decays with vertical distance from surface.
+    let blockingDisp = 0;
+    if (x_chord >= -0.1 && x_chord <= 1.1) {
+      const surf = above ? surfaceUp : surfaceLo;
+      const dist = Math.abs(yFar_chord - surf);
+      // Streamlines very close get pushed away strongly; far ones nearly unaffected.
+      const decay = Math.exp(-dist * 4);
+      const wedge = Math.max(0, 1 - Math.pow(2 * x_chord - 1, 2)); // bell shape
+      blockingDisp = (above ? 1 : -1) * decay * wedge * 0.13;
+    }
+
+    // 2) Circulation-induced displacement: upwash in front, downwash behind.
+    //    S-shape passes through 0 around mid-chord.
+    //    Strength is proportional to Cl.
+    const arctan = Math.atan(2.2 * (x_chord - 0.5));
+    // Negative sign: positive Cl produces downwash behind, upwash in front
+    const circDisp = -Cl * 0.085 * (arctan / (Math.PI / 2));
+    // Far streamlines feel less of it (1/r-like decay)
+    const farDecay = 1 / (1 + 5 * yFar_chord * yFar_chord);
+
+    // 3) Separation bubble (only above airfoil, only when stalled)
+    let bubbleDisp = 0;
+    if (above && isStalled(alpha_deg) && yFar_chord > 0 && yFar_chord < 0.3) {
+      const stallDepth = Math.min(1, (alpha_deg - STALL_ALPHA) / 4);
+      const sepX = 0.4 - 0.25 * stallDepth;
+      if (x_chord > sepX && x_chord < 1.6) {
+        const into = (x_chord - sepX) / (1.6 - sepX);
+        const bump = Math.sin(Math.PI * Math.min(1, into * 1.5)) * 0.6 +
+                     0.4 * Math.exp(-Math.max(0, into - 0.7) * 2.5);
+        bubbleDisp = bump * 0.16 * stallDepth *
+                     Math.exp(-Math.max(0, yFar_chord - 0.04) * 7);
+      }
+    }
+
+    return yFar_chord + blockingDisp + circDisp * farDecay + bubbleDisp;
+  }
+
+  // Generate a streamline as a polyline path
+  function streamlinePath(yFar_chord, alpha_deg, Cl) {
+    const xs = [];
+    const xMin = -0.4, xMax = 1.6;
+    const nPts = 90;
+    for (let i = 0; i <= nPts; i++) {
+      const x = xMin + (xMax - xMin) * (i / nPts);
+      xs.push(x);
+    }
+    const stalled = isStalled(alpha_deg) && yFar_chord > 0 && yFar_chord < 0.25;
+    let d = '';
+    xs.forEach((x, i) => {
+      const y = streamlineY(yFar_chord, x, alpha_deg, Cl);
+      // Add small turbulent jitter past separation
+      let yJ = y;
+      if (stalled) {
+        const sepX = 0.4 - 0.25 * Math.min(1, (alpha_deg - STALL_ALPHA) / 6);
+        if (x > sepX) {
+          const seed = (x * 17 + i * 0.7);
+          yJ += 0.012 * Math.sin(seed * 6.28) *
+                Math.min(1, (alpha_deg - STALL_ALPHA) / 4);
+        }
+      }
+      const sx = CHORD_X0 + x * CHORD_PX;
+      const sy = CHORD_Y0 - yJ * CHORD_PX;
+      d += (i === 0 ? 'M ' : 'L ') + sx.toFixed(2) + ' ' + sy.toFixed(2) + ' ';
+    });
+    return d;
+  }
+
+  // ─── Build static SVG groups ────────────────────────────────
+  const gStream = widget.querySelector('.airfoil-streamlines');
+  const gShape = widget.querySelector('.airfoil-shape');
+  const gPress = widget.querySelector('.airfoil-pressure-region');
+  const gDeflect = widget.querySelector('.airfoil-deflection');
+
+  // The airfoil shape: a path inside a <g> we can rotate for AoA
+  const airfoilG = document.createElementNS(SVG_NS, 'g');
+  const airfoilPath_el = document.createElementNS(SVG_NS, 'path');
+  airfoilPath_el.setAttribute('d', airfoilPath());
+  airfoilPath_el.setAttribute('fill', '#0a3d62');
+  airfoilPath_el.setAttribute('stroke', '#0a3d62');
+  airfoilPath_el.setAttribute('stroke-width', '0.5');
+  airfoilG.appendChild(airfoilPath_el);
+  // Chord line (very subtle) for orientation
+  const chordLine = document.createElementNS(SVG_NS, 'line');
+  chordLine.setAttribute('x1', CHORD_X0);
+  chordLine.setAttribute('y1', CHORD_Y0);
+  chordLine.setAttribute('x2', CHORD_X0 + CHORD_PX);
+  chordLine.setAttribute('y2', CHORD_Y0);
+  chordLine.setAttribute('stroke', '#fafaf7');
+  chordLine.setAttribute('stroke-width', '0.6');
+  chordLine.setAttribute('stroke-dasharray', '3 3');
+  chordLine.setAttribute('opacity', '0.5');
+  airfoilG.appendChild(chordLine);
+  gShape.appendChild(airfoilG);
+
+  // Pressure regions (two ellipses, sized at runtime)
+  const pressUpper = document.createElementNS(SVG_NS, 'ellipse');
+  pressUpper.setAttribute('cx', CHORD_X0 + CHORD_PX * 0.4);
+  pressUpper.setAttribute('cy', CHORD_Y0 - 30);
+  pressUpper.setAttribute('rx', CHORD_PX * 0.55);
+  pressUpper.setAttribute('ry', 38);
+  pressUpper.setAttribute('fill', 'url(#afgrad-suction)');
+  pressUpper.setAttribute('opacity', '0');
+  gPress.appendChild(pressUpper);
+  const pressLower = document.createElementNS(SVG_NS, 'ellipse');
+  pressLower.setAttribute('cx', CHORD_X0 + CHORD_PX * 0.4);
+  pressLower.setAttribute('cy', CHORD_Y0 + 30);
+  pressLower.setAttribute('rx', CHORD_PX * 0.55);
+  pressLower.setAttribute('ry', 38);
+  pressLower.setAttribute('fill', 'url(#afgrad-pressure)');
+  pressLower.setAttribute('opacity', '0');
+  gPress.appendChild(pressLower);
+
+  // Trailing-edge downward deflection arrow
+  const deflectArrow = document.createElementNS(SVG_NS, 'line');
+  deflectArrow.setAttribute('stroke', '#3a5a40');
+  deflectArrow.setAttribute('stroke-width', '3');
+  deflectArrow.setAttribute('marker-end', 'url(#afmarker-arrow)');
+  deflectArrow.setAttribute('opacity', '0.9');
+  gDeflect.appendChild(deflectArrow);
+
+  // Pre-create streamline path elements (we just update `d` on each frame)
+  const STREAMLINE_HEIGHTS = [
+    -0.45, -0.32, -0.22, -0.14, -0.075, -0.025,  // below
+    0.025, 0.075, 0.14, 0.22, 0.32, 0.45         // above
+  ];
+  const streamlineEls = STREAMLINE_HEIGHTS.map(yFar => {
+    const p = document.createElementNS(SVG_NS, 'path');
+    p.setAttribute('fill', 'none');
+    p.setAttribute('stroke', '#6b7280');
+    p.setAttribute('stroke-width', '0.85');
+    p.setAttribute('opacity', '0.7');
+    gStream.appendChild(p);
+    return { yFar, el: p };
+  });
+
+  // ─── Cl(α) curve in the side plot (drawn once) ──────────────
+  const clCurve = widget.querySelector('.airfoil-clcurve');
+  const clPoint = widget.querySelector('.airfoil-clpoint');
+  // Plot range: α from -5 to 20, Cl from 0 to 1.6
+  // SVG: x maps -5..20 => 35..210 (175 px, 7 px per degree); y maps 0..1.6 => 170..50
+  function clToSVG(alpha, Cl) {
+    return {
+      x: 35 + (alpha + 5) * (175 / 25),
+      y: 170 - Math.max(0, Cl) * (120 / 1.6)
+    };
+  }
+  // Build polyline path of Cl curve
+  let clD = '';
+  for (let a = -5; a <= 20; a += 0.5) {
+    const Cl = liftCoeff(a);
+    const pt = clToSVG(a, Math.max(0, Cl));
+    clD += (a === -5 ? 'M ' : 'L ') + pt.x.toFixed(2) + ' ' + pt.y.toFixed(2) + ' ';
+  }
+  clCurve.setAttribute('d', clD);
+
+  // ─── Render function ────────────────────────────────────────
+  function render(alpha_deg) {
+    const Cl = liftCoeff(alpha_deg);
+    const stalled = isStalled(alpha_deg);
+
+    // Rotate airfoil group around mid-chord (CHORD_X0 + CHORD_PX/2, CHORD_Y0)
+    const pivotX = CHORD_X0 + CHORD_PX / 2;
+    const pivotY = CHORD_Y0;
+    airfoilG.setAttribute('transform',
+      'rotate(' + (-alpha_deg).toFixed(2) + ' ' + pivotX + ' ' + pivotY + ')');
+
+    // Update streamlines
+    streamlineEls.forEach(({ yFar, el }) => {
+      el.setAttribute('d', streamlinePath(yFar, alpha_deg, Cl));
+    });
+
+    // Update pressure regions: opacity scales with |Cl|, capped
+    const pOp = Math.min(0.9, Math.abs(Cl) * 0.55);
+    if (Cl >= 0) {
+      pressUpper.setAttribute('opacity', pOp);
+      pressLower.setAttribute('opacity', pOp);
+    } else {
+      // Swap: negative Cl means lower surface is suction
+      pressUpper.setAttribute('opacity', 0);
+      pressLower.setAttribute('opacity', 0);
+    }
+    if (stalled) {
+      // Suction collapses on stall — drop upper opacity sharply
+      pressUpper.setAttribute('opacity',
+        Math.max(0.1, pOp - 0.5 * Math.min(1, (alpha_deg - STALL_ALPHA) / 4)));
+    }
+
+    // Update deflection arrow at trailing edge — this is THE pedagogical point
+    const teLocal = surface.upper[N_PANELS]; // (1, ~0)
+    const teX_unrot = CHORD_X0 + teLocal.x * CHORD_PX;
+    const teY_unrot = CHORD_Y0 - teLocal.y * CHORD_PX;
+    const rad = -alpha_deg * Math.PI / 180;
+    const dx = teX_unrot - pivotX, dy = teY_unrot - pivotY;
+    const teX = pivotX + dx * Math.cos(rad) - dy * Math.sin(rad);
+    const teY = pivotY + dx * Math.sin(rad) + dy * Math.cos(rad);
+    // Arrow points back-and-down with magnitude scaled by Cl.
+    // The deflection angle below horizontal is ~ downwash angle (proportional to Cl).
+    const arrowLen = 36 + Math.abs(Cl) * 30;
+    const downwashDeg = 6 + Math.abs(Cl) * 22; // visible deflection
+    const downRad = downwashDeg * Math.PI / 180;
+    const ax = teX + arrowLen * Math.cos(downRad);
+    const ay = teY + arrowLen * Math.sin(downRad);
+    deflectArrow.setAttribute('x1', teX.toFixed(2));
+    deflectArrow.setAttribute('y1', teY.toFixed(2));
+    deflectArrow.setAttribute('x2', ax.toFixed(2));
+    deflectArrow.setAttribute('y2', ay.toFixed(2));
+    deflectArrow.setAttribute('opacity', stalled ? 0.2 : 0.9);
+
+    // Update Cl-α plot point
+    const pt = clToSVG(alpha_deg, Math.max(0, Cl));
+    clPoint.setAttribute('cx', pt.x.toFixed(2));
+    clPoint.setAttribute('cy', pt.y.toFixed(2));
+
+    // Update readout
+    const readout = document.getElementById('airfoil-aoa-readout');
+    readout.textContent = (alpha_deg >= 0 ? ' ' : '') + alpha_deg.toFixed(1) + '°';
+
+    // Update status text (both langs, hide/show via CSS data-lang-content)
+    const statusEn = document.getElementById('airfoil-status');
+    const statusZh = document.getElementById('airfoil-status-zh');
+    let textEn, textZh, isStallStatus = false;
+    if (alpha_deg < ALPHA_L0) {
+      textEn = 'Negative lift · airflow turned upward';
+      textZh = '负升力 · 气流被向上偏转';
+    } else if (stalled) {
+      textEn = 'STALL · upper-surface flow separated, lift collapsing';
+      textZh = '失速 · 上翼面气流分离，升力骤降';
+      isStallStatus = true;
+    } else if (alpha_deg > STALL_ALPHA - 3) {
+      textEn = 'Approaching stall · lift near maximum';
+      textZh = '接近失速 · 升力接近最大值';
+    } else {
+      textEn = 'Attached flow · lift increasing with α';
+      textZh = '附着流 · 升力随迎角增加';
+    }
+    statusEn.textContent = textEn;
+    statusZh.textContent = textZh;
+    statusEn.classList.toggle('stalled', isStallStatus);
+    statusZh.classList.toggle('stalled', isStallStatus);
+  }
+
+  // ─── Wire up the slider ─────────────────────────────────────
+  const slider = document.getElementById('airfoil-aoa');
+  slider.addEventListener('input', () => render(parseFloat(slider.value)));
+  // Initial render
+  render(parseFloat(slider.value));
 })();
 </script>
 
