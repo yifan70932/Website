@@ -180,16 +180,6 @@
   }
   body[data-lang="zh"] h1 em { font-style: normal; }
 
-  .hero-deck {
-    font-size: 22px;
-    line-height: 1.5;
-    color: var(--ink-soft);
-    max-width: 56ch;
-    font-weight: 400;
-    margin-bottom: 36px;
-  }
-  body[data-lang="zh"] .hero-deck { font-size: 19px; line-height: 1.7; }
-
   .hero-meta {
     display: flex;
     gap: 28px;
@@ -228,6 +218,36 @@
   .hero-intro p:last-child { margin-bottom: 0; }
   .hero-intro p strong { color: var(--ink); font-weight: 500; }
   .hero-intro p em { color: var(--ink); }
+
+  /* Hero prelude: literary subtitle in place of the old deck. Sets thematic register. */
+  .hero-prelude {
+    max-width: 64ch;
+    margin: 0 0 16px;
+  }
+  .hero-prelude p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 0;
+    font-feature-settings: 'liga', 'kern', 'onum';
+  }
+  body[data-lang="zh"] .hero-prelude p {
+    font-size: 16.5px;
+    line-height: 1.95;
+  }
+  .hero-prelude p em {
+    font-style: italic;
+    color: var(--ink);
+  }
+  body[data-lang="zh"] .hero-prelude p em {
+    font-style: normal;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .hero-prelude p strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
 
   .hero-epigraph {
     font-family: var(--serif-display);
@@ -932,12 +952,18 @@
       <span data-lang-content="en">Returning the <em>Ticket</em></span>
       <span data-lang-content="zh">归还<em>入场券</em></span>
     </h1>
-    <p class="hero-deck">
-      <span data-lang-content="en">A survey of philosophical, historical, and social-scientific critiques of religion — covering Christianity, Buddhism, and Islam, with the broader genealogy of critique from the Enlightenment to cognitive science.</span>
-      <span data-lang-content="zh">关于宗教的哲学、历史与社会科学批评的综述——涵盖基督教、佛教与伊斯兰教,以及从启蒙时代至认知科学的批评谱系。</span>
-    </p>
+
+    <div class="hero-prelude" data-lang-content="en">
+      <p>Twenty-five centuries ago, before the gospels were written, before the Buddha's teachings reached the page, before Muhammad was born, a Greek poet looked at the gods of his city and observed that <em>if oxen had hands, they would paint their gods as oxen</em>. The thought has never gone away. It went underground when the Church burned books, and it returned with Spinoza when an Amsterdam congregation cast him out for saying that God and Nature were the same word. In the same century, in another register entirely, Milton wrote <em>Paradise Lost</em>, and the figure he intended as the great rebel against divine order, Lucifer, became in the reading of his successors from Blake to Baudelaire a hero of refusal more compelling than the deity he resisted. It became a public language in the eighteenth century, when Voltaire and Hume and Kant taught educated Europe to ask the questions that had until then required courage to whisper. It became a verdict in the nineteenth, when Feuerbach reversed the relation, holding that humans had made gods rather than the reverse, and Nietzsche announced, not as a boast but as a piece of cultural news, that God was dead. The twentieth century made the question public for everyone. Existentialists asked how meaning was to be made in a universe that did not provide it; sociologists charted the steady disenchantment of the West; a billion people grew up religiously unaffiliated. None of this proves that any specific religious claim is false. What it shows is that the question, <em>why this God, why these doctrines, why on this authority</em>, is not a modern impertinence but a continuous tradition almost as old as religion itself, with which the West has been arguing for as long as it has been the West. When Ivan Karamazov, in 1880, said he would respectfully return his entrance ticket, he gave that long argument its briefest name. The compendium that follows is one more such return.</p>
+    </div>
+
+    <div class="hero-prelude" data-lang-content="zh">
+      <p>早在福音书写下之前,早在佛陀的教法落于纸上之前,早在穆罕默德诞生之前,一位希腊诗人望着自己城邦的诸神,说出这样一句话:<em>若牛马有手作画,它们笔下的神必有牛马的模样</em>。这一念想从未消散。它在中世纪转入地下。教会有焚书的火堆,但抹不掉异端的思辨与神秘主义者的低语。它在十七世纪重新浮出水面:斯宾诺莎被阿姆斯特丹的犹太会堂开除教籍,只因他主张"神即自然",一句把人格神抽空的话。同一世纪,以完全另一种声调,弥尔顿写下《失乐园》;他原本要塑造为宇宙秩序大反叛者的人物路西法,在从布莱克到波德莱尔的后继者笔下,成了一个比他所反抗的神更具魅力的拒绝者。它在启蒙时代成为一代人的公共语言:伏尔泰、狄德罗、休谟、康德教会受教育的欧洲提出那些曾经只敢在私下耳语的问题。它在十九世纪成为一纸判决。费尔巴哈反转了关系:是人造神,而非神造人。尼采宣告"上帝已死",这不是一句战斗口号,而是关于一种文化事实的告白。二十世纪把问题交给了所有人。存在主义者追问意义;社会学家测量祛魅;十亿人在没有宗教归属的环境中长大。这一切并不证明任何具体的宗教主张为假。它所表明的是:这场追问,<em>为何是这位神?为何是这些教义?为何凭这种权威?</em>,并非现代人的造次,而是一条几乎与宗教本身同样古老的连续传统;西方与自身就此争辩,已有西方之久。1880 年,伊万·卡拉马佐夫说他要恭敬地归还入场券,以最简短的话,为这场漫长的争辩命了名。这部综述,是又一次归还。</p>
+    </div>
+
     <div class="hero-intro" data-lang-content="en">
       <p>This compendium gathers, in one place and at scholarly depth, the principal philosophical critiques that have been brought against religion — both against the doctrines particular religions teach, against the institutions that profess to transmit those doctrines, and against the religious mode of belief as such. Each of the forty entries states the argument precisely, lists primary and secondary sources with open-access links where available, and presents the principal counter-replies together with the rejoinders they have provoked. A <em>Tensions</em> section closing each chapter registers the genuine difficulties internal to the critical positions themselves: the survey aims at intellectual honesty, not at polemic on either side. The reader may consult it as a reference work, follow a single thread through the linked sources, or read it as the connected account of one of the longer arguments in modern intellectual life.</p>
+
       <div class="hero-epigraph">
         From the beginning men used God to justify the unjustifiable.
         <cite>Salman Rushdie, <em>The Satanic Verses</em> (1988)</cite>
@@ -954,6 +980,7 @@
 
     <div class="hero-intro" data-lang-content="zh">
       <p>本综述在一处以学术深度汇集对宗教所提出之主要哲学批评——既针对各宗教所教导之教义,亦针对宣称传承这些教义之机构,亦针对宗教信仰模式本身。四十条条目,每条均精确陈述论证、列出主要与次级文献(凡可得者附开放获取链接),并呈现主要反驳与其所引发之再驳。每章末尾之<em>未解张力</em>部分诚实记录批评立场内部之真实困难:本综述追求学术诚实,而非任何一方之论辩立场。读者可作为参考书查询、循单一线索追踪所附文献、或将其作为现代知识生活之中较长论证之一的连贯陈述阅读。</p>
+
       <div class="hero-epigraph">
         自古以来,人即假神之名,以辩不可辩者。
         <cite>萨尔曼·拉什迪《撒旦诗篇》(1988)</cite>
@@ -1050,6 +1077,7 @@
             <li><a href="#crit-3-5">Feminist Theology</a></li>
             <li><a href="#crit-3-6">Liberation Theology</a></li>
             <li><a href="#crit-3-7">Doctrine vs Practice</a></li>
+            <li><a href="#crit-3-8">Romantic Satanism</a></li>
           </ul>
           <ul data-lang-content="zh">
             <li><a href="#crit-3-1">有神论论证</a></li>
@@ -1059,6 +1087,7 @@
             <li><a href="#crit-3-5">女性主义神学</a></li>
             <li><a href="#crit-3-6">解放神学</a></li>
             <li><a href="#crit-3-7">教义与实践</a></li>
+            <li><a href="#crit-3-8">浪漫主义撒旦论</a></li>
           </ul>
         </div>
         <div class="toc-chapter">
@@ -1187,8 +1216,8 @@
               <span class="toc-num">III.</span>
               <span data-lang-content="en">Christianity</span>
               <span data-lang-content="zh">基督教</span>
-              <span class="toc-desc" data-lang-content="en">Arguments for God; institution; feminist & liberation</span>
-              <span class="toc-desc" data-lang-content="zh">神的论证;机构;女性主义与解放神学</span>
+              <span class="toc-desc" data-lang-content="en">Arguments for God; institutions; feminist, liberation, Satanic readings</span>
+              <span class="toc-desc" data-lang-content="zh">神的论证;机构;女性主义、解放神学、撒旦论解读</span>
             </a>
           </li>
           <li>
@@ -2651,6 +2680,94 @@
                   <div class="label" data-lang-content="zh">再驳</div>
                   <p data-lang-content="en">The reply is sound as far as it goes but invites two further questions. First, the magnitude of the gap: an institution claiming divine sanction and unique custody of moral truth bears a higher burden than a hospital claims for itself; the Catholic Church's claim of being the mystical body of Christ is not commensurate with admitting "we err like every institution." Second, the structural-versus-incidental distinction (raised in III.4 above on systemic abuse): when the failures are not random deviations but follow predictably from the institution's structure — celibacy, hierarchy, secrecy, deference to clerical authority — the "self-correcting" reply weakens. The Kierkegaardian objection still stands: an institution constituted in ways that systematically betray its founding norms is, by its founding norms, an anti-institution.</p>
                   <p data-lang-content="zh">该回应在其范围内成立,但引出两个进一步问题。第一,鸿沟之规模:声称神圣认可与对道德真理之独特托管之机构,所担之负累高于医院为自己所声称者;天主教会作为基督奥体之主张,与承认"我们如任何机构般犯错"不可相称。第二,结构与偶发之区分(于上文 III.4 关于系统性虐待已提出):当失败非随机偏差而是从机构之结构——独身、等级、保密、对神职权威之顺服——可预测地推出时,"自我纠正"之回应弱化。克尔凯郭尔之反对仍成立:以系统性背叛其奠基性规范之方式构成之机构,以其奠基性规范判,是一反–机构。</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ============== III.8 Romantic Satanism ============== -->
+        <div class="critique" id="crit-3-8">
+          <div class="critique-head">
+            <span class="critique-id">III · 8</span>
+            <span class="critique-title">
+              <span data-lang-content="en">Romantic Satanism: The Aesthetic Inversion of Authority</span>
+              <span data-lang-content="zh">浪漫主义撒旦论:权威的美学倒转</span>
+            </span>
+            <span class="critique-icon">+</span>
+          </div>
+          <div class="critique-body">
+            <div class="critique-body-inner">
+
+              <h4 data-lang-content="en">The Form of the Argument</h4>
+              <h4 data-lang-content="zh">论证的形式</h4>
+              <p data-lang-content="en">Distinct from the philosophical critiques surveyed in the foregoing entries, a major line of religious critique in modern Western culture proceeds not by argument but by <em>aesthetic inversion</em>. It does not attempt to prove that Christian theology is false; it works instead to make the figures whom Christian narrative casts as villains more compelling, more morally serious, more worthy of identification, than the deity who opposes them. The technique is older than its modern theorists. It is the same logic by which Plato's <em>Republic</em> conceded that Thrasymachus had to be given the strongest version of his case for the immoralist position to be properly answered: a story whose villain has no real claim on the reader's sympathy fails to discipline the reader's belief. When the reverse occurs, when the official villain is given the better lines, the official hero is silently demoted. The cumulative effect of two centuries of literary work along these lines has been to demote, in Western imaginative life, the God of orthodox Christian narrative from object of worship to character in a story in which He does not always have the better part.</p>
+              <p data-lang-content="zh">区别于前述条目所综述之哲学批评,现代西方文化中宗教批评之一条主要线索,并不通过论证而通过<em>美学倒转</em>展开。它不试图证明基督教神学为假;它所做的工作是让基督教叙事所塑造为反派的形象,比反对它们的神祇更具吸引力、在道德上更严肃、更值得读者认同。此技术比其现代理论家更为古老。柏拉图《理想国》承认必须给塞拉西马霍斯之非道德主义立场最强版本,方能被正当回应,其内在逻辑相同:一个反派对读者无真实诉求的故事,无法约束读者之信念。反过来,当官方反派获得更好的台词时,官方英雄即被静默贬职。两个世纪文学工作沿此线索之累积效果,是在西方想象生活中,把正统基督教叙事中的神,从崇拜对象贬为故事中之一个角色——一个并非总是占上风的角色。</p>
+
+              <h4 data-lang-content="en">The Miltonic Origin</h4>
+              <h4 data-lang-content="zh">弥尔顿源头</h4>
+              <p data-lang-content="en">John Milton's <em>Paradise Lost</em> (1667) is the canonical English-language origin point. Milton, a committed Puritan, intended his epic "to justify the ways of God to men" (I.26). Yet in the writing, the figure of Satan acquired a moral and rhetorical force that has provoked critical debate ever since. Satan delivers the poem's most stirring set-pieces, including "Better to reign in Hell than serve in Heaven" (I.263) and "the mind is its own place" (I.254). The poem's God, by contrast, has long been criticised as tyrannical and unreasoning, most influentially by William Empson's <em>Milton's God</em> (1961). William Blake's verdict in <em>The Marriage of Heaven and Hell</em> (1790–93) named the position that has organised much of modern reading: "The reason Milton wrote in fetters when he wrote of Angels & God, and at liberty when of Devils & Hell, is because he was a true Poet and of the Devil's party without knowing it." Whether or not Blake's diagnosis is accurate to Milton's intention is contested (see Wittreich 1968 and the scholarship since); the historical fact is that this reading became the operative one for the next two centuries.</p>
+              <p data-lang-content="zh">约翰·弥尔顿《失乐园》(1667)是此线索英语世界之经典源头。弥尔顿身为虔诚清教徒,其史诗意图"向人类辩明上帝之道"(I.26)。然而在写作中,撒旦这一形象获得了一种道德与修辞之力量,自此引发持续批评辩论。撒旦发表了诗中最令人激动的几段,包括"宁在地狱为王,不在天堂称臣"(I.263)与"心灵自有其归处"(I.254)。诗中的上帝则长期被批评为暴虐而不讲理,最具影响力者为威廉·燕卜荪《弥尔顿的上帝》(1961)。威廉·布莱克在《天堂与地狱的婚姻》(1790–93)中之判语点出了组织许多现代阅读的立场:"弥尔顿写天使与上帝时戴着镣铐,写魔鬼与地狱时自由自在,这是因为他是真正的诗人,也是魔鬼一党之人而不自知。"布莱克之诊断是否切合弥尔顿本人意图有争议(参 Wittreich 1968 及其后学术);历史事实是此一解读成为接下来两个世纪的主导阅读。</p>
+
+              <h4 data-lang-content="en">The Romantic Programme</h4>
+              <h4 data-lang-content="zh">浪漫主义纲领</h4>
+              <p data-lang-content="en">The Romantic generation made the Miltonic ambiguity into a programme. Percy Shelley's <em>A Defence of Poetry</em> (1821) declared Milton's Satan "as a moral being... as far superior to his God as One who perseveres in some purpose which he has conceived to be excellent in spite of adversity and torture is to one who in the cold security of undoubted triumph inflicts the most horrible revenge upon his enemy." Lord Byron's <em>Cain</em> (1821) staged the first murderer as a tragic philosophical questioner against an unjust deity, drawing such public outrage that Robert Southey coined the phrase "Satanic School" to denounce it. William Blake's prophetic books (<em>America</em>, 1793; <em>Europe</em>, 1794; <em>The Book of Urizen</em>, 1794) systematically inverted orthodox theology, casting the God of conventional religion as the tyrant Urizen and energy itself as divine. The political dimension was inseparable from the theological: Romantic Satanism developed in the immediate wake of the French Revolution, the Napoleonic wars, and Regency repression, and the rebellious archangel was a usable myth for political dissent against legitimist throne-and-altar reaction (see Schock, <em>Romantic Satanism</em>, 2003).</p>
+              <p data-lang-content="zh">浪漫主义一代将弥尔顿的暧昧转化为纲领。雪莱《为诗辩护》(1821)宣称弥尔顿的撒旦"作为一道德存有者……远胜其神,正如一个在逆境与折磨中坚持其所认为高尚之目的者,胜过一个在无可置疑之胜利的冷酷安全中对其敌人施以最恐怖报复者。"拜伦《该隐》(1821)将首位凶手塑造为面对不公之神祇的悲剧性哲学追问者,引发巨大公愤,以致罗伯特·骚塞造出"撒旦学派"一词以谴责之。布莱克的预言诗集(《美洲》1793、《欧洲》1794、《尤里然之书》1794)系统倒转正统神学,将传统宗教之神塑为暴君尤里然,而能量本身被奉为神圣。政治维度与神学维度不可分:浪漫主义撒旦论紧随法国大革命、拿破仑战争与摄政时期之镇压而发展,反叛的大天使成为反对正统君权-祭坛反动之可用神话(参 Schock,《浪漫主义撒旦论》,2003)。</p>
+
+              <h4 data-lang-content="en">The French Inheritance and Twentieth-Century Continuation</h4>
+              <h4 data-lang-content="zh">法国传承与二十世纪延续</h4>
+              <p data-lang-content="en">Charles Baudelaire's <em>Les Fleurs du mal</em> (1857) brought the tradition to its sharpest pitch in "Les Litanies de Satan," a parodic prayer addressed to "the wisest and most beautiful of angels, betrayed god whom fortune has wronged." The poem was among those for which Baudelaire was prosecuted for offence against public morals. Anatole France's <em>The Revolt of the Angels</em> (1914) made the inversion comic and explicit: a band of angels, having read the philosophes, conclude that they were misled and join Satan's renewed rebellion. Mikhail Bulgakov's <em>The Master and Margarita</em> (written 1928–40, published 1966–67) brought the figure into Soviet–Russian literature with an extraordinary refinement: the Satan-figure Woland is the only character in 1930s Moscow with the moral clarity to reward the worthy and punish the venal, while the Soviet writers' union, with its official atheism and informers, occupies the position the Inquisition occupies in earlier renderings. The point is the same. The contemporary continuation, in popular culture (from Milton-influenced fantasy through the figure's appearances in novels and screen drama) and in the political-legal activity of the Satanic Temple (founded 2013, which uses the figure to challenge religious-establishment positions in U.S. constitutional law), demonstrates the durability of the form.</p>
+              <p data-lang-content="zh">波德莱尔《恶之花》(1857)将此传统推至最尖锐之高度,体现于《撒旦的连祷文》——一首仿祷告诗,致"诸天使中最智最美者,被命运所辱之被叛之神"。该诗在波德莱尔因冒犯公共道德受起诉之诗篇之列。阿纳托尔·法朗士《天使的反叛》(1914)将此倒转写得喜剧而明确:一群天使读过哲学家们之书后,得出结论说自己曾被误导,并加入撒旦重启之反叛。布尔加科夫《大师与玛格丽特》(写于 1928–40,出版于 1966–67)以非凡之精炼将此形象带入苏联–俄国文学:撒旦形象沃兰德是 1930 年代莫斯科唯一具有道德清晰性、能奖赏值得者、惩罚贪渎者之角色,而苏联作家协会及其官方无神论与告密者,占据的是早先版本中宗教裁判所所占据的位置。要点是相同的。在流行文化(从受弥尔顿影响之奇幻文学到该形象在小说与影视中之出现)中、以及在撒旦圣殿(成立于 2013,以此形象在美国宪法中挑战宗教建制立场)之政治–法律行动中,当代之延续显示了此形式之持久性。</p>
+
+              <div class="sources">
+                <div class="sources-label">
+                  <span data-lang-content="en">Principal Sources</span>
+                  <span data-lang-content="zh">主要文献</span>
+                </div>
+                <ul>
+                  <li>
+                    <span class="author">John Milton</span>, <span class="work">Paradise Lost</span> <span class="pubinfo">(1667).</span>
+                    <span class="links"><a href="https://www.gutenberg.org/ebooks/26" target="_blank" rel="noopener">Gutenberg</a></span>
+                  </li>
+                  <li>
+                    <span class="author">William Blake</span>, <span class="work">The Marriage of Heaven and Hell</span> <span class="pubinfo">(1790–93).</span>
+                    <span class="links"><a href="https://www.gutenberg.org/ebooks/45315" target="_blank" rel="noopener">Gutenberg</a></span>
+                  </li>
+                  <li>
+                    <span class="author">Percy Bysshe Shelley</span>, <span class="work">A Defence of Poetry</span> <span class="pubinfo">(1821).</span>
+                  </li>
+                  <li>
+                    <span class="author">Lord Byron</span>, <span class="work">Cain: A Mystery</span> <span class="pubinfo">(1821).</span>
+                  </li>
+                  <li>
+                    <span class="author">Charles Baudelaire</span>, <span class="work">Les Fleurs du mal</span> <span class="pubinfo">(1857).</span>
+                  </li>
+                  <li>
+                    <span class="author">William Empson</span>, <span class="work">Milton's God</span> <span class="pubinfo">(Chatto & Windus, 1961; rev. 1965).</span>
+                  </li>
+                  <li>
+                    <span class="author">Peter A. Schock</span>, <span class="work">Romantic Satanism: Myth and the Historical Moment in Blake, Shelley, and Byron</span> <span class="pubinfo">(Palgrave Macmillan, 2003).</span>
+                  </li>
+                  <li>
+                    <span class="author">Ruben van Luijk</span>, <span class="work">Children of Lucifer: The Origins of Modern Religious Satanism</span> <span class="pubinfo">(Oxford UP, 2016).</span>
+                    <span class="links"><a href="https://academic.oup.com/book/26021" target="_blank" rel="noopener">OUP</a></span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="exchange">
+                <div class="exchange-item reply">
+                  <div class="label" data-lang-content="en">The Critical Reply</div>
+                  <div class="label" data-lang-content="zh">批评性回应</div>
+                  <p data-lang-content="en">Two principal replies have been advanced. First, the question of authorial intention: Milton was a committed Christian and did not believe he was producing a critique of his own theology; the Romantic reading, on this view, mistakes a literary effect for an intended argument. Joseph Wittreich's "The 'Satanism' of Blake and Shelley Reconsidered" (1968) and Stanley Fish's <em>Surprised by Sin</em> (1967) hold that the seductive force of Milton's Satan is itself a deliberate didactic device meant to expose the reader's own susceptibility to fallen reasoning. Second, the question of conceptual transfer: a literary effect, however powerful, is not the same thing as a philosophical argument; aesthetic admiration of a fictional rebel does not entail any propositional commitment about the existence or moral standing of God.</p>
+                  <p data-lang-content="zh">已提出两条主要回应。第一,作者意图之问题:弥尔顿为虔诚基督徒,并不认为自己在产出对自己神学之批评;按此立场,浪漫主义解读把文学效果误认为蓄意论证。Joseph Wittreich《重审布莱克与雪莱之"撒旦论"》(1968)与 Stanley Fish《为罪所惊》(1967)主张:弥尔顿撒旦之诱惑力本身是一种刻意的教导手段,意在暴露读者自身对堕落推理之易感性。第二,概念迁移之问题:文学效果无论多么有力,与哲学论证不是同一回事;对虚构反叛者之美学钦慕并不蕴涵任何关于神之存在或道德地位之命题承诺。</p>
+                </div>
+                <div class="exchange-item rejoinder">
+                  <div class="label" data-lang-content="en">Rejoinder</div>
+                  <div class="label" data-lang-content="zh">再驳</div>
+                  <p data-lang-content="en">The intention reply concerns Milton; the cumulative cultural effect, which is what is at stake, was driven primarily by his readers, not by him. Whether Milton was "of the Devil's party without knowing it" is a footnote to the larger fact that Blake, Shelley, Byron, Baudelaire, Bulgakov, and the modern inheritors all <em>were</em> of that party with full knowledge. The conceptual-transfer reply is correct that aesthetic effect is not propositional argument, but underestimates how thoroughly religious authority depends on aesthetic resources. Worship requires a deity worth worshipping; the moral authority of a tradition rests in part on the moral attractiveness of its central figures. When a tradition's villains can be written as more morally compelling than its heroes, what is undermined is not a proposition but the lived plausibility of the hierarchy on which the tradition's authority rests. That is a kind of critique even if not the philosopher's kind.</p>
+                  <p data-lang-content="zh">意图之回应涉及弥尔顿本人;但所要紧者是累积之文化效果,而此效果主要由其读者驱动,不由其本人驱动。弥尔顿是否"魔鬼一党之人而不自知"是一个脚注,大事实在于:布莱克、雪莱、拜伦、波德莱尔、布尔加科夫与现代继承者皆<em>是</em>该党之人,且充分知情。概念迁移之回应正确指出美学效果非命题论证,但低估了宗教权威对美学资源之深度依赖。崇拜要求一位值得崇拜之神祇;一个传统之道德权威部分有赖于其核心人物之道德吸引力。当一个传统之反派可以被写得比其英雄更具道德感召力时,被瓦解者并非一命题,而是该传统权威所依靠之等级在生活中的合理性。即便不是哲学家的批评,这也是一种批评。</p>
                 </div>
               </div>
 
