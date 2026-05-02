@@ -1019,6 +1019,232 @@ html { scroll-behavior: smooth; }
   .flying-page .fmc-nd { max-width: 100%; }
 }
 
+/* ─── §3 METAR/TAF decoder widget ───────────────────────────────── */
+.flying-page .metar-widget {
+  background: var(--fl-paper-deep);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  font-family: var(--fl-font-ui);
+  font-size: 0.88rem;
+  color: var(--fl-ink);
+}
+.flying-page[data-lang="zh"] .metar-widget {
+  font-family: var(--fl-font-cn);
+}
+
+/* Input row */
+.flying-page .metar-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--fl-rule);
+  margin-bottom: 1.25rem;
+}
+.flying-page .metar-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fl-ink-faint);
+  font-weight: 600;
+}
+.flying-page[data-lang="zh"] .metar-label {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.flying-page #metar-icao-input {
+  font-family: var(--fl-font-mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  width: 6rem;
+  padding: 0.42rem 0.6rem;
+  border: 1px solid var(--fl-rule);
+  border-radius: 3px;
+  background: var(--fl-paper);
+  color: var(--fl-navy);
+  text-transform: uppercase;
+}
+.flying-page #metar-icao-input:focus {
+  outline: none;
+  border-color: var(--fl-sapphire);
+  box-shadow: 0 0 0 2px rgba(30, 95, 168, 0.18);
+}
+.flying-page .metar-fetch-btn {
+  font-family: var(--fl-font-ui);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.42rem 1rem;
+  border: 1px solid var(--fl-navy);
+  border-radius: 3px;
+  background: var(--fl-navy);
+  color: #fafaf7;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background 0.1s;
+}
+.flying-page[data-lang="zh"] .metar-fetch-btn {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0.02em;
+}
+.flying-page .metar-fetch-btn:hover {
+  background: var(--fl-sapphire);
+  border-color: var(--fl-sapphire);
+}
+.flying-page .metar-fetch-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.flying-page .metar-status {
+  font-size: 0.82rem;
+  color: var(--fl-ink-faint);
+  font-style: italic;
+  margin-left: auto;
+}
+.flying-page .metar-status.error { color: #c0392b; font-style: normal; }
+.flying-page .metar-status.success { color: #2d6e3e; font-style: normal; }
+
+/* Sections (METAR / TAF) */
+.flying-page .metar-section {
+  margin-bottom: 1.5rem;
+}
+.flying-page .metar-section:last-child {
+  margin-bottom: 0;
+}
+.flying-page .metar-section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--fl-rule-soft);
+}
+.flying-page .metar-section-title {
+  font-family: var(--fl-font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--fl-navy);
+}
+.flying-page .metar-section-meta {
+  font-size: 0.78rem;
+  color: var(--fl-ink-faint);
+  font-style: italic;
+}
+.flying-page[data-lang="zh"] .metar-section-meta {
+  font-style: normal;
+}
+
+.flying-page .metar-raw {
+  font-family: var(--fl-font-mono);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--fl-ink);
+  background: var(--fl-paper);
+  padding: 0.75rem 0.95rem;
+  border: 1px solid var(--fl-rule-soft);
+  border-radius: 3px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0 0 0.85rem 0;
+}
+
+/* Decoded fields (key-value pairs in a stacked layout) */
+.flying-page .metar-decoded {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 0.6rem 1.5rem;
+  font-size: 0.85rem;
+}
+.flying-page .metar-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.flying-page .metar-field-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fl-ink-faint);
+}
+.flying-page[data-lang="zh"] .metar-field-label {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.flying-page .metar-field-value {
+  font-size: 0.88rem;
+  color: var(--fl-ink);
+  line-height: 1.4;
+}
+.flying-page .metar-field-value strong {
+  color: var(--fl-navy);
+  font-weight: 600;
+}
+
+/* TAF timeline */
+.flying-page .taf-timeline-wrap {
+  margin: 0.85rem 0;
+  padding: 0.5rem;
+  background: var(--fl-paper);
+  border: 1px solid var(--fl-rule-soft);
+  border-radius: 3px;
+  overflow-x: auto;
+}
+.flying-page .taf-timeline {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 600px;
+}
+
+/* TAF period decoded list */
+.flying-page #taf-decoded {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.flying-page .taf-period {
+  background: var(--fl-paper);
+  border: 1px solid var(--fl-rule-soft);
+  border-left: 3px solid var(--fl-navy);
+  border-radius: 3px;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.flying-page .taf-period.fm     { border-left-color: var(--fl-navy); }
+.flying-page .taf-period.tempo  { border-left-color: #b08838; }
+.flying-page .taf-period.becmg  { border-left-color: #3a7a4f; }
+.flying-page .taf-period.prob   { border-left-color: #8a4ea2; }
+.flying-page .taf-period-header {
+  font-family: var(--fl-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--fl-ink-faint);
+  margin-bottom: 0.25rem;
+}
+.flying-page .taf-period-type {
+  font-weight: 700;
+  color: var(--fl-navy);
+}
+.flying-page .taf-period.tempo .taf-period-type { color: #b08838; }
+.flying-page .taf-period.becmg .taf-period-type { color: #3a7a4f; }
+.flying-page .taf-period.prob  .taf-period-type { color: #8a4ea2; }
+
+/* Compact mobile layout */
+@media (max-width: 600px) {
+  .flying-page .metar-input-row {
+    flex-wrap: wrap;
+  }
+  .flying-page .metar-status {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
 /* ─── §4 Approach plate annotator ────────────────────────────────── */
 .flying-page .plate-widget {
   background: var(--fl-paper-deep);

@@ -507,6 +507,64 @@
       </figcaption>
     </figure>
 
+    <!-- Widget for §3: METAR/TAF decoder -->
+    <figure class="full-bleed">
+      <div class="metar-widget" id="metar-widget">
+
+        <div class="metar-input-row">
+          <label class="metar-label" for="metar-icao-input">
+            <span data-lang-content="en">ICAO</span>
+            <span data-lang-content="zh">ICAO 代码</span>
+          </label>
+          <input id="metar-icao-input" type="text" maxlength="4"
+                 placeholder="KBUF" autocomplete="off" spellcheck="false"
+                 aria-label="ICAO airport code"/>
+          <button id="metar-fetch-btn" class="metar-fetch-btn">
+            <span data-lang-content="en">Fetch</span>
+            <span data-lang-content="zh">查询</span>
+          </button>
+          <span class="metar-status" id="metar-status"></span>
+        </div>
+
+        <div class="metar-results" id="metar-results">
+          <!-- METAR section -->
+          <section class="metar-section" data-section="metar">
+            <header class="metar-section-header">
+              <span class="metar-section-title">METAR</span>
+              <span class="metar-section-meta" id="metar-meta"></span>
+            </header>
+            <pre class="metar-raw" id="metar-raw"
+                 data-lang-content="en">Enter an ICAO code above to fetch.</pre>
+            <pre class="metar-raw" id="metar-raw-zh"
+                 data-lang-content="zh">在上方输入 ICAO 代码进行查询。</pre>
+            <div class="metar-decoded" id="metar-decoded"></div>
+          </section>
+
+          <!-- TAF section -->
+          <section class="metar-section" data-section="taf">
+            <header class="metar-section-header">
+              <span class="metar-section-title">TAF</span>
+              <span class="metar-section-meta" id="taf-meta"></span>
+            </header>
+            <pre class="metar-raw" id="taf-raw" data-lang-content="en">—</pre>
+            <pre class="metar-raw" id="taf-raw-zh" data-lang-content="zh">—</pre>
+            <div class="taf-timeline-wrap" id="taf-timeline-wrap" style="display:none">
+              <svg class="taf-timeline" id="taf-timeline"
+                   viewBox="0 0 720 200"
+                   xmlns="http://www.w3.org/2000/svg"
+                   aria-label="TAF forecast timeline"></svg>
+            </div>
+            <div class="metar-decoded" id="taf-decoded"></div>
+          </section>
+        </div>
+
+      </div>
+      <figcaption>
+        <span data-lang-content="en">Figure 3. METAR and TAF — a single hour's observation and the next twenty-four hours' forecast, both compressed into about two hundred characters apiece. Each field is dense by design: every abbreviation removes ambiguity that a longer English sentence would re-introduce. The TAF timeline (when available) shows how forecast change groups stack into a continuous expectation of the airfield's weather.</span>
+        <span data-lang-content="zh">图 3。METAR 与 TAF——单一小时的观测与后续二十四小时的预报，各自被压缩到约两百字符。每个字段的高密度都是有意为之：每一个缩写都消除了一句英文长句会重新引入的歧义。TAF 时间轴（如果有）展示了预报变化组如何堆叠成对机场天气的连续预期。</span>
+      </figcaption>
+    </figure>
+
     <h2 id="sec-instruments"><span class="sec-num">4 ·</span>
       <span data-lang-content="en">Trust the Instruments</span>
       <span data-lang-content="zh">相信仪表</span>
@@ -936,8 +994,8 @@
 
       </div>
       <figcaption>
-        <span data-lang-content="en">Figure 3. A stylised reproduction of an FAA d-TPP instrument approach plate for KBUF ILS RWY 23. Hover any element to see what it does and why it is positioned where it is. The plate is a piece of information design as much as a piece of navigation equipment.</span>
-        <span data-lang-content="zh">图 3。一张 FAA d-TPP 风格的 KBUF ILS RWY 23 进近图的程式化复刻。悬停任意元素可查看其功能及位置原因。这张图既是导航资料，也是一件信息设计作品。</span>
+        <span data-lang-content="en">Figure 4. A stylised reproduction of an FAA d-TPP instrument approach plate for KBUF ILS RWY 23. Hover any element to see what it does and why it is positioned where it is. The plate is a piece of information design as much as a piece of navigation equipment.</span>
+        <span data-lang-content="zh">图 4。一张 FAA d-TPP 风格的 KBUF ILS RWY 23 进近图的程式化复刻。悬停任意元素可查看其功能及位置原因。这张图既是导航资料，也是一件信息设计作品。</span>
       </figcaption>
     </figure>
 
@@ -977,20 +1035,6 @@
 
       <p>总的教训是方法论上的。一个数字之所以在安全文化里幸存下来，并不与它的准确度成正比，而是与它的叙事形态成正比。"178 秒"短、具体、结尾是死；它无法被遗忘。约束其适用性的那些条件性子句——<em>在这架飞机里、在这种配置下、在这种训练前提下</em>——则冗长、技术化、在转述中很容易被丢掉。五十年的重复之后，剩下的是一个赤裸的数字，从它流传的形态里已经无法恢复其原始条件。这不是航空独有的问题。它是大多数安全统计数字所采取的形态。</p>
     </div>
-
-    <!-- Widget placeholder for §5: 178s decomposition calculator -->
-    <figure class="full-bleed">
-      <div class="widget-placeholder">
-        <strong data-lang-content="en">178 Seconds Decomposition Calculator — to be implemented</strong>
-        <strong data-lang-content="zh">178 秒参数分解计算器 — 待实装</strong>
-        <span data-lang-content="en">Sliders for aircraft type, instrument-time, panel configuration, centre of gravity, and autopilot. A "1954 setup" toggle returns to the original experimental configuration to show how the headline number depends on its conditions.</span>
-        <span data-lang-content="zh">滑块：机型、仪表飞行小时、仪表配置、重心位置、自动驾驶。"1954 配置"开关一键回到原实验状态，演示标题数字如何完全依赖于其前提条件。</span>
-      </div>
-      <figcaption>
-        <span data-lang-content="en">Figure 4. A statistic detached from its conditions is not a finding; it is a slogan. The interactive form makes the conditional structure visible.</span>
-        <span data-lang-content="zh">图 4。一个脱离了条件的统计数字不是一项发现，而是一句口号。交互形式让条件结构可见。</span>
-      </figcaption>
-    </figure>
 
     <h2 id="sec-defense"><span class="sec-num">6 ·</span>
       <span data-lang-content="en">Defense in Depth</span>
@@ -2077,6 +2121,677 @@
 
   // Initial render
   renderScreen();
+})();
+</script>
+
+<!-- ─── §3 METAR/TAF decoder widget ─────────────────────────── -->
+<script>
+(function () {
+  const widget = document.getElementById('metar-widget');
+  if (!widget) return;
+
+  // ─── CONFIGURATION ─────────────────────────────────────────
+  // Replace YOUR_CHECKWX_API_KEY with a key from https://www.checkwxapi.com/
+  // (free tier: 3,000 requests/day). The key is fine to embed in client JS
+  // for a personal-use site; if it gets abused, regenerate at the dashboard.
+  const CHECKWX_API_KEY = '7785a5c6be7f49e5b7e36eb8d37650e2';
+
+  const API_BASE = 'https://api.checkwx.com';
+
+  // ─── DOM references ────────────────────────────────────────
+  const inputEl   = widget.querySelector('#metar-icao-input');
+  const fetchBtn  = widget.querySelector('#metar-fetch-btn');
+  const statusEl  = widget.querySelector('#metar-status');
+  const metarMeta = widget.querySelector('#metar-meta');
+  const metarRaw  = widget.querySelector('#metar-raw');
+  const metarRawZh= widget.querySelector('#metar-raw-zh');
+  const metarDec  = widget.querySelector('#metar-decoded');
+  const tafMeta   = widget.querySelector('#taf-meta');
+  const tafRaw    = widget.querySelector('#taf-raw');
+  const tafRawZh  = widget.querySelector('#taf-raw-zh');
+  const tafTL     = widget.querySelector('#taf-timeline');
+  const tafTLwrap = widget.querySelector('#taf-timeline-wrap');
+  const tafDec    = widget.querySelector('#taf-decoded');
+
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+
+  function lang() { return document.body.getAttribute('data-lang') || 'en'; }
+
+  // ─── Bilingual labels ──────────────────────────────────────
+  const T = {
+    en: {
+      observed:  'Observed',
+      flightCat: 'Flight category',
+      wind:      'Wind',
+      visibility:'Visibility',
+      clouds:    'Clouds',
+      ceiling:   'Ceiling',
+      temperature:'Temperature',
+      dewpoint:  'Dewpoint',
+      humidity:  'Humidity',
+      altimeter: 'Altimeter',
+      conditions:'Present weather',
+      station:   'Station',
+      noTaf:     'No TAF available for this station.',
+      noMetar:   'No METAR available for this station.',
+      validFrom: 'Valid',
+      fetching:  'Fetching…',
+      success:   'Fetched',
+      errorPrefix: 'Error: ',
+      noKey:     'API key not configured. Edit the source and replace YOUR_CHECKWX_API_KEY with a key from checkwxapi.com (free, 3000 req/day).',
+      enterIcao: 'Enter a 4-letter ICAO code.',
+      notFound:  'Station not found or no recent report.',
+      networkErr:'Network error. Check connection or API key.',
+      from:      'FROM',
+      tempo:     'TEMPORARY',
+      becmg:     'BECOMING',
+      prob:      'PROBABILITY',
+      mainFcst:  'MAIN FORECAST',
+      gusting:   'gusting',
+      kt:        'kt',
+      sm:        'SM',
+      ft:        'ft',
+      cAt:       '°C',
+      hpa:       'hPa',
+      inHg:      'inHg'
+    },
+    zh: {
+      observed:  '观测时间',
+      flightCat: '飞行类别',
+      wind:      '风',
+      visibility:'能见度',
+      clouds:    '云',
+      ceiling:   '云底高',
+      temperature:'温度',
+      dewpoint:  '露点',
+      humidity:  '湿度',
+      altimeter: '修正海压',
+      conditions:'天气现象',
+      station:   '站',
+      noTaf:     '该机场无 TAF 数据。',
+      noMetar:   '该机场无 METAR 数据。',
+      validFrom: '有效',
+      fetching:  '查询中…',
+      success:   '完成',
+      errorPrefix: '错误：',
+      noKey:     '尚未配置 API 密钥。请编辑源代码，将 YOUR_CHECKWX_API_KEY 替换为来自 checkwxapi.com 的密钥（免费，每日 3000 次）。',
+      enterIcao: '请输入 4 字母 ICAO 代码。',
+      notFound:  '未找到该机场或无近期报告。',
+      networkErr:'网络错误。请检查连接或 API 密钥。',
+      from:      '从',
+      tempo:     '临时',
+      becmg:     '渐变',
+      prob:      '概率',
+      mainFcst:  '主预报',
+      gusting:   '阵风',
+      kt:        '节',
+      sm:        '法定英里',
+      ft:        '英尺',
+      cAt:       '°C',
+      hpa:       '百帕',
+      inHg:      '英寸汞柱'
+    }
+  };
+  function t(key) { return (T[lang()] || T.en)[key]; }
+
+  const CLOUD_TEXT = {
+    en: { CLR: 'Clear', SKC: 'Sky clear', NSC: 'No significant cloud',
+          NCD: 'No clouds detected', FEW: 'Few', SCT: 'Scattered',
+          BKN: 'Broken', OVC: 'Overcast', VV: 'Vertical visibility' },
+    zh: { CLR: '晴空', SKC: '天空晴朗', NSC: '无显著云',
+          NCD: '未检测到云', FEW: '少云', SCT: '散云',
+          BKN: '多云', OVC: '满天云', VV: '垂直能见度' }
+  };
+  function cloudText(code) { return (CLOUD_TEXT[lang()] || CLOUD_TEXT.en)[code] || code; }
+
+  const FLIGHT_CAT_TEXT = {
+    en: { VFR: 'VFR (visual)', MVFR: 'MVFR (marginal visual)',
+          IFR: 'IFR (instrument)', LIFR: 'LIFR (low instrument)' },
+    zh: { VFR: 'VFR（目视）', MVFR: 'MVFR（边缘目视）',
+          IFR: 'IFR（仪表）', LIFR: 'LIFR（低仪表）' }
+  };
+  function flightCatText(code) {
+    return (FLIGHT_CAT_TEXT[lang()] || FLIGHT_CAT_TEXT.en)[code] || code;
+  }
+
+  const COND_TEXT = {
+    en: { RA:'rain', SN:'snow', BR:'mist', FG:'fog', HZ:'haze',
+          TS:'thunderstorm', SH:'showers', DZ:'drizzle', GR:'hail',
+          GS:'small hail', PL:'ice pellets', UP:'unknown precip',
+          FU:'smoke', VA:'volcanic ash', DU:'dust', SA:'sand',
+          SQ:'squalls', FC:'funnel cloud', SS:'sandstorm', DS:'duststorm',
+          PO:'dust whirls', IC:'ice crystals',
+          MI:'shallow', BC:'patches of', BL:'blowing', DR:'low drifting',
+          FZ:'freezing', VC:'in vicinity',
+          '-':'light ', '+':'heavy ' },
+    zh: { RA:'雨', SN:'雪', BR:'轻雾', FG:'雾', HZ:'霾',
+          TS:'雷暴', SH:'阵', DZ:'毛毛雨', GR:'冰雹',
+          GS:'小冰雹', PL:'冰粒', UP:'未知降水',
+          FU:'烟', VA:'火山灰', DU:'扬尘', SA:'沙',
+          SQ:'飑', FC:'漏斗云', SS:'沙暴', DS:'尘暴',
+          PO:'尘旋风', IC:'冰晶',
+          MI:'浅', BC:'散片', BL:'吹', DR:'低吹',
+          FZ:'冻', VC:'附近',
+          '-':'弱', '+':'强' }
+  };
+  function condText(code) {
+    if (!code) return '';
+    const dict = COND_TEXT[lang()] || COND_TEXT.en;
+    // Direct match first
+    if (dict[code]) return dict[code];
+    // Parse compound: [intensity][descriptor][phenomenon]+
+    let s = code;
+    let intensity = '', descriptor = '';
+    const phenomena = [];
+    if (s[0] === '-' || s[0] === '+') { intensity = dict[s[0]] || ''; s = s.slice(1); }
+    // Descriptors (2-letter) come BEFORE phenomena, but in our text we want
+    // phenomenon first then descriptor for natural reading
+    // ("rain shower", "雨阵") — though convention is mixed.
+    const DESCRIPTORS = ['MI','BC','BL','DR','SH','TS','FZ'];
+    if (s.length >= 2 && DESCRIPTORS.indexOf(s.slice(0, 2)) >= 0) {
+      descriptor = dict[s.slice(0, 2)] || '';
+      s = s.slice(2);
+    }
+    while (s.length >= 2) {
+      const pair = s.slice(0, 2);
+      if (dict[pair]) { phenomena.push(dict[pair]); s = s.slice(2); }
+      else break;
+    }
+    if (!intensity && !descriptor && !phenomena.length) return code;
+    if (lang() === 'zh') {
+      // Chinese: intensity + descriptor + phenomena (e.g. 弱阵雨)
+      return intensity + descriptor + phenomena.join('');
+    } else {
+      // English: intensity + phenomena + descriptor (e.g. "light rain showers")
+      const ph = phenomena.join(' ');
+      const parts = [intensity.trim(), ph, descriptor].filter(x => x);
+      return parts.join(' ');
+    }
+  }
+
+  // ─── Status helpers ────────────────────────────────────────
+  function setStatus(msg, kind) {
+    statusEl.textContent = msg || '';
+    statusEl.className = 'metar-status' + (kind ? ' ' + kind : '');
+  }
+
+  // ─── Fetch ─────────────────────────────────────────────────
+  async function fetchJson(path) {
+    if (!CHECKWX_API_KEY || CHECKWX_API_KEY === 'YOUR_CHECKWX_API_KEY') {
+      const e = new Error('NO_KEY'); e.code = 'NO_KEY'; throw e;
+    }
+    const url = API_BASE + path + (path.includes('?') ? '&' : '?')
+              + 'x-api-key=' + encodeURIComponent(CHECKWX_API_KEY);
+    const r = await fetch(url, { headers: { 'X-API-Key': CHECKWX_API_KEY }});
+    if (!r.ok) {
+      const e = new Error('HTTP_' + r.status); e.code = 'HTTP_' + r.status; throw e;
+    }
+    return r.json();
+  }
+
+  // ─── Renderers ─────────────────────────────────────────────
+  function renderField(label, value) {
+    const div = document.createElement('div');
+    div.className = 'metar-field';
+    const lbl = document.createElement('div');
+    lbl.className = 'metar-field-label';
+    lbl.textContent = label;
+    const val = document.createElement('div');
+    val.className = 'metar-field-value';
+    val.innerHTML = value;
+    div.appendChild(lbl);
+    div.appendChild(val);
+    return div;
+  }
+
+  function fmtWind(o) {
+    if (!o) return '—';
+    const sp = o.speed_kts !== undefined ? o.speed_kts : o.speed_kph;
+    const unit = o.speed_kts !== undefined ? 'kt' : 'kph';
+    if (sp === 0 || sp === '0' || o.degrees === undefined) {
+      return lang() === 'zh' ? '静风 (0 kt)' : 'Calm (0 kt)';
+    }
+    const at = lang() === 'zh' ? '，' : ' at ';
+    let s = `${o.degrees}°${at}<strong>${sp} ${unit}</strong>`;
+    if (o.gust_kts) s += `，${t('gusting')} ${o.gust_kts} kt`;
+    return s;
+  }
+
+  function fmtVisibility(v) {
+    if (!v) return '—';
+    const sm = v.miles_float !== undefined ? v.miles_float : v.miles;
+    if (sm !== undefined) return `<strong>${sm} ${t('sm')}</strong>` +
+      (v.meters_float !== undefined ? ` (${Math.round(v.meters_float)} m)` : '');
+    if (v.meters !== undefined) return `<strong>${v.meters} m</strong>`;
+    return '—';
+  }
+
+  function fmtClouds(arr) {
+    if (!arr || !arr.length) return '—';
+    const at = lang() === 'zh' ? '，云底 ' : ' at ';
+    return arr.map(c => {
+      const txt = cloudText(c.code);
+      const ft = c.feet !== undefined ? c.feet : c.base_feet_agl;
+      if (ft === undefined || ft === null) return `<strong>${txt}</strong>`;
+      return `<strong>${txt}</strong>${at}${ft.toLocaleString()} ${t('ft')}`;
+    }).join(lang() === 'zh' ? '；' : ', ');
+  }
+
+  function fmtCeiling(c) {
+    if (!c || c.feet === undefined) {
+      return lang() === 'zh' ? '无云底高' : 'No defined ceiling';
+    }
+    const at = lang() === 'zh' ? '，' : ' at ';
+    return `${cloudText(c.code)}${at}<strong>${c.feet.toLocaleString()} ${t('ft')}</strong>`;
+  }
+
+  function fmtConditions(arr) {
+    if (!arr || !arr.length) return '—';
+    return arr.map(c => condText(c.code) || c.text || c.code).join(', ');
+  }
+
+  function fmtAltimeter(b) {
+    if (!b) return '—';
+    const hg = b.hg !== undefined ? b.hg.toFixed(2) : '?';
+    const hp = b.hpa !== undefined ? b.hpa.toFixed(0) : (b.mb !== undefined ? b.mb.toFixed(0) : '?');
+    return `<strong>${hg} ${t('inHg')}</strong> / ${hp} ${t('hpa')}`;
+  }
+
+  function fmtTemp(td) {
+    if (!td) return '—';
+    const c = td.celsius !== undefined ? td.celsius : (td.celcius !== undefined ? td.celcius : '?');
+    const f = td.fahrenheit !== undefined ? td.fahrenheit : '?';
+    return `<strong>${c}°C</strong> / ${f}°F`;
+  }
+
+  function fmtObserved(iso) {
+    if (!iso) return '—';
+    try {
+      const d = new Date(iso);
+      const ago = Math.round((Date.now() - d.getTime()) / 60000);
+      const utc = d.toISOString().replace('T', ' ').slice(0, 16) + ' Z';
+      const agoStr = (lang() === 'zh') ?
+        (ago < 60 ? `${ago} 分钟前` : `${Math.round(ago/60)} 小时前`) :
+        (ago < 60 ? `${ago} min ago` : `${Math.round(ago/60)} h ago`);
+      return `${utc} (${agoStr})`;
+    } catch (e) { return iso; }
+  }
+
+  function renderMetar(d) {
+    metarMeta.textContent = d.station && d.station.name
+      ? `${d.icao} · ${d.station.name}` : (d.icao || '');
+
+    metarRaw.textContent = d.raw_text || '—';
+    metarRaw.removeAttribute('data-lang-content');
+    metarRawZh.style.display = 'none';
+
+    metarDec.innerHTML = '';
+    metarDec.appendChild(renderField(t('observed'), fmtObserved(d.observed)));
+    if (d.flight_category) {
+      metarDec.appendChild(renderField(t('flightCat'), `<strong>${flightCatText(d.flight_category)}</strong>`));
+    }
+    metarDec.appendChild(renderField(t('wind'), fmtWind(d.wind)));
+    metarDec.appendChild(renderField(t('visibility'), fmtVisibility(d.visibility)));
+    if (d.conditions && d.conditions.length) {
+      metarDec.appendChild(renderField(t('conditions'), fmtConditions(d.conditions)));
+    }
+    metarDec.appendChild(renderField(t('clouds'), fmtClouds(d.clouds)));
+    if (d.ceiling) {
+      metarDec.appendChild(renderField(t('ceiling'), fmtCeiling(d.ceiling)));
+    }
+    metarDec.appendChild(renderField(t('temperature'), fmtTemp(d.temperature)));
+    metarDec.appendChild(renderField(t('dewpoint'), fmtTemp(d.dewpoint)));
+    if (d.humidity) {
+      const v = (typeof d.humidity === 'object') ? d.humidity.percent : d.humidity;
+      metarDec.appendChild(renderField(t('humidity'), `<strong>${v}%</strong>`));
+    }
+    metarDec.appendChild(renderField(t('altimeter'), fmtAltimeter(d.barometer)));
+  }
+
+  function clearMetar(msg) {
+    metarMeta.textContent = '';
+    metarRaw.textContent = msg || '';
+    metarRaw.removeAttribute('data-lang-content');
+    if (metarRawZh) metarRawZh.style.display = 'none';
+    metarDec.innerHTML = '';
+  }
+
+  // ─── TAF rendering ─────────────────────────────────────────
+  function fmtTimeRange(fromIso, toIso) {
+    if (!fromIso) return '';
+    try {
+      const f = new Date(fromIso), tt = new Date(toIso);
+      const fmt = d => `${String(d.getUTCDate()).padStart(2,'0')}/${String(d.getUTCHours()).padStart(2,'0')}:${String(d.getUTCMinutes()).padStart(2,'0')}Z`;
+      return `${fmt(f)} → ${fmt(tt)}`;
+    } catch (e) { return ''; }
+  }
+
+  function periodTypeKey(period) {
+    // Determine FM / TEMPO / BECMG / PROB / main from CheckWX TAF forecast entry
+    if (period.change && period.change.indicator) {
+      const ind = period.change.indicator.code || period.change.indicator;
+      if (ind === 'FM') return 'fm';
+      if (ind === 'TEMPO') return 'tempo';
+      if (ind === 'BECMG') return 'becmg';
+      if (ind === 'PROB' || ind === 'PROB30' || ind === 'PROB40') return 'prob';
+    }
+    if (period.type === 'FROM') return 'fm';
+    return 'main';
+  }
+
+  function periodTypeLabel(key) {
+    return { fm: t('from'), tempo: t('tempo'), becmg: t('becmg'),
+             prob: t('prob'), main: t('mainFcst') }[key] || key.toUpperCase();
+  }
+
+  function renderTafTimeline(taf) {
+    // Wipe SVG
+    while (tafTL.firstChild) tafTL.removeChild(tafTL.firstChild);
+    if (!taf.forecast || !taf.forecast.length) {
+      tafTLwrap.style.display = 'none';
+      return;
+    }
+    tafTLwrap.style.display = '';
+
+    const W = 720, H = 200;
+    // Determine TAF time range
+    const startMs = new Date(taf.timestamp && taf.timestamp.from ?
+                             taf.timestamp.from : taf.forecast[0].timestamp.from).getTime();
+    const endMs = new Date(taf.timestamp && taf.timestamp.to ?
+                           taf.timestamp.to : taf.forecast[taf.forecast.length-1].timestamp.to).getTime();
+    const totalMs = endMs - startMs;
+    if (totalMs <= 0) return;
+    const x0 = 50, x1 = W - 20;
+    const xMap = ms => x0 + ((ms - startMs) / totalMs) * (x1 - x0);
+
+    // Background
+    const bg = document.createElementNS(SVG_NS, 'rect');
+    bg.setAttribute('x', x0); bg.setAttribute('y', 30);
+    bg.setAttribute('width', x1 - x0); bg.setAttribute('height', 110);
+    bg.setAttribute('fill', '#fafaf7'); bg.setAttribute('stroke', '#d8d4c5');
+    bg.setAttribute('stroke-width', '0.5');
+    tafTL.appendChild(bg);
+
+    // Hour ticks (every 3h)
+    const HOUR_MS = 3600000;
+    let tickMs = Math.ceil(startMs / (3 * HOUR_MS)) * (3 * HOUR_MS);
+    while (tickMs <= endMs) {
+      const x = xMap(tickMs);
+      const tick = document.createElementNS(SVG_NS, 'line');
+      tick.setAttribute('x1', x); tick.setAttribute('y1', 30);
+      tick.setAttribute('x2', x); tick.setAttribute('y2', 145);
+      tick.setAttribute('stroke', '#d8d4c5'); tick.setAttribute('stroke-width', '0.5');
+      tafTL.appendChild(tick);
+      const lbl = document.createElementNS(SVG_NS, 'text');
+      lbl.setAttribute('x', x); lbl.setAttribute('y', 158);
+      lbl.setAttribute('text-anchor', 'middle');
+      lbl.setAttribute('font-family', 'JetBrains Mono, monospace');
+      lbl.setAttribute('font-size', '9');
+      lbl.setAttribute('fill', '#6b7280');
+      const d = new Date(tickMs);
+      lbl.textContent = String(d.getUTCHours()).padStart(2,'0') + 'Z';
+      tafTL.appendChild(lbl);
+      tickMs += 3 * HOUR_MS;
+    }
+    // Day labels
+    let dayMs = Math.ceil(startMs / (24 * HOUR_MS)) * (24 * HOUR_MS);
+    while (dayMs <= endMs) {
+      const x = xMap(dayMs);
+      const dLbl = document.createElementNS(SVG_NS, 'text');
+      dLbl.setAttribute('x', x); dLbl.setAttribute('y', 175);
+      dLbl.setAttribute('text-anchor', 'middle');
+      dLbl.setAttribute('font-family', 'Inter, sans-serif');
+      dLbl.setAttribute('font-size', '9');
+      dLbl.setAttribute('fill', '#4a5159');
+      dLbl.setAttribute('font-weight', '600');
+      const d = new Date(dayMs);
+      dLbl.textContent = `${d.getUTCMonth()+1}/${d.getUTCDate()}`;
+      tafTL.appendChild(dLbl);
+      dayMs += 24 * HOUR_MS;
+    }
+
+    // Y-axis row labels
+    const rows = [
+      { y: 50,  label: t('clouds'), key: 'clouds' },
+      { y: 80,  label: t('wind'),   key: 'wind' },
+      { y: 110, label: t('visibility'), key: 'vis' }
+    ];
+    rows.forEach(r => {
+      const lbl = document.createElementNS(SVG_NS, 'text');
+      lbl.setAttribute('x', x0 - 6);
+      lbl.setAttribute('y', r.y + 4);
+      lbl.setAttribute('text-anchor', 'end');
+      lbl.setAttribute('font-family', 'Inter, sans-serif');
+      lbl.setAttribute('font-size', '9');
+      lbl.setAttribute('fill', '#6b7280');
+      lbl.textContent = r.label;
+      tafTL.appendChild(lbl);
+    });
+
+    // Period bands
+    const TYPE_COLORS = {
+      main: '#0a3d62', fm: '#1e5fa8', tempo: '#b08838',
+      becmg: '#3a7a4f', prob: '#8a4ea2'
+    };
+
+    taf.forecast.forEach((p, i) => {
+      const tfrom = p.timestamp && p.timestamp.from ?
+                    new Date(p.timestamp.from).getTime() : null;
+      const tto = p.timestamp && p.timestamp.to ?
+                  new Date(p.timestamp.to).getTime() : null;
+      if (!tfrom || !tto) return;
+      const xs = xMap(tfrom), xe = xMap(tto);
+      const w = Math.max(2, xe - xs);
+      const ptype = periodTypeKey(p);
+      const color = TYPE_COLORS[ptype] || TYPE_COLORS.main;
+
+      // Cloud row: draw a band whose vertical extent indicates cloud coverage
+      // (lower = lower ceiling). Color by period type.
+      const ceiling = p.ceiling && p.ceiling.feet ? p.ceiling.feet : null;
+      const cloudY = 38 + 22; // baseline for cloud row
+      const cloudH = ceiling !== null ?
+        Math.max(4, 24 - Math.min(24, ceiling / 1000)) : 4;
+      const cloudR = document.createElementNS(SVG_NS, 'rect');
+      cloudR.setAttribute('x', xs); cloudR.setAttribute('y', cloudY - cloudH);
+      cloudR.setAttribute('width', w); cloudR.setAttribute('height', cloudH);
+      cloudR.setAttribute('fill', color);
+      cloudR.setAttribute('opacity', ptype === 'tempo' ? '0.5' : '0.85');
+      tafTL.appendChild(cloudR);
+
+      // Wind row: arrow + speed text in mid-band (only on bands wide enough,
+      // and only on permanent forecast periods — TEMPO/PROB bands skip the
+      // text label since their wind would visually collide with the underlying
+      // FROM/main band's text).
+      const ws = p.wind ? (p.wind.speed_kts !== undefined ? p.wind.speed_kts : 0) : 0;
+      const wd = p.wind ? p.wind.degrees : null;
+      const windY = 80;
+      const isTransient = (ptype === 'tempo' || ptype === 'prob');
+      if (!isTransient && w >= 36) {
+        const wt = document.createElementNS(SVG_NS, 'text');
+        wt.setAttribute('x', xs + w/2); wt.setAttribute('y', windY + 3);
+        wt.setAttribute('text-anchor', 'middle');
+        wt.setAttribute('font-family', 'JetBrains Mono, monospace');
+        wt.setAttribute('font-size', '9');
+        wt.setAttribute('fill', color);
+        wt.setAttribute('font-weight', '700');
+        wt.textContent = wd !== null ? `${wd}°/${ws}` : `${ws}kt`;
+        tafTL.appendChild(wt);
+      }
+
+      // Visibility row: bar height ∝ visibility, capped at 6+SM
+      let visMi = 6;
+      if (p.visibility) {
+        if (p.visibility.miles_float !== undefined) visMi = p.visibility.miles_float;
+        else if (typeof p.visibility.miles === 'number') visMi = p.visibility.miles;
+        else if (typeof p.visibility.miles === 'string') {
+          const m = parseFloat(p.visibility.miles);
+          if (!isNaN(m)) visMi = m;
+        }
+      }
+      visMi = Math.min(6, Math.max(0.25, visMi));
+      const visY = 110;
+      const visH = (visMi / 6) * 18;
+      const visR = document.createElementNS(SVG_NS, 'rect');
+      visR.setAttribute('x', xs); visR.setAttribute('y', visY + 8 - visH);
+      visR.setAttribute('width', w); visR.setAttribute('height', visH);
+      visR.setAttribute('fill', color);
+      visR.setAttribute('opacity', ptype === 'tempo' ? '0.5' : '0.85');
+      tafTL.appendChild(visR);
+
+      // Period type tag at top
+      if (w > 20 && ptype !== 'main') {
+        const tag = document.createElementNS(SVG_NS, 'text');
+        tag.setAttribute('x', xs + 2); tag.setAttribute('y', 24);
+        tag.setAttribute('font-family', 'JetBrains Mono, monospace');
+        tag.setAttribute('font-size', '8');
+        tag.setAttribute('font-weight', '700');
+        tag.setAttribute('fill', color);
+        tag.textContent = (p.change && p.change.indicator) ?
+                          (p.change.indicator.code || p.change.indicator) : 'FM';
+        tafTL.appendChild(tag);
+      }
+    });
+
+    // Axis labels
+    const xAxisL = document.createElementNS(SVG_NS, 'text');
+    xAxisL.setAttribute('x', (x0 + x1) / 2); xAxisL.setAttribute('y', 192);
+    xAxisL.setAttribute('text-anchor', 'middle');
+    xAxisL.setAttribute('font-family', 'Inter, sans-serif');
+    xAxisL.setAttribute('font-size', '9');
+    xAxisL.setAttribute('fill', '#4a5159');
+    xAxisL.textContent = 'UTC';
+    tafTL.appendChild(xAxisL);
+  }
+
+  function renderTafDecoded(taf) {
+    tafDec.innerHTML = '';
+    if (!taf.forecast) return;
+    taf.forecast.forEach(p => {
+      const div = document.createElement('div');
+      const ptype = periodTypeKey(p);
+      div.className = 'taf-period ' + ptype;
+      const hdr = document.createElement('div');
+      hdr.className = 'taf-period-header';
+      const range = (p.timestamp && p.timestamp.from && p.timestamp.to)
+        ? fmtTimeRange(p.timestamp.from, p.timestamp.to) : '';
+      hdr.innerHTML = `<span class="taf-period-type">${periodTypeLabel(ptype)}</span> ${range}`;
+      div.appendChild(hdr);
+
+      const fields = document.createElement('div');
+      fields.className = 'metar-decoded';
+      if (p.wind) fields.appendChild(renderField(t('wind'), fmtWind(p.wind)));
+      if (p.visibility) fields.appendChild(renderField(t('visibility'), fmtVisibility(p.visibility)));
+      if (p.conditions && p.conditions.length) {
+        fields.appendChild(renderField(t('conditions'), fmtConditions(p.conditions)));
+      }
+      if (p.clouds && p.clouds.length) {
+        fields.appendChild(renderField(t('clouds'), fmtClouds(p.clouds)));
+      }
+      if (p.ceiling) fields.appendChild(renderField(t('ceiling'), fmtCeiling(p.ceiling)));
+      div.appendChild(fields);
+      tafDec.appendChild(div);
+    });
+  }
+
+  function renderTaf(taf) {
+    tafMeta.textContent = (taf.timestamp && taf.timestamp.issued)
+      ? (lang() === 'zh' ? '发布于 ' : 'Issued ') +
+        fmtObserved(taf.timestamp.issued) : '';
+    tafRaw.textContent = taf.raw_text || '';
+    tafRaw.removeAttribute('data-lang-content');
+    if (tafRawZh) tafRawZh.style.display = 'none';
+    renderTafTimeline(taf);
+    renderTafDecoded(taf);
+  }
+
+  function clearTaf(msg) {
+    tafMeta.textContent = '';
+    tafRaw.textContent = msg || '';
+    tafRaw.removeAttribute('data-lang-content');
+    if (tafRawZh) tafRawZh.style.display = 'none';
+    while (tafTL.firstChild) tafTL.removeChild(tafTL.firstChild);
+    tafTLwrap.style.display = 'none';
+    tafDec.innerHTML = '';
+  }
+
+  // ─── Main fetch flow ───────────────────────────────────────
+  let currentIcao = null;
+  let lastMetarData = null, lastTafData = null;
+
+  async function doFetch(icao) {
+    icao = (icao || '').toUpperCase().trim();
+    if (!/^[A-Z0-9]{4}$/.test(icao)) {
+      setStatus(t('enterIcao'), 'error');
+      return;
+    }
+    currentIcao = icao;
+    fetchBtn.disabled = true;
+    setStatus(t('fetching'));
+    clearMetar('');
+    clearTaf('');
+    metarRawZh.style.display = 'none';
+
+    try {
+      // METAR
+      let metarOk = false;
+      try {
+        const m = await fetchJson(`/metar/${icao}/decoded`);
+        if (m.results > 0 && m.data && m.data[0]) {
+          renderMetar(m.data[0]);
+          lastMetarData = m.data[0];
+          metarOk = true;
+        } else {
+          clearMetar(t('noMetar'));
+        }
+      } catch (e) {
+        if (e.code === 'NO_KEY') {
+          clearMetar(t('noKey'));
+          setStatus(t('errorPrefix') + 'API key', 'error');
+          fetchBtn.disabled = false;
+          return;
+        }
+        clearMetar(t('networkErr'));
+      }
+
+      // TAF — separate try block, may not exist for small airports
+      let tafOk = false;
+      try {
+        const ta = await fetchJson(`/taf/${icao}/decoded`);
+        if (ta.results > 0 && ta.data && ta.data[0]) {
+          renderTaf(ta.data[0]);
+          lastTafData = ta.data[0];
+          tafOk = true;
+        } else {
+          clearTaf(t('noTaf'));
+        }
+      } catch (e) {
+        clearTaf(t('noTaf'));
+      }
+
+      if (metarOk || tafOk) {
+        setStatus(t('success'), 'success');
+      } else {
+        setStatus(t('notFound'), 'error');
+      }
+    } finally {
+      fetchBtn.disabled = false;
+    }
+  }
+
+  // ─── Wire up ───────────────────────────────────────────────
+  inputEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); doFetch(inputEl.value); }
+  });
+  inputEl.addEventListener('input', () => {
+    inputEl.value = inputEl.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  });
+  fetchBtn.addEventListener('click', () => doFetch(inputEl.value));
+
+  // Re-render on language change
+  document.addEventListener('flying:langchange', () => {
+    if (lastMetarData) renderMetar(lastMetarData);
+    if (lastTafData)   renderTaf(lastTafData);
+  });
 })();
 </script>
 
