@@ -739,7 +739,7 @@ html { scroll-behavior: smooth; }
   padding: 1.5rem;
   margin: 2rem 0;
   display: grid;
-  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 480px) minmax(0, 1fr);
   column-gap: 1.5rem;
   row-gap: 1rem;
   align-items: start;
@@ -752,67 +752,67 @@ html { scroll-behavior: smooth; }
 }
 
 /* ── The CDU body ── */
+/* ── The CDU body — 经典波音灰外壳 ── */
 .flying-page .fmc-cdu {
-  /* Real CDU bezel: dark grey-black injection-moulded plastic, slight texture */
-  background: #1a1c1f;
-  border: 1px solid #0a0c0e;
-  border-radius: 6px;
-  padding: 10px 9px 12px;
+  background-color: #5b656b;
+  border: 2px solid #4a5359;
+  border-radius: 12px;
+  padding: 18px;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.04),
-    inset 0 -1px 0 rgba(0,0,0,0.4),
-    0 4px 16px rgba(0,0,0,0.2);
+    0 8px 24px rgba(0,0,0,0.35),
+    inset 0 2px 4px rgba(255,255,255,0.18),
+    inset 0 -2px 4px rgba(0,0,0,0.4);
   user-select: none;
   width: 100%;
-  max-width: 360px;
+  max-width: 460px;
   justify-self: start;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 /* ── Screen + flanking LSK columns ── */
 .flying-page .fmc-screen-wrap {
-  display: grid;
-  grid-template-columns: 26px 1fr 26px;
-  gap: 4px;
-  align-items: stretch;
-  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 18px;
 }
 
 .flying-page .fmc-screen {
-  /* Boeing CRT: deep green-black phosphor */
-  background: #021608;
-  color: #4dff5a;
-  font-family: var(--fl-font-mono);
-  font-size: 11px;
-  line-height: 15px;
-  letter-spacing: 0.06em;
-  padding: 9px 10px;
-  border: 1px solid #000;
-  border-radius: 3px;
+  /* CRT-style black background */
+  background-color: #050505;
+  flex: 1;
+  height: 280px;
+  border-radius: 5px;
+  padding: 10px 14px;
+  margin: 0 4px;
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  line-height: 14px;
+  color: #ffffff;
   white-space: pre;
   overflow: hidden;
-  min-height: 224px;     /* 14 rows × 16 px */
-  text-shadow: 0 0 1.5px rgba(77,255,90,0.55);
   box-shadow:
-    inset 0 0 24px rgba(77,255,90,0.06),
-    inset 0 0 3px rgba(0,0,0,0.95);
-  /* Subtle scanline effect */
-  background-image:
-    linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.18) 50%);
-  background-size: 100% 3px;
+    inset 0 0 12px rgba(0,0,0,0.95),
+    inset 0 0 1px rgba(255,255,255,0.05);
+  text-shadow: 0 0 1px rgba(255,255,255,0.4);
 }
 
-/* Highlight classes inside the screen text — colors taken from real Pegasus CDU */
-.flying-page .fmc-screen .fmc-label   { color: #d8d048; }   /* small yellow line-titles (SEL/OAT, RED TO N1) */
-.flying-page .fmc-screen .fmc-prompt  { color: #4dff5a; }   /* prompt text green */
-.flying-page .fmc-screen .fmc-data    { color: #d8d048; }   /* user data also yellow on Pegasus */
-.flying-page .fmc-screen .fmc-dim     { color: #5a8c40; }   /* dim placeholder */
-.flying-page .fmc-screen .fmc-scratch { color: #ffffff; }   /* scratchpad in white */
-.flying-page .fmc-screen .fmc-msg     { color: #ff7755; }
-.flying-page .fmc-screen .fmc-mod     { color: #ffe055; }   /* MOD header */
+/* Highlight classes inside the screen text — multi-color CRT per user reference */
+.flying-page .fmc-screen .fmc-label   { color: #ffffff; }   /* white line-titles */
+.flying-page .fmc-screen .fmc-prompt  { color: #00ffff; }   /* cyan prompts */
+.flying-page .fmc-screen .fmc-data    { color: #00ff00; }   /* green data */
+.flying-page .fmc-screen .fmc-dim     { color: #5a8c5a; }   /* dim placeholder */
+.flying-page .fmc-screen .fmc-scratch { color: #ffffff; }   /* white scratchpad */
+.flying-page .fmc-screen .fmc-msg     { color: #ff00ff; }   /* magenta messages */
+.flying-page .fmc-screen .fmc-mod     { color: #ff00ff; }   /* magenta MOD header */
 .flying-page .fmc-screen .fmc-cursor  {
   display: inline-block;
-  width: 6px;
-  background: #4dff5a;
+  width: 8px;
+  background: #ffffff;
   animation: fmc-blink 0.9s step-end infinite;
 }
 @keyframes fmc-blink {
@@ -823,171 +823,188 @@ html { scroll-behavior: smooth; }
 .flying-page .fmc-lsk-col {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 3px 0;
+  justify-content: space-around;
+  height: 280px;
 }
 .flying-page .fmc-lsk {
-  width: 26px;
-  height: 11px;
-  background: #0e1012;
+  width: 35px;
+  height: 20px;
+  background-color: #2b3033;
   color: transparent;
-  border: 1px solid #050608;
-  border-top-color: #2a2c2e;
-  border-radius: 1.5px;
+  border: 1px solid #111;
+  border-radius: 3px;
   font-family: var(--fl-font-mono);
   font-size: 0;
   cursor: pointer;
   padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.06),
-    inset 0 -1px 0 rgba(0,0,0,0.6);
   position: relative;
-  transition: background 0.05s, transform 0.05s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  transition: transform 0.05s, box-shadow 0.05s;
 }
-/* The two horizontal bars that decorate each LSK button on real CDUs */
-.flying-page .fmc-lsk::before,
+.flying-page .fmc-lsk:hover { background-color: #353a3d; }
+.flying-page .fmc-lsk:active {
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+  transform: translateY(1px);
+}
+/* The dash markings on each LSK row — small white tab between key and screen */
 .flying-page .fmc-lsk::after {
   content: '';
   position: absolute;
-  left: 4px;
-  right: 4px;
-  height: 1px;
-  background: #6a6c6e;
-  border-radius: 0.5px;
+  top: 50%;
+  width: 6px;
+  height: 1.5px;
+  background: #d8d8d8;
+  transform: translateY(-50%);
 }
-.flying-page .fmc-lsk::before { top: 2.5px; }
-.flying-page .fmc-lsk::after  { bottom: 2.5px; }
-.flying-page .fmc-lsk:hover { background: #1a1c1e; }
-.flying-page .fmc-lsk:active {
-  background: #050608;
-  transform: translateY(1px);
-}
+.flying-page .fmc-lsk-left .fmc-lsk::after  { right: -10px; }
+.flying-page .fmc-lsk-right .fmc-lsk::after { left:  -10px; }
 
-/* ── Function keys row ── */
-/* Real CDU keys: dark grey-black plastic with subtle bevel, very thin gaps */
+/* ── Function keys area ── */
+/* The fnrows together form a 6-column grid; spacers leave gaps. */
 .flying-page .fmc-fnrow {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 3px;
-  margin-bottom: 3px;
+  gap: 8px;
+  margin-bottom: 8px;
 }
+.flying-page .fmc-fnrow:last-child { margin-bottom: 0; }
 .flying-page .fmc-fn {
-  background: linear-gradient(180deg, #2a2c2f 0%, #1c1e21 100%);
-  color: #e6e6e6;
-  border: 1px solid #060708;
-  border-top-color: #3a3c3f;
-  border-radius: 2px;
-  font-family: var(--fl-font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  background-color: #1e2226;
+  color: #e0e0e0;
+  border: 2px solid #111;
+  border-radius: 4px;
+  font-family: 'Arial', sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.02em;
   line-height: 1.05;
-  padding: 6px 1px;
+  padding: 4px 1px;
   cursor: pointer;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.08),
-    inset 0 -1px 0 rgba(0,0,0,0.6),
-    0 1px 1px rgba(0,0,0,0.4);
+    0 3px 5px rgba(0,0,0,0.6),
+    inset 0 1px 1px rgba(255,255,255,0.1);
   text-align: center;
-  min-height: 26px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   white-space: pre-line;
+  transition: all 0.1s;
 }
-.flying-page .fmc-fn:hover {
-  background: linear-gradient(180deg, #3a3c3f 0%, #2a2c2f 100%);
-}
+.flying-page .fmc-fn:hover { background-color: #2a2e32; }
 .flying-page .fmc-fn:active {
-  background: linear-gradient(180deg, #0e1012 0%, #060708 100%);
-  transform: translateY(1px);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.8);
+  transform: translateY(2px);
 }
 .flying-page .fmc-fn.active {
-  background: linear-gradient(180deg, #6a5a18 0%, #4a3e10 100%);
+  background-color: #4a3a10;
   color: #ffe888;
   box-shadow:
-    inset 0 0 4px rgba(160,130,40,0.4),
-    inset 0 1px 0 rgba(255,220,120,0.3);
+    inset 0 0 4px rgba(180,140,40,0.5),
+    0 2px 4px rgba(0,0,0,0.6);
 }
+
+/* EXEC button: special with indicator strip on top */
 .flying-page .fmc-fn.fmc-exec {
-  /* Distinct key: square indicator slot like the real CDU */
-  background: linear-gradient(180deg, #2a2c2f 0%, #1c1e21 100%);
-  color: #888;
+  background-color: #2a2a2a;
+  position: relative;
 }
-.flying-page .fmc-fn.fmc-exec:not(:disabled) {
-  background: linear-gradient(180deg, #3aff60 0%, #1cb830 100%);
-  color: #032a08;
-  border-color: #1a4a20;
-  text-shadow: 0 0 2px rgba(0,80,0,0.4);
-  box-shadow:
-    0 0 8px rgba(108,255,108,0.55),
-    inset 0 1px 0 rgba(255,255,255,0.4),
-    inset 0 -1px 0 rgba(0,0,0,0.3);
+.flying-page .fmc-fn.fmc-exec::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 3px;
+  background-color: #333;
+  border-radius: 1px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.5);
 }
-.flying-page .fmc-fn.fmc-exec:disabled { cursor: not-allowed; opacity: 0.6; }
+.flying-page .fmc-fn.fmc-exec:not(:disabled)::before {
+  background-color: #00ff00;
+  box-shadow: 0 0 4px rgba(0,255,0,0.7);
+}
+.flying-page .fmc-fn.fmc-exec:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
 .flying-page .fmc-fn-spacer {
   background: transparent;
   border: none;
   box-shadow: none;
   pointer-events: none;
+  visibility: hidden;
 }
 
 /* ── Alphanumeric keypad ── */
+/* Two-column layout: numeric pad (left, ~35%) + alphabet pad (right, ~65%) */
 .flying-page .fmc-keypad {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  margin-top: 6px;
-}
-.flying-page .fmc-kp-row {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 3px;
+  grid-template-columns: 35% 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+.flying-page .fmc-numpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+.flying-page .fmc-numpad .fmc-key {
+  height: 34px;
+  border-radius: 50%;
+  font-size: 15px;
+}
+.flying-page .fmc-alphapad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+}
+.flying-page .fmc-alphapad .fmc-key {
+  height: 34px;
+  border-radius: 4px;
+  font-size: 13px;
 }
 .flying-page .fmc-key {
-  background: linear-gradient(180deg, #2a2c2f 0%, #1c1e21 100%);
-  color: #e6e6e6;
-  border: 1px solid #060708;
-  border-top-color: #3a3c3f;
-  border-radius: 2px;
-  font-family: var(--fl-font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 7px 0;
+  background-color: #1e2226;
+  color: #e0e0e0;
+  border: 2px solid #111;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
   cursor: pointer;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.08),
-    inset 0 -1px 0 rgba(0,0,0,0.6),
-    0 1px 1px rgba(0,0,0,0.4);
-  min-width: 0;
+    0 3px 5px rgba(0,0,0,0.6),
+    inset 0 1px 1px rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.1s;
 }
-.flying-page .fmc-key:hover { background: linear-gradient(180deg, #3a3c3f 0%, #2a2c2f 100%); }
+.flying-page .fmc-key:hover { background-color: #2a2e32; }
 .flying-page .fmc-key:active {
-  background: linear-gradient(180deg, #0e1012 0%, #060708 100%);
-  transform: translateY(1px);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.8);
+  transform: translateY(2px);
 }
-.flying-page .fmc-key-wide  { font-size: 9px; letter-spacing: 0.05em; }
-.flying-page .fmc-key-clr   {
-  font-size: 9px;
-  background: linear-gradient(180deg, #5a3320 0%, #3a2010 100%);
+.flying-page .fmc-key-wide  { font-size: 11px; letter-spacing: 0.05em; }
+.flying-page .fmc-key-clr {
+  font-size: 11px;
+  background-color: #5a3320;
   color: #ffd0b0;
 }
-.flying-page .fmc-key-clr:hover {
-  background: linear-gradient(180deg, #6a4330 0%, #4a3020 100%);
-}
-.flying-page .fmc-key-del   { font-size: 9px; }
+.flying-page .fmc-key-clr:hover { background-color: #6a4330; }
+.flying-page .fmc-key-del { font-size: 11px; }
 .flying-page .fmc-key-spacer {
   background: transparent;
   border: none;
   box-shadow: none;
   pointer-events: none;
+  visibility: hidden;
 }
+
+/* Hide nameplate (we don't need it with the new shell aesthetic) */
+.flying-page .fmc-nameplate { display: none; }
 
 /* ── CDU nameplate ── */
 .flying-page .fmc-nameplate {

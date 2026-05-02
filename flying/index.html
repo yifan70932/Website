@@ -364,21 +364,21 @@
           <!-- Screen: 14 rows × 24 cols, with 6 LSKs flanking each side -->
           <div class="fmc-screen-wrap">
             <div class="fmc-lsk-col fmc-lsk-left">
-              <button class="fmc-lsk" data-lsk="L1" aria-label="LSK 1L">&lt;</button>
-              <button class="fmc-lsk" data-lsk="L2" aria-label="LSK 2L">&lt;</button>
-              <button class="fmc-lsk" data-lsk="L3" aria-label="LSK 3L">&lt;</button>
-              <button class="fmc-lsk" data-lsk="L4" aria-label="LSK 4L">&lt;</button>
-              <button class="fmc-lsk" data-lsk="L5" aria-label="LSK 5L">&lt;</button>
-              <button class="fmc-lsk" data-lsk="L6" aria-label="LSK 6L">&lt;</button>
+              <button class="fmc-lsk" data-lsk="L1" aria-label="LSK 1L"></button>
+              <button class="fmc-lsk" data-lsk="L2" aria-label="LSK 2L"></button>
+              <button class="fmc-lsk" data-lsk="L3" aria-label="LSK 3L"></button>
+              <button class="fmc-lsk" data-lsk="L4" aria-label="LSK 4L"></button>
+              <button class="fmc-lsk" data-lsk="L5" aria-label="LSK 5L"></button>
+              <button class="fmc-lsk" data-lsk="L6" aria-label="LSK 6L"></button>
             </div>
             <div class="fmc-screen" id="fmc-screen" aria-live="polite"></div>
             <div class="fmc-lsk-col fmc-lsk-right">
-              <button class="fmc-lsk" data-lsk="R1" aria-label="LSK 1R">&gt;</button>
-              <button class="fmc-lsk" data-lsk="R2" aria-label="LSK 2R">&gt;</button>
-              <button class="fmc-lsk" data-lsk="R3" aria-label="LSK 3R">&gt;</button>
-              <button class="fmc-lsk" data-lsk="R4" aria-label="LSK 4R">&gt;</button>
-              <button class="fmc-lsk" data-lsk="R5" aria-label="LSK 5R">&gt;</button>
-              <button class="fmc-lsk" data-lsk="R6" aria-label="LSK 6R">&gt;</button>
+              <button class="fmc-lsk" data-lsk="R1" aria-label="LSK 1R"></button>
+              <button class="fmc-lsk" data-lsk="R2" aria-label="LSK 2R"></button>
+              <button class="fmc-lsk" data-lsk="R3" aria-label="LSK 3R"></button>
+              <button class="fmc-lsk" data-lsk="R4" aria-label="LSK 4R"></button>
+              <button class="fmc-lsk" data-lsk="R5" aria-label="LSK 5R"></button>
+              <button class="fmc-lsk" data-lsk="R6" aria-label="LSK 6R"></button>
             </div>
           </div>
 
@@ -411,49 +411,43 @@
             <button class="fmc-fn fmc-fn-spacer" disabled aria-hidden="true"></button>
           </div>
 
-          <!-- Alphanumeric keypad: 5 letter rows + 1 number/symbol row arrangement -->
+          <!-- Alphanumeric keypad: numeric pad (3-col, round buttons) + alphabet pad (5-col) -->
           <div class="fmc-keypad">
-            <div class="fmc-kp-row">
+            <div class="fmc-numpad">
+              <button class="fmc-key" data-key="1">1</button>
+              <button class="fmc-key" data-key="2">2</button>
+              <button class="fmc-key" data-key="3">3</button>
+              <button class="fmc-key" data-key="4">4</button>
+              <button class="fmc-key" data-key="5">5</button>
+              <button class="fmc-key" data-key="6">6</button>
+              <button class="fmc-key" data-key="7">7</button>
+              <button class="fmc-key" data-key="8">8</button>
+              <button class="fmc-key" data-key="9">9</button>
+              <button class="fmc-key" data-key=".">.</button>
+              <button class="fmc-key" data-key="0">0</button>
+              <button class="fmc-key" data-key="+/-">+/-</button>
+            </div>
+            <div class="fmc-alphapad">
               <button class="fmc-key" data-key="A">A</button>
               <button class="fmc-key" data-key="B">B</button>
               <button class="fmc-key" data-key="C">C</button>
               <button class="fmc-key" data-key="D">D</button>
               <button class="fmc-key" data-key="E">E</button>
-              <button class="fmc-key" data-key="1">1</button>
-              <button class="fmc-key" data-key="2">2</button>
-              <button class="fmc-key" data-key="3">3</button>
-            </div>
-            <div class="fmc-kp-row">
               <button class="fmc-key" data-key="F">F</button>
               <button class="fmc-key" data-key="G">G</button>
               <button class="fmc-key" data-key="H">H</button>
               <button class="fmc-key" data-key="I">I</button>
               <button class="fmc-key" data-key="J">J</button>
-              <button class="fmc-key" data-key="4">4</button>
-              <button class="fmc-key" data-key="5">5</button>
-              <button class="fmc-key" data-key="6">6</button>
-            </div>
-            <div class="fmc-kp-row">
               <button class="fmc-key" data-key="K">K</button>
               <button class="fmc-key" data-key="L">L</button>
               <button class="fmc-key" data-key="M">M</button>
               <button class="fmc-key" data-key="N">N</button>
               <button class="fmc-key" data-key="O">O</button>
-              <button class="fmc-key" data-key="7">7</button>
-              <button class="fmc-key" data-key="8">8</button>
-              <button class="fmc-key" data-key="9">9</button>
-            </div>
-            <div class="fmc-kp-row">
               <button class="fmc-key" data-key="P">P</button>
               <button class="fmc-key" data-key="Q">Q</button>
               <button class="fmc-key" data-key="R">R</button>
               <button class="fmc-key" data-key="S">S</button>
               <button class="fmc-key" data-key="T">T</button>
-              <button class="fmc-key" data-key=".">.</button>
-              <button class="fmc-key" data-key="0">0</button>
-              <button class="fmc-key" data-key="+/-">+/-</button>
-            </div>
-            <div class="fmc-kp-row">
               <button class="fmc-key" data-key="U">U</button>
               <button class="fmc-key" data-key="V">V</button>
               <button class="fmc-key" data-key="W">W</button>
@@ -462,14 +456,6 @@
               <button class="fmc-key" data-key="Z">Z</button>
               <button class="fmc-key fmc-key-wide" data-key="SP">SP</button>
               <button class="fmc-key fmc-key-del" data-action="DEL">DEL</button>
-            </div>
-            <div class="fmc-kp-row">
-              <button class="fmc-key fmc-key-spacer" disabled aria-hidden="true"></button>
-              <button class="fmc-key fmc-key-spacer" disabled aria-hidden="true"></button>
-              <button class="fmc-key fmc-key-spacer" disabled aria-hidden="true"></button>
-              <button class="fmc-key fmc-key-spacer" disabled aria-hidden="true"></button>
-              <button class="fmc-key fmc-key-spacer" disabled aria-hidden="true"></button>
-              <button class="fmc-key fmc-key-spacer" disabled aria-hidden="true"></button>
               <button class="fmc-key" data-key="/">/</button>
               <button class="fmc-key fmc-key-clr" data-action="CLR">CLR</button>
             </div>
