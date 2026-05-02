@@ -3799,9 +3799,24 @@
 
   // ─── Highlight the active entry as audio plays ────────────────
   let activeIdx = -1;
+  let userScrolled = false;
+  let userScrollTimer = null;
+  const wrap = list.parentElement;
+
+  // Track manual user scrolls so we don't fight the user's scroll position.
+  // Any scroll on the wrap that wasn't programmatic counts as "user scrolled";
+  // we suspend auto-scroll for 4 seconds after that.
+  let programmaticScroll = false;
+  wrap.addEventListener('scroll', () => {
+    if (programmaticScroll) return;
+    userScrolled = true;
+    clearTimeout(userScrollTimer);
+    userScrollTimer = setTimeout(() => { userScrolled = false; }, 4000);
+  });
+
   function updateActive() {
     const t = audio.currentTime;
-    // Find latest entry whose timestamp <= current time
+    // Find latest entry whose timestamp <= current time (binary search)
     let lo = 0, hi = TRANSCRIPT.length - 1, found = -1;
     while (lo <= hi) {
       const mid = (lo + hi) >> 1;
@@ -3814,15 +3829,29 @@
       if (old) old.classList.remove('active');
     }
     activeIdx = found;
-    if (activeIdx >= 0) {
-      const cur = list.children[activeIdx];
-      if (cur) {
-        cur.classList.add('active');
-        // Auto-scroll to keep the active entry roughly centered
-        const wrap = list.parentElement;
-        const off = cur.offsetTop - wrap.clientHeight / 2 + cur.clientHeight / 2;
-        wrap.scrollTo({ top: Math.max(0, off), behavior: 'smooth' });
-      }
+    if (activeIdx < 0) return;
+
+    const cur = list.children[activeIdx];
+    if (!cur) return;
+    cur.classList.add('active');
+
+    // Don't fight the user. If they scrolled away, leave it alone.
+    if (userScrolled) return;
+
+    // Only scroll if the active entry is outside the visible band of the wrap.
+    // Use scrollTop math so we don't accidentally scroll the page itself.
+    const wrapRect = wrap.getBoundingClientRect();
+    const curRect = cur.getBoundingClientRect();
+    const margin = 60; // keep a comfortable buffer at top and bottom
+    const above = curRect.top < wrapRect.top + margin;
+    const below = curRect.bottom > wrapRect.bottom - margin;
+    if (above || below) {
+      // Compute the scrollTop that would put the entry near the top third of the wrap.
+      const targetOffset = cur.offsetTop - list.offsetTop - wrap.clientHeight / 3;
+      programmaticScroll = true;
+      wrap.scrollTop = Math.max(0, targetOffset);
+      // Allow the scroll event from this assignment to fire and be ignored.
+      requestAnimationFrame(() => { programmaticScroll = false; });
     }
   }
   audio.addEventListener('timeupdate', updateActive);
