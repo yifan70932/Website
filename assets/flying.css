@@ -1579,9 +1579,9 @@ html { scroll-behavior: smooth; }
 /* Layout: map on left, list on right (collapses on mobile) */
 .flying-page .accidents-body {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr);
   gap: 1rem;
-  height: 32rem;
+  height: 44rem;
 }
 @media (max-width: 800px) {
   .flying-page .accidents-body {
@@ -1597,10 +1597,10 @@ html { scroll-behavior: smooth; }
   border-radius: 3px;
   overflow: hidden;
   background: #f0f0f0;
-  min-height: 26rem;
+  min-height: 38rem;
 }
 @media (max-width: 800px) {
-  .flying-page .accidents-map { min-height: 24rem; height: 24rem; }
+  .flying-page .accidents-map { min-height: 28rem; height: 28rem; }
 }
 
 /* Side list */
@@ -1609,10 +1609,10 @@ html { scroll-behavior: smooth; }
   border-radius: 3px;
   background: var(--fl-paper);
   overflow-y: auto;
-  max-height: 32rem;
+  max-height: 44rem;
 }
 @media (max-width: 800px) {
-  .flying-page .accidents-list-wrap { max-height: 22rem; }
+  .flying-page .accidents-list-wrap { max-height: 26rem; }
 }
 .flying-page .accidents-list {
   list-style: none;
