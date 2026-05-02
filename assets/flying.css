@@ -1912,3 +1912,235 @@ html { scroll-behavior: smooth; }
 .flying-page .acc-popup-links a:hover { text-decoration: underline; }
 
 /* Marker color/size tier definitions are applied inline via JS */
+
+/* ════════════════════════════════════════════════════════════
+   §3.1 — Phonetic alphabet table
+   A 26-cell grid showing each letter + its ICAO codeword + a
+   pronunciation respelling. Renders responsively: 6/cols on
+   wide screens, 4/cols on tablet, 2/cols on phone.
+   ════════════════════════════════════════════════════════════ */
+.flying-page .phonetic-alphabet-figure {
+  margin: 1.5rem 0 1.75rem;
+}
+.flying-page .phonetic-alphabet-table {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  background: var(--fl-rule);          /* thin grid lines */
+  border: 1px solid var(--fl-rule);
+  border-radius: 3px;
+  overflow: hidden;
+}
+@media (max-width: 800px) {
+  .flying-page .phonetic-alphabet-table { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 480px) {
+  .flying-page .phonetic-alphabet-table { grid-template-columns: repeat(3, 1fr); }
+}
+.flying-page .phonetic-cell {
+  background: var(--fl-paper);
+  padding: 0.75rem 0.5rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1.15;
+}
+.flying-page .phonetic-letter {
+  font-family: var(--fl-font-mono);
+  font-size: 1.55rem;
+  font-weight: 500;
+  color: var(--fl-navy);
+  margin-bottom: 0.25rem;
+}
+.flying-page .phonetic-word {
+  font-family: var(--fl-font-ui);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--fl-ink);
+  letter-spacing: 0.01em;
+}
+.flying-page .phonetic-pron {
+  margin-top: 0.18rem;
+  font-family: var(--fl-font-ui);
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--fl-ink-faint);
+  letter-spacing: 0.02em;
+}
+
+/* ════════════════════════════════════════════════════════════
+   §3.1 — ATC Dialogue Generator widget
+   Mimics the visual register of the FMC widget header so the
+   two adjacent components feel like part of the same toolkit.
+   ════════════════════════════════════════════════════════════ */
+.flying-page .atc-widget-header {
+  margin: 1.5rem 0 0.5rem;
+  padding: 0 0.25rem 0.6rem;
+  border-bottom: 1px solid var(--fl-rule);
+  font-family: var(--fl-font-ui);
+}
+.flying-page .atc-widget-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--fl-ink);
+  text-transform: uppercase;
+}
+.flying-page[data-lang="zh"] .atc-widget-title {
+  font-family: var(--fl-font-cn);
+  font-weight: 600;
+  text-transform: none;
+}
+.flying-page .atc-widget-sub {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.82rem;
+  color: var(--fl-ink-faint);
+}
+.flying-page[data-lang="zh"] .atc-widget-sub { font-family: var(--fl-font-cn); }
+.flying-page .atc-widget-title [data-lang-content],
+.flying-page .atc-widget-sub [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-widget-title [data-lang-content="en"],
+.flying-page[data-lang="en"] .atc-widget-sub [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-widget-title [data-lang-content="zh"],
+.flying-page[data-lang="zh"] .atc-widget-sub [data-lang-content="zh"] { display: inline; }
+
+.flying-page .atc-widget {
+  background: var(--fl-paper-deep);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1.1rem 1.2rem 1.25rem;
+}
+
+/* Top control bar: phase buttons on the left, regen button on the right */
+.flying-page .atc-controls {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--fl-rule);
+  margin-bottom: 0.85rem;
+}
+.flying-page .atc-phase-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  flex: 1 1 auto;
+}
+.flying-page .atc-phase-buttons button {
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--fl-rule);
+  background: var(--fl-paper);
+  color: var(--fl-ink);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.flying-page .atc-phase-buttons button:hover {
+  border-color: var(--fl-sapphire);
+  color: var(--fl-sapphire);
+}
+.flying-page .atc-phase-buttons button.active {
+  background: var(--fl-sapphire);
+  border-color: var(--fl-sapphire);
+  color: #fff;
+}
+.flying-page[data-lang="zh"] .atc-phase-buttons button { font-family: var(--fl-font-cn); }
+.flying-page .atc-phase-buttons button [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-phase-buttons button [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-phase-buttons button [data-lang-content="zh"] { display: inline; }
+
+.flying-page .atc-actions { display: flex; align-items: center; }
+.flying-page .atc-regen-btn {
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--fl-rule);
+  background: var(--fl-paper);
+  color: var(--fl-ink-soft);
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: color 0.12s, border-color 0.12s;
+}
+.flying-page .atc-regen-btn:hover {
+  border-color: var(--fl-ink-soft);
+  color: var(--fl-ink);
+}
+.flying-page[data-lang="zh"] .atc-regen-btn { font-family: var(--fl-font-cn); }
+.flying-page .atc-regen-btn [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-regen-btn [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-regen-btn [data-lang-content="zh"] { display: inline; }
+
+/* The dialog body — each line is a speaker label + transmission +
+   optional decode subtext. */
+.flying-page .atc-dialog {
+  font-family: var(--fl-font-mono);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--fl-ink);
+  min-height: 12rem;
+}
+.flying-page .atc-dialog-empty {
+  color: var(--fl-ink-faint);
+  font-family: var(--fl-font-ui);
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+.flying-page[data-lang="zh"] .atc-dialog-empty { font-family: var(--fl-font-cn); font-style: normal; }
+
+.flying-page .atc-line {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 0.5rem 0.85rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px dotted var(--fl-rule);
+}
+.flying-page .atc-line:last-child { border-bottom: none; }
+
+.flying-page .atc-speaker {
+  font-family: var(--fl-font-ui);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fl-ink-faint);
+  padding-top: 0.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.flying-page .atc-speaker.is-pilot { color: var(--fl-sapphire); }
+.flying-page .atc-speaker.is-controller { color: var(--fl-forest); }
+
+.flying-page .atc-transmission { color: var(--fl-ink); }
+
+.flying-page .atc-decode {
+  display: block;
+  margin-top: 0.25rem;
+  font-family: var(--fl-font-ui);
+  font-size: 0.74rem;
+  color: var(--fl-ink-faint);
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+.flying-page[data-lang="zh"] .atc-decode { font-family: var(--fl-font-cn); font-style: normal; }
+.flying-page .atc-decode [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-decode [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-decode [data-lang-content="zh"] { display: inline; }
+
+@media (max-width: 600px) {
+  .flying-page .atc-line {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+  .flying-page .atc-speaker { font-size: 0.7rem; }
+}

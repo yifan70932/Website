@@ -69,8 +69,8 @@
           <span data-lang-content="zh">二 · 起舞而非征服</span>
         </a></li>
         <li><a href="#sec-languages">
-          <span data-lang-content="en">3 · Specialized Languages</span>
-          <span data-lang-content="zh">三 · 特殊的语言</span>
+          <span data-lang-content="en">3 · Flying as Specialized Languages</span>
+          <span data-lang-content="zh">三 · 作为特殊语言的飞行</span>
         </a></li>
         <li><a href="#sec-instruments">
           <span data-lang-content="en">4 · Trust the Instruments</span>
@@ -299,29 +299,206 @@
     </div>
 
     <h2 id="sec-languages"><span class="sec-num">3 ·</span>
-      <span data-lang-content="en">Specialized Languages</span>
-      <span data-lang-content="zh">特殊的语言</span>
+      <span data-lang-content="en">Flying as Specialized Languages</span>
+      <span data-lang-content="zh">作为特殊语言的飞行</span>
     </h2>
 
     <div data-lang-content="en">
-      <p>Aviation runs on a stack of constructed languages, each designed to compress a specific kind of information into a form that survives transmission over a noisy radio channel, in non-native English under stress, between people who will never meet and have a few seconds to confirm an intent on which lives depend. None of these languages is plain English, and none is incidental.</p>
+      <p>Aviation runs on a stack of constructed languages, each designed to compress a specific kind of information into a form that survives transmission over a noisy radio channel, in non-native English under stress, between people who will never meet and have a few seconds to confirm an intent on which lives depend. None of these languages is plain English, and none is incidental. Three are sketched below: the spoken phraseology of air traffic control, the textual code of weather reports, and the keyboard vocabulary of the flight management computer.</p>
+    </div>
 
-      <h3>The phonetic alphabet</h3>
+    <div data-lang-content="zh">
+      <p>航空运行在一摞被构造出来的语言之上。其中每一种都为压缩某一类信息而设计——这些信息要在嘈杂的无线电信道里、在压力下的非母语英语里、在永不相见的人之间、在以人命为赌注的几秒钟之内被传递并被确认。这一摞语言里没有一种是普通英语，也没有一种是无关紧要的。下文勾勒其中三种：空管通话的口语、气象报告的文本编码、以及飞行管理计算机的键盘词汇。</p>
+    </div>
 
-      <p>The set of words used to spell letters over the radio — Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliett, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor, Whiskey, X-ray, Yankee, Zulu — was adopted by ICAO in 1956 after extensive listening tests under simulated noise conditions. It is sometimes called the NATO alphabet, but its origin is civil aviation; NATO adopted the same set later. The choices look arbitrary until one notices the constraints they jointly satisfy: each word has at least two syllables, no two words rhyme, no word is a common English word likely to occur naturally in transmission ("Able" was rejected for that reason in earlier alphabets), and each word sounds distinct in every major language used internationally. Numbers are pronounced separately, with three rendered as "tree" and nine as "niner" to avoid German "nein" confusion and to put a final consonant on a long vowel that would otherwise be lost.</p>
+    <!-- ─────────────────────────────────────────────────────────
+         §3.1 ATC PHRASEOLOGY
+         ───────────────────────────────────────────────────────── -->
+    <h3 id="sec-3-atc">
+      <span data-lang-content="en">ATC Phraseology</span>
+      <span data-lang-content="zh">空管通话</span>
+    </h3>
 
-      <h3>METAR and TAF</h3>
-
-      <p>A surface weather observation in METAR format compresses fifteen or more independent variables into about fifty characters: <span class="mono">KBUF 301654Z 27015G22KT 10SM FEW040 SCT250 08/M02 A2998</span> reports station Buffalo, day-30 of the month at 16:54 UTC, wind 270 degrees at 15 knots gusting 22, visibility 10 statute miles, few clouds at 4,000 feet AGL, scattered at 25,000, temperature 8 °C, dewpoint −2 °C, altimeter 29.98 inches of mercury. A TAF — Terminal Aerodrome Forecast — extends the same syntax into time-bracketed predictions, with conditional clauses (TEMPO, BECMG, PROB30) that nest forecasts within forecasts. A flight crew at the start of a long-haul descent reads ten or twenty such reports for destination, alternates, and en-route waypoints, in a window of a few minutes, while doing other things.</p>
-
-      <h3>ATC phraseology</h3>
-
+    <div data-lang-content="en">
       <p>Standard radiotelephony is governed by ICAO Annex 10 and the procedures in Doc 4444. Every routine controller-pilot exchange has a prescribed form: <span class="mono">"United 287, climb and maintain flight level three-three-zero"</span>; readback: <span class="mono">"Climb and maintain flight level three-three-zero, United 287."</span> Certain words are never used (the negation "no" is replaced by "negative"; "okay" is replaced by "affirm" or "wilco"); altitudes below the transition level are read as feet ("five thousand"), above it as flight levels ("flight level three-three-zero"); headings are read digit-by-digit ("turn left heading two-seven-zero"); the call sign is appended to a readback so the controller can tag the response.</p>
 
+      <p>Letters are spelled out using a 26-word phonetic alphabet — Alfa, Bravo, Charlie, and so on — adopted by ICAO in 1956 after extensive listening tests under simulated noise. It is sometimes called the NATO alphabet, but its origin is civil aviation; NATO adopted the same set later. The choices look arbitrary until one notices the constraints they jointly satisfy: each word has at least two syllables, no two words rhyme, no word is a common English word likely to occur naturally in transmission ("Able" was rejected for that reason in earlier alphabets), and each word sounds distinct in every major language used internationally. Numbers are pronounced separately, with three rendered as "tree" and nine as "niner" to avoid German <em>nein</em> confusion and to put a final consonant on a long vowel that would otherwise be lost.</p>
+
       <p>The Tenerife disaster of March 1977 — two 747s collided on a runway in fog, killing 583 — turned in significant part on a single ambiguous transmission. The KLM crew, holding for departure, transmitted "we are now at takeoff," intending the gerund "rolling" but using a noun construction. The controller, not on the runway and unable to see, replied "OK… stand by for takeoff, I will call you," part of which was overlapped by simultaneous transmission and lost. The KLM aircraft began its takeoff roll into a Pan Am 747 still backtracking on the same runway. The accident was a precipitating cause of a general overhaul of phraseology: the words "takeoff" and "cleared" are now used only in their final, operational sense ("cleared for takeoff" and the corresponding readback), with "departure" substituted in all preparatory contexts.</p>
+    </div>
 
-      <h3>The flight management computer</h3>
+    <div data-lang-content="zh">
+      <p>标准无线电通话用语由 ICAO 附件 10 与 Doc 4444 规定。每一次例行的管制员—飞行员对话都有规定形式：<span class="mono">"United 287, climb and maintain flight level three-three-zero"</span>；复诵：<span class="mono">"Climb and maintain flight level three-three-zero, United 287."</span> 某些词永不使用（否定不用 "no" 而用 "negative"，肯定不用 "okay" 而用 "affirm" 或 "wilco"）；过渡高度以下的高度按英尺读（"five thousand"），以上按飞行高度层读（"flight level three-three-zero"）；航向逐位读出（"turn left heading two-seven-zero"）；呼号附在复诵末尾，以便管制员把回应与发起者对上。</p>
 
+      <p>字母通过一套 26 词的通话字母表逐字拼读——Alfa、Bravo、Charlie⋯⋯——是国际民航组织于 1956 年在大量模拟噪声听辨测试之后采纳的。它有时被称作"北约字母表"，但其源头是民航；北约后来才采用了同一套。这些词的选择初看像是随意的，直到注意到它们共同满足的约束：每个词至少两音节，任意两个词不押韵，没有一个词是常见英语单词（早期版本中的 "Able" 即因此被淘汰），并且在每一种主要的国际通用语中都听感分明。数字单独逐位读出，"3"读为 <em>tree</em>，"9"读为 <em>niner</em>，前者避免与德语 <em>nein</em> 混淆，后者为本来会被吞掉的长元音补一个尾辅音。</p>
+
+      <p>1977 年 3 月的特内里费空难——两架 747 在浓雾中的跑道上相撞，造成 583 人死亡——在很大程度上系于一句模糊的发话。等待起飞的荷兰皇家航空机组发出 "we are now at takeoff"，意图是动名词意义上的"正在起飞"，但用了名词性结构。管制员不在跑道上，看不见发生了什么，回复 "OK… stand by for takeoff, I will call you"，其中一部分被同时发话遮盖而丢失。荷航的飞机在仍在同一跑道上反向滑行的泛美航空 747 面前开始起飞滑跑。这场事故是通话用语全面整改的直接诱因之一：在今天，"takeoff" 与 "cleared" 二词只在其最终的、运行的语义下使用——"cleared for takeoff" 与对应的复诵——一切准备阶段的语境一律改用 "departure"。</p>
+    </div>
+
+    <!-- §3.1 widget A: phonetic alphabet table -->
+    <figure class="phonetic-alphabet-figure">
+      <div class="phonetic-alphabet-table" aria-label="ICAO phonetic alphabet">
+        <div class="phonetic-cell"><span class="phonetic-letter">A</span><span class="phonetic-word">Alfa</span><span class="phonetic-pron">AL fah</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">B</span><span class="phonetic-word">Bravo</span><span class="phonetic-pron">BRAH voh</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">C</span><span class="phonetic-word">Charlie</span><span class="phonetic-pron">CHAR lee</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">D</span><span class="phonetic-word">Delta</span><span class="phonetic-pron">DELL tah</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">E</span><span class="phonetic-word">Echo</span><span class="phonetic-pron">ECK oh</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">F</span><span class="phonetic-word">Foxtrot</span><span class="phonetic-pron">FOKS trot</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">G</span><span class="phonetic-word">Golf</span><span class="phonetic-pron">GOLF</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">H</span><span class="phonetic-word">Hotel</span><span class="phonetic-pron">hoh TELL</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">I</span><span class="phonetic-word">India</span><span class="phonetic-pron">IN dee ah</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">J</span><span class="phonetic-word">Juliett</span><span class="phonetic-pron">JEW lee ETT</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">K</span><span class="phonetic-word">Kilo</span><span class="phonetic-pron">KEY loh</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">L</span><span class="phonetic-word">Lima</span><span class="phonetic-pron">LEE mah</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">M</span><span class="phonetic-word">Mike</span><span class="phonetic-pron">MIKE</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">N</span><span class="phonetic-word">November</span><span class="phonetic-pron">no VEM ber</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">O</span><span class="phonetic-word">Oscar</span><span class="phonetic-pron">OSS cah</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">P</span><span class="phonetic-word">Papa</span><span class="phonetic-pron">pah PAH</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">Q</span><span class="phonetic-word">Quebec</span><span class="phonetic-pron">keh BECK</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">R</span><span class="phonetic-word">Romeo</span><span class="phonetic-pron">ROW me oh</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">S</span><span class="phonetic-word">Sierra</span><span class="phonetic-pron">see AIR ah</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">T</span><span class="phonetic-word">Tango</span><span class="phonetic-pron">TANG go</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">U</span><span class="phonetic-word">Uniform</span><span class="phonetic-pron">YOU nee form</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">V</span><span class="phonetic-word">Victor</span><span class="phonetic-pron">VIK tah</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">W</span><span class="phonetic-word">Whiskey</span><span class="phonetic-pron">WISS key</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">X</span><span class="phonetic-word">X-ray</span><span class="phonetic-pron">ECKS ray</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">Y</span><span class="phonetic-word">Yankee</span><span class="phonetic-pron">YANG key</span></div>
+        <div class="phonetic-cell"><span class="phonetic-letter">Z</span><span class="phonetic-word">Zulu</span><span class="phonetic-pron">ZOO loo</span></div>
+      </div>
+    </figure>
+
+    <!-- §3.1 widget B: ATC dialog generator (form 2) -->
+    <figure class="full-bleed">
+      <div class="atc-widget-header">
+        <span class="atc-widget-title">
+          <span data-lang-content="en">ATC Dialogue Generator</span>
+          <span data-lang-content="zh">空管对话生成器</span>
+        </span>
+        <span class="atc-widget-sub">
+          <span data-lang-content="en">Pick a flight phase. The dialogue is generated from ICAO templates with randomized parameters.</span>
+          <span data-lang-content="zh">选择飞行阶段。对话由 ICAO 标准模板加随机参数生成。</span>
+        </span>
+      </div>
+      <div class="atc-widget" id="atc-widget">
+        <div class="atc-controls">
+          <div class="atc-phase-buttons" id="atc-phase-buttons">
+            <button type="button" data-phase="clearance">
+              <span data-lang-content="en">IFR Clearance</span>
+              <span data-lang-content="zh">放行许可</span>
+            </button>
+            <button type="button" data-phase="taxi">
+              <span data-lang-content="en">Taxi</span>
+              <span data-lang-content="zh">滑行</span>
+            </button>
+            <button type="button" data-phase="takeoff">
+              <span data-lang-content="en">Takeoff</span>
+              <span data-lang-content="zh">起飞</span>
+            </button>
+            <button type="button" data-phase="climb">
+              <span data-lang-content="en">Climb / Departure</span>
+              <span data-lang-content="zh">爬升 / 离场</span>
+            </button>
+            <button type="button" data-phase="enroute">
+              <span data-lang-content="en">En Route</span>
+              <span data-lang-content="zh">航路</span>
+            </button>
+            <button type="button" data-phase="descent">
+              <span data-lang-content="en">Descent</span>
+              <span data-lang-content="zh">下降</span>
+            </button>
+            <button type="button" data-phase="approach">
+              <span data-lang-content="en">Approach</span>
+              <span data-lang-content="zh">进近</span>
+            </button>
+            <button type="button" data-phase="landing">
+              <span data-lang-content="en">Landing</span>
+              <span data-lang-content="zh">着陆</span>
+            </button>
+          </div>
+          <div class="atc-actions">
+            <button type="button" id="atc-regenerate" class="atc-regen-btn">
+              <span data-lang-content="en">Regenerate ↻</span>
+              <span data-lang-content="zh">换一次 ↻</span>
+            </button>
+          </div>
+        </div>
+        <div class="atc-dialog" id="atc-dialog" aria-live="polite"></div>
+      </div>
+    </figure>
+
+    <!-- ─────────────────────────────────────────────────────────
+         §3.2 METAR / TAF
+         ───────────────────────────────────────────────────────── -->
+    <h3 id="sec-3-metar">METAR / TAF</h3>
+
+    <div data-lang-content="en">
+      <p>A surface weather observation in METAR format compresses fifteen or more independent variables into about fifty characters: <span class="mono">KBUF 301654Z 27015G22KT 10SM FEW040 SCT250 08/M02 A2998</span> reports station Buffalo, day-30 of the month at 16:54 UTC, wind 270 degrees at 15 knots gusting 22, visibility 10 statute miles, few clouds at 4,000 feet AGL, scattered at 25,000, temperature 8 °C, dewpoint −2 °C, altimeter 29.98 inches of mercury. A TAF — Terminal Aerodrome Forecast — extends the same syntax into time-bracketed predictions, with conditional clauses (TEMPO, BECMG, PROB30) that nest forecasts within forecasts. A flight crew at the start of a long-haul descent reads ten or twenty such reports for destination, alternates, and en-route waypoints, in a window of a few minutes, while doing other things.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>METAR 格式的地面气象观测报告把十五个以上的独立变量压缩进约五十个字符：<span class="mono">KBUF 301654Z 27015G22KT 10SM FEW040 SCT250 08/M02 A2998</span> 报告的是 Buffalo 站、当月 30 日 16:54 UTC、风向 270 度风速 15 节阵风 22 节、能见度 10 法定英里、4,000 英尺高度少云、25,000 英尺高度疏云、温度 8 ℃、露点 −2 ℃、修正海平面气压 29.98 英寸汞柱。TAF 是 Terminal Aerodrome Forecast，把同样的句法扩展为带时间区间的预报，并以条件子句（TEMPO、BECMG、PROB30）在预报内部嵌套预报。长航段下降前，机组要在数分钟之内、在同时做着别的事情的同时，读完目的地、备降场和航路点的十几或二十几份这种报告。</p>
+    </div>
+
+    <!-- §3.2 METAR widget -->
+    <figure class="full-bleed">
+      <div class="metar-widget" id="metar-widget">
+
+        <div class="metar-input-row">
+          <label class="metar-label" for="metar-icao-input">
+            <span data-lang-content="en">ICAO</span>
+            <span data-lang-content="zh">ICAO 代码</span>
+          </label>
+          <input id="metar-icao-input" type="text" maxlength="4"
+                 placeholder="KBUF" autocomplete="off" spellcheck="false"
+                 aria-label="ICAO airport code"/>
+          <button id="metar-fetch-btn" class="metar-fetch-btn">
+            <span data-lang-content="en">Fetch</span>
+            <span data-lang-content="zh">查询</span>
+          </button>
+          <span class="metar-status" id="metar-status"></span>
+        </div>
+
+        <div class="metar-results" id="metar-results">
+          <!-- METAR section -->
+          <section class="metar-section" data-section="metar">
+            <header class="metar-section-header">
+              <span class="metar-section-title">METAR</span>
+              <span class="metar-section-meta" id="metar-meta"></span>
+            </header>
+            <pre class="metar-raw" id="metar-raw"
+                 data-lang-content="en">Enter an ICAO code above to fetch.</pre>
+            <pre class="metar-raw" id="metar-raw-zh"
+                 data-lang-content="zh">在上方输入 ICAO 代码进行查询。</pre>
+            <div class="metar-decoded" id="metar-decoded"></div>
+          </section>
+
+          <!-- TAF section -->
+          <section class="metar-section" data-section="taf">
+            <header class="metar-section-header">
+              <span class="metar-section-title">TAF</span>
+              <span class="metar-section-meta" id="taf-meta"></span>
+            </header>
+            <pre class="metar-raw" id="taf-raw" data-lang-content="en">—</pre>
+            <pre class="metar-raw" id="taf-raw-zh" data-lang-content="zh">—</pre>
+            <div class="taf-timeline-wrap" id="taf-timeline-wrap" style="display:none">
+              <svg class="taf-timeline" id="taf-timeline"
+                   viewBox="0 0 720 200"
+                   xmlns="http://www.w3.org/2000/svg"
+                   aria-label="TAF forecast timeline"></svg>
+            </div>
+            <div class="metar-decoded" id="taf-decoded"></div>
+          </section>
+        </div>
+
+      </div>
+    </figure>
+
+        <!-- ─────────────────────────────────────────────────────────
+         §3.3 FMC
+         ───────────────────────────────────────────────────────── -->
+    <h3 id="sec-3-fmc">FMC</h3>
+
+    <div data-lang-content="en">
       <p>The flight management computer (FMC) is the airliner's primary navigation, performance, and guidance computer. The crew interacts with it through the control display unit (CDU): a 14-line monochrome electroluminescent display, six line-select keys (LSKs) on each side of the screen labelled <span class="mono">1L</span>–<span class="mono">6L</span> and <span class="mono">1R</span>–<span class="mono">6R</span>, an alphanumeric keypad, a one-line scratchpad along the bottom, and a row of mode-function keys (<span class="mono">INIT REF</span>, <span class="mono">RTE</span>, <span class="mono">DEP ARR</span>, <span class="mono">ATC</span>, <span class="mono">VNAV</span>, <span class="mono">FIX</span>, <span class="mono">LEGS</span>, <span class="mono">HOLD</span>, <span class="mono">FMC COMM</span>, <span class="mono">PROG</span>, <span class="mono">MENU</span>, <span class="mono">N1 LIMIT</span>, <span class="mono">PREV PAGE</span>, <span class="mono">NEXT PAGE</span>) plus the green <span class="mono">EXEC</span> annunciator. Two CDUs are installed side-by-side on the centre pedestal; either pilot can edit, and edits to the active flight plan must be confirmed by pressing <span class="mono">EXEC</span> before they take effect.</p>
 
       <p>Preflight FMC configuration follows a fixed page sequence, each step setting up data the next step depends on. <span class="mono">IDENT</span> displays the model and database AIRAC cycle and is verified current. <span class="mono">POS INIT</span> sets present position by gate coordinates or reference airport, which aligns the inertial reference units (IRUs) — alignment requires the aircraft to remain stationary for several minutes. <span class="mono">RTE</span> accepts origin (<span class="mono">KBUF</span>), destination (<span class="mono">KDFW</span>), company route number if filed, and the route segments themselves: airways and waypoints (<span class="mono">SYR..J70..PSB..PSB7</span>), direct legs (<span class="mono">DCT</span>), and the cruise flight level. <span class="mono">DEP ARR</span> selects the standard instrument departure (SID) and runway, the standard terminal arrival (STAR), and the planned approach. <span class="mono">PERF INIT</span> takes zero fuel weight, fuel quantity (auto-fed by the totaliser), reserves, cost index, and cruise altitude — the cost index is a single integer trading time against fuel that drives all VNAV speed targets. <span class="mono">N1 LIMIT</span> selects the active takeoff thrust rating (<span class="mono">TO</span>, <span class="mono">TO-1</span>, <span class="mono">TO-2</span>, or assumed-temperature derate) and corresponding climb rating. <span class="mono">TAKEOFF REF</span> takes V<sub>1</sub>/V<sub>R</sub>/V<sub>2</sub> from the performance computer and the runway. With each step complete, the route is <span class="mono">EXEC</span>'d into the active flight plan; the FMC computes the lateral and vertical profile and feeds the autopilot/autothrottle and the navigation displays.</p>
@@ -330,24 +507,6 @@
     </div>
 
     <div data-lang-content="zh">
-      <p>航空运行在一摞被构造出来的语言之上。其中每一种都为压缩某一类信息而设计——这些信息要在嘈杂的无线电信道里、在压力下的非母语英语里、在永不相见的人之间、在以人命为赌注的几秒钟之内被传递并被确认。这一摞语言里没有一种是普通英语，也没有一种是无关紧要的。</p>
-
-      <h3>通话字母表</h3>
-
-      <p>用于在无线电中拼读字母的那组词——Alfa、Bravo、Charlie、Delta、Echo、Foxtrot、Golf、Hotel、India、Juliett、Kilo、Lima、Mike、November、Oscar、Papa、Quebec、Romeo、Sierra、Tango、Uniform、Victor、Whiskey、X-ray、Yankee、Zulu——是国际民航组织（ICAO）于 1956 年在大量模拟噪声听辨测试之后采纳的。它有时被称作"北约字母表"，但其源头是民航；北约后来才采用了同一套。这些词的选择初看像是随意的，直到注意到它们共同满足的约束：每个词至少两音节，任意两个词不押韵，没有一个词是常见英语单词（早期版本中的 "Able" 即因此被淘汰），并且在每一种主要的国际通用语中都听感分明。数字单独逐位读出，"3"读为 <em>tree</em>，"9"读为 <em>niner</em>，前者避免与德语 <em>nein</em> 混淆，后者为本来会被吞掉的长元音补一个尾辅音。</p>
-
-      <h3>METAR 与 TAF</h3>
-
-      <p>METAR 格式的地面气象观测报告把十五个以上的独立变量压缩进约五十个字符：<span class="mono">KBUF 301654Z 27015G22KT 10SM FEW040 SCT250 08/M02 A2998</span> 报告的是 Buffalo 站、当月 30 日 16:54 UTC、风向 270 度风速 15 节阵风 22 节、能见度 10 法定英里、4,000 英尺高度少云、25,000 英尺高度疏云、温度 8 ℃、露点 −2 ℃、修正海平面气压 29.98 英寸汞柱。TAF 是 Terminal Aerodrome Forecast，把同样的句法扩展为带时间区间的预报，并以条件子句（TEMPO、BECMG、PROB30）在预报内部嵌套预报。长航段下降前，机组要在数分钟之内、在同时做着别的事情的同时，读完目的地、备降场和航路点的十几或二十几份这种报告。</p>
-
-      <h3>空管通话用语</h3>
-
-      <p>标准无线电通话用语由 ICAO 附件 10 与 Doc 4444 规定。每一次例行的管制员—飞行员对话都有规定形式：<span class="mono">"United 287, climb and maintain flight level three-three-zero"</span>；复诵：<span class="mono">"Climb and maintain flight level three-three-zero, United 287."</span> 某些词永不使用（否定不用 "no" 而用 "negative"，肯定不用 "okay" 而用 "affirm" 或 "wilco"）；过渡高度以下的高度按英尺读（"five thousand"），以上按飞行高度层读（"flight level three-three-zero"）；航向逐位读出（"turn left heading two-seven-zero"）；呼号附在复诵末尾，以便管制员把回应与发起者对上。</p>
-
-      <p>1977 年 3 月的特内里费空难——两架 747 在浓雾中的跑道上相撞，造成 583 人死亡——在很大程度上系于一句模糊的发话。等待起飞的荷兰皇家航空机组发出 "we are now at takeoff"，意图是动名词意义上的"正在起飞"，但用了名词性结构。管制员不在跑道上，看不见发生了什么，回复 "OK… stand by for takeoff, I will call you"，其中一部分被同时发话遮盖而丢失。荷航的飞机在仍在同一跑道上反向滑行的泛美航空 747 面前开始起飞滑跑。这场事故是通话用语全面整改的直接诱因之一：在今天，"takeoff" 与 "cleared" 二词只在其最终的、运行的语义下使用——"cleared for takeoff" 与对应的复诵——一切准备阶段的语境一律改用 "departure"。</p>
-
-      <h3>飞行管理计算机</h3>
-
       <p>飞行管理计算机（FMC）是客机的主导航、性能与制导计算机。机组通过控制显示单元（CDU）与之交互：一块 14 行单色电致发光显示屏，屏幕两侧各有六个行选择键（LSK），标作 <span class="mono">1L</span>–<span class="mono">6L</span> 与 <span class="mono">1R</span>–<span class="mono">6R</span>，下方为字母数字键盘和位于底部的一行草稿板（scratchpad），以及一排模式/功能键（<span class="mono">INIT REF</span>、<span class="mono">RTE</span>、<span class="mono">DEP ARR</span>、<span class="mono">ATC</span>、<span class="mono">VNAV</span>、<span class="mono">FIX</span>、<span class="mono">LEGS</span>、<span class="mono">HOLD</span>、<span class="mono">FMC COMM</span>、<span class="mono">PROG</span>、<span class="mono">MENU</span>、<span class="mono">N1 LIMIT</span>、<span class="mono">PREV PAGE</span>、<span class="mono">NEXT PAGE</span>），加上绿色的 <span class="mono">EXEC</span> 提示灯。两台 CDU 在中央操纵台并排安装；任一飞行员皆可编辑，对激活飞行计划的修改必须按 <span class="mono">EXEC</span> 确认后方才生效。</p>
 
       <p>飞行前 FMC 的配置遵循一个固定页面序列，每一步设置都为下一步提供数据。<span class="mono">IDENT</span> 页显示机型与导航数据库 AIRAC 周期，机组确认当前周期有效。<span class="mono">POS INIT</span> 页以登机门坐标或参考机场设置当前位置，用以对齐惯性基准装置（IRU）——对齐要求飞机静止数分钟。<span class="mono">RTE</span> 页录入起始机场（<span class="mono">KBUF</span>）、目的机场（<span class="mono">KDFW</span>）、若有则录入公司航路编号，以及航段本身：航路与航点（<span class="mono">SYR..J70..PSB..PSB7</span>）、直飞段（<span class="mono">DCT</span>）、巡航高度层。<span class="mono">DEP ARR</span> 页选择标准仪表离场程序（SID）与跑道、标准终端进场程序（STAR）和预计进近程序。<span class="mono">PERF INIT</span> 页录入零燃油重量、燃油量（由油量计自动填入）、备份油量、成本指数（cost index）和巡航高度——成本指数是一个整数，权衡时间与燃油，驱动 VNAV 全部速度目标。<span class="mono">N1 LIMIT</span> 页选定起飞推力等级（<span class="mono">TO</span>、<span class="mono">TO-1</span>、<span class="mono">TO-2</span>、或基于设定温度的降推力）与相应爬升推力等级。<span class="mono">TAKEOFF REF</span> 页从性能计算机与跑道读取 V<sub>1</sub>/V<sub>R</sub>/V<sub>2</sub>。每一步完成后按 <span class="mono">EXEC</span>，将航路写入激活飞行计划；FMC 据此计算横向与垂直剖面，并将其馈送给自动驾驶、自动油门以及导航显示器。</p>
@@ -355,7 +514,7 @@
       <p>在飞行中，常驻页面通常是 <span class="mono">LEGS</span>——按顺序排列的航点列表，每个航点附带目标高度与速度。编辑遵循事务式工作流：在草稿板中键入新值，按对应的 LSK 暂存修改（页头由 <span class="mono">ACT</span> 切换为 <span class="mono">MOD</span>，<span class="mono">EXEC</span> 提示灯亮），可继续修改任意多次，直到按下 <span class="mono">EXEC</span> 一次性提交全部修改，或按 <span class="mono">ERASE</span> 撤销。<span class="mono">PROG</span> 页是飞行中的状态页：到下一航点与目的地的距离与预计到达时间、目的地预测剩余油量、风、横向偏离。<span class="mono">FIX</span> 页可从选定航点向导航显示器投射方位/距离参考圆——可视化净空界限的标准工具。<span class="mono">HOLD</span> 页在任一航点定义或修改等待航线。<span class="mono">VNAV</span> 页显示并调谐垂直剖面（爬升、巡航、下降的高度限制）。<span class="mono">FMC COMM</span> 页处理数据链（CPDLC、ACARS）报文编辑。<span class="mono">ATC</span> 页是管制员—飞行员数据链接口，用于请求与确认许可。这套界面在设计上是克制的：每个值都可编辑，每次编辑在 <span class="mono">EXEC</span> 之前都可撤销，没有任何动作是默默发生的。</p>
     </div>
 
-    <!-- ─── Widget for §3: FMC/CDU input demo ──────────────────── -->
+    <!-- ─── §3.3 FMC widget ──────────────────── -->
     <figure class="full-bleed">
       <div class="fmc-widget-header">
         <span class="fmc-widget-title">
@@ -521,60 +680,6 @@
             </div>
             <div class="fmc-manual-body" id="fmc-manual-body"></div>
           </div>
-        </div>
-
-      </div>
-    </figure>
-
-    <!-- Widget for §3: METAR/TAF decoder -->
-    <figure class="full-bleed">
-      <div class="metar-widget" id="metar-widget">
-
-        <div class="metar-input-row">
-          <label class="metar-label" for="metar-icao-input">
-            <span data-lang-content="en">ICAO</span>
-            <span data-lang-content="zh">ICAO 代码</span>
-          </label>
-          <input id="metar-icao-input" type="text" maxlength="4"
-                 placeholder="KBUF" autocomplete="off" spellcheck="false"
-                 aria-label="ICAO airport code"/>
-          <button id="metar-fetch-btn" class="metar-fetch-btn">
-            <span data-lang-content="en">Fetch</span>
-            <span data-lang-content="zh">查询</span>
-          </button>
-          <span class="metar-status" id="metar-status"></span>
-        </div>
-
-        <div class="metar-results" id="metar-results">
-          <!-- METAR section -->
-          <section class="metar-section" data-section="metar">
-            <header class="metar-section-header">
-              <span class="metar-section-title">METAR</span>
-              <span class="metar-section-meta" id="metar-meta"></span>
-            </header>
-            <pre class="metar-raw" id="metar-raw"
-                 data-lang-content="en">Enter an ICAO code above to fetch.</pre>
-            <pre class="metar-raw" id="metar-raw-zh"
-                 data-lang-content="zh">在上方输入 ICAO 代码进行查询。</pre>
-            <div class="metar-decoded" id="metar-decoded"></div>
-          </section>
-
-          <!-- TAF section -->
-          <section class="metar-section" data-section="taf">
-            <header class="metar-section-header">
-              <span class="metar-section-title">TAF</span>
-              <span class="metar-section-meta" id="taf-meta"></span>
-            </header>
-            <pre class="metar-raw" id="taf-raw" data-lang-content="en">—</pre>
-            <pre class="metar-raw" id="taf-raw-zh" data-lang-content="zh">—</pre>
-            <div class="taf-timeline-wrap" id="taf-timeline-wrap" style="display:none">
-              <svg class="taf-timeline" id="taf-timeline"
-                   viewBox="0 0 720 200"
-                   xmlns="http://www.w3.org/2000/svg"
-                   aria-label="TAF forecast timeline"></svg>
-            </div>
-            <div class="metar-decoded" id="taf-decoded"></div>
-          </section>
         </div>
 
       </div>
@@ -2960,6 +3065,397 @@
   // Kick off async nav data fetch (NASR-derived JSONs).
   // No await — render() handles the loading state via NAV_DATA.loadState.
   startNavDataLoad();
+})();
+</script>
+
+<!-- ─── §3.1 ATC Dialogue Generator ──────────────────────────
+     Form 2: parameterised templates with randomised parameters.
+     Templates encode ICAO Doc 4444 phraseology; parameters
+     (callsigns, runways, altitudes, headings, frequencies)
+     are sampled per regeneration. Bilingual decode subtext
+     explains each transmission.
+     ───────────────────────────────────────────────────────── -->
+<script>
+(function () {
+  const widget = document.getElementById('atc-widget');
+  if (!widget) return;
+
+  const dialogEl = widget.querySelector('#atc-dialog');
+  const phaseButtons = Array.from(widget.querySelectorAll('#atc-phase-buttons button'));
+  const regenBtn = widget.querySelector('#atc-regenerate');
+
+  // ─── Parameter pools ─────────────────────────────────────
+  // Sampled at random each regeneration.
+  const AIRLINE_CALLSIGNS = [
+    { call: 'United',     icao: 'UAL' },
+    { call: 'American',   icao: 'AAL' },
+    { call: 'Delta',      icao: 'DAL' },
+    { call: 'Southwest',  icao: 'SWA' },
+    { call: 'JetBlue',    icao: 'JBU' },
+    { call: 'Speedbird',  icao: 'BAW' },   // British Airways
+    { call: 'Lufthansa',  icao: 'DLH' },
+    { call: 'Air China',  icao: 'CCA' },
+    { call: 'Cathay',     icao: 'CPA' },
+    { call: 'Qantas',     icao: 'QFA' }
+  ];
+  const AIRPORTS = [
+    { icao: 'KBUF', name: 'Buffalo',         twr: 'Buffalo Tower',         gnd: 'Buffalo Ground',         dep: 'Buffalo Departure',     app: 'Buffalo Approach',     ctr: 'Cleveland Center' },
+    { icao: 'KJFK', name: 'Kennedy',         twr: 'Kennedy Tower',         gnd: 'Kennedy Ground',         dep: 'New York Departure',    app: 'New York Approach',    ctr: 'New York Center' },
+    { icao: 'KORD', name: "O'Hare",          twr: "O'Hare Tower",          gnd: "O'Hare Ground",          dep: 'Chicago Departure',     app: 'Chicago Approach',     ctr: 'Chicago Center' },
+    { icao: 'KSFO', name: 'San Francisco',   twr: 'San Francisco Tower',   gnd: 'San Francisco Ground',   dep: 'NorCal Departure',      app: 'NorCal Approach',      ctr: 'Oakland Center' },
+    { icao: 'KLAX', name: 'Los Angeles',     twr: 'Los Angeles Tower',     gnd: 'Los Angeles Ground',     dep: 'SoCal Departure',       app: 'SoCal Approach',       ctr: 'Los Angeles Center' }
+  ];
+  const RUNWAYS_BY_AIRPORT = {
+    KBUF: ['23', '5', '14', '32'],
+    KJFK: ['04L', '04R', '13L', '13R', '22L', '22R', '31L', '31R'],
+    KORD: ['10L', '10C', '10R', '28L', '28C', '28R', '4L', '4R', '22L', '22R'],
+    KSFO: ['28L', '28R', '01L', '01R', '10L', '10R'],
+    KLAX: ['25L', '25R', '24L', '24R', '07L', '07R', '06L', '06R']
+  };
+  const FIXES = ['BUFFY', 'GREKI', 'KORRY', 'BIZEX', 'COATE', 'DEEZZ', 'PARCH', 'WAVEY',
+                 'CAMRN', 'DPK', 'BOSOX', 'MERIT', 'CYNTHIANA', 'LENDY', 'BAYYS'];
+  const FLIGHT_LEVELS = ['260', '280', '300', '310', '320', '330', '340', '350', '360', '370', '380', '390', '400'];
+  const ALTITUDES_FT = [3000, 4000, 5000, 6000, 7000, 8000, 10000, 11000, 12000, 13000, 14000, 16000, 17000];
+
+  // ─── Number-speak helpers ────────────────────────────────
+  // ATC reads digits one-by-one. 3 → tree, 9 → niner.
+  const DIGIT_SPOKEN = {
+    '0': 'zero', '1': 'one', '2': 'two', '3': 'tree', '4': 'four',
+    '5': 'five', '6': 'six', '7': 'seven', '8': 'eight', '9': 'niner'
+  };
+  function digitsSpoken(s) {
+    return String(s).split('').map(c => DIGIT_SPOKEN[c] || c).join('-');
+  }
+  function altitudeSpoken(ft) {
+    // Below FL180, speak as "<thousands> thousand" or "<n> thousand <m> hundred"
+    const thousand = Math.floor(ft / 1000);
+    const hundred = (ft % 1000) / 100;
+    let s = digitsSpoken(thousand) + ' thousand';
+    if (hundred > 0) s += ' ' + digitsSpoken(hundred) + ' hundred';
+    return s;
+  }
+  function flightLevelSpoken(fl) {
+    return 'flight level ' + digitsSpoken(fl);
+  }
+  function freqSpoken(mhz) {
+    // e.g. 125.3 → "one-two-five point three"
+    const [whole, frac] = String(mhz).split('.');
+    let s = digitsSpoken(whole);
+    if (frac) s += ' point ' + digitsSpoken(frac);
+    return s;
+  }
+  function runwaySpoken(rw) {
+    // '23R' → "two-tree right";  '04L' → "zero-four left"
+    const m = rw.match(/^(\d+)([LCR]?)$/);
+    if (!m) return rw;
+    const num = m[1].padStart(2, '0');
+    const side = { L: 'left', C: 'center', R: 'right' }[m[2]] || '';
+    return digitsSpoken(num) + (side ? ' ' + side : '');
+  }
+  function callsignSpoken(call, num) {
+    // Numbers in flight numbers usually grouped if they happen to align —
+    // simplest correct version: speak digits one by one.
+    return call + ' ' + digitsSpoken(num);
+  }
+
+  // ─── Sample a context object ─────────────────────────────
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function pickInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+  function sampleContext(originIcao) {
+    const a = AIRLINE_CALLSIGNS[Math.floor(Math.random() * AIRLINE_CALLSIGNS.length)];
+    const flightNum = String(pickInt(100, 1999));
+    const apt = AIRPORTS.find(x => x.icao === originIcao) || pick(AIRPORTS);
+    const dest = pick(AIRPORTS.filter(x => x.icao !== apt.icao));
+    const rwys = RUNWAYS_BY_AIRPORT[apt.icao] || ['18'];
+    const rwy = pick(rwys);
+    const fl = pick(FLIGHT_LEVELS);
+    const altFt = pick(ALTITUDES_FT);
+    const fix = pick(FIXES);
+    const heading = String(pickInt(1, 36) * 10).padStart(3, '0');
+    const towerFreq = (118 + Math.random() * 18).toFixed(1);   // 118-136 MHz
+    const groundFreq = (121 + Math.random() * 1.5).toFixed(2); // GND usually 121.x
+    const depFreq = (124 + Math.random() * 8).toFixed(1);
+    const appFreq = (124 + Math.random() * 8).toFixed(1);
+    const ctrFreq = (132 + Math.random() * 4).toFixed(1);
+    const squawk = String(pickInt(1000, 6777)).padStart(4, '0').replace(/[89]/g, '7');
+
+    return {
+      callsign: a.call,
+      callsignSpoken: callsignSpoken(a.call, flightNum),
+      flightNum: digitsSpoken(flightNum),
+      origin: apt,
+      dest: dest,
+      runway: rwy,
+      runwaySpoken: runwaySpoken(rwy),
+      flightLevel: fl,
+      flightLevelSpoken: flightLevelSpoken(fl),
+      altFt: altFt,
+      altSpoken: altitudeSpoken(altFt),
+      fix: fix,
+      heading: heading,
+      headingSpoken: digitsSpoken(heading),
+      towerFreq: towerFreq,
+      towerFreqSpoken: freqSpoken(towerFreq),
+      groundFreq: groundFreq,
+      groundFreqSpoken: freqSpoken(groundFreq),
+      depFreq: depFreq,
+      depFreqSpoken: freqSpoken(depFreq),
+      appFreq: appFreq,
+      appFreqSpoken: freqSpoken(appFreq),
+      ctrFreq: ctrFreq,
+      ctrFreqSpoken: freqSpoken(ctrFreq),
+      squawk: squawk,
+      squawkSpoken: digitsSpoken(squawk)
+    };
+  }
+
+  // ─── Phase templates ─────────────────────────────────────
+  // Each template is an array of {speaker, text, decode_en, decode_zh}.
+  // text uses Mustache-style {slot} substitution.
+  // speaker is the *short* facility code; full names are looked up in `ctx`.
+  const TEMPLATES = {
+    clearance: [
+      [
+        { who: 'PILOT', txt: '{ctrl}, {call}, IFR to {destName}, ready to copy.',
+          en: 'Pilot announces ready to receive the IFR clearance.',
+          zh: '飞行员向放行席报告准备抄收 IFR 放行许可。' },
+        { who: 'CLR', txt: '{call}, {ctrl}, cleared to {destName} via the {sidName} departure, then as filed. Climb maintain {altSpoken}, expect {flSpoken} ten minutes after departure. Departure frequency {depFreqSpoken}, squawk {squawkSpoken}.',
+          en: 'Clearance: cleared to destination via SID, initial altitude, expected cruise, departure frequency, transponder code.',
+          zh: '放行：经标准仪表离场（SID）至目的地，初始高度、预期巡航高度层、离场频率、应答机编码。' },
+        { who: 'PILOT', txt: 'Cleared to {destName} via {sidName}, then as filed, climb {altSpoken}, expect {flSpoken} after ten, departure {depFreqSpoken}, squawk {squawkSpoken}, {call}.',
+          en: 'Pilot reads back the clearance verbatim, callsign at the end.',
+          zh: '飞行员逐字复诵放行内容，呼号置于末尾。' }
+      ]
+    ],
+    taxi: [
+      [
+        { who: 'PILOT', txt: '{gnd}, {call}, gate {gateNum}, ready to taxi with information {atisLetter}.',
+          en: 'Pilot calls Ground, gate position, ATIS letter (so the controller knows the pilot has the latest field info).',
+          zh: '飞行员呼叫地面席，报登机口位置和已收听的 ATIS 编号（让管制员知道机组掌握最新机场信息）。' },
+        { who: 'GND', txt: '{call}, {gnd}, runway {rwySpoken}, taxi via Alpha, Charlie, hold short of runway {rwySpoken}.',
+          en: 'Ground assigns the departure runway and the taxi route.',
+          zh: '地面指派起飞跑道与滑行路线。' },
+        { who: 'PILOT', txt: 'Runway {rwySpoken}, taxi via Alpha, Charlie, hold short of runway {rwySpoken}, {call}.',
+          en: 'Pilot reads back the runway and taxi route.',
+          zh: '飞行员复诵跑道和滑行路线。' }
+      ]
+    ],
+    takeoff: [
+      [
+        { who: 'PILOT', txt: '{twr}, {call}, holding short runway {rwySpoken}, ready for departure.',
+          en: 'Pilot reports ready at the runway hold-short line.',
+          zh: '飞行员报告在跑道等待线已准备就绪。' },
+        { who: 'TWR', txt: '{call}, {twr}, runway {rwySpoken}, wind {windDir} at {windKt}, cleared for takeoff.',
+          en: 'Tower issues the actual takeoff clearance — note "cleared for takeoff" only used here, never preparatorily (Tenerife rule).',
+          zh: '塔台发出起飞许可——注意 "cleared for takeoff" 只在此处使用，准备阶段一律不用（特内里费规则）。' },
+        { who: 'PILOT', txt: 'Cleared for takeoff runway {rwySpoken}, {call}.',
+          en: 'Readback: clearance text + runway + callsign.',
+          zh: '复诵：许可文字 + 跑道 + 呼号。' }
+      ]
+    ],
+    climb: [
+      [
+        { who: 'TWR', txt: '{call}, contact {dep} {depFreqSpoken}, good day.',
+          en: 'Tower hands off to Departure as the aircraft passes upwind.',
+          zh: '塔台在飞机通过上风段后将其移交给离场席。' },
+        { who: 'PILOT', txt: '{depFreqSpoken}, {call}, good day.',
+          en: 'Pilot reads back the new frequency.',
+          zh: '飞行员复诵新频率。' },
+        { who: 'PILOT', txt: '{dep}, {call}, passing {altSpoken} climbing {flSpoken}.',
+          en: 'Initial check-in on Departure: callsign + present altitude + assigned altitude/level.',
+          zh: '在离场席首次报到：呼号 + 当前高度 + 指定高度/高度层。' },
+        { who: 'DEP', txt: '{call}, {dep}, radar contact, climb and maintain {flSpoken}, direct {fix}.',
+          en: 'Controller confirms radar identification, clears to cruise, and assigns a direct routing to a fix.',
+          zh: '管制员确认雷达识别，许可至巡航高度层，并指派直飞至某航点。' },
+        { who: 'PILOT', txt: 'Climb and maintain {flSpoken}, direct {fix}, {call}.',
+          en: 'Readback in the canonical order: altitude, then routing, then callsign.',
+          zh: '按规范顺序复诵：高度、然后是航路、最后呼号。' }
+      ]
+    ],
+    enroute: [
+      [
+        { who: 'CTR', txt: '{call}, {ctrl}, descend at pilot\'s discretion, maintain {altSpoken}.',
+          en: 'Center grants pilot\'s-discretion descent — pilot may begin whenever appropriate.',
+          zh: '区调许可飞行员自定时机下降——机组可在合适时机自行开始。' },
+        { who: 'PILOT', txt: 'Pilot\'s discretion to {altSpoken}, {call}.',
+          en: 'Readback. "Pilot\'s discretion" is part of the clearance phrasing.',
+          zh: '复诵。"Pilot\'s discretion"（自定时机）是许可的一部分。' }
+      ],
+      [
+        { who: 'CTR', txt: '{call}, {ctrl}, contact {nextCtrl} {ctrFreqSpoken}.',
+          en: 'Center hands off to the next sector.',
+          zh: '区调将航班移交至下一扇区。' },
+        { who: 'PILOT', txt: '{ctrFreqSpoken}, {call}.',
+          en: 'Pilot reads back only the new frequency and own callsign.',
+          zh: '飞行员仅复诵新频率与本机呼号。' }
+      ]
+    ],
+    descent: [
+      [
+        { who: 'CTR', txt: '{call}, {ctrl}, descend and maintain {altSpoken}, cross {fix} at or above {altCrossSpoken}.',
+          en: 'Descent clearance with a crossing restriction at a named fix.',
+          zh: '下降许可，附带在指定航点上的过点高度限制。' },
+        { who: 'PILOT', txt: 'Descend and maintain {altSpoken}, cross {fix} at or above {altCrossSpoken}, {call}.',
+          en: 'Readback. Restriction must be read back verbatim.',
+          zh: '复诵。限制条件必须逐字复诵。' }
+      ]
+    ],
+    approach: [
+      [
+        { who: 'APP', txt: '{call}, {app}, turn left heading {hdgSpoken}, descend and maintain {altSpoken}, vectors for the ILS runway {rwySpoken} approach.',
+          en: 'Vectors to final: assigned heading + altitude + intended approach.',
+          zh: '雷达引导至最后进近：分配航向 + 高度 + 预计进近程序。' },
+        { who: 'PILOT', txt: 'Left {hdgSpoken}, down to {altSpoken}, vectors ILS {rwySpoken}, {call}.',
+          en: 'Compact readback. Pilots may abbreviate routine phrases like "descend and maintain" → "down to".',
+          zh: '紧凑复诵。常用短语可酌情简化（"descend and maintain" → "down to"）。' },
+        { who: 'APP', txt: '{call}, three miles from {fix}, turn left heading {hdgSpoken}, maintain {altSpoken} until established on the localizer, cleared ILS runway {rwySpoken} approach.',
+          en: 'Final vector + maintain altitude until intercepting the localiser + the actual approach clearance.',
+          zh: '最终引导 + 截获航向台前保持高度 + 进近许可。' },
+        { who: 'PILOT', txt: 'Left {hdgSpoken}, maintain {altSpoken} until established, cleared ILS {rwySpoken}, {call}.',
+          en: 'Readback of the approach clearance.',
+          zh: '复诵进近许可。' }
+      ]
+    ],
+    landing: [
+      [
+        { who: 'APP', txt: '{call}, contact {twr} {towerFreqSpoken}.',
+          en: 'Approach hands off to Tower for the final 5 NM.',
+          zh: '进近席在最后约 5 海里将航班移交塔台。' },
+        { who: 'PILOT', txt: '{towerFreqSpoken}, {call}.',
+          en: 'Brief readback: new frequency, callsign.',
+          zh: '简短复诵：新频率，呼号。' },
+        { who: 'PILOT', txt: '{twr}, {call}, ILS runway {rwySpoken}.',
+          en: 'Initial Tower call: callsign + the approach being flown.',
+          zh: '首次呼叫塔台：呼号 + 正在飞的进近程序。' },
+        { who: 'TWR', txt: '{call}, {twr}, runway {rwySpoken}, wind {windDir} at {windKt}, cleared to land.',
+          en: 'Landing clearance: runway + winds + the operative phrase "cleared to land".',
+          zh: '着陆许可：跑道 + 风 + 关键短语 "cleared to land"。' },
+        { who: 'PILOT', txt: 'Cleared to land runway {rwySpoken}, {call}.',
+          en: 'Readback. Runway must be repeated.',
+          zh: '复诵。跑道必须重复。' }
+      ]
+    ]
+  };
+
+  // ─── Render ──────────────────────────────────────────────
+  // Template slot expansion. Each line gets its `txt` rendered with
+  // ctx values; speaker is mapped to a friendly facility name.
+  const SPEAKER_LABEL = {
+    PILOT:  null,           // resolved at render to the callsign abbrev
+    CLR:    'CLNC DLY',
+    GND:    'GROUND',
+    TWR:    'TOWER',
+    DEP:    'DEPARTURE',
+    APP:    'APPROACH',
+    CTR:    'CENTER'
+  };
+
+  function expand(text, ctx) {
+    return text.replace(/\{(\w+)\}/g, (m, key) => {
+      switch (key) {
+        case 'call':         return ctx.callsignSpoken;
+        case 'destName':     return ctx.dest.name;
+        case 'sidName':      return ctx.fix + ' ' + (1 + Math.floor(Math.random()*9)); // e.g. BUFFY 3
+        case 'altSpoken':    return ctx.altSpoken;
+        case 'flSpoken':     return ctx.flightLevelSpoken;
+        case 'depFreqSpoken':return ctx.depFreqSpoken;
+        case 'appFreqSpoken':return ctx.appFreqSpoken;
+        case 'ctrFreqSpoken':return ctx.ctrFreqSpoken;
+        case 'towerFreqSpoken': return ctx.towerFreqSpoken;
+        case 'squawkSpoken': return ctx.squawkSpoken;
+        case 'rwySpoken':    return ctx.runwaySpoken;
+        case 'fix':          return ctx.fix;
+        case 'gateNum':      return ctx.gateNum || (1 + Math.floor(Math.random()*40));
+        case 'atisLetter':   return ctx.atisLetter || String.fromCharCode(65 + Math.floor(Math.random()*26));
+        case 'windDir':      return ctx.windDir || (Math.floor(Math.random()*36)*10).toString().padStart(3,'0');
+        case 'windKt':       return ctx.windKt || (5 + Math.floor(Math.random()*20)).toString();
+        case 'hdgSpoken':    return ctx.headingSpoken;
+        case 'altCrossSpoken': return altitudeSpoken(Math.max(3000, ctx.altFt - 4000));
+        case 'twr':          return ctx.origin.twr;
+        case 'gnd':          return ctx.origin.gnd;
+        case 'dep':          return ctx.origin.dep;
+        case 'app':          return ctx.dest.app;
+        case 'ctrl':         return ctx.origin.ctr;
+        case 'nextCtrl':     return ctx.dest.ctr;
+        default:             return m;
+      }
+    });
+  }
+
+  function speakerHTML(who, ctx) {
+    const isPilot = who === 'PILOT';
+    let label;
+    if (isPilot) {
+      label = ctx.callsign.toUpperCase();
+    } else {
+      label = SPEAKER_LABEL[who] || who;
+    }
+    const cls = isPilot ? 'is-pilot' : 'is-controller';
+    return `<span class="atc-speaker ${cls}">${label}</span>`;
+  }
+
+  function renderPhase(phaseKey) {
+    const phaseTemplates = TEMPLATES[phaseKey];
+    if (!phaseTemplates) return;
+    const template = phaseTemplates[Math.floor(Math.random() * phaseTemplates.length)];
+    const ctx = sampleContext();
+
+    // Pre-compute crossing fix altitude/level to keep narrative consistent
+    ctx.gateNum = 1 + Math.floor(Math.random() * 40);
+    ctx.atisLetter = String.fromCharCode(65 + Math.floor(Math.random()*26));
+    ctx.windDir = (Math.floor(Math.random()*36)*10).toString().padStart(3,'0');
+    ctx.windKt = (4 + Math.floor(Math.random()*16)).toString();
+
+    const lines = template.map(line => {
+      const txt = expand(line.txt, ctx);
+      const spkHTML = speakerHTML(line.who, ctx);
+      const decodeHTML = (line.en || line.zh)
+        ? `<span class="atc-decode">
+             <span data-lang-content="en">${line.en || ''}</span>
+             <span data-lang-content="zh">${line.zh || ''}</span>
+           </span>`
+        : '';
+      return `<div class="atc-line">
+        ${spkHTML}
+        <span class="atc-transmission">"${txt}"${decodeHTML}</span>
+      </div>`;
+    }).join('');
+
+    dialogEl.innerHTML = lines;
+  }
+
+  let activePhase = null;
+  function setActivePhase(phaseKey) {
+    activePhase = phaseKey;
+    phaseButtons.forEach(b => b.classList.toggle('active', b.dataset.phase === phaseKey));
+    renderPhase(phaseKey);
+  }
+
+  phaseButtons.forEach(b => {
+    b.addEventListener('click', () => setActivePhase(b.dataset.phase));
+  });
+  regenBtn.addEventListener('click', () => {
+    if (activePhase) renderPhase(activePhase);
+    else setActivePhase('clearance');  // first regen click without selection → clearance
+  });
+
+  // Initial state: empty placeholder asking the reader to pick a phase.
+  function showEmpty() {
+    dialogEl.innerHTML = `<div class="atc-dialog-empty">
+      <span data-lang-content="en">Pick a flight phase above to generate a sample dialogue.</span>
+      <span data-lang-content="zh">从上方选择一个飞行阶段，以生成一段示例对话。</span>
+    </div>`;
+  }
+  showEmpty();
+
+  // Re-render the visible block on language change so any data-lang-content
+  // children swap correctly. (CSS handles the actual swap; we don't re-run
+  // the template — same phase, same parameters.)
+  document.addEventListener('flying:langchange', () => {
+    if (!activePhase) showEmpty();
+    // CSS handles in-place language swap for already-rendered lines
+  });
 })();
 </script>
 
