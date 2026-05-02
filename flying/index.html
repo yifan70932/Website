@@ -326,7 +326,11 @@
 
       <h3>The flight management computer</h3>
 
-      <p>A modern airliner's flight plan is not a route on a paper chart; it is a sequence of identifiers entered into a flight management computer (FMC) through a hardware terminal called a control display unit (CDU). The syntax is its own constructed language. <span class="mono">KBUF</span> is the origin, <span class="mono">KDFW</span> the destination; a route segment <span class="mono">SYR..PSB..AIR..AGC</span> chains four navigation fixes into a lateral path; <span class="mono">DCT</span> means "direct," bypassing intermediate waypoints; a standard instrument departure (SID) and a standard terminal arrival (STAR) are inserted by name and runway. The CDU is a six-line monochrome display with twelve "line select keys" along the bezel, each of which acts on whatever value is displayed beside it; the alphanumeric keypad below feeds a "scratchpad" that loads into the selected line. The interaction style is from the late 1970s and has changed remarkably little since. Pilots type a route the way an early UNIX user typed at a terminal — with full awareness that one wrong character in the wrong field is a wrong path through real airspace.</p>
+      <p>The flight management computer (FMC) is the airliner's primary navigation, performance, and guidance computer. The crew interacts with it through the control display unit (CDU): a 14-line monochrome electroluminescent display, six line-select keys (LSKs) on each side of the screen labelled <span class="mono">1L</span>–<span class="mono">6L</span> and <span class="mono">1R</span>–<span class="mono">6R</span>, an alphanumeric keypad, a one-line scratchpad along the bottom, and a row of mode-function keys (<span class="mono">INIT REF</span>, <span class="mono">RTE</span>, <span class="mono">DEP ARR</span>, <span class="mono">ATC</span>, <span class="mono">VNAV</span>, <span class="mono">FIX</span>, <span class="mono">LEGS</span>, <span class="mono">HOLD</span>, <span class="mono">FMC COMM</span>, <span class="mono">PROG</span>, <span class="mono">MENU</span>, <span class="mono">N1 LIMIT</span>, <span class="mono">PREV PAGE</span>, <span class="mono">NEXT PAGE</span>) plus the green <span class="mono">EXEC</span> annunciator. Two CDUs are installed side-by-side on the centre pedestal; either pilot can edit, and edits to the active flight plan must be confirmed by pressing <span class="mono">EXEC</span> before they take effect.</p>
+
+      <p>Preflight FMC configuration follows a fixed page sequence, each step setting up data the next step depends on. <span class="mono">IDENT</span> displays the model and database AIRAC cycle and is verified current. <span class="mono">POS INIT</span> sets present position by gate coordinates or reference airport, which aligns the inertial reference units (IRUs) — alignment requires the aircraft to remain stationary for several minutes. <span class="mono">RTE</span> accepts origin (<span class="mono">KBUF</span>), destination (<span class="mono">KDFW</span>), company route number if filed, and the route segments themselves: airways and waypoints (<span class="mono">SYR..J70..PSB..PSB7</span>), direct legs (<span class="mono">DCT</span>), and the cruise flight level. <span class="mono">DEP ARR</span> selects the standard instrument departure (SID) and runway, the standard terminal arrival (STAR), and the planned approach. <span class="mono">PERF INIT</span> takes zero fuel weight, fuel quantity (auto-fed by the totaliser), reserves, cost index, and cruise altitude — the cost index is a single integer trading time against fuel that drives all VNAV speed targets. <span class="mono">N1 LIMIT</span> selects the active takeoff thrust rating (<span class="mono">TO</span>, <span class="mono">TO-1</span>, <span class="mono">TO-2</span>, or assumed-temperature derate) and corresponding climb rating. <span class="mono">TAKEOFF REF</span> takes V<sub>1</sub>/V<sub>R</sub>/V<sub>2</sub> from the performance computer and the runway. With each step complete, the route is <span class="mono">EXEC</span>'d into the active flight plan; the FMC computes the lateral and vertical profile and feeds the autopilot/autothrottle and the navigation displays.</p>
+
+      <p>In flight, the active page is usually <span class="mono">LEGS</span> — the sequenced list of waypoints, each with a target altitude and speed. Edits work as a transaction: keying a new value into the scratchpad and pressing the corresponding LSK stages a modification (the page header changes from <span class="mono">ACT</span> to <span class="mono">MOD</span> and <span class="mono">EXEC</span> illuminates), allowing as many further edits as needed before <span class="mono">EXEC</span> commits the whole set or <span class="mono">ERASE</span> reverts. <span class="mono">PROG</span> is the in-flight status page: distance and ETA to next waypoint and destination, fuel-at-destination prediction, wind, and cross-track error. <span class="mono">FIX</span> draws bearing/distance reference rings from a chosen waypoint onto the navigation display — the standard tool for visualising clearance limits. <span class="mono">HOLD</span> defines or modifies a holding pattern at any waypoint. <span class="mono">VNAV</span> displays and tunes the vertical profile (climb, cruise, descent path constraints). <span class="mono">FMC COMM</span> handles datalink (CPDLC, ACARS) message composition. <span class="mono">ATC</span> is the controller-pilot datalink interface for clearance requests and acknowledgements. The interface is austere by design: every value is editable, every edit is reversible up to <span class="mono">EXEC</span>, and nothing happens silently.</p>
     </div>
 
     <div data-lang-content="zh">
@@ -348,7 +352,11 @@
 
       <h3>飞行管理计算机</h3>
 
-      <p>现代客机的飞行计划不是一张纸质航图上的航线，而是输入飞行管理计算机（FMC）的一串标识符，输入通过一种叫作控制显示单元（CDU）的硬件终端完成。这套语法本身是一门被构造出来的语言。<span class="mono">KBUF</span> 是起始站，<span class="mono">KDFW</span> 是目的地；一段航路 <span class="mono">SYR..PSB..AIR..AGC</span> 把四个导航定位点串联成一条横向路径；<span class="mono">DCT</span> 表示"直飞"，跳过中间航点；标准仪表离场（SID）与标准终端进场（STAR）以名称及对应跑道嵌入。CDU 是一块六行单色显示屏，边框上排列着十二个"行选择键"，每个键作用于显示屏上与之并排的那一行的值；下方的字母数字键盘把输入送入"草稿板"，再由行选择键加载到选定的行。这种交互风格来自 1970 年代末，至今几乎没变。飞行员把一条航路敲进 CDU，就像早期 Unix 用户敲终端命令——清楚地知道，错误字段里的一个错误字符意味着一条错误的、穿越真实空域的路径。</p>
+      <p>飞行管理计算机（FMC）是客机的主导航、性能与制导计算机。机组通过控制显示单元（CDU）与之交互：一块 14 行单色电致发光显示屏，屏幕两侧各有六个行选择键（LSK），标作 <span class="mono">1L</span>–<span class="mono">6L</span> 与 <span class="mono">1R</span>–<span class="mono">6R</span>，下方为字母数字键盘和位于底部的一行草稿板（scratchpad），以及一排模式/功能键（<span class="mono">INIT REF</span>、<span class="mono">RTE</span>、<span class="mono">DEP ARR</span>、<span class="mono">ATC</span>、<span class="mono">VNAV</span>、<span class="mono">FIX</span>、<span class="mono">LEGS</span>、<span class="mono">HOLD</span>、<span class="mono">FMC COMM</span>、<span class="mono">PROG</span>、<span class="mono">MENU</span>、<span class="mono">N1 LIMIT</span>、<span class="mono">PREV PAGE</span>、<span class="mono">NEXT PAGE</span>），加上绿色的 <span class="mono">EXEC</span> 提示灯。两台 CDU 在中央操纵台并排安装；任一飞行员皆可编辑，对激活飞行计划的修改必须按 <span class="mono">EXEC</span> 确认后方才生效。</p>
+
+      <p>飞行前 FMC 的配置遵循一个固定页面序列，每一步设置都为下一步提供数据。<span class="mono">IDENT</span> 页显示机型与导航数据库 AIRAC 周期，机组确认当前周期有效。<span class="mono">POS INIT</span> 页以登机门坐标或参考机场设置当前位置，用以对齐惯性基准装置（IRU）——对齐要求飞机静止数分钟。<span class="mono">RTE</span> 页录入起始机场（<span class="mono">KBUF</span>）、目的机场（<span class="mono">KDFW</span>）、若有则录入公司航路编号，以及航段本身：航路与航点（<span class="mono">SYR..J70..PSB..PSB7</span>）、直飞段（<span class="mono">DCT</span>）、巡航高度层。<span class="mono">DEP ARR</span> 页选择标准仪表离场程序（SID）与跑道、标准终端进场程序（STAR）和预计进近程序。<span class="mono">PERF INIT</span> 页录入零燃油重量、燃油量（由油量计自动填入）、备份油量、成本指数（cost index）和巡航高度——成本指数是一个整数，权衡时间与燃油，驱动 VNAV 全部速度目标。<span class="mono">N1 LIMIT</span> 页选定起飞推力等级（<span class="mono">TO</span>、<span class="mono">TO-1</span>、<span class="mono">TO-2</span>、或基于设定温度的降推力）与相应爬升推力等级。<span class="mono">TAKEOFF REF</span> 页从性能计算机与跑道读取 V<sub>1</sub>/V<sub>R</sub>/V<sub>2</sub>。每一步完成后按 <span class="mono">EXEC</span>，将航路写入激活飞行计划；FMC 据此计算横向与垂直剖面，并将其馈送给自动驾驶、自动油门以及导航显示器。</p>
+
+      <p>在飞行中，常驻页面通常是 <span class="mono">LEGS</span>——按顺序排列的航点列表，每个航点附带目标高度与速度。编辑遵循事务式工作流：在草稿板中键入新值，按对应的 LSK 暂存修改（页头由 <span class="mono">ACT</span> 切换为 <span class="mono">MOD</span>，<span class="mono">EXEC</span> 提示灯亮），可继续修改任意多次，直到按下 <span class="mono">EXEC</span> 一次性提交全部修改，或按 <span class="mono">ERASE</span> 撤销。<span class="mono">PROG</span> 页是飞行中的状态页：到下一航点与目的地的距离与预计到达时间、目的地预测剩余油量、风、横向偏离。<span class="mono">FIX</span> 页可从选定航点向导航显示器投射方位/距离参考圆——可视化净空界限的标准工具。<span class="mono">HOLD</span> 页在任一航点定义或修改等待航线。<span class="mono">VNAV</span> 页显示并调谐垂直剖面（爬升、巡航、下降的高度限制）。<span class="mono">FMC COMM</span> 页处理数据链（CPDLC、ACARS）报文编辑。<span class="mono">ATC</span> 页是管制员—飞行员数据链接口，用于请求与确认许可。这套界面在设计上是克制的：每个值都可编辑，每次编辑在 <span class="mono">EXEC</span> 之前都可撤销，没有任何动作是默默发生的。</p>
     </div>
 
     <!-- ─── Widget for §3: FMC/CDU input demo ──────────────────── -->
@@ -378,16 +386,36 @@
             </div>
           </div>
 
-          <!-- Function keys: just the four pages we support, plus EXEC/CLR -->
+          <!-- Function keys: full Boeing 737NG/MAX layout, two rows -->
+          <!-- Row 1: INIT REF, RTE, DEP ARR, ATC, VNAV, [BRT- BRT+] (cosmetic) -->
           <div class="fmc-fnrow">
-            <button class="fmc-fn" data-page="INIT">INIT REF</button>
+            <button class="fmc-fn" data-page="INIT">INIT<br>REF</button>
             <button class="fmc-fn" data-page="RTE">RTE</button>
+            <button class="fmc-fn" data-page="DEPARR">DEP<br>ARR</button>
+            <button class="fmc-fn" data-page="ATC">ATC</button>
+            <button class="fmc-fn" data-page="VNAV">VNAV</button>
+            <button class="fmc-fn fmc-fn-spacer" disabled aria-hidden="true"></button>
+          </div>
+          <!-- Row 2: FIX, LEGS, HOLD, FMC COMM, PROG, EXEC -->
+          <div class="fmc-fnrow">
+            <button class="fmc-fn" data-page="FIX">FIX</button>
             <button class="fmc-fn" data-page="LEGS">LEGS</button>
-            <button class="fmc-fn" data-page="MENU">MENU</button>
+            <button class="fmc-fn" data-page="HOLD">HOLD</button>
+            <button class="fmc-fn" data-page="FMCCOMM">FMC<br>COMM</button>
+            <button class="fmc-fn" data-page="PROG">PROG</button>
             <button class="fmc-fn fmc-exec" data-action="EXEC" disabled>EXEC</button>
           </div>
+          <!-- Row 3: MENU, N1 LIMIT, [empty], PREV PAGE, NEXT PAGE, [empty] -->
+          <div class="fmc-fnrow">
+            <button class="fmc-fn" data-page="MENU">MENU</button>
+            <button class="fmc-fn" data-page="N1LIM">N1<br>LIMIT</button>
+            <button class="fmc-fn fmc-fn-spacer" disabled aria-hidden="true"></button>
+            <button class="fmc-fn" data-action="PREV">PREV<br>PAGE</button>
+            <button class="fmc-fn" data-action="NEXT">NEXT<br>PAGE</button>
+            <button class="fmc-fn fmc-fn-spacer" disabled aria-hidden="true"></button>
+          </div>
 
-          <!-- Alphanumeric keypad -->
+          <!-- Alphanumeric keypad: 5 letter rows + 1 number/symbol row arrangement -->
           <div class="fmc-keypad">
             <div class="fmc-kp-row">
               <button class="fmc-key" data-key="A">A</button>
@@ -427,7 +455,7 @@
               <button class="fmc-key" data-key="T">T</button>
               <button class="fmc-key" data-key=".">.</button>
               <button class="fmc-key" data-key="0">0</button>
-              <button class="fmc-key" data-key="/">/</button>
+              <button class="fmc-key" data-key="+/-">+/-</button>
             </div>
             <div class="fmc-kp-row">
               <button class="fmc-key" data-key="U">U</button>
@@ -437,6 +465,16 @@
               <button class="fmc-key" data-key="Y">Y</button>
               <button class="fmc-key" data-key="Z">Z</button>
               <button class="fmc-key fmc-key-wide" data-key="SP">SP</button>
+              <button class="fmc-key fmc-key-del" data-action="DEL">DEL</button>
+            </div>
+            <div class="fmc-kp-row">
+              <button class="fmc-key fmc-key-spacer" disabled aria-hidden="true"></button>
+              <button class="fmc-key fmc-key-spacer" disabled aria-hidden="true"></button>
+              <button class="fmc-key fmc-key-spacer" disabled aria-hidden="true"></button>
+              <button class="fmc-key fmc-key-spacer" disabled aria-hidden="true"></button>
+              <button class="fmc-key fmc-key-spacer" disabled aria-hidden="true"></button>
+              <button class="fmc-key fmc-key-spacer" disabled aria-hidden="true"></button>
+              <button class="fmc-key" data-key="/">/</button>
               <button class="fmc-key fmc-key-clr" data-action="CLR">CLR</button>
             </div>
           </div>
@@ -1740,10 +1778,9 @@
     return {
       rows,
       lsk: {
-        // L6 = INDEX, R6 = POS INIT — both no-op in this demo
-        // R5 placeholder advances to RTE for narrative flow
+        R6: () => { state.page = 'POSINIT'; }
       },
-      hint: { en: 'Press RTE to enter a flight plan.', zh: '按 RTE 进入航路录入。' }
+      hint: { en: 'IDENT shows the FMC software and database. Press R6 (POS INIT>) to continue.', zh: 'IDENT 页显示 FMC 软件与导航数据库版本。按 R6（POS INIT>）继续。' }
     };
   }
 
@@ -2091,16 +2128,223 @@
     });
   }
 
+  // ─── New pages: full preflight configuration sequence ────────
+
+  function pagePOSINIT() {
+    const rows = [];
+    rows.push(center('POS INIT  1/3', SCREEN_COLS));
+    rows.push(' [Y]LAST POS[/]');
+    rows.push(' [W] N42°56.4 W078°44.2[/]');
+    rows.push(' [Y]REF AIRPORT[/]');
+    rows.push(' [W]KBUF[/]');
+    rows.push(' [Y]GATE[/]');
+    rows.push(' [D]----[/]');
+    rows.push(' [Y]GMT-MO/DY[/]      [Y]UTC[/]');
+    rows.push(' [W]05/02[/]         [W]1654.0z[/]');
+    rows.push('');
+    rows.push(' [Y]SET IRS POS[/]');
+    rows.push(' [D]----.-/-----.-[/]');
+    rows.push('');
+    rows.push(' [P]<INDEX[/]       [P]ROUTE>[/]');
+    return {
+      rows,
+      lsk: {
+        R6: () => { state.page = 'RTE'; }
+      },
+      hint: {
+        en: 'POS INIT aligns the inertial reference units. Press ROUTE> (R6) to continue.',
+        zh: 'POS INIT 用于对齐惯性基准装置。按 ROUTE>（R6）继续。'
+      }
+    };
+  }
+
+  function pageDEPARR() {
+    const rows = [];
+    rows.push(center('DEP/ARR INDEX', SCREEN_COLS));
+    rows.push('');
+    rows.push(' [P]<DEP[/]   [Y]KBUF[/]   [P]ARR>[/]');
+    rows.push('');
+    rows.push(' [P]<DEP[/]   [Y]KDFW[/]   [P]ARR>[/]');
+    rows.push('');
+    rows.push(' [Y]OTHER[/]');
+    rows.push(' [D]<DEP[/]   [D]----[/]   [D]ARR>[/]');
+    rows.push('');
+    rows.push('');
+    rows.push('');
+    rows.push('');
+    rows.push('');
+    rows.push(' [P]<INDEX[/]');
+    return {
+      rows,
+      lsk: {},
+      hint: {
+        en: 'DEP/ARR selects the SID, runway, STAR, and approach for origin and destination.',
+        zh: 'DEP/ARR 用于为起始与目的机场选择 SID、跑道、STAR 与进近程序。'
+      }
+    };
+  }
+
+  function pagePERFINIT() {
+    const rows = [];
+    rows.push(center('PERF INIT', SCREEN_COLS));
+    rows.push(' [Y]GW/CRZ CG[/]    [Y]CRZ ALT[/]');
+    rows.push(' [D]---.-[/]/[D]--.-[/]    [W]FL360[/]');
+    rows.push(' [Y]FUEL[/]            [Y]CRZ WIND[/]');
+    rows.push(' [W]42.3[/] [D]CALC[/]      [D]---°/---[/]');
+    rows.push(' [Y]ZFW[/]             [Y]ISA DEV[/]');
+    rows.push(' [W]144.2[/]            [D]---°[/]');
+    rows.push(' [Y]RESERVES[/]        [Y]TAI TEMP[/]');
+    rows.push(' [W]5.0[/]              [D]----[/]');
+    rows.push(' [Y]COST INDEX[/]      [Y]TRANS ALT[/]');
+    rows.push(' [W]35[/]               [W]18000[/]');
+    rows.push('');
+    rows.push('');
+    rows.push(' [P]<INDEX[/]      [P]N1 LIMIT>[/]');
+    return {
+      rows,
+      lsk: {
+        R6: () => { state.page = 'N1LIM'; }
+      },
+      hint: {
+        en: 'PERF INIT takes weights, fuel, cost index, and cruise altitude. Cost index 35 is typical for short-haul.',
+        zh: 'PERF INIT 录入重量、燃油、成本指数与巡航高度。成本指数 35 是短程航段的典型值。'
+      }
+    };
+  }
+
+  function pageN1LIM() {
+    const rows = [];
+    rows.push(center('N1 LIMIT', SCREEN_COLS));
+    rows.push(' [Y]SEL/OAT[/]       [Y]RED TO N1[/]');
+    rows.push(' [W]35°C[/]/[W]15°C[/]            [W]96.0[/]');
+    rows.push(' [Y]26K[/]');
+    rows.push(' [P]<TO[/]   [Y]<ACT> <SEL>[/]   [P]CLB>[/]');
+    rows.push(' [Y]24K DERATE[/]');
+    rows.push(' [P]<TO-1[/]                [P]CLB-1>[/]');
+    rows.push(' [Y]22K DERATE[/]');
+    rows.push(' [P]<TO-2[/]                [P]CLB-2>[/]');
+    rows.push(' [Y]27K BUMP[/]');
+    rows.push(' [P]<TO-B[/]');
+    rows.push(' [D]----------------------[/]');
+    rows.push('');
+    rows.push(' [P]<INDEX[/]        [P]TAKEOFF>[/]');
+    return {
+      rows,
+      lsk: {
+        R6: () => { state.page = 'TAKEOFF'; }
+      },
+      hint: {
+        en: 'N1 LIMIT selects the takeoff thrust rating. TO-1, TO-2 are derates; TO-B is a bump rating.',
+        zh: 'N1 LIMIT 选定起飞推力等级。TO-1、TO-2 为降推力等级，TO-B 为提升推力等级。'
+      }
+    };
+  }
+
+  function pageTAKEOFF() {
+    const rows = [];
+    rows.push(center('TAKEOFF REF  1/2', SCREEN_COLS));
+    rows.push(' [Y]V1[/]               [Y]RWY WIND[/]');
+    rows.push(' [W]142[/]               [W]270/8[/]');
+    rows.push(' [Y]VR[/]               [Y]RWY SLOPE[/]');
+    rows.push(' [W]144[/]               [W]+0.1°[/]');
+    rows.push(' [Y]V2[/]               [Y]RWY HDG[/]');
+    rows.push(' [W]148[/]               [W]232°[/]');
+    rows.push(' [Y]CG[/]/[Y]TRIM[/]            [Y]POS SHIFT[/]');
+    rows.push(' [W]23.5[/]/[W]4.10[/]           [W]C/0[/]');
+    rows.push(' [Y]FLAPS[/]            [Y]ENG OUT ACC[/]');
+    rows.push(' [W]5°[/]                [W]1500[/]');
+    rows.push('');
+    rows.push('');
+    rows.push(' [P]<INDEX[/]      [P]PRE-FLT>[/]');
+    return {
+      rows,
+      lsk: {},
+      hint: {
+        en: 'TAKEOFF REF shows V1, VR, V2 from the performance computer for the active runway.',
+        zh: 'TAKEOFF REF 显示性能计算机基于当前跑道计算的 V1、VR、V2。'
+      }
+    };
+  }
+
+  function pagePROG() {
+    const rows = [];
+    rows.push(center('PROGRESS  1/2', SCREEN_COLS));
+    rows.push(' [Y]LAST[/]    [Y]ALT[/]    [Y]ATA[/]    [Y]FUEL[/]');
+    rows.push(' [W]SYR[/]     [W]35000[/]  [W]1721z[/]  [W]39.5[/]');
+    rows.push(' [Y]TO[/]      [Y]DTG[/]    [Y]ETA[/]    [Y]FUEL[/]');
+    rows.push(' [W]PSB[/]     [W]142[/]    [W]1742z[/]  [W]36.8[/]');
+    rows.push(' [Y]NEXT[/]');
+    rows.push(' [W]AIR[/]     [W]289[/]    [W]1801z[/]  [W]34.0[/]');
+    rows.push(' [Y]DEST[/]');
+    rows.push(' [W]KDFW[/]    [W]1042[/]   [W]2010z[/]  [W]14.2[/]');
+    rows.push('');
+    rows.push(' [Y]WIND[/]            [Y]XTK ERROR[/]');
+    rows.push(' [W]280°/52[/]         [W]L 0.1[/]');
+    rows.push('');
+    rows.push(' [P]<RTE LEGS[/]    [P]POS REPORT>[/]');
+    return {
+      rows,
+      lsk: {},
+      hint: {
+        en: 'PROG shows distance, ETA, and predicted fuel for the next waypoint and destination.',
+        zh: 'PROG 显示到下一航点与目的地的距离、预计到达时间与预测剩余油量。'
+      }
+    };
+  }
+
+  // Stubs for keys that exist on the panel but whose pages are out of scope here
+  function pageStub(title, hintEn, hintZh) {
+    return function() {
+      const rows = [];
+      rows.push(center(title, SCREEN_COLS));
+      rows.push('');
+      rows.push(center('PAGE NOT IMPLEMENTED', SCREEN_COLS));
+      rows.push(center('IN THIS DEMO', SCREEN_COLS));
+      while (rows.length < 13) rows.push('');
+      rows.push(' [P]<INDEX[/]');
+      return {
+        rows, lsk: {},
+        hint: { en: hintEn, zh: hintZh }
+      };
+    };
+  }
+  const pageATC = pageStub('ATC',
+    'ATC is the controller-pilot datalink (CPDLC) interface for clearance requests and acknowledgements.',
+    'ATC 为管制员—飞行员数据链（CPDLC）接口，用于请求与确认管制许可。');
+  const pageVNAV = pageStub('VNAV',
+    'VNAV displays and tunes the vertical profile (climb, cruise, descent path constraints).',
+    'VNAV 显示并调谐垂直剖面（爬升、巡航、下降的高度限制）。');
+  const pageFIX = pageStub('FIX INFO',
+    'FIX draws bearing/distance reference rings from a chosen waypoint onto the navigation display.',
+    'FIX 从选定航点向导航显示器投射方位/距离参考圆。');
+  const pageHOLD = pageStub('HOLD',
+    'HOLD defines or modifies a holding pattern at any waypoint.',
+    'HOLD 在任一航点定义或修改等待航线。');
+  const pageFMCCOMM = pageStub('FMC COMM',
+    'FMC COMM handles datalink (CPDLC, ACARS) message composition.',
+    'FMC COMM 处理数据链（CPDLC、ACARS）报文编辑。');
+
   // ─── Render the screen ─────────────────────────────────────
   function renderScreen() {
     const screen = widget.querySelector('#fmc-screen');
     let pageDef;
     switch (state.page) {
-      case 'INIT': pageDef = pageINIT(); break;
-      case 'RTE':  pageDef = pageRTE(); break;
-      case 'LEGS': pageDef = pageLEGS(); break;
-      case 'MENU': pageDef = pageMENU(); break;
-      default:     pageDef = pageINIT();
+      case 'INIT':     pageDef = pageINIT(); break;
+      case 'POSINIT':  pageDef = pagePOSINIT(); break;
+      case 'RTE':      pageDef = pageRTE(); break;
+      case 'DEPARR':   pageDef = pageDEPARR(); break;
+      case 'PERFINIT': pageDef = pagePERFINIT(); break;
+      case 'N1LIM':    pageDef = pageN1LIM(); break;
+      case 'TAKEOFF':  pageDef = pageTAKEOFF(); break;
+      case 'LEGS':     pageDef = pageLEGS(); break;
+      case 'PROG':     pageDef = pagePROG(); break;
+      case 'ATC':      pageDef = pageATC(); break;
+      case 'VNAV':     pageDef = pageVNAV(); break;
+      case 'FIX':      pageDef = pageFIX(); break;
+      case 'HOLD':     pageDef = pageHOLD(); break;
+      case 'FMCCOMM':  pageDef = pageFMCCOMM(); break;
+      case 'MENU':     pageDef = pageMENU(); break;
+      default:         pageDef = pageINIT();
     }
     state.lsk = pageDef.lsk || {};
 
@@ -2181,6 +2425,29 @@
     } else if (state.scratchpad.length > 0) {
       state.scratchpad = state.scratchpad.slice(0, -1);
     }
+    renderScreen();
+  });
+  // DEL key: writes "DELETE" to scratchpad as a deletion command (Boeing behaviour:
+  // pressing DEL with empty scratchpad places "DELETE" in scratchpad; LSK then
+  // deletes the field. Simplified here to a no-op visual stub.)
+  const delKey = widget.querySelector('.fmc-key-del');
+  if (delKey) delKey.addEventListener('click', () => {
+    if (state.scratchpad.length === 0) {
+      state.scratchpad = 'DELETE';
+    } else {
+      state.scratchpad = '';
+    }
+    renderScreen();
+  });
+  // PREV/NEXT page keys: cosmetic in this demo (most pages are 1/1).
+  const prevKey = widget.querySelector('.fmc-fn[data-action="PREV"]');
+  if (prevKey) prevKey.addEventListener('click', () => {
+    state.message = '';
+    renderScreen();
+  });
+  const nextKey = widget.querySelector('.fmc-fn[data-action="NEXT"]');
+  if (nextKey) nextKey.addEventListener('click', () => {
+    state.message = '';
     renderScreen();
   });
   widget.querySelectorAll('.fmc-lsk').forEach(b => {
