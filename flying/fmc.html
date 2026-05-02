@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boeing 737 FMC / CDU — Interactive Demo</title>
+    <style>
+        /* ===== Reset / Page ===== */
+        * { box-sizing: border-box; }
+        body {
+            background: #0e0e10;
+            color: #d8dce0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            line-height: 1.55;
+        }
+        a { color: #6cb6ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 30px 80px;
+        }
+        .page header {
+            border-bottom: 1px solid #2a2d33;
+            padding-bottom: 18px;
+            margin-bottom: 30px;
+        }
+        .page header h1 {
+            font-size: 24px;
+            margin: 0 0 6px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .page header .sub {
+            color: #8b9098;
+            font-size: 14px;
+        }
+
+        /* ===== Main layout: FMC + ND ===== */
+        .device-row {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        /* ===== FMC casing ===== */
+        .fmc-casing {
+            background-color: #5b656b;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.2);
+            width: 460px;
+            border: 2px solid #4a5359;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .screen-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .lsk-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 280px;
+        }
+
+        .lsk-btn {
+            background-color: #2b3033;
+            width: 35px;
+            height: 20px;
+            border-radius: 3px;
+            border: 1px solid #111;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.05s;
+        }
+        .lsk-btn:hover { background-color: #353a3e; }
+        .lsk-btn:active {
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+            transform: translateY(1px);
+        }
+        .lsk-btn::after {
+            content: '-';
+            position: absolute;
+            color: #fff;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .lsk-column.left .lsk-btn::after { right: -15px; }
+        .lsk-column.right .lsk-btn::after { left: -15px; }
+
+        /* ===== CDU screen ===== */
+        .cdu-screen {
+            background-color: #050505;
+            width: 340px;
+            height: 280px;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .text-white   { color: #ffffff; }
+        .text-green   { color: #00ff7f; }
+        .text-cyan    { color: #00d8ff; }
+        .text-magenta { color: #ff5cff; }
+        .text-amber   { color: #ffb648; }
+        .text-small   { font-size: 11px; opacity: 0.85; }
+
+        .screen-header {
+            text-align: center;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+        .screen-row {
+            display: flex;
+            justify-content: space-between;
+            line-height: 1.15;
+            white-space: pre;
+        }
+        .screen-body { flex: 1; overflow: hidden; }
+        .screen-footer {
+            border-top: 1px solid #1a1a1a;
+            padding-top: 3px;
+            margin-top: 3px;
+            min-height: 18px;
+        }
+        .scratchpad {
+            color: #ffffff;
+            font-size: 14px;
+            min-height: 16px;
+        }
+        .scratchpad.error { color: #ffb648; }
+        .cdu-screen::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255,255,255,0) 0px,
+                rgba(255,255,255,0) 2px,
+                rgba(255,255,255,0.025) 3px,
+                rgba(255,255,255,0) 4px
+            );
+            pointer-events: none;
+            border-radius: 5px;
+        }
+
+        /* ===== Keyboard ===== */
+        .keyboard-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        button {
+            background-color: #1e2226;
+            color: #e0e0e0;
+            border: 2px solid #111;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.05s;
+            font-family: inherit;
+        }
+        button:hover { background-color: #262b30; }
+        button:active {
+            box-shadow: inset 0 3px 5px rgba(0,0,0,0.8);
+            transform: translateY(2px);
+        }
+        .function-keys {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+        }
+        .function-keys button {
+            height: 30px;
+            font-size: 10px;
+            line-height: 1.05;
+        }
+        .function-keys button.active {
+            background-color: #3a4348;
+            box-shadow: inset 0 0 6px rgba(255,255,255,0.15);
+            border-color: #5a6a72;
+        }
+        .btn-exec {
+            background-color: #2a2a2a;
+            position: relative;
+        }
+        .btn-exec::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            width: 30px;
+            height: 3px;
+            background-color: #333;
+            border-radius: 1px;
+            transition: background-color 0.15s;
+        }
+        .btn-exec.armed::before {
+            background-color: #00ff7f;
+            box-shadow: 0 0 6px #00ff7f;
+        }
+
+        .alpha-num-pad { display: flex; gap: 15px; }
+        .num-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            width: 35%;
+        }
+        .num-pad button {
+            height: 35px;
+            border-radius: 50%;
+            font-size: 16px;
+        }
+        .alpha-pad {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            width: 65%;
+        }
+        .alpha-pad button {
+            height: 35px;
+            font-size: 14px;
+        }
+        .empty-space { visibility: hidden; }
+
+        .fmc-hint {
+            margin-top: 14px;
+            padding: 8px 12px;
+            background: #2a2f33;
+            border-left: 3px solid #00d8ff;
+            border-radius: 3px;
+            color: #cfd6da;
+            font-size: 12px;
+            line-height: 1.5;
+            min-height: 16px;
+        }
+        .fmc-hint .hint-label {
+            color: #00d8ff;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+
+        /* ===== ND (Navigation Display) ===== */
+        .nd-housing {
+            background-color: #2b2f33;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.1);
+            border: 2px solid #1c1f22;
+            width: 360px;
+            flex-shrink: 0;
+        }
+        .nd-screen {
+            background-color: #050505;
+            width: 100%;
+            height: 360px;
+            border-radius: 6px;
+            box-shadow: inset 0 0 12px rgba(0,0,0,0.95);
+            position: relative;
+            overflow: hidden;
+        }
+        .nd-screen svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .nd-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            gap: 8px;
+        }
+        .nd-controls .control-group {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .nd-controls .control-label {
+            font-size: 10px;
+            color: #8b9098;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-right: 4px;
+        }
+        .nd-controls button {
+            min-width: 38px;
+            height: 26px;
+            font-size: 11px;
+            padding: 0 6px;
+        }
+        .nd-controls button.active {
+            background-color: #1f3a4d;
+            border-color: #2e5a73;
+            color: #00d8ff;
+        }
+        .nd-info {
+            position: absolute;
+            color: #d8dce0;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            font-weight: bold;
+            pointer-events: none;
+        }
+        .nd-info.tl { top: 6px; left: 8px; }
+        .nd-info.tr { top: 6px; right: 8px; text-align: right; }
+        .nd-info.bl { bottom: 6px; left: 8px; }
+        .nd-info.br { bottom: 6px; right: 8px; text-align: right; }
+        .nd-screen::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255,255,255,0) 0px,
+                rgba(255,255,255,0) 2px,
+                rgba(255,255,255,0.02) 3px,
+                rgba(255,255,255,0) 4px
+            );
+            pointer-events: none;
+        }
+
+        /* ===== Tutorial / quick start ===== */
+        .quick-start {
+            background: #16181c;
+            border: 1px solid #25282d;
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        .quick-start h2 {
+            font-size: 14px;
+            margin: 0 0 8px;
+            color: #cfd6da;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .quick-start ol {
+            margin: 6px 0 0;
+            padding-left: 22px;
+            color: #b6bcc4;
+        }
+        .quick-start ol li { margin: 3px 0; }
+        .quick-start code {
+            background: #232629;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #00d8ff;
+        }
+
+        /* ===== Footer / external tools ===== */
+        .related-tools {
+            margin-top: 40px;
+            border-top: 1px solid #2a2d33;
+            padding-top: 24px;
+        }
+        .related-tools h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8b9098;
+            font-weight: 600;
+            margin: 0 0 14px;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+        }
+        .tool-card {
+            background: #16181c;
+            border: 1px solid #25282d;
+            border-radius: 6px;
+            padding: 12px 14px;
+            transition: border-color 0.1s;
+        }
+        .tool-card:hover { border-color: #3a4348; }
+        .tool-card .name {
+            font-weight: 600;
+            color: #d8dce0;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+        .tool-card .desc {
+            font-size: 12px;
+            color: #8b9098;
+            line-height: 1.4;
+        }
+
+        .colophon {
+            margin-top: 30px;
+            padding-top: 16px;
+            border-top: 1px solid #2a2d33;
+            font-size: 11px;
+            color: #6c7079;
+            line-height: 1.6;
+        }
+
+        /* ===== Mobile fallback ===== */
+        @media (max-width: 900px) {
+            .device-row { flex-direction: column; align-items: center; }
+            .nd-housing { width: 460px; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <header>
+        <h1>Boeing 737 FMC / CDU</h1>
+        <div class="sub">A simplified, browser-based interactive model of the Flight Management Computer Control Display Unit · 飞行管理计算机控制显示单元交互演示</div>
+    </header>
+
+    <section class="quick-start">
+        <h2>Quick start</h2>
+        <ol>
+            <li>Press <code>RTE</code> to open the route page.</li>
+            <li>Type an origin airport (e.g. <code>KBUF</code>), then press the LSK next to <strong>ORIGIN</strong> (1L).</li>
+            <li>Type a destination (e.g. <code>KDFW</code>), then press LSK 1R.</li>
+            <li>The <code>EXEC</code> light turns green. Press it to activate the route.</li>
+            <li>Press <code>LEGS</code> to view the generated lateral path. The active leg is shown in <span style="color:#ff5cff">magenta</span>; planned legs are white.</li>
+        </ol>
+    </section>
+
+    <div class="device-row">
+        <!-- ============ FMC ============ -->
+        <div class="fmc-casing">
+            <div class="screen-section">
+                <div class="lsk-column left">
+                    <div class="lsk-btn" data-key="L1"></div>
+                    <div class="lsk-btn" data-key="L2"></div>
+                    <div class="lsk-btn" data-key="L3"></div>
+                    <div class="lsk-btn" data-key="L4"></div>
+                    <div class="lsk-btn" data-key="L5"></div>
+                    <div class="lsk-btn" data-key="L6"></div>
+                </div>
+
+                <div class="cdu-screen" id="screen">
+                    <div class="screen-header text-white" id="screen-title">CDU MENU</div>
+                    <div class="screen-body" id="screen-body"></div>
+                    <div class="screen-footer">
+                        <div class="scratchpad" id="scratchpad"></div>
+                    </div>
+                </div>
+
+                <div class="lsk-column right">
+                    <div class="lsk-btn" data-key="R1"></div>
+                    <div class="lsk-btn" data-key="R2"></div>
+                    <div class="lsk-btn" data-key="R3"></div>
+                    <div class="lsk-btn" data-key="R4"></div>
+                    <div class="lsk-btn" data-key="R5"></div>
+                    <div class="lsk-btn" data-key="R6"></div>
+                </div>
+            </div>
+
+            <div class="keyboard-section">
+                <div class="function-keys">
+                    <button data-fn="INITREF">INIT<br>REF</button>
+                    <button data-fn="RTE">RTE</button>
+                    <button data-fn="CLB">CLB</button>
+                    <button data-fn="CRZ">CRZ</button>
+                    <button data-fn="DES">DES</button>
+                    <div class="empty-space"></div>
+
+                    <button data-fn="MENU">MENU</button>
+                    <button data-fn="LEGS">LEGS</button>
+                    <button data-fn="DEPARR">DEP<br>ARR</button>
+                    <button data-fn="HOLD">HOLD</button>
+                    <button data-fn="PROG">PROG</button>
+                    <button class="btn-exec" data-fn="EXEC" id="btn-exec">EXEC</button>
+
+                    <button data-fn="N1LIMIT">N1<br>LIMIT</button>
+                    <button data-fn="FIX">FIX</button>
+                    <div class="empty-space"></div>
+                    <div class="empty-space"></div>
+                    <div class="empty-space"></div>
+                    <div class="empty-space"></div>
+
+                    <button data-fn="PREVPAGE">PREV<br>PAGE</button>
+                    <button data-fn="NEXTPAGE">NEXT<br>PAGE</button>
+                </div>
+
+                <div class="alpha-num-pad">
+                    <div class="num-pad">
+                        <button data-key="1">1</button>
+                        <button data-key="2">2</button>
+                        <button data-key="3">3</button>
+                        <button data-key="4">4</button>
+                        <button data-key="5">5</button>
+                        <button data-key="6">6</button>
+                        <button data-key="7">7</button>
+                        <button data-key="8">8</button>
+                        <button data-key="9">9</button>
+                        <button data-key=".">.</button>
+                        <button data-key="0">0</button>
+                        <button data-key="+/-">+/-</button>
+                    </div>
+
+                    <div class="alpha-pad">
+                        <button data-key="A">A</button>
+                        <button data-key="B">B</button>
+                        <button data-key="C">C</button>
+                        <button data-key="D">D</button>
+                        <button data-key="E">E</button>
+                        <button data-key="F">F</button>
+                        <button data-key="G">G</button>
+                        <button data-key="H">H</button>
+                        <button data-key="I">I</button>
+                        <button data-key="J">J</button>
+                        <button data-key="K">K</button>
+                        <button data-key="L">L</button>
+                        <button data-key="M">M</button>
+                        <button data-key="N">N</button>
+                        <button data-key="O">O</button>
+                        <button data-key="P">P</button>
+                        <button data-key="Q">Q</button>
+                        <button data-key="R">R</button>
+                        <button data-key="S">S</button>
+                        <button data-key="T">T</button>
+                        <button data-key="U">U</button>
+                        <button data-key="V">V</button>
+                        <button data-key="W">W</button>
+                        <button data-key="X">X</button>
+                        <button data-key="Y">Y</button>
+                        <button data-key="Z">Z</button>
+                        <button data-key=" ">SP</button>
+                        <button data-key="DEL">DEL</button>
+                        <button data-key="/">/</button>
+                        <button data-key="CLR">CLR</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fmc-hint" id="hint">
+                <span class="hint-label">提示</span>
+                <span id="hint-text">按 INIT REF 开始，或按 RTE 进入航路页面。试着输入 KBUF / KDFW 创建一条航路。</span>
+            </div>
+        </div>
+
+        <!-- ============ ND ============ -->
+        <div class="nd-housing">
+            <div class="nd-screen">
+                <div class="nd-info tl" id="nd-info-tl">MAP<br>AUTO</div>
+                <div class="nd-info tr" id="nd-info-tr">GS ---<br>TAS ---</div>
+                <svg id="nd-svg" viewBox="0 0 360 360" preserveAspectRatio="xMidYMid meet">
+                    <!-- everything is drawn dynamically -->
+                </svg>
+                <div class="nd-info bl" id="nd-info-bl">WIND ---/---</div>
+                <div class="nd-info br" id="nd-info-br">NO RTE</div>
+            </div>
+            <div class="nd-controls">
+                <div class="control-group">
+                    <span class="control-label">MODE</span>
+                    <button data-mode="PLAN">PLAN</button>
+                    <button data-mode="MAP" class="active">MAP</button>
+                </div>
+                <div class="control-group">
+                    <span class="control-label">RANGE</span>
+                    <button data-range="80">80</button>
+                    <button data-range="160">160</button>
+                    <button data-range="320">320</button>
+                    <button data-range="auto" class="active">AUTO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="related-tools">
+        <h2>Related Flight-Planning Tools</h2>
+        <div class="tools-grid">
+            <a class="tool-card" href="https://skyvector.com/" target="_blank" rel="noopener">
+                <div class="name">SkyVector</div>
+                <div class="desc">Free aeronautical charts (sectional, IFR low/high, world-wide). The de facto VFR/IFR planning chart for U.S. pilots.</div>
+            </a>
+            <a class="tool-card" href="https://www.flightaware.com/" target="_blank" rel="noopener">
+                <div class="name">FlightAware</div>
+                <div class="desc">Live flight tracking + historical filed routes. Useful for seeing what routes airlines actually fly between two airports.</div>
+            </a>
+            <a class="tool-card" href="https://www.airnav.com/" target="_blank" rel="noopener">
+                <div class="name">AirNav</div>
+                <div class="desc">Detailed information on U.S. airports, navaids, and FBOs — runways, frequencies, fuel, communications.</div>
+            </a>
+            <a class="tool-card" href="https://map.vatsim.net/" target="_blank" rel="noopener">
+                <div class="name">VATSIM Map</div>
+                <div class="desc">Live network map of online virtual pilots and ATC on VATSIM — see real-time traffic in the global online flight-sim network.</div>
+            </a>
+            <a class="tool-card" href="https://flightplandatabase.com/" target="_blank" rel="noopener">
+                <div class="name">FlightPlan Database</div>
+                <div class="desc">Community database of flight plans across simulators (P3D, X-Plane, MSFS). Browse, generate, and export FMC-compatible routes.</div>
+            </a>
+            <a class="tool-card" href="https://www.simbrief.com/" target="_blank" rel="noopener">
+                <div class="name">SimBrief</div>
+                <div class="desc">Free virtual flight planning suite — generates OFP, fuel calculations, weather briefings, and FMC route strings used by sim pilots worldwide.</div>
+            </a>
+            <a class="tool-card" href="https://aviationweather.gov/" target="_blank" rel="noopener">
+                <div class="name">Aviation Weather Center</div>
+                <div class="desc">NOAA's official aviation weather portal: METAR, TAF, SIGMET, winds aloft, and graphical forecasts.</div>
+            </a>
+            <a class="tool-card" href="https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/" target="_blank" rel="noopener">
+                <div class="name">FAA d-TPP</div>
+                <div class="desc">Digital Terminal Procedures Publication — official U.S. instrument approach plates, free and public-domain.</div>
+            </a>
+        </div>
+    </section>
+
+    <footer class="colophon">
+        <p>This is a teaching demo. The CDU paradigm and screen layout follow Boeing 737NG conventions, but logic, performance values, and the navigation database are heavily simplified. Distances and bearings are computed using the spherical-Earth great-circle formula (haversine). Cost index, climb/descent profiles, holding logic, and SID/STAR procedures are not implemented. Color coding follows real-aircraft conventions: <span style="color:#ff5cff">magenta</span> = active leg, <span style="color:#00d8ff">cyan</span> = pilot-entered or selectable, white = computed/inactive, <span style="color:#00ff7f">green</span> = activated/executed, <span style="color:#ffb648">amber</span> = warning.</p>
+    </footer>
+</div>
+
+<script>
+/* =========================================================
+   Boeing 737NG-style FMC/CDU + Navigation Display
+   Simplified teaching model.
+   ========================================================= */
+
+// ---------- Waypoint database ----------
+const WAYPOINTS = {
+  // Airports
+  KBUF: {type:'apt', name:'Buffalo Niagara',   lat:42.94, lon:-78.73},
+  KDFW: {type:'apt', name:'Dallas/Fort Worth', lat:32.90, lon:-97.04},
+  KORD: {type:'apt', name:"Chicago O'Hare",    lat:41.98, lon:-87.90},
+  KJFK: {type:'apt', name:'New York JFK',      lat:40.64, lon:-73.78},
+  KLAX: {type:'apt', name:'Los Angeles',       lat:33.94, lon:-118.41},
+  KSEA: {type:'apt', name:'Seattle-Tacoma',    lat:47.45, lon:-122.31},
+  KMIA: {type:'apt', name:'Miami',             lat:25.79, lon:-80.29},
+  KBOS: {type:'apt', name:'Boston Logan',      lat:42.36, lon:-71.01},
+  KDEN: {type:'apt', name:'Denver',            lat:39.86, lon:-104.67},
+  ZBAA: {type:'apt', name:'Beijing Capital',   lat:40.08, lon:116.58},
+  ZSPD: {type:'apt', name:'Shanghai Pudong',   lat:31.14, lon:121.81},
+  // VOR / Fixes (for KBUF→KDFW corridor)
+  SYR:  {type:'vor', name:'Syracuse',          lat:43.16, lon:-76.10},
+  PSB:  {type:'vor', name:'Philipsburg',       lat:40.92, lon:-78.10},
+  AGC:  {type:'vor', name:'Allegheny Co',      lat:40.27, lon:-80.04},
+  HVQ:  {type:'vor', name:'Charleston',        lat:38.76, lon:-82.36},
+  ARG:  {type:'vor', name:'Walnut Ridge',      lat:36.27, lon:-90.93},
+  TXK:  {type:'vor', name:'Texarkana',         lat:33.50, lon:-93.99},
+  // KJFK→KLAX corridor
+  PSK:  {type:'vor', name:'Pulaski',           lat:37.09, lon:-80.71},
+  HMV:  {type:'vor', name:'Holston Mountain',  lat:36.43, lon:-82.49},
+  BNA:  {type:'vor', name:'Nashville',         lat:36.14, lon:-86.69},
+  MEM:  {type:'vor', name:'Memphis',           lat:35.06, lon:-89.98},
+  ABQ:  {type:'vor', name:'Albuquerque',       lat:35.04, lon:-106.62},
+  // Asia corridor (preserved from original)
+  SUNEY:{type:'wpt', name:'SUNEY',             lat:31.18, lon:121.95},
+  SALMN:{type:'wpt', name:'SALMN',             lat:31.10, lon:122.10},
+  TRDWL:{type:'wpt', name:'TRDWL',             lat:30.94, lon:122.40},
+  MARMN:{type:'wpt', name:'MARMN',             lat:30.78, lon:122.69},
+  SNETT:{type:'wpt', name:'SNETT',             lat:30.40, lon:123.10},
+};
+
+// ---------- Company routes ----------
+const COMPANY_ROUTES = {
+  'KBUFKDFW1': { from:'KBUF', to:'KDFW', legs:['SYR','PSB','AGC','HVQ','ARG','TXK'] },
+  'KJFKKLAX1': { from:'KJFK', to:'KLAX', legs:['PSK','HMV','BNA','MEM','ABQ'] },
+  'KBOSDEN1':  { from:'KBOS', to:'KDEN', legs:[] },
+  'ZBAAZSPD1': { from:'ZBAA', to:'ZSPD', legs:['SUNEY','SALMN','TRDWL','MARMN','SNETT'] },
+};
+
+// ---------- FMC state ----------
+const fmc = {
+  page: 'MENU',
+  subpage: 0,
+  scratchpad: '',
+  scratchpadError: false,
+  fp: {
+    origin: '',
+    dest: '',
+    coRoute: '',
+    fltNo: '',
+    legs: [],
+    activeLeg: 0,
+    cruiseAlt: '',
+    costIndex: '',
+    activated: false,
+  }
+};
+
+// ND state
+const nd = {
+  mode: 'MAP',     // PLAN | MAP — MAP is the default in flight; PLAN is for editing
+  range: 'auto',   // 80 | 160 | 320 | 'auto'
+};
+
+// ---------- Helpers ----------
+const $  = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+
+const setHint = (text) => { $('#hint-text').textContent = text; };
+const setScratch = (text, isError=false) => {
+  fmc.scratchpad = text;
+  fmc.scratchpadError = isError;
+  const el = $('#scratchpad');
+  el.textContent = text;
+  el.classList.toggle('error', isError);
+};
+const clearScratch = () => setScratch('');
+const flashError = (msg) => setScratch(msg, true);
+const pad  = (s, n) => { s=String(s||''); return s.length>=n ? s : s+' '.repeat(n-s.length); };
+const rpad = (s, n) => { s=String(s||''); return s.length>=n ? s : ' '.repeat(n-s.length)+s; };
+
+function checkExecArm() {
+  const armed = fmc.fp.origin && fmc.fp.dest && !fmc.fp.activated;
+  $('#btn-exec').classList.toggle('armed', !!armed);
+}
+
+// ---------- Spherical-earth math ----------
+const toRad = (d) => d * Math.PI/180;
+const toDeg = (r) => r * 180/Math.PI;
+function gcDist(a, b) {
+  if (!a || !b) return 0;
+  const φ1 = toRad(a.lat), φ2 = toRad(b.lat);
+  const Δφ = toRad(b.lat-a.lat);
+  const Δλ = toRad(b.lon-a.lon);
+  const x = Math.sin(Δφ/2)**2 + Math.cos(φ1)*Math.cos(φ2)*Math.sin(Δλ/2)**2;
+  const c = 2*Math.atan2(Math.sqrt(x), Math.sqrt(1-x));
+  return 3440 * c;
+}
+function gcBearing(a, b) {
+  if (!a || !b) return 0;
+  const φ1 = toRad(a.lat), φ2 = toRad(b.lat);
+  const Δλ = toRad(b.lon-a.lon);
+  const y = Math.sin(Δλ)*Math.cos(φ2);
+  const x = Math.cos(φ1)*Math.sin(φ2) - Math.sin(φ1)*Math.cos(φ2)*Math.cos(Δλ);
+  return (toDeg(Math.atan2(y,x)) + 360) % 360;
+}
+// Intermediate point along great circle, fraction f ∈ [0,1]
+function gcInterp(a, b, f) {
+  const φ1 = toRad(a.lat), λ1 = toRad(a.lon);
+  const φ2 = toRad(b.lat), λ2 = toRad(b.lon);
+  const Δφ = φ2-φ1, Δλ = λ2-λ1;
+  const aa = Math.sin(Δφ/2)**2 + Math.cos(φ1)*Math.cos(φ2)*Math.sin(Δλ/2)**2;
+  const δ  = 2*Math.atan2(Math.sqrt(aa), Math.sqrt(1-aa));
+  if (δ === 0) return {lat:a.lat, lon:a.lon};
+  const A = Math.sin((1-f)*δ)/Math.sin(δ);
+  const B = Math.sin(f*δ)/Math.sin(δ);
+  const x = A*Math.cos(φ1)*Math.cos(λ1) + B*Math.cos(φ2)*Math.cos(λ2);
+  const y = A*Math.cos(φ1)*Math.sin(λ1) + B*Math.cos(φ2)*Math.sin(λ2);
+  const z = A*Math.sin(φ1) + B*Math.sin(φ2);
+  const φi = Math.atan2(z, Math.sqrt(x*x + y*y));
+  const λi = Math.atan2(y, x);
+  return {lat:toDeg(φi), lon:toDeg(λi)};
+}
+
+// ---------- Render: CDU screen ----------
+function setScreen(title, rows) {
+  $('#screen-title').textContent = title;
+  const body = $('#screen-body');
+  body.innerHTML = '';
+  rows.forEach(r => {
+    if (r === null) {
+      const sp = document.createElement('div');
+      sp.className = 'screen-row';
+      sp.innerHTML = '&nbsp;';
+      body.appendChild(sp);
+      return;
+    }
+    const div = document.createElement('div');
+    div.className = 'screen-row ' + (r.cls || '');
+    if (r.left !== undefined || r.right !== undefined) {
+      div.innerHTML = `<span>${r.left || ''}</span><span>${r.right || ''}</span>`;
+    } else if (r.center !== undefined) {
+      div.style.justifyContent = 'center';
+      div.innerHTML = `<span>${r.center}</span>`;
+    } else if (r.html !== undefined) {
+      div.innerHTML = r.html;
+    }
+    body.appendChild(div);
+  });
+}
+
+function render() {
+  checkExecArm();
+  const renderer = PAGES[fmc.page];
+  if (renderer) renderer();
+  else renderUnknown();
+
+  $$('.function-keys button[data-fn]').forEach(b => b.classList.remove('active'));
+  const map = {INITREF:'INITREF', RTE:'RTE', LEGS:'LEGS', DEPARR:'DEPARR',
+               PROG:'PROG', CLB:'CLB', CRZ:'CRZ', DES:'DES',
+               HOLD:'HOLD', FIX:'FIX', N1LIMIT:'N1LIMIT', MENU:'MENU'};
+  if (map[fmc.page]) {
+    const btn = $(`.function-keys button[data-fn="${map[fmc.page]}"]`);
+    if (btn) btn.classList.add('active');
+  }
+  renderND();
+}
+
+function renderUnknown() {
+  setScreen('NOT IMPLEMENTED', [
+    null,
+    { center: '<span class="text-amber">PAGE NOT IMPLEMENTED</span>' },
+    null,
+    { center: `<span class="text-small text-white">page id: ${fmc.page}</span>` },
+  ]);
+}
+
+// ---------- Pages ----------
+const PAGES = {};
+
+PAGES.MENU = function() {
+  setScreen('CDU MENU', [
+    { left: '<span class="text-cyan">&lt;FMC</span>',  right: '<span class="text-white">(SELECTED)</span>', cls:'text-small' },
+    null,
+    { left: '<span class="text-cyan">&lt;ACARS</span>', right: '' },
+    null,
+    { left: '<span class="text-cyan">&lt;ATC</span>',   right: '' },
+    null,
+    { left: '<span class="text-cyan">&lt;DLNK</span>',  right: '' },
+    null,
+    null,
+    null,
+    { center: '<span class="text-small text-white">SELECT DESIRED SYSTEM</span>' },
+  ]);
+  setHint('CDU MENU。按 INIT REF 进入飞行管理；或直接按 RTE 跳到航路页面。');
+};
+
+PAGES.INITREF = function() {
+  const fp = fmc.fp;
+  const orig = fp.origin || '----';
+  setScreen('IDENT      1/1', [
+    { left: '<span class="text-small text-white">MODEL</span>',
+      right: '<span class="text-small text-white">ENGINES</span>' },
+    { left: '<span class="text-white">737-800W</span>',
+      right: '<span class="text-white">CFM56-7B26</span>' },
+    null,
+    { left: '<span class="text-small text-white">NAV DATA</span>',
+      right: '<span class="text-small text-white">ACTIVE</span>' },
+    { left: '<span class="text-white">WORLD</span>',
+      right: '<span class="text-green">CURRENT</span>' },
+    null,
+    { left: '<span class="text-small text-cyan">REF AIRPORT</span>', right: '' },
+    { left: `<span class="text-cyan">${pad(orig,4)}</span>`, right: '' },
+    null,
+    null,
+    { left: '<span class="text-small text-white">───────────────</span>', right: '' },
+    { left: '<span class="text-cyan">&lt;INDEX</span>',
+      right: '<span class="text-cyan">POS INIT&gt;</span>' },
+  ]);
+  setHint('IDENT 页。可在 LSK 4L 输入 REF AIRPORT (如 KBUF)；或按 RTE 进入航路页。');
+};
+
+PAGES.RTE = function() {
+  const fp = fmc.fp;
+  const orig = fp.origin || '----';
+  const dest = fp.dest || '----';
+  const coR  = fp.coRoute || '----------';
+  const flt  = fp.fltNo || '-------';
+  setScreen('RTE        1/1', [
+    { left: '<span class="text-small text-white">ORIGIN</span>',
+      right: '<span class="text-small text-white">DEST</span>' },
+    { left: `<span class="${fp.origin ? 'text-white' : 'text-cyan'}">${orig}</span>`,
+      right: `<span class="${fp.dest ? 'text-white' : 'text-cyan'}">${dest}</span>` },
+    null,
+    { left: '<span class="text-small text-white">CO ROUTE</span>',
+      right: '<span class="text-small text-white">FLT NO</span>' },
+    { left: `<span class="${fp.coRoute ? 'text-white' : 'text-cyan'}">${coR}</span>`,
+      right: `<span class="${fp.fltNo ? 'text-white' : 'text-cyan'}">${flt}</span>` },
+    null,
+    { left: '<span class="text-small text-cyan">RUNWAY</span>', right: '' },
+    { left: '<span class="text-cyan">-----</span>', right: '' },
+    null,
+    null,
+    { left: '<span class="text-small text-white">───────────────</span>', right: '' },
+    { left: fp.activated
+        ? '<span class="text-green">&lt;ACT RTE</span>'
+        : '<span class="text-amber">&lt;RTE INACTIVE</span>',
+      right: fp.legs.length
+        ? '<span class="text-cyan">PERF INIT&gt;</span>'
+        : '<span class="text-amber">ROUTE&gt;</span>' },
+  ]);
+  if (!fp.origin) {
+    setHint('输入机场代码 (如 KBUF)，按 LSK 1L 上载到 ORIGIN。');
+  } else if (!fp.dest) {
+    setHint('已设 ORIGIN。再输入目的机场 (如 KDFW)，按 LSK 1R 上载到 DEST。');
+  } else if (!fp.activated) {
+    setHint('航路已就绪：EXEC 灯亮。按 EXEC 激活航路；或按 LEGS 查看航段。');
+  } else {
+    setHint('航路已激活。按 LEGS 查看航段，或 PROG 查看进度。');
+  }
+};
+
+PAGES.LEGS = function() {
+  const fp = fmc.fp;
+  const all = [];
+  if (fp.origin) all.push({ident:fp.origin, role:'origin'});
+  fp.legs.forEach(l => all.push({ident:l.ident, role:'wpt', spd:l.spd, alt:l.alt}));
+  if (fp.dest) all.push({ident:fp.dest, role:'dest'});
+
+  if (all.length === 0) {
+    setScreen('LEGS       1/1', [
+      null, null,
+      { center: '<span class="text-amber">NO ACTIVE ROUTE</span>' },
+      null,
+      { center: '<span class="text-small text-white">ENTER ORIGIN/DEST ON RTE PAGE</span>' },
+    ]);
+    setHint('航段表为空。先去 RTE 页输入 ORIGIN 和 DEST。');
+    return;
+  }
+
+  const perPage = 5;
+  const totalPages = Math.max(1, Math.ceil(all.length / perPage));
+  if (fmc.subpage >= totalPages) fmc.subpage = totalPages - 1;
+  const start = fmc.subpage * perPage;
+  const slice = all.slice(start, start + perPage);
+
+  const rows = [];
+  slice.forEach((wp, i) => {
+    const idx = start + i;
+    const isActive = fp.activated && idx === fp.activeLeg;
+    const colorCls = isActive ? 'text-magenta' : 'text-white';
+
+    const prev = idx > 0 ? all[idx-1] : null;
+    const dist = prev ? gcDist(WAYPOINTS[prev.ident], WAYPOINTS[wp.ident]) : 0;
+    const distStr = prev ? `${dist.toFixed(0)}NM` : 'START';
+    const trk = prev ? `${gcBearing(WAYPOINTS[prev.ident], WAYPOINTS[wp.ident]).toFixed(0).padStart(3,'0')}°` : '';
+    rows.push({
+      cls:'text-small text-white',
+      left: ` ${trk}`,
+      right: distStr,
+    });
+
+    let spdAlt;
+    if (wp.role === 'origin')      spdAlt = '---/  ----';
+    else if (wp.role === 'dest')   spdAlt = '---/  ----';
+    else                           spdAlt = '250/ FL350';
+    rows.push({
+      cls: colorCls,
+      left:  `<span class="${colorCls}">${pad(wp.ident, 5)}</span>`,
+      right: `<span class="${colorCls}">${spdAlt}</span>`,
+    });
+  });
+  while (rows.length < 10) rows.push(null);
+
+  rows.push({
+    cls:'text-small text-white',
+    left: 'RNP/ACTUAL',
+    right: '',
+  });
+  rows.push({
+    cls:'text-white',
+    left:  '<span class="text-white">1.00/0.06NM</span>',
+    right: '<span class="text-cyan">RTE DATA&gt;</span>',
+  });
+
+  setScreen(`${fp.activated ? 'ACT' : 'MOD'} RTE LEGS  ${fmc.subpage+1}/${totalPages}`, rows);
+
+  if (totalPages > 1) {
+    setHint(`LEGS 共 ${totalPages} 页，PREV/NEXT PAGE 翻页。${fp.activated ? '当前 active leg 为洋红色。' : '航路尚未激活，回 RTE 页按 EXEC。'}`);
+  } else {
+    setHint(fp.activated ? '航路已激活。当前 active leg 为洋红色。' : '按 RTE → EXEC 激活航路，使其颜色变为洋红 (active)。');
+  }
+};
+
+PAGES.DEPARR = function() {
+  const fp = fmc.fp;
+  setScreen('DEP/ARR INDEX 1/1', [
+    null,
+    { left: `<span class="text-cyan">&lt;${pad(fp.origin||'----',4)} DEP</span>`,
+      right: `<span class="text-cyan">${pad(fp.origin||'----',4)} ARR&gt;</span>` },
+    null,
+    null,
+    { left: `<span class="text-cyan">&lt;${pad(fp.dest||'----',4)} DEP</span>`,
+      right: `<span class="text-cyan">${pad(fp.dest||'----',4)} ARR&gt;</span>` },
+    null,
+    null,
+    null,
+    null,
+    null,
+    { left: '<span class="text-small text-white">───────────────</span>', right: '' },
+    { left: '<span class="text-cyan">&lt;INDEX</span>', right: '' },
+  ]);
+  setHint('DEP/ARR 索引页 (本演示中不实现具体 SID/STAR 列表)。');
+};
+
+PAGES.PROG = function() {
+  const fp = fmc.fp;
+  let totalDist = 0;
+  if (fp.origin && fp.dest) {
+    const all = [fp.origin, ...fp.legs.map(l=>l.ident), fp.dest];
+    for (let i=1; i<all.length; i++) {
+      totalDist += gcDist(WAYPOINTS[all[i-1]], WAYPOINTS[all[i]]);
+    }
+  }
+  const eta = totalDist ? `${(totalDist / 450 * 60).toFixed(0)} MIN` : '----';
+  setScreen('PROGRESS    1/2', [
+    { left: '<span class="text-small text-white">LAST</span>',
+      right: '<span class="text-small text-white">DTG  ETA   FUEL</span>' },
+    { left: `<span class="text-white">${pad(fp.origin||'----',5)}</span>`,
+      right: `<span class="text-white">${rpad(totalDist.toFixed(0),4)}NM</span>` },
+    null,
+    { left: '<span class="text-small text-white">TO</span>',
+      right: '<span class="text-small text-white"></span>' },
+    { left: `<span class="text-magenta">${pad(fp.legs[0]?.ident || fp.dest || '----', 5)}</span>`,
+      right: '' },
+    null,
+    { left: '<span class="text-small text-white">DEST</span>',
+      right: '<span class="text-small text-white">FUEL REM</span>' },
+    { left: `<span class="text-white">${pad(fp.dest||'----',5)}</span>`,
+      right: `<span class="text-white">${eta}    --.-</span>` },
+    null,
+    null,
+    { left: '<span class="text-small text-white">───────────────</span>', right: '' },
+    { left: '<span class="text-cyan">&lt;NAV STATUS</span>',
+      right: '<span class="text-cyan">POS REPORT&gt;</span>' },
+  ]);
+  setHint(`进度页：当前总航距约 ${totalDist.toFixed(0)} NM，按 450 KGS 巡航估算。`);
+};
+
+function perfPage(label, defaultAlt) {
+  const fp = fmc.fp;
+  setScreen(`${label}        1/1`, [
+    { left: '<span class="text-small text-white">CRZ ALT</span>', right: '<span class="text-small text-white">COST INDEX</span>' },
+    { left: `<span class="${fp.cruiseAlt ? 'text-white' : 'text-cyan'}">${fp.cruiseAlt || defaultAlt}</span>`,
+      right: `<span class="${fp.costIndex ? 'text-white' : 'text-cyan'}">${fp.costIndex || '---'}</span>` },
+    null,
+    { left: '<span class="text-small text-white">RESTRICTIONS</span>', right: '' },
+    { left: '<span class="text-cyan">-----/-----</span>', right: '' },
+    null, null, null, null, null,
+    { left: '<span class="text-small text-white">───────────────</span>', right: '' },
+    { left: '<span class="text-cyan">&lt;ENG OUT</span>', right: '<span class="text-cyan">N1 LIMIT&gt;</span>' },
+  ]);
+  setHint(`${label} 性能页。LSK 1L 输入巡航高度 (如 FL350)，1R 输入 cost index。`);
+}
+PAGES.CLB = () => perfPage('CLB', 'FL---');
+PAGES.CRZ = () => perfPage('CRZ', 'FL---');
+PAGES.DES = () => perfPage('DES', 'FL---');
+
+PAGES.HOLD = function() {
+  setScreen('HOLD        1/1', [
+    null,
+    { center: '<span class="text-amber">NO HOLDING FIX</span>' },
+    null,
+    { center: '<span class="text-small text-white">ENTER FIX IDENT TO ESTABLISH HOLD</span>' },
+  ]);
+  setHint('HOLD 页 (本演示中不实现具体盘旋逻辑)。');
+};
+
+PAGES.FIX = function() {
+  setScreen('FIX INFO    1/1', [
+    { left: '<span class="text-small text-cyan">FIX</span>', right: '' },
+    { left: '<span class="text-cyan">-----</span>', right: '' },
+    null, null, null, null, null, null, null, null,
+    { left: '<span class="text-small text-white">───────────────</span>', right: '' },
+    { left: '<span class="text-cyan">&lt;ERASE</span>', right: '' },
+  ]);
+  setHint('FIX 页。可输入航点查询其位置/距离 (本演示中不实现)。');
+};
+
+PAGES.N1LIMIT = function() {
+  setScreen('N1 LIMIT    1/1', [
+    null,
+    { left: '<span class="text-white">SEL TEMP</span>', right: '<span class="text-cyan">+15°C</span>' },
+    null,
+    { left: '<span class="text-white">TO</span>', right: '<span class="text-green">96.4 / 96.4</span>' },
+    null,
+    { left: '<span class="text-white">CLB</span>', right: '<span class="text-green">94.2</span>' },
+    null,
+    { left: '<span class="text-white">CRZ</span>', right: '<span class="text-green">92.8</span>' },
+  ]);
+  setHint('N1 LIMIT 页。展示 TO/CLB/CRZ 的 N1 限值。');
+};
+
+// ---------- LSK ----------
+function handleLSK(key) {
+  const handler = LSK_HANDLERS[fmc.page];
+  if (handler) handler(key);
+  render();
+}
+
+const LSK_HANDLERS = {
+  RTE(key) {
+    const fp = fmc.fp;
+    const sp = fmc.scratchpad.trim().toUpperCase();
+    const isDelete = sp === 'DELETE';
+    const isClear  = sp === '';
+
+    if (key === 'L1') {
+      if (isClear) return;
+      if (isDelete) { fp.origin=''; fp.legs=[]; fp.activated=false; clearScratch(); return; }
+      if (!WAYPOINTS[sp] || WAYPOINTS[sp].type !== 'apt') { flashError('NOT IN DATABASE'); return; }
+      fp.origin = sp; clearScratch();
+      tryAutoLoadCoRoute();
+    } else if (key === 'R1') {
+      if (isClear) return;
+      if (isDelete) { fp.dest=''; fp.legs=[]; fp.activated=false; clearScratch(); return; }
+      if (!WAYPOINTS[sp] || WAYPOINTS[sp].type !== 'apt') { flashError('NOT IN DATABASE'); return; }
+      fp.dest = sp; clearScratch();
+      tryAutoLoadCoRoute();
+    } else if (key === 'L2') {
+      if (isClear) return;
+      if (isDelete) { fp.coRoute=''; fp.legs=[]; clearScratch(); return; }
+      if (!COMPANY_ROUTES[sp]) { flashError('CO ROUTE NOT FOUND'); return; }
+      const co = COMPANY_ROUTES[sp];
+      fp.coRoute = sp; fp.origin = co.from; fp.dest = co.to;
+      fp.legs = co.legs.map(id => ({ident:id, spd:'250', alt:'FL350'}));
+      clearScratch();
+    } else if (key === 'R2') {
+      if (isClear) return;
+      if (isDelete) { fp.fltNo=''; clearScratch(); return; }
+      fp.fltNo = sp; clearScratch();
+    } else if (key === 'R6') {
+      if (fp.legs.length) fmc.page = 'CRZ';
+      else                fmc.page = 'LEGS';
+    }
+  },
+  INITREF(key) {
+    const sp = fmc.scratchpad.trim().toUpperCase();
+    if (key === 'L4') {
+      if (!WAYPOINTS[sp] || WAYPOINTS[sp].type !== 'apt') { flashError('NOT IN DATABASE'); return; }
+      fmc.fp.origin = fmc.fp.origin || sp;
+      clearScratch();
+    }
+  },
+  LEGS(key) {
+    const fp = fmc.fp;
+    const sp = fmc.scratchpad.trim().toUpperCase();
+    const idx = {'L1':0,'L2':1,'L3':2,'L4':3,'L5':4}[key];
+    if (idx === undefined) return;
+    const start = fmc.subpage * 5;
+    const all = [];
+    if (fp.origin) all.push({type:'origin'});
+    fp.legs.forEach(()=>all.push({type:'wpt'}));
+    if (fp.dest) all.push({type:'dest'});
+    const target = all[start+idx];
+    if (!target) return;
+    if (sp === 'DELETE' && target.type === 'wpt') {
+      const wptIdx = (start+idx) - (fp.origin ? 1 : 0);
+      fp.legs.splice(wptIdx, 1);
+      clearScratch();
+    }
+  },
+  CRZ(key) {
+    const fp = fmc.fp;
+    const sp = fmc.scratchpad.trim().toUpperCase();
+    if (key === 'L1') {
+      if (sp === 'DELETE') { fp.cruiseAlt=''; clearScratch(); return; }
+      if (/^FL\d{2,3}$/.test(sp) || /^\d{4,5}$/.test(sp)) {
+        fp.cruiseAlt = sp; clearScratch();
+      } else if (sp) flashError('INVALID ENTRY');
+    } else if (key === 'R1') {
+      if (sp === 'DELETE') { fp.costIndex=''; clearScratch(); return; }
+      if (/^\d{1,3}$/.test(sp)) { fp.costIndex = sp; clearScratch(); }
+      else if (sp) flashError('INVALID ENTRY');
+    }
+  },
+};
+LSK_HANDLERS.CLB = LSK_HANDLERS.CRZ;
+LSK_HANDLERS.DES = LSK_HANDLERS.CRZ;
+
+function tryAutoLoadCoRoute() {
+  const fp = fmc.fp;
+  if (!fp.origin || !fp.dest) return;
+  for (const code in COMPANY_ROUTES) {
+    const co = COMPANY_ROUTES[code];
+    if (co.from === fp.origin && co.to === fp.dest) {
+      fp.coRoute = code;
+      fp.legs = co.legs.map(id => ({ident:id, spd:'250', alt:'FL350'}));
+      return;
+    }
+  }
+  fp.legs = [];
+}
+
+// ---------- Keyboard ----------
+function handleKey(k) {
+  if (k === 'CLR') {
+    if (fmc.scratchpadError) { clearScratch(); return; }
+    if (fmc.scratchpad.length > 0) setScratch(fmc.scratchpad.slice(0, -1));
+    return;
+  }
+  if (k === 'DEL') { setScratch('DELETE'); return; }
+  if (fmc.scratchpadError) clearScratch();
+  if (fmc.scratchpad.length >= 16) return;
+  setScratch(fmc.scratchpad + k);
+}
+
+function handleFn(fn) {
+  if (fn === 'EXEC') {
+    if ($('#btn-exec').classList.contains('armed')) {
+      fmc.fp.activated = true;
+      fmc.fp.activeLeg = 0;
+      $('#btn-exec').classList.remove('armed');
+      setHint('EXEC 完成。航路已激活，进入 LEGS 页查看。');
+      fmc.page = 'LEGS';
+      fmc.subpage = 0;
+    } else flashError('NOT ARMED');
+  } else if (fn === 'PREVPAGE') {
+    if (fmc.subpage > 0) fmc.subpage--;
+  } else if (fn === 'NEXTPAGE') {
+    fmc.subpage++;
+  } else {
+    fmc.page = fn;
+    fmc.subpage = 0;
+  }
+  render();
+}
+
+// ---------- ND rendering ----------
+const ND_VIEWBOX = 360;
+const ND_CENTER = ND_VIEWBOX / 2;
+const ND_AIRCRAFT_Y = 305;   // y-coord of aircraft symbol in MAP mode
+const ND_ARC_HALF_ANGLE = 47;  // half-width of compass arc in degrees
+
+function buildRoutePoints() {
+  // returns ordered list of {ident, lat, lon, role}
+  const fp = fmc.fp;
+  const out = [];
+  if (fp.origin && WAYPOINTS[fp.origin]) out.push({ident:fp.origin, ...WAYPOINTS[fp.origin], role:'origin'});
+  fp.legs.forEach(l => {
+    if (WAYPOINTS[l.ident]) out.push({ident:l.ident, ...WAYPOINTS[l.ident], role:'wpt'});
+  });
+  if (fp.dest && WAYPOINTS[fp.dest]) out.push({ident:fp.dest, ...WAYPOINTS[fp.dest], role:'dest'});
+  return out;
+}
+
+// Equirectangular projection centered on midpoint of route (lat-cos corrected).
+// Returns a function (lat,lon) => {x,y} in viewBox coords, plus chosen scale (NM/px).
+function buildProjection(points, rangeNM, mode) {
+  if (points.length === 0) {
+    return { proj: () => ({x:ND_CENTER, y:ND_CENTER}), centerLat:0, centerLon:0, scale:1, halfRangeNM:80 };
+  }
+
+  if (mode === 'MAP') {
+    // MAP mode: aircraft at bottom-center; origin is "current position".
+    // Project so that `rangeNM` corresponds to the distance from aircraft (anchor)
+    // to the top of the arc (radius of the displayed semicircle).
+    const cLat = points[0].lat;
+    const cLon = points[0].lon;
+    const cosLat = Math.cos(toRad(cLat));
+    let halfRangeNM;
+    if (rangeNM === 'auto') {
+      // Find max distance from origin to any point on great-circle path
+      let maxDist = 0;
+      for (let i = 1; i < points.length; i++) {
+        maxDist = Math.max(maxDist, gcDist(points[0], points[i]));
+        if (i+1 < points.length) {
+          for (let f = 0.1; f < 1; f += 0.1) {
+            const p = gcInterp(points[i], points[i+1], f);
+            maxDist = Math.max(maxDist, gcDist(points[0], p));
+          }
+        }
+      }
+      // Pick the smallest standard Boeing range that contains the route, capped at 320
+      // (MAP mode is for in-flight situational awareness, not seeing the whole route).
+      const standardRanges = [10, 20, 40, 80, 160, 320];
+      halfRangeNM = standardRanges.find(r => r >= maxDist * 1.05) || 320;
+    } else {
+      halfRangeNM = rangeNM;
+    }
+    // Aircraft anchor at (ND_CENTER, ND_AIRCRAFT_Y); top of arc is range above that.
+    const arcRadius = ND_AIRCRAFT_Y - 50;  // pixels from aircraft to top of arc
+    const scale = arcRadius / halfRangeNM;
+    const proj = (lat, lon) => {
+      const dy = (lat - cLat) * 60;
+      const dx = (lon - cLon) * 60 * cosLat;
+      return { x: ND_CENTER + dx*scale, y: ND_AIRCRAFT_Y - dy*scale };
+    };
+    return { proj, centerLat:cLat, centerLon:cLon, scale, halfRangeNM };
+  }
+
+  // PLAN mode: bbox-centered projection (north-up, full circle)
+  let minLat= 90, maxLat=-90, minLon= 180, maxLon=-180;
+  for (let i = 0; i < points.length; i++) {
+    minLat = Math.min(minLat, points[i].lat); maxLat = Math.max(maxLat, points[i].lat);
+    minLon = Math.min(minLon, points[i].lon); maxLon = Math.max(maxLon, points[i].lon);
+    if (i+1 < points.length) {
+      for (let f = 0.1; f < 1; f += 0.1) {
+        const p = gcInterp(points[i], points[i+1], f);
+        minLat = Math.min(minLat, p.lat); maxLat = Math.max(maxLat, p.lat);
+        minLon = Math.min(minLon, p.lon); maxLon = Math.max(maxLon, p.lon);
+      }
+    }
+  }
+  const cLat = (minLat + maxLat) / 2;
+  const cLon = (minLon + maxLon) / 2;
+  const cosLat = Math.cos(toRad(cLat));
+  const latSpanNM = (maxLat - minLat) * 60;
+  const lonSpanNM = (maxLon - minLon) * 60 * cosLat;
+  let halfRangeNM;
+  if (rangeNM === 'auto') {
+    halfRangeNM = Math.max(latSpanNM, lonSpanNM) / 2 * 1.15;
+    if (halfRangeNM < 40) halfRangeNM = 40;
+  } else {
+    halfRangeNM = rangeNM;
+  }
+  const scale = (ND_VIEWBOX/2 - 30) / halfRangeNM;
+  const proj = (lat, lon) => {
+    const dy = (lat - cLat) * 60;
+    const dx = (lon - cLon) * 60 * cosLat;
+    return { x: ND_CENTER + dx*scale, y: ND_CENTER - dy*scale };
+  };
+  return { proj, centerLat:cLat, centerLon:cLon, scale, halfRangeNM };
+}
+
+function renderND() {
+  const svg = $('#nd-svg');
+  const points = buildRoutePoints();
+  const fp = fmc.fp;
+  const { proj, halfRangeNM } = buildProjection(points, nd.range, nd.mode);
+
+  // Determine current heading: in MAP mode it is the bearing of the first leg
+  // (i.e., the direction the aircraft is "pointing"). With no route, default 0.
+  let heading = 0;
+  if (points.length >= 2) heading = gcBearing(points[0], points[1]);
+
+  const parts = [];
+  const isMap = nd.mode === 'MAP';
+
+  // ===== Background ground/sky shading (subtle) =====
+  if (isMap) {
+    // very subtle dark band suggesting expanded view background
+    parts.push(`<rect x="0" y="0" width="${ND_VIEWBOX}" height="${ND_VIEWBOX}" fill="#000"/>`);
+  } else {
+    parts.push(`<rect x="0" y="0" width="${ND_VIEWBOX}" height="${ND_VIEWBOX}" fill="#000"/>`);
+  }
+
+  if (isMap) {
+    // ============================================================
+    //   MAP MODE — Boeing-style expanded heading-up view
+    // ============================================================
+    const ax = ND_CENTER;          // aircraft x
+    const ay = ND_AIRCRAFT_Y;      // aircraft y
+    const arcRadius = ay - 50;     // pixels from aircraft to top of compass arc
+
+    // ----- Range rings (semicircles) -----
+    // 3 dashed arcs at 1/3, 2/3, 3/3 of range.
+    // SVG arc path: M (start) A rx ry rotation large-arc sweep (end)
+    function arcPath(r) {
+      const a1 = -ND_ARC_HALF_ANGLE * Math.PI/180;
+      const a2 =  ND_ARC_HALF_ANGLE * Math.PI/180;
+      const x1 = ax + r * Math.sin(a1);
+      const y1 = ay - r * Math.cos(a1);
+      const x2 = ax + r * Math.sin(a2);
+      const y2 = ay - r * Math.cos(a2);
+      return `M ${x1.toFixed(1)} ${y1.toFixed(1)} A ${r} ${r} 0 0 1 ${x2.toFixed(1)} ${y2.toFixed(1)}`;
+    }
+    parts.push(`<path d="${arcPath(arcRadius)}" fill="none" stroke="#3a8a6a" stroke-width="0.8"/>`);
+    parts.push(`<path d="${arcPath(arcRadius * 2/3)}" fill="none" stroke="#1c5a3a" stroke-width="0.6" stroke-dasharray="4 5"/>`);
+    parts.push(`<path d="${arcPath(arcRadius * 1/3)}" fill="none" stroke="#1c5a3a" stroke-width="0.6" stroke-dasharray="4 5"/>`);
+
+    // Range labels (NM) on left side at each ring
+    const halfStr = halfRangeNM.toFixed(0);
+    const thirdStr = (halfRangeNM/3).toFixed(0);
+    const twoThirdStr = (halfRangeNM*2/3).toFixed(0);
+    // place labels near the left edge of each arc, with safe inset
+    function labelAtRing(r, label) {
+      const a = (-ND_ARC_HALF_ANGLE + 14) * Math.PI/180;  // pulled inward from arc end
+      const x = ax + r * Math.sin(a);
+      const y = ay - r * Math.cos(a);
+      // clamp x so label doesn't get clipped
+      const cx = Math.max(20, x);
+      parts.push(`<text x="${cx.toFixed(1)}" y="${(y+3).toFixed(1)}" fill="#3a8a6a" font-family="monospace" font-size="9" text-anchor="middle">${label}</text>`);
+    }
+    labelAtRing(arcRadius * 1/3, thirdStr);
+    labelAtRing(arcRadius * 2/3, twoThirdStr);
+    labelAtRing(arcRadius, halfStr);
+
+    // ----- Compass arc with heading ticks -----
+    // Boeing-style: tick every 5°, label every 30° (showing the actual numeric heading
+    // at that screen angle, since heading is up). The arc spans heading±47°.
+    // For a screen angle θ (0=up, +right), the magnetic heading shown there is heading+θ.
+    const compassR = arcRadius + 4;
+    const compassRTickIn = compassR - 6;
+    const compassRTickInLong = compassR - 10;
+    const tickStep = 5;
+    for (let theta = -ND_ARC_HALF_ANGLE; theta <= ND_ARC_HALF_ANGLE; theta += tickStep) {
+      const long = (theta % 10 === 0);
+      const labeled = ((Math.round(((heading + theta) % 360 + 360) % 360 / 10) * 10) % 30 === 0) && long;
+      const aRad = theta * Math.PI/180;
+      const r1 = compassR;
+      const r2 = labeled || long ? compassRTickInLong : compassRTickIn;
+      const x1 = ax + r1 * Math.sin(aRad), y1 = ay - r1 * Math.cos(aRad);
+      const x2 = ax + r2 * Math.sin(aRad), y2 = ay - r2 * Math.cos(aRad);
+      parts.push(`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#ffffff" stroke-width="${labeled?1.4:1}"/>`);
+      if (labeled) {
+        const headingAtTheta = ((heading + theta) % 360 + 360) % 360;
+        const lbl = String(Math.round(headingAtTheta/10)).padStart(2, '0');  // 030 → "03"
+        const tx = ax + (compassR - 18) * Math.sin(aRad);
+        const ty = ay - (compassR - 18) * Math.cos(aRad);
+        parts.push(`<text x="${tx.toFixed(1)}" y="${(ty+4).toFixed(1)}" fill="#ffffff" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">${lbl}</text>`);
+      }
+    }
+
+    // ----- Heading bug (current heading, always at θ=0, top-center) -----
+    // It's a small inverted triangle pointing down to the arc
+    parts.push(`<polygon points="${ax-5},${ay-compassR-3} ${ax+5},${ay-compassR-3} ${ax},${ay-compassR+3}" fill="#ff5cff" stroke="#ff5cff"/>`);
+
+    // Current heading numeric display (top-left of screen)
+    const hdgText = String(Math.round(heading)).padStart(3, '0');
+    parts.push(`<rect x="${ax-22}" y="2" width="44" height="18" fill="#000" stroke="#ffffff" stroke-width="1"/>`);
+    parts.push(`<text x="${ax}" y="16" fill="#ff5cff" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">${hdgText}</text>`);
+    parts.push(`<text x="${ax-26}" y="16" fill="#00d8ff" font-family="monospace" font-size="11" font-weight="bold" text-anchor="end">MAG</text>`);
+    parts.push(`<text x="${ax+26}" y="16" fill="#ffffff" font-family="monospace" font-size="11" font-weight="bold">HDG</text>`);
+
+    // ----- Helper: project lat/lon to screen, then rotate around aircraft so heading=up -----
+    const rotRad = -toRad(heading);
+    function rot(p) {
+      const dx = p.x - ax, dy = p.y - ay;
+      return {
+        x: ax + dx*Math.cos(rotRad) - dy*Math.sin(rotRad),
+        y: ay + dx*Math.sin(rotRad) + dy*Math.cos(rotRad),
+      };
+    }
+
+    // ----- Build segments and project them (rotated) -----
+    if (points.length >= 2) {
+      const segments = [];
+      for (let i = 0; i+1 < points.length; i++) {
+        const seg = { active: fp.activated && i === fp.activeLeg, pts: [] };
+        const samples = 30;
+        for (let s = 0; s <= samples; s++) {
+          const f = s/samples;
+          const gp = gcInterp(points[i], points[i+1], f);
+          seg.pts.push(rot(proj(gp.lat, gp.lon)));
+        }
+        segments.push(seg);
+      }
+
+      // Clip by arc: cap path inside the visible semicircle of arcRadius radius
+      // Simpler: don't clip, but only draw points inside the arc
+      function inArc(p) {
+        const dx = p.x - ax, dy = p.y - ay;
+        // must be in front of (above) the aircraft (y < ay) AND within arc radius
+        const r = Math.sqrt(dx*dx + dy*dy);
+        if (r > arcRadius) return false;
+        // angle from straight-up
+        const ang = Math.atan2(dx, -dy) * 180 / Math.PI;
+        return Math.abs(ang) <= ND_ARC_HALF_ANGLE;
+      }
+
+      // Pass 1: non-active path
+      segments.forEach(seg => {
+        if (seg.active) return;
+        let d = '';
+        let pen = false;
+        seg.pts.forEach((pp, j) => {
+          if (inArc(pp)) {
+            d += `${pen ? 'L':'M'} ${pp.x.toFixed(1)} ${pp.y.toFixed(1)} `;
+            pen = true;
+          } else {
+            pen = false;
+          }
+        });
+        if (d) parts.push(`<path d="${d}" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>`);
+      });
+      // Pass 2: active path
+      segments.forEach(seg => {
+        if (!seg.active) return;
+        let d = '';
+        let pen = false;
+        seg.pts.forEach((pp, j) => {
+          if (inArc(pp)) {
+            d += `${pen ? 'L':'M'} ${pp.x.toFixed(1)} ${pp.y.toFixed(1)} `;
+            pen = true;
+          } else {
+            pen = false;
+          }
+        });
+        if (d) parts.push(`<path d="${d}" fill="none" stroke="#ff5cff" stroke-width="2.4"/>`);
+      });
+
+      // ----- Pass 3: waypoint markers (rotated) -----
+      const projWps = points.map((wp, i) => {
+        const p = rot(proj(wp.lat, wp.lon));
+        const visible = inArc(p);
+        const isActiveTarget = fp.activated && (i === fp.activeLeg + 1);
+        const color = isActiveTarget ? '#ff5cff'
+                    : (wp.role === 'origin' || wp.role === 'dest') ? '#00d8ff'
+                    : '#ffffff';
+        return { wp, i, p, visible, color };
+      });
+
+      projWps.forEach(({ wp, p, visible, color }) => {
+        if (!visible) return;
+        // In Boeing ND: VOR=hexagon outline, fix=triangle outline (cyan), airport=larger square (cyan)
+        if (wp.role === 'origin' || wp.role === 'dest') {
+          parts.push(`<rect x="${(p.x-4).toFixed(1)}" y="${(p.y-4).toFixed(1)}" width="8" height="8" fill="${color}" stroke="${color}"/>`);
+        } else {
+          // Cyan triangle for fixes (Boeing convention)
+          parts.push(`<polygon points="${p.x.toFixed(1)},${(p.y-5).toFixed(1)} ${(p.x-4.5).toFixed(1)},${(p.y+3.5).toFixed(1)} ${(p.x+4.5).toFixed(1)},${(p.y+3.5).toFixed(1)}" fill="none" stroke="${color}" stroke-width="1.4"/>`);
+        }
+      });
+
+      // ----- Pass 4: labels -----
+      projWps.forEach(({ wp, p, visible, color }) => {
+        if (!visible) return;
+        // Place label to the right of the marker by default; clamp inside arc
+        let lx = p.x + 8, ly = p.y + 3;
+        const labelW = wp.ident.length * 6.5 + 2;
+        // background for legibility
+        parts.push(`<rect x="${(lx-1).toFixed(1)}" y="${(ly-9).toFixed(1)}" width="${labelW}" height="11" fill="#000" opacity="0.7"/>`);
+        parts.push(`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" fill="${color}" font-family="monospace" font-size="10" font-weight="bold">${wp.ident}</text>`);
+      });
+    }
+
+    // ----- Aircraft symbol at bottom-center -----
+    // Boeing-style aircraft icon: stylized white triangle with wings
+    const ac = `M ${ax} ${ay-9} L ${ax-2} ${ay-3} L ${ax-2} ${ay+1} L ${ax-12} ${ay+5} L ${ax-12} ${ay+8} L ${ax-2} ${ay+5} L ${ax-2} ${ay+11} L ${ax-5} ${ay+13} L ${ax-5} ${ay+15} L ${ax} ${ay+13} L ${ax+5} ${ay+15} L ${ax+5} ${ay+13} L ${ax+2} ${ay+11} L ${ax+2} ${ay+5} L ${ax+12} ${ay+8} L ${ax+12} ${ay+5} L ${ax+2} ${ay+1} L ${ax+2} ${ay-3} Z`;
+    parts.push(`<path d="${ac}" fill="#ffffff" stroke="#ffffff" stroke-width="0.5"/>`);
+
+    if (points.length === 0) {
+      parts.push(`<text x="${ND_CENTER}" y="${ND_AIRCRAFT_Y - 60}" fill="#ffb648" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">NO ACTIVE FLIGHT PLAN</text>`);
+    }
+
+  } else {
+    // ============================================================
+    //   PLAN MODE — north-up bbox view (route modification view)
+    // ============================================================
+    const ringR = (ND_VIEWBOX/2 - 30);
+
+    // Background concentric range rings + N/E/S/W cross
+    parts.push(`<circle cx="${ND_CENTER}" cy="${ND_CENTER}" r="${ringR}" fill="none" stroke="#3a8a6a" stroke-width="0.8"/>`);
+    parts.push(`<circle cx="${ND_CENTER}" cy="${ND_CENTER}" r="${ringR*0.66}" fill="none" stroke="#1c5a3a" stroke-width="0.6" stroke-dasharray="3 4"/>`);
+    parts.push(`<circle cx="${ND_CENTER}" cy="${ND_CENTER}" r="${ringR*0.33}" fill="none" stroke="#1c5a3a" stroke-width="0.6" stroke-dasharray="3 4"/>`);
+    parts.push(`<line x1="${ND_CENTER}" y1="${ND_CENTER-ringR}" x2="${ND_CENTER}" y2="${ND_CENTER+ringR}" stroke="#1c5a3a" stroke-width="0.4"/>`);
+    parts.push(`<line x1="${ND_CENTER-ringR}" y1="${ND_CENTER}" x2="${ND_CENTER+ringR}" y2="${ND_CENTER}" stroke="#1c5a3a" stroke-width="0.4"/>`);
+
+    // Cardinal labels
+    parts.push(`<text x="${ND_CENTER}" y="${ND_CENTER-ringR-4}" fill="#3a8a6a" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">N</text>`);
+    parts.push(`<text x="${ND_CENTER+ringR+8}" y="${ND_CENTER+4}" fill="#3a8a6a" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">E</text>`);
+    parts.push(`<text x="${ND_CENTER}" y="${ND_CENTER+ringR+12}" fill="#3a8a6a" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">S</text>`);
+    parts.push(`<text x="${ND_CENTER-ringR-8}" y="${ND_CENTER+4}" fill="#3a8a6a" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">W</text>`);
+
+    // (Note: "PLAN" mode label is shown in the info panel overlay at top-left;
+    //  we don't draw it inside the SVG to avoid overlapping the N cardinal marker.)
+
+    if (points.length === 0) {
+      parts.push(`<text x="${ND_CENTER}" y="${ND_CENTER}" fill="#ffb648" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">NO ACTIVE FLIGHT PLAN</text>`);
+    } else {
+      // Build segments
+      const segments = [];
+      for (let i = 0; i+1 < points.length; i++) {
+        const seg = { active: fp.activated && i === fp.activeLeg, pts: [] };
+        const samples = 30;
+        for (let s = 0; s <= samples; s++) {
+          const f = s/samples;
+          const p = gcInterp(points[i], points[i+1], f);
+          seg.pts.push(proj(p.lat, p.lon));
+        }
+        segments.push(seg);
+      }
+
+      // Pass 1: non-active path
+      segments.forEach(seg => {
+        if (seg.active) return;
+        const d = seg.pts.map((p,j) => `${j===0?'M':'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+        parts.push(`<path d="${d}" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="${fp.activated ? 0.85 : 0.6}"/>`);
+      });
+      // Pass 2: active path
+      segments.forEach(seg => {
+        if (!seg.active) return;
+        const d = seg.pts.map((p,j) => `${j===0?'M':'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+        parts.push(`<path d="${d}" fill="none" stroke="#ff5cff" stroke-width="2.4"/>`);
+      });
+
+      // Pass 3 & 4: waypoint markers + labels
+      const projWps = points.map((wp, i) => {
+        const p = proj(wp.lat, wp.lon);
+        const isInBounds = p.x > 5 && p.x < ND_VIEWBOX-5 && p.y > 5 && p.y < ND_VIEWBOX-5;
+        const isActiveTarget = fp.activated && (i === fp.activeLeg + 1);
+        const color = isActiveTarget ? '#ff5cff'
+                    : (wp.role === 'origin' || wp.role === 'dest') ? '#00d8ff'
+                    : '#ffffff';
+        return { wp, i, p, isInBounds, color };
+      });
+
+      projWps.forEach(({ wp, p, isInBounds, color }) => {
+        if (!isInBounds) return;
+        if (wp.role === 'origin' || wp.role === 'dest') {
+          parts.push(`<rect x="${(p.x-4).toFixed(1)}" y="${(p.y-4).toFixed(1)}" width="8" height="8" fill="${color}" stroke="${color}"/>`);
+        } else {
+          parts.push(`<polygon points="${p.x.toFixed(1)},${(p.y-5).toFixed(1)} ${(p.x-4.5).toFixed(1)},${(p.y+3.5).toFixed(1)} ${(p.x+4.5).toFixed(1)},${(p.y+3.5).toFixed(1)}" fill="none" stroke="${color}" stroke-width="1.4"/>`);
+        }
+      });
+
+      projWps.forEach(({ wp, i, p, isInBounds, color }) => {
+        if (!isInBounds) return;
+        let lx = p.x + 8, ly = p.y + 3;
+        let anchor = 'start';
+        if (i === 0 && projWps.length > 1 && projWps[1].isInBounds) {
+          const next = projWps[1].p;
+          const dx = next.x - p.x, dy = next.y - p.y;
+          const len = Math.sqrt(dx*dx + dy*dy) || 1;
+          lx = p.x - dx/len * 9;
+          ly = p.y - dy/len * 9 + 3;
+          anchor = (dx >= 0) ? 'end' : 'start';
+        }
+        if (i === projWps.length - 1 && projWps.length > 1 && projWps[i-1].isInBounds) {
+          const prev = projWps[i-1].p;
+          const dx = prev.x - p.x, dy = prev.y - p.y;
+          const len = Math.sqrt(dx*dx + dy*dy) || 1;
+          lx = p.x - dx/len * 9;
+          ly = p.y - dy/len * 9 + 3;
+          anchor = (dx >= 0) ? 'end' : 'start';
+        }
+        if (lx < 5) { lx = 5; anchor = 'start'; }
+        if (lx > ND_VIEWBOX - 5) { lx = ND_VIEWBOX - 5; anchor = 'end'; }
+        if (ly < 12) ly = 12;
+        if (ly > ND_VIEWBOX - 5) ly = ND_VIEWBOX - 5;
+        const labelW = wp.ident.length * 6.5 + 2;
+        const bgX = anchor === 'end' ? lx - labelW : lx - 1;
+        parts.push(`<rect x="${bgX.toFixed(1)}" y="${(ly-9).toFixed(1)}" width="${labelW}" height="11" fill="#000" opacity="0.7"/>`);
+        parts.push(`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" fill="${color}" font-family="monospace" font-size="10" font-weight="bold" text-anchor="${anchor}">${wp.ident}</text>`);
+      });
+    }
+  }
+
+  svg.innerHTML = parts.join('');
+
+  // ----- Update info panels (outside SVG) -----
+  // In MAP mode, range = distance from aircraft outward (radius).
+  // In PLAN mode, range = half the bbox span (radius equivalent).
+  const rangeDisplay = nd.range === 'auto'
+    ? (isMap ? `AUTO (${halfRangeNM.toFixed(0)} NM)` : `AUTO (${(halfRangeNM*2).toFixed(0)} NM)`)
+    : nd.range + ' NM';
+  $('#nd-info-tl').innerHTML = `${nd.mode}<br>${rangeDisplay}`;
+  if (fp.activated) {
+    $('#nd-info-tr').innerHTML = `GS 450<br>TAS 460`;
+    $('#nd-info-bl').innerHTML = `WIND 270/45`;
+    let trueNM = 0;
+    for (let i = 0; i+1 < points.length; i++) trueNM += gcDist(points[i], points[i+1]);
+    $('#nd-info-br').innerHTML = `${fp.dest}<br>${trueNM.toFixed(0)} NM`;
+  } else {
+    $('#nd-info-tr').innerHTML = `GS ---<br>TAS ---`;
+    $('#nd-info-bl').innerHTML = `WIND ---/---`;
+    let trueNM = 0;
+    for (let i = 0; i+1 < points.length; i++) trueNM += gcDist(points[i], points[i+1]);
+    $('#nd-info-br').innerHTML = `${fp.dest || '----'}<br>${trueNM.toFixed(0)} NM`;
+  }
+}
+
+// ---------- Bind events ----------
+$$('.lsk-btn').forEach(el => {
+  el.addEventListener('click', () => handleLSK(el.dataset.key));
+});
+$$('.alpha-pad button[data-key], .num-pad button[data-key]').forEach(el => {
+  el.addEventListener('click', () => { handleKey(el.dataset.key); render(); });
+});
+$$('.function-keys button[data-fn]').forEach(el => {
+  el.addEventListener('click', () => handleFn(el.dataset.fn));
+});
+$$('.nd-controls button[data-mode]').forEach(el => {
+  el.addEventListener('click', () => {
+    nd.mode = el.dataset.mode;
+    $$('.nd-controls button[data-mode]').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    renderND();
+  });
+});
+$$('.nd-controls button[data-range]').forEach(el => {
+  el.addEventListener('click', () => {
+    const r = el.dataset.range;
+    nd.range = (r === 'auto') ? 'auto' : parseInt(r, 10);
+    $$('.nd-controls button[data-range]').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    renderND();
+  });
+});
+
+window.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  const k = e.key.toUpperCase();
+  if (/^[A-Z]$/.test(k) || /^[0-9]$/.test(e.key)) {
+    handleKey(e.key.toUpperCase()); render(); e.preventDefault();
+  } else if (e.key === 'Backspace') {
+    handleKey('CLR'); render(); e.preventDefault();
+  } else if (e.key === 'Delete') {
+    handleKey('DEL'); render(); e.preventDefault();
+  } else if (e.key === '/' || e.key === '.' || e.key === ' ') {
+    handleKey(e.key === ' ' ? ' ' : e.key); render(); e.preventDefault();
+  } else if (e.key === 'Enter') {
+    handleFn('EXEC'); e.preventDefault();
+  }
+});
+
+// Init
+fmc.page = 'MENU';
+render();
+</script>
+
+</body>
+</html>

@@ -732,6 +732,57 @@ html { scroll-behavior: smooth; }
 }
 
 /* ─── §3 FMC/CDU widget ─────────────────────────────────────────── */
+/* Title bar above the FMC figure: identifies the device and links
+   out to the standalone simulator page for readers who want the
+   full set of pages. Sits inside the same <figure> as .fmc-widget,
+   so it shares the figure's full-bleed width. */
+.flying-page .fmc-widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding: 0 0.25rem 0.6rem;
+  margin: 1.25rem 0 -0.5rem;  /* negative bottom merges into widget */
+  border-bottom: 1px solid var(--fl-rule);
+  font-family: var(--fl-font-ui);
+}
+.flying-page .fmc-widget-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--fl-ink);
+  text-transform: uppercase;
+}
+.flying-page[data-lang="zh"] .fmc-widget-title {
+  font-family: var(--fl-font-cn);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+.flying-page .fmc-widget-link {
+  font-size: 0.85rem;
+  color: var(--fl-sapphire);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.flying-page .fmc-widget-link:hover {
+  text-decoration: underline;
+}
+.flying-page[data-lang="zh"] .fmc-widget-link {
+  font-family: var(--fl-font-cn);
+}
+.flying-page .fmc-widget-title [data-lang-content],
+.flying-page .fmc-widget-link [data-lang-content] {
+  display: none;
+}
+.flying-page[data-lang="en"] .fmc-widget-title [data-lang-content="en"],
+.flying-page[data-lang="en"] .fmc-widget-link [data-lang-content="en"],
+.flying-page[data-lang="zh"] .fmc-widget-title [data-lang-content="zh"],
+.flying-page[data-lang="zh"] .fmc-widget-link [data-lang-content="zh"] {
+  display: inline;
+}
+
 .flying-page .fmc-widget {
   background: var(--fl-paper-deep);
   border: 1px solid var(--fl-rule);

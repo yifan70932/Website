@@ -357,6 +357,16 @@
 
     <!-- ─── Widget for §3: FMC/CDU input demo ──────────────────── -->
     <figure class="full-bleed">
+      <div class="fmc-widget-header">
+        <span class="fmc-widget-title">
+          <span data-lang-content="en">Boeing 737 FMC / CDU</span>
+          <span data-lang-content="zh">波音 737 飞行管理计算机</span>
+        </span>
+        <a class="fmc-widget-link" href="/flying/fmc.html" target="_blank" rel="noopener">
+          <span data-lang-content="en">Open in full simulator →</span>
+          <span data-lang-content="zh">打开完整模拟器 →</span>
+        </a>
+      </div>
       <div class="fmc-widget" id="fmc-widget">
 
         <!-- Left side: the CDU itself -->
@@ -1609,7 +1619,17 @@
     TXK: { lat: 33.45, lon: -94.08, name: 'TEXARKANA' },
     PRX: { lat: 33.64, lon: -95.45, name: 'PARIS' },
     SLR: { lat: 33.02, lon: -95.40, name: 'SULPHUR SPGS' },
-    CVE: { lat: 32.81, lon: -97.04, name: 'COWBOY' }
+    CVE: { lat: 32.81, lon: -97.04, name: 'COWBOY' },
+    // Additional fixes for transcon and Sun Belt routes
+    DSD: { lat: 33.43, lon: -112.27, name: 'DESERT' },        // PHX area
+    BLH: { lat: 33.62, lon: -114.72, name: 'BLYTHE' },        // CA-AZ border
+    DRK: { lat: 34.70, lon: -112.48, name: 'DRAKE' },         // northern AZ
+    MCB: { lat: 31.18, lon: -90.26, name: 'MCCOMB' },         // gulf transit
+    RAP: { lat: 44.05, lon: -103.06, name: 'RAPID CITY' },    // northern transcon
+    BFF: { lat: 41.89, lon: -103.48, name: 'SCOTTSBLUFF' },   // northern transcon
+    EKR: { lat: 39.95, lon: -108.09, name: 'MEEKER' },        // CO-WY mountain
+    OAL: { lat: 38.27, lon: -118.05, name: 'MUSTANG' },       // NV transit
+    LBL: { lat: 37.05, lon: -100.97, name: 'LIBERAL' }        // KS plains
   };
 
   function lookupWaypoint(code) {
@@ -1631,6 +1651,52 @@
     return null;
   }
 
+  // ─── Company route database ────────────────────────────────
+  // Pre-canned flight plans keyed by an 8-char company-style code.
+  // The pattern <ORIG><DEST><N> matches the way airlines actually file
+  // routes through the FMC (e.g. AAL filing "KORDKDFW1" for an O'Hare
+  // -> DFW segment). Entered on the RTE page at LSK 2L (CO ROUTE slot).
+  const COMPANY_ROUTES = {
+    // Buffalo origins
+    'KBUFKDFW1': { from: 'KBUF', to: 'KDFW', via: ['SYR', 'PSB', 'AGC', 'HVQ', 'TXK'] },
+    'KBUFKORD1': { from: 'KBUF', to: 'KORD', via: ['ELZ', 'PSB', 'FWA'] },
+    'KBUFKLAX1': { from: 'KBUF', to: 'KLAX', via: ['PSB', 'FWA', 'BVT', 'TTH', 'DRK', 'BLH'] },
+    'KBUFKBOS1': { from: 'KBUF', to: 'KBOS', via: ['SYR'] },
+    'KBUFKMIA1': { from: 'KBUF', to: 'KMIA', via: ['HVQ', 'APE', 'MCB'] },
+    // East-coast hub patterns
+    'KJFKKLAX1': { from: 'KJFK', to: 'KLAX', via: ['JST', 'BVT', 'TTH', 'RZC', 'DRK', 'BLH'] },
+    'KJFKKORD1': { from: 'KJFK', to: 'KORD', via: ['JST', 'FWA'] },
+    'KBOSKDFW1': { from: 'KBOS', to: 'KDFW', via: ['SYR', 'PSB', 'AGC', 'HVQ', 'TXK'] },
+    // West-coast and transcons
+    'KORDKLAX1': { from: 'KORD', to: 'KLAX', via: ['BVT', 'TTH', 'LBL', 'DRK', 'BLH'] },
+    'KORDKSEA1': { from: 'KORD', to: 'KSEA', via: ['RAP', 'BFF', 'EKR'] },
+    'KSFOKJFK1': { from: 'KSFO', to: 'KJFK', via: ['OAL', 'EKR', 'TTH', 'JST'] },
+    'KSEAKORD1': { from: 'KSEA', to: 'KORD', via: ['EKR', 'BFF', 'RAP'] },
+    // Sun Belt
+    'KATLKDFW1': { from: 'KATL', to: 'KDFW', via: ['HVQ', 'TXK'] },
+    'KMIAKDFW1': { from: 'KMIA', to: 'KDFW', via: ['MCB', 'TXK'] },
+    'KIAHKDEN1': { from: 'KIAH', to: 'KDEN', via: ['TXK', 'LBL'] },
+    'KPHXKLAS1': { from: 'KPHX', to: 'KLAS', via: ['DSD', 'BLH'] }
+  };
+
+  function lookupCoRoute(code) {
+    code = code.trim().toUpperCase();
+    return COMPANY_ROUTES[code] || null;
+  }
+
+  // Find a default CO ROUTE for a given origin/dest pair (used to auto-load
+  // a company route whenever both origin and dest are entered manually).
+  function findCoRouteFor(origin, dest) {
+    if (!origin || !dest) return null;
+    for (const code in COMPANY_ROUTES) {
+      const r = COMPANY_ROUTES[code];
+      if (r.from === origin && r.to === dest) {
+        return { code, ...r };
+      }
+    }
+    return null;
+  }
+
   // ─── State ─────────────────────────────────────────────────
   const state = {
     page: 'INIT',
@@ -1639,6 +1705,7 @@
     route: {
       origin: '',
       dest: '',
+      coRoute: '',  // company-route code, e.g. 'KBUFKDFW1'
       via: []      // list of waypoint codes
     },
     pendingRoute: null,   // an unexecuted change that EXEC will commit
@@ -1769,7 +1836,9 @@
               ' '.repeat(SCREEN_COLS - 1 - 4 - 4) +
               (r.dest ? '[W]' + r.dest + '[/]' : '[D]----[/]');
     rows.push(' [Y]CO ROUTE[/]            [Y]FLT NO[/]');
-    rows.push(' [D]----------[/]              [D]------[/]');
+    rows.push(' ' + (r.coRoute ? '[W]' + r.coRoute + '[/]' : '[D]----------[/]') +
+              ' '.repeat(SCREEN_COLS - 1 - 10 - 6) +
+              '[D]------[/]');
     // Route legs preview
     rows.push(' [Y]VIA[/]                  [Y]TO[/]');
     if (r.via.length === 0) {
@@ -1798,6 +1867,7 @@
       lsk: {
         L1: () => takeScratchpadAs('origin'),
         R1: () => takeScratchpadAs('dest'),
+        L2: () => takeScratchpadAsCoRoute(),
         L3: () => takeScratchpadAsRoute(),
         R6: () => activateRoute()
       },
@@ -1893,6 +1963,34 @@
     state.route[field] = sp;
     state.scratchpad = '';
     state.message = '';
+    // Auto-load a matching company route if one exists for this origin/dest
+    // pair and the via list is currently empty (i.e. user hasn't typed their
+    // own routing). Mirrors how a real FMC offers the filed route after a
+    // dispatch upload.
+    if (state.route.origin && state.route.dest && state.route.via.length === 0) {
+      const co = findCoRouteFor(state.route.origin, state.route.dest);
+      if (co) {
+        state.route.coRoute = co.code;
+        state.route.via = co.via.slice();
+      }
+    }
+    updateExecArmed();
+  }
+
+  function takeScratchpadAsCoRoute() {
+    const sp = state.scratchpad.trim().toUpperCase();
+    if (!sp) { state.message = 'INVALID ENTRY'; return; }
+    const co = lookupCoRoute(sp);
+    if (!co) {
+      state.message = 'CO ROUTE NOT FOUND';
+      return;
+    }
+    state.route.coRoute = sp;
+    state.route.origin = co.from;
+    state.route.dest = co.to;
+    state.route.via = co.via.slice();
+    state.scratchpad = '';
+    state.message = '';
     updateExecArmed();
   }
 
@@ -1939,8 +2037,10 @@
   }
 
   function routeStepHint() {
-    if (!state.route.origin) return { en: 'Type KBUF, then press the LSK next to ORIGIN (1L).',
-                                       zh: '输入 KBUF，再按 ORIGIN 旁边的行选择键（1L）。' };
+    if (!state.route.origin) return {
+      en: 'Type KBUF, then press LSK 1L. Or type a CO ROUTE code (e.g. KBUFKDFW1) and press LSK 2L to load a filed route.',
+      zh: '输入 KBUF 后按 1L；或输入 CO ROUTE 代码（如 KBUFKDFW1）后按 2L 一键加载预设航路。'
+    };
     if (!state.route.dest) return { en: 'Type KDFW, then press the LSK next to DEST (1R).',
                                      zh: '输入 KDFW，再按 DEST 旁边的行选择键（1R）。' };
     if (state.route.via.length === 0) return {
