@@ -1708,7 +1708,7 @@
       fetch('/flying/data/waypoints.json').then(r => r.ok ? r.json() : Promise.reject(r.status)),
       fetch('/flying/data/airports.json').then(r => r.ok ? r.json() : Promise.reject(r.status)),
       fetch('/flying/data/airways.json').then(r => r.ok ? r.json() : Promise.reject(r.status)),
-      fetch('/flying/data/_meta.json').then(r => r.ok ? r.json() : Promise.reject(r.status)).catch(() => null)
+      fetch('/flying/data/meta.json').then(r => r.ok ? r.json() : Promise.reject(r.status)).catch(() => null)
     ]).then(([waypoints, airports, airways, meta]) => {
       NAV_DATA.waypoints = waypoints;
       NAV_DATA.airports = airports;
