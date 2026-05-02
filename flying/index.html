@@ -1583,27 +1583,53 @@
   const widget = document.getElementById('fmc-widget');
   if (!widget) return;
 
-  // ─── Waypoint database (rough lat/lon, decimal degrees) ─────
-  // Mix of airports (K-prefixed) and named en-route fixes.
-  const WAYPOINTS = {
-    // Airports — Buffalo region anchor + sample destinations
-    KBUF: { lat: 42.94, lon: -78.73, name: 'BUFFALO' },
-    KDFW: { lat: 32.90, lon: -97.04, name: 'DALLAS-FT WORTH' },
-    KORD: { lat: 41.98, lon: -87.91, name: 'CHICAGO O\'HARE' },
-    KJFK: { lat: 40.64, lon: -73.78, name: 'NEW YORK JFK' },
-    KLAX: { lat: 33.94, lon: -118.41, name: 'LOS ANGELES' },
-    KSFO: { lat: 37.62, lon: -122.38, name: 'SAN FRANCISCO' },
-    KATL: { lat: 33.64, lon: -84.43, name: 'ATLANTA' },
-    KBOS: { lat: 42.36, lon: -71.01, name: 'BOSTON' },
-    KSEA: { lat: 47.45, lon: -122.31, name: 'SEATTLE' },
-    KIAD: { lat: 38.94, lon: -77.46, name: 'WASHINGTON DULLES' },
-    KMIA: { lat: 25.79, lon: -80.29, name: 'MIAMI' },
-    KDEN: { lat: 39.86, lon: -104.67, name: 'DENVER' },
-    KIAH: { lat: 29.98, lon: -95.34, name: 'HOUSTON' },
-    KMSP: { lat: 44.88, lon: -93.22, name: 'MINNEAPOLIS' },
-    KPHX: { lat: 33.43, lon: -112.01, name: 'PHOENIX' },
-    KLAS: { lat: 36.08, lon: -115.15, name: 'LAS VEGAS' },
-    // En-route fixes/VORs roughly along common routings
+  // ─── Navigation database (loaded async from FAA NASR data) ───
+  // Three separate JSON files are fetched on first load:
+  //   /flying/data/waypoints.json — en-route fixes + VORs/NDBs (~80k entries)
+  //   /flying/data/airports.json  — public-use airports (~20k entries)
+  //   /flying/data/airways.json   — airway/jet route definitions (~2.5k)
+  //
+  // All three are public-domain US Government work (FAA NASR subscription),
+  // updated every 28 days by re-running scripts/build_navdata.py against
+  // the latest cycle. Until they finish loading, we fall back to a small
+  // hardcoded set so the widget still works offline / on first paint.
+  //
+  // Compact JSON layout (to save bytes):
+  //   waypoints[ident] = { lat, lon, t: 'F'|'V'|'VD'|'VT'|'TC'|'N'|'ND'|'D', s?, n? }
+  //     where t is type (F=fix, V=VOR, VD=VOR/DME, VT=VORTAC, TC=TACAN,
+  //                      N=NDB, ND=NDB/DME, D=DME)
+  //   airports[ident] = { lat, lon, n: <name>, s?: <state>, e?: <elev_ft> }
+  //   airways[name]   = { t: 'JET'|'VICTOR'|'RNAV'|..., p: [ident, ident, ...] }
+  const NAV_DATA = {
+    waypoints: null,   // populated after fetch
+    airports: null,
+    airways: null,
+    meta: null,
+    loadState: 'idle', // 'idle' | 'loading' | 'ready' | 'error'
+    error: null
+  };
+
+  // Hardcoded fallback: same set we used before the FAA data was wired up.
+  // If the JSON fetches fail (offline preview, blocked CDN, etc.), this
+  // keeps every COMPANY_ROUTES entry resolvable.
+  const FALLBACK_WAYPOINTS = {
+    KBUF: { lat: 42.94, lon: -78.73, name: 'BUFFALO',          isAirport: true },
+    KDFW: { lat: 32.90, lon: -97.04, name: 'DALLAS-FT WORTH',  isAirport: true },
+    KORD: { lat: 41.98, lon: -87.91, name: "CHICAGO O'HARE",   isAirport: true },
+    KJFK: { lat: 40.64, lon: -73.78, name: 'NEW YORK JFK',     isAirport: true },
+    KLAX: { lat: 33.94, lon: -118.41, name: 'LOS ANGELES',     isAirport: true },
+    KSFO: { lat: 37.62, lon: -122.38, name: 'SAN FRANCISCO',   isAirport: true },
+    KATL: { lat: 33.64, lon: -84.43, name: 'ATLANTA',          isAirport: true },
+    KBOS: { lat: 42.36, lon: -71.01, name: 'BOSTON',           isAirport: true },
+    KSEA: { lat: 47.45, lon: -122.31, name: 'SEATTLE',         isAirport: true },
+    KIAD: { lat: 38.94, lon: -77.46, name: 'WASHINGTON DULLES',isAirport: true },
+    KMIA: { lat: 25.79, lon: -80.29, name: 'MIAMI',            isAirport: true },
+    KDEN: { lat: 39.86, lon: -104.67, name: 'DENVER',          isAirport: true },
+    KIAH: { lat: 29.98, lon: -95.34, name: 'HOUSTON',          isAirport: true },
+    KMSP: { lat: 44.88, lon: -93.22, name: 'MINNEAPOLIS',      isAirport: true },
+    KPHX: { lat: 33.43, lon: -112.01, name: 'PHOENIX',         isAirport: true },
+    KLAS: { lat: 36.08, lon: -115.15, name: 'LAS VEGAS',       isAirport: true },
+    // En-route fixes/VORs along the COMPANY_ROUTES entries
     SYR: { lat: 43.16, lon: -76.10, name: 'SYRACUSE' },
     ELZ: { lat: 42.10, lon: -77.99, name: 'WELLSVILLE' },
     PSB: { lat: 40.92, lon: -78.00, name: 'PHILIPSBURG' },
@@ -1620,36 +1646,86 @@
     PRX: { lat: 33.64, lon: -95.45, name: 'PARIS' },
     SLR: { lat: 33.02, lon: -95.40, name: 'SULPHUR SPGS' },
     CVE: { lat: 32.81, lon: -97.04, name: 'COWBOY' },
-    // Additional fixes for transcon and Sun Belt routes
-    DSD: { lat: 33.43, lon: -112.27, name: 'DESERT' },        // PHX area
-    BLH: { lat: 33.62, lon: -114.72, name: 'BLYTHE' },        // CA-AZ border
-    DRK: { lat: 34.70, lon: -112.48, name: 'DRAKE' },         // northern AZ
-    MCB: { lat: 31.18, lon: -90.26, name: 'MCCOMB' },         // gulf transit
-    RAP: { lat: 44.05, lon: -103.06, name: 'RAPID CITY' },    // northern transcon
-    BFF: { lat: 41.89, lon: -103.48, name: 'SCOTTSBLUFF' },   // northern transcon
-    EKR: { lat: 39.95, lon: -108.09, name: 'MEEKER' },        // CO-WY mountain
-    OAL: { lat: 38.27, lon: -118.05, name: 'MUSTANG' },       // NV transit
-    LBL: { lat: 37.05, lon: -100.97, name: 'LIBERAL' }        // KS plains
+    DSD: { lat: 33.43, lon: -112.27, name: 'DESERT' },
+    BLH: { lat: 33.62, lon: -114.72, name: 'BLYTHE' },
+    DRK: { lat: 34.70, lon: -112.48, name: 'DRAKE' },
+    MCB: { lat: 31.18, lon: -90.26, name: 'MCCOMB' },
+    RAP: { lat: 44.05, lon: -103.06, name: 'RAPID CITY' },
+    BFF: { lat: 41.89, lon: -103.48, name: 'SCOTTSBLUFF' },
+    EKR: { lat: 39.95, lon: -108.09, name: 'MEEKER' },
+    OAL: { lat: 38.27, lon: -118.05, name: 'MUSTANG' },
+    LBL: { lat: 37.05, lon: -100.97, name: 'LIBERAL' }
+  };
+
+  // Map compact type codes back to readable type strings.
+  const TYPE_NAMES = {
+    F:  'FIX',     V:  'VOR',     VD: 'VOR/DME',  VT: 'VORTAC',
+    TC: 'TACAN',   N:  'NDB',     ND: 'NDB/DME',  D:  'DME'
   };
 
   function lookupWaypoint(code) {
     code = code.trim().toUpperCase();
-    if (WAYPOINTS[code]) return { code, ...WAYPOINTS[code] };
-    // Synthesize a placeholder for unknown 4-letter K-airport codes
-    if (/^K[A-Z]{3}$/.test(code)) {
-      // Place at a deterministic but plausible-looking location
-      let h = 0;
-      for (const c of code) h = (h * 31 + c.charCodeAt(0)) % 1000;
-      return {
-        code,
-        lat: 30 + (h % 200) / 10,        // 30–50°N
-        lon: -120 + ((h * 7) % 600) / 10,// -120 to -60°W
-        name: code,
-        synthetic: true
-      };
+    if (!code) return null;
+
+    // 1. If real FAA data is loaded, prefer it
+    if (NAV_DATA.loadState === 'ready') {
+      const apt = NAV_DATA.airports[code];
+      if (apt) {
+        return { code, lat: apt.lat, lon: apt.lon,
+                 name: apt.n, type: 'AIRPORT', isAirport: true,
+                 state: apt.s, elevation_ft: apt.e };
+      }
+      const wp = NAV_DATA.waypoints[code];
+      if (wp) {
+        return { code, lat: wp.lat, lon: wp.lon,
+                 name: wp.n || code, type: TYPE_NAMES[wp.t] || 'FIX',
+                 state: wp.s };
+      }
+    }
+
+    // 2. Fall back to the hardcoded table (works while data loads, or if
+    //    the fetch failed). Note: no synthetic-airport fallback any more —
+    //    we'd rather honestly say NOT IN DATABASE than invent coordinates.
+    if (FALLBACK_WAYPOINTS[code]) {
+      return { code, ...FALLBACK_WAYPOINTS[code] };
     }
     return null;
   }
+
+  function lookupAirway(code) {
+    code = code.trim().toUpperCase();
+    if (NAV_DATA.loadState === 'ready' && NAV_DATA.airways[code]) {
+      return NAV_DATA.airways[code];
+    }
+    return null;
+  }
+
+  // ─── Begin async load of navigation data ───────────────────
+  function startNavDataLoad() {
+    if (NAV_DATA.loadState !== 'idle') return;
+    NAV_DATA.loadState = 'loading';
+    Promise.all([
+      fetch('/flying/data/waypoints.json').then(r => r.ok ? r.json() : Promise.reject(r.status)),
+      fetch('/flying/data/airports.json').then(r => r.ok ? r.json() : Promise.reject(r.status)),
+      fetch('/flying/data/airways.json').then(r => r.ok ? r.json() : Promise.reject(r.status)),
+      fetch('/flying/data/_meta.json').then(r => r.ok ? r.json() : Promise.reject(r.status)).catch(() => null)
+    ]).then(([waypoints, airports, airways, meta]) => {
+      NAV_DATA.waypoints = waypoints;
+      NAV_DATA.airports = airports;
+      NAV_DATA.airways = airways;
+      NAV_DATA.meta = meta;
+      NAV_DATA.loadState = 'ready';
+      // Re-render so any "LOADING" state clears
+      try { renderScreen(); updateND(); } catch (e) { /* swallow — render not yet defined */ }
+    }).catch(err => {
+      console.warn('FMC: nav data fetch failed; using fallback waypoints', err);
+      NAV_DATA.loadState = 'error';
+      NAV_DATA.error = err;
+      try { renderScreen(); } catch (e) { /* ignore */ }
+    });
+  }
+  // Kick it off once the IIFE body is loaded.
+  // (Defined here, called at the bottom after all functions exist.)
 
   // ─── Company route database ────────────────────────────────
   // Pre-canned flight plans keyed by an 8-char company-style code.
@@ -1778,7 +1854,23 @@
     rows.push(' [Y]MODEL[/]              [Y]ENG RATING[/]');
     rows.push(' [W]737-800[/]              [W]CFM56-7B[/]');
     rows.push(' [Y]NAV DATA[/]              [Y]ACTIVE[/]');
-    rows.push(' [W]WORLD-2604[/]      [W]26MAY-23JUN[/]');
+    // Real AIRAC info comes from NAV_DATA.meta once the fetch completes.
+    // While loading, show a placeholder so it's clear data is loading.
+    let navDataLine, activeLine;
+    if (NAV_DATA.loadState === 'ready' && NAV_DATA.meta && NAV_DATA.meta.cycle) {
+      // 'cycle' is YYYY-MM-DD; convert to traditional FMC short-form display
+      const c = NAV_DATA.meta.cycle;
+      navDataLine = '[W]NASR-' + c.substring(2,4) + c.substring(5,7) + '[/]';
+      activeLine  = '[W]' + _formatAiracRange(c) + '[/]';
+    } else if (NAV_DATA.loadState === 'loading' || NAV_DATA.loadState === 'idle') {
+      navDataLine = '[D]LOADING...[/]';
+      activeLine = '[D]----[/]';
+    } else {
+      // error
+      navDataLine = '[W]FALLBACK[/]';
+      activeLine = '[Y]LOCAL[/]';
+    }
+    rows.push(' ' + navDataLine + '      ' + activeLine);
     rows.push(' [Y]OP PROGRAM[/]              [Y]DRAG/FF[/]');
     rows.push(' [W]U10.8A[/]                  [W]+0.0/+0.0[/]');
     rows.push('');
@@ -1795,6 +1887,24 @@
       },
       hint: { en: 'IDENT shows the FMC software and database. Press R6 (POS INIT>) to continue.', zh: 'IDENT 页显示 FMC 软件与导航数据库版本。按 R6（POS INIT>）继续。' }
     };
+  }
+
+  // Convert AIRAC effective date 'YYYY-MM-DD' into the 11-char range string
+  // shown on real Boeing FMCs, e.g. '19FEB-19MAR'. (28-day cycles.)
+  function _formatAiracRange(yyyymmdd) {
+    const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    try {
+      const d = new Date(yyyymmdd + 'T00:00:00Z');
+      const e = new Date(d.getTime() + 28*24*3600*1000);
+      const fmt = (date) => {
+        const day = String(date.getUTCDate()).padStart(2, '0');
+        const mo = months[date.getUTCMonth()];
+        return day + mo;
+      };
+      return fmt(d) + '-' + fmt(e);
+    } catch (e) {
+      return yyyymmdd;
+    }
   }
 
   function pageMENU() {
@@ -1997,7 +2107,96 @@
   function takeScratchpadAsRoute() {
     const sp = state.scratchpad.trim().toUpperCase();
     if (!sp) { state.message = 'INVALID ENTRY'; return; }
-    // Accept tokens: WPT or WPT DCT WPT DCT WPT  (DCT optional/ignored)
+
+    // Real Boeing FMC route syntax accepts a mix of:
+    //   WPT             — direct fix/navaid
+    //   WPT.AIRWAY.WPT  — fly AIRWAY from the previous WPT to the next WPT
+    //   WPT AIRWAY WPT  — same, with whitespace separator
+    //   DCT, ..         — direct-leg connectors (ignored)
+    //
+    // We parse left-to-right, expanding airways between adjacent waypoints
+    // by looking up the airway in NAV_DATA.airways and slicing its `points`
+    // list between the two named idents (inclusive of intermediate points
+    // only — endpoints already exist as the named waypoints).
+    //
+    // If an airway can't be expanded (data not loaded, or airway name not
+    // found), we fall back to a direct leg between the two waypoints —
+    // matching what a pilot does when ATC says "expect direct."
+    const rawTokens = sp.split(/[\s.]+/).filter(t => t && t !== 'DCT' && t !== '..');
+    if (rawTokens.length === 0) { state.message = 'INVALID ENTRY'; return; }
+
+    const expanded = [];
+    let pendingAirway = null;
+    for (let i = 0; i < rawTokens.length; i++) {
+      const t = rawTokens[i];
+      const aw = lookupAirway(t);
+
+      if (aw && expanded.length > 0) {
+        // It's an airway, and we have a previous waypoint to anchor from.
+        // Defer expansion until we see the next waypoint (we need both
+        // endpoints to know which slice of the airway to use).
+        pendingAirway = t;
+        continue;
+      }
+
+      const wp = lookupWaypoint(t);
+      if (!wp) {
+        state.message = t + ' NOT IN DATABASE';
+        return;
+      }
+
+      if (pendingAirway) {
+        const prev = expanded[expanded.length - 1];
+        const intermediates = expandAirway(pendingAirway, prev, t);
+        if (intermediates === null) {
+          // Couldn't expand — fall through to direct leg
+          state.message = pendingAirway + ' NOT VALID';
+          // Note: we don't return — the user's intent was clear enough,
+          // and a direct leg is a reasonable fallback. But we surface a
+          // soft warning in the message line.
+        } else {
+          for (const ident of intermediates) expanded.push(ident);
+        }
+        pendingAirway = null;
+      }
+      expanded.push(t);
+    }
+    if (pendingAirway) {
+      // Trailing airway with no final fix — treat as error
+      state.message = pendingAirway + ' NEEDS END FIX';
+      return;
+    }
+
+    state.route.via = expanded;
+    state.scratchpad = '';
+    if (!state.message) state.message = '';  // preserve airway warnings
+    updateExecArmed();
+  }
+
+  // Expand an airway between two named endpoints. Returns the list of
+  // *intermediate* idents (excluding both endpoints), in route order.
+  // Returns null if expansion isn't possible.
+  function expandAirway(awName, fromIdent, toIdent) {
+    const aw = lookupAirway(awName);
+    if (!aw || !aw.p) return null;
+    const pts = aw.p;
+    const fromIdx = pts.indexOf(fromIdent);
+    const toIdx = pts.indexOf(toIdent);
+    if (fromIdx < 0 || toIdx < 0) return null;
+    if (fromIdx === toIdx) return [];
+    // Slice intermediates only — endpoints are already in `expanded`
+    if (fromIdx < toIdx) {
+      return pts.slice(fromIdx + 1, toIdx);
+    } else {
+      // Reverse traversal (airway flown backwards)
+      return pts.slice(toIdx + 1, fromIdx).reverse();
+    }
+  }
+  // Note: the original simpler version of takeScratchpadAsRoute is preserved
+  // below as `_takeScratchpadAsRoute_legacy` for reference, but is unused.
+  function _takeScratchpadAsRoute_legacy() {
+    const sp = state.scratchpad.trim().toUpperCase();
+    if (!sp) { state.message = 'INVALID ENTRY'; return; }
     const tokens = sp.split(/\s+/).filter(t => t && t !== 'DCT' && t !== '..');
     const valid = [];
     for (const t of tokens) {
@@ -2753,8 +2952,14 @@
   // ─── Re-render when language changes ───────────────────────
   document.addEventListener('flying:langchange', renderScreen);
 
-  // Initial render
+  // Initial render — happens immediately, before nav data has loaded.
+  // The screen will use FALLBACK_WAYPOINTS in the meantime; the load
+  // promise's resolution handler re-renders when real data arrives.
   renderScreen();
+
+  // Kick off async nav data fetch (NASR-derived JSONs).
+  // No await — render() handles the loading state via NAV_DATA.loadState.
+  startNavDataLoad();
 })();
 </script>
 
