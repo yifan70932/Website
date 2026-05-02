@@ -1562,3 +1562,179 @@ html { scroll-behavior: smooth; }
   .flying-page .cvr-time { grid-row: 1 / span 2; }
   .flying-page .cvr-text { grid-column: 2; }
 }
+
+/* ─── §6 accident map figure ─────────────────────────────────── */
+.flying-page .accidents-widget {
+  background: var(--fl-paper-deep);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin: 2rem 0;
+  font-family: var(--fl-font-ui);
+  font-size: 0.88rem;
+  color: var(--fl-ink);
+}
+.flying-page[data-lang="zh"] .accidents-widget { font-family: var(--fl-font-cn); }
+
+/* Layout: map on left, list on right (collapses on mobile) */
+.flying-page .accidents-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 1rem;
+  height: 32rem;
+}
+@media (max-width: 800px) {
+  .flying-page .accidents-body {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
+
+/* Map container */
+.flying-page .accidents-map {
+  position: relative;
+  border: 1px solid var(--fl-rule-soft);
+  border-radius: 3px;
+  overflow: hidden;
+  background: #f0f0f0;
+  min-height: 26rem;
+}
+@media (max-width: 800px) {
+  .flying-page .accidents-map { min-height: 24rem; height: 24rem; }
+}
+
+/* Side list */
+.flying-page .accidents-list-wrap {
+  border: 1px solid var(--fl-rule-soft);
+  border-radius: 3px;
+  background: var(--fl-paper);
+  overflow-y: auto;
+  max-height: 32rem;
+}
+@media (max-width: 800px) {
+  .flying-page .accidents-list-wrap { max-height: 22rem; }
+}
+.flying-page .accidents-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.84rem;
+}
+.flying-page .accident-entry {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--fl-rule-soft);
+  cursor: pointer;
+  transition: background 0.1s;
+  border-left: 3px solid transparent;
+}
+.flying-page .accident-entry:hover { background: var(--fl-paper-deep); }
+.flying-page .accident-entry.active {
+  background: rgba(30, 95, 168, 0.08);
+  border-left-color: var(--fl-sapphire);
+}
+.flying-page .accident-row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.flying-page .accident-date {
+  font-family: var(--fl-font-mono);
+  font-size: 0.78rem;
+  color: var(--fl-ink-faint);
+}
+.flying-page .accident-fatalities {
+  font-family: var(--fl-font-mono);
+  font-size: 0.78rem;
+  color: var(--fl-navy);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.flying-page .accident-title {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--fl-ink);
+  margin-bottom: 0.1rem;
+}
+.flying-page .accident-meta {
+  font-size: 0.78rem;
+  color: var(--fl-ink-faint);
+}
+
+/* Time slider */
+.flying-page .accidents-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--fl-rule);
+  margin-bottom: 0.8rem;
+}
+.flying-page .accidents-slider-wrap {
+  flex: 1 1 280px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--fl-ink-faint);
+  letter-spacing: 0.04em;
+}
+.flying-page .accidents-slider-wrap input[type="range"] {
+  flex: 1;
+  min-width: 100px;
+  accent-color: var(--fl-sapphire);
+}
+.flying-page .accidents-year-display {
+  font-family: var(--fl-font-mono);
+  font-size: 0.85rem;
+  color: var(--fl-ink);
+  font-weight: 600;
+  min-width: 5.5rem;
+}
+
+/* Leaflet popup styling overrides — match wiki tone */
+.flying-page .leaflet-popup-content-wrapper {
+  border-radius: 3px;
+  font-family: var(--fl-font-ui);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  max-width: 320px;
+}
+.flying-page[data-lang="zh"] .leaflet-popup-content-wrapper { font-family: var(--fl-font-cn); }
+.flying-page .leaflet-popup-content {
+  margin: 0.7rem 0.85rem;
+}
+.flying-page .acc-popup-title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 0.2rem;
+  color: var(--fl-navy);
+}
+.flying-page .acc-popup-meta {
+  font-family: var(--fl-font-mono);
+  font-size: 0.74rem;
+  color: var(--fl-ink-faint);
+  margin-bottom: 0.45rem;
+}
+.flying-page .acc-popup-summary {
+  margin: 0.45rem 0;
+  font-size: 0.82rem;
+  color: var(--fl-ink);
+}
+.flying-page .acc-popup-links {
+  margin-top: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--fl-rule-soft);
+  font-size: 0.78rem;
+}
+.flying-page .acc-popup-links a {
+  display: inline-block;
+  margin-right: 0.6rem;
+  color: var(--fl-sapphire);
+  text-decoration: none;
+}
+.flying-page .acc-popup-links a:hover { text-decoration: underline; }
+
+/* Marker color/size tier definitions are applied inline via JS */

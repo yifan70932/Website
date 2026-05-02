@@ -11,6 +11,14 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
 
   <link rel="stylesheet" href="/assets/flying.css">
+
+  <!-- Leaflet (for §6 accident map figure) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
 </head>
 
 <body class="flying-page" data-lang="en">
@@ -1103,6 +1111,29 @@
       <figcaption>
         <span data-lang-content="en">Figure 5. Cockpit voice recorder audio of CZ3456, with a bilingual time-synced transcript. The recording was leaked during the original investigation and has long circulated on Chinese aviation forums; the transcription consolidates several public listening transcripts and is corrected against the audio. Click any line to seek. The default filter shows CZ3456-related dialog only; switching to "All channels" surfaces the parallel traffic on the same frequency — Shenzhen Approach managing 822, 308, and Air China 1305 simultaneously — which gives the texture of the airspace that evening.</span>
         <span data-lang-content="zh">图 5。CZ3456 驾驶舱话音记录器音频，附双语时间同步文字记录。该录音于原始调查期间外泄，长期在中文航空论坛流传；文字记录整合了多份公开听写并与音频核对。点击任一行可跳转。默认仅显示 CZ3456 相关对话；切换至"全部"可显示同频道上其他飞机的平行通话——深圳进近同时在指挥 822、308、国航 1305——以呈现当晚那片空域的纹理。</span>
+      </figcaption>
+    </figure>
+
+    <!-- ─── §6 figure: hull-loss accident map ──────────────────────── -->
+    <figure class="accidents-widget full-bleed" id="accidents-widget">
+      <div class="accidents-controls">
+        <div class="accidents-slider-wrap">
+          <span data-lang-content="en">Time range:</span>
+          <span data-lang-content="zh">时间范围：</span>
+          <input type="range" id="accidents-year-from" min="1970" max="2026" value="1970" step="1">
+          <input type="range" id="accidents-year-to" min="1970" max="2026" value="2026" step="1">
+          <span class="accidents-year-display" id="accidents-year-display">1970–2026</span>
+        </div>
+      </div>
+      <div class="accidents-body">
+        <div class="accidents-map" id="accidents-map"></div>
+        <div class="accidents-list-wrap">
+          <ol class="accidents-list" id="accidents-list"></ol>
+        </div>
+      </div>
+      <figcaption>
+        <span data-lang-content="en">Figure 6. Hull-loss and otherwise significant accidents in commercial aviation. Marker color and size scale with onboard fatalities (white→yellow→orange→red→deep red; log-scaled radius). Click a marker or list entry for date, aircraft, location, a brief account, and links to the official investigation report and other authoritative sources. Use the time slider to filter by year; the long-term thinning of marker density visualizes the safety improvements documented in §6 and §7. The selection here is curated, not exhaustive — Aviation Safety Network and Wikipedia maintain comprehensive databases.</span>
+        <span data-lang-content="zh">图 6。商业航空中的机体损毁与其他重大事故。标记颜色与大小按机上罹难人数分级（白→黄→橙→红→深红；半径取对数）。点击标记或列表条目可查看日期、机型、位置、简要事实陈述、以及官方调查报告与其他权威来源链接。使用时间滑块按年份过滤；长期标记密度的稀疏化直观体现 §6 §7 所述的安全演化。本图为筛选案例，并非完整列表——Aviation Safety Network 与维基百科维护着完整数据库。</span>
       </figcaption>
     </figure>
 
@@ -3880,6 +3911,428 @@
   }
   updateFilterText();
   document.addEventListener('flying:langchange', updateFilterText);
+})();
+</script>
+
+<!-- ─── §6 figure 6: hull-loss accident map ─────────────────────── -->
+<script>
+(function () {
+  // Wait for Leaflet to load (deferred), and for DOM ready.
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  function whenLeafletReady(fn) {
+    if (typeof L !== 'undefined') return fn();
+    const check = setInterval(() => {
+      if (typeof L !== 'undefined') {
+        clearInterval(check);
+        fn();
+      }
+    }, 50);
+  }
+  ready(() => whenLeafletReady(initAccidentsMap));
+
+  // ─── Embedded accident dataset ────────────────────────────────
+  /* ACCIDENTS_INLINE_START */
+  const ACCIDENTS = [
+
+  // 1. ─── Eastern Air Lines Flight 401 ──────────────────────────────────
+  {
+    id: 'ea401',
+    date: '1972-12-29',
+    airline: 'Eastern Air Lines',
+    flight: '401',
+    aircraft: 'Lockheed L-1011-1 TriStar',
+    registration: 'N310EA',
+    lat: 25.8588,
+    lon: -80.5905,
+    location: 'Florida Everglades, USA (18.7 mi WNW of Miami International)',
+    fatalities: { onboard: 101, ground: 0, total: 101, occupants: 176 },
+    phase: 'approach',
+    category: 'CFIT',
+    summary_zh: '夜间飞往迈阿密的进近段，前起落架指示灯未亮起。三名机组成员均被这一灯泡问题占据注意力，未察觉自动驾驶在某次轻微的驾驶杆触碰后切出高度保持模式，飞机以缓慢恒定的下沉率撞入沼泽。NTSB 将事故归因于飞行机组未能监控仪表，由此事故与 1978 年的联合 173 号航班一同成为机组资源管理（CRM）训练在 1980 年代成为业内标准做法的直接催化剂。该机为洛克希德 L-1011 的首次坠毁。',
+    summary_en: 'On a night approach to Miami, the nose-gear indicator light failed to illuminate. All three flight-deck crew became preoccupied with the bulb problem; none noticed that the autopilot had disengaged from altitude hold after a slight inadvertent yoke touch, and the aircraft descended at a slow constant rate into the swamp. The NTSB attributed the accident to failure to monitor flight instruments. Together with United 173 (1978), this accident is the direct catalyst for crew resource management (CRM) training becoming standard industry practice in the 1980s. It was the first hull loss of the Lockheed L-1011.',
+    links: [
+      { label: "NTSB Aircraft Accident Report AAR-73/14", url: "https://www.ntsb.gov/investigations/AccidentReports/Reports/AAR7314.pdf" },
+      { label: "FAA Lessons Learned: L-1011 N310EA", url: "https://www.faa.gov/lessons_learned/transport_airplane/accidents/N310EA" },
+      { label: "Wikipedia", url: "https://en.wikipedia.org/wiki/Eastern_Air_Lines_Flight_401" }
+    ]
+  },
+
+  // 2. ─── Turkish Airlines Flight 981 ──────────────────────────────────
+  {
+    id: 'thy981',
+    date: '1974-03-03',
+    airline: 'Turkish Airlines (THY)',
+    flight: '981',
+    aircraft: 'McDonnell Douglas DC-10-10',
+    registration: 'TC-JAV',
+    lat: 49.1457,
+    lon: 2.6346,
+    location: 'Ermenonville Forest, France (37 km NE of Paris)',
+    fatalities: { onboard: 346, ground: 0, total: 346, occupants: 346 },
+    phase: 'climb',
+    category: 'structural',
+    summary_zh: '起飞后约十分钟，DC-10 后货舱门在 11,000 英尺高度脱落。爆炸性减压使客舱地板部分塌陷，并切断了铺设在地板下的全部俯仰操纵索；机组失去俯仰控制，77 秒后飞机以 800 公里/时撞入森林，机上 346 人全部罹难。两年前美国航空 96 号航班在加拿大温莎已发生同型货舱门爆开事件，机组凭运气改出降落；麦道公司内部备忘（"阿普尔盖特备忘录"）已识别该设计缺陷，但相关服务通告不具强制性。事故后 FAA 立即发布强制性适航指令重新设计 DC-10 货舱门并要求所有大型客机加装地板泄压通风口。',
+    summary_en: 'About ten minutes after takeoff, the DC-10\'s aft cargo door blew off at 11,000 feet. The explosive decompression collapsed part of the cabin floor and severed all pitch-control cables routed beneath it; the crew lost pitch control, and 77 seconds later the aircraft struck forest at 800 km/h, killing all 346 aboard. American Airlines flight 96 had suffered the same door failure two years earlier over Windsor, Ontario, and survived only by luck; McDonnell Douglas had internally identified the flaw (the "Applegate memo"), but service bulletins were non-mandatory. After the crash the FAA issued an immediate airworthiness directive redesigning the DC-10 cargo door and requiring vented cabin floors on all large jets.',
+    links: [
+      { label: "FAA Lessons Learned: DC-10 TC-JAV", url: "https://www.faa.gov/lessons_learned/transport_airplane/accidents/TC-JAV" },
+      { label: "Wikipedia", url: "https://en.wikipedia.org/wiki/Turkish_Airlines_Flight_981" }
+    ]
+  },
+
+  // 3. ─── Tenerife (KLM 4805 + Pan Am 1736) ────────────────────────────
+  {
+    id: 'tenerife',
+    date: '1977-03-27',
+    airline: 'KLM / Pan Am',
+    flight: '4805 / 1736 (Tenerife)',
+    aircraft: 'Boeing 747-206B (KLM) + Boeing 747-121 (Pan Am)',
+    registration: 'PH-BUF + N736PA',
+    lat: 28.4827,
+    lon: -16.3415,
+    location: 'Los Rodeos Airport (TFN), Tenerife, Canary Islands, Spain',
+    fatalities: { onboard: 583, ground: 0, total: 583, occupants: 644 },
+    phase: 'takeoff',
+    category: 'runway',
+    summary_zh: '两架被前一日大加那利岛炸弹爆炸事件改飞至此的 747 在浓雾中的同一条跑道上相撞。荷兰皇家航空机长在塔台未发出起飞许可的情况下开始起飞滑跑，原因系一段含糊的发话被同时无线电传输部分覆盖。泛美航空 747 当时仍在沿同一跑道反向滑行寻找出口。荷航撞穿泛美机身后段；荷航全部 248 人遇难，泛美 396 人中 335 人遇难，幸存 61 人。这是民用航空史上死亡人数最多的事故，并直接催生了对国际通话用语的全面整改和机组资源管理（CRM）的概念。',
+    summary_en: 'Two 747s, both diverted to Tenerife by a bombing the previous day at Gran Canaria, collided on the same runway in heavy fog. The KLM captain began his takeoff roll without takeoff clearance, after an ambiguous transmission was partly stepped on by simultaneous radio traffic. The Pan Am aircraft was still backtracking on the same runway looking for its exit. KLM struck the Pan Am 747 in the upper fuselage; all 248 aboard KLM died, and 335 of 396 aboard Pan Am died, with 61 survivors. It remains the deadliest accident in civil aviation history, and led directly to the global overhaul of standard radiotelephony phraseology and to the formal development of crew resource management (CRM).',
+    links: [
+
+      { label: "SKYbrary: Tenerife disaster", url: "https://skybrary.aero/accidents-and-incidents/b742-b741-tenerife-canary-islands-spain-1977" },
+      { label: "Wikipedia", url: "https://en.wikipedia.org/wiki/Tenerife_airport_disaster" }
+    ]
+  },
+
+  // 4. ─── United Airlines Flight 173 ───────────────────────────────────
+  {
+    id: 'ua173',
+    date: '1978-12-28',
+    airline: 'United Airlines',
+    flight: '173',
+    aircraft: 'McDonnell Douglas DC-8-61',
+    registration: 'N8082U',
+    lat: 45.5316,
+    lon: -122.5347,
+    location: 'Portland, Oregon, USA (suburban, ~6 nmi SE of PDX)',
+    fatalities: { onboard: 10, ground: 0, total: 10, occupants: 189 },
+    phase: 'approach',
+    category: 'fuel exhaustion',
+    summary_zh: '波音 DC-8 在波特兰进近时因起落架指示异常进入等待航线排查问题。机长被起落架问题占据注意力达约一小时，副驾驶与飞行机械员的燃油警示未能有效传达；四台发动机相继因燃油耗尽停车，飞机滑翔坠入郊区树林。NTSB 将此案与 Eastern 401 一并视为机组互动模式失效的典型事例。次年 NASA 召集了一次研讨会催生了机组资源管理（CRM），联合航空 1980 年率先在业内实施——这次事故是 CRM 项目的直接命名起源。',
+    summary_en: 'A DC-8 entered a hold near Portland with a landing-gear indication problem. The captain spent about an hour on the gear issue while fuel warnings from the first officer and flight engineer failed to register; all four engines flamed out from fuel exhaustion, and the aircraft glided into a wooded suburb. The NTSB grouped this case with Eastern 401 as a paradigm of crew-interaction failure. NASA convened a workshop the following year that produced what became crew resource management (CRM); United Airlines became the first carrier to implement it, in 1980 — this accident is the program\'s naming origin.',
+    links: [
+      { label: "NTSB Accident Report AAR-79/07", url: "https://www.ntsb.gov/investigations/AccidentReports/Reports/AAR7907.pdf" },
+      { label: "NTSB Investigation Page", url: "https://www.ntsb.gov/investigations/Pages/DCA79AA005.aspx" },
+      { label: "FAA Lessons Learned: DC-8 N8082U", url: "https://www.faa.gov/lessons_learned/transport_airplane/accidents/N8082U" },
+      { label: "Wikipedia", url: "https://en.wikipedia.org/wiki/United_Airlines_Flight_173" }
+    ]
+  },
+
+  // 5. ─── American Airlines Flight 191 ─────────────────────────────────
+  {
+    id: 'aa191',
+    date: '1979-05-25',
+    airline: 'American Airlines',
+    flight: '191',
+    aircraft: 'McDonnell Douglas DC-10-10',
+    registration: 'N110AA',
+    lat: 41.9942,
+    lon: -87.9069,
+    location: 'Chicago O\'Hare International Airport, USA',
+    fatalities: { onboard: 271, ground: 2, total: 273, occupants: 271 },
+    phase: 'takeoff',
+    category: 'structural',
+    summary_zh: '起飞旋转瞬间，左侧发动机连同其挂架从机翼整体脱落，向上向后翻越机翼。脱落过程切断了多条液压管路并锁定了左翼前缘缝翼，导致左翼失速、飞机迅速向左滚转，在距跑道头不到一英里处近乎倒扣撞地。31 秒过程。NTSB 调查发现脱落根源是美国航空采用的非标准维护规程——以叉车整体安装"发动机加挂架"组件——在挂架后接耳处累积疲劳裂纹。该事故仍是美国本土死亡人数最多的民航事故，导致 DC-10 短暂全球停飞与维护规程整改。',
+    summary_en: 'At the moment of takeoff rotation, the left engine and its pylon separated as a unit from the wing and flipped up and over the leading edge. The separation severed multiple hydraulic lines and locked the left-wing slats retracted; the asymmetric stall rolled the aircraft sharply left, and it struck the ground in a near-inverted attitude less than a mile past the runway end. Total elapsed time: 31 seconds. The NTSB found the root cause in a non-standard maintenance procedure adopted by American Airlines — using a forklift to install the engine-and-pylon as a single unit — which had introduced fatigue cracks in the rear pylon attachment. It remains the deadliest aviation accident on U.S. soil, and led to a temporary global grounding of the DC-10 and an overhaul of maintenance procedures.',
+    links: [
+      { label: "NTSB Accident Report AAR-79/17", url: "https://www.ntsb.gov/investigations/AccidentReports/Reports/AAR7917.pdf" },
+      { label: "FAA Lessons Learned: DC-10 N110AA", url: "https://www.faa.gov/lessons_learned/transport_airplane/accidents/N110AA" },
+      { label: "Wikipedia", url: "https://en.wikipedia.org/wiki/American_Airlines_Flight_191" }
+    ]
+  },
+
+  // 6. ─── Air Canada Flight 797 ────────────────────────────────────────
+  {
+    id: 'ac797',
+    date: '1983-06-02',
+    airline: 'Air Canada',
+    flight: '797',
+    aircraft: 'McDonnell Douglas DC-9-32',
+    registration: 'C-FTLU',
+    lat: 39.0488,
+    lon: -84.6678,
+    location: 'Greater Cincinnati Airport (CVG), Kentucky, USA',
+    fatalities: { onboard: 23, ground: 0, total: 23, occupants: 46 },
+    phase: 'descent',
+    category: 'fire',
+    summary_zh: '巡航高度上后部洗手间起火，机组在四分钟内决定改飞辛辛那提紧急落地。烟雾迅速充满机舱，电子系统逐一失效。落地后机舱门与紧急出口打开瞬间引入新鲜空气，残余热气与可燃气体发生闪燃（flashover），尚未撤离的 23 名乘客瞬间罹难。事故直接催生了一系列机舱安全标准重写：座椅靠垫使用阻燃材料、洗手间废纸桶强制配备烟雾探测器、地板紧急出口指示灯（用于烟雾中辨识方向）、机组烟雾应急训练规范化。',
+    summary_en: 'A fire began in the rear lavatory at cruise altitude. The crew diverted to Cincinnati within four minutes, but smoke filled the cabin and electrical systems failed one by one. When the doors and exits opened on landing, the inrush of fresh air caused the remaining hot combustible gases to flash over; 23 passengers who had not yet evacuated died instantly. The accident drove a comprehensive rewrite of cabin safety standards: fire-blocking seat covers, mandatory lavatory smoke detectors, floor-level emergency lighting strips (for smoke navigation), and standardised crew smoke-and-fire response training.',
+    links: [
+      { label: "NTSB Accident Report AAR-86/02 (re-investigated)", url: "https://www.ntsb.gov/investigations/AccidentReports/Reports/AAR8602.pdf" },
+      { label: "Wikipedia", url: "https://en.wikipedia.org/wiki/Air_Canada_Flight_797" }
+    ]
+  },
+
+  // 7. ─── Delta Air Lines Flight 191 ───────────────────────────────────
+  {
+    id: 'dl191',
+    date: '1985-08-02',
+    airline: 'Delta Air Lines',
+    flight: '191',
+    aircraft: 'Lockheed L-1011-385-1 TriStar',
+    registration: 'N726DA',
+    lat: 32.8998,
+    lon: -97.0403,
+    location: 'Dallas-Fort Worth International Airport (DFW), Texas, USA',
+    fatalities: { onboard: 134, ground: 1, total: 135, occupants: 163 },
+    phase: 'approach',
+    category: 'weather',
+    summary_zh: 'L-1011 在 DFW 五边进近段穿越一团孤立雷暴胞，遭遇强微下击暴流，顶风在数秒内变为强尾风，空速骤降，飞机失去升力撞地。撞击点位于跑道入口前一英里处，飞机弹起后撞上一辆水箱与机场跑道附近的两座大型水罐起火。134 人罹难。事故直接推动美国全境部署多普勒终端气象雷达（TDWR）、机载预测式风切变探测系统标准化，并促成微下击暴流回避程序写入所有航线运行手册。',
+    summary_en: 'The L-1011 flew through an isolated thunderstorm cell on final to DFW and encountered a severe microburst: the headwind reversed to a strong tailwind within seconds, airspeed collapsed, and the aircraft lost lift and struck the ground a mile short of the runway. After bouncing, it struck a water tank near the field and burned. 134 died. The accident drove the U.S.-wide deployment of Terminal Doppler Weather Radar (TDWR), the standardisation of airborne predictive wind-shear warning systems, and the inclusion of microburst-avoidance procedures in every airline operations manual.',
+    links: [
+      { label: "NTSB Accident Report AAR-86/05", url: "https://www.ntsb.gov/investigations/AccidentReports/Reports/AAR8605.pdf" },
+      { label: "FAA Lessons Learned: L-1011 N726DA", url: "https://www.faa.gov/lessons_learned/transport_airplane/accidents/N726DA" },
+      { label: "Wikipedia", url: "https://en.wikipedia.org/wiki/Delta_Air_Lines_Flight_191" }
+    ]
+  },
+
+  // 8. ─── Japan Airlines Flight 123 ────────────────────────────────────
+  {
+    id: 'jal123',
+    date: '1985-08-12',
+    airline: 'Japan Airlines',
+    flight: '123',
+    aircraft: 'Boeing 747SR-46',
+    registration: 'JA8119',
+    lat: 36.0010,
+    lon: 138.6924,
+    location: 'Mount Takamagahara (Osutaka Ridge), Gunma Prefecture, Japan',
+    fatalities: { onboard: 520, ground: 0, total: 520, occupants: 524 },
+    phase: 'climb',
+    category: 'structural',
+    summary_zh: '起飞后约十二分钟，机身后部加压隔框（aft pressure bulkhead）爆裂性失效，扯断垂直安定面与四套液压系统，飞机失去全部常规飞行操纵。机组通过差动推力维持空中悬浮长达 32 分钟——驾驶舱话音记录显示机长林、副驾驶佐佐木、机械师福田在不可能的处境下持续做着教科书无解的工作——最终撞入御巢鹰山脊。524 人中 520 人罹难，4 名女性幸存。失效的 aft pressure bulkhead 在 1978 年大阪机场尾擦事故后由波音工程师以非标准的单排铆钉修复（应为双排），疲劳累积约 12,000 起降循环后断裂。这是单架飞机死亡人数最多的事故，至今仍是日本航空业最深的伤痕。',
+    summary_en: 'About twelve minutes after takeoff, the aft pressure bulkhead failed explosively, tearing off most of the vertical stabilizer and severing all four hydraulic systems; the aircraft lost all conventional flight controls. The crew kept it airborne for 32 minutes using differential thrust — the cockpit voice recording shows captain Takahama, first officer Sasaki, and flight engineer Fukuda working a problem with no textbook solution under impossible conditions — before it struck the Osutaka ridge. 520 of 524 aboard died; four women survived. The failed bulkhead had been repaired by a Boeing engineer following a 1978 tail-strike at Osaka with a non-standard single-row rivet splice (the correct repair specified two rows), and fatigue cracks propagated over roughly 12,000 pressurisation cycles before failure. It remains the deadliest single-aircraft accident in history and the deepest scar in Japanese commercial aviation.',
+    links: [
+      { label: "Aircraft Accident Investigation Commission Final Report (English)", url: "https://www.mlit.go.jp/jtsb/eng-air_report/JA8119.pdf" },
+      { label: "SKYbrary: JL123", url: "https://skybrary.aero/accidents-and-incidents/b742-mt-osutaka-japan-1985" },
+      { label: "Wikipedia", url: "https://en.wikipedia.org/wiki/Japan_Air_Lines_Flight_123" }
+    ]
+  },
+
+  // 9. ─── Arrow Air Flight 1285 ────────────────────────────────────────
+  {
+    id: 'arrow1285',
+    date: '1985-12-12',
+    airline: 'Arrow Air',
+    flight: '1285R',
+    aircraft: 'McDonnell Douglas DC-8-63',
+    registration: 'N950JW',
+    lat: 48.9469,
+    lon: -54.5644,
+    location: 'Gander International Airport (CYQX), Newfoundland, Canada',
+    fatalities: { onboard: 256, ground: 0, total: 256, occupants: 256 },
+    phase: 'takeoff',
+    category: 'weather',
+    summary_zh: '包机搭载第 101 空降师官兵从西奈半岛维和任务返回美国，在加拿大冈德机场加油后起飞失败，撞地起火，机上 256 人全部罹难——其中 248 名美军士兵。这是加拿大境内死亡人数最多的航空事故。加拿大航空安全委员会（CASB）对原因结论分裂：多数意见认为机翼污染（结冰）加上飞机超重导致升力不足；少数意见怀疑机内炸弹（事故政治背景敏感，尤其涉及黎巴嫩真主党人质交换议题）。少数意见从未被官方采信但争议至今未息。',
+    summary_en: 'A charter flight returning U.S. 101st Airborne Division soldiers from Sinai peacekeeping duty failed to take off after refueling at Gander; the DC-8 struck terrain and burned, killing all 256 aboard, including 248 U.S. servicemen. It remains the deadliest aviation accident on Canadian soil. The Canadian Aviation Safety Board (CASB) split on cause: the majority concluded that wing-surface contamination (icing) plus aircraft overweight produced insufficient lift; a minority suspected an onboard bomb (the political context — Lebanon hostage exchanges — was sensitive). The minority view has never been officially adopted but the dispute persists.',
+    links: [
+      { label: "CASB Final Report (1988)", url: "https://www.bst-tsb.gc.ca/eng/rapports-reports/aviation/1985/a85h0002/a85h0002.html" },
+      { label: "Wikipedia", url: "https://en.wikipedia.org/wiki/Arrow_Air_Flight_1285R" }
+    ]
+  },
+
+  // 10. ─── Aloha Airlines Flight 243 ───────────────────────────────────
+  {
+    id: 'aq243',
+    date: '1988-04-28',
+    airline: 'Aloha Airlines',
+    flight: '243',
+    aircraft: 'Boeing 737-297',
+    registration: 'N73711',
+    lat: 20.8987,
+    lon: -156.4305,
+    location: 'Maui (en route, near Kahului OGG), Hawaii, USA',
+    fatalities: { onboard: 1, ground: 0, total: 1, occupants: 95 },
+    phase: 'cruise',
+    category: 'structural',
+    summary_zh: '巡航高度 24,000 英尺时，机身上半段从前舱门后至机翼前缘整体撕裂剥离——约 5.5 米长的客舱顶部被风掀掉，一名乘务员被吸出机外（唯一遇难者）。机组在严重结构损伤下成功降落毛伊岛卡胡卢伊机场，剩余 94 人全部生还。该机为波音 737-200 早期型，频繁起降夏威夷岛屿间短航段（执行约 89,680 次起降循环，远超设计预期），盐雾环境加速腐蚀，机身蒙皮搭接缝沿铆钉孔形成的疲劳裂纹"链式连接"（widespread fatigue damage）最终断裂。事故催生了 FAA 对老龄飞机检查规则的全面重写，"广泛疲劳损伤"概念成为飞机适航管理的核心。',
+    summary_en: 'At 24,000 feet in cruise, the upper fuselage from just aft of the forward door to the wing\'s leading edge tore off as a single piece — about 5.5 metres of cabin roof was peeled away, and a flight attendant was swept out of the aircraft (the sole fatality). The crew landed the structurally devastated aircraft at Kahului on Maui; the remaining 94 occupants survived. The aircraft was an early-build 737-200 used on short inter-island Hawaii hops, with about 89,680 cycles (far beyond design assumptions); the salt-air environment had accelerated corrosion, and fatigue cracks at fuselage skin lap joints had linked into a continuous structural failure path (widespread fatigue damage). The accident drove a comprehensive FAA rewrite of aging-aircraft inspection rules; the concept of "widespread fatigue damage" became central to airworthiness management.',
+    links: [
+      { label: "NTSB Accident Report AAR-89/03", url: "https://www.ntsb.gov/investigations/AccidentReports/Reports/AAR8903.pdf" },
+      { label: "FAA Lessons Learned: 737 N73711", url: "https://www.faa.gov/lessons_learned/transport_airplane/accidents/N73711" },
+      { label: "Wikipedia", url: "https://en.wikipedia.org/wiki/Aloha_Airlines_Flight_243" }
+    ]
+  }
+
+];
+  /* ACCIDENTS_INLINE_END */
+
+  function initAccidentsMap() {
+    const widget = document.getElementById('accidents-widget');
+    if (!widget || typeof L === 'undefined') return;
+    const mapEl = document.getElementById('accidents-map');
+    const listEl = document.getElementById('accidents-list');
+    const yearFromEl = document.getElementById('accidents-year-from');
+    const yearToEl = document.getElementById('accidents-year-to');
+    const yearDisplayEl = document.getElementById('accidents-year-display');
+
+    // ─── Set up map ──────────────────────────────────────────────
+    const map = L.map(mapEl, {
+      worldCopyJump: true,
+      zoomControl: true,
+    }).setView([20, 30], 2);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    // ─── Marker color & size by fatality count (log scale) ──────
+    function tierColor(n) {
+      if (n === 0) return '#ffffff';
+      if (n < 10)   return '#fff7bc';
+      if (n < 50)   return '#fec44f';
+      if (n < 150)  return '#fb9a29';
+      if (n < 300)  return '#cc4c02';
+      return '#7f0000';
+    }
+    function tierRadius(n) {
+      // Log-scale radius between 6 and 22 px
+      const minN = 1, maxN = 600;
+      const v = Math.max(minN, Math.min(maxN, n));
+      const t = Math.log(v) / Math.log(maxN);
+      return 6 + t * 16;
+    }
+
+    // ─── Build markers + list rows ──────────────────────────────
+    const lang = () => document.body.getAttribute('data-lang') || 'en';
+
+    const markers = []; // parallel array, same order as ACCIDENTS
+    ACCIDENTS.forEach((a, idx) => {
+      const fatTotal = a.fatalities.total;
+      const m = L.circleMarker([a.lat, a.lon], {
+        radius: tierRadius(fatTotal),
+        fillColor: tierColor(fatTotal),
+        color: '#222',
+        weight: 1,
+        opacity: 0.9,
+        fillOpacity: 0.85,
+      });
+      m.accidentIdx = idx;
+      m.bindPopup(() => buildPopupHtml(a, lang()), { maxWidth: 340, autoPan: true });
+      m.on('click', () => highlightListEntry(idx, /*scroll=*/true));
+      m.addTo(map);
+      markers.push(m);
+    });
+
+    // ─── Build list rows ────────────────────────────────────────
+    ACCIDENTS.forEach((a, idx) => {
+      const li = document.createElement('li');
+      li.className = 'accident-entry';
+      li.dataset.idx = idx;
+      li.innerHTML =
+        '<div class="accident-row1">' +
+          '<span class="accident-date">' + a.date + '</span>' +
+          '<span class="accident-fatalities">' + a.fatalities.total + ' †</span>' +
+        '</div>' +
+        '<div class="accident-title">' + a.airline + ' ' + a.flight + '</div>' +
+        '<div class="accident-meta accident-meta-en"' + (lang() === 'zh' ? ' style="display:none"' : '') + '>' +
+          a.aircraft + ' · ' + a.location +
+        '</div>';
+      // We render a separate ZH meta if helpful, but for now just keep one
+      li.addEventListener('click', () => {
+        highlightListEntry(idx, /*scroll=*/false);
+        const m = markers[idx];
+        map.setView([a.lat, a.lon], Math.max(map.getZoom(), 5), { animate: true });
+        m.openPopup();
+      });
+      listEl.appendChild(li);
+    });
+
+    let activeIdx = -1;
+    function highlightListEntry(idx, scrollTo) {
+      if (activeIdx === idx) return;
+      if (activeIdx >= 0) {
+        const old = listEl.children[activeIdx];
+        if (old) old.classList.remove('active');
+      }
+      activeIdx = idx;
+      const cur = listEl.children[idx];
+      if (cur) {
+        cur.classList.add('active');
+        if (scrollTo) {
+          const wrap = listEl.parentElement;
+          const off = cur.offsetTop - wrap.clientHeight / 3;
+          wrap.scrollTo({ top: Math.max(0, off), behavior: 'smooth' });
+        }
+      }
+    }
+
+    // ─── Popup HTML builder (re-runs on lang change via lazy eval) ─
+    function buildPopupHtml(a, l) {
+      const summary = (l === 'zh') ? a.summary_zh : a.summary_en;
+      const labelDate = (l === 'zh') ? '日期' : 'Date';
+      const labelFat  = (l === 'zh') ? '罹难' : 'Fatalities';
+      const labelOcc  = (l === 'zh') ? '机上' : 'aboard';
+      const labelLoc  = (l === 'zh') ? '位置' : 'Location';
+      const labelAc   = (l === 'zh') ? '机型' : 'Aircraft';
+      let html = '';
+      html += '<div class="acc-popup-title">' + a.airline + ' ' + a.flight + '</div>';
+      html += '<div class="acc-popup-meta">' + a.date + ' · ' + a.aircraft + ' · ' + a.registration + '</div>';
+      html += '<div class="acc-popup-meta">' + a.location + '</div>';
+      html += '<div class="acc-popup-meta">' + a.fatalities.total + ' ' + labelFat.toLowerCase() +
+              ' / ' + a.fatalities.occupants + ' ' + labelOcc + '</div>';
+      html += '<div class="acc-popup-summary">' + summary + '</div>';
+      if (a.links && a.links.length) {
+        html += '<div class="acc-popup-links">';
+        a.links.forEach(link => {
+          html += '<a href="' + link.url + '" target="_blank" rel="noopener noreferrer">' + link.label + '</a>';
+        });
+        html += '</div>';
+      }
+      return html;
+    }
+
+    // ─── Time slider ────────────────────────────────────────────
+    function updateYearFilter() {
+      let from = parseInt(yearFromEl.value, 10);
+      let to = parseInt(yearToEl.value, 10);
+      // Keep from <= to
+      if (from > to) {
+        if (event && event.target === yearFromEl) yearToEl.value = from;
+        else yearFromEl.value = to;
+        from = parseInt(yearFromEl.value, 10);
+        to = parseInt(yearToEl.value, 10);
+      }
+      yearDisplayEl.textContent = from + '–' + to;
+      ACCIDENTS.forEach((a, idx) => {
+        const y = parseInt(a.date.substring(0, 4), 10);
+        const visible = y >= from && y <= to;
+        const m = markers[idx];
+        if (visible && !map.hasLayer(m)) m.addTo(map);
+        else if (!visible && map.hasLayer(m)) map.removeLayer(m);
+        listEl.children[idx].style.display = visible ? '' : 'none';
+      });
+    }
+    yearFromEl.addEventListener('input', updateYearFilter);
+    yearToEl.addEventListener('input', updateYearFilter);
+    updateYearFilter();
+
+    // ─── Refresh popups + list meta on language change ──────────
+    document.addEventListener('flying:langchange', () => {
+      // Re-open active popup if any to refresh content
+      markers.forEach(m => {
+        if (m.isPopupOpen()) {
+          m.closePopup();
+          m.openPopup();
+        }
+      });
+    });
+
+    // Force Leaflet to recalc map size after the figure becomes laid out
+    setTimeout(() => map.invalidateSize(), 200);
+  }
 })();
 </script>
 
