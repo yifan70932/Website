@@ -274,10 +274,6 @@
                 data-lang-content="zh">附着流 · 升力随迎角增加</span>
         </div>
       </div>
-      <figcaption>
-        <span data-lang-content="en">Figure 1. The simplest interactive demonstration that for any angle of attack below stall, the wing turns the airflow downward, and the airflow turns the wing upward. The whole secret of heavier-than-air flight, in one diagram.</span>
-        <span data-lang-content="zh">图 1。最简单的交互演示：在失速之前，对任意迎角，机翼把气流向下偏转，气流把机翼向上抬起。重于空气飞行的全部秘密，尽在一图。</span>
-      </figcaption>
     </figure>
 
     <!-- ─── Placeholder shells for sections 2–10 ─────────────── -->
@@ -519,39 +515,19 @@
                   fill="#7a9b8a" font-family="JetBrains Mono, monospace" font-size="8">NO ACTIVE ROUTE</text>
           </svg>
 
-          <div class="fmc-hint" id="fmc-hint">
-            <strong data-lang-content="en">Try this</strong>
-            <strong data-lang-content="zh">动手试试</strong>
-            <ol data-lang-content="en">
-              <li>Press <code>RTE</code></li>
-              <li>Type <code>KBUF</code> on the keypad</li>
-              <li>Press the LSK next to <code>ORIGIN</code></li>
-              <li>Type <code>KDFW</code>, press LSK next to <code>DEST</code></li>
-              <li>On line 2, type a route like <code>SYR DCT PSB DCT AGC</code></li>
-              <li>Press <code>EXEC</code> when it lights up</li>
-            </ol>
-            <ol data-lang-content="zh">
-              <li>按 <code>RTE</code></li>
-              <li>用键盘输入 <code>KBUF</code></li>
-              <li>按 <code>ORIGIN</code> 旁边的行选择键</li>
-              <li>输入 <code>KDFW</code>，按 <code>DEST</code> 旁边的行选择键</li>
-              <li>第二行输入航路，例如 <code>SYR DCT PSB DCT AGC</code></li>
-              <li>当 <code>EXEC</code> 亮起，按下它</li>
-            </ol>
-            <p class="fmc-hint-note" data-lang-content="en">
-              Available waypoints: <code>SYR ELZ PSB JST AIR AGC HVQ APE FWA BVT TTH RZC TXK PRX SLR CVE</code> and any four-letter ICAO airport beginning with <code>K</code>.
-            </p>
-            <p class="fmc-hint-note" data-lang-content="zh">
-              可用航点：<code>SYR ELZ PSB JST AIR AGC HVQ APE FWA BVT TTH RZC TXK PRX SLR CVE</code> 以及任何以 <code>K</code> 开头的四字母 ICAO 机场代码。
-            </p>
+          <!-- Per-page reference manual: contents are written into #fmc-manual-body
+               by the page-render JS and update as the user navigates pages. -->
+          <div class="fmc-manual" id="fmc-manual">
+            <div class="fmc-manual-header">
+              <span class="fmc-manual-tag" data-lang-content="en">PAGE</span>
+              <span class="fmc-manual-tag" data-lang-content="zh">页面</span>
+              <span class="fmc-manual-title" id="fmc-manual-title"></span>
+            </div>
+            <div class="fmc-manual-body" id="fmc-manual-body"></div>
           </div>
         </div>
 
       </div>
-      <figcaption>
-        <span data-lang-content="en">Figure 2. A simplified, working Boeing-style FMC. The point is not to learn flight management — it is to feel, in your fingers, why the line-select-key + scratchpad pattern is itself a piece of constructed language.</span>
-        <span data-lang-content="zh">图 2。一台简化的、可工作的波音风格 FMC。重点不是学会飞行管理——而是用手指感受到，行选择键加草稿板的交互范式本身就是一种被构造出来的语言。</span>
-      </figcaption>
     </figure>
 
     <!-- Widget for §3: METAR/TAF decoder -->
@@ -606,10 +582,6 @@
         </div>
 
       </div>
-      <figcaption>
-        <span data-lang-content="en">Figure 3. METAR and TAF — a single hour's observation and the next twenty-four hours' forecast, both compressed into about two hundred characters apiece. Each field is dense by design: every abbreviation removes ambiguity that a longer English sentence would re-introduce. The TAF timeline (when available) shows how forecast change groups stack into a continuous expectation of the airfield's weather.</span>
-        <span data-lang-content="zh">图 3。METAR 与 TAF——单一小时的观测与后续二十四小时的预报，各自被压缩到约两百字符。每个字段的高密度都是有意为之：每一个缩写都消除了一句英文长句会重新引入的歧义。TAF 时间轴（如果有）展示了预报变化组如何堆叠成对机场天气的连续预期。</span>
-      </figcaption>
     </figure>
 
     <h2 id="sec-instruments"><span class="sec-num">4 ·</span>
@@ -1040,10 +1012,6 @@
         </aside>
 
       </div>
-      <figcaption>
-        <span data-lang-content="en">Figure 4. A stylised reproduction of an FAA d-TPP instrument approach plate for KBUF ILS RWY 23. Hover any element to see what it does and why it is positioned where it is. The plate is a piece of information design as much as a piece of navigation equipment.</span>
-        <span data-lang-content="zh">图 4。一张 FAA d-TPP 风格的 KBUF ILS RWY 23 进近图的程式化复刻。悬停任意元素可查看其功能及位置原因。这张图既是导航资料，也是一件信息设计作品。</span>
-      </figcaption>
     </figure>
 
     <h2 id="sec-178"><span class="sec-num">5 ·</span>
@@ -1147,10 +1115,6 @@
       <div class="cvr-transcript-wrap">
         <ol class="cvr-transcript" id="cvr-transcript"></ol>
       </div>
-      <figcaption>
-        <span data-lang-content="en">Figure 5. Cockpit voice recorder audio of CZ3456, with a bilingual time-synced transcript. The recording was leaked during the original investigation and has long circulated on Chinese aviation forums; the transcription consolidates several public listening transcripts and is corrected against the audio. Click any line to seek. The default filter shows CZ3456-related dialog only; switching to "All channels" surfaces the parallel traffic on the same frequency — Shenzhen Approach managing 822, 308, and Air China 1305 simultaneously — which gives the texture of the airspace that evening.</span>
-        <span data-lang-content="zh">图 5。CZ3456 驾驶舱话音记录器音频，附双语时间同步文字记录。该录音于原始调查期间外泄，长期在中文航空论坛流传；文字记录整合了多份公开听写并与音频核对。点击任一行可跳转。默认仅显示 CZ3456 相关对话；切换至"全部"可显示同频道上其他飞机的平行通话——深圳进近同时在指挥 822、308、国航 1305——以呈现当晚那片空域的纹理。</span>
-      </figcaption>
     </figure>
 
     <!-- ─── §6 figure: hull-loss accident map ──────────────────────── -->
@@ -1170,10 +1134,6 @@
           <ol class="accidents-list" id="accidents-list"></ol>
         </div>
       </div>
-      <figcaption>
-        <span data-lang-content="en">Figure 6. Hull-loss and otherwise significant accidents in commercial aviation. Marker color and size scale with onboard fatalities (white→yellow→orange→red→deep red; log-scaled radius). Click a marker or list entry for date, aircraft, location, a brief account, and links to the official investigation report and other authoritative sources. Use the time slider to filter by year; the long-term thinning of marker density visualizes the safety improvements documented in §6 and §7. The selection here is curated, not exhaustive — Aviation Safety Network and Wikipedia maintain comprehensive databases. <a href="/flying/accidents-map/" class="cvr-link">Open in full-screen map →</a></span>
-        <span data-lang-content="zh">图 6。商业航空中的机体损毁与其他重大事故。标记颜色与大小按机上罹难人数分级（白→黄→橙→红→深红；半径取对数）。点击标记或列表条目可查看日期、机型、位置、简要事实陈述、以及官方调查报告与其他权威来源链接。使用时间滑块按年份过滤；长期标记密度的稀疏化直观体现 §6 §7 所述的安全演化。本图为筛选案例，并非完整列表——Aviation Safety Network 与维基百科维护着完整数据库。<a href="/flying/accidents-map/" class="cvr-link">在全屏地图中打开 →</a></span>
-      </figcaption>
     </figure>
 
     <h2 id="sec-engine"><span class="sec-num">7 ·</span>
@@ -2366,9 +2326,8 @@
     // Render to HTML
     screen.innerHTML = rows.map(renderSpans).join('\n');
 
-    // Update the hint
-    const hint = pageDef.hint || routeStepHint();
-    updateHint(hint);
+    // Update the per-page manual on the right
+    updateManual(state.page);
 
     // Update active fn key visual
     widget.querySelectorAll('.fmc-fn[data-page]').forEach(b => {
@@ -2378,20 +2337,263 @@
     updateExecArmed();
   }
 
-  function updateHint(hint) {
-    if (!hint) return;
-    // The .fmc-hint already has bilingual <ol> blocks for the static tutorial.
-    // We don't replace those; instead we maintain a separate dynamic line.
-    let dyn = widget.querySelector('.fmc-hint-dynamic');
-    if (!dyn) {
-      dyn = document.createElement('p');
-      dyn.className = 'fmc-hint-dynamic';
-      const hintBox = widget.querySelector('.fmc-hint');
-      hintBox.appendChild(dyn);
+  // Per-page reference manual content. Each entry has:
+  //   title: short display title (e.g. "N1 LIMIT")
+  //   en, zh: HTML body strings (bilingual). May contain inline <code>, <dl>, <p>.
+  // The manual updates whenever state.page changes — what you see in the right
+  // panel is always tied to what is on the CDU screen.
+  const MANUAL = {
+    INIT: {
+      title: 'IDENT',
+      en: '<p>The first page in the preflight sequence. <code>IDENT</code> displays the FMC software version and the active navigation database (AIRAC cycle) and the date range during which it is valid. The crew confirms the database is current; an expired cycle prevents departure under most carriers\' procedures.</p>'
+        + '<dl>'
+        + '<dt>R6 — POS INIT&gt;</dt><dd>Advance to position initialisation (next step).</dd>'
+        + '<dt>L6 — &lt;INDEX</dt><dd>Return to the FMC main index.</dd>'
+        + '</dl>',
+      zh: '<p>飞行前序列的第一页。<code>IDENT</code> 显示 FMC 软件版本与当前导航数据库（AIRAC 周期）及其有效日期。机组确认数据库当前有效；多数航司规程禁止使用过期周期签派起飞。</p>'
+        + '<dl>'
+        + '<dt>R6 — POS INIT&gt;</dt><dd>进入位置初始化（下一步）。</dd>'
+        + '<dt>L6 — &lt;INDEX</dt><dd>返回 FMC 主索引页。</dd>'
+        + '</dl>'
+    },
+    POSINIT: {
+      title: 'POS INIT',
+      en: '<p>Sets the present aircraft position to align the inertial reference units (IRUs). The crew enters the gate coordinates or selects a reference airport; the FMC propagates that position to all three IRUs. Alignment requires the aircraft to be stationary for several minutes — moving the aircraft during alignment forces a restart.</p>'
+        + '<dl>'
+        + '<dt>L1 — LAST POS</dt><dd>Last known position from the previous flight; used as a quick check.</dd>'
+        + '<dt>L2 — REF AIRPORT</dt><dd>Sets present position to the reference airport coordinates.</dd>'
+        + '<dt>L3 — GATE</dt><dd>If the database has gate coordinates, refines position to the specific gate.</dd>'
+        + '<dt>L5 — SET IRS POS</dt><dd>Manually entered lat/lon — used when no database reference is available.</dd>'
+        + '<dt>R6 — ROUTE&gt;</dt><dd>Continue to route entry.</dd>'
+        + '</dl>',
+      zh: '<p>设置当前飞机位置以对齐惯性基准装置（IRU）。机组录入登机门坐标或选定一个参考机场；FMC 将该位置同步至全部三套 IRU。对齐要求飞机静止数分钟——对齐期间移动飞机会迫使重启。</p>'
+        + '<dl>'
+        + '<dt>L1 — LAST POS</dt><dd>上一航段的末位置，用于快速核对。</dd>'
+        + '<dt>L2 — REF AIRPORT</dt><dd>将当前位置设为参考机场坐标。</dd>'
+        + '<dt>L3 — GATE</dt><dd>若数据库含登机门坐标，可精确至具体登机门。</dd>'
+        + '<dt>L5 — SET IRS POS</dt><dd>手动录入经纬度——用于无数据库参考的情况。</dd>'
+        + '<dt>R6 — ROUTE&gt;</dt><dd>进入航路录入。</dd>'
+        + '</dl>'
+    },
+    RTE: {
+      title: 'RTE',
+      en: '<p>The flight plan, expressed as a sequence of identifiers. The FMC accepts ICAO airport codes, navigation fix names, airway designators, and the special tokens <code>DCT</code> (direct) and standard procedure names. Edits here stage a modification — the route does not become active until <code>EXEC</code> is pressed.</p>'
+        + '<dl>'
+        + '<dt>L1 — ORIGIN</dt><dd>Departure airport ICAO code.</dd>'
+        + '<dt>R1 — DEST</dt><dd>Destination airport ICAO code.</dd>'
+        + '<dt>L2 — CO ROUTE</dt><dd>Company route number, if filed (preloads a known route).</dd>'
+        + '<dt>R2 — FLT NO</dt><dd>Flight number for the FMC log.</dd>'
+        + '<dt>L3+ — VIA / TO</dt><dd>Each row defines one leg: an airway or <code>DIRECT</code>, then the next waypoint.</dd>'
+        + '<dt>R6 — ACTIVATE&gt;</dt><dd>Stage the route for activation; press <code>EXEC</code> to commit.</dd>'
+        + '</dl>',
+      zh: '<p>飞行计划，表达为一串标识符。FMC 接受 ICAO 机场代码、导航定位点名称、航路代号，以及特殊符号 <code>DCT</code>（直飞）和标准程序名。本页编辑只是暂存——按 <code>EXEC</code> 之前航路不会激活。</p>'
+        + '<dl>'
+        + '<dt>L1 — ORIGIN</dt><dd>起始机场 ICAO 代码。</dd>'
+        + '<dt>R1 — DEST</dt><dd>目的机场 ICAO 代码。</dd>'
+        + '<dt>L2 — CO ROUTE</dt><dd>若有，公司航路编号（预载已知航路）。</dd>'
+        + '<dt>R2 — FLT NO</dt><dd>航班号，用于 FMC 日志。</dd>'
+        + '<dt>L3+ — VIA / TO</dt><dd>每行定义一段航段：航路或 <code>DIRECT</code>，加下一航点。</dd>'
+        + '<dt>R6 — ACTIVATE&gt;</dt><dd>暂存航路待激活；按 <code>EXEC</code> 提交。</dd>'
+        + '</dl>'
+    },
+    DEPARR: {
+      title: 'DEP/ARR',
+      en: '<p>Selects the standard instrument departure (SID) and runway for the origin airport, and the standard terminal arrival (STAR) and approach for the destination. Entries are tied to the active <code>RTE</code> — changing the runway here updates the route automatically.</p>'
+        + '<dl>'
+        + '<dt>L1 — &lt;DEP (origin)</dt><dd>Departure procedures menu for the origin: SID + runway selection.</dd>'
+        + '<dt>R1 — ARR&gt; (origin)</dt><dd>Arrival procedures, in case of return-to-origin.</dd>'
+        + '<dt>L2 — &lt;DEP (dest)</dt><dd>Rare: departure procedures from the destination.</dd>'
+        + '<dt>R2 — ARR&gt; (dest)</dt><dd>STAR + approach + runway selection at destination.</dd>'
+        + '</dl>',
+      zh: '<p>为起始机场选择标准仪表离场程序（SID）与跑道，为目的机场选择标准终端进场程序（STAR）与进近程序。本页录入与激活的 <code>RTE</code> 绑定——在此更换跑道时，航路自动随之更新。</p>'
+        + '<dl>'
+        + '<dt>L1 — &lt;DEP（起始）</dt><dd>起始机场的离场程序菜单：SID 与跑道选择。</dd>'
+        + '<dt>R1 — ARR&gt;（起始）</dt><dd>起始机场的进场程序，用于返回起始的情况。</dd>'
+        + '<dt>L2 — &lt;DEP（目的）</dt><dd>少见：从目的机场出发的离场程序。</dd>'
+        + '<dt>R2 — ARR&gt;（目的）</dt><dd>目的机场 STAR + 进近程序 + 跑道选择。</dd>'
+        + '</dl>'
+    },
+    PERFINIT: {
+      title: 'PERF INIT',
+      en: '<p>Performance initialisation. The FMC needs the aircraft\'s weights, fuel, cruise altitude, and the cost index in order to compute the vertical profile and target speeds. The <em>cost index</em> is a single integer (typically 0–200) that trades fuel against time: 0 means minimum-fuel cruise speed, high values mean closer to maximum cruise speed.</p>'
+        + '<dl>'
+        + '<dt>L1 — GW/CRZ CG</dt><dd>Gross weight and cruise centre of gravity.</dd>'
+        + '<dt>L2 — FUEL</dt><dd>Fuel quantity (auto-fed by the totaliser).</dd>'
+        + '<dt>L3 — ZFW</dt><dd>Zero fuel weight.</dd>'
+        + '<dt>L4 — RESERVES</dt><dd>Required reserve fuel.</dd>'
+        + '<dt>L5 — COST INDEX</dt><dd>Time-vs-fuel trade integer; drives all VNAV speed targets.</dd>'
+        + '<dt>R1 — CRZ ALT</dt><dd>Planned cruise altitude (FL360 here).</dd>'
+        + '<dt>R5 — TRANS ALT</dt><dd>Transition altitude (above which altitudes are flight levels).</dd>'
+        + '<dt>R6 — N1 LIMIT&gt;</dt><dd>Continue to thrust selection.</dd>'
+        + '</dl>',
+      zh: '<p>性能初始化。FMC 需要飞机重量、燃油量、巡航高度与成本指数，方能计算垂直剖面与目标速度。<em>成本指数</em>是一个整数（通常 0–200），权衡燃油与时间：0 代表最省油巡航速度，越高越接近最大巡航速度。</p>'
+        + '<dl>'
+        + '<dt>L1 — GW/CRZ CG</dt><dd>毛重与巡航重心位置。</dd>'
+        + '<dt>L2 — FUEL</dt><dd>燃油量（由油量计自动填入）。</dd>'
+        + '<dt>L3 — ZFW</dt><dd>零燃油重量。</dd>'
+        + '<dt>L4 — RESERVES</dt><dd>规定备份油量。</dd>'
+        + '<dt>L5 — COST INDEX</dt><dd>时间–燃油权衡整数，驱动 VNAV 全部速度目标。</dd>'
+        + '<dt>R1 — CRZ ALT</dt><dd>计划巡航高度（此例 FL360）。</dd>'
+        + '<dt>R5 — TRANS ALT</dt><dd>过渡高度（其上为飞行高度层）。</dd>'
+        + '<dt>R6 — N1 LIMIT&gt;</dt><dd>继续至推力等级选择。</dd>'
+        + '</dl>'
+    },
+    N1LIM: {
+      title: 'N1 LIMIT',
+      en: '<p>Selects the active takeoff thrust rating and the corresponding climb rating. <em>N1</em> is the rotational speed of the low-pressure spool, expressed as a percentage of redline; on a CFM56-7B at sea level the takeoff <code>RED N1</code> is around 96–100. <em>Derate</em> ratings (TO-1, TO-2) reduce the rated thrust to extend engine life and reduce stress on long runways. <em>Bump</em> ratings (TO-B) temporarily increase the rated thrust for short-runway or high-altitude departures.</p>'
+        + '<dl>'
+        + '<dt>L1 — SEL/OAT</dt><dd>Selected (assumed) outside air temperature for derated takeoff calculation.</dd>'
+        + '<dt>R1 — RED TO N1</dt><dd>The redline N1 percentage for the selected rating.</dd>'
+        + '<dt>L2 — &lt;TO (26K)</dt><dd>Full rated takeoff thrust (26,000 lbf on this CFM56).</dd>'
+        + '<dt>L3 — &lt;TO-1</dt><dd>First derate, here 24,000 lbf.</dd>'
+        + '<dt>L4 — &lt;TO-2</dt><dd>Second derate, 22,000 lbf.</dd>'
+        + '<dt>L5 — &lt;TO-B</dt><dd>Bump rating, 27,000 lbf.</dd>'
+        + '<dt>R2/R3/R4 — CLB ratings</dt><dd>Matching climb thrust ratings.</dd>'
+        + '<dt>R6 — TAKEOFF&gt;</dt><dd>Continue to takeoff data review.</dd>'
+        + '</dl>',
+      zh: '<p>选定起飞推力等级与对应爬升推力等级。<em>N1</em> 为低压转子转速，以红线百分比表示；CFM56-7B 在海平面起飞 <code>RED N1</code> 约为 96–100。<em>降推力</em>等级（TO-1、TO-2）降低额定推力以延长发动机寿命、在长跑道时减少应力。<em>提升推力</em>（TO-B）在短跑道或高原机场起飞时临时提高额定推力。</p>'
+        + '<dl>'
+        + '<dt>L1 — SEL/OAT</dt><dd>用于降推力计算的假定外界温度。</dd>'
+        + '<dt>R1 — RED TO N1</dt><dd>所选等级的红线 N1 百分比。</dd>'
+        + '<dt>L2 — &lt;TO (26K)</dt><dd>全额定起飞推力（本机 CFM56 为 26,000 磅力）。</dd>'
+        + '<dt>L3 — &lt;TO-1</dt><dd>第一档降推力，本例 24,000 磅力。</dd>'
+        + '<dt>L4 — &lt;TO-2</dt><dd>第二档降推力，22,000 磅力。</dd>'
+        + '<dt>L5 — &lt;TO-B</dt><dd>提升推力等级，27,000 磅力。</dd>'
+        + '<dt>R2/R3/R4 — CLB 等级</dt><dd>对应的爬升推力等级。</dd>'
+        + '<dt>R6 — TAKEOFF&gt;</dt><dd>继续至起飞数据复核。</dd>'
+        + '</dl>'
+    },
+    TAKEOFF: {
+      title: 'TAKEOFF REF',
+      en: '<p>Final review of takeoff parameters. <code>V1</code>, <code>VR</code>, <code>V2</code> are the takeoff decision speed, rotation speed, and takeoff safety speed; they are computed by the performance computer for the active runway, weight, flap setting, and ambient conditions. The crew compares the displayed values against the dispatch release and the runway analysis chart.</p>'
+        + '<dl>'
+        + '<dt>L1 — V1</dt><dd>Decision speed: above this, takeoff continues even if an engine fails.</dd>'
+        + '<dt>L2 — VR</dt><dd>Rotation speed: pilot pulls back on the column at this speed.</dd>'
+        + '<dt>L3 — V2</dt><dd>Takeoff safety speed: minimum speed for engine-out climb.</dd>'
+        + '<dt>L4 — CG/TRIM</dt><dd>Centre of gravity and stabiliser trim setting for the takeoff weight.</dd>'
+        + '<dt>L5 — FLAPS</dt><dd>Selected takeoff flap position.</dd>'
+        + '<dt>R1 — RWY WIND</dt><dd>Runway wind component (head/tail and crosswind).</dd>'
+        + '<dt>R3 — RWY HDG</dt><dd>Runway heading.</dd>'
+        + '<dt>R5 — ENG OUT ACC</dt><dd>Engine-out acceleration altitude (above which excess thrust accelerates rather than climbs).</dd>'
+        + '</dl>',
+      zh: '<p>对起飞参数的最终复核。<code>V1</code>、<code>VR</code>、<code>V2</code> 分别为起飞决断速度、抬轮速度、起飞安全速度；由性能计算机基于当前跑道、重量、襟翼位置与环境条件计算得出。机组将显示值与签派放行单和跑道分析图核对。</p>'
+        + '<dl>'
+        + '<dt>L1 — V1</dt><dd>决断速度：超过此速度即使发动机失效起飞也继续。</dd>'
+        + '<dt>L2 — VR</dt><dd>抬轮速度：飞行员在此速度拉杆抬头。</dd>'
+        + '<dt>L3 — V2</dt><dd>起飞安全速度：单发爬升的最小速度。</dd>'
+        + '<dt>L4 — CG/TRIM</dt><dd>重心位置与起飞重量对应的水平安定面配平值。</dd>'
+        + '<dt>L5 — FLAPS</dt><dd>选定的起飞襟翼位。</dd>'
+        + '<dt>R1 — RWY WIND</dt><dd>跑道风分量（顺/逆风、侧风）。</dd>'
+        + '<dt>R3 — RWY HDG</dt><dd>跑道航向。</dd>'
+        + '<dt>R5 — ENG OUT ACC</dt><dd>单发加速高度（其上多余推力用于加速而非爬升）。</dd>'
+        + '</dl>'
+    },
+    LEGS: {
+      title: 'LEGS',
+      en: '<p>The active flight plan as a sequenced list of waypoints, with target altitude and speed for each. This is the most-used page in flight. Edits behave as a transaction: keying a new value into the scratchpad and pressing the corresponding LSK stages a modification — the page header changes from <code>ACT</code> to <code>MOD</code> and <code>EXEC</code> illuminates. Multiple staged edits can be made before <code>EXEC</code> commits the whole set, or <code>ERASE</code> reverts.</p>'
+        + '<dl>'
+        + '<dt>Each row</dt><dd>One leg: track angle, distance, target altitude/speed at the waypoint.</dd>'
+        + '<dt>L1–L5 (waypoints)</dt><dd>Press to insert a new waypoint above this one, delete it, or edit constraints.</dd>'
+        + '<dt>R1–R5 (constraints)</dt><dd>Edit altitude/speed constraint at that waypoint.</dd>'
+        + '<dt>NEXT PAGE</dt><dd>Scrolls forward through the rest of the legs (route may span many pages).</dd>'
+        + '</dl>',
+      zh: '<p>激活飞行计划，按顺序排列的航点列表，每个航点附带目标高度与速度。这是飞行中使用最频繁的页面。编辑遵循事务式工作流：在草稿板键入新值，按对应 LSK 暂存修改——页头由 <code>ACT</code> 切换为 <code>MOD</code>，<code>EXEC</code> 亮起。可暂存多次修改后按 <code>EXEC</code> 一次性提交，或按 <code>ERASE</code> 撤销。</p>'
+        + '<dl>'
+        + '<dt>每行</dt><dd>一段航段：航迹角、距离、该航点的目标高度/速度。</dd>'
+        + '<dt>L1–L5（航点）</dt><dd>按下可在其上方插入新航点、删除它、或编辑限制条件。</dd>'
+        + '<dt>R1–R5（限制）</dt><dd>编辑该航点的高度/速度限制。</dd>'
+        + '<dt>NEXT PAGE</dt><dd>向前翻页查看其余航段（航路可跨多页）。</dd>'
+        + '</dl>'
+    },
+    PROG: {
+      title: 'PROGRESS',
+      en: '<p>The in-flight status page. Distance and ETA to the next waypoint and the destination, predicted fuel-on-arrival, current wind, and cross-track error. <code>PROG</code> is the page typically left selected in cruise — it answers most "how is the flight going" questions in one display.</p>'
+        + '<dl>'
+        + '<dt>LAST</dt><dd>Most recently overflown waypoint, with its actual time of arrival.</dd>'
+        + '<dt>TO</dt><dd>Active leg target.</dd>'
+        + '<dt>NEXT</dt><dd>Following waypoint.</dd>'
+        + '<dt>DEST</dt><dd>Destination summary: distance to go, ETA, predicted fuel.</dd>'
+        + '<dt>WIND</dt><dd>Current wind direction and speed at the aircraft.</dd>'
+        + '<dt>XTK ERROR</dt><dd>Lateral deviation from the desired track, in nautical miles.</dd>'
+        + '</dl>',
+      zh: '<p>飞行中的状态页。到下一航点与目的地的距离与预计到达时间、预测剩余油量、当前风、横向偏离。<code>PROG</code> 是巡航段最常驻留的页面——一屏即答"这趟飞得怎么样"的多数问题。</p>'
+        + '<dl>'
+        + '<dt>LAST</dt><dd>最近越过的航点，附实际到达时间。</dd>'
+        + '<dt>TO</dt><dd>当前航段目标。</dd>'
+        + '<dt>NEXT</dt><dd>下一个航点。</dd>'
+        + '<dt>DEST</dt><dd>目的地摘要：剩余距离、预计到达时间、预测剩余油量。</dd>'
+        + '<dt>WIND</dt><dd>飞机当前位置的风向与风速。</dd>'
+        + '<dt>XTK ERROR</dt><dd>偏离计划航迹的横向距离（海里）。</dd>'
+        + '</dl>'
+    },
+    MENU: {
+      title: 'CDU MENU',
+      en: '<p>The CDU\'s root selector. The same physical CDU hardware can be used as the front panel for the FMC, the ACARS, the controller-pilot datalink (CPDLC/ATC), and various subsystems. The menu page selects which of these the keystrokes are routed to.</p>'
+        + '<dl>'
+        + '<dt>L1 — &lt;FMC</dt><dd>Route subsequent input to the flight management computer (the main use).</dd>'
+        + '<dt>L2 — &lt;ACARS</dt><dd>Aircraft Communications Addressing and Reporting System: text dispatch messages.</dd>'
+        + '<dt>L3 — &lt;ATC</dt><dd>Controller-pilot datalink (CPDLC) — clearance requests by text.</dd>'
+        + '<dt>L4 — &lt;DLINK</dt><dd>Other datalink subsystems.</dd>'
+        + '</dl>',
+      zh: '<p>CDU 的根选择页。同一台物理 CDU 硬件可作为 FMC、ACARS、管制员–飞行员数据链（CPDLC/ATC）以及其他子系统的前面板。MENU 页选择按键被路由到哪一个子系统。</p>'
+        + '<dl>'
+        + '<dt>L1 — &lt;FMC</dt><dd>将后续输入路由至飞行管理计算机（主要用途）。</dd>'
+        + '<dt>L2 — &lt;ACARS</dt><dd>飞机通讯寻址与报告系统：签派文本报文。</dd>'
+        + '<dt>L3 — &lt;ATC</dt><dd>管制员–飞行员数据链（CPDLC），以文本请求许可。</dd>'
+        + '<dt>L4 — &lt;DLINK</dt><dd>其他数据链子系统。</dd>'
+        + '</dl>'
+    },
+    ATC: {
+      title: 'ATC',
+      en: '<p>Controller-pilot datalink (CPDLC) interface. Used to request and acknowledge ATC clearances by text rather than voice — particularly over oceanic and remote regions where HF voice is unreliable. Common messages: <code>REQUEST CLIMB FL360</code>, <code>WILCO</code>, <code>UNABLE</code>. Each transaction is logged.</p>'
+        + '<p><em>Page details out of scope in this demo.</em></p>',
+      zh: '<p>管制员–飞行员数据链（CPDLC）接口。用于以文本而非语音请求并确认 ATC 许可——尤其在洋区与偏远地区，短波语音不可靠的环境。常见报文：<code>REQUEST CLIMB FL360</code>、<code>WILCO</code>、<code>UNABLE</code>。每次往复均被记录。</p>'
+        + '<p><em>本演示中不展开此页内容。</em></p>'
+    },
+    VNAV: {
+      title: 'VNAV',
+      en: '<p>Vertical navigation: displays and tunes the climb, cruise, and descent profile. Constraints include altitude restrictions at named waypoints (e.g. <code>AT OR ABOVE 6000</code>), speed restrictions (<code>AT OR BELOW 250/10000</code>), and the descent path angle from cruise altitude to the destination. The autopilot can fly the VNAV path automatically (<code>VNAV PATH</code> mode).</p>'
+        + '<p><em>Page details out of scope in this demo.</em></p>',
+      zh: '<p>垂直导航：显示并调谐爬升、巡航、下降剖面。限制条件包括指定航点的高度限制（如 <code>AT OR ABOVE 6000</code>）、速度限制（<code>AT OR BELOW 250/10000</code>），以及从巡航高度到目的地的下降路径角。自动驾驶可自动沿 VNAV 路径飞行（<code>VNAV PATH</code> 模式）。</p>'
+        + '<p><em>本演示中不展开此页内容。</em></p>'
+    },
+    FIX: {
+      title: 'FIX INFO',
+      en: '<p>Draws bearing/distance reference rings or radials from a chosen waypoint onto the navigation display. Used to visualise clearance limits ("hold north of <code>SYR</code> at 20 NM"), to tag a target by relative position, or to check overflight times against constraints.</p>'
+        + '<p><em>Page details out of scope in this demo.</em></p>',
+      zh: '<p>从选定航点向导航显示器投射方位/距离参考圆或径向线。用于可视化净空界限（如"在 <code>SYR</code> 北 20 海里处等待"）、按相对位置标记目标，或核对越飞时间与限制条件。</p>'
+        + '<p><em>本演示中不展开此页内容。</em></p>'
+    },
+    HOLD: {
+      title: 'HOLD',
+      en: '<p>Defines or modifies a holding pattern at any waypoint. The crew enters: holding fix, inbound course, turn direction, leg time or distance. The FMC calculates the racetrack pattern and displays it on the navigation display. Often required when ATC issues a hold with non-published parameters.</p>'
+        + '<p><em>Page details out of scope in this demo.</em></p>',
+      zh: '<p>在任一航点定义或修改等待航线。机组录入：等待定位点、入航航向、转弯方向、航段时间或距离。FMC 据此计算等待航线并显示于导航显示器。当 ATC 指令的等待参数不在已发布航图中时，常需此页。</p>'
+        + '<p><em>本演示中不展开此页内容。</em></p>'
+    },
+    FMCCOMM: {
+      title: 'FMC COMM',
+      en: '<p>Datalink interface for FMC-related messages: route uplinks from dispatch, weather report requests, position reports. Receives the company\'s FMS-format flight plan, which is loaded into the route with crew confirmation.</p>'
+        + '<p><em>Page details out of scope in this demo.</em></p>',
+      zh: '<p>FMC 相关报文的数据链接口：签派发来的航路上行、天气报告请求、位置报告。接收公司 FMS 格式的飞行计划，由机组确认后载入航路。</p>'
+        + '<p><em>本演示中不展开此页内容。</em></p>'
     }
+  };
+
+  function updateManual(pageKey) {
+    const titleEl = widget.querySelector('#fmc-manual-title');
+    const bodyEl = widget.querySelector('#fmc-manual-body');
+    if (!titleEl || !bodyEl) return;
+    const entry = MANUAL[pageKey] || MANUAL.INIT;
     const lang = document.body.getAttribute('data-lang') || 'en';
-    dyn.textContent = '→ ' + (hint[lang] || hint.en);
+    titleEl.textContent = entry.title;
+    bodyEl.innerHTML = entry[lang] || entry.en;
   }
+
+  // Refresh the manual on language change
+  document.addEventListener('flying:langchange', () => {
+    updateManual(state.page);
+  });
 
   // ─── Wire up keys ──────────────────────────────────────────
   widget.querySelectorAll('.fmc-fn[data-page]').forEach(b => {

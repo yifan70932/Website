@@ -753,69 +753,66 @@ html { scroll-behavior: smooth; }
 
 /* ── The CDU body ── */
 .flying-page .fmc-cdu {
-  /* Brushed dark metal with subtle grain; matches Honeywell CDU bezel */
-  background:
-    linear-gradient(180deg, #4a4d52 0%, #3a3d42 8%, #353a40 100%);
-  border: 1px solid #1a1c1e;
-  border-radius: 8px;
-  padding: 16px 14px 14px;
+  /* Real CDU bezel: dark grey-black injection-moulded plastic, slight texture */
+  background: #1a1c1f;
+  border: 1px solid #0a0c0e;
+  border-radius: 6px;
+  padding: 10px 9px 12px;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.10),
-    inset 0 -2px 6px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    inset 0 -1px 0 rgba(0,0,0,0.4),
     0 4px 16px rgba(0,0,0,0.2);
   user-select: none;
   width: 100%;
-  max-width: 380px;
+  max-width: 360px;
   justify-self: start;
 }
 
 /* ── Screen + flanking LSK columns ── */
 .flying-page .fmc-screen-wrap {
   display: grid;
-  grid-template-columns: 22px 1fr 22px;
-  gap: 5px;
+  grid-template-columns: 26px 1fr 26px;
+  gap: 4px;
   align-items: stretch;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .flying-page .fmc-screen {
-  /* Deep blue CRT background as in the reference photo */
-  background:
-    radial-gradient(ellipse at center, #0d2042 0%, #081530 70%, #050d22 100%);
-  color: #ffffff;
+  /* Boeing CRT: deep green-black phosphor */
+  background: #021608;
+  color: #4dff5a;
   font-family: var(--fl-font-mono);
   font-size: 11px;
   line-height: 15px;
   letter-spacing: 0.06em;
-  padding: 10px 11px;
+  padding: 9px 10px;
   border: 1px solid #000;
   border-radius: 3px;
   white-space: pre;
   overflow: hidden;
   min-height: 224px;     /* 14 rows × 16 px */
-  text-shadow: 0 0 1px rgba(255,255,255,0.4);
+  text-shadow: 0 0 1.5px rgba(77,255,90,0.55);
   box-shadow:
-    inset 0 0 22px rgba(50,90,180,0.18),
-    inset 0 0 3px rgba(0,0,0,0.9);
+    inset 0 0 24px rgba(77,255,90,0.06),
+    inset 0 0 3px rgba(0,0,0,0.95);
   /* Subtle scanline effect */
   background-image:
-    linear-gradient(rgba(255,255,255,0) 50%, rgba(0,0,0,0.10) 50%),
-    radial-gradient(ellipse at center, #0d2042 0%, #081530 70%, #050d22 100%);
-  background-size: 100% 3px, 100% 100%;
+    linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.18) 50%);
+  background-size: 100% 3px;
 }
 
-/* Highlight classes inside the screen text */
-.flying-page .fmc-screen .fmc-label   { color: #c8c8c8; }   /* line-title labels (small grey on Pegasus) */
-.flying-page .fmc-screen .fmc-prompt  { color: #ffffff; }   /* prompt text white */
-.flying-page .fmc-screen .fmc-data    { color: #4dffb0; }   /* user-entered data in green */
-.flying-page .fmc-screen .fmc-dim     { color: #8a8a8a; }   /* dim placeholder */
-.flying-page .fmc-screen .fmc-scratch { color: #ffffff; background: rgba(255,255,255,0.06); }
+/* Highlight classes inside the screen text — colors taken from real Pegasus CDU */
+.flying-page .fmc-screen .fmc-label   { color: #d8d048; }   /* small yellow line-titles (SEL/OAT, RED TO N1) */
+.flying-page .fmc-screen .fmc-prompt  { color: #4dff5a; }   /* prompt text green */
+.flying-page .fmc-screen .fmc-data    { color: #d8d048; }   /* user data also yellow on Pegasus */
+.flying-page .fmc-screen .fmc-dim     { color: #5a8c40; }   /* dim placeholder */
+.flying-page .fmc-screen .fmc-scratch { color: #ffffff; }   /* scratchpad in white */
 .flying-page .fmc-screen .fmc-msg     { color: #ff7755; }
 .flying-page .fmc-screen .fmc-mod     { color: #ffe055; }   /* MOD header */
 .flying-page .fmc-screen .fmc-cursor  {
   display: inline-block;
-  width: 7px;
-  background: #ffffff;
+  width: 6px;
+  background: #4dff5a;
   animation: fmc-blink 0.9s step-end infinite;
 }
 @keyframes fmc-blink {
@@ -827,17 +824,16 @@ html { scroll-behavior: smooth; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 6px 0;
+  padding: 3px 0;
 }
 .flying-page .fmc-lsk {
-  width: 22px;
-  height: 14px;
-  background:
-    linear-gradient(180deg, #5e6166 0%, #3e4146 100%);
-  color: #f0f0f0;
-  border: 1px solid #1a1c1e;
+  width: 26px;
+  height: 11px;
+  background: #0e1012;
+  color: transparent;
+  border: 1px solid #050608;
   border-top-color: #2a2c2e;
-  border-radius: 2px;
+  border-radius: 1.5px;
   font-family: var(--fl-font-mono);
   font-size: 0;
   cursor: pointer;
@@ -846,9 +842,8 @@ html { scroll-behavior: smooth; }
   align-items: center;
   justify-content: center;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.15),
-    inset 0 -1px 0 rgba(0,0,0,0.5),
-    0 1px 2px rgba(0,0,0,0.3);
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    inset 0 -1px 0 rgba(0,0,0,0.6);
   position: relative;
   transition: background 0.05s, transform 0.05s;
 }
@@ -859,46 +854,45 @@ html { scroll-behavior: smooth; }
   position: absolute;
   left: 4px;
   right: 4px;
-  height: 1.5px;
-  background: #d8d8d8;
-  border-radius: 1px;
+  height: 1px;
+  background: #6a6c6e;
+  border-radius: 0.5px;
 }
-.flying-page .fmc-lsk::before { top: 3px; }
-.flying-page .fmc-lsk::after  { bottom: 3px; }
-.flying-page .fmc-lsk:hover { background: linear-gradient(180deg, #6e7176 0%, #4e5156 100%); }
+.flying-page .fmc-lsk::before { top: 2.5px; }
+.flying-page .fmc-lsk::after  { bottom: 2.5px; }
+.flying-page .fmc-lsk:hover { background: #1a1c1e; }
 .flying-page .fmc-lsk:active {
-  background: linear-gradient(180deg, #2a2c2e 0%, #1a1c1e 100%);
+  background: #050608;
   transform: translateY(1px);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
 }
 
 /* ── Function keys row ── */
+/* Real CDU keys: dark grey-black plastic with subtle bevel, very thin gaps */
 .flying-page .fmc-fnrow {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 5px;
-  margin-bottom: 5px;
+  gap: 3px;
+  margin-bottom: 3px;
 }
 .flying-page .fmc-fn {
-  background:
-    linear-gradient(180deg, #f8f8f8 0%, #d8d8d8 100%);
-  color: #1a1a1a;
-  border: 1px solid #1a1c1e;
-  border-top-color: #ffffff;
-  border-radius: 3px;
+  background: linear-gradient(180deg, #2a2c2f 0%, #1c1e21 100%);
+  color: #e6e6e6;
+  border: 1px solid #060708;
+  border-top-color: #3a3c3f;
+  border-radius: 2px;
   font-family: var(--fl-font-mono);
-  font-size: 8.5px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1.05;
-  padding: 8px 1px;
+  padding: 6px 1px;
   cursor: pointer;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.6),
-    inset 0 -2px 0 rgba(0,0,0,0.15),
-    0 1px 2px rgba(0,0,0,0.3);
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.6),
+    0 1px 1px rgba(0,0,0,0.4);
   text-align: center;
-  min-height: 30px;
+  min-height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -906,85 +900,93 @@ html { scroll-behavior: smooth; }
   white-space: pre-line;
 }
 .flying-page .fmc-fn:hover {
-  background: linear-gradient(180deg, #ffffff 0%, #e8e8e8 100%);
+  background: linear-gradient(180deg, #3a3c3f 0%, #2a2c2f 100%);
 }
 .flying-page .fmc-fn:active {
-  background: linear-gradient(180deg, #c0c0c0 0%, #a8a8a8 100%);
+  background: linear-gradient(180deg, #0e1012 0%, #060708 100%);
   transform: translateY(1px);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
 }
 .flying-page .fmc-fn.active {
-  background: linear-gradient(180deg, #d8c870 0%, #b8a850 100%);
-  color: #2a1a00;
+  background: linear-gradient(180deg, #6a5a18 0%, #4a3e10 100%);
+  color: #ffe888;
   box-shadow:
-    inset 0 0 4px rgba(180,140,40,0.5),
-    inset 0 1px 0 rgba(255,255,255,0.4);
+    inset 0 0 4px rgba(160,130,40,0.4),
+    inset 0 1px 0 rgba(255,220,120,0.3);
 }
 .flying-page .fmc-fn.fmc-exec {
-  background: linear-gradient(180deg, #c8c8c8 0%, #a8a8a8 100%);
-  color: #5a5a5a;
+  /* Distinct key: square indicator slot like the real CDU */
+  background: linear-gradient(180deg, #2a2c2f 0%, #1c1e21 100%);
+  color: #888;
 }
 .flying-page .fmc-fn.fmc-exec:not(:disabled) {
-  background: linear-gradient(180deg, #b8ffb8 0%, #6cd86c 100%);
-  color: #0a3d20;
-  border-color: #2a5a2a;
-  text-shadow: 0 0 2px rgba(0,80,0,0.3);
+  background: linear-gradient(180deg, #3aff60 0%, #1cb830 100%);
+  color: #032a08;
+  border-color: #1a4a20;
+  text-shadow: 0 0 2px rgba(0,80,0,0.4);
   box-shadow:
-    0 0 8px rgba(108,216,108,0.6),
-    inset 0 1px 0 rgba(255,255,255,0.6),
-    inset 0 -1px 0 rgba(0,0,0,0.2);
+    0 0 8px rgba(108,255,108,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.4),
+    inset 0 -1px 0 rgba(0,0,0,0.3);
 }
-.flying-page .fmc-fn.fmc-exec:disabled { cursor: not-allowed; opacity: 0.7; }
-.flying-page .fmc-fn-spacer { background: transparent; border: none; box-shadow: none; pointer-events: none; }
-
-/* Brightness / page-nav row layout */
-.flying-page .fmc-fnrow-2 {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 5px;
-  margin-bottom: 8px;
+.flying-page .fmc-fn.fmc-exec:disabled { cursor: not-allowed; opacity: 0.6; }
+.flying-page .fmc-fn-spacer {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  pointer-events: none;
 }
 
 /* ── Alphanumeric keypad ── */
 .flying-page .fmc-keypad {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
+  margin-top: 6px;
 }
 .flying-page .fmc-kp-row {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  gap: 4px;
+  gap: 3px;
 }
 .flying-page .fmc-key {
-  background: linear-gradient(180deg, #fafafa 0%, #d4d4d4 100%);
-  color: #1a1a1a;
-  border: 1px solid #1a1c1e;
-  border-top-color: #ffffff;
-  border-radius: 3px;
+  background: linear-gradient(180deg, #2a2c2f 0%, #1c1e21 100%);
+  color: #e6e6e6;
+  border: 1px solid #060708;
+  border-top-color: #3a3c3f;
+  border-radius: 2px;
   font-family: var(--fl-font-mono);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  padding: 9px 0;
+  padding: 7px 0;
   cursor: pointer;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.6),
-    inset 0 -2px 0 rgba(0,0,0,0.15),
-    0 1px 2px rgba(0,0,0,0.3);
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.6),
+    0 1px 1px rgba(0,0,0,0.4);
   min-width: 0;
 }
-.flying-page .fmc-key:hover { background: linear-gradient(180deg, #ffffff 0%, #e4e4e4 100%); }
+.flying-page .fmc-key:hover { background: linear-gradient(180deg, #3a3c3f 0%, #2a2c2f 100%); }
 .flying-page .fmc-key:active {
-  background: linear-gradient(180deg, #b8b8b8 0%, #a0a0a0 100%);
+  background: linear-gradient(180deg, #0e1012 0%, #060708 100%);
   transform: translateY(1px);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
 }
 .flying-page .fmc-key-wide  { font-size: 9px; letter-spacing: 0.05em; }
 .flying-page .fmc-key-clr   {
   font-size: 9px;
+  background: linear-gradient(180deg, #5a3320 0%, #3a2010 100%);
+  color: #ffd0b0;
 }
-.flying-page .fmc-key-del   {
-  font-size: 9px;
+.flying-page .fmc-key-clr:hover {
+  background: linear-gradient(180deg, #6a4330 0%, #4a3020 100%);
+}
+.flying-page .fmc-key-del   { font-size: 9px; }
+.flying-page .fmc-key-spacer {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  pointer-events: none;
 }
 
 /* ── CDU nameplate ── */
@@ -1016,53 +1018,62 @@ html { scroll-behavior: smooth; }
   align-self: start;
 }
 
-.flying-page .fmc-hint {
+/* ── Per-page reference manual (right column) ── */
+.flying-page .fmc-manual {
   font-family: var(--fl-font-ui);
   font-size: 0.82rem;
   line-height: 1.55;
-  color: var(--fl-ink-soft);
+  color: var(--fl-ink);
   background: var(--fl-paper);
   border: 1px solid var(--fl-rule);
   border-radius: 4px;
-  padding: 0.85rem 1rem;
+  padding: 0.85rem 1rem 1rem;
 }
-.flying-page[data-lang="zh"] .fmc-hint {
+.flying-page[data-lang="zh"] .fmc-manual {
   font-family: var(--fl-font-cn);
   line-height: 1.7;
 }
-.flying-page .fmc-hint strong[data-lang-content] {
-  display: none;     /* hidden by default; lang rule below overrides */
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
+.flying-page .fmc-manual-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--fl-rule-soft);
+}
+.flying-page .fmc-manual-tag {
+  font-family: var(--fl-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--fl-ink-faint);
-  margin-bottom: 0.4rem;
   font-weight: 600;
+  flex-shrink: 0;
 }
-.flying-page[data-lang="en"] .fmc-hint strong[data-lang-content="en"],
-.flying-page[data-lang="zh"] .fmc-hint strong[data-lang-content="zh"] {
-  display: block;
+.flying-page[data-lang="zh"] .fmc-manual-tag {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0.06em;
 }
-.flying-page[data-lang="zh"] .fmc-hint strong[data-lang-content="zh"] {
-  letter-spacing: 0.02em;
-  text-transform: none;
+.flying-page .fmc-manual-tag[data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .fmc-manual-tag[data-lang-content="en"],
+.flying-page[data-lang="zh"] .fmc-manual-tag[data-lang-content="zh"] {
+  display: inline;
 }
-.flying-page .fmc-hint ol[data-lang-content],
-.flying-page .fmc-hint p[data-lang-content] {
-  display: none;
+.flying-page .fmc-manual-title {
+  font-family: var(--fl-font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--fl-navy);
 }
-.flying-page[data-lang="en"] .fmc-hint ol[data-lang-content="en"],
-.flying-page[data-lang="zh"] .fmc-hint ol[data-lang-content="zh"],
-.flying-page[data-lang="en"] .fmc-hint p[data-lang-content="en"],
-.flying-page[data-lang="zh"] .fmc-hint p[data-lang-content="zh"] {
-  display: block;
+.flying-page .fmc-manual-body p {
+  margin: 0 0 0.55rem;
 }
-.flying-page .fmc-hint ol {
-  margin: 0 0 0.65rem;
-  padding-left: 1.2em;
+.flying-page .fmc-manual-body p:last-child {
+  margin-bottom: 0;
 }
-.flying-page .fmc-hint li { margin-bottom: 0.15em; }
-.flying-page .fmc-hint code {
+.flying-page .fmc-manual-body code,
+.flying-page .fmc-manual-body .mono {
   font-family: var(--fl-font-mono);
   font-size: 0.78rem;
   background: var(--fl-rule-soft);
@@ -1070,9 +1081,32 @@ html { scroll-behavior: smooth; }
   border-radius: 2px;
   color: var(--fl-navy);
 }
-.flying-page .fmc-hint-note {
-  margin: 0;
+.flying-page .fmc-manual-body dl {
+  margin: 0.4rem 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.7rem;
+  row-gap: 0.2rem;
+}
+.flying-page .fmc-manual-body dt {
+  font-family: var(--fl-font-mono);
   font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--fl-navy);
+  white-space: nowrap;
+}
+.flying-page .fmc-manual-body dd {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--fl-ink-soft);
+}
+.flying-page[data-lang="zh"] .fmc-manual-body dd {
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+.flying-page .fmc-manual-body em {
+  font-style: italic;
   color: var(--fl-ink-faint);
 }
 
