@@ -1381,6 +1381,75 @@
     }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
     sections.forEach(s => observer.observe(s));
   }
+
+  // ─── Sidenote vertical anchoring ──────────────────────────────
+  // Each .sidenote sits in document order between its anchoring
+  // section's last prose paragraph and the figure/widget that
+  // follows. By default that places it visually next to the
+  // widget, not next to the prose. To pull it back up to align
+  // with the top of its anchor section, we measure the section
+  // heading position and translate the sidenote upward.
+  //
+  // Only runs at viewport widths where sidenotes float into the
+  // gutter (≥ 1100px); below that they are inline cards and
+  // need no adjustment.
+  function findVisibleAnchor(sn) {
+    // Walk previous siblings looking for an h2/h3, OR a div
+    // containing an h3 that is currently visible (i.e. matches
+    // the active language). Hidden language divs are skipped so
+    // we never anchor to an h3 inside the inactive .zh / .en div.
+    let prev = sn.previousElementSibling;
+    while (prev) {
+      if (prev.tagName === 'H2' || prev.tagName === 'H3') return prev;
+      // For language-scoped wrappers, only inspect inner h3s if
+      // the wrapper is the currently-shown language.
+      const isLangDiv = prev.hasAttribute && prev.hasAttribute('data-lang-content');
+      const visible = !isLangDiv ||
+        getComputedStyle(prev).display !== 'none';
+      if (visible && prev.querySelector) {
+        const h = prev.querySelector('h2, h3');
+        if (h && getComputedStyle(h).display !== 'none' &&
+            h.getBoundingClientRect().height > 0) {
+          return h;
+        }
+      }
+      prev = prev.previousElementSibling;
+    }
+    return null;
+  }
+
+  function anchorSidenotes() {
+    const wide = window.matchMedia('(min-width: 1600px)').matches;
+    document.querySelectorAll('.sidenote').forEach(sn => {
+      if (!wide) {
+        sn.style.transform = '';
+        return;
+      }
+      // Reset first so the natural-position measurement is honest.
+      sn.style.transform = '';
+      const anchor = findVisibleAnchor(sn);
+      if (!anchor) return;
+      const snRect = sn.getBoundingClientRect();
+      const anchorRect = anchor.getBoundingClientRect();
+      // Sanity: skip if either rect is degenerate (page not laid out yet)
+      if (anchorRect.height === 0 || snRect.height === 0) return;
+      const snTop = snRect.top + window.scrollY;
+      const anchorTop = anchorRect.top + window.scrollY;
+      const delta = anchorTop - snTop;
+      sn.style.transform = `translateY(${delta}px)`;
+    });
+  }
+
+  // Run anchoring on load, language change, resize.
+  // We also re-run after a delay because async font / image
+  // loading can change paragraph heights.
+  window.addEventListener('load', anchorSidenotes);
+  window.addEventListener('resize', anchorSidenotes);
+  document.addEventListener('flying:langchange', anchorSidenotes);
+  // Multiple retries: 100ms / 500ms / 1500ms catches most late layout.
+  setTimeout(anchorSidenotes, 100);
+  setTimeout(anchorSidenotes, 500);
+  setTimeout(anchorSidenotes, 1500);
 })();
 </script>
 

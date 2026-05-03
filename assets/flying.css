@@ -2590,10 +2590,16 @@ html { scroll-behavior: smooth; }
 }
 
 /* ── Wide-screen Tufte placement ──────────────────────────────
-   .main has max-width: 64rem and lives in a 1fr grid column.
-   On screens ≥ 1100px, the column is wider than 64rem, so we
-   can pull sidenotes out into the right gutter. */
-@media (min-width: 1100px) {
+   .layout is max-width: 96rem (1536px) with a 14rem TOC sidebar
+   on the left; .main is max-width: 64rem (1024px) inside the
+   1fr column. For a sidenote to fit in the gutter to the right
+   of .main without horizontal overflow, the viewport needs to
+   be at least .main's right edge (304px padding-left + 14rem
+   TOC + 3rem gap + 64rem main = ~1352px) plus the sidenote's
+   own width (14rem = 224px) plus a small margin. We set the
+   breakpoint at 1600px — the lowest viewport at which a 14rem
+   sidenote can sit comfortably in the gutter without clipping. */
+@media (min-width: 1600px) {
   .flying-page .sidenote {
     position: absolute;
     left: calc(64rem + 1.5rem);
@@ -2601,8 +2607,6 @@ html { scroll-behavior: smooth; }
     margin: 0;
     padding: 0;
     background: transparent;
-    border-left: none;
-    /* Reduce visual weight in margin: hairline left rule only */
     border-left: 1px solid var(--fl-rule);
     padding-left: 0.9rem;
     font-size: 0.75rem;
@@ -2612,8 +2616,8 @@ html { scroll-behavior: smooth; }
   .flying-page[data-lang="zh"] .sidenote .sn-blurb { font-size: 0.72rem; }
 }
 
-/* On very wide screens (≥ 1400px) give sidenotes a touch more room */
-@media (min-width: 1400px) {
+/* On very wide screens (≥ 1800px) give sidenotes a touch more room */
+@media (min-width: 1800px) {
   .flying-page .sidenote {
     width: 16rem;
     left: calc(64rem + 2rem);
