@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soccer Coach Board</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Interactive tactics board</p>
+        <h1>Soccer Coach Board</h1>
+      </div>
+      <div class="topbar-actions">
+        <button id="exportBtn" class="button primary" type="button">Export PNG</button>
+        <button id="resetBtn" class="button danger" type="button">Reset</button>
+      </div>
+    </header>
+
+    <section class="workspace" aria-label="Soccer tactics board workspace">
+      <aside class="panel" aria-label="Board controls">
+        <div class="control-group">
+          <label for="formationSelect">Formation</label>
+          <select id="formationSelect">
+            <option value="433">4-3-3</option>
+            <option value="442">4-4-2</option>
+            <option value="4231">4-2-3-1</option>
+            <option value="352">3-5-2</option>
+            <option value="custom">Custom / keep current</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <span class="label">Drawing tool</span>
+          <div class="segmented">
+            <button id="moveTool" class="tool active" type="button" data-tool="move">Move</button>
+            <button id="arrowTool" class="tool" type="button" data-tool="arrow">Arrow</button>
+            <button id="lineTool" class="tool" type="button" data-tool="line">Line</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <span class="label">Team display</span>
+          <label class="checkline">
+            <input id="toggleHome" type="checkbox" checked />
+            Show home team
+          </label>
+          <label class="checkline">
+            <input id="toggleAway" type="checkbox" checked />
+            Show away team
+          </label>
+        </div>
+
+        <div class="control-group">
+          <label for="noteInput">Coach note</label>
+          <textarea id="noteInput" rows="5" placeholder="Example: Press wide, recover centrally, quick outlet after winning the ball."></textarea>
+        </div>
+
+        <div class="control-group compact-buttons">
+          <button id="clearDrawingsBtn" class="button" type="button">Clear drawings</button>
+          <button id="flipBoardBtn" class="button" type="button">Flip board</button>
+        </div>
+
+        <p class="hint">
+          Drag players to reposition. Select Arrow or Line, then drag across the pitch to draw.
+        </p>
+      </aside>
+
+      <section class="board-card">
+        <div id="captureArea" class="capture-area">
+          <div class="board-title-row">
+            <div>
+              <h2>Match Plan</h2>
+              <p id="formationLabel">4-3-3</p>
+            </div>
+            <p id="notePreview">Add a coach note from the control panel.</p>
+          </div>
+
+          <div id="pitch" class="pitch" role="application" aria-label="Interactive soccer pitch">
+            <canvas id="drawingCanvas"></canvas>
+
+            <div class="pitch-markings" aria-hidden="true">
+              <div class="halfway"></div>
+              <div class="center-circle"></div>
+              <div class="center-spot"></div>
+
+              <div class="penalty-box left"></div>
+              <div class="goal-box left"></div>
+              <div class="penalty-arc left"></div>
+
+              <div class="penalty-box right"></div>
+              <div class="goal-box right"></div>
+              <div class="penalty-arc right"></div>
+
+              <div class="goal left"></div>
+              <div class="goal right"></div>
+            </div>
+
+            <div id="playersLayer" class="players-layer"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
