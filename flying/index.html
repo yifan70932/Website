@@ -3429,11 +3429,29 @@
       const lFlpHinge = makeHinge('LeftFlap');
       const rFlpHinge = makeHinge('RightFlap');
 
-      // For propeller: hinge at its centre (it spins around its own axis,
-      // not at an edge). Easiest: just rotate the existing Propeller group
-      // around the model's +Z axis. The probe showed Propeller's pivot is
-      // already at its geometric centre, so this works without a wrapper.
-      const propeller = root.getObjectByName('Propeller');
+      // For propeller: it spins around its own disc-normal axis (the
+      // forward direction). Just like the control surfaces, the
+      // Propeller group's local Z axis isn't aligned with the world's
+      // forward direction — modeler set it differently. We need a
+      // hinge wrapper centered at the propeller's geometric centre,
+      // with identity rotation, so we can spin it around world +Z
+      // (the airplane's forward direction).
+      function makePropHinge() {
+        const node = root.getObjectByName('Propeller');
+        if (!node) return null;
+        const wbox = new THREE.Box3().setFromObject(node);
+        const cx = (wbox.min.x + wbox.max.x) / 2;
+        const cy = (wbox.min.y + wbox.max.y) / 2;
+        const cz = (wbox.min.z + wbox.max.z) / 2;
+        const hinge = new THREE.Group();
+        hinge.name = 'Propeller_Hinge';
+        hinge.position.set(cx, cy, cz);
+        attitudeGroup.add(hinge);
+        attitudeGroup.updateMatrixWorld(true);
+        hinge.attach(node);
+        return hinge;
+      }
+      const propHinge = makePropHinge();
 
       // Hide loading, show help
       loadingEl.hidden = true;
@@ -3513,10 +3531,11 @@
         if (rFlpHinge) rFlpHinge.rotation.x = -dFlap;
         if (lFlpHinge) lFlpHinge.rotation.x = -dFlap;
 
-        // Propeller spin
-        if (propeller) {
+        // Propeller spin — around world +Z (forward axis through the
+        // hinge wrapper, whose local axes equal world axes).
+        if (propHinge) {
           propRotation += dt * (state.throttle / 100) * Math.PI * 12;
-          propeller.rotation.z = propRotation;
+          propHinge.rotation.z = propRotation;
         }
 
         // ─ Aircraft attitude (response mode) ─
