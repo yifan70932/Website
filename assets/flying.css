@@ -2295,10 +2295,15 @@ html { scroll-behavior: smooth; }
 .flying-page[data-lang="en"] .aero-widget-title [data-lang-content="en"],
 .flying-page[data-lang="zh"] .aero-widget-title [data-lang-content="zh"] { display: inline; }
 
-/* The combined Cessna widget — SVG diagram + control panel.
-   On wide screens: SVG on left (2/3 width), controls on right.
-   On narrow screens: SVG on top, controls below. */
-.flying-page .cessna-widget {
+/* ════════════════════════════════════════════════════════════
+   §2.2 — Cessna 3D flight controls widget
+   Layout:
+     - Left: 3D viewport (Three.js canvas) — large, ~2/3 width
+     - Right: control panel with sliders + mode toggle + reset
+     - Below figure: small attribution line (.see-also style)
+   On wide screens: 2-column grid. On narrow screens: stack.
+   ════════════════════════════════════════════════════════════ */
+.flying-page .cessna3d-widget {
   background: var(--fl-paper-deep);
   border: 1px solid var(--fl-rule);
   border-radius: 4px;
@@ -2306,33 +2311,87 @@ html { scroll-behavior: smooth; }
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 1.5rem;
-  align-items: start;
+  align-items: stretch;
 }
 @media (max-width: 720px) {
-  .flying-page .cessna-widget { grid-template-columns: 1fr; }
+  .flying-page .cessna3d-widget { grid-template-columns: 1fr; }
 }
 
-.flying-page .cessna-svg-wrap {
-  background: var(--fl-paper);
+.flying-page .cessna3d-viewport {
+  position: relative;
+  background: var(--fl-pale-blue);
   border: 1px solid var(--fl-rule);
   border-radius: 3px;
-  padding: 0.5rem;
+  min-height: 480px;
+  overflow: hidden;
 }
-.flying-page .cessna-diagram {
+.flying-page .cessna3d-canvas {
   display: block;
   width: 100%;
-  height: auto;
-  max-width: 600px;
-  margin: 0 auto;
-}
-/* Each overlay group rotates around its hinge point, set in JS via
-   transform-origin. Smooth transitions via CSS for an elastic feel
-   in addition to the JS tween. */
-.flying-page .ovl-surface {
-  transition: transform 0.05s linear;
+  height: 100%;
 }
 
-.flying-page .cessna-controls {
+/* Launch button — covers the viewport before the 3D scene loads */
+.flying-page .cessna3d-launch-btn {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: max-content;
+  height: max-content;
+  font-family: var(--fl-font-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  padding: 0.85rem 1.6rem;
+  border: 1px solid var(--fl-sapphire);
+  background: var(--fl-paper);
+  color: var(--fl-sapphire);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.flying-page .cessna3d-launch-btn:hover {
+  background: var(--fl-sapphire);
+  color: var(--fl-paper);
+}
+.flying-page[data-lang="zh"] .cessna3d-launch-btn { font-family: var(--fl-font-cn); }
+.flying-page .cessna3d-launch-btn [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .cessna3d-launch-btn [data-lang-content="en"],
+.flying-page[data-lang="zh"] .cessna3d-launch-btn [data-lang-content="zh"] { display: inline; }
+
+/* Loading + help notes — small text overlays inside viewport */
+.flying-page .cessna3d-loading,
+.flying-page .cessna3d-help,
+.flying-page .cessna3d-error {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--fl-ink-soft);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+  pointer-events: none;
+}
+.flying-page .cessna3d-loading {
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+}
+.flying-page .cessna3d-error { color: var(--fl-amber); }
+.flying-page[data-lang="zh"] .cessna3d-loading,
+.flying-page[data-lang="zh"] .cessna3d-help { font-family: var(--fl-font-cn); }
+.flying-page .cessna3d-loading [data-lang-content],
+.flying-page .cessna3d-help [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .cessna3d-loading [data-lang-content="en"],
+.flying-page[data-lang="en"] .cessna3d-help [data-lang-content="en"],
+.flying-page[data-lang="zh"] .cessna3d-loading [data-lang-content="zh"],
+.flying-page[data-lang="zh"] .cessna3d-help [data-lang-content="zh"] { display: inline; }
+
+/* Control panel — sliders, grouping, mode toggle, reset */
+.flying-page .cessna3d-controls {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -2340,20 +2399,20 @@ html { scroll-behavior: smooth; }
   font-size: 0.85rem;
   color: var(--fl-ink);
 }
-.flying-page[data-lang="zh"] .cessna-controls { font-family: var(--fl-font-cn); }
-.flying-page .cessna-controls [data-lang-content] { display: none; }
-.flying-page[data-lang="en"] .cessna-controls [data-lang-content="en"],
-.flying-page[data-lang="zh"] .cessna-controls [data-lang-content="zh"] { display: inline; }
+.flying-page[data-lang="zh"] .cessna3d-controls { font-family: var(--fl-font-cn); }
+.flying-page .cessna3d-controls [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .cessna3d-controls [data-lang-content="en"],
+.flying-page[data-lang="zh"] .cessna3d-controls [data-lang-content="zh"] { display: inline; }
 
-.flying-page .cessna-controls-group {
+.flying-page .cessna3d-controls-group {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
   padding-bottom: 0.85rem;
   border-bottom: 1px dotted var(--fl-rule);
 }
-.flying-page .cessna-controls-group:last-of-type { border-bottom: none; }
-.flying-page .cessna-controls-label {
+.flying-page .cessna3d-controls-group:last-of-type { border-bottom: none; }
+.flying-page .cessna3d-controls-label {
   font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -2361,34 +2420,64 @@ html { scroll-behavior: smooth; }
   color: var(--fl-ink-faint);
   margin-bottom: 0.2rem;
 }
-.flying-page[data-lang="zh"] .cessna-controls-label {
+.flying-page[data-lang="zh"] .cessna3d-controls-label {
   letter-spacing: 0.04em;
   text-transform: none;
 }
 
-.flying-page .cessna-reset-btn {
+/* Mode toggle row: checkbox + reset button side by side */
+.flying-page .cessna3d-mode-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.flying-page .cessna3d-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  color: var(--fl-ink-soft);
+  cursor: pointer;
+  user-select: none;
+}
+.flying-page .cessna3d-mode-toggle input[type="checkbox"] {
+  accent-color: var(--fl-sapphire);
+  cursor: pointer;
+}
+.flying-page .cessna3d-mode-toggle input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.flying-page .cessna3d-reset-btn {
   font-family: var(--fl-font-ui);
   font-size: 0.78rem;
   letter-spacing: 0.03em;
-  padding: 0.4rem 0.9rem;
+  padding: 0.35rem 0.85rem;
   border: 1px solid var(--fl-rule);
   background: var(--fl-paper);
   color: var(--fl-ink-soft);
   border-radius: 3px;
   cursor: pointer;
-  align-self: flex-start;
   transition: color 0.12s, border-color 0.12s;
 }
-.flying-page .cessna-reset-btn:hover {
+.flying-page .cessna3d-reset-btn:hover:not(:disabled) {
   border-color: var(--fl-ink-soft);
   color: var(--fl-ink);
 }
-.flying-page[data-lang="zh"] .cessna-reset-btn { font-family: var(--fl-font-cn); }
-.flying-page .cessna-reset-btn [data-lang-content] { display: none; }
-.flying-page[data-lang="en"] .cessna-reset-btn [data-lang-content="en"],
-.flying-page[data-lang="zh"] .cessna-reset-btn [data-lang-content="zh"] { display: inline; }
+.flying-page .cessna3d-reset-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.flying-page[data-lang="zh"] .cessna3d-reset-btn { font-family: var(--fl-font-cn); }
+.flying-page .cessna3d-reset-btn [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .cessna3d-reset-btn [data-lang-content="en"],
+.flying-page[data-lang="zh"] .cessna3d-reset-btn [data-lang-content="zh"] { display: inline; }
 
-/* Slider styles — shared with the previous widget set */
+/* Slider styles — shared with the older widget set; safe to keep
+   as-is so other widgets that reuse .aero-slider continue to work. */
 .flying-page .aero-slider-label {
   display: flex;
   justify-content: space-between;
@@ -2408,30 +2497,4 @@ html { scroll-behavior: smooth; }
   accent-color: var(--fl-sapphire);
   margin: 0;
 }
-
-/* ════════════════════════════════════════════════════════════
-   §2.2 — Per-slider schematic SVGs
-   Each control row has: label (with value readout) → slider →
-   small schematic SVG that animates the corresponding surface.
-   The schematics are line-art, restrained, in the same visual
-   register as the static Cessna SVG to their left.
-   ════════════════════════════════════════════════════════════ */
-.flying-page .cessna-control-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding-bottom: 0.4rem;
-}
-.flying-page .cessna-schematic {
-  display: block;
-  width: 100%;
-  max-width: 200px;
-  height: 50px;
-  margin-top: 0.15rem;
-  align-self: flex-start;
-}
-/* Smooth tween in addition to the JS exponential filter — gives an
-   elastic "settle" feel when the slider stops moving. */
-.flying-page .sch-anim {
-  transition: transform 0.08s linear;
-}
+.flying-page .aero-slider:disabled { opacity: 0.4; cursor: not-allowed; }
