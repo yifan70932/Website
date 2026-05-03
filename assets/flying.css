@@ -181,29 +181,37 @@ body.flying-page[data-lang="zh"] {
   font-style: italic;
   color: var(--fl-ink-soft);
   font-size: 0.95rem;
-  line-height: 1.55;
-  border-left: 2px solid var(--fl-sapphire);
-  padding: 0.4rem 0 0.4rem 1rem;
-  margin: 1.5rem 0 0;
-  max-width: 50rem;
+  line-height: 1.65;
+  /* No left bar, no background — purely typographic. */
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 1.75rem 0 0 2.5rem;
+  max-width: 42rem;
+  /* Traditional epigraph indent rather than callout. */
 }
 .flying-page[data-lang="zh"] .epigraph {
   font-family: var(--fl-font-cn);
   font-style: normal;
+  line-height: 1.85;
 }
 .flying-page .epigraph .attribution {
   display: block;
   font-style: normal;
-  font-family: var(--fl-font-ui);
-  font-size: 0.78rem;
-  letter-spacing: 0.04em;
+  font-family: var(--fl-font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0;
   color: var(--fl-ink-faint);
-  text-transform: uppercase;
-  margin-top: 0.6rem;
+  text-transform: none;
+  margin-top: 0.5rem;
+  /* En-dash convention preceding the attribution name. */
+}
+.flying-page .epigraph .attribution::before {
+  content: "— ";
 }
 .flying-page[data-lang="zh"] .epigraph .attribution {
   font-family: var(--fl-font-cn);
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   text-transform: none;
 }
 
