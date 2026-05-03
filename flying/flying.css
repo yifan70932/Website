@@ -2498,3 +2498,124 @@ html { scroll-behavior: smooth; }
   margin: 0;
 }
 .flying-page .aero-slider:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ════════════════════════════════════════════════════════════
+   Tufte-style sidenotes
+   Mark up as: <aside class="sidenote"> ... </aside> placed
+   immediately after the paragraph (or figure/widget) it
+   anchors to. Each sidenote should contain a heading <span
+   class="sn-tag"> and then a list of links with brief
+   bilingual blurbs.
+
+   Layout strategy:
+     - On screens ≥ 1100px: float into the right gutter using
+       absolute positioning anchored to .main (which is
+       position: relative with max-width: 64rem inside a
+       1fr column, leaving roughly 14-18rem to the right).
+     - Below 1100px: render inline as a small bordered card,
+       so nothing is lost on tablets/phones.
+   ════════════════════════════════════════════════════════════ */
+.flying-page .sidenote {
+  /* Mobile / narrow default: inline card */
+  margin: 1.25rem 0 1.5rem;
+  padding: 0.7rem 0.9rem;
+  border-left: 2px solid var(--fl-sapphire);
+  background: var(--fl-paper-deep);
+  font-family: var(--fl-font-ui);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--fl-ink-soft);
+  border-radius: 0 2px 2px 0;
+}
+
+.flying-page .sidenote .sn-tag {
+  display: block;
+  font-family: var(--fl-font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fl-navy);
+  margin-bottom: 0.45rem;
+  font-weight: 600;
+}
+
+.flying-page .sidenote ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.flying-page .sidenote li {
+  margin: 0.4rem 0;
+}
+
+.flying-page .sidenote li:first-child { margin-top: 0; }
+.flying-page .sidenote li:last-child  { margin-bottom: 0; }
+
+.flying-page .sidenote a {
+  color: var(--fl-sapphire);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px dotted var(--fl-rule);
+}
+.flying-page .sidenote a:hover {
+  color: var(--fl-navy);
+  border-bottom-color: var(--fl-navy);
+}
+
+.flying-page .sidenote .sn-blurb {
+  display: block;
+  color: var(--fl-ink-faint);
+  font-size: 0.75rem;
+  margin-top: 0.1rem;
+  font-weight: 400;
+}
+
+/* Bilingual swap: only show the active language inside sidenotes */
+.flying-page .sidenote .sn-tag[data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .sidenote .sn-tag[data-lang-content="en"],
+.flying-page[data-lang="zh"] .sidenote .sn-tag[data-lang-content="zh"] {
+  display: block;
+}
+.flying-page .sidenote .sn-blurb[data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .sidenote .sn-blurb[data-lang-content="en"],
+.flying-page[data-lang="zh"] .sidenote .sn-blurb[data-lang-content="zh"] {
+  display: block;
+}
+
+/* CN typography inside sidenotes */
+.flying-page[data-lang="zh"] .sidenote .sn-blurb {
+  font-family: var(--fl-font-cn);
+  font-size: 0.78rem;
+}
+
+/* ── Wide-screen Tufte placement ──────────────────────────────
+   .main has max-width: 64rem and lives in a 1fr grid column.
+   On screens ≥ 1100px, the column is wider than 64rem, so we
+   can pull sidenotes out into the right gutter. */
+@media (min-width: 1100px) {
+  .flying-page .sidenote {
+    position: absolute;
+    left: calc(64rem + 1.5rem);
+    width: 14rem;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border-left: none;
+    /* Reduce visual weight in margin: hairline left rule only */
+    border-left: 1px solid var(--fl-rule);
+    padding-left: 0.9rem;
+    font-size: 0.75rem;
+  }
+  .flying-page .sidenote .sn-tag { font-size: 0.62rem; }
+  .flying-page .sidenote .sn-blurb { font-size: 0.7rem; }
+  .flying-page[data-lang="zh"] .sidenote .sn-blurb { font-size: 0.72rem; }
+}
+
+/* On very wide screens (≥ 1400px) give sidenotes a touch more room */
+@media (min-width: 1400px) {
+  .flying-page .sidenote {
+    width: 16rem;
+    left: calc(64rem + 2rem);
+  }
+}
