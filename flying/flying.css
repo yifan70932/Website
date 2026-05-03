@@ -1993,19 +1993,9 @@ html { scroll-behavior: smooth; }
   font-weight: 600;
   text-transform: none;
 }
-.flying-page .atc-widget-sub {
-  display: block;
-  margin-top: 0.25rem;
-  font-size: 0.82rem;
-  color: var(--fl-ink-faint);
-}
-.flying-page[data-lang="zh"] .atc-widget-sub { font-family: var(--fl-font-cn); }
-.flying-page .atc-widget-title [data-lang-content],
-.flying-page .atc-widget-sub [data-lang-content] { display: none; }
+.flying-page .atc-widget-title [data-lang-content] { display: none; }
 .flying-page[data-lang="en"] .atc-widget-title [data-lang-content="en"],
-.flying-page[data-lang="en"] .atc-widget-sub [data-lang-content="en"],
-.flying-page[data-lang="zh"] .atc-widget-title [data-lang-content="zh"],
-.flying-page[data-lang="zh"] .atc-widget-sub [data-lang-content="zh"] { display: inline; }
+.flying-page[data-lang="zh"] .atc-widget-title [data-lang-content="zh"] { display: inline; }
 
 .flying-page .atc-widget {
   background: var(--fl-paper-deep);
@@ -2242,24 +2232,146 @@ html { scroll-behavior: smooth; }
   .flying-page .atc-speaker { font-size: 0.7rem; }
 }
 
-/* LiveATC note — small pull-quote style paragraph below the ATC widget */
-.flying-page .atc-liveatc-note {
-  margin: 1rem 0 1.75rem;
-  padding: 0.65rem 0.85rem;
-  border-left: 2px solid var(--fl-sapphire);
-  background: var(--fl-pale-blue);
-  font-family: var(--fl-font-ui);
-  font-size: 0.85rem;
-  color: var(--fl-ink-soft);
-  line-height: 1.55;
+/* See-also: a minimal bookmark list under widgets that gestures at
+   external resources without editorializing about them. Renders as
+   a single line of monospaced URLs separated by " · ". */
+.flying-page .see-also {
+  list-style: none;
+  margin: 0.85rem 0 1.75rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+  font-family: var(--fl-font-mono);
+  font-size: 0.78rem;
+  color: var(--fl-ink-faint);
 }
-.flying-page[data-lang="zh"] .atc-liveatc-note { font-family: var(--fl-font-cn); }
-.flying-page .atc-liveatc-note a {
+.flying-page .see-also li {
+  display: inline;
+}
+.flying-page .see-also li + li::before {
+  content: "· ";
+  margin-right: 0.4rem;
+  color: var(--fl-ink-faded);
+}
+.flying-page .see-also a {
   color: var(--fl-sapphire);
   text-decoration: none;
+}
+.flying-page .see-also a:hover { text-decoration: underline; }
+
+/* ════════════════════════════════════════════════════════════
+   §2.2 — Aerodynamics widgets (flight control surfaces)
+   Each widget has:
+     - a 3D canvas on the left (Three.js scene with the airplane)
+     - a control panel on the right with sliders + readouts
+   The four widgets share styling but each animates a different
+   subset of surfaces and reports a different attitude axis.
+   ════════════════════════════════════════════════════════════ */
+.flying-page .aero-widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding: 0 0.25rem 0.6rem;
+  margin: 1.25rem 0 -0.5rem;
+  border-bottom: 1px solid var(--fl-rule);
+  font-family: var(--fl-font-ui);
+}
+.flying-page .aero-widget-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--fl-ink);
+  text-transform: uppercase;
+}
+.flying-page[data-lang="zh"] .aero-widget-title {
+  font-family: var(--fl-font-cn);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+.flying-page .aero-widget-title [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .aero-widget-title [data-lang-content="en"],
+.flying-page[data-lang="zh"] .aero-widget-title [data-lang-content="zh"] { display: inline; }
+
+.flying-page .aero-widget {
+  background: var(--fl-paper-deep);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1.1rem 1.2rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.2rem;
+  align-items: stretch;
+}
+@media (max-width: 720px) {
+  .flying-page .aero-widget { grid-template-columns: 1fr; }
+}
+
+.flying-page .aero-canvas-wrap {
+  position: relative;
+  background: var(--fl-paper);
+  border: 1px solid var(--fl-rule);
+  border-radius: 3px;
+  min-height: 280px;
+  overflow: hidden;
+}
+.flying-page .aero-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.flying-page .aero-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-family: var(--fl-font-ui);
+  font-size: 0.85rem;
+  color: var(--fl-ink);
+}
+.flying-page[data-lang="zh"] .aero-controls { font-family: var(--fl-font-cn); }
+.flying-page .aero-controls [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .aero-controls [data-lang-content="en"],
+.flying-page[data-lang="zh"] .aero-controls [data-lang-content="zh"] { display: inline; }
+
+.flying-page .aero-slider-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.8rem;
+  color: var(--fl-ink-soft);
+  margin-top: 0.4rem;
+  letter-spacing: 0.01em;
+}
+.flying-page .aero-slider-label:first-child { margin-top: 0; }
+.flying-page .aero-slider-value {
+  font-family: var(--fl-font-mono);
+  font-size: 0.78rem;
+  color: var(--fl-sapphire);
   font-weight: 500;
 }
-.flying-page .atc-liveatc-note a:hover { text-decoration: underline; }
-.flying-page .atc-liveatc-note [data-lang-content] { display: none; }
-.flying-page[data-lang="en"] .atc-liveatc-note [data-lang-content="en"],
-.flying-page[data-lang="zh"] .atc-liveatc-note [data-lang-content="zh"] { display: inline; }
+.flying-page .aero-slider {
+  width: 100%;
+  accent-color: var(--fl-sapphire);
+  margin: 0;
+}
+.flying-page .aero-axis-readout {
+  margin-top: 0.85rem;
+  padding-top: 0.6rem;
+  border-top: 1px dotted var(--fl-rule);
+  font-size: 0.8rem;
+  color: var(--fl-ink-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  letter-spacing: 0.01em;
+}
+.flying-page .aero-axis-value {
+  font-family: var(--fl-font-mono);
+  font-size: 0.85rem;
+  color: var(--fl-navy);
+  font-weight: 600;
+}

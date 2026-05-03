@@ -19,6 +19,8 @@
   <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
           crossorigin=""></script>
+  <!-- Three.js r128 (for §2.2 flight controls widgets) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script defer src="/assets/accidents-data.js"></script>
 </head>
 
@@ -283,20 +285,187 @@
     </h2>
 
     <div data-lang-content="en">
-      <p>A captain once told Yifan: <em>you do not conquer the air, you romance it</em>. The line resists the early-twentieth-century vocabulary of pioneers, conquerors, and frontiers, which still surfaces in marketing copy. The atmosphere is a fluid medium with its own behaviour, several orders of magnitude more massive than any aircraft moving through it. It does not bend to the aircraft; the aircraft must be in the right relation to it.</p>
+      <p>A captain once told Yifan: <em>you do not conquer the air, you romance it</em>. The line resists the early-twentieth-century vocabulary of pioneers, conquerors, and frontiers, which still surfaces in marketing copy. The atmosphere is a fluid medium with its own behaviour, several orders of magnitude more massive than any aircraft moving through it. It does not bend to the aircraft; the aircraft must be in the right relation to it. The argument has two halves: how the medium behaves, and how the airplane is built to negotiate with it.</p>
+    </div>
 
+    <div data-lang-content="zh">
+      <p>一位机长曾经告诉 Yifan：<em>你不能征服空气，你只能与之共舞</em>。这句话拒绝二十世纪早期"先驱、征服者、边疆"的词汇——这种词汇至今仍出没于营销文案中。大气是一种有自身行为方式的流体介质，比任何穿行其中的飞机重几个数量级。介质不会迁就飞机，飞机必须置身于与介质恰当的关系之中。这一论点有两半：介质如何运行，以及飞机被造成什么样子来与之协调。</p>
+    </div>
+
+    <!-- ─────────────────────────────────────────────────────────
+         §2.1 The medium
+         ───────────────────────────────────────────────────────── -->
+    <h3 id="sec-2-medium">
+      <span data-lang-content="en">The medium</span>
+      <span data-lang-content="zh">媒介</span>
+    </h3>
+
+    <div data-lang-content="en">
       <p>Several large-scale features of the atmosphere illustrate the point. The <em>jet stream</em>, a band of fast westerly winds running roughly along the boundary between polar and mid-latitude air masses, can exceed 200 knots in winter; transatlantic flights eastbound ride it for free, and westbound flights pay for it in fuel and time. <em>Wake turbulence</em> — the pair of counter-rotating vortices that any wing sheds behind it as a by-product of producing lift — can persist for two or three minutes behind a heavy aircraft, sink at several hundred feet per minute below its flight path, and roll a smaller airplane that strays into it past the limit of aileron authority. <em>Microbursts</em>, narrow columns of cold air descending out of a thunderstorm, can produce headwind-to-tailwind transitions of seventy or eighty knots within seconds, and have brought down airliners on short final at altitudes too low to recover. <em>Mountain wave</em>, the standing oscillation set up by stable air flowing over a ridge, can lift or drop a jet by thousands of feet in a minute, with rotors of severe turbulence under the wave crests.</p>
 
       <p>None of these phenomena is exotic. All are routine features of the medium in which all flying takes place. What separates a safe operation from a dangerous one is not whether they are present — they always are — but whether the crew has read the day's weather correctly, planned around the bands and altitudes where the atmosphere is doing something incompatible with the route, and retained the option to deviate when the briefing turns out to have been wrong.</p>
     </div>
 
     <div data-lang-content="zh">
-      <p>一位机长曾经告诉 Yifan：<em>你不能征服空气，你只能与之共舞</em>。这句话拒绝二十世纪早期"先驱、征服者、边疆"的词汇——这种词汇至今仍出没于营销文案中。大气是一种有自身行为方式的流体介质，比任何穿行其中的飞机重几个数量级。介质不会迁就飞机，飞机必须置身于与介质恰当的关系之中。</p>
-
       <p>大气的几种宏观现象很能说明这一点。<em>急流</em>是一条沿极地与中纬度气团边界大致东向流动的高速气流带，冬季可超过 200 节；横跨大西洋东行的航班搭它的便车，西行的航班则以油耗和时间为之买单。<em>尾流</em>——任何机翼在产生升力的同时所拖出的一对反向旋转涡——可以在一架重型飞机身后持续两到三分钟，以每分钟数百英尺的速率沉降到它的飞行轨迹下方，并把误入其中的较小飞机滚转到副翼操纵权限以外。<em>微下击暴流</em>是从雷暴中下泻的窄柱冷气流，能在数秒内造成七八十节的"顶风转尾风"切换，曾在最后进近段把客机拍在低得无法改出的高度上。<em>山地波</em>是稳定气团越过山脊后建立起来的驻波振荡，能在一分钟内把一架喷气客机抬升或压下数千英尺，波峰之下的转子区伴有严重颠簸。</p>
 
       <p>这些现象都不算稀奇，都是飞行所发生的那个介质的常规特征。在一次安全运行与一次危险运行之间，差别不是这些现象是否在场——它们总在场——而是机组是否正确地读出了当天的天气，是否绕开了大气正在做某件与航线不兼容的事情的高度带与区域，是否保留了在简令被证明错误时改飞的余地。</p>
     </div>
+
+    <!-- ─────────────────────────────────────────────────────────
+         §2.2 The interface
+         ───────────────────────────────────────────────────────── -->
+    <h3 id="sec-2-interface">
+      <span data-lang-content="en">The interface</span>
+      <span data-lang-content="zh">界面</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>If the medium has its behaviour, the airplane has its handles. Flight happens through a small set of mechanical control surfaces, each hinged at the trailing edge of a fixed surface and named for the part it moves. The three <em>primary</em> controls — aileron, elevator, rudder — bend the airplane around its three axes: roll, pitch, yaw. The <em>secondary</em> controls — flaps, trim, spoilers — change the airplane's <em>configuration</em> rather than its instantaneous attitude. They reshape the wing for slow flight, relieve the steady forces the pilot would otherwise hold against the stick, or destroy lift on demand.</p>
+
+      <p>The aileron lives on the trailing edge of each wing, near the tip, and the two move differentially — when one deflects down, the other deflects up. The down-going aileron increases lift on its wing; the up-going one decreases lift on the other. The lift differential rolls the airplane around its longitudinal axis. The reason ailerons sit near the tip rather than the root is moment arm: at the tip, a small force generates a large rolling torque about the centreline.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>如果介质有它的行为方式，飞机就有它的把手。飞行通过一小组机械操纵面发生——每一面铰接在某固定翼面的后缘上，以它所操纵的部位命名。三个<em>主</em>操纵面——副翼、升降舵、方向舵——围绕飞机的三个轴使其偏转：滚转、俯仰、偏航。三个<em>次</em>操纵面——襟翼、配平、扰流板——改变的不是飞机的瞬时姿态，而是它的<em>构形</em>。它们把机翼重塑为适合低速飞行的形状，卸去飞行员本要在杆上一直顶着的稳态力，或在需要时主动毁掉升力。</p>
+
+      <p>副翼位于每片机翼的后缘靠近翼尖处，左右差动——一边向下偏，另一边就向上偏。下偏的副翼增加该侧机翼的升力；上偏的副翼减少另一侧的升力。升力差使飞机绕其纵轴滚转。副翼置于翼尖而非翼根的原因是力臂：在翼尖处一个小的力可以围绕纵轴产生很大的滚转力矩。</p>
+    </div>
+
+    <!-- §2.2 widget A: Aileron / Roll -->
+    <figure class="full-bleed">
+      <div class="aero-widget-header">
+        <span class="aero-widget-title">
+          <span data-lang-content="en">Aileron · Roll</span>
+          <span data-lang-content="zh">副翼 · 滚转</span>
+        </span>
+      </div>
+      <div class="aero-widget" data-surface="aileron">
+        <div class="aero-canvas-wrap"><canvas class="aero-canvas"></canvas></div>
+        <div class="aero-controls">
+          <label class="aero-slider-label">
+            <span data-lang-content="en">Aileron deflection</span>
+            <span data-lang-content="zh">副翼偏转</span>
+            <span class="aero-slider-value" data-channel="aileron">0°</span>
+          </label>
+          <input type="range" class="aero-slider" data-channel="aileron" min="-25" max="25" value="0" step="1">
+          <div class="aero-axis-readout">
+            <span data-lang-content="en">Bank angle:</span>
+            <span data-lang-content="zh">坡度角：</span>
+            <span class="aero-axis-value" data-axis="roll">0°</span>
+          </div>
+        </div>
+      </div>
+    </figure>
+
+    <div data-lang-content="en">
+      <p>The elevator is the trailing edge of the horizontal stabilizer, the small wing at the tail. Pulling the stick back raises the elevator, which pushes the tail down, pitches the nose up, and increases the wing's angle of attack. The horizontal stabilizer itself produces lift downward by design — it has to, in order to balance the nose-down pitching moment generated by the main wing's centre of lift acting behind the airplane's centre of gravity. Stable airplanes are slightly tail-heavy in their force diagram, even though their CG is forward of the wing's lift centre.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>升降舵是水平安定面后缘——尾部那块小翼面。把杆向后拉，升降舵向上偏，把尾巴压下去，机头上仰，机翼迎角增大。水平安定面本身按设计产生向下的升力——它必须如此，以平衡主翼升力中心位于飞机重心之后所产生的低头力矩。稳定的飞机在受力图上是略微"尾重"的，尽管重心位于机翼升力中心之前。</p>
+    </div>
+
+    <!-- §2.2 widget B: Elevator / Pitch -->
+    <figure class="full-bleed">
+      <div class="aero-widget-header">
+        <span class="aero-widget-title">
+          <span data-lang-content="en">Elevator · Pitch</span>
+          <span data-lang-content="zh">升降舵 · 俯仰</span>
+        </span>
+      </div>
+      <div class="aero-widget" data-surface="elevator">
+        <div class="aero-canvas-wrap"><canvas class="aero-canvas"></canvas></div>
+        <div class="aero-controls">
+          <label class="aero-slider-label">
+            <span data-lang-content="en">Elevator deflection</span>
+            <span data-lang-content="zh">升降舵偏转</span>
+            <span class="aero-slider-value" data-channel="elevator">0°</span>
+          </label>
+          <input type="range" class="aero-slider" data-channel="elevator" min="-25" max="25" value="0" step="1">
+          <div class="aero-axis-readout">
+            <span data-lang-content="en">Pitch angle:</span>
+            <span data-lang-content="zh">俯仰角：</span>
+            <span class="aero-axis-value" data-axis="pitch">0°</span>
+          </div>
+        </div>
+      </div>
+    </figure>
+
+    <div data-lang-content="en">
+      <p>The rudder is the trailing edge of the vertical stabilizer at the tail. Deflecting it left or right yaws the nose around the vertical axis. The rudder is the most often misunderstood control: in a coordinated turn it mostly counters <em>adverse yaw</em> — the unwanted yaw caused by the down-going aileron's added drag — rather than producing the turn itself. The turn is produced by bank, which tilts the lift vector inward. Pure rudder yaw is only useful in a few specific cases: crosswind landings (kicking the nose straight just before touchdown), engine-out asymmetric thrust (holding the nose against the working engine's torque), and slow-flight pattern work.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>方向舵是垂直安定面后缘——尾部那块竖直翼面。左右偏转它，使机头围绕垂直轴偏航。方向舵是最常被误解的操纵面：在一次协调转弯中，它主要用于抵消<em>反偏航</em>——由下偏副翼额外产生的阻力造成的不必要偏航——而非产生转弯本身。转弯由坡度产生：坡度使升力向量向内倾。纯偏航操纵只在少数特定情形下有用：侧风着陆（接地前一刻把机头踢正）、单发停车的不对称推力（顶住推力矩使机头保持指向）、以及慢速绕场。</p>
+    </div>
+
+    <!-- §2.2 widget C: Rudder / Yaw -->
+    <figure class="full-bleed">
+      <div class="aero-widget-header">
+        <span class="aero-widget-title">
+          <span data-lang-content="en">Rudder · Yaw</span>
+          <span data-lang-content="zh">方向舵 · 偏航</span>
+        </span>
+      </div>
+      <div class="aero-widget" data-surface="rudder">
+        <div class="aero-canvas-wrap"><canvas class="aero-canvas"></canvas></div>
+        <div class="aero-controls">
+          <label class="aero-slider-label">
+            <span data-lang-content="en">Rudder deflection</span>
+            <span data-lang-content="zh">方向舵偏转</span>
+            <span class="aero-slider-value" data-channel="rudder">0°</span>
+          </label>
+          <input type="range" class="aero-slider" data-channel="rudder" min="-25" max="25" value="0" step="1">
+          <div class="aero-axis-readout">
+            <span data-lang-content="en">Yaw angle:</span>
+            <span data-lang-content="zh">偏航角：</span>
+            <span class="aero-axis-value" data-axis="yaw">0°</span>
+          </div>
+        </div>
+      </div>
+    </figure>
+
+    <div data-lang-content="en">
+      <p>Beyond the three primaries, three further surfaces change what kind of airplane this is for the next few minutes. <em>Flaps</em> deploy from the trailing edge of the inboard wing, increasing both lift coefficient and drag at any given angle of attack — they let the airplane fly slowly enough to land, at the cost of fuel burn that nobody minds because the airplane is descending anyway. <em>Spoilers</em> are panels on the upper surface of the wing that pop up to disrupt the airflow, destroying lift and adding drag; they serve as in-flight speedbrakes and, on touchdown, deploy automatically to plant the airplane on the runway so the brakes have weight to bite against. <em>Trim</em> is a small tab on the elevator (and on some airplanes on the aileron and rudder too) that biases the surface a few degrees in one direction, removing the steady force the pilot would otherwise have to hold against the airframe's natural tendency at the current speed and configuration.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>除了三个主操纵面之外，还有三个改变"接下来几分钟这是怎样一架飞机"的表面。<em>襟翼</em>从内翼后缘伸出，在任一迎角下同时增加升力系数和阻力——它使飞机能慢到足以着陆，代价是油耗，但飞机本就在下降，没人介意。<em>扰流板</em>是机翼上表面的板片，立起来时打乱气流、毁掉升力、增加阻力；空中作减速板使用，接地瞬间自动展开把飞机牢牢按在跑道上，让刹车有重量可咬。<em>配平</em>是升降舵上（在某些飞机上还包括副翼和方向舵）的一片小调整片，让操纵面在某方向上偏几度，卸掉飞行员本要在杆上顶着的稳态力——这力来自当前速度与构形下机体的自然趋势。</p>
+    </div>
+
+    <!-- §2.2 widget D: Secondary surfaces (flaps + spoilers + trim) -->
+    <figure class="full-bleed">
+      <div class="aero-widget-header">
+        <span class="aero-widget-title">
+          <span data-lang-content="en">Secondary controls · Configuration</span>
+          <span data-lang-content="zh">次操纵面 · 构形</span>
+        </span>
+      </div>
+      <div class="aero-widget" data-surface="secondary">
+        <div class="aero-canvas-wrap"><canvas class="aero-canvas"></canvas></div>
+        <div class="aero-controls">
+          <label class="aero-slider-label">
+            <span data-lang-content="en">Flaps</span>
+            <span data-lang-content="zh">襟翼</span>
+            <span class="aero-slider-value" data-channel="flaps">0°</span>
+          </label>
+          <input type="range" class="aero-slider" data-channel="flaps" min="0" max="40" value="0" step="5">
+          <label class="aero-slider-label">
+            <span data-lang-content="en">Spoilers</span>
+            <span data-lang-content="zh">扰流板</span>
+            <span class="aero-slider-value" data-channel="spoilers">0%</span>
+          </label>
+          <input type="range" class="aero-slider" data-channel="spoilers" min="0" max="100" value="0" step="5">
+          <label class="aero-slider-label">
+            <span data-lang-content="en">Trim</span>
+            <span data-lang-content="zh">配平</span>
+            <span class="aero-slider-value" data-channel="trim">0°</span>
+          </label>
+          <input type="range" class="aero-slider" data-channel="trim" min="-10" max="10" value="0" step="1">
+        </div>
+      </div>
+    </figure>
 
     <h2 id="sec-languages"><span class="sec-num">3 ·</span>
       <span data-lang-content="en">Flying as Specialized Languages</span>
@@ -375,12 +544,8 @@
     <figure class="full-bleed">
       <div class="atc-widget-header">
         <span class="atc-widget-title">
-          <span data-lang-content="en">ATC Dialogue Generator</span>
-          <span data-lang-content="zh">空管对话生成器</span>
-        </span>
-        <span class="atc-widget-sub">
-          <span data-lang-content="en">Pick flight rules and a phase. The dialogue is generated from ICAO templates with randomised parameters.</span>
-          <span data-lang-content="zh">选择飞行规则和阶段。对话由 ICAO 标准模板加随机参数生成。</span>
+          <span data-lang-content="en">ATC Dialogue Simulator</span>
+          <span data-lang-content="zh">空管对话模拟器</span>
         </span>
       </div>
       <div class="atc-widget" id="atc-widget">
@@ -394,8 +559,8 @@
           <div class="atc-mode-spacer"></div>
           <label class="atc-structure-toggle">
             <input type="checkbox" id="atc-show-structure">
-            <span data-lang-content="en">Show four-step structure</span>
-            <span data-lang-content="zh">显示四步骨架</span>
+            <span data-lang-content="en">Four Ws</span>
+            <span data-lang-content="zh">四个 W</span>
           </label>
           <button type="button" id="atc-regenerate" class="atc-regen-btn">
             <span data-lang-content="en">Regenerate ↻</span>
@@ -431,10 +596,9 @@
     </figure>
 
     <!-- LiveATC link — listen to real ATC streams -->
-    <p class="atc-liveatc-note">
-      <span data-lang-content="en">Listen to real controllers and pilots at <a href="https://www.liveatc.net/" target="_blank" rel="noopener">LiveATC.net</a> — feeds from hundreds of towers and centers worldwide, mostly in the United States, free of charge.</span>
-      <span data-lang-content="zh">真实的管制员与飞行员通话可在 <a href="https://www.liveatc.net/" target="_blank" rel="noopener">LiveATC.net</a> 收听——全球数百个塔台与区调的实时音频，多数为美国境内，免费。</span>
-    </p>
+    <ul class="see-also">
+      <li><a href="https://www.liveatc.net/" target="_blank" rel="noopener">LiveATC.net</a></li>
+    </ul>
 
     <!-- ─────────────────────────────────────────────────────────
          §3.2 METAR / TAF
@@ -502,6 +666,11 @@
 
       </div>
     </figure>
+
+    <ul class="see-also">
+      <li><a href="https://aviationweather.gov/" target="_blank" rel="noopener">aviationweather.gov</a></li>
+      <li><a href="https://skyvector.com/" target="_blank" rel="noopener">skyvector.com</a></li>
+    </ul>
 
         <!-- ─────────────────────────────────────────────────────────
          §3.3 FMC
@@ -3075,6 +3244,500 @@
   // Kick off async nav data fetch (NASR-derived JSONs).
   // No await — render() handles the loading state via NAV_DATA.loadState.
   startNavDataLoad();
+})();
+</script>
+
+
+<!-- ─── §2.2 Flight controls widgets ──────────────────────────
+     Three.js scenes for aileron / elevator / rudder / secondary.
+     Each widget owns its own canvas, scene, camera, renderer,
+     and airplane mesh. The aircraft is built from primitive
+     geometries (boxes + cylinders) — no external models, no
+     textures. Each control surface is a separate mesh hinged
+     around its correct axis so it can deflect independently.
+
+     The four widgets share createAirplane() but use only the
+     surfaces they care about; per-widget code maps slider value
+     to surface deflection and to overall attitude (the parent
+     group's rotation). A subtle tween smooths attitude changes
+     so the response feels elastic rather than snapping.
+     ───────────────────────────────────────────────────────── -->
+<script>
+(function () {
+  // Defer setup until Three.js has loaded (it's loaded with `defer`)
+  function ready() {
+    if (typeof THREE === 'undefined') return setTimeout(ready, 50);
+    init();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ready);
+  } else {
+    ready();
+  }
+
+  function init() {
+    const widgets = document.querySelectorAll('.aero-widget');
+    if (!widgets.length) return;
+    widgets.forEach(setupWidget);
+  }
+
+  // ────────────────────────────────────────────────────────────
+  // Build the airplane. Returns:
+  //   { group, parts: { fuselage, leftWing, rightWing, hStab,
+  //     vStab, leftAileron, rightAileron, elevator, rudder,
+  //     leftFlap, rightFlap, leftSpoiler, rightSpoiler, trimTab } }
+  // group is a THREE.Group; setting group.rotation.{x,y,z} rotates
+  // the whole airplane. Surface meshes have their own rotations
+  // around hinge axes set in their parent groups (so the surface's
+  // local rotation is its deflection angle).
+  // ────────────────────────────────────────────────────────────
+  function createAirplane() {
+    const group = new THREE.Group();
+    const parts = {};
+
+    // Material palette — restrained, monochrome with subtle accents.
+    // Sapphire wing/fuselage matches the wiki's accent colour.
+    const matFuselage  = new THREE.MeshLambertMaterial({ color: 0xeef0f3 });   // light grey
+    const matWing      = new THREE.MeshLambertMaterial({ color: 0x1e5fa8 });   // sapphire
+    const matWingDark  = new THREE.MeshLambertMaterial({ color: 0x174680 });   // darker sapphire (control surfaces)
+    const matAccent    = new THREE.MeshLambertMaterial({ color: 0xb45309 });   // amber (deflected surfaces)
+    const matSecondary = new THREE.MeshLambertMaterial({ color: 0x3a5a40 });   // forest (flaps/spoilers)
+
+    // Aircraft proportions: scaled so wingspan ≈ 6 units, length ≈ 5.
+    // Camera is positioned to fit this comfortably.
+
+    // ─ Fuselage: cylinder, axis along x (along the airplane's
+    //   longitudinal axis). Thin and tapered visually.
+    const fuselage = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.18, 0.13, 4.5, 16),
+      matFuselage
+    );
+    fuselage.rotation.z = Math.PI / 2;     // align cylinder along x
+    parts.fuselage = fuselage;
+    group.add(fuselage);
+
+    // ─ Nose cone (a smaller cylinder forward)
+    const nose = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.13, 0.05, 0.6, 12),
+      matFuselage
+    );
+    nose.rotation.z = Math.PI / 2;
+    nose.position.x = 2.55;
+    group.add(nose);
+
+    // ─ Main wing — symmetric pair of trapezoidal slabs
+    //   The fixed (non-control) part of each wing.
+    function makeWingSlab(span, rootChord, tipChord, thickness) {
+      // Use BoxGeometry with non-uniform scaling per vertex won't work
+      // cleanly; use ShapeGeometry extruded thin instead for taper.
+      const shape = new THREE.Shape();
+      shape.moveTo(0, -rootChord/2);
+      shape.lineTo(0,  rootChord/2);
+      shape.lineTo(span, tipChord/2);
+      shape.lineTo(span, -tipChord/2);
+      shape.closePath();
+      const geom = new THREE.ExtrudeGeometry(shape, {
+        depth: thickness, bevelEnabled: false
+      });
+      // ExtrudeGeometry extrudes along +z; we want the wing flat in the
+      // xy plane (span along x, chord along y, thickness along z).
+      // Centre the thickness around z=0:
+      geom.translate(0, 0, -thickness/2);
+      return geom;
+    }
+
+    // Right wing fixed part: span 2.4 (from root at z=±0.18 outward),
+    // root chord 1.0, tip chord 0.6, thickness 0.06.
+    const rightWingFixed = new THREE.Mesh(
+      makeWingSlab(2.4, 1.0, 0.6, 0.06),
+      matWing
+    );
+    // Position so the wing root touches the fuselage side.
+    // The slab's local frame: span along x, chord along y, thick along z.
+    // We want span along world-z, chord along world-x, thick along world-y.
+    rightWingFixed.rotation.x = Math.PI / 2;   // tip-axis along world-z
+    rightWingFixed.rotation.y = 0;
+    rightWingFixed.rotation.z = -Math.PI / 2;  // chord along x
+    rightWingFixed.position.set(0, 0, 0.18);
+    parts.rightWing = rightWingFixed;
+    group.add(rightWingFixed);
+
+    const leftWingFixed = new THREE.Mesh(
+      makeWingSlab(2.4, 1.0, 0.6, 0.06),
+      matWing
+    );
+    leftWingFixed.rotation.x = -Math.PI / 2;
+    leftWingFixed.rotation.y = 0;
+    leftWingFixed.rotation.z = -Math.PI / 2;
+    leftWingFixed.position.set(0, 0, -0.18);
+    parts.leftWing = leftWingFixed;
+    group.add(leftWingFixed);
+
+    // ─ Ailerons — outboard trailing edge of each wing.
+    // We model an aileron as a thin slab attached to a hinge group;
+    // rotating the hinge group around its z-axis (chordwise) deflects
+    // the aileron up or down.
+    function makeAileron(side) {
+      // Aileron geometry: small box (chordwise depth 0.25, span 0.9,
+      // thickness 0.04). Positioned so its inner edge is near the
+      // wing root of the outboard half.
+      const aileron = new THREE.Mesh(
+        new THREE.BoxGeometry(0.25, 0.04, 0.9),
+        matWingDark
+      );
+      // Aileron centre relative to its hinge: chord/2 aft, so we
+      // wrap the aileron in a hinge group and offset the aileron
+      // forward by chord/2 from the hinge centre. The hinge axis
+      // is along world-z (spanwise) at the trailing edge.
+      const hinge = new THREE.Group();
+      aileron.position.x = -0.125;   // half its chord, aft of hinge
+      hinge.add(aileron);
+      // Place hinge at outboard wing's trailing edge:
+      // x = -0.4 (rear of root chord), y = 0, z = ±(0.18 + 1.5) outboard
+      hinge.position.set(-0.4, 0, side * (0.18 + 1.5));
+      group.add(hinge);
+      return hinge;
+    }
+    parts.rightAileron = makeAileron(+1);
+    parts.leftAileron  = makeAileron(-1);
+
+    // ─ Flaps — inboard trailing edge of each wing.
+    function makeFlap(side) {
+      const flap = new THREE.Mesh(
+        new THREE.BoxGeometry(0.3, 0.04, 1.2),
+        matSecondary
+      );
+      const hinge = new THREE.Group();
+      flap.position.x = -0.15;
+      hinge.add(flap);
+      // Inboard portion: from z = ±0.18 outward by 1.2
+      hinge.position.set(-0.4, 0, side * (0.18 + 0.65));
+      group.add(hinge);
+      return hinge;
+    }
+    parts.rightFlap = makeFlap(+1);
+    parts.leftFlap  = makeFlap(-1);
+
+    // ─ Spoilers — top surface of each wing, just forward of the flaps.
+    function makeSpoiler(side) {
+      const spoiler = new THREE.Mesh(
+        new THREE.BoxGeometry(0.25, 0.03, 1.0),
+        matSecondary
+      );
+      const hinge = new THREE.Group();
+      // Spoiler hinges at its leading edge (chordwise forward edge).
+      // When deflected, it rotates upward around that hinge.
+      spoiler.position.x = -0.125;      // half chord aft of hinge
+      spoiler.position.y = 0.03;        // sits on the upper surface
+      hinge.add(spoiler);
+      // Place hinge mid-chord on the upper inboard wing.
+      hinge.position.set(-0.05, 0.03, side * (0.18 + 0.6));
+      group.add(hinge);
+      return hinge;
+    }
+    parts.rightSpoiler = makeSpoiler(+1);
+    parts.leftSpoiler  = makeSpoiler(-1);
+
+    // ─ Horizontal stabilizer (smaller wing at the tail).
+    const hStab = new THREE.Mesh(
+      makeWingSlab(0.95, 0.55, 0.35, 0.04),
+      matWing
+    );
+    hStab.rotation.x = Math.PI / 2;
+    hStab.rotation.z = -Math.PI / 2;
+    hStab.position.set(-1.95, 0.05, 0.05);
+    group.add(hStab);
+
+    const hStabL = new THREE.Mesh(
+      makeWingSlab(0.95, 0.55, 0.35, 0.04),
+      matWing
+    );
+    hStabL.rotation.x = -Math.PI / 2;
+    hStabL.rotation.z = -Math.PI / 2;
+    hStabL.position.set(-1.95, 0.05, -0.05);
+    group.add(hStabL);
+
+    // ─ Elevator — single mesh spanning both stabilizer halves.
+    {
+      const elev = new THREE.Mesh(
+        new THREE.BoxGeometry(0.18, 0.04, 1.95),
+        matWingDark
+      );
+      const hinge = new THREE.Group();
+      elev.position.x = -0.09;
+      hinge.add(elev);
+      hinge.position.set(-2.4, 0.05, 0);
+      group.add(hinge);
+      parts.elevator = hinge;
+    }
+
+    // ─ Trim tab on the elevator (small inset on its trailing edge).
+    {
+      const tab = new THREE.Mesh(
+        new THREE.BoxGeometry(0.06, 0.03, 0.4),
+        matAccent
+      );
+      const hinge = new THREE.Group();
+      tab.position.x = -0.03;
+      hinge.add(tab);
+      // Tab sits at the elevator's trailing edge, near the root
+      hinge.position.set(-2.55, 0.05, 0);
+      // Parent the trim hinge to the elevator hinge so it follows
+      // elevator deflection in addition to its own deflection.
+      parts.elevator.add(hinge);
+      hinge.position.set(-0.18, 0, 0); // local to elevator hinge
+      parts.trimTab = hinge;
+    }
+
+    // ─ Vertical stabilizer.
+    const vStab = new THREE.Mesh(
+      makeWingSlab(0.85, 0.7, 0.3, 0.04),
+      matWing
+    );
+    // Want the slab's span along world-y (vertical), chord along world-x.
+    // Local frame after rotation: span vertical, chord aft.
+    vStab.rotation.y = Math.PI / 2;     // span along world-y
+    vStab.rotation.z = 0;
+    vStab.position.set(-2.0, 0.18, 0);
+    group.add(vStab);
+
+    // ─ Rudder — trailing edge of the vertical stabilizer.
+    {
+      const rud = new THREE.Mesh(
+        new THREE.BoxGeometry(0.16, 0.85, 0.04),
+        matWingDark
+      );
+      const hinge = new THREE.Group();
+      rud.position.x = -0.08;
+      rud.position.y = 0.425;
+      hinge.add(rud);
+      hinge.position.set(-2.55, 0.18, 0);
+      group.add(hinge);
+      parts.rudder = hinge;
+    }
+
+    return { group, parts };
+  }
+
+  // ────────────────────────────────────────────────────────────
+  // Set up one widget.
+  // ────────────────────────────────────────────────────────────
+  function setupWidget(widgetEl) {
+    const surfaceType = widgetEl.dataset.surface; // 'aileron'|'elevator'|'rudder'|'secondary'
+    const canvas = widgetEl.querySelector('.aero-canvas');
+    const sliders = Array.from(widgetEl.querySelectorAll('.aero-slider'));
+    const sliderValueEls = {};
+    widgetEl.querySelectorAll('.aero-slider-value').forEach(el => {
+      sliderValueEls[el.dataset.channel] = el;
+    });
+    const axisValueEl = widgetEl.querySelector('.aero-axis-value');
+    const axisType = axisValueEl ? axisValueEl.dataset.axis : null;
+
+    // Three.js scene
+    const scene = new THREE.Scene();
+    scene.background = null;       // transparent — let canvas-wrap bg show
+    const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+
+    // Camera position: looking at the airplane from in front, slightly
+    // above and to one side so all three axes of motion are visible.
+    // For each surface type the camera angle is tweaked so the relevant
+    // axis is most readable.
+    if (surfaceType === 'aileron') {
+      // Front-quarter view from slightly above. Banking is most legible
+      // from a near-frontal angle where both wingtips are visible.
+      camera.position.set(7, 2, 1.5);
+    } else if (surfaceType === 'elevator') {
+      // Side-quarter view (mostly along +z, the wingspan axis, but with
+      // some forward offset so the wings are visible too). Pitch
+      // rotation is unambiguous — nose lifts/drops in the camera plane.
+      camera.position.set(3, 1.8, 7);
+    } else if (surfaceType === 'rudder') {
+      // High rear-quarter view. Yaw rotation visible AND the rudder
+      // surface itself is visible (a top-down view would hide it).
+      camera.position.set(-6, 4, 4);
+    } else {
+      // Secondary controls — 3/4 from the upper rear so flaps,
+      // spoilers, and the trim tab are all visible.
+      camera.position.set(-4, 4, 5);
+    }
+    camera.lookAt(0, 0, 0);
+
+    // Lights
+    const ambient = new THREE.AmbientLight(0xffffff, 0.55);
+    scene.add(ambient);
+    const dir = new THREE.DirectionalLight(0xffffff, 0.7);
+    dir.position.set(5, 10, 7);
+    scene.add(dir);
+    const fill = new THREE.DirectionalLight(0xffffff, 0.25);
+    fill.position.set(-5, 3, -5);
+    scene.add(fill);
+
+    // Airplane
+    const { group, parts } = createAirplane();
+    scene.add(group);
+
+    // Renderer
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvas, antialias: true, alpha: true
+    });
+    renderer.setPixelRatio(window.devicePixelRatio || 1);
+
+    // Resize handling — observe canvas-wrap for size changes
+    const wrap = widgetEl.querySelector('.aero-canvas-wrap');
+    function resize() {
+      const w = wrap.clientWidth;
+      const h = wrap.clientHeight;
+      if (!w || !h) return;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    if (typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(resize);
+      ro.observe(wrap);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // ─── State (slider channels and resulting attitudes) ─────
+    // Slider values live in `inputs`; smoothed values that drive
+    // the actual rendered geometry live in `state`. The render
+    // loop tweens state toward inputs each frame.
+    const inputs = {
+      aileron: 0, elevator: 0, rudder: 0,
+      flaps: 0, spoilers: 0, trim: 0
+    };
+    const state = { ...inputs };
+
+    function fmtDeg(v)     { return Math.round(v) + '°'; }
+    function fmtPercent(v) { return Math.round(v) + '%'; }
+
+    // Wire up sliders
+    sliders.forEach(slider => {
+      const channel = slider.dataset.channel;
+      slider.addEventListener('input', () => {
+        const v = parseFloat(slider.value);
+        inputs[channel] = v;
+        // Update the readout label
+        const valueEl = sliderValueEls[channel];
+        if (valueEl) {
+          if (channel === 'spoilers') valueEl.textContent = fmtPercent(v);
+          else                         valueEl.textContent = fmtDeg(v);
+        }
+      });
+    });
+
+    // ─── Animation loop ─────────────────────────────────────
+    // Each frame:
+    //   (1) tween state toward inputs with an exponential filter
+    //   (2) apply state.{aileron,elevator,rudder} to surface deflections
+    //   (3) apply state.{flaps,spoilers,trim} likewise
+    //   (4) compute resulting aircraft attitude:
+    //         aileron deflection → roll angle
+    //         elevator deflection → pitch angle
+    //         rudder deflection → yaw angle
+    //       For the secondary widget, no attitude change.
+    //   (5) update the axis readout (if any)
+
+    const TAU = 0.18;   // tween time-constant (~180 ms)
+    let lastTime = performance.now();
+
+    function animate(now) {
+      const dt = Math.min(0.05, (now - lastTime) / 1000);
+      lastTime = now;
+      const alpha = 1 - Math.exp(-dt / TAU);
+
+      // Smooth state toward inputs
+      for (const k in inputs) {
+        state[k] += (inputs[k] - state[k]) * alpha;
+      }
+
+      // Surface deflections (radians)
+      const dAil = state.aileron * Math.PI / 180;
+      const dElev = state.elevator * Math.PI / 180;
+      const dRud  = state.rudder  * Math.PI / 180;
+      const dFlap = state.flaps   * Math.PI / 180;
+      const dSpoil = state.spoilers / 100 * Math.PI / 4;  // 0–45°
+      const dTrim = state.trim    * Math.PI / 180;
+
+      // Ailerons rotate around their hinge axis (chordwise → spanwise
+      // in our local frame → world-z when the airplane is upright).
+      // The surface group's local x rotates around that.
+      // Differential: right aileron up = positive aileron deflection
+      // → roll right (right wing down).
+      if (parts.rightAileron) parts.rightAileron.rotation.z = -dAil;
+      if (parts.leftAileron)  parts.leftAileron.rotation.z  =  dAil;
+
+      // Elevator: positive deflection (up) pitches nose up.
+      if (parts.elevator) parts.elevator.rotation.z = -dElev;
+      // Trim tab: opposite sense to elevator (a "tab" works backward —
+      // pushing the tab up forces the elevator down). For visual
+      // teaching, just deflect the tab proportional to its setting.
+      if (parts.trimTab) parts.trimTab.rotation.z = -dTrim * 1.5;
+
+      // Rudder: positive deflection (right) yaws nose right.
+      if (parts.rudder) parts.rudder.rotation.y = -dRud;
+
+      // Flaps deflect downward (positive angle).
+      if (parts.rightFlap) parts.rightFlap.rotation.z = -dFlap;
+      if (parts.leftFlap)  parts.leftFlap.rotation.z  = -dFlap;
+
+      // Spoilers deflect upward.
+      if (parts.rightSpoiler) parts.rightSpoiler.rotation.z = dSpoil;
+      if (parts.leftSpoiler)  parts.leftSpoiler.rotation.z  = dSpoil;
+
+      // Aircraft attitude — driven only for primary widgets.
+      // Sign convention: positive slider = nose-up / right-bank /
+      // right-yaw, matching the standard aviation convention. The
+      // direct mapping (slider position → attitude) plus the
+      // smoothing tween makes "this much deflection produces this
+      // much bank" immediately legible.
+      //
+      // In this Three.js scene: +x = forward (nose), +y = up,
+      // +z = airplane's right wing. Right-hand rule:
+      //   roll right (right wing down) = +rotation.x
+      //   pitch up (nose up)           = +rotation.z
+      //   yaw right (nose right)       = -rotation.y
+      const attRoll  =  state.aileron  * 1.6 * Math.PI / 180;   // +slider → +rotation.x
+      const attPitch =  state.elevator * 1.0 * Math.PI / 180;   // +slider → +rotation.z
+      const attYaw   = -state.rudder   * 1.4 * Math.PI / 180;   // +slider → -rotation.y
+
+      // For each widget, only apply the relevant axis (so one
+      // widget doesn't get visual contamination from the others'
+      // sliders, even though they share airplane state).
+      if (surfaceType === 'aileron') {
+        group.rotation.x = attRoll;
+        group.rotation.y = 0;
+        group.rotation.z = 0;
+      } else if (surfaceType === 'elevator') {
+        group.rotation.x = 0;
+        group.rotation.y = 0;
+        group.rotation.z = attPitch;
+      } else if (surfaceType === 'rudder') {
+        group.rotation.x = 0;
+        group.rotation.y = attYaw;
+        group.rotation.z = 0;
+      } else {
+        // Secondary: airplane stays level
+        group.rotation.set(0, 0, 0);
+      }
+
+      // Update axis readout. Signs follow standard aviation convention:
+      // positive bank = right roll, positive pitch = nose up,
+      // positive yaw = nose right.
+      if (axisValueEl && axisType) {
+        let degrees = 0;
+        if (axisType === 'roll')  degrees =  attRoll  * 180 / Math.PI;
+        if (axisType === 'pitch') degrees =  attPitch * 180 / Math.PI;
+        if (axisType === 'yaw')   degrees = -attYaw   * 180 / Math.PI;
+        axisValueEl.textContent = (degrees >= 0 ? '+' : '') + degrees.toFixed(0) + '°';
+      }
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  }
 })();
 </script>
 
