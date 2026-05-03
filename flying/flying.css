@@ -367,6 +367,29 @@ html { scroll-behavior: smooth; }
   line-height: 1.7;
 }
 
+/* Figure caption variant used as a header above a widget rather
+   than a footer below it. Used for widgets in §5 (accidents map,
+   CZ3456 CVR) where the caption introduces what follows. */
+.flying-page figcaption.figure-caption {
+  display: block;
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--fl-navy);
+  font-weight: 600;
+  margin: 0 0 0.85rem 0;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--fl-rule);
+  max-width: none;
+}
+.flying-page[data-lang="zh"] figcaption.figure-caption {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-size: 0.92rem;
+}
+
 .flying-page figure.full-bleed {
   margin-left: 0;
   margin-right: 0;
@@ -475,22 +498,34 @@ html { scroll-behavior: smooth; }
 
 /* TOC sub-list (used under §9 for the key tool anchors) */
 .flying-page .toc .toc-sublist {
-  margin: 0 0 0.3rem 0;
+  margin: 0.15rem 0 0.5rem 0;
   padding: 0;
   list-style: none;
 }
 .flying-page .toc .toc-sublist a {
-  padding: 0.2rem 0 0.2rem 1.5rem;
-  font-size: 0.82em;
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  font-size: 0.84em;
   color: var(--fl-ink-faint);
-  font-family: var(--fl-font-mono);
+  font-family: var(--fl-font-ui);
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 400;
 }
 .flying-page[data-lang="zh"] .toc .toc-sublist a {
-  font-family: var(--fl-font-mono);
+  font-family: var(--fl-font-ui);
+}
+.flying-page .toc .toc-sublist a::after {
+  content: " ↗";
+  opacity: 0.4;
+  font-size: 0.85em;
+  margin-left: 0.25em;
 }
 .flying-page .toc .toc-sublist a:hover {
   color: var(--fl-sapphire);
   border-left-color: var(--fl-rule);
+}
+.flying-page .toc .toc-sublist a:hover::after {
+  opacity: 1;
 }
 
 /* Desktop TOC: sticky in left margin */

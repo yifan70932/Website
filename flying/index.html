@@ -94,12 +94,12 @@
             <span data-lang-content="zh">八 · 作为持续学习的飞行</span>
           </a>
           <ol class="toc-sublist">
-            <li><a href="#further-flightradar24">flightradar24</a></li>
-            <li><a href="#further-aviationweather">aviationweather.gov</a></li>
-            <li><a href="#further-skyvector">skyvector</a></li>
-            <li><a href="#further-liveatc">liveatc</a></li>
-            <li><a href="#further-simbrief">simbrief</a></li>
-            <li><a href="#further-vatsim">VATSIM</a></li>
+            <li><a href="https://www.flightradar24.com/" target="_blank" rel="noopener">FlightRadar24</a></li>
+            <li><a href="https://aviationweather.gov/" target="_blank" rel="noopener">Aviation Weather Center</a></li>
+            <li><a href="https://skyvector.com/" target="_blank" rel="noopener">SkyVector</a></li>
+            <li><a href="https://www.liveatc.net/" target="_blank" rel="noopener">LiveATC</a></li>
+            <li><a href="https://www.simbrief.com/" target="_blank" rel="noopener">SimBrief</a></li>
+            <li><a href="https://vatsim.net/" target="_blank" rel="noopener">VATSIM</a></li>
           </ol>
         </li>
       </ol>
@@ -122,7 +122,8 @@
 
       <blockquote class="epigraph">
         <span data-lang-content="en">
-          <em>Una volta che avrai spiccato il volo, camminerai sulla terra guardando il cielo, perché là sei stato, e là sempre desidererai tornare.</em>
+          <em>Una volta che avrai spiccato il volo, camminerai sulla terra guardando il cielo, perché là sei stato, e là sempre desidererai tornare.</em><br>
+          Once you have taken flight, you'll decide to gaze towards the sky, you'll know that that is where your heart will feel at home.
           <span class="attribution">attributed to Leonardo da Vinci</span>
         </span>
         <span data-lang-content="zh">
@@ -1286,6 +1287,29 @@
       <span data-lang-content="zh">作为安全冗余的飞行</span>
     </h2>
 
+    <!-- ─── §5 figure: hull-loss accident map (moved to chapter opening) ─── -->
+    <figure class="accidents-widget full-bleed" id="accidents-widget">
+      <figcaption class="figure-caption">
+        <span data-lang-content="en">Fatal hull losses in scheduled commercial aviation, 1970 – present</span>
+        <span data-lang-content="zh">定期商业航空全机损失致命事故，1970 — 至今</span>
+      </figcaption>
+      <div class="accidents-controls">
+        <div class="accidents-slider-wrap">
+          <span data-lang-content="en">Time range:</span>
+          <span data-lang-content="zh">时间范围：</span>
+          <input type="range" id="accidents-year-from" min="1970" max="2026" value="1970" step="1">
+          <input type="range" id="accidents-year-to" min="1970" max="2026" value="2026" step="1">
+          <span class="accidents-year-display" id="accidents-year-display">1970–2026</span>
+        </div>
+      </div>
+      <div class="accidents-body">
+        <div class="accidents-map" id="accidents-map"></div>
+        <div class="accidents-list-wrap">
+          <ol class="accidents-list" id="accidents-list"></ol>
+        </div>
+      </div>
+    </figure>
+
     <div data-lang-content="en">
       <p>The fatality rate for scheduled commercial aviation is approximately one death per ten to fifteen million passenger boardings. The figure is large enough that, for a passenger flying once a week for a working life, the probability of dying on board approaches but does not reach the probability of being struck by lightning at home over the same interval. This number is not the result of any single safety system. It is the cumulative product of an architecture of overlapping defenses, each of which would, on its own, fail at a far higher rate.</p>
 
@@ -1334,8 +1358,12 @@
       <p>中国民航总局以这次事故为契机推行了一轮持续的运行改革：收紧飞行员资质筛选与现行性要求、重构机组搭配规则、扩展 CRM 训练、修订强对流天气下的签派与空管程序、并实施长期的安全审计计划。其后十年中，中国主要定期航空公司未再发生致命事故。</p>
     </div>
 
-    <!-- ─── §6 figure: CZ3456 CVR audio + bilingual transcript ─── -->
+    <!-- ─── §5 figure: CZ3456 CVR audio + bilingual transcript ─── -->
     <figure class="cvr-widget full-bleed" id="cvr-widget">
+      <figcaption class="figure-caption">
+        <span data-lang-content="en">Cockpit voice recorder, CZ3456, final approach to Shenzhen, 8 May 1997</span>
+        <span data-lang-content="zh">驾驶舱话音记录，南航 3456 号，深圳进近，1997 年 5 月 8 日</span>
+      </figcaption>
       <div class="cvr-header">
         <audio id="cvr-audio" controls preload="metadata"
                src="/assets/cz3456/recording.mp3"></audio>
@@ -1352,25 +1380,6 @@
       </div>
       <div class="cvr-transcript-wrap">
         <ol class="cvr-transcript" id="cvr-transcript"></ol>
-      </div>
-    </figure>
-
-    <!-- ─── §6 figure: hull-loss accident map ──────────────────────── -->
-    <figure class="accidents-widget full-bleed" id="accidents-widget">
-      <div class="accidents-controls">
-        <div class="accidents-slider-wrap">
-          <span data-lang-content="en">Time range:</span>
-          <span data-lang-content="zh">时间范围：</span>
-          <input type="range" id="accidents-year-from" min="1970" max="2026" value="1970" step="1">
-          <input type="range" id="accidents-year-to" min="1970" max="2026" value="2026" step="1">
-          <span class="accidents-year-display" id="accidents-year-display">1970–2026</span>
-        </div>
-      </div>
-      <div class="accidents-body">
-        <div class="accidents-map" id="accidents-map"></div>
-        <div class="accidents-list-wrap">
-          <ol class="accidents-list" id="accidents-list"></ol>
-        </div>
       </div>
     </figure>
 
@@ -1540,22 +1549,22 @@
     </h3>
 
     <ul class="reading-list">
-      <li id="further-flightradar24">
+      <li>
         <a href="https://www.flightradar24.com/" target="_blank" rel="noopener">flightradar24.com</a>
       </li>
-      <li id="further-aviationweather">
+      <li>
         <a href="https://aviationweather.gov/" target="_blank" rel="noopener">aviationweather.gov</a>
       </li>
-      <li id="further-skyvector">
+      <li>
         <a href="https://skyvector.com/" target="_blank" rel="noopener">skyvector.com</a>
       </li>
-      <li id="further-liveatc">
+      <li>
         <a href="https://www.liveatc.net/" target="_blank" rel="noopener">liveatc.net</a>
       </li>
-      <li id="further-simbrief">
+      <li>
         <a href="https://www.simbrief.com/" target="_blank" rel="noopener">simbrief.com</a>
       </li>
-      <li id="further-vatsim">
+      <li>
         <a href="https://vatsim.net/" target="_blank" rel="noopener">vatsim.net</a>
       </li>
       <li>
