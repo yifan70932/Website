@@ -22,6 +22,7 @@
   --fl-navy:       #0a3d62;
   --fl-sapphire:   #1e5fa8;
   --fl-forest:     #3a5a40;
+  --fl-amber:      #b45309;
   --fl-pale-blue:  #e8f1f8;
   --fl-pale-fst:   #eef2ec;
 
@@ -2263,10 +2264,8 @@ html { scroll-behavior: smooth; }
 /* ════════════════════════════════════════════════════════════
    §2.2 — Aerodynamics widgets (flight control surfaces)
    Each widget has:
-     - a 3D canvas on the left (Three.js scene with the airplane)
-     - a control panel on the right with sliders + readouts
-   The four widgets share styling but each animates a different
-   subset of surfaces and reports a different attitude axis.
+     - the Cessna 172 three-view SVG on the left (or top on narrow screens)
+     - a control panel on the right with sliders for each surface
    ════════════════════════════════════════════════════════════ */
 .flying-page .aero-widget-header {
   display: flex;
@@ -2296,57 +2295,108 @@ html { scroll-behavior: smooth; }
 .flying-page[data-lang="en"] .aero-widget-title [data-lang-content="en"],
 .flying-page[data-lang="zh"] .aero-widget-title [data-lang-content="zh"] { display: inline; }
 
-.flying-page .aero-widget {
+/* The combined Cessna widget — SVG diagram + control panel.
+   On wide screens: SVG on left (2/3 width), controls on right.
+   On narrow screens: SVG on top, controls below. */
+.flying-page .cessna-widget {
   background: var(--fl-paper-deep);
   border: 1px solid var(--fl-rule);
   border-radius: 4px;
-  padding: 1.1rem 1.2rem 1.25rem;
+  padding: 1.25rem;
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: 1.2rem;
-  align-items: stretch;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
 }
 @media (max-width: 720px) {
-  .flying-page .aero-widget { grid-template-columns: 1fr; }
+  .flying-page .cessna-widget { grid-template-columns: 1fr; }
 }
 
-.flying-page .aero-canvas-wrap {
-  position: relative;
+.flying-page .cessna-svg-wrap {
   background: var(--fl-paper);
   border: 1px solid var(--fl-rule);
   border-radius: 3px;
-  min-height: 280px;
-  overflow: hidden;
+  padding: 0.5rem;
 }
-.flying-page .aero-canvas {
+.flying-page .cessna-diagram {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-width: 600px;
+  margin: 0 auto;
+}
+/* Each overlay group rotates around its hinge point, set in JS via
+   transform-origin. Smooth transitions via CSS for an elastic feel
+   in addition to the JS tween. */
+.flying-page .ovl-surface {
+  transition: transform 0.05s linear;
 }
 
-.flying-page .aero-controls {
+.flying-page .cessna-controls {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 1rem;
   font-family: var(--fl-font-ui);
   font-size: 0.85rem;
   color: var(--fl-ink);
 }
-.flying-page[data-lang="zh"] .aero-controls { font-family: var(--fl-font-cn); }
-.flying-page .aero-controls [data-lang-content] { display: none; }
-.flying-page[data-lang="en"] .aero-controls [data-lang-content="en"],
-.flying-page[data-lang="zh"] .aero-controls [data-lang-content="zh"] { display: inline; }
+.flying-page[data-lang="zh"] .cessna-controls { font-family: var(--fl-font-cn); }
+.flying-page .cessna-controls [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .cessna-controls [data-lang-content="en"],
+.flying-page[data-lang="zh"] .cessna-controls [data-lang-content="zh"] { display: inline; }
 
+.flying-page .cessna-controls-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px dotted var(--fl-rule);
+}
+.flying-page .cessna-controls-group:last-of-type { border-bottom: none; }
+.flying-page .cessna-controls-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fl-ink-faint);
+  margin-bottom: 0.2rem;
+}
+.flying-page[data-lang="zh"] .cessna-controls-label {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.flying-page .cessna-reset-btn {
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--fl-rule);
+  background: var(--fl-paper);
+  color: var(--fl-ink-soft);
+  border-radius: 3px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: color 0.12s, border-color 0.12s;
+}
+.flying-page .cessna-reset-btn:hover {
+  border-color: var(--fl-ink-soft);
+  color: var(--fl-ink);
+}
+.flying-page[data-lang="zh"] .cessna-reset-btn { font-family: var(--fl-font-cn); }
+.flying-page .cessna-reset-btn [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .cessna-reset-btn [data-lang-content="en"],
+.flying-page[data-lang="zh"] .cessna-reset-btn [data-lang-content="zh"] { display: inline; }
+
+/* Slider styles — shared with the previous widget set */
 .flying-page .aero-slider-label {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--fl-ink-soft);
-  margin-top: 0.4rem;
   letter-spacing: 0.01em;
 }
-.flying-page .aero-slider-label:first-child { margin-top: 0; }
 .flying-page .aero-slider-value {
   font-family: var(--fl-font-mono);
   font-size: 0.78rem;
@@ -2358,20 +2408,30 @@ html { scroll-behavior: smooth; }
   accent-color: var(--fl-sapphire);
   margin: 0;
 }
-.flying-page .aero-axis-readout {
-  margin-top: 0.85rem;
-  padding-top: 0.6rem;
-  border-top: 1px dotted var(--fl-rule);
-  font-size: 0.8rem;
-  color: var(--fl-ink-soft);
+
+/* ════════════════════════════════════════════════════════════
+   §2.2 — Per-slider schematic SVGs
+   Each control row has: label (with value readout) → slider →
+   small schematic SVG that animates the corresponding surface.
+   The schematics are line-art, restrained, in the same visual
+   register as the static Cessna SVG to their left.
+   ════════════════════════════════════════════════════════════ */
+.flying-page .cessna-control-row {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  letter-spacing: 0.01em;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-bottom: 0.4rem;
 }
-.flying-page .aero-axis-value {
-  font-family: var(--fl-font-mono);
-  font-size: 0.85rem;
-  color: var(--fl-navy);
-  font-weight: 600;
+.flying-page .cessna-schematic {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: 50px;
+  margin-top: 0.15rem;
+  align-self: flex-start;
+}
+/* Smooth tween in addition to the JS exponential filter — gives an
+   elastic "settle" feel when the slider stops moving. */
+.flying-page .sch-anim {
+  transition: transform 0.08s linear;
 }
