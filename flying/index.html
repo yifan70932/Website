@@ -320,6 +320,8 @@
     </h3>
 
     <div data-lang-content="en">
+      <p>Almost every pilot-initiated transmission follows a four-step skeleton, taught in flight schools as the four W's: (1) <em>who you are calling</em> — the facility, by name and function; (2) <em>who you are</em> — your callsign; (3) <em>where you are</em> — position, altitude, or both; (4) <em>what you want</em> — your intent or request. Controller transmissions invert the first two — they begin with your callsign, then identify themselves — and substitute <em>what you should do</em> for the request. The skeleton is invariant across phases of flight and across countries; the vocabulary that fills the slots is what changes. The dialogue generator below highlights these four parts when "show structure" is on, so the form behind any specific transmission becomes visible.</p>
+
       <p>Standard radiotelephony is governed by ICAO Annex 10 and the procedures in Doc 4444. Every routine controller-pilot exchange has a prescribed form: <span class="mono">"United 287, climb and maintain flight level three-three-zero"</span>; readback: <span class="mono">"Climb and maintain flight level three-three-zero, United 287."</span> Certain words are never used (the negation "no" is replaced by "negative"; "okay" is replaced by "affirm" or "wilco"); altitudes below the transition level are read as feet ("five thousand"), above it as flight levels ("flight level three-three-zero"); headings are read digit-by-digit ("turn left heading two-seven-zero"); the call sign is appended to a readback so the controller can tag the response.</p>
 
       <p>Letters are spelled out using a 26-word phonetic alphabet — Alfa, Bravo, Charlie, and so on — adopted by ICAO in 1956 after extensive listening tests under simulated noise. It is sometimes called the NATO alphabet, but its origin is civil aviation; NATO adopted the same set later. The choices look arbitrary until one notices the constraints they jointly satisfy: each word has at least two syllables, no two words rhyme, no word is a common English word likely to occur naturally in transmission ("Able" was rejected for that reason in earlier alphabets), and each word sounds distinct in every major language used internationally. Numbers are pronounced separately, with three rendered as "tree" and nine as "niner" to avoid German <em>nein</em> confusion and to put a final consonant on a long vowel that would otherwise be lost.</p>
@@ -328,6 +330,8 @@
     </div>
 
     <div data-lang-content="zh">
+      <p>几乎每一次飞行员主动发起的通话都遵循一个四步骨架，飞行学校把它教成"四个 W"：(1) <em>你在叫谁</em>——管制席位的名称与职能；(2) <em>你是谁</em>——本机呼号；(3) <em>你在哪里</em>——位置、高度，或两者；(4) <em>你想干什么</em>——意图或请求。管制员发起的通话则把前两步对调——先报你的呼号，再表明自己是哪个席位——并把"请求"换成"指令"。无论处于哪个飞行阶段、在哪个国家，骨架不变；变的只是填进槽里的词。下面的对话生成器在打开"显示骨架"时会把这四个部分用颜色标出，让任何一句具体通话背后的形式都能被看见。</p>
+
       <p>标准无线电通话用语由 ICAO 附件 10 与 Doc 4444 规定。每一次例行的管制员—飞行员对话都有规定形式：<span class="mono">"United 287, climb and maintain flight level three-three-zero"</span>；复诵：<span class="mono">"Climb and maintain flight level three-three-zero, United 287."</span> 某些词永不使用（否定不用 "no" 而用 "negative"，肯定不用 "okay" 而用 "affirm" 或 "wilco"）；过渡高度以下的高度按英尺读（"five thousand"），以上按飞行高度层读（"flight level three-three-zero"）；航向逐位读出（"turn left heading two-seven-zero"）；呼号附在复诵末尾，以便管制员把回应与发起者对上。</p>
 
       <p>字母通过一套 26 词的通话字母表逐字拼读——Alfa、Bravo、Charlie⋯⋯——是国际民航组织于 1956 年在大量模拟噪声听辨测试之后采纳的。它有时被称作"北约字母表"，但其源头是民航；北约后来才采用了同一套。这些词的选择初看像是随意的，直到注意到它们共同满足的约束：每个词至少两音节，任意两个词不押韵，没有一个词是常见英语单词（早期版本中的 "Able" 即因此被淘汰），并且在每一种主要的国际通用语中都听感分明。数字单独逐位读出，"3"读为 <em>tree</em>，"9"读为 <em>niner</em>，前者避免与德语 <em>nein</em> 混淆，后者为本来会被吞掉的长元音补一个尾辅音。</p>
@@ -375,56 +379,62 @@
           <span data-lang-content="zh">空管对话生成器</span>
         </span>
         <span class="atc-widget-sub">
-          <span data-lang-content="en">Pick a flight phase. The dialogue is generated from ICAO templates with randomized parameters.</span>
-          <span data-lang-content="zh">选择飞行阶段。对话由 ICAO 标准模板加随机参数生成。</span>
+          <span data-lang-content="en">Pick flight rules and a phase. The dialogue is generated from ICAO templates with randomised parameters.</span>
+          <span data-lang-content="zh">选择飞行规则和阶段。对话由 ICAO 标准模板加随机参数生成。</span>
         </span>
       </div>
       <div class="atc-widget" id="atc-widget">
-        <div class="atc-controls">
-          <div class="atc-phase-buttons" id="atc-phase-buttons">
-            <button type="button" data-phase="clearance">
-              <span data-lang-content="en">IFR Clearance</span>
-              <span data-lang-content="zh">放行许可</span>
-            </button>
-            <button type="button" data-phase="taxi">
-              <span data-lang-content="en">Taxi</span>
-              <span data-lang-content="zh">滑行</span>
-            </button>
-            <button type="button" data-phase="takeoff">
-              <span data-lang-content="en">Takeoff</span>
-              <span data-lang-content="zh">起飞</span>
-            </button>
-            <button type="button" data-phase="climb">
-              <span data-lang-content="en">Climb / Departure</span>
-              <span data-lang-content="zh">爬升 / 离场</span>
-            </button>
-            <button type="button" data-phase="enroute">
-              <span data-lang-content="en">En Route</span>
-              <span data-lang-content="zh">航路</span>
-            </button>
-            <button type="button" data-phase="descent">
-              <span data-lang-content="en">Descent</span>
-              <span data-lang-content="zh">下降</span>
-            </button>
-            <button type="button" data-phase="approach">
-              <span data-lang-content="en">Approach</span>
-              <span data-lang-content="zh">进近</span>
-            </button>
-            <button type="button" data-phase="landing">
-              <span data-lang-content="en">Landing</span>
-              <span data-lang-content="zh">着陆</span>
-            </button>
+
+        <!-- Top row: VFR/IFR mode toggle + Show structure switch + regen button -->
+        <div class="atc-mode-row">
+          <div class="atc-mode-toggle" id="atc-mode-toggle" role="tablist">
+            <button type="button" data-mode="ifr" class="active" role="tab" aria-selected="true">IFR</button>
+            <button type="button" data-mode="vfr" role="tab" aria-selected="false">VFR</button>
           </div>
-          <div class="atc-actions">
-            <button type="button" id="atc-regenerate" class="atc-regen-btn">
-              <span data-lang-content="en">Regenerate ↻</span>
-              <span data-lang-content="zh">换一次 ↻</span>
-            </button>
-          </div>
+          <div class="atc-mode-spacer"></div>
+          <label class="atc-structure-toggle">
+            <input type="checkbox" id="atc-show-structure">
+            <span data-lang-content="en">Show four-step structure</span>
+            <span data-lang-content="zh">显示四步骨架</span>
+          </label>
+          <button type="button" id="atc-regenerate" class="atc-regen-btn">
+            <span data-lang-content="en">Regenerate ↻</span>
+            <span data-lang-content="zh">换一次 ↻</span>
+          </button>
         </div>
+
+        <!-- Phase buttons — populated by JS based on current mode (IFR vs VFR) -->
+        <div class="atc-phase-buttons" id="atc-phase-buttons" role="tablist"></div>
+
+        <!-- Legend for the four-W skeleton, only visible when structure is on -->
+        <div class="atc-w-legend" id="atc-w-legend" hidden>
+          <span class="atc-w-chip atc-w1">
+            <span data-lang-content="en">1. Who you call</span>
+            <span data-lang-content="zh">1. 在叫谁</span>
+          </span>
+          <span class="atc-w-chip atc-w2">
+            <span data-lang-content="en">2. Who you are</span>
+            <span data-lang-content="zh">2. 你是谁</span>
+          </span>
+          <span class="atc-w-chip atc-w3">
+            <span data-lang-content="en">3. Where you are</span>
+            <span data-lang-content="zh">3. 你在哪</span>
+          </span>
+          <span class="atc-w-chip atc-w4">
+            <span data-lang-content="en">4. What you want / instruction</span>
+            <span data-lang-content="zh">4. 想要做什么 / 指令</span>
+          </span>
+        </div>
+
         <div class="atc-dialog" id="atc-dialog" aria-live="polite"></div>
       </div>
     </figure>
+
+    <!-- LiveATC link — listen to real ATC streams -->
+    <p class="atc-liveatc-note">
+      <span data-lang-content="en">Listen to real controllers and pilots at <a href="https://www.liveatc.net/" target="_blank" rel="noopener">LiveATC.net</a> — feeds from hundreds of towers and centers worldwide, mostly in the United States, free of charge.</span>
+      <span data-lang-content="zh">真实的管制员与飞行员通话可在 <a href="https://www.liveatc.net/" target="_blank" rel="noopener">LiveATC.net</a> 收听——全球数百个塔台与区调的实时音频，多数为美国境内，免费。</span>
+    </p>
 
     <!-- ─────────────────────────────────────────────────────────
          §3.2 METAR / TAF
@@ -1207,8 +1217,8 @@
             <span data-lang-content="en">Show:</span>
             <span data-lang-content="zh">显示：</span>
             <select id="cvr-filter">
-              <option value="cz3456">CZ3456</option>
               <option value="all">All</option>
+              <option value="cz3456">CZ3456</option>
             </select>
           </label>
         </div>
@@ -3074,30 +3084,58 @@
      (callsigns, runways, altitudes, headings, frequencies)
      are sampled per regeneration. Bilingual decode subtext
      explains each transmission.
+
+     Each line is structured as a `parts` array — an ordered
+     list of {w, txt} fragments. The `w` value (1..4) marks
+     each fragment's role in the four-W skeleton (who-you-call,
+     who-you-are, where-you-are, what-you-want). The `txt`
+     string uses {slot} placeholders filled at render time.
+
+     When "show structure" is OFF, fragments render as a single
+     comma-joined sentence. When ON, each fragment is wrapped
+     in <span class="atc-w{N}"> for colour highlighting,
+     making the form behind any specific transmission visible.
      ───────────────────────────────────────────────────────── -->
 <script>
 (function () {
   const widget = document.getElementById('atc-widget');
   if (!widget) return;
 
-  const dialogEl = widget.querySelector('#atc-dialog');
-  const phaseButtons = Array.from(widget.querySelectorAll('#atc-phase-buttons button'));
-  const regenBtn = widget.querySelector('#atc-regenerate');
+  const dialogEl     = widget.querySelector('#atc-dialog');
+  const phaseBtnsEl  = widget.querySelector('#atc-phase-buttons');
+  const modeToggleEl = widget.querySelector('#atc-mode-toggle');
+  const modeButtons  = Array.from(modeToggleEl.querySelectorAll('button'));
+  const regenBtn     = widget.querySelector('#atc-regenerate');
+  const showStructEl = widget.querySelector('#atc-show-structure');
+  const legendEl     = widget.querySelector('#atc-w-legend');
 
   // ─── Parameter pools ─────────────────────────────────────
-  // Sampled at random each regeneration.
   const AIRLINE_CALLSIGNS = [
     { call: 'United',     icao: 'UAL' },
     { call: 'American',   icao: 'AAL' },
     { call: 'Delta',      icao: 'DAL' },
     { call: 'Southwest',  icao: 'SWA' },
     { call: 'JetBlue',    icao: 'JBU' },
-    { call: 'Speedbird',  icao: 'BAW' },   // British Airways
+    { call: 'Speedbird',  icao: 'BAW' },
     { call: 'Lufthansa',  icao: 'DLH' },
     { call: 'Air China',  icao: 'CCA' },
     { call: 'Cathay',     icao: 'CPA' },
     { call: 'Qantas',     icao: 'QFA' }
   ];
+
+  // VFR uses tail-number callsigns rather than airline names
+  // (most VFR ops are general-aviation single-engine pistons or trainers)
+  const TAIL_NUMBERS = [
+    { call: 'Cessna', tail: '12345' },
+    { call: 'Cessna', tail: '4567Q' },
+    { call: 'Skyhawk', tail: '5283G' },
+    { call: 'Cherokee', tail: '7841P' },
+    { call: 'Piper', tail: '9032M' },
+    { call: 'Bonanza', tail: '6614X' },
+    { call: 'Cirrus', tail: '298SR' },
+    { call: 'November', tail: '47218' }
+  ];
+
   const AIRPORTS = [
     { icao: 'KBUF', name: 'Buffalo',         twr: 'Buffalo Tower',         gnd: 'Buffalo Ground',         dep: 'Buffalo Departure',     app: 'Buffalo Approach',     ctr: 'Cleveland Center' },
     { icao: 'KJFK', name: 'Kennedy',         twr: 'Kennedy Tower',         gnd: 'Kennedy Ground',         dep: 'New York Departure',    app: 'New York Approach',    ctr: 'New York Center' },
@@ -3105,17 +3143,44 @@
     { icao: 'KSFO', name: 'San Francisco',   twr: 'San Francisco Tower',   gnd: 'San Francisco Ground',   dep: 'NorCal Departure',      app: 'NorCal Approach',      ctr: 'Oakland Center' },
     { icao: 'KLAX', name: 'Los Angeles',     twr: 'Los Angeles Tower',     gnd: 'Los Angeles Ground',     dep: 'SoCal Departure',       app: 'SoCal Approach',       ctr: 'Los Angeles Center' }
   ];
+
+  // Smaller airports for VFR scenarios — towered but not class B
+  // Each has CTAF (for radio check), Tower/Ground (towered ops),
+  // and an Approach/Center facility nearby (for flight following).
+  const VFR_AIRPORTS = [
+    { icao: 'KIAG', name: 'Niagara Falls',   twr: 'Niagara Tower',         gnd: 'Niagara Ground',         radio: 'Niagara CTAF',        app: 'Buffalo Approach',      ctr: 'Cleveland Center' },
+    { icao: 'KFRG', name: 'Republic',        twr: 'Republic Tower',        gnd: 'Republic Ground',        radio: 'Republic CTAF',       app: 'New York Approach',     ctr: 'New York Center' },
+    { icao: 'KPAO', name: 'Palo Alto',       twr: 'Palo Alto Tower',       gnd: 'Palo Alto Ground',       radio: 'Palo Alto CTAF',      app: 'NorCal Approach',       ctr: 'Oakland Center' },
+    { icao: 'KAPA', name: 'Centennial',      twr: 'Centennial Tower',      gnd: 'Centennial Ground',      radio: 'Centennial CTAF',     app: 'Denver Approach',       ctr: 'Denver Center' }
+  ];
+
   const RUNWAYS_BY_AIRPORT = {
     KBUF: ['23', '5', '14', '32'],
     KJFK: ['04L', '04R', '13L', '13R', '22L', '22R', '31L', '31R'],
     KORD: ['10L', '10C', '10R', '28L', '28C', '28R', '4L', '4R', '22L', '22R'],
     KSFO: ['28L', '28R', '01L', '01R', '10L', '10R'],
-    KLAX: ['25L', '25R', '24L', '24R', '07L', '07R', '06L', '06R']
+    KLAX: ['25L', '25R', '24L', '24R', '07L', '07R', '06L', '06R'],
+    KIAG: ['28R', '28L', '10R', '10L'],
+    KFRG: ['1', '14', '19', '32'],
+    KPAO: ['13', '31'],
+    KAPA: ['17L', '17R', '35L', '35R', '10', '28']
   };
+
   const FIXES = ['BUFFY', 'GREKI', 'KORRY', 'BIZEX', 'COATE', 'DEEZZ', 'PARCH', 'WAVEY',
-                 'CAMRN', 'DPK', 'BOSOX', 'MERIT', 'CYNTHIANA', 'LENDY', 'BAYYS'];
+                 'CAMRN', 'BOSOX', 'MERIT', 'LENDY', 'BAYYS'];
+  const VFR_LANDMARKS = [
+    { en: 'the bridge',         zh: '大桥' },
+    { en: 'the lake',           zh: '湖' },
+    { en: 'the practice area',  zh: '训练空域' },
+    { en: 'the river',          zh: '河流' },
+    { en: 'the freeway',        zh: '高速公路' },
+    { en: 'the stadium',        zh: '体育场' },
+    { en: 'the reservoir',      zh: '水库' },
+    { en: 'the radio tower',    zh: '无线电塔' }
+  ];
   const FLIGHT_LEVELS = ['260', '280', '300', '310', '320', '330', '340', '350', '360', '370', '380', '390', '400'];
-  const ALTITUDES_FT = [3000, 4000, 5000, 6000, 7000, 8000, 10000, 11000, 12000, 13000, 14000, 16000, 17000];
+  const ALTITUDES_FT  = [3000, 4000, 5000, 6000, 7000, 8000, 10000, 11000, 12000, 13000, 14000, 16000, 17000];
+  const VFR_ALTITUDES = [1500, 2500, 3500, 4500, 5500, 6500, 7500, 8500];
 
   // ─── Number-speak helpers ────────────────────────────────
   // ATC reads digits one-by-one. 3 → tree, 9 → niner.
@@ -3127,7 +3192,6 @@
     return String(s).split('').map(c => DIGIT_SPOKEN[c] || c).join('-');
   }
   function altitudeSpoken(ft) {
-    // Below FL180, speak as "<thousands> thousand" or "<n> thousand <m> hundred"
     const thousand = Math.floor(ft / 1000);
     const hundred = (ft % 1000) / 100;
     let s = digitsSpoken(thousand) + ' thousand';
@@ -3138,34 +3202,49 @@
     return 'flight level ' + digitsSpoken(fl);
   }
   function freqSpoken(mhz) {
-    // e.g. 125.3 → "one-two-five point three"
     const [whole, frac] = String(mhz).split('.');
     let s = digitsSpoken(whole);
     if (frac) s += ' point ' + digitsSpoken(frac);
     return s;
   }
   function runwaySpoken(rw) {
-    // '23R' → "two-tree right";  '04L' → "zero-four left"
     const m = rw.match(/^(\d+)([LCR]?)$/);
     if (!m) return rw;
     const num = m[1].padStart(2, '0');
     const side = { L: 'left', C: 'center', R: 'right' }[m[2]] || '';
     return digitsSpoken(num) + (side ? ' ' + side : '');
   }
-  function callsignSpoken(call, num) {
-    // Numbers in flight numbers usually grouped if they happen to align —
-    // simplest correct version: speak digits one by one.
+  function airlineCallsignSpoken(call, num) {
     return call + ' ' + digitsSpoken(num);
   }
+  function tailCallsignSpoken(prefix, tail) {
+    // 'Cessna 4567Q' → "Cessna four-five-six-seven-Quebec"
+    // We spell each character: digits → digit names; letters → phonetic
+    const PHON = {
+      A:'Alpha',B:'Bravo',C:'Charlie',D:'Delta',E:'Echo',F:'Foxtrot',G:'Golf',
+      H:'Hotel',I:'India',J:'Juliett',K:'Kilo',L:'Lima',M:'Mike',N:'November',
+      O:'Oscar',P:'Papa',Q:'Quebec',R:'Romeo',S:'Sierra',T:'Tango',U:'Uniform',
+      V:'Victor',W:'Whiskey',X:'X-ray',Y:'Yankee',Z:'Zulu'
+    };
+    const parts = String(tail).split('').map(c => /\d/.test(c) ? DIGIT_SPOKEN[c] : (PHON[c.toUpperCase()] || c));
+    return prefix + ' ' + parts.join('-');
+  }
 
-  // ─── Sample a context object ─────────────────────────────
   function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
   function pickInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
-  function sampleContext(originIcao) {
-    const a = AIRLINE_CALLSIGNS[Math.floor(Math.random() * AIRLINE_CALLSIGNS.length)];
+  // ─── Sample a context object based on flight rules mode ──
+  function sampleContext(mode) {
+    if (mode === 'vfr') {
+      return sampleVfrContext();
+    }
+    return sampleIfrContext();
+  }
+
+  function sampleIfrContext() {
+    const a = pick(AIRLINE_CALLSIGNS);
     const flightNum = String(pickInt(100, 1999));
-    const apt = AIRPORTS.find(x => x.icao === originIcao) || pick(AIRPORTS);
+    const apt = pick(AIRPORTS);
     const dest = pick(AIRPORTS.filter(x => x.icao !== apt.icao));
     const rwys = RUNWAYS_BY_AIRPORT[apt.icao] || ['18'];
     const rwy = pick(rwys);
@@ -3173,17 +3252,16 @@
     const altFt = pick(ALTITUDES_FT);
     const fix = pick(FIXES);
     const heading = String(pickInt(1, 36) * 10).padStart(3, '0');
-    const towerFreq = (118 + Math.random() * 18).toFixed(1);   // 118-136 MHz
-    const groundFreq = (121 + Math.random() * 1.5).toFixed(2); // GND usually 121.x
-    const depFreq = (124 + Math.random() * 8).toFixed(1);
-    const appFreq = (124 + Math.random() * 8).toFixed(1);
-    const ctrFreq = (132 + Math.random() * 4).toFixed(1);
-    const squawk = String(pickInt(1000, 6777)).padStart(4, '0').replace(/[89]/g, '7');
-
+    const towerFreq  = (118 + Math.random() * 18).toFixed(1);
+    const groundFreq = (121 + Math.random() * 1.5).toFixed(2);
+    const depFreq    = (124 + Math.random() * 8).toFixed(1);
+    const appFreq    = (124 + Math.random() * 8).toFixed(1);
+    const ctrFreq    = (132 + Math.random() * 4).toFixed(1);
+    const squawk     = String(pickInt(1000, 6777)).padStart(4, '0').replace(/[89]/g, '7');
     return {
+      mode: 'ifr',
       callsign: a.call,
-      callsignSpoken: callsignSpoken(a.call, flightNum),
-      flightNum: digitsSpoken(flightNum),
+      callsignSpoken: airlineCallsignSpoken(a.call, flightNum),
       origin: apt,
       dest: dest,
       runway: rwy,
@@ -3192,223 +3270,661 @@
       flightLevelSpoken: flightLevelSpoken(fl),
       altFt: altFt,
       altSpoken: altitudeSpoken(altFt),
+      altCrossSpoken: altitudeSpoken(Math.max(3000, altFt - 4000)),
       fix: fix,
       heading: heading,
       headingSpoken: digitsSpoken(heading),
-      towerFreq: towerFreq,
-      towerFreqSpoken: freqSpoken(towerFreq),
-      groundFreq: groundFreq,
+      towerFreqSpoken:  freqSpoken(towerFreq),
       groundFreqSpoken: freqSpoken(groundFreq),
-      depFreq: depFreq,
-      depFreqSpoken: freqSpoken(depFreq),
-      appFreq: appFreq,
-      appFreqSpoken: freqSpoken(appFreq),
-      ctrFreq: ctrFreq,
-      ctrFreqSpoken: freqSpoken(ctrFreq),
-      squawk: squawk,
-      squawkSpoken: digitsSpoken(squawk)
+      depFreqSpoken:    freqSpoken(depFreq),
+      appFreqSpoken:    freqSpoken(appFreq),
+      ctrFreqSpoken:    freqSpoken(ctrFreq),
+      squawkSpoken:     digitsSpoken(squawk),
+      gateNum:          1 + pickInt(0, 39),
+      atisLetter:       String.fromCharCode(65 + pickInt(0, 25)),
+      windDir:          (pickInt(0, 35) * 10).toString().padStart(3, '0'),
+      windKt:           (4 + pickInt(0, 15)).toString(),
+      sidName:          fix + ' ' + (1 + pickInt(0, 8))
     };
   }
 
-  // ─── Phase templates ─────────────────────────────────────
-  // Each template is an array of {speaker, text, decode_en, decode_zh}.
-  // text uses Mustache-style {slot} substitution.
-  // speaker is the *short* facility code; full names are looked up in `ctx`.
-  const TEMPLATES = {
+  function sampleVfrContext() {
+    const a = pick(TAIL_NUMBERS);
+    const apt = pick(VFR_AIRPORTS);
+    const rwys = RUNWAYS_BY_AIRPORT[apt.icao] || ['18'];
+    const rwy = pick(rwys);
+    const altFt = pick(VFR_ALTITUDES);
+    const landmark = pick(VFR_LANDMARKS);
+    const heading = String(pickInt(1, 36) * 10).padStart(3, '0');
+    const towerFreq  = (118 + Math.random() * 18).toFixed(2);
+    const ctafFreq   = (122 + Math.random() * 4).toFixed(2);
+    const squawk     = String(pickInt(1000, 6777)).padStart(4, '0').replace(/[89]/g, '7');
+    const distNm     = pickInt(5, 25);
+    return {
+      mode: 'vfr',
+      callsign: a.call,
+      callsignSpoken: tailCallsignSpoken(a.call, a.tail),
+      origin: apt,
+      runway: rwy,
+      runwaySpoken: runwaySpoken(rwy),
+      altFt: altFt,
+      altSpoken: altitudeSpoken(altFt),
+      landmark: landmark,
+      heading: heading,
+      headingSpoken: digitsSpoken(heading),
+      towerFreqSpoken:  freqSpoken(towerFreq),
+      ctafFreqSpoken:   freqSpoken(ctafFreq),
+      squawkSpoken:     digitsSpoken(squawk),
+      distNm:           distNm,
+      atisLetter:       String.fromCharCode(65 + pickInt(0, 25)),
+      windDir:          (pickInt(0, 35) * 10).toString().padStart(3, '0'),
+      windKt:           (4 + pickInt(0, 15)).toString()
+    };
+  }
+
+  // ─── Templates ──────────────────────────────────────────
+  // Each entry is an array of "alternative templates" for the
+  // phase. Each alternative is a list of lines. Each line has:
+  //   who:   short facility code or 'PILOT'
+  //   parts: ordered [{w, txt}] fragments — w is the four-W role
+  //   en/zh: decode subtext
+  //
+  // Slot syntax: {key} — replaced at render time from ctx.
+
+  const IFR_TEMPLATES = {
     clearance: [
       [
-        { who: 'PILOT', txt: '{ctrl}, {call}, IFR to {destName}, ready to copy.',
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{ctrl}' },
+            { w: 2, txt: '{call}' },
+            { w: 4, txt: 'IFR to {destName}, ready to copy' }
+          ],
           en: 'Pilot announces ready to receive the IFR clearance.',
           zh: '飞行员向放行席报告准备抄收 IFR 放行许可。' },
-        { who: 'CLR', txt: '{call}, {ctrl}, cleared to {destName} via the {sidName} departure, then as filed. Climb maintain {altSpoken}, expect {flSpoken} ten minutes after departure. Departure frequency {depFreqSpoken}, squawk {squawkSpoken}.',
-          en: 'Clearance: cleared to destination via SID, initial altitude, expected cruise, departure frequency, transponder code.',
-          zh: '放行：经标准仪表离场（SID）至目的地，初始高度、预期巡航高度层、离场频率、应答机编码。' },
-        { who: 'PILOT', txt: 'Cleared to {destName} via {sidName}, then as filed, climb {altSpoken}, expect {flSpoken} after ten, departure {depFreqSpoken}, squawk {squawkSpoken}, {call}.',
+        { who: 'CLR',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 1, txt: '{ctrl}' },
+            { w: 4, txt: 'cleared to {destName} via the {sidName} departure, then as filed; climb maintain {altSpoken}, expect {flSpoken} ten minutes after departure; departure frequency {depFreqSpoken}, squawk {squawkSpoken}' }
+          ],
+          en: 'Cleared to destination via SID, initial altitude, expected cruise, departure frequency, transponder code.',
+          zh: '经标准仪表离场（SID）至目的地、初始高度、预期巡航高度层、离场频率、应答机编码。' },
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'cleared to {destName} via {sidName}, then as filed, climb {altSpoken}, expect {flSpoken} after ten, departure {depFreqSpoken}, squawk {squawkSpoken}' },
+            { w: 2, txt: '{call}' }
+          ],
           en: 'Pilot reads back the clearance verbatim, callsign at the end.',
           zh: '飞行员逐字复诵放行内容，呼号置于末尾。' }
       ]
     ],
     taxi: [
       [
-        { who: 'PILOT', txt: '{gnd}, {call}, gate {gateNum}, ready to taxi with information {atisLetter}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{gnd}' },
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: 'gate {gateNum}' },
+            { w: 4, txt: 'ready to taxi with information {atisLetter}' }
+          ],
           en: 'Pilot calls Ground, gate position, ATIS letter (so the controller knows the pilot has the latest field info).',
           zh: '飞行员呼叫地面席，报登机口位置和已收听的 ATIS 编号（让管制员知道机组掌握最新机场信息）。' },
-        { who: 'GND', txt: '{call}, {gnd}, runway {rwySpoken}, taxi via Alpha, Charlie, hold short of runway {rwySpoken}.',
+        { who: 'GND',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 1, txt: '{gnd}' },
+            { w: 4, txt: 'runway {rwySpoken}, taxi via Alpha, Charlie, hold short of runway {rwySpoken}' }
+          ],
           en: 'Ground assigns the departure runway and the taxi route.',
           zh: '地面指派起飞跑道与滑行路线。' },
-        { who: 'PILOT', txt: 'Runway {rwySpoken}, taxi via Alpha, Charlie, hold short of runway {rwySpoken}, {call}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'runway {rwySpoken}, taxi via Alpha, Charlie, hold short of runway {rwySpoken}' },
+            { w: 2, txt: '{call}' }
+          ],
           en: 'Pilot reads back the runway and taxi route.',
           zh: '飞行员复诵跑道和滑行路线。' }
       ]
     ],
     takeoff: [
       [
-        { who: 'PILOT', txt: '{twr}, {call}, holding short runway {rwySpoken}, ready for departure.',
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{twr}' },
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: 'holding short runway {rwySpoken}' },
+            { w: 4, txt: 'ready for departure' }
+          ],
           en: 'Pilot reports ready at the runway hold-short line.',
           zh: '飞行员报告在跑道等待线已准备就绪。' },
-        { who: 'TWR', txt: '{call}, {twr}, runway {rwySpoken}, wind {windDir} at {windKt}, cleared for takeoff.',
+        { who: 'TWR',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 1, txt: '{twr}' },
+            { w: 4, txt: 'runway {rwySpoken}, wind {windDir} at {windKt}, cleared for takeoff' }
+          ],
           en: 'Tower issues the actual takeoff clearance — note "cleared for takeoff" only used here, never preparatorily (Tenerife rule).',
           zh: '塔台发出起飞许可——注意 "cleared for takeoff" 只在此处使用，准备阶段一律不用（特内里费规则）。' },
-        { who: 'PILOT', txt: 'Cleared for takeoff runway {rwySpoken}, {call}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'cleared for takeoff runway {rwySpoken}' },
+            { w: 2, txt: '{call}' }
+          ],
           en: 'Readback: clearance text + runway + callsign.',
           zh: '复诵：许可文字 + 跑道 + 呼号。' }
       ]
     ],
     climb: [
       [
-        { who: 'TWR', txt: '{call}, contact {dep} {depFreqSpoken}, good day.',
+        { who: 'TWR',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 4, txt: 'contact {dep} {depFreqSpoken}, good day' }
+          ],
           en: 'Tower hands off to Departure as the aircraft passes upwind.',
           zh: '塔台在飞机通过上风段后将其移交给离场席。' },
-        { who: 'PILOT', txt: '{depFreqSpoken}, {call}, good day.',
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: '{depFreqSpoken}, good day' },
+            { w: 2, txt: '{call}' }
+          ],
           en: 'Pilot reads back the new frequency.',
           zh: '飞行员复诵新频率。' },
-        { who: 'PILOT', txt: '{dep}, {call}, passing {altSpoken} climbing {flSpoken}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{dep}' },
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: 'passing {altSpoken} climbing {flSpoken}' }
+          ],
           en: 'Initial check-in on Departure: callsign + present altitude + assigned altitude/level.',
           zh: '在离场席首次报到：呼号 + 当前高度 + 指定高度/高度层。' },
-        { who: 'DEP', txt: '{call}, {dep}, radar contact, climb and maintain {flSpoken}, direct {fix}.',
+        { who: 'DEP',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 1, txt: '{dep}' },
+            { w: 4, txt: 'radar contact, climb and maintain {flSpoken}, direct {fix}' }
+          ],
           en: 'Controller confirms radar identification, clears to cruise, and assigns a direct routing to a fix.',
           zh: '管制员确认雷达识别，许可至巡航高度层，并指派直飞至某航点。' },
-        { who: 'PILOT', txt: 'Climb and maintain {flSpoken}, direct {fix}, {call}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'climb and maintain {flSpoken}, direct {fix}' },
+            { w: 2, txt: '{call}' }
+          ],
           en: 'Readback in the canonical order: altitude, then routing, then callsign.',
           zh: '按规范顺序复诵：高度、然后是航路、最后呼号。' }
       ]
     ],
     enroute: [
       [
-        { who: 'CTR', txt: '{call}, {ctrl}, descend at pilot\'s discretion, maintain {altSpoken}.',
-          en: 'Center grants pilot\'s-discretion descent — pilot may begin whenever appropriate.',
+        { who: 'CTR',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 1, txt: '{ctrl}' },
+            { w: 4, txt: "descend at pilot's discretion, maintain {altSpoken}" }
+          ],
+          en: "Center grants pilot's-discretion descent — pilot may begin whenever appropriate.",
           zh: '区调许可飞行员自定时机下降——机组可在合适时机自行开始。' },
-        { who: 'PILOT', txt: 'Pilot\'s discretion to {altSpoken}, {call}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: "pilot's discretion to {altSpoken}" },
+            { w: 2, txt: '{call}' }
+          ],
           en: 'Readback. "Pilot\'s discretion" is part of the clearance phrasing.',
           zh: '复诵。"Pilot\'s discretion"（自定时机）是许可的一部分。' }
       ],
       [
-        { who: 'CTR', txt: '{call}, {ctrl}, contact {nextCtrl} {ctrFreqSpoken}.',
+        { who: 'CTR',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 1, txt: '{ctrl}' },
+            { w: 4, txt: 'contact {nextCtrl} {ctrFreqSpoken}' }
+          ],
           en: 'Center hands off to the next sector.',
           zh: '区调将航班移交至下一扇区。' },
-        { who: 'PILOT', txt: '{ctrFreqSpoken}, {call}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: '{ctrFreqSpoken}' },
+            { w: 2, txt: '{call}' }
+          ],
           en: 'Pilot reads back only the new frequency and own callsign.',
           zh: '飞行员仅复诵新频率与本机呼号。' }
       ]
     ],
     descent: [
       [
-        { who: 'CTR', txt: '{call}, {ctrl}, descend and maintain {altSpoken}, cross {fix} at or above {altCrossSpoken}.',
+        { who: 'CTR',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 1, txt: '{ctrl}' },
+            { w: 4, txt: 'descend and maintain {altSpoken}, cross {fix} at or above {altCrossSpoken}' }
+          ],
           en: 'Descent clearance with a crossing restriction at a named fix.',
           zh: '下降许可，附带在指定航点上的过点高度限制。' },
-        { who: 'PILOT', txt: 'Descend and maintain {altSpoken}, cross {fix} at or above {altCrossSpoken}, {call}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'descend and maintain {altSpoken}, cross {fix} at or above {altCrossSpoken}' },
+            { w: 2, txt: '{call}' }
+          ],
           en: 'Readback. Restriction must be read back verbatim.',
           zh: '复诵。限制条件必须逐字复诵。' }
       ]
     ],
     approach: [
       [
-        { who: 'APP', txt: '{call}, {app}, turn left heading {hdgSpoken}, descend and maintain {altSpoken}, vectors for the ILS runway {rwySpoken} approach.',
+        { who: 'APP',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 1, txt: '{app}' },
+            { w: 4, txt: 'turn left heading {hdgSpoken}, descend and maintain {altSpoken}, vectors for the ILS runway {rwySpoken} approach' }
+          ],
           en: 'Vectors to final: assigned heading + altitude + intended approach.',
           zh: '雷达引导至最后进近：分配航向 + 高度 + 预计进近程序。' },
-        { who: 'PILOT', txt: 'Left {hdgSpoken}, down to {altSpoken}, vectors ILS {rwySpoken}, {call}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'left {hdgSpoken}, down to {altSpoken}, vectors ILS {rwySpoken}' },
+            { w: 2, txt: '{call}' }
+          ],
           en: 'Compact readback. Pilots may abbreviate routine phrases like "descend and maintain" → "down to".',
           zh: '紧凑复诵。常用短语可酌情简化（"descend and maintain" → "down to"）。' },
-        { who: 'APP', txt: '{call}, three miles from {fix}, turn left heading {hdgSpoken}, maintain {altSpoken} until established on the localizer, cleared ILS runway {rwySpoken} approach.',
+        { who: 'APP',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: 'three miles from {fix}' },
+            { w: 4, txt: 'turn left heading {hdgSpoken}, maintain {altSpoken} until established on the localizer, cleared ILS runway {rwySpoken} approach' }
+          ],
           en: 'Final vector + maintain altitude until intercepting the localiser + the actual approach clearance.',
           zh: '最终引导 + 截获航向台前保持高度 + 进近许可。' },
-        { who: 'PILOT', txt: 'Left {hdgSpoken}, maintain {altSpoken} until established, cleared ILS {rwySpoken}, {call}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'left {hdgSpoken}, maintain {altSpoken} until established, cleared ILS {rwySpoken}' },
+            { w: 2, txt: '{call}' }
+          ],
           en: 'Readback of the approach clearance.',
           zh: '复诵进近许可。' }
       ]
     ],
     landing: [
       [
-        { who: 'APP', txt: '{call}, contact {twr} {towerFreqSpoken}.',
+        { who: 'APP',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 4, txt: 'contact {twr} {towerFreqSpoken}' }
+          ],
           en: 'Approach hands off to Tower for the final 5 NM.',
           zh: '进近席在最后约 5 海里将航班移交塔台。' },
-        { who: 'PILOT', txt: '{towerFreqSpoken}, {call}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: '{towerFreqSpoken}' },
+            { w: 2, txt: '{call}' }
+          ],
           en: 'Brief readback: new frequency, callsign.',
           zh: '简短复诵：新频率，呼号。' },
-        { who: 'PILOT', txt: '{twr}, {call}, ILS runway {rwySpoken}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{twr}' },
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: 'ILS runway {rwySpoken}' }
+          ],
           en: 'Initial Tower call: callsign + the approach being flown.',
           zh: '首次呼叫塔台：呼号 + 正在飞的进近程序。' },
-        { who: 'TWR', txt: '{call}, {twr}, runway {rwySpoken}, wind {windDir} at {windKt}, cleared to land.',
+        { who: 'TWR',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 1, txt: '{twr}' },
+            { w: 4, txt: 'runway {rwySpoken}, wind {windDir} at {windKt}, cleared to land' }
+          ],
           en: 'Landing clearance: runway + winds + the operative phrase "cleared to land".',
           zh: '着陆许可：跑道 + 风 + 关键短语 "cleared to land"。' },
-        { who: 'PILOT', txt: 'Cleared to land runway {rwySpoken}, {call}.',
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'cleared to land runway {rwySpoken}' },
+            { w: 2, txt: '{call}' }
+          ],
           en: 'Readback. Runway must be repeated.',
           zh: '复诵。跑道必须重复。' }
       ]
     ]
   };
 
-  // ─── Render ──────────────────────────────────────────────
-  // Template slot expansion. Each line gets its `txt` rendered with
-  // ctx values; speaker is mapped to a friendly facility name.
-  const SPEAKER_LABEL = {
-    PILOT:  null,           // resolved at render to the callsign abbrev
-    CLR:    'CLNC DLY',
-    GND:    'GROUND',
-    TWR:    'TOWER',
-    DEP:    'DEPARTURE',
-    APP:    'APPROACH',
-    CTR:    'CENTER'
+  const VFR_TEMPLATES = {
+    radio_check: [
+      [
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{gnd}' },
+            { w: 2, txt: '{call}' },
+            { w: 4, txt: 'radio check' }
+          ],
+          en: 'Pilot requests a radio check before taxi.',
+          zh: '飞行员在滑行前请求做无线电信号检查。' },
+        { who: 'GND',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 1, txt: '{gnd}' },
+            { w: 4, txt: 'loud and clear' }
+          ],
+          en: '"Loud and clear" = readability 5, clear copy.',
+          zh: '"Loud and clear" = 信号清晰度 5，完全清晰。' }
+      ]
+    ],
+    taxi: [
+      [
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{gnd}' },
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: 'at the south ramp' },
+            { w: 4, txt: 'VFR to the practice area, ready to taxi with {atisLetter}' }
+          ],
+          en: 'Pilot calls Ground, gives ramp position, intent (practice area), ATIS letter.',
+          zh: '飞行员呼叫地面席，报停机坪位置、意图（训练空域）、已听 ATIS 编号。' },
+        { who: 'GND',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 1, txt: '{gnd}' },
+            { w: 4, txt: 'runway {rwySpoken}, taxi via Alpha' }
+          ],
+          en: 'Ground assigns runway and taxi route.',
+          zh: '地面指派跑道与滑行路径。' },
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'runway {rwySpoken}, taxi via Alpha' },
+            { w: 2, txt: '{call}' }
+          ],
+          en: 'Readback.',
+          zh: '复诵。' }
+      ]
+    ],
+    takeoff: [
+      [
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{twr}' },
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: 'holding short runway {rwySpoken}' },
+            { w: 4, txt: 'ready, departing to the south' }
+          ],
+          en: 'Pilot reports ready, including direction of flight (so Tower knows whether to expect a turn).',
+          zh: '飞行员报告就绪，并说明出场方向（让塔台预期可能的转弯方向）。' },
+        { who: 'TWR',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 4, txt: 'runway {rwySpoken}, wind {windDir} at {windKt}, cleared for takeoff, left turn approved' }
+          ],
+          en: 'Takeoff clearance with the turn approval baked in.',
+          zh: '起飞许可，连同转弯许可一起发出。' },
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'cleared for takeoff runway {rwySpoken}, left turn approved' },
+            { w: 2, txt: '{call}' }
+          ],
+          en: 'Readback.',
+          zh: '复诵。' }
+      ]
+    ],
+    leaving: [
+      [
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{twr}' },
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: '{distNm} miles south at {altSpoken}' },
+            { w: 4, txt: 'leaving your airspace, request frequency change' }
+          ],
+          en: 'Pilot reports clear of the Class D airspace and asks to switch off Tower frequency.',
+          zh: '飞行员报告已出 D 类空域，请求换至下一频率。' },
+        { who: 'TWR',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 4, txt: 'frequency change approved, squawk VFR, good day' }
+          ],
+          en: '"Squawk VFR" = set transponder to 1200, the standard VFR code in the US.',
+          zh: '"Squawk VFR" = 应答机置 1200，美国 VFR 标准编码。' },
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'squawk VFR, good day' },
+            { w: 2, txt: '{call}' }
+          ],
+          en: 'Readback.',
+          zh: '复诵。' }
+      ]
+    ],
+    flight_following: [
+      [
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{ctrl}' },
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: '{distNm} miles south of {originName} at {altSpoken}' },
+            { w: 4, txt: 'request VFR flight following to {landmarkName}' }
+          ],
+          en: 'Pilot requests advisory radar service from Center / Approach. Optional in the US for VFR; provides traffic alerts.',
+          zh: '飞行员向区调或进近席请求 VFR 雷达咨询服务。在美国对 VFR 是可选的；可提供交通通报。' },
+        { who: 'APP',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 4, txt: 'squawk {squawkSpoken} and ident' }
+          ],
+          en: 'Controller assigns a discrete squawk and asks the pilot to press IDENT (highlights the target on radar).',
+          zh: '管制员分配独立应答机编码，并要求按下 IDENT 键（在雷达上让目标短暂高亮）。' },
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'squawk {squawkSpoken} and ident' },
+            { w: 2, txt: '{call}' }
+          ],
+          en: 'Readback.',
+          zh: '复诵。' },
+        { who: 'APP',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 4, txt: 'radar contact {distNm} miles south of {originName}, altimeter two niner niner two' }
+          ],
+          en: 'Controller confirms identification and gives the local altimeter setting.',
+          zh: '管制员确认识别，并给出当地修正气压（altimeter setting）。' }
+      ]
+    ],
+    position_report: [
+      [
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{ctrl}' },
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: 'over {landmarkName} at {altSpoken}' }
+          ],
+          en: 'Pilot makes a position report — common when in an MOA, over remote terrain, or when controller asks.',
+          zh: '飞行员做位置报告——在军事训练空域、偏远地形上空、或管制员询问时常做。' },
+        { who: 'APP',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 4, txt: 'roger' }
+          ],
+          en: '"Roger" = "I have received your transmission" — does NOT mean "yes" or "I will comply".',
+          zh: '"Roger" = "我已收到你的发话"——并不表示"是"或"将照办"。' }
+      ]
+    ],
+    enter_class: [
+      [
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{app}' },
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: '{distNm} miles south at {altSpoken}' },
+            { w: 4, txt: 'request transition through your Class C, north-bound to {landmarkName}' }
+          ],
+          en: 'Class C entry requires two-way radio communication established. Pilot states position, altitude, and intent.',
+          zh: 'C 类空域准入要求"双向通讯已建立"。飞行员报告位置、高度、意图。' },
+        { who: 'APP',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 1, txt: '{app}' },
+            { w: 4, txt: 'squawk {squawkSpoken}, expect transition at or above {altSpoken}' }
+          ],
+          en: 'Approach issues a squawk and an altitude. Once Approach uses the callsign, two-way communication is established and entry is permitted.',
+          zh: '进近席分配应答机编码与高度。管制员一旦呼叫呼号，"双向通讯"即建立，可以进入。' },
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'squawk {squawkSpoken}, at or above {altSpoken}' },
+            { w: 2, txt: '{call}' }
+          ],
+          en: 'Readback.',
+          zh: '复诵。' }
+      ]
+    ],
+    pattern: [
+      [
+        { who: 'PILOT',
+          parts: [
+            { w: 1, txt: '{twr}' },
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: '{distNm} miles north at {altSpoken}' },
+            { w: 4, txt: 'inbound for landing with {atisLetter}' }
+          ],
+          en: 'Inbound call: position, altitude, intent, ATIS letter.',
+          zh: '入场呼叫：位置、高度、意图、ATIS 编号。' },
+        { who: 'TWR',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 4, txt: 'enter left downwind runway {rwySpoken}, report midfield' }
+          ],
+          en: 'Tower assigns the pattern entry leg and asks for a position report at midfield.',
+          zh: '塔台指派起落航线进入边（左下风），并要求在中场报告位置。' },
+        { who: 'PILOT',
+          parts: [
+            { w: 4, txt: 'left downwind runway {rwySpoken}, will report midfield' },
+            { w: 2, txt: '{call}' }
+          ],
+          en: 'Readback.',
+          zh: '复诵。' },
+        { who: 'PILOT',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 3, txt: 'midfield, left downwind runway {rwySpoken}' }
+          ],
+          en: 'Position report on downwind, as instructed.',
+          zh: '按指示在下风边中场报位置。' },
+        { who: 'TWR',
+          parts: [
+            { w: 2, txt: '{call}' },
+            { w: 4, txt: 'runway {rwySpoken}, cleared to land' }
+          ],
+          en: 'Landing clearance.',
+          zh: '着陆许可。' }
+      ]
+    ]
   };
 
-  function expand(text, ctx) {
+  // ─── Phase metadata: button labels and ordering per mode ──
+  // Order matters — buttons render in this sequence.
+  const PHASES = {
+    ifr: [
+      { key: 'clearance', en: 'IFR Clearance',     zh: '放行许可' },
+      { key: 'taxi',      en: 'Taxi',              zh: '滑行' },
+      { key: 'takeoff',   en: 'Takeoff',           zh: '起飞' },
+      { key: 'climb',     en: 'Climb / Departure', zh: '爬升 / 离场' },
+      { key: 'enroute',   en: 'En Route',          zh: '航路' },
+      { key: 'descent',   en: 'Descent',           zh: '下降' },
+      { key: 'approach',  en: 'Approach',          zh: '进近' },
+      { key: 'landing',   en: 'Landing',           zh: '着陆' }
+    ],
+    vfr: [
+      { key: 'radio_check',       en: 'Radio Check',          zh: '通话检查' },
+      { key: 'taxi',              en: 'Taxi',                 zh: '滑行' },
+      { key: 'takeoff',           en: 'Takeoff',              zh: '起飞' },
+      { key: 'leaving',           en: 'Leaving the Area',     zh: '离开空域' },
+      { key: 'flight_following',  en: 'Flight Following',     zh: '雷达咨询服务' },
+      { key: 'position_report',   en: 'Position Report',      zh: '位置报告' },
+      { key: 'enter_class',       en: 'Entering Class B/C/D', zh: '进入 B/C/D 类空域' },
+      { key: 'pattern',           en: 'Pattern & Landing',    zh: '起落航线与着陆' }
+    ]
+  };
+
+  // ─── State ──────────────────────────────────────────────
+  let mode = 'ifr';                 // 'ifr' or 'vfr'
+  let activePhase = null;
+  let lastContext = null;           // re-used by regen of same phase
+  let showStructure = false;        // four-W highlight toggle
+
+  // ─── Slot expansion ─────────────────────────────────────
+  function expandSlots(text, ctx) {
     return text.replace(/\{(\w+)\}/g, (m, key) => {
       switch (key) {
-        case 'call':         return ctx.callsignSpoken;
-        case 'destName':     return ctx.dest.name;
-        case 'sidName':      return ctx.fix + ' ' + (1 + Math.floor(Math.random()*9)); // e.g. BUFFY 3
-        case 'altSpoken':    return ctx.altSpoken;
-        case 'flSpoken':     return ctx.flightLevelSpoken;
-        case 'depFreqSpoken':return ctx.depFreqSpoken;
-        case 'appFreqSpoken':return ctx.appFreqSpoken;
-        case 'ctrFreqSpoken':return ctx.ctrFreqSpoken;
+        case 'call':            return ctx.callsignSpoken;
+        case 'destName':        return ctx.dest ? ctx.dest.name : '';
+        case 'sidName':         return ctx.sidName || ((ctx.fix || 'BUFFY') + ' 1');
+        case 'altSpoken':       return ctx.altSpoken;
+        case 'flSpoken':        return ctx.flightLevelSpoken || '';
+        case 'depFreqSpoken':   return ctx.depFreqSpoken || '';
+        case 'appFreqSpoken':   return ctx.appFreqSpoken || '';
+        case 'ctrFreqSpoken':   return ctx.ctrFreqSpoken || '';
         case 'towerFreqSpoken': return ctx.towerFreqSpoken;
-        case 'squawkSpoken': return ctx.squawkSpoken;
-        case 'rwySpoken':    return ctx.runwaySpoken;
-        case 'fix':          return ctx.fix;
-        case 'gateNum':      return ctx.gateNum || (1 + Math.floor(Math.random()*40));
-        case 'atisLetter':   return ctx.atisLetter || String.fromCharCode(65 + Math.floor(Math.random()*26));
-        case 'windDir':      return ctx.windDir || (Math.floor(Math.random()*36)*10).toString().padStart(3,'0');
-        case 'windKt':       return ctx.windKt || (5 + Math.floor(Math.random()*20)).toString();
-        case 'hdgSpoken':    return ctx.headingSpoken;
-        case 'altCrossSpoken': return altitudeSpoken(Math.max(3000, ctx.altFt - 4000));
-        case 'twr':          return ctx.origin.twr;
-        case 'gnd':          return ctx.origin.gnd;
-        case 'dep':          return ctx.origin.dep;
-        case 'app':          return ctx.dest.app;
-        case 'ctrl':         return ctx.origin.ctr;
-        case 'nextCtrl':     return ctx.dest.ctr;
-        default:             return m;
+        case 'ctafFreqSpoken':  return ctx.ctafFreqSpoken || '';
+        case 'squawkSpoken':    return ctx.squawkSpoken;
+        case 'rwySpoken':       return ctx.runwaySpoken;
+        case 'fix':             return ctx.fix || '';
+        case 'gateNum':         return ctx.gateNum || 1;
+        case 'atisLetter':      return ctx.atisLetter;
+        case 'windDir':         return ctx.windDir;
+        case 'windKt':          return ctx.windKt;
+        case 'hdgSpoken':       return ctx.headingSpoken || '';
+        case 'altCrossSpoken':  return ctx.altCrossSpoken || '';
+        case 'twr':             return ctx.origin ? ctx.origin.twr : '';
+        case 'gnd':             return ctx.origin ? ctx.origin.gnd : '';
+        case 'dep':             return ctx.origin ? ctx.origin.dep : '';
+        case 'app':             return ctx.dest ? ctx.dest.app : (ctx.origin ? ctx.origin.app || '' : '');
+        case 'ctrl':
+          // For VFR, the pilot talks to Approach (TRACON) for flight
+          // following and position reports — not Center. For IFR, it's
+          // Center for en-route work.
+          if (ctx.mode === 'vfr') {
+            return ctx.origin ? (ctx.origin.app || ctx.origin.ctr || '') : '';
+          }
+          return ctx.origin ? ctx.origin.ctr : '';
+        case 'nextCtrl':        return ctx.dest ? ctx.dest.ctr : (ctx.origin ? ctx.origin.ctr : '');
+        case 'distNm':          return ctx.distNm || 10;
+        case 'originName':      return ctx.origin ? ctx.origin.name : '';
+        case 'landmarkName':    return ctx.landmark ? ctx.landmark.en : 'the practice area';
+        default:                return m;
       }
     });
   }
 
   function speakerHTML(who, ctx) {
     const isPilot = who === 'PILOT';
-    let label;
-    if (isPilot) {
-      label = ctx.callsign.toUpperCase();
-    } else {
-      label = SPEAKER_LABEL[who] || who;
-    }
+    const SPEAKER_LABEL = {
+      CLR: 'CLNC DLY', GND: 'GROUND', TWR: 'TOWER',
+      DEP: 'DEPARTURE', APP: 'APPROACH', CTR: 'CENTER'
+    };
+    const label = isPilot ? ctx.callsign.toUpperCase() : (SPEAKER_LABEL[who] || who);
     const cls = isPilot ? 'is-pilot' : 'is-controller';
     return `<span class="atc-speaker ${cls}">${label}</span>`;
   }
 
-  function renderPhase(phaseKey) {
-    const phaseTemplates = TEMPLATES[phaseKey];
-    if (!phaseTemplates) return;
-    const template = phaseTemplates[Math.floor(Math.random() * phaseTemplates.length)];
-    const ctx = sampleContext();
+  function renderTransmission(parts, ctx, withStructure) {
+    // Join parts with comma + space; if structure highlighting
+    // is on, wrap each part in a coloured span.
+    return parts.map((p, i) => {
+      const text = expandSlots(p.txt, ctx);
+      const sep = (i === 0) ? '' : ', ';
+      if (withStructure) {
+        return `${sep}<span class="atc-w atc-w${p.w}">${text}</span>`;
+      } else {
+        return `${sep}${text}`;
+      }
+    }).join('');
+  }
 
-    // Pre-compute crossing fix altitude/level to keep narrative consistent
-    ctx.gateNum = 1 + Math.floor(Math.random() * 40);
-    ctx.atisLetter = String.fromCharCode(65 + Math.floor(Math.random()*26));
-    ctx.windDir = (Math.floor(Math.random()*36)*10).toString().padStart(3,'0');
-    ctx.windKt = (4 + Math.floor(Math.random()*16)).toString();
+  function renderPhase(phaseKey, freshContext) {
+    const lib = (mode === 'vfr') ? VFR_TEMPLATES : IFR_TEMPLATES;
+    const phaseTemplates = lib[phaseKey];
+    if (!phaseTemplates) return;
+    const template = pick(phaseTemplates);
+    const ctx = freshContext ? sampleContext(mode) : (lastContext || sampleContext(mode));
+    lastContext = ctx;
 
     const lines = template.map(line => {
-      const txt = expand(line.txt, ctx);
+      const txHTML = renderTransmission(line.parts, ctx, showStructure);
       const spkHTML = speakerHTML(line.who, ctx);
       const decodeHTML = (line.en || line.zh)
         ? `<span class="atc-decode">
@@ -3418,43 +3934,91 @@
         : '';
       return `<div class="atc-line">
         ${spkHTML}
-        <span class="atc-transmission">"${txt}"${decodeHTML}</span>
+        <span class="atc-transmission">"${txHTML}."${decodeHTML}</span>
       </div>`;
     }).join('');
 
     dialogEl.innerHTML = lines;
   }
 
-  let activePhase = null;
-  function setActivePhase(phaseKey) {
-    activePhase = phaseKey;
-    phaseButtons.forEach(b => b.classList.toggle('active', b.dataset.phase === phaseKey));
-    renderPhase(phaseKey);
+  // ─── Phase button rendering — per mode ──────────────────
+  function renderPhaseButtons() {
+    phaseBtnsEl.innerHTML = PHASES[mode].map(p => `
+      <button type="button" data-phase="${p.key}" role="tab">
+        <span data-lang-content="en">${p.en}</span>
+        <span data-lang-content="zh">${p.zh}</span>
+      </button>
+    `).join('');
+    // Wire up clicks
+    phaseBtnsEl.querySelectorAll('button').forEach(b => {
+      b.addEventListener('click', () => {
+        activePhase = b.dataset.phase;
+        phaseBtnsEl.querySelectorAll('button').forEach(x =>
+          x.classList.toggle('active', x.dataset.phase === activePhase));
+        renderPhase(activePhase, true);   // fresh context
+      });
+    });
   }
 
-  phaseButtons.forEach(b => {
-    b.addEventListener('click', () => setActivePhase(b.dataset.phase));
-  });
-  regenBtn.addEventListener('click', () => {
-    if (activePhase) renderPhase(activePhase);
-    else setActivePhase('clearance');  // first regen click without selection → clearance
+  // ─── Mode toggle ─────────────────────────────────────────
+  modeButtons.forEach(b => {
+    b.addEventListener('click', () => {
+      const newMode = b.dataset.mode;
+      if (newMode === mode) return;
+      mode = newMode;
+      modeButtons.forEach(x => {
+        const active = x.dataset.mode === mode;
+        x.classList.toggle('active', active);
+        x.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      activePhase = null;
+      lastContext = null;
+      renderPhaseButtons();
+      showEmpty();
+    });
   });
 
-  // Initial state: empty placeholder asking the reader to pick a phase.
+  // ─── Regenerate button ───────────────────────────────────
+  regenBtn.addEventListener('click', () => {
+    if (activePhase) {
+      renderPhase(activePhase, true);   // fresh parameters
+    } else {
+      // No phase selected — pick the first one for the current mode
+      const first = PHASES[mode][0];
+      activePhase = first.key;
+      phaseBtnsEl.querySelectorAll('button').forEach(x =>
+        x.classList.toggle('active', x.dataset.phase === activePhase));
+      renderPhase(activePhase, true);
+    }
+  });
+
+  // ─── Show-structure checkbox ─────────────────────────────
+  showStructEl.addEventListener('change', () => {
+    showStructure = showStructEl.checked;
+    legendEl.hidden = !showStructure;
+    if (activePhase) {
+      // Re-render with same context (so user sees the same dialogue
+      // with structure overlaid) — don't sample fresh parameters.
+      renderPhase(activePhase, false);
+    }
+  });
+
+  // ─── Empty-state placeholder ─────────────────────────────
   function showEmpty() {
     dialogEl.innerHTML = `<div class="atc-dialog-empty">
       <span data-lang-content="en">Pick a flight phase above to generate a sample dialogue.</span>
       <span data-lang-content="zh">从上方选择一个飞行阶段，以生成一段示例对话。</span>
     </div>`;
   }
+
+  // ─── Init ────────────────────────────────────────────────
+  renderPhaseButtons();
   showEmpty();
 
-  // Re-render the visible block on language change so any data-lang-content
-  // children swap correctly. (CSS handles the actual swap; we don't re-run
-  // the template — same phase, same parameters.)
+  // Re-render on language change (CSS handles in-place swap; nothing
+  // to do, but keep the hook for future use).
   document.addEventListener('flying:langchange', () => {
     if (!activePhase) showEmpty();
-    // CSS handles in-place language swap for already-rendered lines
   });
 })();
 </script>
@@ -5134,15 +5698,16 @@
   applyFilter();
 
   // ─── Filter option text follows current language ──────────────
+  // Option order: [0] All channels  [1] CZ3456 only
   const filterOpts = filterSel.querySelectorAll('option');
   function updateFilterText() {
     const lang = document.body.getAttribute('data-lang') || 'en';
     if (lang === 'zh') {
-      filterOpts[0].textContent = '仅 CZ3456';
-      filterOpts[1].textContent = '全部频道';
+      filterOpts[0].textContent = '全部频道';
+      filterOpts[1].textContent = '仅 CZ3456';
     } else {
-      filterOpts[0].textContent = 'CZ3456 only';
-      filterOpts[1].textContent = 'All channels';
+      filterOpts[0].textContent = 'All channels';
+      filterOpts[1].textContent = 'CZ3456 only';
     }
   }
   updateFilterText();

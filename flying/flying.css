@@ -2015,20 +2015,75 @@ html { scroll-behavior: smooth; }
 }
 
 /* Top control bar: phase buttons on the left, regen button on the right */
-.flying-page .atc-controls {
+/* New top control row: VFR/IFR mode toggle | spacer | structure checkbox | regen */
+.flying-page .atc-mode-row {
   display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 0.65rem 0.85rem;
   padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--fl-rule);
   margin-bottom: 0.85rem;
 }
+.flying-page .atc-mode-spacer { flex: 1; }
+
+/* VFR/IFR segmented toggle — two buttons with shared border */
+.flying-page .atc-mode-toggle {
+  display: inline-flex;
+  border: 1px solid var(--fl-rule);
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--fl-paper);
+}
+.flying-page .atc-mode-toggle button {
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 0.85rem;
+  border: none;
+  background: transparent;
+  color: var(--fl-ink-soft);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.flying-page .atc-mode-toggle button + button {
+  border-left: 1px solid var(--fl-rule);
+}
+.flying-page .atc-mode-toggle button:hover {
+  color: var(--fl-sapphire);
+}
+.flying-page .atc-mode-toggle button.active {
+  background: var(--fl-sapphire);
+  color: #fff;
+}
+
+/* Show-structure checkbox label */
+.flying-page .atc-structure-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  color: var(--fl-ink-soft);
+  cursor: pointer;
+  user-select: none;
+}
+.flying-page[data-lang="zh"] .atc-structure-toggle { font-family: var(--fl-font-cn); }
+.flying-page .atc-structure-toggle [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-structure-toggle [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-structure-toggle [data-lang-content="zh"] { display: inline; }
+.flying-page .atc-structure-toggle input[type="checkbox"] {
+  accent-color: var(--fl-sapphire);
+  cursor: pointer;
+}
+
 .flying-page .atc-phase-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
   flex: 1 1 auto;
+  margin-bottom: 0.85rem;
 }
 .flying-page .atc-phase-buttons button {
   font-family: var(--fl-font-ui);
@@ -2056,7 +2111,49 @@ html { scroll-behavior: smooth; }
 .flying-page[data-lang="en"] .atc-phase-buttons button [data-lang-content="en"],
 .flying-page[data-lang="zh"] .atc-phase-buttons button [data-lang-content="zh"] { display: inline; }
 
-.flying-page .atc-actions { display: flex; align-items: center; }
+/* Four-W legend — only visible when structure toggle is on */
+.flying-page .atc-w-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.85rem;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.85rem;
+  background: var(--fl-paper);
+  border: 1px solid var(--fl-rule);
+  border-radius: 3px;
+  font-family: var(--fl-font-ui);
+  font-size: 0.74rem;
+  color: var(--fl-ink-soft);
+}
+/* The HTML `hidden` attribute would normally trigger display:none, but
+   our class rule above sets display:flex with higher specificity. We
+   need this explicit rule so JS toggling [hidden] actually hides it. */
+.flying-page .atc-w-legend[hidden] { display: none; }
+.flying-page[data-lang="zh"] .atc-w-legend { font-family: var(--fl-font-cn); }
+.flying-page .atc-w-legend [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-w-legend [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-w-legend [data-lang-content="zh"] { display: inline; }
+.flying-page .atc-w-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+}
+/* Four-W colour palette. Used both for the legend chips and (when
+   structure is on) for inline highlights inside transmissions. */
+.flying-page .atc-w1 { color: #1e5fa8; border-bottom: 1.5px solid #1e5fa8; }   /* sapphire */
+.flying-page .atc-w2 { color: #3a5a40; border-bottom: 1.5px solid #3a5a40; }   /* forest */
+.flying-page .atc-w3 { color: #b45309; border-bottom: 1.5px solid #b45309; }   /* amber */
+.flying-page .atc-w4 { color: #6b21a8; border-bottom: 1.5px solid #6b21a8; }   /* purple */
+.flying-page .atc-w-chip.atc-w1 { background: #e8f1f8; }
+.flying-page .atc-w-chip.atc-w2 { background: #eef2ec; }
+.flying-page .atc-w-chip.atc-w3 { background: #fef3c7; }
+.flying-page .atc-w-chip.atc-w4 { background: #f3e8ff; }
+/* When highlighting is OFF (no .atc-w wrappers in the rendered HTML),
+   transmissions render as plain inline text — nothing to do. */
 .flying-page .atc-regen-btn {
   font-family: var(--fl-font-ui);
   font-size: 0.78rem;
@@ -2144,3 +2241,25 @@ html { scroll-behavior: smooth; }
   }
   .flying-page .atc-speaker { font-size: 0.7rem; }
 }
+
+/* LiveATC note — small pull-quote style paragraph below the ATC widget */
+.flying-page .atc-liveatc-note {
+  margin: 1rem 0 1.75rem;
+  padding: 0.65rem 0.85rem;
+  border-left: 2px solid var(--fl-sapphire);
+  background: var(--fl-pale-blue);
+  font-family: var(--fl-font-ui);
+  font-size: 0.85rem;
+  color: var(--fl-ink-soft);
+  line-height: 1.55;
+}
+.flying-page[data-lang="zh"] .atc-liveatc-note { font-family: var(--fl-font-cn); }
+.flying-page .atc-liveatc-note a {
+  color: var(--fl-sapphire);
+  text-decoration: none;
+  font-weight: 500;
+}
+.flying-page .atc-liveatc-note a:hover { text-decoration: underline; }
+.flying-page .atc-liveatc-note [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-liveatc-note [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-liveatc-note [data-lang-content="zh"] { display: inline; }
