@@ -2590,19 +2590,18 @@ html { scroll-behavior: smooth; }
 }
 
 /* ── Wide-screen Tufte placement ──────────────────────────────
-   .layout is max-width: 96rem (1536px) with a 14rem TOC sidebar
-   on the left; .main is max-width: 64rem (1024px) inside the
-   1fr column. For a sidenote to fit in the gutter to the right
-   of .main without horizontal overflow, the viewport needs to
-   be at least .main's right edge (304px padding-left + 14rem
-   TOC + 3rem gap + 64rem main = ~1352px) plus the sidenote's
-   own width (14rem = 224px) plus a small margin. We set the
-   breakpoint at 1600px — the lowest viewport at which a 14rem
-   sidenote can sit comfortably in the gutter without clipping. */
-@media (min-width: 1600px) {
+   .main is 64rem wide but paragraphs inside cap at 50rem
+   (per the page's chosen reading-line length). The sidenote
+   should sit flush against the paragraph's right edge — not
+   .main's — otherwise there is a 14rem block of empty space
+   between the prose and the note.
+   Total horizontal footprint at the smallest comfortable
+   viewport: 14rem TOC + 3rem gap + 50rem prose + 1rem gap +
+   14rem sidenote ≈ 82rem (~1310px). 1300px breakpoint. */
+@media (min-width: 1300px) {
   .flying-page .sidenote {
     position: absolute;
-    left: calc(64rem + 1.5rem);
+    left: calc(50rem + 1rem);
     width: 14rem;
     margin: 0;
     padding: 0;
@@ -2614,12 +2613,4 @@ html { scroll-behavior: smooth; }
   .flying-page .sidenote .sn-tag { font-size: 0.62rem; }
   .flying-page .sidenote .sn-blurb { font-size: 0.7rem; }
   .flying-page[data-lang="zh"] .sidenote .sn-blurb { font-size: 0.72rem; }
-}
-
-/* On very wide screens (≥ 1800px) give sidenotes a touch more room */
-@media (min-width: 1800px) {
-  .flying-page .sidenote {
-    width: 16rem;
-    left: calc(64rem + 2rem);
-  }
 }
