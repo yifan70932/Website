@@ -886,347 +886,103 @@
     <figure class="full-bleed">
       <div class="plate-widget" id="plate-widget">
 
-        <!-- The plate itself, in SVG. Layout follows FAA d-TPP convention:
-             briefing strip on top, plan view + scale below, profile view, minimums box. -->
+        <!-- Real FAA d-TPP plate (KBUF ILS or LOC RWY 5, AL-65, cycle 16 APR–14 MAY 2026,
+             public domain — 17 USC §105). The SVG is a thin annotation layer: the chart
+             itself is a single <image>, with transparent <rect>s on top providing the
+             hover/click hot-zones. Each <g class="plate-region" data-key="X"> wraps a
+             rect whose styling (transparent at rest, half-opaque amber on active) is
+             inherited from the existing CSS — the JS interaction layer below is
+             unchanged from the previous hand-drawn version.
+             viewBox matches PNG pixel dimensions (1184 × 1815) so coordinates are
+             read directly off the chart. -->
         <div class="plate-stage">
-          <svg class="plate-svg" viewBox="0 0 540 760"
-               xmlns="http://www.w3.org/2000/svg" aria-label="ILS RWY 23 approach plate, KBUF">
+          <svg class="plate-svg" viewBox="0 0 1184 1815"
+               xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink"
+               aria-label="ILS or LOC RWY 5 approach plate, Buffalo Niagara International (KBUF), FAA d-TPP">
 
-            <defs>
-              <pattern id="plate-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f5f3ed" stroke-width="0.4"/>
-              </pattern>
-            </defs>
-
-            <!-- Paper background (no pointer events so it doesn't block hovers) -->
-            <rect width="540" height="760" fill="#fdfcf7" pointer-events="none"/>
+            <!-- The chart itself: a single rasterised reference of the FAA d-TPP page.
+                 Path is relative; index.html sits next to kbuf_ils5.png. The image is
+                 marked pointer-events="none" so hovers fall through to the rects below. -->
+            <image href="kbuf_ils5.png" x="0" y="0" width="1184" height="1815"
+                   preserveAspectRatio="xMidYMid meet" pointer-events="none"/>
 
             <!-- ════════════════════════════════════════════════════════════
-                 BRIEFING STRIP (top ~140px)
+                 ANNOTATION HOT-ZONES
+                 Each <g> wraps a transparent <rect> sized to a region of the
+                 chart. CSS turns the rect amber on hover/active.
+                 Coordinates were read off a 100-px grid overlaid on the PNG.
+                 Order: small/inset zones drawn LAST so they win on overlap
+                 (planview overlaps the missed-approach inset; the inset
+                 must be declared after the planview to take precedence).
                  ════════════════════════════════════════════════════════════ -->
+
+            <!-- Briefing strip: LOC freq, APP CRS, Rwy Ldg / TDZE / Apt Elev -->
             <g class="plate-region" data-key="briefing">
-              <rect x="10" y="10" width="520" height="135" fill="none"
-                    stroke="#1a1a1a" stroke-width="1"/>
-              <!-- Top header row -->
-              <line x1="10" y1="40" x2="530" y2="40" stroke="#1a1a1a" stroke-width="0.6"/>
-              <text x="20" y="30" font-family="Inter, sans-serif" font-size="10"
-                    font-weight="700" fill="#1a1a1a">BUFFALO/NIAGARA INTL (BUF)</text>
-              <text x="270" y="30" font-family="Inter, sans-serif" font-size="10"
-                    font-weight="700" fill="#1a1a1a" text-anchor="middle">BUFFALO, NEW YORK</text>
-              <text x="520" y="30" font-family="Inter, sans-serif" font-size="10"
-                    font-weight="700" fill="#1a1a1a" text-anchor="end">AL-77 (FAA)</text>
-
-              <!-- Procedure title row -->
-              <text x="270" y="62" font-family="Inter, sans-serif" font-size="14"
-                    font-weight="800" fill="#1a1a1a" text-anchor="middle">ILS or LOC RWY 23</text>
-
-              <!-- Frequency / NAVAID / minimums summary row -->
-              <line x1="10" y1="78" x2="530" y2="78" stroke="#1a1a1a" stroke-width="0.6"/>
-              <line x1="135" y1="78" x2="135" y2="145" stroke="#1a1a1a" stroke-width="0.6"/>
-              <line x1="270" y1="78" x2="270" y2="145" stroke="#1a1a1a" stroke-width="0.6"/>
-              <line x1="405" y1="78" x2="405" y2="145" stroke="#1a1a1a" stroke-width="0.6"/>
-
-              <!-- Cell 1: ILS frequency / identifier -->
-              <text x="20" y="92" font-family="Inter, sans-serif" font-size="8"
-                    fill="#5a5a5a" letter-spacing="0.05em">LOC/DME</text>
-              <text x="20" y="112" font-family="Inter, sans-serif" font-size="14"
-                    font-weight="700" fill="#1a1a1a">111.3</text>
-              <text x="20" y="128" font-family="JetBrains Mono, monospace" font-size="11"
-                    font-weight="700" fill="#1a1a1a">I-BUF</text>
-              <text x="20" y="142" font-family="Inter, sans-serif" font-size="8"
-                    fill="#5a5a5a">Chan 50</text>
-
-              <!-- Cell 2: Approach courses -->
-              <text x="145" y="92" font-family="Inter, sans-serif" font-size="8"
-                    fill="#5a5a5a" letter-spacing="0.05em">APP CRS / RWY</text>
-              <text x="145" y="112" font-family="Inter, sans-serif" font-size="14"
-                    font-weight="700" fill="#1a1a1a">227°</text>
-              <text x="145" y="128" font-family="Inter, sans-serif" font-size="9"
-                    fill="#1a1a1a">Rwy Idg 8094</text>
-              <text x="145" y="140" font-family="Inter, sans-serif" font-size="9"
-                    fill="#1a1a1a">TDZE 707  Apt Elev 728</text>
-
-              <!-- Cell 3: Missed approach summary -->
-              <text x="280" y="92" font-family="Inter, sans-serif" font-size="8"
-                    fill="#5a5a5a" letter-spacing="0.05em">MISSED APPROACH</text>
-              <text x="280" y="106" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">
-                Climb to 2500 then climbing
-              </text>
-              <text x="280" y="118" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">
-                left turn to 3000 direct
-              </text>
-              <text x="280" y="130" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">
-                BUF VOR/DME and hold.
-              </text>
-
-              <!-- Cell 4: Approach lighting / equipment -->
-              <text x="415" y="92" font-family="Inter, sans-serif" font-size="8"
-                    fill="#5a5a5a" letter-spacing="0.05em">EQUIPMENT</text>
-              <text x="415" y="108" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">ALSF-2  ⊕</text>
-              <text x="415" y="122" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">TDZ/CL</text>
-              <text x="415" y="136" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">PAPI Rwy 23</text>
+              <rect x="70" y="80" width="465" height="65"
+                    fill="transparent" stroke="none"/>
             </g>
 
-            <!-- COMM strip (small row under briefing) -->
+            <!-- Procedure-notes band: RADAR/RNP/ADF requirement + ALS/autopilot caveats -->
+            <g class="plate-region" data-key="notes">
+              <rect x="75" y="148" width="725" height="65"
+                    fill="transparent" stroke="none"/>
+            </g>
+
+            <!-- Missed approach summary (right of notes band) -->
+            <g class="plate-region" data-key="missed">
+              <rect x="800" y="148" width="315" height="65"
+                    fill="transparent" stroke="none"/>
+            </g>
+
+            <!-- Communication frequencies row (D-ATIS / APP / TWR / GND) -->
             <g class="plate-region" data-key="comm">
-              <rect x="10" y="148" width="520" height="22" fill="none"
-                    stroke="#1a1a1a" stroke-width="0.7"/>
-              <text x="20" y="163" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a">
-                ATIS 135.55  •  BUFFALO APP 126.5  •  TOWER 120.5  •  GND 121.9  •  CLNC DEL 118.55
-              </text>
+              <rect x="75" y="216" width="1040" height="68"
+                    fill="transparent" stroke="none"/>
             </g>
 
-            <!-- ════════════════════════════════════════════════════════════
-                 PLAN VIEW (middle ~300px)
-                 ════════════════════════════════════════════════════════════ -->
+            <!-- Minimum Sector Altitude circle (top-left, MSA GB 25 NM) -->
+            <g class="plate-region" data-key="msa">
+              <rect x="68" y="290" width="225" height="180"
+                    fill="transparent" stroke="none"/>
+            </g>
+
+            <!-- Plan view: the bulk of the page — localiser ribbon, PLAZZ LOM,
+                 ZOBSO IF, missed-approach track, Niagara River / border etc.
+                 Drawn before insets so insets layer on top. -->
             <g class="plate-region" data-key="planview">
-              <rect x="10" y="180" width="520" height="290" fill="url(#plate-grid)"
-                    stroke="#1a1a1a" stroke-width="1"/>
-
-              <!-- North arrow, top right -->
-              <g transform="translate(495 205)">
-                <line x1="0" y1="-12" x2="0" y2="12" stroke="#1a1a1a" stroke-width="1"/>
-                <polygon points="0,-12 -3,-6 3,-6" fill="#1a1a1a"/>
-                <text x="0" y="-16" font-family="Inter, sans-serif" font-size="10"
-                      font-weight="700" fill="#1a1a1a" text-anchor="middle">N</text>
-              </g>
-
-              <!-- Holding pattern at KLUMP (drawn before KLUMP so KLUMP wins hover) -->
-              <g class="plate-element" data-key="holding">
-                <path d="M 420 250
-                         a 16 8 0 0 1 32 0
-                         l 0 -28
-                         a 16 8 0 0 1 -32 0
-                         z"
-                      transform="rotate(-47 420 250)"
-                      fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
-                <text x="466" y="222" font-family="Inter, sans-serif" font-size="7"
-                      fill="#5a5a5a">HOLD</text>
-              </g>
-
-              <!-- KLUMP LOM (Locator Outer Marker) — IAF, far NE.
-                   Drawn AFTER holding so its hit-rect wins hover events. -->
-              <g class="plate-element" data-key="klump" transform="translate(420 250)">
-                <rect x="-12" y="-12" width="50" height="32" fill="transparent"/>
-                <circle r="4" fill="none" stroke="#1a1a1a" stroke-width="1.2"/>
-                <circle r="1.5" fill="#1a1a1a"/>
-                <text x="8" y="2" font-family="JetBrains Mono, monospace" font-size="9"
-                      font-weight="700" fill="#1a1a1a">KLUMP</text>
-                <text x="8" y="13" font-family="Inter, sans-serif" font-size="8" fill="#5a5a5a">LOM</text>
-              </g>
-
-              <!-- Localizer ribbon: from KLUMP toward BUF, descending diagonal -->
-              <g class="plate-element" data-key="localizer">
-                <!-- Solid centreline -->
-                <line x1="420" y1="250" x2="120" y2="430"
-                      stroke="#1a1a1a" stroke-width="1.4"/>
-                <!-- Lobed marks indicating LOC sensitivity -->
-                <g stroke="#1a1a1a" stroke-width="0.6" fill="none">
-                  <line x1="350" y1="280" x2="335" y2="265"/>
-                  <line x1="350" y1="280" x2="345" y2="295"/>
-                  <line x1="280" y1="320" x2="265" y2="305"/>
-                  <line x1="280" y1="320" x2="275" y2="335"/>
-                  <line x1="210" y1="362" x2="195" y2="347"/>
-                  <line x1="210" y1="362" x2="205" y2="377"/>
-                </g>
-                <!-- Course label box near KLUMP -->
-                <g transform="translate(380 235)">
-                  <rect x="-22" y="-9" width="44" height="14" fill="#fdfcf7"
-                        stroke="#1a1a1a" stroke-width="0.5"/>
-                  <text x="0" y="2" font-family="Inter, sans-serif" font-size="9"
-                        font-weight="700" fill="#1a1a1a" text-anchor="middle">227°</text>
-                </g>
-              </g>
-
-              <!-- Missed approach track (drawn before runway/VOR so they capture hover on top) -->
-              <g class="plate-element" data-key="missed-track" stroke="#1a1a1a"
-                 stroke-width="0.8" stroke-dasharray="4 3" fill="none">
-                <path d="M 120 430 Q 130 380, 155 460"/>
-                <polygon points="0,-3 -2.5,3 2.5,3" fill="#1a1a1a"
-                         transform="translate(155 462) rotate(160)"/>
-              </g>
-
-              <!-- Airport / runway 23 symbol — BUF, at the SW end of LOC -->
-              <g class="plate-element" data-key="runway" transform="translate(120 430)">
-                <rect x="-30" y="-30" width="60" height="70" fill="transparent"/>
-                <!-- Runway 5/23 (long) — black bar at runway heading -->
-                <g transform="rotate(47)">
-                  <rect x="-30" y="-2.5" width="60" height="5" fill="#1a1a1a"/>
-                  <!-- Runway 14/32 crossing it -->
-                  <rect x="-3" y="-22" width="6" height="44" fill="#1a1a1a"
-                        transform="rotate(-90)"/>
-                </g>
-                <text x="-24" y="38" font-family="JetBrains Mono, monospace" font-size="9"
-                      font-weight="700" fill="#1a1a1a">BUF</text>
-              </g>
-
-              <!-- BUF VOR/DME — represented as a hexagon SE of the runway -->
-              <g class="plate-element" data-key="buf-vor" transform="translate(155 460)">
-                <rect x="-50" y="-15" width="60" height="30" fill="transparent"/>
-                <polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5"
-                         fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
-                <circle r="1.5" fill="#1a1a1a"/>
-                <text x="-32" y="2" font-family="Inter, sans-serif" font-size="8"
-                      fill="#5a5a5a" text-anchor="end">VOR/DME</text>
-                <text x="-32" y="-8" font-family="JetBrains Mono, monospace" font-size="8"
-                      font-weight="700" fill="#1a1a1a" text-anchor="end">116.4 BUF</text>
-              </g>
-
-              <!-- MSA circle (top-left) — Minimum Safe Altitude reference -->
-              <g class="plate-element" data-key="msa">
-                <circle cx="60" cy="220" r="22" fill="none" stroke="#1a1a1a" stroke-width="0.7"/>
-                <text x="60" y="218" font-family="Inter, sans-serif" font-size="7"
-                      fill="#5a5a5a" text-anchor="middle">MSA 25 NM</text>
-                <text x="60" y="230" font-family="Inter, sans-serif" font-size="9"
-                      font-weight="700" fill="#1a1a1a" text-anchor="middle">3500</text>
-              </g>
-
-              <!-- Distance label along the LOC course -->
-              <text x="290" y="335" font-family="Inter, sans-serif" font-size="7"
-                    fill="#5a5a5a" transform="rotate(31 290 335)">5.6 NM</text>
-
-              <!-- Plan view label -->
-              <text x="20" y="195" font-family="Inter, sans-serif" font-size="7"
-                    fill="#5a5a5a" letter-spacing="0.05em">PLAN VIEW</text>
+              <rect x="295" y="290" width="820" height="720"
+                    fill="transparent" stroke="none"/>
             </g>
 
-            <!-- ════════════════════════════════════════════════════════════
-                 PROFILE VIEW (~140px)
-                 ════════════════════════════════════════════════════════════ -->
+            <!-- Missed-approach inset (top-right corner of plan view, 4 NM scale) -->
+            <g class="plate-region" data-key="missed_inset">
+              <rect x="868" y="290" width="247" height="120"
+                    fill="transparent" stroke="none"/>
+            </g>
+
+            <!-- Profile view (left-bottom): ZOBSO → PLAZZ → GS 3.00° → MAP -->
             <g class="plate-region" data-key="profile">
-              <rect x="10" y="478" width="380" height="160" fill="none"
-                    stroke="#1a1a1a" stroke-width="1"/>
-              <text x="20" y="493" font-family="Inter, sans-serif" font-size="7"
-                    fill="#5a5a5a" letter-spacing="0.05em">PROFILE VIEW</text>
-
-              <!-- Ground line -->
-              <line x1="40" y1="600" x2="370" y2="600" stroke="#1a1a1a" stroke-width="1.2"/>
-              <!-- Runway threshold mark -->
-              <rect x="350" y="596" width="20" height="8" fill="#1a1a1a"/>
-
-              <!-- Glide slope: enters at upper left, descends to runway at right -->
-              <g class="plate-element" data-key="glideslope">
-                <line x1="60" y1="510" x2="360" y2="600"
-                      stroke="#1a1a1a" stroke-width="1.4"/>
-                <text x="200" y="540" font-family="Inter, sans-serif" font-size="9"
-                      fill="#1a1a1a" transform="rotate(15 200 540)">GS 3.00°</text>
-                <text x="200" y="552" font-family="Inter, sans-serif" font-size="8"
-                      fill="#5a5a5a" transform="rotate(15 200 552)">TCH 52</text>
-              </g>
-
-              <!-- FAF (KLUMP / glideslope intercept) -->
-              <g class="plate-element" data-key="faf" transform="translate(80 521)">
-                <rect x="-30" y="-20" width="60" height="55" fill="transparent"/>
-                <polygon points="0,-6 6,0 0,6 -6,0" fill="none"
-                         stroke="#1a1a1a" stroke-width="1"/>
-                <text x="0" y="-12" font-family="JetBrains Mono, monospace" font-size="8"
-                      font-weight="700" fill="#1a1a1a" text-anchor="middle">KLUMP</text>
-                <text x="-25" y="20" font-family="Inter, sans-serif" font-size="8"
-                      fill="#1a1a1a">2300</text>
-                <text x="-25" y="30" font-family="Inter, sans-serif" font-size="7"
-                      fill="#5a5a5a">GS INT</text>
-              </g>
-
-              <!-- DA point (Decision Altitude) -->
-              <g class="plate-element" data-key="da" transform="translate(310 588)">
-                <rect x="-30" y="-12" width="80" height="20" fill="transparent"/>
-                <line x1="-50" y1="0" x2="50" y2="0" stroke="#c0392b"
-                      stroke-width="0.7" stroke-dasharray="3 2"/>
-                <circle r="3" fill="#c0392b"/>
-                <text x="6" y="-5" font-family="Inter, sans-serif" font-size="9"
-                      font-weight="700" fill="#c0392b">DA 907</text>
-              </g>
-
-              <!-- Missed approach climb arrow -->
-              <g class="plate-element" data-key="map">
-                <path d="M 360 600 Q 365 580, 380 555 L 380 488"
-                      stroke="#1a1a1a" stroke-width="1" fill="none"
-                      stroke-dasharray="3 2"/>
-                <polygon points="0,-3 -2.5,3 2.5,3" fill="#1a1a1a"
-                         transform="translate(380 488)"/>
-              </g>
-
-              <!-- Distance scale at bottom of profile -->
-              <text x="80" y="618" font-family="Inter, sans-serif" font-size="7"
-                    fill="#5a5a5a" text-anchor="middle">FAF</text>
-              <text x="220" y="618" font-family="Inter, sans-serif" font-size="7"
-                    fill="#5a5a5a" text-anchor="middle">5.6 NM</text>
-              <text x="360" y="618" font-family="Inter, sans-serif" font-size="7"
-                    fill="#5a5a5a" text-anchor="middle">RWY</text>
-              <text x="80" y="630" font-family="Inter, sans-serif" font-size="7"
-                    fill="#5a5a5a" text-anchor="middle">2300</text>
-              <text x="360" y="630" font-family="Inter, sans-serif" font-size="7"
-                    fill="#5a5a5a" text-anchor="middle">707</text>
+              <rect x="70" y="1085" width="680" height="325"
+                    fill="transparent" stroke="none"/>
             </g>
 
-            <!-- ════════════════════════════════════════════════════════════
-                 MINIMUMS BOX (bottom right)
-                 ════════════════════════════════════════════════════════════ -->
+            <!-- Airport diagram (right-bottom): runways 5-23 and 14-32, TWR -->
+            <g class="plate-region" data-key="airport">
+              <rect x="752" y="1085" width="363" height="365"
+                    fill="transparent" stroke="none"/>
+            </g>
+
+            <!-- Minimums box: S-ILS 5 / S-LOC 5 / CIRCLING × Cat A B C D -->
             <g class="plate-region" data-key="minimums">
-              <rect x="395" y="478" width="135" height="160" fill="none"
-                    stroke="#1a1a1a" stroke-width="1"/>
-              <text x="405" y="493" font-family="Inter, sans-serif" font-size="7"
-                    fill="#5a5a5a" letter-spacing="0.05em">MINIMUMS</text>
-
-              <!-- Header row -->
-              <line x1="395" y1="500" x2="530" y2="500" stroke="#1a1a1a" stroke-width="0.5"/>
-              <text x="403" y="513" font-family="Inter, sans-serif" font-size="7" fill="#5a5a5a">CAT</text>
-              <text x="445" y="513" font-family="Inter, sans-serif" font-size="8" fill="#5a5a5a" text-anchor="middle">A</text>
-              <text x="467" y="513" font-family="Inter, sans-serif" font-size="8" fill="#5a5a5a" text-anchor="middle">B</text>
-              <text x="489" y="513" font-family="Inter, sans-serif" font-size="8" fill="#5a5a5a" text-anchor="middle">C</text>
-              <text x="513" y="513" font-family="Inter, sans-serif" font-size="8" fill="#5a5a5a" text-anchor="middle">D</text>
-              <line x1="395" y1="520" x2="530" y2="520" stroke="#1a1a1a" stroke-width="0.5"/>
-
-              <!-- S-ILS row -->
-              <text x="403" y="535" font-family="Inter, sans-serif" font-size="7"
-                    font-weight="700" fill="#1a1a1a">S-ILS 23</text>
-              <text x="403" y="546" font-family="Inter, sans-serif" font-size="6.5"
-                    fill="#5a5a5a">DA 907</text>
-              <text x="445" y="540" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">¼</text>
-              <text x="467" y="540" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">¼</text>
-              <text x="489" y="540" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">¼</text>
-              <text x="513" y="540" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">½</text>
-              <line x1="395" y1="555" x2="530" y2="555" stroke="#1a1a1a" stroke-width="0.4"/>
-
-              <!-- S-LOC row -->
-              <text x="403" y="570" font-family="Inter, sans-serif" font-size="7"
-                    font-weight="700" fill="#1a1a1a">S-LOC 23</text>
-              <text x="403" y="581" font-family="Inter, sans-serif" font-size="6.5"
-                    fill="#5a5a5a">MDA 1080</text>
-              <text x="445" y="575" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">½</text>
-              <text x="467" y="575" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">½</text>
-              <text x="489" y="575" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">½</text>
-              <text x="513" y="575" font-family="Inter, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">¾</text>
-              <line x1="395" y1="589" x2="530" y2="589" stroke="#1a1a1a" stroke-width="0.4"/>
-
-              <!-- Circling row -->
-              <text x="403" y="606" font-family="Inter, sans-serif" font-size="7"
-                    font-weight="700" fill="#1a1a1a">CIRCLING</text>
-              <text x="456" y="605" font-family="Inter, sans-serif" font-size="8" fill="#1a1a1a" text-anchor="middle">1240</text>
-              <text x="501" y="605" font-family="Inter, sans-serif" font-size="8" fill="#1a1a1a" text-anchor="middle">1240</text>
-              <text x="456" y="618" font-family="Inter, sans-serif" font-size="7" fill="#5a5a5a" text-anchor="middle">1</text>
-              <text x="501" y="618" font-family="Inter, sans-serif" font-size="7" fill="#5a5a5a" text-anchor="middle">1¼</text>
+              <rect x="70" y="1410" width="680" height="155"
+                    fill="transparent" stroke="none"/>
             </g>
 
-            <!-- ════════════════════════════════════════════════════════════
-                 BOTTOM IDENTIFICATION STRIP
-                 ════════════════════════════════════════════════════════════ -->
-            <g>
-              <line x1="10" y1="650" x2="530" y2="650" stroke="#1a1a1a" stroke-width="0.6"/>
-              <text x="20" y="664" font-family="Inter, sans-serif" font-size="9"
-                    font-weight="700" fill="#1a1a1a">BUFFALO/NIAGARA INTL (BUF)</text>
-              <text x="270" y="664" font-family="Inter, sans-serif" font-size="9"
-                    font-weight="700" fill="#1a1a1a" text-anchor="middle">BUFFALO, NEW YORK</text>
-              <text x="520" y="664" font-family="Inter, sans-serif" font-size="9"
-                    font-weight="700" fill="#1a1a1a" text-anchor="end">42°56'N - 78°44'W</text>
-              <text x="20" y="680" font-family="Inter, sans-serif" font-size="9"
-                    font-weight="700" fill="#1a1a1a">ILS or LOC RWY 23</text>
-              <text x="520" y="680" font-family="Inter, sans-serif" font-size="9"
-                    font-weight="700" fill="#1a1a1a" text-anchor="end">Amdt 30  · 06APR2023</text>
-              <text x="270" y="700" font-family="Inter, sans-serif" font-size="8"
-                    fill="#5a5a5a" text-anchor="middle" font-style="italic">
-                Stylised reproduction. Not for navigation.
-              </text>
+            <!-- Landing aids + FAF-to-MAP timing (right-bottom of minimums) -->
+            <g class="plate-region" data-key="ldg_aids">
+              <rect x="752" y="1450" width="363" height="125"
+                    fill="transparent" stroke="none"/>
             </g>
 
           </svg>
@@ -1577,176 +1333,121 @@
       tag: 'BRIEFING STRIP',
       en: {
         title: 'The briefing strip',
-        body: 'The first thing the crew reads. Compresses the procedure title, the relevant ILS frequency and identifier, the final approach course, the runway threshold elevation, the missed-approach summary, and the approach lighting installed on this runway. The intent is that a flight crew can verify they have the right chart and tune the right radio in well under a minute, without yet looking at the rest of the page.'
+        body: 'The first thing the crew reads. Six numbers compressed into two short rows: the localiser frequency (108.5) and identifier (I-GBI), the final approach course (055°), the landing distance available on Runway 5 (7,569 ft), the touchdown-zone elevation (708 ft), and the airport elevation (727 ft). The intent is that a crew can verify they have the right chart and tune the right radio in well under a minute, without yet looking at the rest of the page.'
       },
       zh: {
         title: '通话简令带',
-        body: '机组首先阅读的部分。它压缩了进近程序名称、ILS 频率与识别码、最终进近航向、跑道入口高程、复飞要点、以及该跑道安装的进近灯。目的是让机组在不到一分钟内核对图表是否正确并调好无线电，而无需看到本页其它部分。'
+        body: '机组首先阅读的部分——六个数字被压缩在短短两行内：航向道频率（108.5）与识别码（I-GBI）、最终进近航向（055°）、5 号跑道可用着陆距离（7,569 英尺）、接地区高程（708 英尺）、机场高程（727 英尺）。目的是让机组在不到一分钟内核对图表是否正确并调好无线电，而无需看到本页其它部分。'
+      }
+    },
+    notes: {
+      tag: 'PROCEDURE NOTES',
+      en: {
+        title: 'Procedure notes & equipment requirements',
+        body: 'Every approach has a row of caveats below the briefing strip. Here: RADAR is required to enter the procedure (because the initial fix ZOBSO is identified by a radar vector rather than by an on-board navaid alone), GPS is acceptable for the RNP overlay version, and ADF is required when flying the LOC-only version (used to identify the PLAZZ outer marker). Two further notes: an autopilot-coupled approach is not authorised on this procedure, and if the approach lighting system is inoperative, the LOC-only minimum visibility for Categories C and D rises to RVR 5500. These are exactly the items that determine whether the crew can legally fly the approach today, given the aircraft equipment and the airport state.'
+      },
+      zh: {
+        title: '程序注解与设备要求',
+        body: '每个进近程序在简令带下方都有一行注意事项。本程序要求：进入程序须有雷达（因为初始定位点 ZOBSO 由雷达引导识别，而不是仅依赖机载导航设备），GPS 可用于 RNP 替代程序，仅航向道进近时须有 ADF（用于识别 PLAZZ 外指点标）。另两条说明：本程序禁止自动驾驶耦合进近；若进近灯系统失效，仅航向道进近的 C/D 类最低能见度提高至 RVR 5500。这些信息恰恰决定了机组在今天的飞机设备状态与机场条件下能否合法实施该进近。'
+      }
+    },
+    missed: {
+      tag: 'MISSED APPROACH',
+      en: {
+        title: 'Missed-approach summary',
+        body: 'Spelled out in plain text in the briefing band, then drawn graphically in the inset to the right and the dashed line in the plan view. From the missed-approach point: climb straight ahead to 3,000 ft, proceed direct to TRAVA, and hold. The summary box exists because in the workload-saturated moment when a missed approach is initiated — failed visual contact at the decision altitude, full power, gear and flaps repositioning, callout — the crew must already know what comes next without reading.'
+      },
+      zh: {
+        title: '复飞要点',
+        body: '在简令带以纯文字形式列出，并在右侧小图与平面图中的虚线轨迹中以图形再现。从复飞点起：保持航向爬升至 3,000 英尺，直飞 TRAVA，并进入等待。这个摘要框存在的原因：在复飞被触发的那个工作负荷饱和的瞬间——决断高度未目视、满推、起落架与襟翼重新设置、口呼——机组必须已经知道接下来要做什么，而无须临时阅读。'
       }
     },
     comm: {
       tag: 'COMM FREQUENCIES',
       en: {
         title: 'Communication frequencies',
-        body: 'The five frequencies a crew will need from descent through landing, in the order they will be used: ATIS for current weather, then approach control, tower for landing clearance, ground for taxi, and clearance delivery for the next IFR clearance. Listed left-to-right in the order of expected handoff.'
+        body: 'The four frequencies a crew will need from arrival through landing, listed left-to-right in the order of expected handoff: D-ATIS (135.35) for current weather, Buffalo Approach (126.15 / 263.125), Buffalo Tower (120.5 / 257.8) for the landing clearance, then Ground (133.2 / 257.8) after vacating the runway. Each civil frequency is paired with a military UHF channel — a legacy of joint civil/military operations.'
       },
       zh: {
         title: '通信频率',
-        body: '从下降到落地阶段机组需要使用的五个频率，按使用顺序排列：ATIS 获取当前天气，进近管制，塔台落地许可，地面滑行，离场放行。从左到右按预期移交顺序排列。'
+        body: '从进场到落地阶段机组需要使用的四个频率，按移交顺序从左到右排列：D-ATIS（135.35）获取当前天气，Buffalo Approach 进近（126.15 / 263.125），Buffalo Tower 塔台（120.5 / 257.8）获取落地许可，落地后转 Ground 地面（133.2 / 257.8）。每个民用频率都配有一个军用 UHF 频道——这是民军合用机场的历史遗留。'
+      }
+    },
+    msa: {
+      tag: 'MSA CIRCLE',
+      en: {
+        title: 'Minimum Sector Altitude',
+        body: 'A circular emergency reference, centred on the GB locator and 25 nautical miles in radius, divided into sectors. Each sector lists the lowest altitude (here 2,800 / 3,300 / 3,900 ft) that guarantees 1,000 ft of clearance above any obstacle within that sector. The MSA is not part of the published procedure; it exists for the case where the crew loses navigation or situational awareness and needs an instant safe-altitude floor.'
+      },
+      zh: {
+        title: '最低扇区高度（MSA）',
+        body: '一个以 GB 定位台为中心、半径 25 海里的应急参照圆，分为若干扇区。每个扇区给出对该扇区内任何障碍物均保证 1,000 英尺余度的最低高度（此处为 2,800 / 3,300 / 3,900 英尺）。MSA 并非已公布进近程序的组成部分；它的存在是为了应对机组丧失导航或情境意识时需要瞬时获得安全高度下限的情形。'
       }
     },
     planview: {
       tag: 'PLAN VIEW',
       en: {
         title: 'The plan view',
-        body: 'A top-down map of the procedure, showing the localiser course, the locator (KLUMP), the hold for course-reversal entries, the runway, the missed-approach track, and the BUF VOR/DME used in the missed approach. Rotated so the runway and approach course point downward — the natural direction of flight — rather than to true north. North is shown by the small arrow in the upper right.'
+        body: 'A top-down map of the procedure. The shaded ribbon is the localiser course (055° to runway 5), drawn as a wide hatched lane because it represents a sensitivity zone rather than a line. Inbound from the south-west the aircraft crosses ZOBSO (the initial fix, identified by JHW VOR R-017) and then PLAZZ (the outer marker, where the glide-slope intercept happens). The dashed line continuing past the runway is the missed-approach track. The U.S./Canada border crosses the chart because final approach to runway 5 begins inside Canadian airspace — a feature unique to a handful of border airports.'
       },
       zh: {
         title: '平面图',
-        body: '程序的俯视图：航向道、KLUMP 定位台、用于反向进入的等待航线、跑道、复飞航径、以及复飞时使用的 BUF VOR/DME。该图旋转使跑道与进近航向朝下——这是飞行的自然方向——而不是真北朝上。北向由右上角的小箭头表示。'
+        body: '程序的俯视图。带阴影的飘带是航向道（055° 对准 5 号跑道），画成宽阔的斜线带是因为它代表的是一个灵敏区，不是一条线。从西南方进入时，飞机依次穿越 ZOBSO（初始定位点，由 JHW VOR 的 R-017 径向线识别）和 PLAZZ（外指点标，下滑道截获点）。越过跑道继续延伸的虚线是复飞航径。图中横贯的美加边境是因为进入 5 号跑道的最终进近段实际上从加拿大空域内开始——这是少数几个边境机场独有的特征。'
       }
     },
-    klump: {
-      tag: 'IAF / FAF',
+    missed_inset: {
+      tag: 'MISSED-APPROACH INSET',
       en: {
-        title: 'KLUMP — locator outer marker',
-        body: 'A non-directional beacon (NDB) collocated with the outer marker of the ILS. KLUMP serves a double role here: it is the Initial Approach Fix (entry into the procedure from the en-route phase) and, on the glide-slope intercept, it becomes the Final Approach Fix where the crew begins the descent below the intercept altitude.'
+        title: 'Missed-approach inset',
+        body: 'The same missed-approach trajectory shown in the plan view, redrawn here at a different scale (4 NM bar at top) so the small holding-pattern geometry at TRAVA is visible. The two course numbers (055°/235°) on the holding loop give the inbound and outbound tracks of the racetrack. Reading both the plan view and this inset together: the plan view shows the missed approach in context with the rest of the procedure; the inset shows the part the crew will actually fly after the go-around.'
       },
       zh: {
-        title: 'KLUMP — 定位外指点标',
-        body: '一个与 ILS 外指点标共址的无方向信标（NDB）。在这里它兼具双重角色：作为初始进近定位点（IAF，从航路阶段进入进近程序的入口）；在截获下滑道时，它也是最终进近定位点（FAF），机组由此开始低于截获高度的下降。'
-      }
-    },
-    localizer: {
-      tag: 'LOCALIZER',
-      en: {
-        title: 'The localiser course',
-        body: 'The 227° magnetic course defined by the localiser transmitter at the far end of runway 23. The "feathered" tick marks along the centreline are not a stylistic choice; they indicate which side of the centreline the 90 Hz tone is dominant on, so a pilot reading the chart upside-down would still know whether a left or right correction is required to recapture the course.'
-      },
-      zh: {
-        title: '航向道',
-        body: '由 23 号跑道远端航向道发射机定义的 227° 磁航向。中线两侧的"羽毛"刻线不是装饰：它们指示中线哪一侧 90 Hz 音占主导，使飞行员即便倒着读图也能判断需要左修正还是右修正以重新截获航道。'
-      }
-    },
-    holding: {
-      tag: 'HOLDING PATTERN',
-      en: {
-        title: 'Holding pattern at KLUMP',
-        body: 'A racetrack-shaped pattern published at the IAF for course-reversal entries and for ATC holding. Direction (right turns), inbound course, and leg length are all standardised in the chart\'s graphical depiction, so the crew can fly the entry without separate written instructions.'
-      },
-      zh: {
-        title: 'KLUMP 等待航线',
-        body: '出现在 IAF 处的跑马场形等待航线，用于反向进入与 ATC 指令保持。方向（右转）、入航航向、航段长度全部以图形约定标示，机组无需额外书面指令即可执行入航程序。'
-      }
-    },
-    runway: {
-      tag: 'RUNWAY DIAGRAM',
-      en: {
-        title: 'Runway diagram',
-        body: 'The two runways at BUF — 5/23 (the long one) and 14/32 — drawn at their actual relative angle and proportion. This compact depiction lets the crew correlate the localiser course with the visible runway environment when they break out of cloud at the decision altitude.'
-      },
-      zh: {
-        title: '跑道示意',
-        body: 'BUF 的两条跑道——5/23（主跑道）和 14/32——按实际相对角度与比例绘制。这种紧凑的描绘让机组在决断高度冲出云层时，能立刻把航向道与目视的跑道环境对应起来。'
-      }
-    },
-    'buf-vor': {
-      tag: 'NAVAID',
-      en: {
-        title: 'BUF VOR/DME (116.4)',
-        body: 'A VHF Omnidirectional Range with Distance Measuring Equipment, located on the airfield. Not used for the approach itself — but used as the missed-approach holding fix. After a missed approach the aircraft climbs to 3,000 ft and proceeds direct to BUF for the published hold.'
-      },
-      zh: {
-        title: 'BUF VOR/DME (116.4)',
-        body: '位于机场内的甚高频全向信标台 / 测距设备。不直接用于进近——但被用作复飞等待定位点。复飞后飞机爬升至 3,000 英尺并直飞 BUF 执行公布的等待程序。'
-      }
-    },
-    'missed-track': {
-      tag: 'MISSED APPROACH',
-      en: {
-        title: 'Missed approach track',
-        body: 'The dashed line shows the lateral path the aircraft must fly if the runway is not in sight at the decision altitude: continue runway heading briefly, then a left climbing turn direct to BUF VOR/DME and hold. Drawn dashed because it is conditional — flown only on a missed approach.'
-      },
-      zh: {
-        title: '复飞航径',
-        body: '虚线表示当决断高度仍未看见跑道时飞机必须执行的横向航径：先短暂保持跑道航向，然后左转爬升直飞 BUF VOR/DME 并进入等待。用虚线绘制是因为它是条件性的——只在复飞时才被飞行。'
-      }
-    },
-    msa: {
-      tag: 'MSA',
-      en: {
-        title: 'Minimum Safe Altitude',
-        body: 'The MSA circle gives a single emergency-use altitude (here 3,500 ft) within 25 NM of the reference navaid that guarantees terrain and obstacle clearance in any direction. Used if the crew loses situational awareness and needs an immediately-safe altitude to climb to.'
-      },
-      zh: {
-        title: '最低安全高度（MSA）',
-        body: 'MSA 圆给出一个紧急使用高度（此处 3,500 英尺），保证在距参考导航台 25 海里范围内、任何方向上的地形与障碍物超越间隔。当机组失去情境意识、需要一个立即安全的爬升高度时使用。'
+        title: '复飞小图',
+        body: '与平面图中相同的复飞轨迹，以不同比例尺重新绘制（顶部的 4 海里比例尺），让 TRAVA 等待航线的几何细节得以显现。等待航线上的两个航向数字（055°/235°）给出跑道型等待的入航与出航航迹。两图同读：平面图把复飞放在整个程序的背景下，小图则只画出复飞后机组实际飞行的那一段。'
       }
     },
     profile: {
       tag: 'PROFILE VIEW',
       en: {
         title: 'The profile view',
-        body: 'A side view of the same procedure shown in the plan view above. The plan view answers "which direction"; the profile view answers "what altitude, when". The two are read together: cross KLUMP at 2,300 ft, follow the 3.0° glide slope, descend to a decision altitude of 907 ft, miss if not visual.'
+        body: 'A side view of the same procedure shown in the plan view above. The plan view answers "which direction"; the profile view answers "what altitude, when". Read together: cross ZOBSO at 4,000 ft, descend on a step to cross PLAZZ at 2,300 ft on the 3.0° glide slope (TCH 46 ft), continue to a decision altitude of 908 ft MSL — the asterisk-marked altitude in the minimums box. The hatched ground silhouette gives the crew an immediate sense of terrain clearance.'
       },
       zh: {
         title: '剖面图',
-        body: '上方平面图所示同一程序的侧视图。平面图回答"往哪个方向"；剖面图回答"何时、什么高度"。两者必须一起读：在 KLUMP 上方以 2,300 英尺通过，沿 3.0° 下滑道下降，到 907 英尺决断高度——若未目视到跑道则复飞。'
+        body: '上方平面图所示同一程序的侧视图。平面图回答"往哪个方向"；剖面图回答"何时、什么高度"。两图同读：在 ZOBSO 上方 4,000 英尺通过，按阶梯下降至在 PLAZZ 上方 2,300 英尺截获 3.0° 下滑道（TCH 46 英尺），继续下降至 908 英尺 MSL 的决断高度——即最低标准框中带星号的那个高度。带阴影的地面剪影让机组对地形余度有直接的感知。'
       }
     },
-    glideslope: {
-      tag: 'GLIDE SLOPE',
+    airport: {
+      tag: 'AIRPORT DIAGRAM',
       en: {
-        title: 'The glide slope',
-        body: 'A 3.0° descending path in space, defined by the glide-slope antenna beside runway 23. Threshold Crossing Height (TCH) is 52 ft — the altitude the glide slope passes over the runway threshold. The angle is steeper than ideal at high altitudes (which is why aircraft are typically not yet on the glide slope at the FAF) and self-corrects as the aircraft descends.'
+        title: 'Airport diagram',
+        body: 'The two runways at BUF — 5/23 (the long one, 8,829 ft × 150 ft) and 14/32 (7,161 ft × 150 ft) — drawn at their actual relative angle and proportion, with elevation 727 ft and TDZE 708 ft labelled at the top. This compact depiction lets the crew correlate the localiser course with the visible runway environment when they break out of cloud at the decision altitude. The small "0.9% UP" notation indicates the runway slope.'
       },
       zh: {
-        title: '下滑道',
-        body: '由 23 号跑道旁的下滑道天线定义的 3.0° 空间下降路径。入口越障高（TCH）为 52 英尺——下滑道在跑道入口上方的高度。在高高度上，3 度角的物理下降率显得偏大（这就是为什么飞机通常不会在 FAF 已经在下滑道上），随着下降会自然校正。'
-      }
-    },
-    faf: {
-      tag: 'FAF',
-      en: {
-        title: 'Final approach fix',
-        body: 'On a precision approach, the FAF is the point where the aircraft, descending on the glide slope, passes through the published intercept altitude — here 2,300 ft over KLUMP. From this point onward, the autopilot (or the pilot) is following the glide-slope needle rather than a level altitude.'
-      },
-      zh: {
-        title: '最终进近定位点（FAF）',
-        body: '在精密进近中，FAF 是飞机沿下滑道下降时穿过公布截获高度的位置——此处为 KLUMP 上方 2,300 英尺。从这一点开始，自动驾驶（或飞行员）跟随下滑道指针，而不再保持平飞高度。'
-      }
-    },
-    da: {
-      tag: 'DA',
-      en: {
-        title: 'Decision altitude — 907 ft',
-        body: 'The single most important number on the chart. At this altitude — 907 ft MSL, 200 ft above the runway threshold — the crew must have the runway environment in sight. If not, they must immediately initiate the missed approach. The DA is not a "minimum descent altitude" with hover-time; it is a decision instant. There is no shallower descent permitted below this point on a missed approach.'
-      },
-      zh: {
-        title: '决断高度（DA）— 907 英尺',
-        body: '本图上最重要的一个数字。在此高度——907 英尺 MSL，跑道入口以上 200 英尺——机组必须看见跑道环境。若未看见，必须立即执行复飞。DA 不是允许停留的"最低下降高度"，而是一个决策瞬间。在复飞时，不允许在此点以下继续浅下降。'
-      }
-    },
-    map: {
-      tag: 'MISSED APPROACH PROFILE',
-      en: {
-        title: 'Missed approach climb',
-        body: 'The dashed climbing arrow shows the vertical profile of the missed approach: from DA, climb straight ahead to 2,500 ft, then continue climbing to 3,000 ft on the curving path back to BUF VOR/DME (depicted in the plan view above). The two views together describe one three-dimensional path.'
-      },
-      zh: {
-        title: '复飞爬升',
-        body: '虚线爬升箭头展示复飞的垂直剖面：从 DA 直前方爬升至 2,500 英尺，然后沿（上方平面图所示的）弯曲路径继续爬升至 3,000 英尺并返回 BUF VOR/DME。两个视图共同描述一条三维路径。'
+        title: '机场图',
+        body: 'BUF 的两条跑道——5/23（长跑道，8,829 × 150 英尺）和 14/32（7,161 × 150 英尺）——按实际夹角与比例绘制，顶部标有机场高程 727 英尺与接地区高程 708 英尺。这一紧凑表达让机组在决断高度突破云层时，能够把航向道与肉眼所见的跑道环境对应起来。小字 "0.9% UP" 表示跑道纵坡。'
       }
     },
     minimums: {
       tag: 'MINIMUMS BOX',
       en: {
         title: 'The minimums box',
-        body: 'Three rows for three different approach categories: a full ILS (DA 907, ¼ mile RVR — Category I), a localiser-only approach if the glide slope is unusable (a much higher minimum descent altitude, 1,080 ft), and a circling minimum for landing on a different runway. The four columns A/B/C/D are aircraft approach categories, defined by approach speed; faster categories get marginally higher minima because of their wider turning radii.'
+        body: 'Three rows for three different approach categories: a full ILS (DA 908 MSL / RVR 1800 — 200 ft above the threshold, the Category I floor), a localiser-only approach if the glide slope is unusable (a much higher minimum descent altitude, 1,060 ft), and circling minimums for landing on a different runway. The four columns A/B/C/D are aircraft approach categories defined by approach speed; faster categories get marginally higher minima because of their wider turning radii. The numbers in parentheses are HAT (height above touchdown) and visibility in statute miles.'
       },
       zh: {
         title: '最低标准框',
-        body: '三行对应三种不同的进近类别：全套 ILS（DA 907 英尺，跑道视程 ¼ 英里——CAT I 标准）；仅有航向道（下滑道不可用）的进近，最低下降高度更高（1,080 英尺）；以及目视盘旋至其他跑道落地的最低标准。A/B/C/D 四列是按进近速度划分的飞机进近类别——速度更快的类别由于盘旋半径更大，最低标准相应略高。'
+        body: '三行对应三种不同的进近类别：全套 ILS（DA 908 英尺 MSL / RVR 1800——高于跑道入口 200 英尺，CAT I 标准下限）；仅有航向道（下滑道不可用）的进近，最低下降高度更高（1,060 英尺）；以及目视盘旋至其它跑道落地的最低标准。A/B/C/D 四列是按进近速度划分的飞机进近类别——速度更快的类别由于盘旋半径更大，最低标准相应略高。括号内数字是 HAT（接地区上方高度）与法定英里能见度。'
+      }
+    },
+    ldg_aids: {
+      tag: 'LANDING AIDS',
+      en: {
+        title: 'Landing aids & FAF-to-MAP timing',
+        body: 'Two pieces of information packed into one corner. Above: the lighting equipment installed on this runway — REIL on Runway 14, TDZL/RCLS on Runways 5 and 23, and HIRL on both. Below: the time table for flying the localiser-only version without a glide slope. With no glide slope to follow, the crew descends to the LOC minimum and then starts a stopwatch at the FAF (PLAZZ); the table gives the time at each ground speed at which they should reach the missed-approach point — for instance, 2 min 27 sec at 120 knots. This is one of the older techniques in instrument flying, still listed because the LOC-only fallback must be flyable when the glide slope fails.'
+      },
+      zh: {
+        title: '助航灯光与 FAF-至-MAP 时间表',
+        body: '一个角落里塞了两条信息。上方：本跑道安装的灯光设备——14 号跑道有 REIL，5 号与 23 号跑道有 TDZL/RCLS，两条跑道均装有 HIRL。下方：仅航向道（无下滑道）进近时使用的时间表。没有下滑道可循，机组下降到 LOC 最低高度后，从 FAF（PLAZZ）开始计时；表格给出在各对地速度下到达复飞点所需的时间——例如 120 节时为 2 分 27 秒。这是仪表飞行中较古老的技术之一，至今仍列在图上，因为下滑道失效时仍必须能够实施 LOC-only 进近。'
       }
     }
   };
