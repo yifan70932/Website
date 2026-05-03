@@ -77,25 +77,21 @@
           <span data-lang-content="zh">四 · 仪表还是 178 秒</span>
         </a></li>
         <li><a href="#sec-defense">
-          <span data-lang-content="en">5 · Defense in Depth</span>
-          <span data-lang-content="zh">五 · 纵深防御</span>
-        </a></li>
-        <li><a href="#sec-engine">
-          <span data-lang-content="en">6 · The Engine That Almost Never Fails</span>
-          <span data-lang-content="zh">六 · 几乎从不失效的发动机</span>
+          <span data-lang-content="en">5 · Flying as Layered Safety</span>
+          <span data-lang-content="zh">五 · 作为安全冗余的飞行</span>
         </a></li>
         <li><a href="#sec-career">
-          <span data-lang-content="en">7 · Flying as a Career</span>
-          <span data-lang-content="zh">七 · 作为职业的飞行</span>
+          <span data-lang-content="en">6 · Flying as a Career</span>
+          <span data-lang-content="zh">六 · 作为职业的飞行</span>
         </a></li>
         <li><a href="#sec-leisure">
-          <span data-lang-content="en">8 · Flying as Serious Leisure</span>
-          <span data-lang-content="zh">八 · 作为严肃休闲的飞行</span>
+          <span data-lang-content="en">7 · Flying as Serious Leisure</span>
+          <span data-lang-content="zh">七 · 作为严肃休闲的飞行</span>
         </a></li>
         <li>
           <a href="#sec-further">
-            <span data-lang-content="en">9 · Flying as Lifelong Learning</span>
-            <span data-lang-content="zh">九 · 作为持续学习的飞行</span>
+            <span data-lang-content="en">8 · Flying as Lifelong Learning</span>
+            <span data-lang-content="zh">八 · 作为持续学习的飞行</span>
           </a>
           <ol class="toc-sublist">
             <li><a href="#further-flightradar24">flightradar24</a></li>
@@ -1286,8 +1282,8 @@
     </div>
 
     <h2 id="sec-defense"><span class="sec-num">5 ·</span>
-      <span data-lang-content="en">Defense in Depth</span>
-      <span data-lang-content="zh">纵深防御</span>
+      <span data-lang-content="en">Flying as Layered Safety</span>
+      <span data-lang-content="zh">作为安全冗余的飞行</span>
     </h2>
 
     <div data-lang-content="en">
@@ -1296,6 +1292,8 @@
       <p>The most influential model of how this architecture functions is James Reason's <em>Swiss cheese</em> model of accident causation, formulated in the late 1980s and now standard in aviation safety training, healthcare risk management, and nuclear plant operations. The model represents each defensive layer — design redundancy, training, procedure, supervision, regulation — as a slice of cheese with holes in it. The holes correspond to local failures: a checklist item missed, a runway incursion not detected, a maintenance log not signed. Each slice has many holes, but the holes are at different places. An accident occurs only when, momentarily, the holes in every slice line up to admit a single trajectory through the entire stack. Reason's central observation is that the layers themselves are necessary but not sufficient; what matters is the alignment of failures across them. Eliminating any single class of failure does not eliminate accidents, because the holes drift; what reduces accident rates is reducing the number of holes per slice and, where possible, adding slices.</p>
 
       <p>The model implies a particular discipline in accident investigation: identify all the holes in all the slices, not merely the proximate one. Modern aviation investigation, conducted under ICAO Annex 13 with national bodies (NTSB in the United States, AAIB in Britain, BEA in France, BFU in Germany, CAAC AIB in China), is designed around this discipline. Investigations are no-blame, separated from criminal proceedings, and oriented to systemic causes. The output is a set of recommendations for changes to aircraft design, procedure, training, regulation, and infrastructure. Compliance is voluntary in form and near-universal in practice, because each major operator has an interest in not seeing the next accident in the same chain.</p>
+
+      <p>The slices in the stack are of two basic kinds. Some are <em>human and procedural</em> — training, checklists, crew interaction, regulatory oversight, the chain of decisions that produces or fails to produce a go-around. Others are <em>engineered</em> — duplicated hydraulic systems, dual-redundant flight computers, two engines instead of one, the airframe certified to keep flying after any single failure. The two kinds of slice are continuous with each other in the model and continuous with each other in practice: as one becomes more reliable, the system depends on it more, and the other is asked to do correspondingly less. The remainder of this chapter walks both halves of the stack — first the human layers, with the case of China Southern 3456 as a study in what alignment of holes looks like, and then the engineering layers, with the rise of ETOPS as the clearest case of physical redundancy being progressively replaced by demonstrated reliability.</p>
 
       <h3>Crew Resource Management</h3>
 
@@ -1318,6 +1316,8 @@
       <p>关于这套架构如何运作，最有影响力的模型是 James Reason 在 1980 年代末提出的事故因果"瑞士奶酪"模型。该模型现在是航空安全培训、医疗风险管理、核电站运行的标准框架。它把每一层防御——设计冗余、训练、程序、监督、规章——表征为一片带洞的奶酪。这些洞对应于局部失败：一项检查单未执行、一次跑道侵入未被察觉、一份维修记录未签字。每一片有许多洞，但洞处在不同位置。当事故发生时，必有一刻——所有奶酪片上的洞临时排成一线，让一条单一的轨迹穿过整摞防御。Reason 的核心观察是：防御层本身是必要的，但不是充分的；真正决定事故的是各层失败之间的对齐。消除任何单一类失败并不能消除事故，因为洞会移动；能降低事故率的，是减少每片上的洞数，并且——如果可能——再加几片。</p>
 
       <p>该模型对事故调查蕴含一种特定的纪律：辨识所有片上的所有洞，而非仅辨识距事故最近的那一个。当代航空事故调查依 ICAO 附件 13 进行，由各国调查机构执行（美国 NTSB、英国 AAIB、法国 BEA、德国 BFU、中国民航局事故调查中心），其设计正是围绕这一纪律。调查不归责，与刑事程序分离，面向系统性原因。其输出是一组针对飞机设计、程序、训练、规章与基础设施的建议。形式上是自愿遵守，实质上则近乎普遍执行——因为每一家主要运营人都不希望在同一条因果链上见到下一起事故。</p>
+
+      <p>这摞片上的奶酪基本上有两类。一类是<em>人与程序</em>——训练、检查单、机组互动、监管、决定复飞或不复飞的那条决策链。另一类是<em>工程</em>——双余度的液压系统、双余度的飞控计算机、两台发动机取代一台、机体被认证为可在任一单一故障后继续飞行。两类奶酪片在模型里彼此连续，在实际运行中也彼此连续：当其中一类变得更可靠时，系统对它的依赖就更深，另一类被要求承担的份额就相应下降。本章的余下部分会同时走过这摞防御的两半——先看人的层面，以南方航空 3456 为一个"洞对齐"的研究案例；再看工程的层面，以 ETOPS 的兴起为物理冗余被持续被证可靠性所取代的最清晰案例。</p>
 
       <h3>机组资源管理</h3>
 
@@ -1374,12 +1374,9 @@
       </div>
     </figure>
 
-    <h2 id="sec-engine"><span class="sec-num">6 ·</span>
-      <span data-lang-content="en">The Engine That Almost Never Fails</span>
-      <span data-lang-content="zh">几乎从不失效的发动机</span>
-    </h2>
-
     <div data-lang-content="en">
+      <h3>Engineered redundancy</h3>
+
       <p>A modern high-bypass turbofan engine on a long-haul widebody achieves an in-flight shutdown rate on the order of one event per one hundred thousand engine-flight-hours, sometimes better. Stated differently: a single engine, run continuously for the equivalent of eleven years without rest, would on average fail once. Two such engines on the same airframe, failing independently, would both fail in the same flight at a rate so low that the corresponding distance can be flown over open water without a usable diversion airport. This calculation is the foundation of <span class="term">ETOPS</span> — Extended-range Twin-engine Operational Performance Standards — and it has, over four decades, fundamentally restructured how the world flies.</p>
 
       <p>Until the late 1970s, the FAA's "60-minute rule" required that any twin-engine commercial aircraft remain within sixty minutes single-engine flying time of an adequate diversion airport. The rule was a holdover from the piston era, when engine reliability was measured in tens of hours rather than tens of thousands. It made transoceanic operation by twin-engine aircraft impossible: the North Atlantic and the Pacific are wide enough that any sensible route exceeds sixty minutes from any diversion. Long-haul international flying was therefore the exclusive province of three-engine and four-engine aircraft — the L-1011 TriStar, the DC-10, the 747.</p>
@@ -1394,6 +1391,8 @@
     </div>
 
     <div data-lang-content="zh">
+      <h3>工程层面的冗余</h3>
+
       <p>当代远程宽体客机上使用的高涵道比涡扇发动机，空中停车率在每十万发动机飞行小时一次左右，更好的可以更低。换一种说法：一台发动机若不间断地连续运行——相当于十一年不休——平均才会失效一次。同一架飞机上的两台这样的发动机，如果各自独立地失效，要在同一次飞行中同时失效的概率，已低到可以在没有可用备降机场的开阔水面上飞行相应距离的程度。这一计算正是 <span class="term">ETOPS</span>（双发延程运行）规则的基础。四十年来，它从根本上重塑了世界飞行的方式。</p>
 
       <p>直到 1970 年代末，FAA 的"60 分钟规则"要求任何双发商用飞机必须始终处于以单发飞行不超过 60 分钟可达一个适宜备降机场的范围内。这一规则是活塞机时代的遗留——那时发动机的可靠性以几十小时计而非几万小时计。它使双发飞机的跨洋运行成为不可能：北大西洋与太平洋都宽到任何合理的航线都会超出 60 分钟之外。因此远程国际飞行长期是三发与四发飞机的专属领域——L-1011 三星、DC-10、747。</p>
@@ -1407,7 +1406,7 @@
       <p>装在大多数通用航空飞机上的活塞发动机则是另一种器物。一台莱康明 O-360 或大陆 IO-550 的设计谱系——经较小修改——可追溯至 1950 年代。它们烧含铅航空汽油，需要手动调贫油气混合比，有两套独立的磁电机作为点火冗余——因为任何单一磁电机的失效率高到需要备份。它们的空中停车率比涡轮机差几个数量级。它们仍然在用，并不是因为没有更好的替代——柴油与涡轮替代品都已存在——而是因为，在一个资本薄弱的私有机主市场上，把大量已认证的发动机型号替换掉的认证成本高到令人却步。通用航空所飞的，是一些其可靠性假设属于上一个时代的发动机；商业航空所飞的，则是一些其可靠性假设由发动机自己报告的数据持续向上修正的发动机。</p>
     </div>
 
-    <h2 id="sec-career"><span class="sec-num">7 ·</span>
+    <h2 id="sec-career"><span class="sec-num">6 ·</span>
       <span data-lang-content="en">Flying as a Career</span>
       <span data-lang-content="zh">作为职业的飞行</span>
     </h2>
@@ -1456,7 +1455,7 @@
       <p>三个时代里，没有变的是后果的不对称性。在每一个时代，飞机都能杀死飞行员，介质都能把两者一同杀死。技能变了，技能的等级变了，但身份绑定没变——因为后果没变。</p>
     </div>
 
-    <h2 id="sec-leisure"><span class="sec-num">8 ·</span>
+    <h2 id="sec-leisure"><span class="sec-num">7 ·</span>
       <span data-lang-content="en">Flying as Serious Leisure</span>
       <span data-lang-content="zh">作为严肃休闲的飞行</span>
     </h2>
@@ -1521,7 +1520,7 @@
       <p>实体飞行与飞行模拟作为严肃休闲的两种追求，其相互关系是不对称的，且仅在有限程度上可相互替代。模拟器被持照飞行员广泛用于程序排练，尤其是仪表进近、系统失效与陌生目的地——在这些情形中，在实机上训练的合规与经济成本均不可承受；FAA 允许在认证模拟设备上完成仪表现行性要求中有限的一部分。反之，绝大多数飞行模拟实践者并不持有飞行员执照；并且，实体飞行所涉及的若干核心技能——着陆时的能量管理、通过躯体感觉识别失速、繁忙机场综合工作负荷的整合——即便在保真度极高的模拟器中也只能被不完全地复现。两类活动因此彼此处于部分重叠而非替代的关系：模拟器不取代飞机，飞机也不取代模拟器，相当一部分认真的参与者两者皆涉。</p>
     </div>
 
-    <h2 id="sec-further"><span class="sec-num">9 ·</span>
+    <h2 id="sec-further"><span class="sec-num">8 ·</span>
       <span data-lang-content="en">Flying as Lifelong Learning</span>
       <span data-lang-content="zh">作为持续学习的飞行</span>
     </h2>
