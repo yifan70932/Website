@@ -3229,19 +3229,30 @@
        - Mouse drag = OrbitControls camera orbit (NOT control input)
        - Toggle "Show aircraft response": when ON, slider deflections
          also rotate the airplane's whole attitude (aileron→roll,
-         elevator→pitch, rudder→yaw) in addition to the surface
-         deflection. Default OFF so the user first sees the surface
-         doing its job before seeing the airframe response.
+         elevator→pitch, rudder→yaw). Default OFF so the user first
+         sees each surface doing its job before seeing the response.
+
+     === IMPORTANT: Hinge correction ===
+     The GLB model groups have non-identity local rotations and
+     pivot points sitting near each surface's geometric centre rather
+     than at the actual hinge line. Rotating those groups directly
+     produces visually wrong deflection (surface "twists" around its
+     middle, or rotates around a tilted axis).
+
+     Fix: after loading, for each control surface we (1) compute
+     the hinge edge position in WORLD coordinates by inspecting the
+     surface's world bounding box, (2) create a fresh hinge wrapper
+     group at that point with identity rotation (so its local axes
+     equal world axes), and (3) reparent the mesh into the hinge
+     using THREE.Object3D.attach() which preserves the mesh's world
+     transform. Then we rotate the hinge around world X (or Y for
+     rudder) — this gives clean trailing-edge deflection.
 
      Sign conventions (standard aviation):
        aileron  +25° = right roll (right aileron up + left down)
-       elevator +25° = nose up (trailing edge UP)
+       elevator +25° = nose up   (trailing edge UP)
        rudder   +25° = nose right (right rudder)
        flaps    0–40° = trailing edge down
-
-     The model uses Y-up, +Z forward (nose), +X spanwise (verified
-     in probe). Pivot points sit at the leading edges of all moving
-     surfaces — modeler set them correctly, no manual fix needed.
      ───────────────────────────────────────────────────────── -->
 <script>
 (function () {
@@ -3261,18 +3272,16 @@
   const resetBtn = widget.querySelector('#cessna3d-reset');
   const attitudeToggle = widget.querySelector('#cessna3d-show-attitude');
 
-  // Slider state (target) and rendered state (smoothed).
+  // Slider state (target) and rendered state (smoothed)
   const inputs = { aileron: 0, elevator: 0, rudder: 0, flaps: 0, throttle: 0 };
   const state  = { ...inputs };
 
-  // Format slider readout
   function fmt(channel, v) {
     if (channel === 'throttle') return Math.round(v) + '%';
     return Math.round(v) + '°';
   }
 
-  // Wire sliders even before launch — they update labels.
-  // Once 3D is live, the animation loop will read inputs.
+  // Wire up sliders + reset (disabled until 3D loads)
   sliders.forEach(slider => {
     const ch = slider.dataset.channel;
     slider.addEventListener('input', () => {
@@ -3281,7 +3290,6 @@
       const valueEl = sliderValueEls[ch];
       if (valueEl) valueEl.textContent = fmt(ch, v);
     });
-    // Disable sliders until 3D is loaded
     slider.disabled = true;
   });
   if (resetBtn) {
@@ -3295,7 +3303,6 @@
   }
   if (attitudeToggle) attitudeToggle.disabled = true;
 
-  // Click handler — wait for Three.js to be available, then init
   launchBtn.addEventListener('click', start, { once: true });
 
   function start() {
@@ -3315,9 +3322,7 @@
   function initScene() {
     // ─── Scene setup ───────────────────────────────────
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xe8f1f8);  // pale blue (matches --fl-pale-blue)
-
-    // Sky gradient via fog — fades distant objects into background
+    scene.background = new THREE.Color(0xe8f1f8);
     scene.fog = new THREE.Fog(0xe8f1f8, 30, 90);
 
     const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 200);
@@ -3328,7 +3333,6 @@
     renderer.setPixelRatio(window.devicePixelRatio || 1);
     renderer.outputEncoding = THREE.sRGBEncoding;
 
-    // Lights — three-point setup
     scene.add(new THREE.AmbientLight(0xffffff, 0.55));
     const keyLight = new THREE.DirectionalLight(0xffffff, 0.8);
     keyLight.position.set(8, 12, 6);
@@ -3337,23 +3341,18 @@
     fillLight.position.set(-6, 4, -4);
     scene.add(fillLight);
 
-    // Ground plane — simple grid below the airplane (no real horizon)
-    // Sized so it extends well beyond the camera's view; the fog
-    // fades its edges into the sky color.
     const grid = new THREE.GridHelper(80, 40, 0x9ca3af, 0xd1d5db);
     grid.position.y = -2;
     scene.add(grid);
 
-    // OrbitControls for mouse-drag camera orbit
     const controls = new THREE.OrbitControls(camera, canvas);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
     controls.minDistance = 8;
     controls.maxDistance = 35;
-    controls.maxPolarAngle = Math.PI * 0.49;  // don't let camera go below ground
+    controls.maxPolarAngle = Math.PI * 0.49;
     controls.target.set(0, 0, 0);
 
-    // Resize handling
     function resize() {
       const w = viewport.clientWidth;
       const h = viewport.clientHeight;
@@ -3369,56 +3368,85 @@
     resize();
 
     // ─── Load GLB ───────────────────────────────────────
-    const loader = new THREE.GLTFLoader();
-
-    // Determine model URL — relative to page, work in both production
-    // (where assets live next to index.html) and the dev/test setup.
-    const modelUrl = 'low_poly_plane.glb';
-
-    loader.load(modelUrl, (gltf) => {
+    new THREE.GLTFLoader().load('low_poly_plane.glb', (gltf) => {
       const root = gltf.scene;
-      scene.add(root);
 
-      // Wrap the airplane in an "attitude" group so we can rotate
-      // the whole thing for the "show response" mode without disturbing
-      // OrbitControls. Camera looks at world origin; airplane sits at
-      // origin and rotates around it.
+      // Wrap whole airplane in attitudeGroup for "show response" mode
       const attitudeGroup = new THREE.Group();
-      scene.remove(root);
       attitudeGroup.add(root);
       scene.add(attitudeGroup);
+      scene.updateMatrixWorld(true);
 
-      // Find each control surface group by name (set in the GLB by the
-      // modeler, verified in our probe).
-      const elevator   = root.getObjectByName('Elevator');
-      const rudder     = root.getObjectByName('Rudder');
-      const lAileron   = root.getObjectByName('LeftAileron');
-      const rAileron   = root.getObjectByName('RightAileron');
-      const lFlap      = root.getObjectByName('LeftFlap');
-      const rFlap      = root.getObjectByName('RightFlap');
-      const propeller  = root.getObjectByName('Propeller');
+      // ─── Build hinge wrappers ──────────────────────────
+      // For each control surface, compute the hinge edge in WORLD
+      // coordinates and create a fresh hinge group with identity
+      // rotation. Reparent the surface mesh into the hinge using
+      // attach() (preserves world transform).
+      //
+      // hinge.rotation.x — rotates around a world-X axis through the
+      // hinge point. This gives clean trailing-edge up/down deflection
+      // for ailerons/elevator/flaps.
+      // hinge.rotation.y — rotates around a world-Y axis (vertical),
+      // for the rudder.
 
-      // Hide the loading indicator, reveal help hint
+      // Build a hinge wrapper. Returns the hinge group, or null if
+      // the named surface isn't found.
+      // hingeEdge: 'forward' (largest Z) or 'top' or 'bottom' — for
+      //   the surfaces here, all hinges are at the forward (+Z) edge.
+      function makeHinge(surfaceName) {
+        const surfaceNode = root.getObjectByName(surfaceName);
+        if (!surfaceNode) return null;
+
+        // Compute the surface's world bounding box BEFORE reparenting
+        const wbox = new THREE.Box3().setFromObject(surfaceNode);
+        // Hinge is the forward edge (largest Z value), centered in X.
+        // Position the hinge there, in world coordinates.
+        const hingeX = (wbox.min.x + wbox.max.x) / 2;
+        const hingeY = (wbox.min.y + wbox.max.y) / 2;
+        const hingeZ = wbox.max.z;   // forward edge (toward nose)
+
+        const hinge = new THREE.Group();
+        hinge.name = surfaceName + '_Hinge';
+        hinge.position.set(hingeX, hingeY, hingeZ);
+        // Hinge has no rotation: its local axes = world axes.
+        // Add it to the attitudeGroup so it follows attitude rotations.
+        attitudeGroup.add(hinge);
+        // We need to update its world matrix so attach() works correctly
+        attitudeGroup.updateMatrixWorld(true);
+
+        // Reparent the surface (with all its nested meshes) into hinge,
+        // preserving its world transform.
+        hinge.attach(surfaceNode);
+
+        return hinge;
+      }
+
+      // Build hinges for the four primary surfaces + flaps
+      const elevHinge = makeHinge('Elevator');
+      const rudHinge  = makeHinge('Rudder');
+      const lAilHinge = makeHinge('LeftAileron');
+      const rAilHinge = makeHinge('RightAileron');
+      const lFlpHinge = makeHinge('LeftFlap');
+      const rFlpHinge = makeHinge('RightFlap');
+
+      // For propeller: hinge at its centre (it spins around its own axis,
+      // not at an edge). Easiest: just rotate the existing Propeller group
+      // around the model's +Z axis. The probe showed Propeller's pivot is
+      // already at its geometric centre, so this works without a wrapper.
+      const propeller = root.getObjectByName('Propeller');
+
+      // Hide loading, show help
       loadingEl.hidden = true;
       helpEl.hidden = false;
-      // Auto-hide help after a few seconds
       setTimeout(() => { helpEl.hidden = true; }, 4500);
 
-      // Enable sliders + button + toggle
+      // Enable controls
       sliders.forEach(s => { s.disabled = false; });
       if (resetBtn) resetBtn.disabled = false;
       if (attitudeToggle) attitudeToggle.disabled = false;
 
       // ─── Animation loop ───────────────────────────────
-      // Each frame:
-      //   1. Tween smoothed `state` toward slider `inputs`
-      //   2. Apply state to control-surface rotations (always)
-      //   3. If "show response" toggle is on, also rotate the
-      //      attitudeGroup according to the same inputs
-      //   4. Spin propeller proportional to throttle
-      //   5. OrbitControls update + render
-
-      const TAU = 0.18;   // 180 ms tween time-constant
+      const TAU = 0.18;
       let lastTime = performance.now();
       let propRotation = 0;
 
@@ -3429,43 +3457,63 @@
         const alpha = 1 - Math.exp(-dt / TAU);
         for (const k in inputs) state[k] += (inputs[k] - state[k]) * alpha;
 
-        // Convert deg → rad
-        const dAil   = state.aileron  * Math.PI / 180;
-        const dElev  = state.elevator * Math.PI / 180;
-        const dRud   = state.rudder   * Math.PI / 180;
-        const dFlap  = state.flaps    * Math.PI / 180;
+        const dAil  = state.aileron  * Math.PI / 180;
+        const dElev = state.elevator * Math.PI / 180;
+        const dRud  = state.rudder   * Math.PI / 180;
+        const dFlap = state.flaps    * Math.PI / 180;
 
         // ─ Surface deflections ─
-        // The model: Y-up, +Z forward, +X spanwise.
-        // Pivot at leading edge of each surface; deflection rotates
-        // the trailing edge up or down (or left/right for rudder).
+        // All hinges are placed at the forward edge of each surface.
+        // Rotating around hinge's local X = world X (since hinge has no
+        // rotation), which is the wingspan/horizontal axis. For a
+        // surface lying flat with trailing edge at lower Z (rearward),
+        // a positive rotation tilts the trailing edge downward in world.
 
-        // Elevator: hinge axis = X. Positive elevator deflection
-        // (stick back) raises the trailing edge → nose up.
-        // In our coord system, trailing edge is at z<hinge, so rotating
-        // around +X moves trailing edge in +Y (up) when angle is positive.
-        if (elevator) elevator.rotation.x = -dElev;
+        // Elevator: positive slider = stick back = trailing edge UP =
+        // nose UP. Trailing edge is at smaller Z (rearward of hinge).
+        // For trailing edge to go UP, need rotation that moves -Z to +Y
+        // → rotation.x = +dElev (right-hand rule: +X axis, fingers curl
+        // -Z toward +Y when rotation is positive).
+        if (elevHinge) elevHinge.rotation.x = dElev;
 
-        // Rudder: hinge axis = Y. Positive rudder (right pedal) yaws
-        // nose right → tail goes left → trailing edge of rudder
-        // swings to airplane's left (−X).
-        if (rudder) rudder.rotation.y = -dRud;
+        // Rudder: hinge wrapper is rotated around world Y (vertical).
+        // Positive slider = right rudder = nose right = trailing edge
+        // swings to the LEFT (airplane's −X side, viewer's right when
+        // looking from behind). Right-hand rule on +Y axis: +Z rotates
+        // toward +X for positive rotation. Rudder trailing edge is at
+        // -Z (toward tail), so positive rotation moves it toward -X
+        // (airplane's left, viewer's right from behind). Wait — that's
+        // backwards. Let me think: positive rudder = nose right, so
+        // trailing edge of rudder swings airplane's LEFT.
+        // +Y rotation positive: viewing from above looking down, things
+        // rotate counter-clockwise. So a vector along -Z rotates toward
+        // -X (airplane's left). YES — so positive rudder = positive Y
+        // rotation on the hinge. But we also have a sign flip because
+        // "right pedal" = "rudder right" in pilot terms means the
+        // trailing edge actually goes to the airplane's right? No, the
+        // pedal pushes the rudder, and right pedal pushes the rudder
+        // such that nose goes right, which means trailing edge of the
+        // rudder goes to the airplane's left side.
+        // So slider+ → rudder TE swings airplane's left → tail of
+        // airplane gets pushed right by airflow → nose goes right.
+        // Hinge rotation: positive Y rotates -Z (TE direction) toward -X
+        // (airplane left). Match.
+        if (rudHinge) rudHinge.rotation.y = dRud;
 
-        // Ailerons: hinge axis = X. Differential.
-        // Positive aileron = bank right = right aileron UP, left DOWN.
-        // Right aileron is at +X, left aileron at −X. Both rotate
-        // around the X axis but with opposite sign.
-        if (rAileron) rAileron.rotation.x = -dAil;
-        if (lAileron) lAileron.rotation.x =  dAil;
+        // Ailerons (differential): positive slider = bank right
+        //   = right aileron UP (TE up), left aileron DOWN (TE down).
+        // For aileron, TE is at smaller Z (rearward). For TE to go UP,
+        // rotation around +X moves -Z → +Y, i.e. rotation.x = positive.
+        if (rAilHinge) rAilHinge.rotation.x = dAil;
+        if (lAilHinge) lAilHinge.rotation.x = -dAil;
 
-        // Flaps: hinge axis = X. Both deploy DOWN together.
-        if (rFlap) rFlap.rotation.x = dFlap;
-        if (lFlap) lFlap.rotation.x = dFlap;
+        // Flaps: positive slider = flaps DOWN (TE down).
+        // For TE to go DOWN, rotation around +X moves -Z → -Y,
+        // i.e. rotation.x = negative.
+        if (rFlpHinge) rFlpHinge.rotation.x = -dFlap;
+        if (lFlpHinge) lFlpHinge.rotation.x = -dFlap;
 
-        // Propeller: spins around its disc normal (Z axis in model space).
-        // Speed proportional to throttle — at 100% it's about 6 revs/sec
-        // (much slower than reality, but realistic spin would just look
-        // like a blur in this framerate range).
+        // Propeller spin
         if (propeller) {
           propRotation += dt * (state.throttle / 100) * Math.PI * 12;
           propeller.rotation.z = propRotation;
@@ -3473,18 +3521,10 @@
 
         // ─ Aircraft attitude (response mode) ─
         if (attitudeToggle && attitudeToggle.checked) {
-          // Map slider directly to attitude (not rate-based) so the
-          // user can see "this much deflection produces this much
-          // response" — instructive even if not physically realistic.
-          // Amplification factors chosen for visual clarity.
-          //   roll  = 1.6× aileron deflection
-          //   pitch = 1.0× elevator deflection
-          //   yaw   = 1.4× rudder deflection
-          attitudeGroup.rotation.z =  dAil  * 1.6;   // roll right  → +Z rotation
-          attitudeGroup.rotation.x =  dElev * 1.0;   // pitch up    → +X rotation
-          attitudeGroup.rotation.y = -dRud  * 1.4;   // yaw right   → −Y rotation
+          attitudeGroup.rotation.z =  dAil  * 1.6;
+          attitudeGroup.rotation.x =  dElev * 1.0;
+          attitudeGroup.rotation.y = -dRud  * 1.4;
         } else {
-          // Tween attitude back to zero
           attitudeGroup.rotation.x += (0 - attitudeGroup.rotation.x) * alpha;
           attitudeGroup.rotation.y += (0 - attitudeGroup.rotation.y) * alpha;
           attitudeGroup.rotation.z += (0 - attitudeGroup.rotation.z) * alpha;
@@ -3498,7 +3538,6 @@
     }, undefined, (err) => {
       loadingEl.hidden = true;
       helpEl.hidden = true;
-      // Show error in placeholder
       const errEl = document.createElement('div');
       errEl.className = 'cessna3d-error';
       errEl.textContent = 'Failed to load 3D model.';
