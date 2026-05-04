@@ -65,7 +65,7 @@ body.photography-page[data-lang="zh"] {
 /* ─── Topbar ─────────────────────────────────────────────────────── */
 .photography-page .topbar {
   border-bottom: 1px solid var(--ph-rule);
-  background: rgba(247, 244, 237, 0.92);
+  background: rgba(255, 255, 255, 0.92);
   position: sticky;
   top: 0;
   z-index: 100;
