@@ -862,8 +862,8 @@ body.photography-page[data-lang="zh"] {
   font-size: 0.78rem;
   color: var(--ph-ink-soft);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.4rem 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.5rem 1rem;
 }
 
 .photography-page[data-lang="zh"] .colorspace-coverage { font-family: var(--ph-font-cn); }
@@ -872,7 +872,8 @@ body.photography-page[data-lang="zh"] {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  white-space: nowrap;
+  min-width: 0;
+  flex-wrap: wrap;
 }
 
 .photography-page .colorspace-coverage .cov-swatch {
@@ -892,6 +893,7 @@ body.photography-page[data-lang="zh"] {
   font-family: var(--ph-font-mono);
   color: var(--ph-ink-faint);
   font-size: 0.74rem;
+  white-space: nowrap;
 }
 
 /* When the first-batch toggle is active, give it a distinct look */
@@ -1044,6 +1046,88 @@ body.photography-page[data-lang="zh"] {
   border: 1px solid var(--ph-rule);
   border-radius: 4px;
   background: #fff;
+}
+
+/* Collapsible <details> wrapper around each ref-table */
+.photography-page details.ref-table-collapse {
+  margin: 1.25rem 0;
+  max-width: 52rem;
+  border: 1px solid var(--ph-rule);
+  border-radius: 4px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.photography-page details.ref-table-collapse > summary {
+  padding: 0.75rem 1rem 0.75rem 2.4rem;
+  background: var(--ph-paper-deep);
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  font-family: var(--ph-font-ui);
+  font-size: 0.85rem;
+  color: var(--ph-graphite);
+  user-select: none;
+  transition: background 0.12s;
+}
+
+.photography-page[data-lang="zh"] details.ref-table-collapse > summary { font-family: var(--ph-font-cn); }
+
+.photography-page details.ref-table-collapse > summary:hover {
+  background: var(--ph-pale-navy);
+}
+
+/* Custom triangle disclosure marker */
+.photography-page details.ref-table-collapse > summary::-webkit-details-marker { display: none; }
+
+.photography-page details.ref-table-collapse > summary::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 1.05rem;
+  width: 0;
+  height: 0;
+  border-left: 6px solid var(--ph-navy);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  transition: transform 0.18s ease;
+  transform-origin: 30% 50%;
+}
+
+.photography-page details.ref-table-collapse[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.photography-page details.ref-table-collapse > summary strong {
+  display: block;
+  font-weight: 600;
+  font-family: var(--ph-font-body);
+  font-size: 0.92rem;
+  color: var(--ph-graphite);
+  margin-bottom: 0.2rem;
+}
+
+.photography-page[data-lang="zh"] details.ref-table-collapse > summary strong { font-family: var(--ph-font-cn); }
+
+.photography-page details.ref-table-collapse > summary .caption-note {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--ph-ink-faint);
+  font-size: 0.78rem;
+}
+
+.photography-page details.ref-table-collapse > summary .summary-hint {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 0.74rem;
+  color: var(--ph-cyan);
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+.photography-page details.ref-table-collapse > .ref-table-body {
+  overflow-x: auto;
+  border-top: 1px solid var(--ph-rule);
 }
 
 .photography-page .ref-table-caption {
