@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photography — yifanova.com</title>
+  <meta name="description" content="A working set of notes on photography — the optical apparatus, the latent image, the path from imaging to material artifact, the artistic axis from the decisive moment to uncommon places, and photography as serious leisure. Bilingual: English / 中文.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
+
+  <link rel="stylesheet" href="/assets/photography.css">
+</head>
+
+<body class="photography-page" data-lang="en">
+
+<!-- ─── Topbar ─────────────────────────────────────────────────── -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">yifanova.com</span>
+      <span style="color: var(--ph-ink-faint); margin-left: 0.4rem;">· /photography</span>
+    </div>
+    <div class="lang-toggle" role="tablist" aria-label="Language">
+      <button type="button" data-lang-set="en" class="active">EN</button>
+      <button type="button" data-lang-set="zh">中文</button>
+    </div>
+  </div>
+</header>
+
+<!-- ─── Layout: TOC sidebar + main column ──────────────────────── -->
+<div class="layout">
+
+  <!-- ───── Table of contents ──────────────────────────────────── -->
+  <nav class="toc" aria-label="Table of contents">
+    <button class="toc-mobile-toggle" type="button" aria-expanded="false">
+      <span data-lang-content="en">Contents</span>
+      <span data-lang-content="zh">目录</span>
+    </button>
+    <p class="toc-title">
+      <span data-lang-content="en">Contents</span>
+      <span data-lang-content="zh">目录</span>
+    </p>
+    <ol>
+      <li><a href="#sec-opening">
+        <span data-lang-content="en">0 · Opening</span>
+        <span data-lang-content="zh">0 · 引</span>
+      </a></li>
+      <li><a href="#sec-apparatus">
+        <span data-lang-content="en">1 · The Optical Apparatus</span>
+        <span data-lang-content="zh">1 · 光学装置</span>
+      </a></li>
+      <li><a href="#sec-latent">
+        <span data-lang-content="en">2 · The Latent Image</span>
+        <span data-lang-content="zh">2 · 潜在图像</span>
+      </a></li>
+      <li><a href="#sec-artifact">
+        <span data-lang-content="en">3 · From Imaging to Material Artifact</span>
+        <span data-lang-content="zh">3 · 从成像到实体物</span>
+      </a></li>
+      <li><a href="#sec-art">
+        <span data-lang-content="en">4 · From the Decisive Moment to Uncommon Places</span>
+        <span data-lang-content="zh">4 · 从决定性时刻到不寻常的地方</span>
+      </a></li>
+      <li><a href="#sec-leisure">
+        <span data-lang-content="en">5 · Photography as Serious Leisure</span>
+        <span data-lang-content="zh">5 · 摄影作为严肃休闲</span>
+      </a></li>
+      <li><a href="#sec-further">
+        <span data-lang-content="en">6 · Further reading</span>
+        <span data-lang-content="zh">6 · 延伸阅读</span>
+      </a></li>
+    </ol>
+  </nav>
+
+  <!-- ───── Main content ──────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- ───── Article header ──────────────────────────────────── -->
+    <header class="article-header">
+      <h1>
+        <span data-lang-content="en">Graphing Photography</span>
+        <span data-lang-content="zh">摄影图谱</span>
+      </h1>
+      <p class="subtitle">
+        <span data-lang-content="en">Notes on the apparatus, the image, the print, and the practice</span>
+        <span data-lang-content="zh">关于装置、影像、印件与实践的札记</span>
+      </p>
+
+      <blockquote class="epigraph">
+        <span data-lang-content="en">
+          <em>What the Photograph reproduces to infinity has occurred only once: the Photograph mechanically repeats what could never be repeated existentially.</em>
+          <span class="attribution">Roland Barthes, <em>Camera Lucida</em> (1980)</span>
+        </span>
+        <span data-lang-content="zh">
+          <em>照片无限复制的，是仅发生过一次之事：照片以机械方式重复着那些在生存论意义上从不重复的东西。</em>
+          <span class="attribution">罗兰·巴特，《明室》（1980）</span>
+        </span>
+      </blockquote>
+    </header>
+
+    <!-- ───── §0 Opening ──────────────────────────────────────── -->
+    <h2 id="sec-opening"><span class="sec-num">0 ·</span>
+      <span data-lang-content="en">Opening</span>
+      <span data-lang-content="zh">引</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>The word <em>photograph</em> names not one object but three, with two further layers built upon them. There is an <em>optical apparatus</em> — a light-tight enclosure containing a lens, a shutter, and a sensitised surface, the descendant of the Renaissance camera obscura and now realised in silicon. There is a <em>latent image</em> — the developed-but-not-yet-visible exposure record, whether silver halide grains awaiting developer or a sensor's analogue voltages awaiting demosaicing, an entity intermediate between the act of capture and any visible photograph. There is a <em>material artifact</em> — the finished print, fixed in pigment or silver on a particular paper, signed and editioned and capable of outlasting its maker by two centuries if the materials are right.</p>
+
+      <p>Above these three material objects two further layers exist that cannot be reduced to any one of them. The first is photography as an <em>artistic practice</em> with its own internal history — the path from the documentary humanism of Cartier-Bresson's decisive moment, through the ordered topographies of Adams and the new colour of Shore and Eggleston, to the typological and conceptual work of the Bechers and their Düsseldorf students. The second is photography as a <em>form of serious leisure</em> in Robert Stebbins's sense — a structured non-professional commitment with its own career path, expense budget, communities, and identity work, occupying a substantial portion of contemporary middle-class lives.</p>
+
+      <p>The three objects and two layers are real, none reduces to the others, and most of the confusion in writing about photography comes from treating one as if it were another. A pure technical history of cameras mistakes the apparatus for the practice. A pure theory of the photographic image — Barthes's, Sontag's — risks treating the latent image as if its material substrate were incidental. A pure aesthetics of the print mistakes the artifact for the act. What follows is a working set of notes — half wiki, half commonplace book — arranged around questions that move between these five rather than within any one of them. Sections are at varying levels of completeness; entries are added as occasion arises.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>「照片」这个词同时指着三件不同的物，再加上两个建立在它们之上的层面。其一是<em>光学装置</em>——一个不透光的容器，内含一支镜头、一个快门、一面感光表面，从文艺复兴的暗箱一脉相承，如今以硅片为基。其二是<em>潜在图像</em>——已经曝光但尚未显现的影像记录，无论是等待显影液的银卤晶体，还是等待去马赛克的传感器模拟电压，是介于「捕捉」这个动作和「可见的照片」之间的中间实体。其三是<em>实体物</em>——最终的印件，以颜料或银盐固定在特定的纸基上，签名、编版、若材料得当可比制作者多活两个世纪。</p>
+
+      <p>在这三个物质对象之上，存在两个不能被化约为其中任何一个的层面。其一是摄影作为<em>艺术实践</em>及其内部历史——从布列松「决定性时刻」式的人文纪实，经亚当斯有秩序的地形学和肖尔、艾格斯顿的新彩色，到贝歇夫妇与杜塞尔多夫学派的类型学与观念之作。其二是摄影作为 Robert Stebbins 意义上的<em>严肃休闲</em>——一种结构化的非职业投入，自有其阶梯式生涯、开销预算、社群与身份建构，占据着当代中产阶级生活相当可观的一部分。</p>
+
+      <p>这三个对象和两个层面都是真实的，没有哪一个可以化约为另一个。关于摄影的写作之所以常陷入混乱，多半因为把其中一个当作了另一个。一部纯粹的相机技术史会把装置当作实践本身。一种纯粹的影像理论——巴特的、桑塔格的——则可能把潜在图像视为其物质载体可有可无的存在。一种纯粹的印件美学则把实体物当作创作的行为。下文是一份持续更新的札记——半是 wiki，半是杂记——围绕在这五者之间往返的问题展开，而非困守其中之一。各节完成度不一，条目随时增补。</p>
+    </div>
+
+    <!-- ───── §1 The Optical Apparatus ─────────────────────────── -->
+    <h2 id="sec-apparatus"><span class="sec-num">1 ·</span>
+      <span data-lang-content="en">The Optical Apparatus</span>
+      <span data-lang-content="zh">光学装置</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p class="lede">The camera is older than photography. The pinhole that forms an image on a darkened wall was described by Mozi in the fourth century BCE and by Ibn al-Haytham in the eleventh, and the camera obscura was a working drawing aid for two centuries before any chemistry existed to fix what it projected. The history of the apparatus is therefore the history of two distinct problems solved on different timescales: how to form a controllable optical image, and how to interrupt it precisely in time. This section follows both — lens and shutter — through the genealogy that runs from the obscura, through the twin-lens reflex, the single-lens reflex, and the digital mirrorless, to the present moment in which the mechanical shutter is itself becoming optional.</p>
+
+      <div class="widget-placeholder">
+        <strong>Widget · Camera lineage timeline (static SVG)</strong>
+        Branching genealogy: camera obscura → daguerreotype apparatus → wet plate → dry plate → roll film → 35mm rangefinder (Leica) → TLR → SLR → DSLR → mirrorless. With dates, key models, and what made each transition mechanically possible.
+        <span class="widget-note">to be drawn inline as SVG, in the style of the chess transmission timeline</span>
+      </div>
+
+      <p>[Body text on the lens line and the shutter line to be written.]</p>
+
+      <div class="widget-placeholder">
+        <strong>Widget · Shutter mechanism animation (interactive)</strong>
+        Three modes side by side: leaf shutter (between-the-lens, full-frame illumination at all speeds, sync at any speed), focal-plane shutter (curtain pair, slit-scan exposure at high speeds, sync limited to ~1/200 s), electronic shutter (rolling readout, banding under flicker, distortion of fast-moving subjects). Slider controls shutter speed; visualisation shows what the sensor sees and what flash sync does at each speed.
+        <span class="widget-note">JS / SVG interactive, occupies one figure block</span>
+      </div>
+
+      <div class="sources">
+        <span class="sources-label">
+          <span data-lang-content="en">Principal sources for this section</span>
+          <span data-lang-content="zh">本节主要参考</span>
+        </span>
+        <p data-lang-content="en">Rudolf Kingslake, <em>A History of the Photographic Lens</em> (Academic Press, 1989). The standard technical history; covers the Petzval (1840), the Cooke triplet (1893), the Tessar (1902), and the Double Gauss family in detail.</p>
+        <p data-lang-content="en">Todd Gustavson, <em>Camera: A History of Photography from Daguerreotype to Digital</em> (Sterling Innovation, 2009). Object-by-object history written from the George Eastman House collection.</p>
+        <p data-lang-content="en">Sidney F. Ray, <em>Applied Photographic Optics</em>, 3rd ed. (Focal Press, 2002). Reference text on lens design and shutter mechanics, including the geometry of focal-plane slit-scan exposure.</p>
+        <p data-lang-content="en">Geoffrey Crawley, <em>British Journal of Photography</em> archive, 1960s–1990s. Contemporary technical reviews of nearly every significant camera transition of the period.</p>
+        <p data-lang-content="zh">Rudolf Kingslake，《摄影镜头史》（Academic Press, 1989）。技术史的标准著作；详细涵盖 Petzval（1840）、Cooke 三片（1893）、Tessar（1902）与 Double Gauss 系列。</p>
+        <p data-lang-content="zh">Todd Gustavson，《相机：从达盖尔银版到数字摄影》（Sterling Innovation, 2009）。基于 George Eastman House 馆藏的逐物史。</p>
+        <p data-lang-content="zh">Sidney F. Ray，《应用摄影光学》第三版（Focal Press, 2002）。镜头设计与快门机构的参考性文本，含焦平面狭缝扫描曝光的几何学。</p>
+        <p data-lang-content="zh">Geoffrey Crawley，《英国摄影杂志》档案，1960s–1990s。该时期几乎所有重要相机转型的同时代技术评论。</p>
+      </div>
+    </div>
+
+    <div data-lang-content="zh">
+      <p class="lede">相机比摄影本身更古老。墨子在公元前四世纪、海什木在十一世纪即已描述过小孔在暗墙上成像的现象；而暗箱作为绘画的辅助工具在化学还无法将其投影固定下来之前的两百年里就在使用。装置的历史因此是两个在不同时间尺度上分别求解的问题：如何形成一幅可控的光学影像，以及如何在时间上精确地中断它。本节同时追踪这两条线索——镜头与快门——经由暗箱、双反、单反、数码无反，直至机械快门本身正在变得可选的当下。</p>
+
+      <p>[关于镜头线索与快门线索的正文待写。]</p>
+
+      <div class="sources">
+        <span class="sources-label">本节主要参考</span>
+        <p>Rudolf Kingslake，《摄影镜头史》（Academic Press, 1989）。技术史的标准著作；详细涵盖 Petzval（1840）、Cooke 三片（1893）、Tessar（1902）与 Double Gauss 系列。</p>
+        <p>Todd Gustavson，《相机：从达盖尔银版到数字摄影》（Sterling Innovation, 2009）。基于 George Eastman House 馆藏的逐物史。</p>
+        <p>Sidney F. Ray，《应用摄影光学》第三版（Focal Press, 2002）。镜头设计与快门机构的参考性文本，含焦平面狭缝扫描曝光的几何学。</p>
+        <p>Geoffrey Crawley，《英国摄影杂志》档案，1960s–1990s。该时期几乎所有重要相机转型的同时代技术评论。</p>
+      </div>
+    </div>
+
+    <!-- ───── §2 The Latent Image ──────────────────────────────── -->
+    <h2 id="sec-latent"><span class="sec-num">2 ·</span>
+      <span data-lang-content="en">The Latent Image</span>
+      <span data-lang-content="zh">潜在图像</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p class="lede">Between the closing of the shutter and the visible photograph there is an intermediate object whose ontology has been almost entirely overlooked in writing about photography. In silver halide film it is the population of photo-reduced silver atoms — too few to scatter light, too few to be seen, but already organised into the latent pattern that the developer will amplify a billion-fold. In a digital sensor it is the array of analogue voltages held briefly in pixel wells before readout, demosaicing, and conversion. In both cases the latent image is what makes photography <em>not painting</em>: it is the place where the indexical bond between the photographed thing and the photograph — what Barthes calls <em>ça-a-été</em>, "that-has-been" — actually lives. Theories of the photographic image that go directly from the act of pressing the shutter to the printed image skip the object that does the philosophical work.</p>
+
+      <p>[Body text on chemistry of silver halide, the digital analogue, and what indexicality survives in each — to be written.]</p>
+
+      <div class="sources">
+        <span class="sources-label">
+          <span data-lang-content="en">Principal sources for this section</span>
+          <span data-lang-content="zh">本节主要参考</span>
+        </span>
+        <p data-lang-content="en">T. H. James (ed.), <em>The Theory of the Photographic Process</em>, 4th ed. (Macmillan, 1977). The chemistry of silver halide and the latent image, in the depth at which it was understood at the height of the analogue era.</p>
+        <p data-lang-content="en">Roland Barthes, <em>La chambre claire: Note sur la photographie</em> (Cahiers du cinéma / Gallimard / Seuil, 1980); English as <em>Camera Lucida</em>, trans. Richard Howard (Hill and Wang, 1981). The source of <em>ça-a-été</em> and of the studium / punctum distinction.</p>
+        <p data-lang-content="en">Rosalind Krauss, "Notes on the Index: Seventies Art in America," <em>October</em> 3 (Spring 1977) and 4 (Autumn 1977). The argument that photography is the index par excellence and the consequences for art-historical category.</p>
+        <p data-lang-content="en">Charles Sanders Peirce, "Logic as Semiotic" (in <em>Philosophical Writings of Peirce</em>, ed. Buchler, Dover, 1955). The original icon / index / symbol typology that Krauss and others draw on.</p>
+        <p data-lang-content="en">Joel Snyder and Neil Walsh Allen, "Photography, Vision, and Representation," <em>Critical Inquiry</em> 2:1 (1975). The standard counter-position: that the indexical reading of photography overstates the case.</p>
+        <p data-lang-content="zh">T. H. James 编，《摄影过程理论》第四版（Macmillan, 1977）。银卤化学与潜在图像的化学，处于胶片时代鼎盛期所能理解的深度。</p>
+        <p data-lang-content="zh">罗兰·巴特，《明室：摄影札记》（Cahiers du cinéma / Gallimard / Seuil, 1980）；中译有赵克非译本（中国人民大学出版社）。"曾在"概念与"知面/刺点"之分的来源。</p>
+        <p data-lang-content="zh">Rosalind Krauss，《关于指号：七十年代美国艺术札记》上下篇，《October》3 与 4（1977）。论摄影是 indexicality 的典范，及其对艺术史分类的影响。</p>
+        <p data-lang-content="zh">查尔斯·桑德斯·皮尔斯，《作为符号学的逻辑》（收于 Buchler 编《皮尔斯哲学著作选》，Dover, 1955）。Krauss 等人援引的 icon/index/symbol 三分法之原始出处。</p>
+        <p data-lang-content="zh">Joel Snyder 与 Neil Walsh Allen，《摄影、视觉与再现》，《Critical Inquiry》2:1（1975）。标准的反方意见：对摄影的指号性解读言过其实。</p>
+      </div>
+    </div>
+
+    <div data-lang-content="zh">
+      <p class="lede">在快门关闭与可见照片之间，存在一个中间对象，其本体地位在关于摄影的写作里几乎被完全忽略了。在银卤胶片中，它是被光还原的银原子的总和——数量太少而无法散射光、无法被肉眼看到，但已经被组织成一个潜在的图样，等待显影液把它放大十亿倍。在数字传感器中，它是像素阱内短暂保持的模拟电压阵列，等待读出、去马赛克与转换。在两种情况下，潜在图像都是使摄影<em>不是绘画</em>的那个东西：它是被摄物与照片之间那种指号性联结——巴特所谓的「曾在」（<em>ça-a-été</em>）——真正栖居的地方。从按下快门直接跳到印出来的影像的摄影理论，跳过了那个真正承担哲学工作的对象。</p>
+
+      <p>[关于银卤化学、数字模拟物、以及在两者中各自存留下何种 indexicality 的正文待写。]</p>
+
+      <div class="sources">
+        <span class="sources-label">本节主要参考</span>
+        <p>T. H. James 编，《摄影过程理论》第四版（Macmillan, 1977）。银卤化学与潜在图像的化学，处于胶片时代鼎盛期所能理解的深度。</p>
+        <p>罗兰·巴特，《明室：摄影札记》（Cahiers du cinéma / Gallimard / Seuil, 1980）；中译有赵克非译本（中国人民大学出版社）。"曾在"概念与"知面/刺点"之分的来源。</p>
+        <p>Rosalind Krauss，《关于指号：七十年代美国艺术札记》上下篇，《October》3 与 4（1977）。论摄影是 indexicality 的典范，及其对艺术史分类的影响。</p>
+        <p>查尔斯·桑德斯·皮尔斯，《作为符号学的逻辑》（收于 Buchler 编《皮尔斯哲学著作选》，Dover, 1955）。Krauss 等人援引的 icon/index/symbol 三分法之原始出处。</p>
+        <p>Joel Snyder 与 Neil Walsh Allen，《摄影、视觉与再现》，《Critical Inquiry》2:1（1975）。标准的反方意见：对摄影的指号性解读言过其实。</p>
+      </div>
+    </div>
+
+    <!-- ───── §3 From Imaging to Material Artifact ─────────────── -->
+    <h2 id="sec-artifact"><span class="sec-num">3 ·</span>
+      <span data-lang-content="en">From Imaging to Material Artifact</span>
+      <span data-lang-content="zh">从成像到实体物</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p class="lede">A digital file or a developed negative is not yet a photograph in the sense that matters to a collector or to a serious printmaker. Becoming a print is a passage through a chain of decisions — colour space, soft proof, paper, ink, profiling, edition, signature — each of which is partly a technical and partly an aesthetic choice. The chain has only become more elaborate since pigment inkjet printing reached fine-art quality around 2000: the Iris print, the giclée, the Piezography monochrome system, the modern UltraChrome and Lucia ink sets, the rise of cotton rag and baryta papers without optical brighteners. This section is the longest in this set of notes, partly because it is where the author works hands-on, partly because the literature is fragmented across manufacturer documentation, archival science, and a handful of working printmakers' books.</p>
+
+      <div class="widget-placeholder">
+        <strong>Widget · Color space comparator (interactive)</strong>
+        CIE 1931 xy chromaticity diagram with toggleable overlays for sRGB, Adobe RGB (1998), Display P3, ProPhoto RGB, and a representative printer + paper gamut (e.g. Epson P900 + Hahnemühle Photo Rag on UltraChrome PRO10). Shows where each space loses out-of-gamut colours and what soft proofing actually constrains.
+        <span class="widget-note">SVG + JS interactive, occupies one figure block</span>
+      </div>
+
+      <p>[Body text on color space, soft proof workflow, paper categories, ink chemistries, archival ratings, edition practice — to be written.]</p>
+
+      <div class="sources">
+        <span class="sources-label">
+          <span data-lang-content="en">Principal sources for this section</span>
+          <span data-lang-content="zh">本节主要参考</span>
+        </span>
+        <p data-lang-content="en">Mark D. Fairchild, <em>Color Appearance Models</em>, 3rd ed. (Wiley, 2013). The reference text on CIE colorimetry, chromatic adaptation, and the appearance models (CIECAM02, CIECAM16) underlying every modern colour-managed workflow.</p>
+        <p data-lang-content="en">Andrew Rodney, <em>Color Management for Photographers</em> (Focal Press, 2005). Practical workflow text; dated in software details but conceptually still standard on profiling, rendering intents, and soft proof.</p>
+        <p data-lang-content="en">Henry Wilhelm and Carol Brower, <em>The Permanence and Care of Color Photographs: Traditional and Digital Color Prints</em> (Preservation Publishing, 1993; later updates available at wilhelm-research.com). The empirical basis for almost every "archival" claim made about contemporary inkjet papers and inks.</p>
+        <p data-lang-content="en">Jeff Schewe, <em>The Digital Print: Preparing Images in Lightroom and Photoshop for Printing</em> (Peachpit, 2013). The most current working printmaker's text, particularly on print sharpening and rendering intents in actual practice.</p>
+        <p data-lang-content="en">Hahnemühle, Canson Infinity, and Awagami technical white papers on cotton rag, alpha-cellulose, and washi substrates respectively. Manufacturer documentation, but written by the people who actually formulate the papers.</p>
+        <p data-lang-content="en">International Color Consortium, ICC.1:2010 specification (icc.profile format). The actual data structure that every soft-proof and print workflow ultimately resolves to.</p>
+        <p data-lang-content="zh">Mark D. Fairchild，《颜色外貌模型》第三版（Wiley, 2013）。CIE 色度学、色适应、以及现代色彩管理工作流所依赖的外貌模型（CIECAM02, CIECAM16）的参考性文本。</p>
+        <p data-lang-content="zh">Andrew Rodney，《摄影师的色彩管理》（Focal Press, 2005）。实操工作流文本；软件细节已过时，但在 profile、渲染意图与软打样上的概念仍属标准。</p>
+        <p data-lang-content="zh">Henry Wilhelm 与 Carol Brower，《彩色照片的耐久性与养护：传统与数字彩色印件》（Preservation Publishing, 1993；wilhelm-research.com 有持续更新）。当代喷墨纸张与墨水几乎所有「档案级」声明的经验基础。</p>
+        <p data-lang-content="zh">Jeff Schewe，《数字印件：在 Lightroom 与 Photoshop 中为打印准备影像》（Peachpit, 2013）。当下最新的实操印制者文本，尤其在打印锐化和实际渲染意图选择上。</p>
+        <p data-lang-content="zh">Hahnemühle、Canson Infinity 与 Awagami 关于棉绒、α-纤维素与和纸基材的技术白皮书。虽属厂商文献，但由实际配方研发者撰写。</p>
+        <p data-lang-content="zh">International Color Consortium，ICC.1:2010 规范（.icc 配置文件格式）。所有软打样与打印工作流最终所归结的数据结构本身。</p>
+      </div>
+    </div>
+
+    <div data-lang-content="zh">
+      <p class="lede">一个数字文件或一卷已显影的底片，对于收藏家或一位认真的制版者来说，还不是真正意义上的照片。成为一件印件需要走过一连串决定——色彩空间、软打样、纸张、墨水、profile、版次、签名——其中每一项都既是技术决定，又是美学决定。自从颜料喷墨打印在 2000 年前后达到艺术级品质以来，这条链条只变得更加复杂：Iris 印件、giclée、Piezography 单色系统、当代的 UltraChrome 与 Lucia 墨水组、不含荧光增白剂的棉绒与 baryta 纸的兴起。本节是这份札记中最长的一节，部分因为这是作者亲手操作的领域，部分因为相关文献散落在厂商技术文档、档案学论文与少数实操制版者的著作之间。</p>
+
+      <p>[关于色彩空间、软打样工作流、纸张分类、墨水化学、档案级评级、版次实践的正文待写。]</p>
+
+      <div class="sources">
+        <span class="sources-label">本节主要参考</span>
+        <p>Mark D. Fairchild，《颜色外貌模型》第三版（Wiley, 2013）。CIE 色度学、色适应、以及现代色彩管理工作流所依赖的外貌模型（CIECAM02, CIECAM16）的参考性文本。</p>
+        <p>Andrew Rodney，《摄影师的色彩管理》（Focal Press, 2005）。实操工作流文本；软件细节已过时，但在 profile、渲染意图与软打样上的概念仍属标准。</p>
+        <p>Henry Wilhelm 与 Carol Brower，《彩色照片的耐久性与养护：传统与数字彩色印件》（Preservation Publishing, 1993；wilhelm-research.com 有持续更新）。当代喷墨纸张与墨水几乎所有「档案级」声明的经验基础。</p>
+        <p>Jeff Schewe，《数字印件：在 Lightroom 与 Photoshop 中为打印准备影像》（Peachpit, 2013）。当下最新的实操印制者文本，尤其在打印锐化和实际渲染意图选择上。</p>
+        <p>Hahnemühle、Canson Infinity 与 Awagami 关于棉绒、α-纤维素与和纸基材的技术白皮书。虽属厂商文献，但由实际配方研发者撰写。</p>
+        <p>International Color Consortium，ICC.1:2010 规范（.icc 配置文件格式）。所有软打样与打印工作流最终所归结的数据结构本身。</p>
+      </div>
+    </div>
+
+    <!-- ───── §4 From the Decisive Moment to Uncommon Places ──── -->
+    <h2 id="sec-art"><span class="sec-num">4 ·</span>
+      <span data-lang-content="en">From the Decisive Moment to Uncommon Places</span>
+      <span data-lang-content="zh">从决定性时刻到不寻常的地方</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p class="lede">Between Henri Cartier-Bresson's <em>Images à la sauvette</em> (1952) and Stephen Shore's <em>Uncommon Places</em> (1982) lie thirty years that contain a near-complete inversion of what serious photography is taken to be about. Cartier-Bresson's argument is that the photographer's task is to recognise the geometric instant in which form, gesture, and meaning briefly coincide — what Tériade's English translator rendered as the "decisive moment." Shore's argument, made entirely through the work, is that the world is photographically interesting all the time: that any ordinary American intersection, motel parking lot, or breakfast plate, attended to with a 4×5 view camera and properly seen, is enough. This section traces that inversion and the history that surrounds it: the Modernist apex of Adams's pre-visualised black-and-white landscape; the New Topographics exhibition of 1975 that framed an entire generation; the new colour photography of Eggleston and Shore; the typological and conceptual turn through Bernd and Hilla Becher, Hilla's students at the Düsseldorf Kunstakademie (Gursky, Struth, Höfer, Ruff), and the contemporary scene that is still working through their inheritance. This is also where the philosophy of photography sits — Sontag's <em>On Photography</em> (1977) was written in the same decade that produced both the New Topographics and the new colour, and is best read against them rather than in isolation.</p>
+
+      <p>[Body text on the artistic-history axis from decisive-moment humanism through pre-visualised modernism, New Topographics, new colour, the Bechers and the Düsseldorf school, into conceptual and contemporary work — to be written.]</p>
+
+      <p>[Sontag's argument and its dialectical structure — to be written. Working position: <em>On Photography</em>'s critique reads differently after Stephen Shore than it did at the moment of its publication. Sontag was largely arguing against the Cartier-Bresson / Capa / Magnum tradition of humanist photojournalism, which she saw as ethically compromised by its aestheticisation of suffering. The new colour and New Topographics work that emerged in roughly the same years had already left that tradition behind for entirely different reasons — not Sontag's ethical ones but formal and ontological ones — and answers her critique obliquely rather than directly.]</p>
+
+      <div class="sources">
+        <span class="sources-label">
+          <span data-lang-content="en">Principal sources for this section</span>
+          <span data-lang-content="zh">本节主要参考</span>
+        </span>
+        <p data-lang-content="en">Henri Cartier-Bresson, <em>Images à la sauvette</em> (Verve, 1952); the English edition is <em>The Decisive Moment</em> (Simon and Schuster, 1952). The cover by Matisse, the Tériade introduction, and the body of work that defined a generation of photojournalism.</p>
+        <p data-lang-content="en">Ansel Adams, <em>The Camera</em>, <em>The Negative</em>, <em>The Print</em> (Little, Brown, 1980–83). The technical exposition of pre-visualisation and the Zone System; the work and the technique are inseparable in Adams's conception.</p>
+        <p data-lang-content="en">William Jenkins (ed.), <em>New Topographics: Photographs of a Man-Altered Landscape</em> (George Eastman House, 1975; reissued Steidl 2009). The exhibition catalogue that named the movement; ten photographers including Robert Adams, Lewis Baltz, Bernd and Hilla Becher, Frank Gohlke, and Stephen Shore.</p>
+        <p data-lang-content="en">Stephen Shore, <em>Uncommon Places</em> (Aperture, 1982; expanded edition 2004). The colour-photographic counterpart to the New Topographics moment; the 1982 selection is leaner and the 2004 expansion includes work that complicates the original argument.</p>
+        <p data-lang-content="en">Stephen Shore, <em>The Nature of Photographs</em> (Johns Hopkins, 1998; reissued Phaidon 2007). The closest thing to a working theorist's text on what a photograph is; short, structural, deliberately not philosophical in tone.</p>
+        <p data-lang-content="en">William Eggleston, <em>William Eggleston's Guide</em> (MoMA, 1976). The 1976 MoMA exhibition catalogue that legitimised colour photography as a fine-art medium; John Szarkowski's introduction is the standard reference for the institutional moment.</p>
+        <p data-lang-content="en">Susan Sontag, <em>On Photography</em> (Farrar, Straus and Giroux, 1977). Six essays from the <em>New York Review of Books</em>; the essential ethical-aesthetic critique to read alongside, and against, the work of the same decade.</p>
+        <p data-lang-content="en">Bernd and Hilla Becher, <em>Anonymous Sculptures</em> (Wittenborn, 1970) and the typological volumes that followed (water towers, gas tanks, blast furnaces). The conceptual-typological move that informed the entire Düsseldorf school.</p>
+        <p data-lang-content="en">Andreas Gursky, Thomas Struth, Candida Höfer, Thomas Ruff — monographs by Schirmer/Mosel and Steidl, principally. The Hilla Becher students whose careers define the high-end contemporary photography market.</p>
+        <p data-lang-content="en">Francesca Woodman, <em>Francesca Woodman</em>, ed. Townsend (Phaidon, 2006). Outside the Düsseldorf line entirely; a different argument about what serious photography can be, made in a different register.</p>
+        <p data-lang-content="zh">亨利·卡蒂埃-布列松，《Images à la sauvette》（Verve, 1952）；英译版为《决定性瞬间》（Simon and Schuster, 1952）。马蒂斯封面、Tériade 导言、以及定义了一代摄影报道的作品本身。</p>
+        <p data-lang-content="zh">安塞尔·亚当斯，《相机》《底片》《印件》三部曲（Little, Brown, 1980–83）。预想（pre-visualisation）与区域系统的技术阐述；在亚当斯的理解里作品与技术不可分。</p>
+        <p data-lang-content="zh">William Jenkins 编，《新地形：人为改变的风景之摄影》（George Eastman House, 1975；Steidl 2009 重印）。命名了这一运动的展览图录；十位摄影师包括 Robert Adams、Lewis Baltz、贝歇夫妇、Frank Gohlke 与 Stephen Shore。</p>
+        <p data-lang-content="zh">史蒂芬·肖尔，《不寻常的地方》（Aperture, 1982；2004 扩充版）。新地形时刻的彩色对应物；1982 年版选片更精炼，2004 年扩充版加入了使原论点复杂化的作品。</p>
+        <p data-lang-content="zh">史蒂芬·肖尔，《照片的本质》（Johns Hopkins, 1998；Phaidon 2007 重印）。一位实操理论家关于「什么是一张照片」最接近的文本；篇幅短、结构性、刻意不取哲学语气。</p>
+        <p data-lang-content="zh">威廉·艾格斯顿，《威廉·艾格斯顿的指南》（MoMA, 1976）。1976 年 MoMA 展览图录，使彩色摄影获得艺术媒介的合法性；John Szarkowski 的导言是该机构性时刻的标准参考。</p>
+        <p data-lang-content="zh">苏珊·桑塔格，《论摄影》（Farrar, Straus and Giroux, 1977）；中译有黄灿然译本。原刊于《纽约书评》的六篇文章；与同年代作品对照、对立阅读时方为完整。</p>
+        <p data-lang-content="zh">贝恩德与希拉·贝歇，《无名的雕塑》（Wittenborn, 1970）以及随后的类型学系列（水塔、煤气罐、高炉）。影响了整个杜塞尔多夫学派的概念—类型学转向。</p>
+        <p data-lang-content="zh">安德烈亚斯·古尔斯基、托马斯·施特鲁特、坎迪达·霍弗、托马斯·鲁夫——专著主要由 Schirmer/Mosel 与 Steidl 出版。希拉·贝歇的学生，其生涯定义了高端当代摄影市场。</p>
+        <p data-lang-content="zh">弗朗西斯卡·伍德曼，《Francesca Woodman》，Townsend 编（Phaidon, 2006）。完全在杜塞尔多夫一脉之外；以不同的语调，对「严肃摄影可以是什么」给出了另一种论证。</p>
+      </div>
+    </div>
+
+    <div data-lang-content="zh">
+      <p class="lede">在亨利·卡蒂埃-布列松的《Images à la sauvette》（1952）与史蒂芬·肖尔的《不寻常的地方》（1982）之间，是三十年间「严肃摄影所关心的是什么」这一问题的近乎彻底的反转。布列松的主张是：摄影师的任务，是辨认出形式、姿态与意义短暂吻合的那个几何性瞬间——Tériade 英译者将其译作「决定性瞬间」。肖尔的主张，则完全通过作品本身做出：世界在任何时刻都是摄影上有意思的；任何一个普通的美国十字路口、汽车旅馆停车场、或一盘早餐，只要以一台 4×5 大画幅认真注视，就足够了。本节追溯这一反转及围绕它的历史：亚当斯预想式黑白风光的现代主义高峰；1975 年定义了一代人的「新地形」展览；艾格斯顿与肖尔的新彩色摄影；经由贝恩德与希拉·贝歇及希拉在杜塞尔多夫艺术学院的学生（古尔斯基、施特鲁特、霍弗、鲁夫）所完成的类型学—概念转向；以及仍在消化这些遗产的当代场景。摄影的哲学也安放于此——桑塔格的《论摄影》（1977）写于产生新地形与新彩色的同一个十年，最好放在与之对照、而非孤立的位置上读。</p>
+
+      <p>[关于从「决定性瞬间」式人文主义、经预想式现代主义、新地形、新彩色、贝歇夫妇与杜塞尔多夫学派、直至当代观念性作品的这条艺术史轴线的正文待写。]</p>
+
+      <p>[桑塔格的论证及其辩证结构——待写。工作中的立场：在读过史蒂芬·肖尔之后，《论摄影》的批判读起来与其出版时已不同。桑塔格主要在反对的是布列松/卡帕/玛格南那一派人文主义摄影报道，她认为该传统因将苦难审美化而在伦理上有所妥协。在大致相同的年份出现的新彩色与新地形作品，已经因完全不同的理由——不是桑塔格的伦理理由，而是形式与本体论上的理由——离开了那个传统，并以斜向而非正面的方式回应了她的批判。]</p>
+
+      <div class="sources">
+        <span class="sources-label">本节主要参考</span>
+        <p>亨利·卡蒂埃-布列松，《Images à la sauvette》（Verve, 1952）；英译版为《决定性瞬间》（Simon and Schuster, 1952）。马蒂斯封面、Tériade 导言、以及定义了一代摄影报道的作品本身。</p>
+        <p>安塞尔·亚当斯，《相机》《底片》《印件》三部曲（Little, Brown, 1980–83）。预想（pre-visualisation）与区域系统的技术阐述；在亚当斯的理解里作品与技术不可分。</p>
+        <p>William Jenkins 编，《新地形：人为改变的风景之摄影》（George Eastman House, 1975；Steidl 2009 重印）。命名了这一运动的展览图录；十位摄影师包括 Robert Adams、Lewis Baltz、贝歇夫妇、Frank Gohlke 与 Stephen Shore。</p>
+        <p>史蒂芬·肖尔，《不寻常的地方》（Aperture, 1982；2004 扩充版）。新地形时刻的彩色对应物；1982 年版选片更精炼，2004 年扩充版加入了使原论点复杂化的作品。</p>
+        <p>史蒂芬·肖尔，《照片的本质》（Johns Hopkins, 1998；Phaidon 2007 重印）。一位实操理论家关于「什么是一张照片」最接近的文本；篇幅短、结构性、刻意不取哲学语气。</p>
+        <p>威廉·艾格斯顿，《威廉·艾格斯顿的指南》（MoMA, 1976）。1976 年 MoMA 展览图录，使彩色摄影获得艺术媒介的合法性；John Szarkowski 的导言是该机构性时刻的标准参考。</p>
+        <p>苏珊·桑塔格，《论摄影》（Farrar, Straus and Giroux, 1977）；中译有黄灿然译本。原刊于《纽约书评》的六篇文章；与同年代作品对照、对立阅读时方为完整。</p>
+        <p>贝恩德与希拉·贝歇，《无名的雕塑》（Wittenborn, 1970）以及随后的类型学系列（水塔、煤气罐、高炉）。影响了整个杜塞尔多夫学派的概念—类型学转向。</p>
+        <p>安德烈亚斯·古尔斯基、托马斯·施特鲁特、坎迪达·霍弗、托马斯·鲁夫——专著主要由 Schirmer/Mosel 与 Steidl 出版。希拉·贝歇的学生，其生涯定义了高端当代摄影市场。</p>
+        <p>弗朗西斯卡·伍德曼，《Francesca Woodman》，Townsend 编（Phaidon, 2006）。完全在杜塞尔多夫一脉之外；以不同的语调，对「严肃摄影可以是什么」给出了另一种论证。</p>
+      </div>
+    </div>
+
+    <!-- ───── §5 Photography as Serious Leisure ───────────────── -->
+    <h2 id="sec-leisure"><span class="sec-num">5 ·</span>
+      <span data-lang-content="en">Photography as Serious Leisure</span>
+      <span data-lang-content="zh">摄影作为严肃休闲</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p class="lede">Robert Stebbins's serious-leisure perspective, developed across roughly forty years of sociological work beginning with his 1979 study of amateur archaeologists, identifies a category of activity intermediate between casual leisure on the one hand and paid professional work on the other. The serious-leisure participant accepts a structured career path within an avocation, accumulates skill and special knowledge, identifies strongly with the pursuit, perseveres through real cost and difficulty, and reaps durable benefits — self-actualisation, group identity, social capital — that casual leisure does not offer. Photography, particularly large-format film photography and serious-amateur digital practice, is one of Stebbins's recurrent examples and one of the most institutionally elaborated cases. This section uses Stebbins's framework not as decoration but as the actual organising lens for thinking about what it means to spend two decades on a non-professional photographic practice — including the question, taken seriously rather than dismissed, of whether the resulting work has value independent of any audience.</p>
+
+      <p>[Body text on Stebbins's six markers, the photographic-amateur career path, the gear-cost dimension as both real and overstated, the relation between serious-leisure photography and the artistic-practice axis of §4, and the question of audience-independent value — to be written.]</p>
+
+      <div class="sources">
+        <span class="sources-label">
+          <span data-lang-content="en">Principal sources for this section</span>
+          <span data-lang-content="zh">本节主要参考</span>
+        </span>
+        <p data-lang-content="en">Robert A. Stebbins, <em>Amateurs: On the Margin Between Work and Leisure</em> (Sage, 1979). The original ethnographic studies; archaeologists, baseball players, classical musicians, magicians.</p>
+        <p data-lang-content="en">Robert A. Stebbins, <em>Amateurs, Professionals and Serious Leisure</em> (McGill-Queen's, 1992). The book-length synthesis; the place to find the six defining qualities and the career-path argument in their developed form.</p>
+        <p data-lang-content="en">Robert A. Stebbins, <em>Serious Leisure: A Perspective for Our Time</em> (Transaction, 2007). Later restatement, including the explicit treatment of identity work and durable benefits.</p>
+        <p data-lang-content="en">Tony Veal, "Whatever Happened to the Leisure Society?" <em>Leisure Studies</em> 28:4 (2009). A useful corrective to the Stebbins literature on the political-economic conditions that make serious leisure possible (and increasingly difficult).</p>
+        <p data-lang-content="en">Pierre Bourdieu, <em>Un art moyen: essai sur les usages sociaux de la photographie</em> (Minuit, 1965); English as <em>Photography: A Middle-brow Art</em>, trans. Whiteside (Stanford, 1990). The other indispensable sociological frame; arrives at very different conclusions from Stebbins about what amateur photography is for.</p>
+        <p data-lang-content="zh">Robert A. Stebbins，《业余者：工作与休闲之间的边缘》（Sage, 1979）。最初的民族志研究；考古学家、棒球运动员、古典乐手、魔术师。</p>
+        <p data-lang-content="zh">Robert A. Stebbins，《业余者、职业人员与严肃休闲》（McGill-Queen's, 1992）。书长综合；六项定义性特质与生涯路径论证发展成熟形态的所在。</p>
+        <p data-lang-content="zh">Robert A. Stebbins，《严肃休闲：一种适合我们时代的视角》（Transaction, 2007）。晚期重述，含对身份建构与持久性回报的明确处理。</p>
+        <p data-lang-content="zh">Tony Veal，《"休闲社会"怎么了？》，《Leisure Studies》28:4（2009）。对 Stebbins 体系的有用纠偏，关于使严肃休闲得以可能（且日益困难）的政治—经济条件。</p>
+        <p data-lang-content="zh">皮埃尔·布尔迪厄，《一种中等艺术：摄影的社会用途之论》（Minuit, 1965）；英译为《摄影：中等品味的艺术》，Whiteside 译（Stanford, 1990）。另一个不可或缺的社会学框架；对业余摄影的功能得出与 Stebbins 相当不同的结论。</p>
+      </div>
+    </div>
+
+    <div data-lang-content="zh">
+      <p class="lede">Robert Stebbins 在大约四十年的社会学研究中——始自 1979 年对业余考古者的研究——识别出一类活动，介于休闲性活动与有薪职业工作之间。严肃休闲参与者在一项业余追求中接受结构化的生涯路径，积累技能与专门知识，强烈认同于该追求，在真实的代价与困难中坚持，并获得休闲性活动无法提供的持久回报——自我实现、群体身份、社会资本。摄影——特别是大画幅胶片摄影与认真的业余数字实践——是 Stebbins 反复使用的例子之一，也是制度化最为发达的案例之一。本节不把 Stebbins 的框架当作装饰，而是把它作为真正用以思考「在一项非职业摄影实践上花掉二十年意味着什么」的组织性透镜——包括认真地（而非轻易打发地）面对一个问题：所产生的作品是否具有与任何观众无关的价值。</p>
+
+      <p>[关于 Stebbins 六项标记、摄影业余者的生涯路径、器材开销维度（既真实又被夸大）、严肃休闲摄影与第四节艺术实践轴线的关系、以及与观众无关的价值之问——的正文待写。]</p>
+
+      <div class="sources">
+        <span class="sources-label">本节主要参考</span>
+        <p>Robert A. Stebbins，《业余者：工作与休闲之间的边缘》（Sage, 1979）。最初的民族志研究；考古学家、棒球运动员、古典乐手、魔术师。</p>
+        <p>Robert A. Stebbins，《业余者、职业人员与严肃休闲》（McGill-Queen's, 1992）。书长综合；六项定义性特质与生涯路径论证发展成熟形态的所在。</p>
+        <p>Robert A. Stebbins，《严肃休闲：一种适合我们时代的视角》（Transaction, 2007）。晚期重述，含对身份建构与持久性回报的明确处理。</p>
+        <p>Tony Veal，《"休闲社会"怎么了？》，《Leisure Studies》28:4（2009）。对 Stebbins 体系的有用纠偏，关于使严肃休闲得以可能（且日益困难）的政治—经济条件。</p>
+        <p>皮埃尔·布尔迪厄，《一种中等艺术：摄影的社会用途之论》（Minuit, 1965）；英译为《摄影：中等品味的艺术》，Whiteside 译（Stanford, 1990）。另一个不可或缺的社会学框架；对业余摄影的功能得出与 Stebbins 相当不同的结论。</p>
+      </div>
+    </div>
+
+    <!-- ───── §6 Further reading ──────────────────────────────── -->
+    <h2 id="sec-further"><span class="sec-num">6 ·</span>
+      <span data-lang-content="en">Further reading</span>
+      <span data-lang-content="zh">延伸阅读</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>[A consolidated, lightly annotated reading list across all five sections, plus a few cross-cutting works (Vilém Flusser's <em>Towards a Philosophy of Photography</em>; Geoffrey Batchen's <em>Burning with Desire</em>; the Aperture archive) that don't sit cleanly inside any single section. To be written when the body sections have stabilised.]</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>[跨越上述五节、外加几部不能整齐归入任何单节的横切性著作（Vilém Flusser《摄影哲学的思考》；Geoffrey Batchen《Burning with Desire》；Aperture 档案）的合并性、稍加注释的阅读清单。待主体各节稳定后再写。]</p>
+    </div>
+
+    <hr>
+
+    <footer class="page-footer">
+      <span>yifanova.com / photography</span>
+      <span>
+        <span data-lang-content="en">last updated May 2026</span>
+        <span data-lang-content="zh">最后更新于 2026 年 5 月</span>
+      </span>
+      <span><a href="/flying">/flying</a></span>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // Language toggle
+  document.querySelectorAll('.lang-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.langSet;
+      document.body.dataset.lang = lang;
+      document.documentElement.lang = lang === 'zh' ? 'zh' : 'en';
+      document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b === btn));
+    });
+  });
+
+  // TOC mobile toggle
+  const tocToggle = document.querySelector('.toc-mobile-toggle');
+  if (tocToggle) {
+    tocToggle.addEventListener('click', () => {
+      const expanded = tocToggle.getAttribute('aria-expanded') === 'true';
+      tocToggle.setAttribute('aria-expanded', String(!expanded));
+    });
+  }
+
+  // TOC scroll-spy: highlight active section
+  const tocLinks = document.querySelectorAll('.toc a[href^="#"]');
+  const sections = Array.from(tocLinks).map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
