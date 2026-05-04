@@ -5,315 +5,357 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>中药材安全与药方风险查询</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
     :root {
-      --bg: #f7f8f5;
+      --bg: #f4f1ea;
+      --paper: #fbfaf6;
       --card: #ffffff;
-      --text: #1f2933;
-      --muted: #64748b;
-      --border: #d8ded2;
-      --green: #2e7d32;
-      --blue: #1565c0;
-      --amber: #b26a00;
-      --orange: #c2410c;
-      --red: #b91c1c;
-      --shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+      --ink: #1a1a1a;
+      --ink-soft: #2c2c2c;
+      --muted: #6b6b6b;
+      --muted-2: #8a8580;
+      --rule: #d4cfc4;
+      --rule-strong: #2c2c2c;
+      --accent: #6b1e1e;
+      --accent-soft: #8a3232;
+      --green: #2d5a3d;
+      --blue: #1e3a5f;
+      --amber: #8a6a1e;
+      --orange: #a04a1e;
+      --red: #6b1e1e;
+      --highlight: #f5e6a3;
+      --shadow-sm: 0 1px 2px rgba(20, 20, 20, 0.04);
+      --shadow: 0 2px 6px rgba(20, 20, 20, 0.06);
+      --serif: 'Source Serif 4', 'Songti SC', 'STSong', 'SimSun', Georgia, serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
     }
 
     * { box-sizing: border-box; }
 
-    body {
+    html, body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Microsoft YaHei", sans-serif;
-      background: linear-gradient(180deg, #eef3ea 0%, var(--bg) 260px);
-      color: var(--text);
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    header {
-      padding: 42px 20px 24px;
-      max-width: 1180px;
+    body {
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(20, 20, 20, 0.012) 28px, rgba(20, 20, 20, 0.012) 29px);
+    }
+
+    header.site-header {
+      background: var(--paper);
+      border-bottom: 2px solid var(--rule-strong);
+      padding: 32px 28px 24px;
+    }
+
+    .site-header-inner {
+      max-width: 1140px;
       margin: 0 auto;
     }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(28px, 5vw, 52px);
-      letter-spacing: -0.04em;
-      line-height: 1.08;
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
     }
 
-    .quote {
-      max-width: 880px;
-      margin: 18px 0 0;
-      padding: 16px 18px;
-      border-left: 5px solid #26352a;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.72);
-      color: #344054;
-      font-size: 16px;
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+    h1.site-title {
+      font-family: var(--serif);
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      margin: 0 0 14px;
+      color: var(--ink);
     }
 
-    .quote cite {
-      display: block;
-      margin-top: 8px;
+    .site-subtitle {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-style: italic;
       color: var(--muted);
-      font-style: normal;
+      margin: 0 0 18px;
+      max-width: 720px;
+      line-height: 1.5;
+    }
+
+    .site-epigraph {
+      font-family: var(--serif);
       font-size: 14px;
+      color: var(--muted);
+      padding: 12px 0 4px;
+      margin-top: 18px;
+      border-top: 1px solid var(--rule);
+      max-width: 760px;
+    }
+
+    .site-epigraph .quote-text {
+      font-style: italic;
+      line-height: 1.55;
+    }
+
+    .site-epigraph .quote-attr {
+      display: block;
+      margin-top: 6px;
+      font-style: normal;
+      font-size: 12.5px;
+      color: var(--muted-2);
+      letter-spacing: 0.02em;
     }
 
     main {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 12px 20px 60px;
+      max-width: 1140px;
+      margin: 32px auto 48px;
+      padding: 0 28px;
       display: grid;
-      gap: 22px;
+      gap: 28px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 28px;
+    }
+
+    .grid > .card {
+      margin: 0;
     }
 
     .card {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 22px;
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 28px 30px;
+      box-shadow: var(--shadow-sm);
     }
 
     .card h2 {
-      margin: 0 0 12px;
+      font-family: var(--serif);
       font-size: 22px;
-      letter-spacing: -0.02em;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 6px;
+      color: var(--ink);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--rule);
     }
 
-    .card h3 {
-      margin: 18px 0 8px;
-      font-size: 17px;
+    .card h2::before {
+      content: "§ ";
+      color: var(--accent);
+      font-weight: 600;
     }
 
     .note {
-      color: var(--muted);
       font-size: 14px;
-      margin: 0 0 14px;
+      color: var(--muted);
+      margin: 12px 0 18px;
+      line-height: 1.6;
     }
 
-    textarea, input, select {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px 15px;
-      font: inherit;
-      outline: none;
-      background: #fbfcfa;
+    .small {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.55;
     }
 
-    textarea { min-height: 150px; resize: vertical; }
-
-    textarea:focus, input:focus, select:focus {
-      border-color: #8aa77f;
-      box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.12);
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    button {
-      border: none;
-      border-radius: 999px;
-      padding: 11px 16px;
+    label {
+      display: block;
+      font-size: 12px;
       font-weight: 700;
-      cursor: pointer;
-      background: #26352a;
-      color: #fff;
-      transition: transform 0.15s ease, opacity 0.15s ease;
-    }
-
-    button:hover { transform: translateY(-1px); }
-    button.secondary { background: #e9eee5; color: #243028; }
-
-    .toolbar {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 12px 0 0;
-    }
-
-    .tag, .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border-radius: 999px;
-      padding: 5px 10px;
-      font-size: 13px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .A { background: rgba(46, 125, 50, 0.12); color: var(--green); }
-    .B { background: rgba(21, 101, 192, 0.12); color: var(--blue); }
-    .C { background: rgba(178, 106, 0, 0.14); color: var(--amber); }
-    .G { background: rgba(194, 65, 12, 0.13); color: var(--orange); }
-    .X { background: rgba(185, 28, 28, 0.13); color: var(--red); }
-    .U { background: rgba(100, 116, 139, 0.15); color: #475569; }
-
-    .results {
-      display: grid;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .result-item, .herb-item {
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px;
-      background: #fbfcfa;
-    }
-
-    .result-top, .herb-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: flex-start;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
       margin-bottom: 6px;
     }
 
-    .herb-name {
-      font-size: 17px;
-      font-weight: 800;
-    }
-
-    .usage {
-      color: var(--muted);
+    textarea, input[type="text"] {
+      width: 100%;
+      font-family: var(--mono);
       font-size: 14px;
-      margin: 4px 0 0;
+      padding: 12px 14px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: var(--paper);
+      color: var(--ink);
+      resize: vertical;
+      transition: border-color 0.15s;
     }
 
-    .risk-line {
-      margin-top: 6px;
-      font-size: 14px;
+    textarea:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: var(--ink-soft);
     }
 
-    .score-box {
+    textarea {
+      min-height: 96px;
+    }
+
+    button.primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    button.primary:hover {
+      background: var(--accent);
+    }
+
+    button.secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: transparent;
+      color: var(--ink-soft);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    button.secondary:hover {
+      border-color: var(--ink-soft);
+      color: var(--ink);
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .grade-card {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 16px;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 22px;
+      padding: 22px 24px;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      margin-top: 6px;
     }
+
+    .grade-letter {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 38px;
+      font-weight: 700;
+      color: #fff;
+      border-radius: 50%;
+      letter-spacing: -0.02em;
+    }
+
+    .grade-letter.S { background: var(--green); }
+    .grade-letter.A { background: var(--blue); }
+    .grade-letter.B { background: var(--amber); }
+    .grade-letter.C { background: var(--orange); }
+    .grade-letter.D { background: var(--red); }
+    .grade-letter.F { background: #1a1a1a; }
 
     .metric {
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px;
-      background: #fbfcfa;
-    }
-
-    .metric .num {
-      font-size: 26px;
-      font-weight: 900;
-      letter-spacing: -0.03em;
+      display: flex;
+      flex-direction: column;
     }
 
     .metric .label {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .warning {
-      border-left: 5px solid var(--red);
-      background: rgba(185, 28, 28, 0.07);
-      padding: 12px 14px;
-      border-radius: 12px;
-      margin-top: 14px;
-      color: #7f1d1d;
+      font-size: 10.5px;
       font-weight: 700;
-    }
-
-    .ok {
-      border-left: 5px solid var(--green);
-      background: rgba(46, 125, 50, 0.08);
-      padding: 12px 14px;
-      border-radius: 12px;
-      margin-top: 14px;
-      color: #14532d;
-      font-weight: 700;
-    }
-
-    .library {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      max-height: 700px;
-      overflow: auto;
-      padding-right: 4px;
-    }
-
-    .small { font-size: 13px; color: var(--muted); }
-
-    .evidence-box {
-      margin-top: 10px;
-      border-top: 1px dashed var(--border);
-      padding-top: 8px;
-      font-size: 14px;
-    }
-
-    .evidence-box summary {
-      cursor: pointer;
-      font-weight: 800;
-      color: #334155;
-    }
-
-    .evidence-box ul {
-      margin: 8px 0 0;
-      padding-left: 20px;
-    }
-
-    .evidence-box li {
-      margin-bottom: 8px;
-    }
-
-    .evidence-box a {
-      color: #0f5f9e;
-      font-weight: 800;
-      text-decoration: none;
-    }
-
-    .evidence-box a:hover { text-decoration: underline; }
-
-    footer {
-      max-width: 1180px;
-      margin: 0 auto 40px;
-      padding: 0 20px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--muted);
-      font-size: 13px;
+      margin-bottom: 4px;
     }
 
+    .metric .value {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      border-radius: 3px;
+      border: 1px solid;
+    }
+
+    .pill.A { background: rgba(45, 90, 61, 0.08); color: var(--green); border-color: rgba(45, 90, 61, 0.3); }
+    .pill.B { background: rgba(30, 58, 95, 0.08); color: var(--blue); border-color: rgba(30, 58, 95, 0.3); }
+    .pill.C { background: rgba(138, 106, 30, 0.08); color: var(--amber); border-color: rgba(138, 106, 30, 0.3); }
+    .pill.G { background: rgba(160, 74, 30, 0.08); color: var(--orange); border-color: rgba(160, 74, 30, 0.3); }
+    .pill.X { background: rgba(107, 30, 30, 0.08); color: var(--red); border-color: rgba(107, 30, 30, 0.3); }
+    .pill.U { background: rgba(107, 107, 107, 0.08); color: var(--muted); border-color: rgba(107, 107, 107, 0.3); }
+
+    .herb-list-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .herb-list-item:last-child {
+      border-bottom: none;
+    }
+
+    .herb-list-item strong {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--ink);
+    }
 
     .interactions {
       display: grid;
-      gap: 12px;
-      margin-top: 12px;
+      gap: 14px;
+      margin-top: 16px;
     }
 
     .interaction-item {
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px 16px;
-      background: #fbfcfa;
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--accent);
+      border-radius: 3px;
+      padding: 16px 18px;
+      background: var(--paper);
     }
 
     .interaction-top {
@@ -321,73 +363,150 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 12px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       flex-wrap: wrap;
     }
 
     .interaction-drug {
+      font-family: var(--serif);
       font-size: 16px;
-      font-weight: 800;
-      color: #1f2933;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
     }
 
     .interaction-effect {
-      font-size: 13px;
+      font-family: var(--sans);
+      font-size: 11px;
       font-weight: 700;
-      color: var(--red);
-      background: rgba(185, 28, 28, 0.08);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(107, 30, 30, 0.06);
       padding: 4px 10px;
-      border-radius: 999px;
+      border-radius: 3px;
       white-space: nowrap;
     }
 
     .interaction-herbs {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 8px;
+      gap: 5px;
+      margin-bottom: 10px;
     }
 
     .pill-mini {
       display: inline-flex;
       align-items: center;
-      padding: 3px 9px;
-      background: #e9eee5;
-      color: #243028;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
+      padding: 2px 8px;
+      background: var(--paper);
+      color: var(--ink-soft);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      font-family: var(--serif);
+      font-size: 12.5px;
+      font-weight: 600;
     }
 
     .interaction-note {
       margin-bottom: 6px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink-soft);
     }
 
-    .interaction-item a {
-      color: #0f5f9e;
-      font-weight: 700;
+    .interaction-item a, .negative-study a, .evidence-summary a {
+      color: var(--accent);
+      font-weight: 600;
       text-decoration: none;
+      border-bottom: 1px solid rgba(107, 30, 30, 0.3);
     }
 
-    .interaction-item a:hover {
-      text-decoration: underline;
+    .interaction-item a:hover, .negative-study a:hover, .evidence-summary a:hover {
+      border-bottom-color: var(--accent);
     }
 
+    /* ============= EVIDENCE / NEGATIVE STUDIES SECTION ============= */
     .evidence-card {
-      border-left: 5px solid #26352a;
+      background: linear-gradient(180deg, #fbfaf6 0%, #ffffff 280px);
+    }
+
+    .epigraph-box {
+      margin: 18px 0 28px;
+      padding: 22px 26px 22px 32px;
+      background: var(--paper);
+      border-left: 4px solid var(--ink);
+      position: relative;
+      font-family: var(--serif);
+    }
+
+    .epigraph-box::before {
+      content: "\201C";
+      position: absolute;
+      top: -8px;
+      left: 14px;
+      font-family: var(--serif);
+      font-size: 64px;
+      color: var(--rule);
+      line-height: 1;
+    }
+
+    .epigraph-text {
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: var(--ink-soft);
+      font-style: italic;
+      margin: 0 0 10px;
+    }
+
+    .epigraph-text .hl {
+      background: linear-gradient(transparent 55%, var(--highlight) 55%, var(--highlight) 90%, transparent 90%);
+      font-style: normal;
+      font-weight: 700;
+      color: var(--ink);
+      padding: 0 2px;
+    }
+
+    .epigraph-attr {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-size: 12.5px;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      text-align: right;
+      font-family: var(--sans);
+      font-weight: 600;
     }
 
     .negative-studies {
       display: grid;
-      gap: 18px;
-      margin-top: 18px;
+      gap: 24px;
+      margin-top: 8px;
     }
 
     .negative-study {
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px 20px;
-      background: #fbfcfa;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 24px 28px;
+      background: var(--card);
+      counter-increment: study;
+      position: relative;
+    }
+
+    .negative-study::before {
+      content: counter(study, decimal-leading-zero);
+      position: absolute;
+      top: 22px;
+      right: 28px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted-2);
+      letter-spacing: 0.1em;
+    }
+
+    .negative-studies {
+      counter-reset: study;
     }
 
     .study-header {
@@ -395,84 +514,129 @@
       gap: 10px;
       flex-wrap: wrap;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--rule);
     }
 
     .study-tag {
       display: inline-flex;
       align-items: center;
-      padding: 4px 12px;
-      background: #26352a;
+      padding: 3px 10px;
+      background: var(--ink);
       color: #fff;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
+      border-radius: 2px;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .study-tag.tier-1 {
+      background: var(--accent);
     }
 
     .study-n {
       display: inline-flex;
       align-items: center;
-      padding: 4px 10px;
-      background: rgba(46, 125, 50, 0.12);
-      color: var(--green);
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Mono", Menlo, monospace;
+      padding: 3px 10px;
+      background: var(--paper);
+      color: var(--ink-soft);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
     }
 
     .negative-study h3 {
-      margin: 4px 0 10px;
-      font-size: 17px;
+      font-family: var(--serif);
+      margin: 6px 0 14px;
+      font-size: 19px;
+      font-weight: 700;
       letter-spacing: -0.01em;
-      line-height: 1.35;
+      line-height: 1.3;
+      color: var(--ink);
     }
 
     .negative-study p {
-      margin: 0 0 10px;
+      margin: 0 0 12px;
       font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    .negative-study .hl-result {
+      background: linear-gradient(transparent 55%, var(--highlight) 55%, var(--highlight) 90%, transparent 90%);
+      font-weight: 700;
+      color: var(--ink);
+      padding: 0 2px;
+    }
+
+    .negative-study .hl-strong {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .study-takeaway {
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: var(--paper);
+      border-left: 3px solid var(--accent);
+      font-size: 13.5px;
       line-height: 1.65;
-      color: #344054;
+      color: var(--ink-soft);
     }
 
-    .negative-study p em {
-      color: var(--red);
-      font-style: normal;
-      font-weight: 700;
+    .study-takeaway strong {
+      color: var(--ink);
     }
 
-    .negative-study .study-meta {
-      margin-top: 10px;
+    .study-citation {
+      margin-top: 12px;
       padding-top: 10px;
-      border-top: 1px dashed var(--border);
-      font-size: 14px;
-      color: #475569;
+      border-top: 1px dashed var(--rule);
+      font-family: var(--serif);
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--muted);
+      text-indent: -1.6em;
+      padding-left: 1.6em;
     }
 
-    .negative-study a {
-      color: #0f5f9e;
-      font-weight: 700;
+    .study-citation a {
+      color: var(--accent);
+      font-weight: 600;
       text-decoration: none;
     }
 
-    .negative-study a:hover {
+    .study-citation a:hover {
       text-decoration: underline;
     }
 
     .evidence-summary {
-      margin-top: 22px;
-      padding: 16px 18px;
-      background: rgba(38, 53, 42, 0.06);
-      border-radius: 16px;
-      border-left: 4px solid #26352a;
+      margin-top: 30px;
+      padding: 24px 28px;
+      background: var(--ink);
+      color: #f4f1ea;
+      border-radius: 3px;
+    }
+
+    .evidence-summary h3 {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 700;
+      margin: 0 0 12px;
+      letter-spacing: -0.005em;
+      color: #fff;
     }
 
     .evidence-summary p {
-      margin: 0 0 8px;
-      font-size: 14.5px;
-      line-height: 1.65;
-      color: #243028;
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(244, 241, 234, 0.9);
     }
 
     .evidence-summary p:last-child {
@@ -481,10 +645,332 @@
 
     .evidence-summary em {
       font-style: italic;
+      color: var(--highlight);
+      font-weight: 600;
+    }
+
+    /* ============= FOOTER ============= */
+    footer {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 28px 28px 48px;
+      border-top: 1px solid var(--rule);
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-family: var(--serif);
+    }
+
+    /* Selectors used by JS that we need to keep working */
+    #results, #lib-results, #grade-card, #explanation { /* placeholder for JS targets */ }
+
+    /* ============= COMPONENTS USED BY EXISTING HTML ============= */
+    h3 {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+      margin: 18px 0 8px;
+      padding-bottom: 4px;
+    }
+
+    h3::before {
+      content: "› ";
+      color: var(--accent);
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .actions button:not(.secondary), #analyzeBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .actions button:not(.secondary):hover, #analyzeBtn:hover {
+      background: var(--accent);
+    }
+
+    .actions .secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      background: transparent;
+      color: var(--ink-soft);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .actions .secondary:hover {
+      border-color: var(--ink-soft);
+      color: var(--ink);
+    }
+
+    .legend {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 18px 0 6px;
+      padding: 10px 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border-radius: 2px;
+      border: 1px solid;
+      font-family: var(--sans);
+    }
+
+    .tag.A { background: rgba(45, 90, 61, 0.08); color: var(--green); border-color: rgba(45, 90, 61, 0.4); }
+    .tag.B { background: rgba(30, 58, 95, 0.08); color: var(--blue); border-color: rgba(30, 58, 95, 0.4); }
+    .tag.C { background: rgba(138, 106, 30, 0.08); color: var(--amber); border-color: rgba(138, 106, 30, 0.4); }
+    .tag.G { background: rgba(160, 74, 30, 0.08); color: var(--orange); border-color: rgba(160, 74, 30, 0.4); }
+    .tag.X { background: rgba(107, 30, 30, 0.08); color: var(--red); border-color: rgba(107, 30, 30, 0.4); }
+    .tag.U { background: rgba(107, 107, 107, 0.08); color: var(--muted); border-color: rgba(107, 107, 107, 0.4); }
+
+    #summary {
+      margin-top: 14px;
+    }
+
+    #summary:not(:empty) {
+      padding: 14px 16px;
+      background: var(--paper);
+      border-left: 3px solid var(--ink);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    .results {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .result-item {
+      padding: 14px 16px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: var(--card);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px 16px;
+      align-items: start;
+    }
+
+    .result-item h4 {
+      font-family: var(--serif);
+      font-size: 16px;
+      margin: 0 0 4px;
+      color: var(--ink);
       font-weight: 700;
     }
 
+    .result-item .meta {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-top: 4px;
+    }
+
+    .result-item .evidence {
+      grid-column: 1 / -1;
+      margin-top: 8px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--rule);
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    .result-item .evidence-label {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 8px;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 2px;
+      margin-right: 6px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .result-item .evidence a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(107, 30, 30, 0.3);
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 14px 0 18px;
+      align-items: center;
+    }
+
+    #searchBox {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px 14px;
+      font-family: var(--sans);
+      font-size: 14px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    #searchBox:focus {
+      outline: none;
+      border-color: var(--ink-soft);
+    }
+
+    #filterSelect {
+      padding: 10px 14px;
+      font-family: var(--sans);
+      font-size: 14px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .library {
+      display: grid;
+      gap: 10px;
+      max-height: 520px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .library::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .library::-webkit-scrollbar-track {
+      background: var(--paper);
+    }
+
+    .library::-webkit-scrollbar-thumb {
+      background: var(--rule);
+      border-radius: 2px;
+    }
+
+    .lib-item {
+      padding: 12px 14px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: var(--card);
+      display: grid;
+      gap: 4px;
+    }
+
+    .lib-item-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .lib-item-name {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .lib-item-aliases {
+      font-size: 12px;
+      color: var(--muted-2);
+      font-family: var(--serif);
+    }
+
+    .lib-item-use {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    .lib-item-risk {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+      padding-top: 4px;
+      border-top: 1px dotted var(--rule);
+    }
+
+    .score-box {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+      padding: 18px;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+    }
+
+    .score-box .metric {
+      text-align: center;
+      padding: 8px 4px;
+    }
+
+    .score-box .metric .num {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .score-box .metric .label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
     @media (max-width: 880px) {
+
       .grid { grid-template-columns: 1fr; }
       .toolbar { grid-template-columns: 1fr; }
       .score-box { grid-template-columns: repeat(2, 1fr); }
@@ -494,12 +980,16 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>中药材安全与药方风险查询</h1>
-    <blockquote class="quote">
-      “我还记得先前的医生的议论和方药，和现在所知道的比较起来，便渐渐的悟得中医不过是一种有意的或无意的骗子”
-      <cite>——鲁迅，《呐喊·自序》</cite>
-    </blockquote>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="eyebrow">中药材安全与药方风险查询 · 政策模拟工具</div>
+      <h1 class="site-title">药方风险评估系统</h1>
+      <p class="site-subtitle">基于循证医学证据的中药材分类、风险等级与药物相互作用查询。立场声明：本工具采纳现代循证医学的整体判断，即中医药体系作为一个整体，缺乏可靠的疗效证据，并存在可观的毒理学风险。</p>
+      <div class="site-epigraph">
+        <div class="quote-text">我还记得先前的医生的议论和方药，和现在所知道的比较起来，便渐渐的悟得中医不过是一种有意的或无意的骗子。</div>
+        <span class="quote-attr">—— 鲁迅，《呐喊·自序》（1922）</span>
+      </div>
+    </div>
   </header>
 
   <main>
@@ -642,42 +1132,71 @@
     </section>
 
     <section class="card evidence-card">
-      <h2>关键的阴性研究</h2>
-      <p class="note">下面这些是大样本、严格随机对照、双盲、安慰剂对照、发表于顶级期刊的研究。它们检验的是中医药/针灸最核心的疗效宣称。结果是:在最干净的研究设计下,中医药与安慰剂没有差异。</p>
+      <h2>关键阴性研究证据汇编</h2>
+
+      <div class="epigraph-box">
+        <p class="epigraph-text">但我总希望这昏乱思想遗传的祸害，不至于有梅毒那样猛烈，竟至百无一免。即使同梅毒一样，现在发明了六百零六，肉体上的病，既可医治；我希望也有一种七百零七的药，可以医治思想上的病。这药原来也已发明，就是<span class="hl">"科学"</span>一味。只希望那班精神上掉了鼻子的朋友，不要又打着"祖传老病"的旗号来反对吃药，中国的昏乱病，便也总有全愈的一天。</p>
+        <span class="epigraph-attr">—— 鲁迅，《热风·随感录三十八（合群的爱国的自大）》（1918）</span>
+      </div>
+
+      <p class="note">下列研究均为大样本、随机化、双盲、安慰剂对照、发表于顶级期刊的金标准 RCT 或系统综述。每项研究都直接检验了中医药/针灸的某个核心疗效宣称。引用格式遵循 APA 第 7 版。</p>
 
       <div class="negative-studies">
 
         <article class="negative-study">
           <div class="study-header">
-            <span class="study-tag">2024 · The Lancet</span>
-            <span class="study-n">n = 1,641</span>
+            <span class="study-tag tier-1">2024 · The Lancet</span>
+            <span class="study-n">N = 1,641</span>
           </div>
-          <h3>中风醒脑口服液 (FYTF-919) 治疗急性脑出血:CHAIN 试验</h3>
-          <p>这是迄今最重要的一项中药 RCT。"中风醒脑"是中国治疗急性脑出血的常用中成药复方,基于"化瘀吸收血肿、抗炎"等理论被广泛使用。CHAIN 试验在中国 26 家医院招募了 1,641 名中重度脑出血患者,随机给予中风醒脑口服液或外观、口味完全一致的安慰剂,持续 28 天。</p>
-          <p><strong>结果:</strong>主要结局 90 天 utility-weighted 改良 Rankin 量表评分,试验组 0.44,安慰剂组 0.44,差值 0.01(95% CI -0.02 至 0.04),<em>p = 0.63</em>。功能恢复、生存率、生活质量——全部三项关键指标无任何差异。Lancet 编辑部评论指出,这一结果"再次确认了对包括中医药在内的、已在全世界广泛使用的现有疗法,进行方法学严格的随机对照试验的必要性"。</p>
-          <p class="study-meta"><strong>意义:</strong>这是首篇以中药复方为主题、发表在 Lancet 的 RCT。其阴性结果之所以重要,在于它的设计完全无法被传统辩护词反驳——不是"剂量不够"(用的是临床推荐剂量)、不是"病人不对"(选的是适应症患者)、不是"不个体化"(中成药本身就是固定方)、不是"西医不懂中医"(主要研究者来自广州中医药大学)。<a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(24)02261-X/abstract" target="_blank" rel="noopener noreferrer">原文链接</a></p>
+          <h3>中风醒脑口服液（FYTF-919）治疗急性脑出血：CHAIN 试验</h3>
+          <p>"中风醒脑口服液"是中国治疗急性脑出血的常用中成药复方，基于"化瘀吸收血肿、抗炎"等理论被广泛使用。CHAIN 试验在中国 26 家医院招募 1,641 名中重度脑出血患者，随机给予中风醒脑口服液或外观、口味完全一致的安慰剂，持续 28 天。</p>
+          <p><span class="hl-strong">主要结局：</span>90 天 utility-weighted 改良 Rankin 量表评分，<span class="hl-result">试验组 0.44，安慰剂组 0.44，差值 0.01（95% CI -0.02 至 0.04），p = 0.63</span>。功能恢复、生存率、生活质量——三项关键指标均无差异。</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>这是首篇以中药复方为主题、发表在 Lancet 的 RCT。其阴性结果之所以决定性，在于它的设计排除了所有传统辩护词——剂量为临床推荐剂量、患者为典型适应症、复方本身就是固定方（不存在"个体化"问题）、主要研究者来自广州中医药大学。
+          </div>
+          <div class="study-citation">CHAIN Investigators. (2024). Traditional Chinese medicine FYTF-919 (Zhongfeng Xingnao oral prescription) for the treatment of acute intracerebral haemorrhage: A multicentre, randomised, placebo-controlled, double-blind, clinical trial. <em>The Lancet, 404</em>(10468), 2187–2196. <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(24)02261-X/abstract" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/S0140-6736(24)02261-X</a></div>
         </article>
 
         <article class="negative-study">
           <div class="study-header">
-            <span class="study-tag">2013 · Stroke (AHA)</span>
-            <span class="study-n">n = 1,100</span>
+            <span class="study-tag tier-1">2008 · JAMA</span>
+            <span class="study-n">N = 3,069</span>
           </div>
-          <h3>NeuroAiD (MLC601) 治疗急性缺血性卒中:CHIMES 试验</h3>
-          <p>CHIMES 是一项国际多中心(中国、新加坡、菲律宾、泰国、斯里兰卡)、双盲、安慰剂对照 RCT,检验的是另一个被广泛使用的中药复方 NeuroAiD,声称可促进卒中后神经功能恢复。患者在卒中发作后 72 小时内入组,治疗 3 个月。</p>
-          <p><strong>结果:</strong>主要结局 3 个月时改良 Rankin 量表评分,中药组与安慰剂组<em>无统计学差异</em>。结论原文:"MLC601 在用于中等严重程度急性缺血性卒中患者时,在 3 个月改善结局方面在统计学上不优于安慰剂"。</p>
-          <p class="study-meta"><strong>意义:</strong>这项试验由中医药支持机构(CHIMES Society / Moleac)赞助——即由<em>利益相关方自己设计</em>的试验,在严格盲法下也得出阴性结果,可信度极高。<a href="https://pubmed.ncbi.nlm.nih.gov/23780952/" target="_blank" rel="noopener noreferrer">PubMed</a></p>
+          <h3>银杏叶提取物预防痴呆：GEM 研究</h3>
+          <p>美国国立补充与替代医学中心（NCCAM）资助的大型 RCT，在 5 个学术医学中心招募 3,069 名 75 岁以上、认知正常或轻度认知损害的老年人，随机服用 EGb761 银杏叶提取物 120 mg 每日两次或安慰剂，中位随访 6.1 年。</p>
+          <p><span class="hl-strong">主要结局：</span>全因痴呆和阿尔茨海默病的发病率，<span class="hl-result">两组间无显著差异（HR 1.12，95% CI 0.94–1.33）</span>。JAMA 同期社论结论原文："常规使用的银杏叶提取物不能预防有或无认知障碍人群的痴呆，对阿尔茨海默病也无效——使用者不应期待它有用。"</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>银杏是全球销量最大的"植物药"之一，"改善记忆""保护脑血管"的市场宣传无处不在。GEM 是迄今为止唯一一项有足够样本量和随访时间来真正检验这一核心宣称的研究，其阴性结果至今未被任何同等量级的研究推翻。
+          </div>
+          <div class="study-citation">DeKosky, S. T., Williamson, J. D., Fitzpatrick, A. L., Kronmal, R. A., Ives, D. G., Saxton, J. A., Lopez, O. L., Burke, G., Carlson, M. C., Fried, L. P., Kuller, L. H., Robbins, J. A., Tracy, R. P., Woolard, N. F., Dunn, L., Snitz, B. E., Nahin, R. L., &amp; Furberg, C. D. (2008). Ginkgo biloba for prevention of dementia: A randomized controlled trial. <em>JAMA, 300</em>(19), 2253–2262. <a href="https://jamanetwork.com/journals/jama/fullarticle/182929" target="_blank" rel="noopener noreferrer">https://doi.org/10.1001/jama.2008.683</a></div>
         </article>
 
         <article class="negative-study">
           <div class="study-header">
-            <span class="study-tag">2008 · JAMA</span>
-            <span class="study-n">n = 3,069</span>
+            <span class="study-tag">2007 · Arch Intern Med</span>
+            <span class="study-n">N = 1,162</span>
           </div>
-          <h3>银杏叶提取物预防痴呆:GEM 研究</h3>
-          <p>美国国立补充与替代医学中心 (NCCAM) 资助的大型 RCT,在 5 个学术医学中心招募 3,069 名 75 岁以上、认知正常或轻度认知损害的老年人,随机服用 EGb761 银杏叶提取物 120 mg 每日两次或安慰剂,中位随访 6.1 年。</p>
-          <p><strong>结果:</strong>痴呆和阿尔茨海默病的发病率在两组间<em>无统计学差异</em>。JAMA 同期社论结论:"GEM 研究为大量证据再添一项,证明常规使用的银杏叶提取物不能预防有或无认知障碍人群的痴呆,对阿尔茨海默病也无效。使用者不应期待它有用。"</p>
-          <p class="study-meta"><strong>意义:</strong>银杏是全球销量最大的"植物药"之一,产业巨大,所谓"改善记忆""保护脑血管"的宣传无处不在。GEM 是迄今为止唯一一项有足够样本量和随访时间来真正检验这一核心宣称的研究。它的阴性结果至今未被任何同等量级的研究推翻。<a href="https://jamanetwork.com/journals/jama/fullarticle/182929" target="_blank" rel="noopener noreferrer">JAMA</a></p>
+          <h3>针灸 vs 假针灸 vs 常规治疗：GERAC 慢性腰痛试验</h3>
+          <p>由德国法定医保资助、为评估针灸医保覆盖性而设计的大型 RCT。在 340 家门诊诊所招募 1,162 名慢性腰痛患者（平均病程 8 年），三臂随机：（1）按中医经络理论的"真针灸"，（2）在非穴位浅刺的"假针灸"，（3）指南推荐的常规治疗（药物+理疗+运动）。10 次 30 分钟治疗，持续 5 周。</p>
+          <p><span class="hl-strong">主要结局：</span>6 个月时疼痛改善的应答率，<span class="hl-result">真针灸 47.6% vs 假针灸 44.2%（差值 3.4%，95% CI -3.7% 至 10.3%，p = 0.39）</span>。两种针灸的效果均显著优于常规治疗（27.4%），但<span class="hl-strong">真针灸与假针灸之间无显著差异</span>。</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>这是对中医"经络穴位特异性"理论的直接证伪。如果穴位真的具有解剖-生理学上的特殊性，那么扎对位置应该比扎错位置有效。但 GERAC 显示——以及后续多项类似设计的 RCT 一致显示——无论扎在哪里，效果都一样。这说明针灸的疗效是<span class="hl-strong">非特异性安慰剂效应 + 期待效应 + 治疗仪式</span>的产物，而非穴位经络的特异性药理作用。
+          </div>
+          <div class="study-citation">Haake, M., Müller, H. H., Schade-Brittinger, C., Basler, H. D., Schäfer, H., Maier, C., Endres, H. G., Trampisch, H. J., &amp; Molsberger, A. (2007). German Acupuncture Trials (GERAC) for chronic low back pain: Randomized, multicenter, blinded, parallel-group trial with 3 groups. <em>Archives of Internal Medicine, 167</em>(17), 1892–1898. <a href="https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/413107" target="_blank" rel="noopener noreferrer">https://doi.org/10.1001/Archinte.167.17.1892</a></div>
+        </article>
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag">2013 · Stroke</span>
+            <span class="study-n">N = 1,100</span>
+          </div>
+          <h3>NeuroAiD（MLC601）治疗急性缺血性卒中：CHIMES 试验</h3>
+          <p>国际多中心（中国、新加坡、菲律宾、泰国、斯里兰卡）双盲、安慰剂对照 RCT，检验中药复方 NeuroAiD 治疗急性缺血性卒中的效果。患者在卒中发作后 72 小时内入组，治疗 3 个月，随访至 2 年（CHIMES-E 延续研究）。</p>
+          <p><span class="hl-strong">主要结局：</span>3 个月时改良 Rankin 量表评分，<span class="hl-result">中药组在统计学上不优于安慰剂（OR 1.09，95% CI 0.86–1.32，p = 0.474）</span>。原文结论："MLC601 在用于中等严重程度急性缺血性卒中患者时，在 3 个月改善结局方面在统计学上不优于安慰剂。"</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>这项试验由中医药支持机构（CHIMES Society / Moleac）赞助——即由<span class="hl-strong">利益相关方自己设计</span>的试验，在严格盲法下仍得出阴性结果，可信度反而极高。后续 2 年延续研究中所谓"6–18 个月时有效"的事后分析，未被主流卒中指南采纳。
+          </div>
+          <div class="study-citation">Chen, C. L. H., Young, S. H., Gan, H. H., Singh, R., Lao, A. Y., Baroque, A. C., Chang, H. M., Hiyadan, J. H. B., Chua, C. L., Advincula, J. M., Muengtaweepongsa, S., Chan, B. P. L., De Silva, H. A., Towanabut, S., Suwanwela, N. C., Poungvarin, N., Chankrachang, S., Wong, K. S. L., Eow, G. B., … Bousser, M. G. (2013). Chinese medicine NeuroAiD efficacy on stroke recovery: A double-blind, placebo-controlled, randomized study. <em>Stroke, 44</em>(8), 2093–2100. <a href="https://pubmed.ncbi.nlm.nih.gov/23780952/" target="_blank" rel="noopener noreferrer">https://doi.org/10.1161/STROKEAHA.113.002055</a></div>
         </article>
 
         <article class="negative-study">
@@ -685,35 +1204,86 @@
             <span class="study-tag">2007 · Postgrad Med J</span>
             <span class="study-n">系统综述</span>
           </div>
-          <h3>"个体化中药辨证论治"的循证检验:Guo, Canter, Ernst 综述</h3>
-          <p>"中医必须个体化辨证论治、不能用 RCT 研究"是中医捍卫者最常见的辩护。Ernst 团队系统检索了所有以"个体化草药处方"(包括中医、欧洲草药、阿育吠陀)为干预的随机对照试验。</p>
-          <p><strong>结果:</strong>全球只检索到 3 项符合标准的 RCT。膝骨关节炎试验中,试验组优于安慰剂的趋势可由基线差异和均值回归解释;肠易激综合征试验中,个体化治疗优于安慰剂但<em>劣于标准化中药方</em>;化疗毒性预防试验中,个体化中药与安慰剂<em>无差异</em>。综述结论原文:"没有令人信服的证据支持在任何适应症上使用个体化草药治疗。"</p>
-          <p class="study-meta"><strong>意义:</strong>这项综述击中了"中医不能用现代科学方法评价"的核心辩护。当真的有人按"辨证论治"的方式做了 RCT,结果是:个体化处方既无优势,反而可能不如固定的标准方。这意味着,即使在"中医自己的规则"下进行严格检验,也不能证明其有效。<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2600130/" target="_blank" rel="noopener noreferrer">PMC</a></p>
+          <h3>"个体化辨证论治"的循证检验：Guo, Canter &amp; Ernst 综述</h3>
+          <p>"中医必须个体化辨证论治、不能用 RCT 评价"是中医捍卫者最常见的辩护。Ernst 团队（英国 Exeter 大学补充与替代医学系）系统检索了所有以"个体化草药处方"（包括中医、欧洲草药、阿育吠陀）为干预的随机对照试验。</p>
+          <p><span class="hl-strong">主要结局：</span>全球只检索到 3 项符合标准的 RCT。膝骨关节炎试验中，趋势可由基线差异和均值回归解释；肠易激综合征试验中，<span class="hl-result">个体化治疗优于安慰剂但劣于标准化中药方</span>；化疗毒性预防试验中，<span class="hl-result">个体化中药与安慰剂无差异</span>。综述结论原文："没有令人信服的证据支持在任何适应症上使用个体化草药治疗。"</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>这项综述击中了"中医不能用现代科学方法评价"的核心辩护。当真的有人按"辨证论治"的方式做了 RCT，结果是：<span class="hl-strong">个体化处方既无优势，反而可能不如固定方</span>。即在中医自己的规则下，也找不到证据。
+          </div>
+          <div class="study-citation">Guo, R., Canter, P. H., &amp; Ernst, E. (2007). A systematic review of randomised clinical trials of individualised herbal medicine in any indication. <em>Postgraduate Medical Journal, 83</em>(984), 633–637. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2600130/" target="_blank" rel="noopener noreferrer">https://doi.org/10.1136/pgmj.2007.060202</a></div>
         </article>
 
         <article class="negative-study">
           <div class="study-header">
-            <span class="study-tag">多项 Cochrane / Meta 综述</span>
-            <span class="study-n">数百项 RCT</span>
+            <span class="study-tag">2022 · J Evid Based Med</span>
+            <span class="study-n">综述：所有 Cochrane 中药综述</span>
           </div>
-          <h3>针灸的"穴位特异性"在严格盲法下消失</h3>
-          <p>针灸的核心理论宣称是经络与穴位的特异性——扎对穴位有效,扎错没效。在使用"假针灸"(sham acupuncture,即在非穴位扎入或假装扎入)作为对照的 RCT 中,这一宣称反复被证伪:</p>
-          <p><strong>结果:</strong>多项系统综述显示,真针灸 vs 假针灸在大多数适应症(疼痛、偏头痛、腰痛、骨关节炎等)上<em>差异微小或无差异</em>,而真针灸+假针灸 vs 不治疗都比不治疗好——也就是说,所谓"针灸效果"主要是<em>非特异性安慰剂效应</em>,与穴位选择、经络理论无关。一项 51 项研究的综述发现,36 项血清生物标志物中绝大多数在真假针灸之间无差异。</p>
-          <p class="study-meta"><strong>意义:</strong>这是对中医理论体系的根本性证伪。如果"经络穴位"真的存在并具有生理特异性,那么扎在错误的位置不应当产生同样的效果。但实际数据显示恰恰相反——这说明经络理论作为一个解释框架是空的,所谓的"治疗效应"完全可以用安慰剂理论解释。<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3001416/" target="_blank" rel="noopener noreferrer">综述 1</a> · <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8850388/" target="_blank" rel="noopener noreferrer">综述 2</a></p>
+          <h3>Cochrane 数据库中中药系统综述的整体评估</h3>
+          <p>Cochrane 系统综述被公认为循证医学的最高证据等级。这项荟萃综述检索了 Cochrane 数据库中所有以中药为主题的系统综述，评估其结论的确定性和方法学质量（按 GRADE 和 AMSTAR 2 标准）。</p>
+          <p><span class="hl-strong">主要结局：</span><span class="hl-result">绝大多数 Cochrane 中药综述的结论是"证据不足以得出结论"或"效应不确定"</span>。即使是少数报告"有效"的综述，其证据质量按 GRADE 评估多为"低"或"极低"。原文结论："尽管中药被广泛使用，其有效性的证据在很大程度上仍然不确定。"</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>过去 20 多年，Cochrane 协作组发表了数百篇中药系统综述，覆盖几乎所有主要疾病。当全球最严格的循证医学机构系统、独立、按统一标准评估全部中药文献时，得出的整体判断不是"中药有效"或"中药无效"，而是"<span class="hl-strong">现有研究质量太差，无法支持任何明确结论</span>"——这本身就是对"中医千年验证有效"宣称的根本反驳。
+          </div>
+          <div class="study-citation">Wu, X. Y., Tang, J. L., Mao, C., Yuan, J. Q., Qin, Y., &amp; Chung, V. C. H. (2022). Cochrane systematic reviews on traditional Chinese medicine: What matters—the quantity or quality of evidence? <em>Journal of Evidence-Based Medicine, 15</em>(4), 372–382. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9741948/" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/jebm.12502</a></div>
+        </article>
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag">2012 · Cochrane Reviews 综述</span>
+            <span class="study-n">6 项 Cochrane 综述</span>
+          </div>
+          <h3>中药治疗冠心病：6 项 Cochrane 综述的整体评估</h3>
+          <p>该综述系统整合了 Cochrane 数据库中所有以中药治疗冠心病（不稳定型心绞痛、稳定型心绞痛、心衰、急性心梗）为主题的 6 项 Cochrane 系统综述。冠心病是中药使用最广泛的适应症之一，"活血化瘀""通脉""养心"等理论应用极广。</p>
+          <p><span class="hl-strong">主要结局：</span><span class="hl-result">6 项 Cochrane 综述无一支持中药对冠心病有确定的治疗效果</span>。原文结论："这些综述均未得到支持中药制剂有效性的明确结论，原因是证据薄弱。"</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>冠心病是有清晰客观结局指标（死亡率、再梗死率、PCI 率）的疾病，不能用主观症状量表搪塞。在这一最经得起检验的领域，中药同样未能通过 Cochrane 标准的检验。
+          </div>
+          <div class="study-citation">Liu, Z. L., Liu, Z. J., Liu, J. P., Yang, M., &amp; Kwong, J. (2012). Traditional Chinese herbal products for coronary heart disease: An overview of Cochrane reviews. <em>Evidence-Based Complementary and Alternative Medicine, 2012</em>, 591636. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3320001/" target="_blank" rel="noopener noreferrer">https://doi.org/10.1155/2012/591636</a></div>
+        </article>
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag">2021 · Front Pharmacol</span>
+            <span class="study-n">N = 1,773 样本</span>
+          </div>
+          <h3>全球中药材重金属污染：1,773 样本调查</h3>
+          <p>这不是一项疗效研究，而是一项<span class="hl-strong">质量与安全性</span>研究。研究者用电感耦合等离子体质谱（ICP-MS）检测了来自全球的 1,773 份中药材样本中镉（Cd）、铅（Pb）、砷（As）、汞（Hg）、铜（Cu）的含量，按《中国药典》限值评估。</p>
+          <p><span class="hl-strong">主要结局：</span><span class="hl-result">30.51%（541 份）样本至少有一种重金属超出《中国药典》限值</span>。其中 25 种常用药材的铅、镉、砷、汞估计每日摄入量超过暂定可耐受日摄入量（PTDI）。其他独立研究在韩国、新加坡、美国市售中药也观察到类似比例的重金属超标。</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>即使忽略疗效问题——假设某种中药真的"有效"——使用者也面临三分之一概率摄入超标重金属的风险。这是一个<span class="hl-strong">系统性产业问题</span>而非个别造假：土壤污染、加工不规范、矿物药故意添加、传统炮制工艺无法清除现代污染物。"天然=安全"是中药市场最大的认知错误。
+          </div>
+          <div class="study-citation">Luo, L., Wang, B., Jiang, J., Fitzgerald, M., Huang, Q., Yu, Z., Li, H., Zhang, J., Wei, J., Yang, C., Zhang, H., Dong, L., &amp; Chen, S. (2021). Heavy metal contaminations in herbal medicines: Determination, comprehensive risk assessments, and solutions. <em>Frontiers in Pharmacology, 11</em>, 595335. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7883644/" target="_blank" rel="noopener noreferrer">https://doi.org/10.3389/fphar.2020.595335</a></div>
+        </article>
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag">2015 · Sci Rep</span>
+            <span class="study-n">N = 26 样本（DNA 测序）</span>
+          </div>
+          <h3>中药商品的成分掺假与污染：基因组学审计</h3>
+          <p>研究者使用 DNA 测序、毒理学分析和重金属检测三种独立方法，对澳大利亚市售的 26 种中药商品进行了"审计"。这是首次对中药使用现代分子生物学方法进行身份核验。</p>
+          <p><span class="hl-strong">主要结局：</span><span class="hl-result">92% 的中药样本存在某种形式的成分掺假和/或污染</span>。包括：标签未声明的植物成分、标签未声明的西药（包括对乙酰氨基酚、抗组胺药、糖皮质激素）、未声明的动物 DNA（包括《濒危野生动植物种国际贸易公约》CITES 保护物种），以及多种重金属（其中一份砷含量超过限值的 10 倍以上）。</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>"中药"作为一个商品类别，其<span class="hl-strong">实际成分与标签宣称严重不符</span>。消费者购买的"金银花胶囊"实际可能含有意外植物、未声明西药、保护动物制品、或重金属。这种系统性掺假使任何"中药 X 治疗 Y 有效"的临床观察都不可解释——你不知道患者实际吃下的是什么。
+          </div>
+          <div class="study-citation">Coghlan, M. L., Maker, G., Crighton, E., Haile, J., Murray, D. C., White, N. E., Byard, R. W., Bellgard, M. I., Mullaney, I., Trengove, R., Allcock, R. J. N., Nash, C., Hoban, C., Jarrett, K., Edwards, R., Musgrave, I. F., &amp; Bunce, M. (2015). Combined DNA, toxicological and heavy metal analyses provides an auditing toolkit to improve pharmacovigilance of traditional Chinese medicine (TCM). <em>Scientific Reports, 5</em>, 17475. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4675079/" target="_blank" rel="noopener noreferrer">https://doi.org/10.1038/srep17475</a></div>
         </article>
 
       </div>
 
       <div class="evidence-summary">
-        <p><strong>共同模式 — </strong>当中医药接受现代医学的金标准检验(大样本、随机、双盲、安慰剂对照、独立数据监查)时,几乎无一例外地得出阴性结果或无法重复的小效应。这不是个别研究的问题,而是<em>一个一致的模式</em>。任何一个具体的中药、复方、疗法在小样本、开放标签或仅以"有效率"为指标的中文文献中显示"有效",但当研究设计变得严格,效应就消失。</p>
-        <p>这种模式在科学史上有一个标准解释:这些治疗手段的"疗效"主要是安慰剂效应、自然病程、回归均值和偏倚的混合产物,而不是治疗本身的特异性药理作用。</p>
+        <h3>共同模式</h3>
+        <p>当中医药接受现代医学的金标准检验——大样本、随机化、双盲、安慰剂对照、独立数据监查——时，结果几乎一致地呈现以下三种之一：<em>与安慰剂无差异</em>、<em>效应小到无临床意义</em>、或<em>证据质量太差以至于无法得出结论</em>。这不是个别研究的偶然，而是一个<em>横跨数十年、覆盖各类适应症、独立于研究地点和资助方的稳定模式</em>。</p>
+        <p>在中文文献中显示"有效"的小样本、开放标签、以"有效率"为指标的研究，一旦研究设计变得严格，效应就消失。这种模式在科学史上有标准解释：所谓的"疗效"主要是<em>安慰剂效应、自然病程、回归均值与系统性偏倚</em>的混合产物，而非治疗本身的特异性药理作用。</p>
+        <p>同时，中药材本身存在<em>系统性重金属污染、农药残留、成分掺假与未声明西药添加</em>等质量问题。"天然 = 安全"是这一行业最具误导性的市场标语——这恰恰是为什么本工具的减害分类（A/B/C/灰/黑名单）有其实际意义：在一个无法摆脱的文化-产业现实中，至少避开会真正伤人的东西。</p>
       </div>
     </section>
 
   </main>
 
   <footer>
-    免责声明：本网页为政策模拟与教学工具，不用于诊断、治疗或替代医生建议。药材类别与风险说明基于本次讨论形成的假想监管框架，实际药政与临床用药应以国家药监部门、药典、说明书和合格医师意见为准。
+    <strong>免责声明 ·</strong> 本工具为政策模拟与教学用途，不用于诊断、治疗或替代医师建议。药材分类与风险说明基于作者依据循证医学证据自行整理的减害框架，非任何监管机构的官方清单。实际用药应以国家药监部门、药典、产品说明书和合格医师意见为准。<br>
+    <strong>方法论立场 ·</strong> 本工具采纳现代循证医学的整体判断：中医药体系作为一个整体，迄今缺乏足以支持其疗效宣称的高质量证据，并存在可观的毒理学、相互作用与质量风险。本工具不试图论证或反驳具体哲学命题，仅提供减害决策辅助。
   </footer>
 
   <script>
