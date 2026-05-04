@@ -14,20 +14,24 @@
    ==================================================================== */
 
 :root {
-  --ph-ink:        #1a1816;
-  --ph-ink-soft:   #44413e;
-  --ph-ink-faint:  #6b6864;
-  --ph-ink-faded:  #9a958e;
-  --ph-rule:       #e6e2db;
-  --ph-rule-soft:  #f0ece5;
-  --ph-paper:      #f7f4ed;
-  --ph-paper-deep: #efeae0;
-  --ph-graphite:   #2b2723;
-  --ph-sepia:      #6b3a1f;
-  --ph-sepia-soft: #8a5436;
-  --ph-platinum:   #59636b;
-  --ph-pale-warm:  #f3ebd9;
-  --ph-pale-cool:  #e7ebec;
+  --ph-ink:        #1a1d21;
+  --ph-ink-soft:   #3d434a;
+  --ph-ink-faint:  #6a7079;
+  --ph-ink-faded:  #a0a5ac;
+  --ph-rule:       #e4e6ea;
+  --ph-rule-soft:  #f1f3f5;
+  --ph-paper:      #ffffff;
+  --ph-paper-deep: #f7f8fa;
+  --ph-graphite:   #1a1d21;
+  --ph-navy:       #0a3d62;
+  --ph-navy-soft:  #1e5fa8;
+  --ph-cyan:       #0e7c8a;
+  --ph-cyan-soft:  #2a99a8;
+  --ph-forest:     #2f6b3f;
+  --ph-forest-soft:#4a8a5c;
+  --ph-pale-navy:  #e8f1f8;
+  --ph-pale-cyan:  #e6f3f5;
+  --ph-pale-fst:   #ecf3ee;
 
   --ph-font-body:  "Atkinson Hyperlegible", "Source Sans 3", system-ui, -apple-system, sans-serif;
   --ph-font-ui:    "Inter", system-ui, sans-serif;
@@ -115,7 +119,7 @@ body.photography-page[data-lang="zh"] {
 }
 
 .photography-page .lang-toggle button.active { background: var(--ph-graphite); color: var(--ph-paper); }
-.photography-page .lang-toggle button:not(.active):hover { color: var(--ph-graphite); background: var(--ph-pale-warm); }
+.photography-page .lang-toggle button:not(.active):hover { color: var(--ph-graphite); background: var(--ph-pale-navy); }
 
 /* ─── Two-column layout: TOC sidebar + main content ──────────────── */
 .photography-page .layout {
@@ -191,7 +195,7 @@ body.photography-page[data-lang="zh"] {
 .photography-page .epigraph {
   margin: 1.5rem 0 0;
   padding: 0 0 0 1.25rem;
-  border-left: 2px solid var(--ph-sepia);
+  border-left: 2px solid var(--ph-navy);
   font-style: italic;
   color: var(--ph-ink-soft);
   font-size: 0.95rem;
@@ -235,7 +239,7 @@ body.photography-page[data-lang="zh"] {
 .photography-page h2 .sec-num {
   font-family: var(--ph-font-ui);
   font-weight: 500;
-  color: var(--ph-sepia);
+  color: var(--ph-navy);
   margin-right: 0.45rem;
   font-size: 0.95em;
   letter-spacing: 0;
@@ -267,9 +271,9 @@ body.photography-page[data-lang="zh"] {
 .photography-page strong { font-weight: 700; color: var(--ph-graphite); }
 
 .photography-page a {
-  color: var(--ph-sepia);
+  color: var(--ph-navy);
   text-decoration: none;
-  border-bottom: 1px solid var(--ph-sepia-soft);
+  border-bottom: 1px solid var(--ph-navy-soft);
   transition: color 0.15s, border-color 0.15s;
 }
 .photography-page a:hover {
@@ -302,7 +306,7 @@ body.photography-page[data-lang="zh"] {
   font-size: 0.9rem;
   color: var(--ph-ink-soft);
   background: var(--ph-rule-soft);
-  border-left: 2px solid var(--ph-platinum);
+  border-left: 2px solid var(--ph-cyan);
   padding: 1rem 1.25rem;
   margin: 1.75rem 0 0;
   max-width: 52rem;
@@ -316,7 +320,7 @@ body.photography-page[data-lang="zh"] {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ph-platinum);
+  color: var(--ph-cyan);
   margin-bottom: 0.5rem;
 }
 
@@ -333,7 +337,7 @@ body.photography-page[data-lang="zh"] {
 .photography-page .sidenote {
   font-size: 0.88rem;
   color: var(--ph-ink-soft);
-  border-left: 2px solid var(--ph-sepia-soft);
+  border-left: 2px solid var(--ph-cyan-soft);
   padding: 0.5rem 0 0.5rem 1rem;
   margin: 1.25rem 0;
   max-width: 50rem;
@@ -345,7 +349,7 @@ body.photography-page[data-lang="zh"] {
   font-family: var(--ph-font-ui);
   font-size: 0.72rem;
   font-weight: 600;
-  color: var(--ph-sepia);
+  color: var(--ph-cyan);
   vertical-align: super;
   margin-right: 0.35rem;
 }
@@ -356,7 +360,7 @@ body.photography-page[data-lang="zh"] {
   vertical-align: super;
   font-weight: 600;
   border-bottom: 0;
-  color: var(--ph-sepia);
+  color: var(--ph-cyan);
   margin-left: 0.05em;
 }
 
@@ -427,7 +431,7 @@ body.photography-page[data-lang="zh"] {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ph-platinum);
+  color: var(--ph-cyan);
   margin: 0 0 0.85rem;
   padding: 0;
 }
@@ -460,7 +464,7 @@ body.photography-page[data-lang="zh"] {
 }
 
 .photography-page .toc a.active {
-  color: var(--ph-sepia);
+  color: var(--ph-navy);
   font-weight: 600;
 }
 
