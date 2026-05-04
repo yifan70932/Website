@@ -401,6 +401,182 @@ body.photography-page[data-lang="zh"] {
   font-size: 0.82rem;
 }
 
+/* ─── Köppen-Geiger map widget ─────────────────────────────────── */
+.photography-page .koppen-widget {
+  margin: 1.75rem 0;
+  max-width: 52rem;
+  border: 1px solid var(--ph-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.photography-page .koppen-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.85rem;
+  align-items: center;
+}
+
+.photography-page[data-lang="zh"] .koppen-controls { font-family: var(--ph-font-cn); }
+
+.photography-page .koppen-controls .label {
+  color: var(--ph-ink-faint);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-right: 0.25rem;
+}
+
+.photography-page[data-lang="zh"] .koppen-controls .label {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.photography-page .koppen-controls .seg {
+  display: inline-flex;
+  border: 1px solid var(--ph-rule);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.photography-page .koppen-controls .seg button {
+  background: #fff;
+  border: 0;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  color: var(--ph-ink-soft);
+  font-family: inherit;
+  font-size: inherit;
+  border-right: 1px solid var(--ph-rule);
+  transition: background 0.15s, color 0.15s;
+}
+
+.photography-page .koppen-controls .seg button:last-child { border-right: 0; }
+
+.photography-page .koppen-controls .seg button:hover {
+  background: var(--ph-pale-navy);
+  color: var(--ph-graphite);
+}
+
+.photography-page .koppen-controls .seg button.active {
+  background: var(--ph-navy);
+  color: #fff;
+}
+
+.photography-page .koppen-controls select {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--ph-rule);
+  border-radius: 3px;
+  background: #fff;
+  color: var(--ph-ink);
+  font-family: inherit;
+  font-size: inherit;
+  max-width: 12rem;
+}
+
+.photography-page .koppen-map {
+  height: 460px;
+  width: 100%;
+  background: #f0f4f7;
+}
+
+.photography-page .koppen-legend {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.78rem;
+  color: var(--ph-ink-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.25rem;
+  align-items: center;
+}
+
+.photography-page[data-lang="zh"] .koppen-legend { font-family: var(--ph-font-cn); }
+
+.photography-page .koppen-legend .swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.photography-page .koppen-legend .sw {
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.photography-page .koppen-status {
+  padding: 1.5rem;
+  text-align: center;
+  font-family: var(--ph-font-ui);
+  color: var(--ph-ink-faint);
+  font-size: 0.85rem;
+}
+
+/* Leaflet popup styled to match wiki */
+.photography-page .leaflet-popup-content-wrapper {
+  border-radius: 3px;
+  font-family: var(--ph-font-body);
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content-wrapper {
+  font-family: var(--ph-font-cn);
+}
+.photography-page .leaflet-popup-content {
+  margin: 0.6rem 0.85rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.photography-page .leaflet-popup-content .pop-code {
+  font-family: var(--ph-font-mono);
+  background: var(--ph-pale-navy);
+  color: var(--ph-navy);
+  padding: 0.05rem 0.35rem;
+  border-radius: 2px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.photography-page .leaflet-popup-content .pop-name {
+  display: block;
+  font-weight: 600;
+  margin: 0.3rem 0 0.15rem;
+  color: var(--ph-graphite);
+}
+.photography-page .leaflet-popup-content .pop-host {
+  font-size: 0.75rem;
+  font-family: var(--ph-font-ui);
+  color: var(--ph-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content .pop-host {
+  font-family: var(--ph-font-cn);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.photography-page .leaflet-popup-content .pop-host.inhospitable { color: #b8472d; }
+.photography-page .leaflet-popup-content .pop-host.edge { color: #6b6840; }
+.photography-page .leaflet-popup-content .pop-host.hospitable { color: var(--ph-forest); }
+.photography-page .leaflet-popup-content .pop-photog {
+  display: block;
+  margin-top: 0.4rem;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--ph-ink-soft);
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content .pop-photog { font-style: normal; }
+
 /* ─── Figure ────────────────────────────────────────────────────── */
 .photography-page figure {
   margin: 1.75rem 0;

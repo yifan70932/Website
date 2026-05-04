@@ -11,6 +11,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
 
   <link rel="stylesheet" href="/assets/photography.css">
+
+  <!-- Leaflet for the §5 Köppen-Geiger map widget -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
 </head>
 
 <body class="photography-page" data-lang="en">
@@ -480,21 +484,50 @@
     </h2>
 
     <div data-lang-content="en">
-      <p class="lede">A holding chamber for working aesthetic positions on landscape photography that the author has arrived at through practice rather than through reading, but that turn out to have something of a literature behind them. The format is one h3 entry per thesis: a precise statement of the position, the supporting arguments and evidence, the standing counter-examples that the position does not absorb, and a recalibrated final claim that respects both. New entries are added as they crystallise; positions are revised when later evidence demands it. This section is the most explicitly personal in the wiki, but the dialectical structure is meant to keep the personal claims accountable to evidence rather than free of it.</p>
-
       <h3>On the absence of trees in landscape photography</h3>
 
-      <p><strong>Thesis.</strong> A substantial part of the aesthetic pull of landscape photography comes from a sense of being far away from human habitation, and the strongest single visual variable that produces this sense is low canopy density. The presence of dense tree cover signals — to a viewer who has not consciously articulated the inference — that this is a place where rainfall, temperature, and soil are sufficient for human agriculture and settlement. The absence of trees signals the opposite: that one is looking at a place where the conditions for ordinary human life are not met. The biomes that produce this effect most strongly are the ones at or beyond the climatic limits of forest: open grassland (steppe, prairie, pampas), true desert, gravel desert (gobi), alpine tundra and alpine meadow above the treeline, arctic tundra, glaciers, and the exposed rock faces of high mountains.</p>
+      <p>A substantial part of the aesthetic pull of landscape photography comes from a sense of being far away from human habitation, and the strongest single visual variable that produces this sense is low canopy density. The presence of dense tree cover signals — to a viewer who has not consciously articulated the inference — that this is a place where rainfall, temperature, and soil are sufficient for human agriculture and settlement. The absence of trees signals the opposite: that one is looking at a place where the conditions for ordinary human life are not met. The biomes that produce this effect most strongly are the ones at or beyond the climatic limits of forest: open grassland (steppe, prairie, pampas), true desert, gravel desert (gobi), alpine tundra and alpine meadow above the treeline, arctic tundra, glaciers, and the exposed rock faces of high mountains.</p>
 
-      <p><strong>Supporting argument 1: evolutionary aesthetics.</strong> Gordon Orians and Judith Heerwagen's <em>savanna hypothesis</em> (Orians 1980; Orians and Heerwagen 1992) proposes that the human aesthetic preference for open landscapes with scattered trees and long sightlines reflects the environment of human evolutionary adaptedness on the East African savanna. Empirical work by Roger Ulrich (1983, 1991) and Stephen and Rachel Kaplan (<em>The Experience of Nature</em>, 1989) has accumulated evidence that human subjects across cultures rate savanna-like landscapes as more restorative and more aesthetically preferred than either dense forest or featureless plain. Note that savanna is itself a low-canopy environment: typical savanna canopy cover ranges from roughly 5% to 15%, with the rest being open grass, which makes it visually closer to an open plain than to a forest. The savanna hypothesis therefore supports rather than contradicts the present thesis, on a precise reading: human preference is not for trees as such, but for openness with sufficient sightline and orientation cues — and most landscapes in the present thesis (steppe, alpine meadow, tundra, true desert) have these cues without trees, while many non-photogenic settings (dense temperate forest interior, suburban thicket) lack them despite or because of their tree cover.</p>
+      <p>The first kind of support comes from evolutionary aesthetics. Gordon Orians and Judith Heerwagen's <em>savanna hypothesis</em> (Orians 1980; Orians and Heerwagen 1992) proposes that the human aesthetic preference for open landscapes with scattered trees and long sightlines reflects the environment of human evolutionary adaptedness on the East African savanna. Empirical work by Roger Ulrich (1983, 1991) and Stephen and Rachel Kaplan (<em>The Experience of Nature</em>, 1989) has accumulated evidence that human subjects across cultures rate savanna-like landscapes as more restorative and more aesthetically preferred than either dense forest or featureless plain. Note that savanna is itself a low-canopy environment: typical savanna canopy cover ranges from roughly 5% to 15%, with the rest being open grass, which makes it visually closer to an open plain than to a forest. The savanna hypothesis therefore supports rather than contradicts the present thesis, on a precise reading: human preference is not for trees as such, but for openness with sufficient sightline and orientation cues — and most landscapes in the present thesis (steppe, alpine meadow, tundra, true desert) have these cues without trees, while many non-photogenic settings (dense temperate forest interior, suburban thicket) lack them despite or because of their tree cover.</p>
 
-      <p><strong>Supporting argument 2: biogeography and treelines.</strong> The boundary between landscapes that can and cannot support trees is a precise climatic line. The arctic treeline, where boreal forest gives way to tundra, runs along approximately the 10°C July isotherm: north of that line, summer warmth is insufficient to support tree growth. The alpine treeline runs along a similar isotherm at altitude. Below roughly 250–300 mm of annual precipitation, true desert begins; below the figure for grassland (~500 mm in temperate zones), forest cannot persist regardless of temperature. The Köppen climate classification and the Whittaker biome diagram both make these boundaries quantitative. The biomes that the present thesis identifies as carrying the "far from human habitation" signal — alpine tundra, arctic tundra, true desert, glaciated landscape, exposed high-altitude rock — are precisely the ones across the treeline or the precipitation line, and are precisely the ones whose conditions historically have not supported sedentary agriculture. The visual signal is therefore reading something real about the underlying climate-biome system, not a pure cultural construction.</p>
+      <p>A second support is more straightforward, and biogeographical. The boundary between landscapes that can and cannot support trees is a precise climatic line. The arctic treeline, where boreal forest gives way to tundra, runs along approximately the 10°C July isotherm: north of that line, summer warmth is insufficient to support tree growth. The alpine treeline runs along a similar isotherm at altitude. Below roughly 250–300 mm of annual precipitation, true desert begins; below the figure for grassland (~500 mm in temperate zones), forest cannot persist regardless of temperature. The Köppen climate classification and the Whittaker biome diagram both make these boundaries quantitative. The biomes that the present thesis identifies as carrying the "far from human habitation" signal — alpine tundra, arctic tundra, true desert, glaciated landscape, exposed high-altitude rock — are precisely the ones across the treeline or the precipitation line, and are precisely the ones whose conditions historically have not supported sedentary agriculture. The visual signal is therefore reading something real about the underlying climate-biome system, not a pure cultural construction.</p>
 
-      <p><strong>Supporting argument 3: the sublime tradition.</strong> Edmund Burke's <em>A Philosophical Enquiry into the Origin of Our Ideas of the Sublime and Beautiful</em> (1757) and Kant's <em>Critique of the Power of Judgement</em> (1790, the third Critique) gave philosophical articulation to a long-standing intuition that vast, austere, and threatening landscapes — the Alps, the Atlantic, the high desert — produce an aesthetic response distinct from and in some sense more profound than the merely beautiful. This is the <em>sublime</em>. William Cronon's "The Trouble with Wilderness" (1996) traces how this Romantic-sublime sensibility was inherited and intensified by nineteenth-century American landscape painting and then by twentieth-century landscape photography (Adams, Eliot Porter, Galen Rowell), producing the contemporary Western expectation that "real" landscape art shows wilderness rather than working countryside. The thesis advanced here is, in Cronon's terms, a description of what the sublime tradition's visual vocabulary has converged on rather than an independent aesthetic discovery — but the convergence is real, and the absence-of-trees variable is the most reliable shorthand within it.</p>
+      <figure class="koppen-widget" data-koppen-instance="en">
+        <figcaption style="padding: 0.55rem 1rem 0; margin: 0; font-style: normal;">
+          <strong style="color: var(--ph-graphite); font-family: var(--ph-font-body); font-size: 0.92rem;">Köppen-Geiger biomes and hospitability</strong>
+          <span style="display: block; margin-top: 0.2rem; color: var(--ph-ink-faint); font-size: 0.78rem;">Filter by hospitability (with respect to the thesis) or by individual climate class. Click any region for biome details and a representative photographer.</span>
+        </figcaption>
+        <div class="koppen-controls">
+          <span class="label">View</span>
+          <span class="seg" data-koppen-host>
+            <button data-h="all" class="active">All classes</button>
+            <button data-h="inhospitable">Inhospitable</button>
+            <button data-h="edge">Edge (taiga)</button>
+            <button data-h="hospitable">Hospitable</button>
+          </span>
+          <span class="label">Class</span>
+          <select data-koppen-class>
+            <option value="">— any —</option>
+          </select>
+        </div>
+        <div class="koppen-map" data-koppen-map></div>
+        <div class="koppen-legend">
+          <span class="swatch"><span class="sw" style="background:#c0392b"></span>Hot desert (BWh)</span>
+          <span class="swatch"><span class="sw" style="background:#e67e22"></span>Cold desert (BWk)</span>
+          <span class="swatch"><span class="sw" style="background:#d4ac3a"></span>Hot steppe (BSh)</span>
+          <span class="swatch"><span class="sw" style="background:#b89968"></span>Cold steppe (BSk)</span>
+          <span class="swatch"><span class="sw" style="background:#7fa9b8"></span>Tundra (ET)</span>
+          <span class="swatch"><span class="sw" style="background:#dbe6ea"></span>Ice cap (EF)</span>
+          <span class="swatch"><span class="sw" style="background:#9aa67b"></span>Edge: subarctic (Dfc/d, Dwc/d)</span>
+          <span class="swatch"><span class="sw" style="background:#5b8a5b"></span>Hospitable (forested temperate / tropical / etc.)</span>
+        </div>
+      </figure>
 
-      <p><strong>Supporting argument 4: contemporary practice.</strong> The contemporary landscape photographers whose work most fully exemplifies the present thesis are visible in the canon. Sebastião Salgado's <em>Genesis</em> (Taschen, 2013) is an eight-year project explicitly organised around landscapes "as they were at the beginning of the world" — Antarctic ice, Patagonian steppe, Saharan and Namib deserts, Galápagos volcanic rock — and the project's visual unity is the absence of trees. Hiroshi Sugimoto's <em>Seascapes</em> (1980–ongoing) reduces the landscape to two horizontal bands (sea and sky), achieving the absence-of-human-habitation signal by removing not only trees but everything else. Michael Kenna's minimalist square-format work, often in winter or fog, achieves the same signal by selecting moments when canopy is bare or invisible. Edward Burtynsky's industrial landscapes, when read against this thesis, work in part by relocating the absence-of-vegetation signal from natural (desert) to industrial (mine, quarry) settings — the visual signature is the same; what has changed is that the desolation is now man-made.</p>
+      <p>A third support runs through the sublime tradition. Edmund Burke's <em>A Philosophical Enquiry into the Origin of Our Ideas of the Sublime and Beautiful</em> (1757) and Kant's <em>Critique of the Power of Judgement</em> (1790, the third Critique) gave philosophical articulation to a long-standing intuition that vast, austere, and threatening landscapes — the Alps, the Atlantic, the high desert — produce an aesthetic response distinct from and in some sense more profound than the merely beautiful. This is the <em>sublime</em>. William Cronon's "The Trouble with Wilderness" (1996) traces how this Romantic-sublime sensibility was inherited and intensified by nineteenth-century American landscape painting and then by twentieth-century landscape photography (Adams, Eliot Porter, Galen Rowell), producing the contemporary Western expectation that "real" landscape art shows wilderness rather than working countryside. The thesis advanced here is, in Cronon's terms, a description of what the sublime tradition's visual vocabulary has converged on rather than an independent aesthetic discovery — but the convergence is real, and the absence-of-trees variable is the most reliable shorthand within it.</p>
 
-      <p><strong>Standing counter-examples.</strong> The thesis does not absorb three lineages within landscape photography that are too important to discount.</p>
+      <p>A fourth support comes from contemporary practice itself. The landscape photographers whose work most fully exemplifies the present thesis are visible in the canon. Sebastião Salgado's <em>Genesis</em> (Taschen, 2013) is an eight-year project explicitly organised around landscapes "as they were at the beginning of the world" — Antarctic ice, Patagonian steppe, Saharan and Namib deserts, Galápagos volcanic rock — and the project's visual unity is the absence of trees. Hiroshi Sugimoto's <em>Seascapes</em> (1980–ongoing) reduces the landscape to two horizontal bands (sea and sky), achieving the absence-of-human-habitation signal by removing not only trees but everything else. Michael Kenna's minimalist square-format work, often in winter or fog, achieves the same signal by selecting moments when canopy is bare or invisible. Edward Burtynsky's industrial landscapes, when read against this thesis, work in part by relocating the absence-of-vegetation signal from natural (desert) to industrial (mine, quarry) settings — the visual signature is the same; what has changed is that the desolation is now man-made.</p>
+
+      <p>Against this, three lineages within landscape photography are too important to discount, and the thesis does not absorb them.</p>
 
       <p>The first is Eliot Porter's colour forest work — <em>In Wildness Is the Preservation of the World</em> (Sierra Club, 1962) and the dye-transfer prints of New England, Maine, and Galápagos forest interiors he produced for forty years thereafter. Porter's argument, made entirely through the work, is that the inside of a forest is a visually inexhaustible subject, and that what is photographed there is colour, light, and texture rather than vista. The thesis above does not describe what Porter does, and it does not need to: forest-interior photography is a distinct mode within landscape, with its own internal logic.</p>
 
@@ -502,7 +535,7 @@
 
       <p>The third is the Chinese <em>shanshui</em> tradition (mountains-and-water painting from Northern Song onward; transposed into photography by figures including Lang Jingshan, Wang Wusheng, and the contemporary Chinese landscape work of Yan Wang Preston). This tradition treats trees as essential and lyrical elements rather than as signals of habitation. The trees in <em>shanshui</em> are typically singular, gnarled, asymmetric pines clinging to rock — visually marked as inhospitable rather than welcoming. The Chinese tradition therefore complicates the thesis less than the previous two: it uses trees, but uses them in a register the thesis would already classify as belonging to the inhospitable rather than to the human-habitable. The thesis can absorb <em>shanshui</em> if its central variable is reread as not "presence vs absence of trees" but "presence vs absence of human-habitable conditions, with trees as one of several visual markers."</p>
 
-      <p><strong>Recalibrated position.</strong> The thesis as initially stated is too strong; the variable is not trees as such but the more general signal of conditions inhospitable to ordinary human life. Tree absence is the most reliable single proxy for that signal but is neither necessary (Chinese pines on cliff faces transmit it) nor sufficient (an interior forest of bare winter trees may still feel humanly inhabited). What is true is that contemporary Western landscape photography has converged, through a chain inherited from the Romantic sublime, on the inhospitable as its principal aesthetic register; that low canopy density is the most reliable shorthand for inhospitability in temperate latitudes; and that an aesthetic theory of landscape photography has therefore to take the canopy-density variable seriously while not collapsing the whole tradition onto it. The Eliot Porter forest interior and the genuinely tree-loving Adams images (<em>Aspens</em>) sit in a complementary register rather than as refutations.</p>
+      <p>The thesis as initially stated is too strong. The variable is not trees as such but the more general signal of conditions inhospitable to ordinary human life. Tree absence is the most reliable single proxy for that signal but is neither necessary (Chinese pines on cliff faces transmit it) nor sufficient (an interior forest of bare winter trees may still feel humanly inhabited). What is true is that contemporary Western landscape photography has converged, through a chain inherited from the Romantic sublime, on the inhospitable as its principal aesthetic register; that low canopy density is the most reliable shorthand for inhospitability in temperate latitudes; and that an aesthetic theory of landscape photography has therefore to take the canopy-density variable seriously while not collapsing the whole tradition onto it. The Eliot Porter forest interior and the genuinely tree-loving Adams images (<em>Aspens</em>) sit in a complementary register rather than as refutations.</p>
 
       <div class="sources">
         <span class="sources-label">
@@ -525,21 +558,50 @@
     </div>
 
     <div data-lang-content="zh">
-      <p class="lede">本章是一个容器，承载作者主要经由实践（而非阅读）所抵达、但事后发现也确有相应文献支撑的若干关于风光摄影的工作中的审美命题。每条命题对应一节 h3：精确地陈述命题，列出支持性论证与证据，列出该命题所未能吸纳的对立例子，并给出在二者之间重新校准后的最终主张。新条目随其结晶而加入；当后续证据要求时，已有命题被修正。本章是这份 wiki 中最明确个人化的一章，但其辩证结构旨在让个人主张对证据负责，而非免于其问询。</p>
-
       <h3>论风光摄影中乔木的缺席</h3>
 
-      <p><strong>命题。</strong>风光摄影审美吸引力的相当一部分，来自一种"远离人类聚居"的感觉；产生这一感觉的最强单一视觉变量，是低乔木覆盖度。茂密的乔木层向观者（即便他并未明确意识到这一推断）发出一种信号：这是一处降水、温度、土壤皆足以维持人类农业与定居的地方。乔木的缺席发出相反的信号：眼前是一处寻常人类生活之条件并未达成的地方。最强烈地产生此一效果的生物群落，正是处在或越过森林气候极限的那些：开阔草原（steppe、prairie、pampas）、真沙漠、戈壁、林线之上的高山苔原与高山草甸、北极苔原、冰川、与高山的裸岩崖面。</p>
+      <p>风光摄影审美吸引力的相当一部分，来自一种"远离人类聚居"的感觉；产生这一感觉的最强单一视觉变量，是低乔木覆盖度。茂密的乔木层向观者（即便他并未明确意识到这一推断）发出一种信号：这是一处降水、温度、土壤皆足以维持人类农业与定居的地方。乔木的缺席发出相反的信号：眼前是一处寻常人类生活之条件并未达成的地方。最强烈地产生此一效果的生物群落，正是处在或越过森林气候极限的那些：开阔草原（steppe、prairie、pampas）、真沙漠、戈壁、林线之上的高山苔原与高山草甸、北极苔原、冰川、与高山的裸岩崖面。</p>
 
-      <p><strong>支持性论证一：演化美学。</strong>Gordon Orians 与 Judith Heerwagen 的<em>稀树草原假说</em>（savanna hypothesis；Orians 1980；Orians 与 Heerwagen 1992）主张，人类对开阔、零散有树、视野通达的景观的审美偏好，反映了人类演化适应所在的东非稀树草原环境。Roger Ulrich（1983、1991）与 Stephen 和 Rachel Kaplan《自然的体验》（1989）以来，关于跨文化受试在 savanna 式景观面前的恢复性反应与美感偏好的实证研究已积累了相当证据。注意：稀树草原本身就是低乔木覆盖度的环境——典型 savanna 的乔木冠层覆盖度约在 5% 至 15% 之间，其余是开阔草地，因此在视觉上更接近开阔平原，而非森林。在精确解读下，savanna 假说因此<em>支持</em>而非反驳本节命题：人类的偏好并非对乔木<em>之为乔木</em>的偏好，而是对开阔性、足够视野与方位线索的偏好——本节命题中绝大多数景观（草原、高山草甸、苔原、真沙漠）正是在没有乔木的情况下具备这些线索；而许多并不上镜的环境（温带森林内部之深处、郊区灌丛）则尽管有树（或正因有树）而欠缺这些线索。</p>
+      <p>第一类支持来自演化美学。Gordon Orians 与 Judith Heerwagen 的<em>稀树草原假说</em>（savanna hypothesis；Orians 1980；Orians 与 Heerwagen 1992）主张，人类对开阔、零散有树、视野通达的景观的审美偏好，反映了人类演化适应所在的东非稀树草原环境。Roger Ulrich（1983、1991）与 Stephen 和 Rachel Kaplan《自然的体验》（1989）以来，关于跨文化受试在 savanna 式景观面前的恢复性反应与美感偏好的实证研究已积累了相当证据。注意：稀树草原本身就是低乔木覆盖度的环境——典型 savanna 的乔木冠层覆盖度约在 5% 至 15% 之间，其余是开阔草地，因此在视觉上更接近开阔平原，而非森林。在精确解读下，savanna 假说因此<em>支持</em>而非反驳本节命题：人类的偏好并非对乔木<em>之为乔木</em>的偏好，而是对开阔性、足够视野与方位线索的偏好——本节命题中绝大多数景观（草原、高山草甸、苔原、真沙漠）正是在没有乔木的情况下具备这些线索；而许多并不上镜的环境（温带森林内部之深处、郊区灌丛）则尽管有树（或正因有树）而欠缺这些线索。</p>
 
-      <p><strong>支持性论证二：生物地理学与林线。</strong>能否支持乔木生长的景观之间的边界，是一条精确的气候线。北极林线——北方针叶林让位于苔原之处——大致沿 7 月平均气温 10°C 等温线展开：以北则夏季暖度不足以支持乔木生长。高山林线沿一条相似的高度等温线展开。年均降水低于约 250–300 毫米开始进入真沙漠；低于温带草原的临界值（约 500 毫米）森林便无法持续，无论温度如何。Köppen 气候分类与 Whittaker 生物群落图皆使这些边界量化。本节命题所识别为承载"远离人类聚居"信号的生物群落——高山苔原、北极苔原、真沙漠、冰川覆盖之景观、高海拔裸岩——恰恰是那些越过林线或越过降水线、且其条件历史上从未支持过定居农业的群落。视觉信号因此读出的是底层气候—生物群落系统中真实之物，而非纯粹文化建构。</p>
+      <p>第二类支持更为直接，来自生物地理学。能否支持乔木生长的景观之间的边界，是一条精确的气候线。北极林线——北方针叶林让位于苔原之处——大致沿 7 月平均气温 10°C 等温线展开：以北则夏季暖度不足以支持乔木生长。高山林线沿一条相似的高度等温线展开。年均降水低于约 250–300 毫米开始进入真沙漠；低于温带草原的临界值（约 500 毫米）森林便无法持续，无论温度如何。Köppen 气候分类与 Whittaker 生物群落图皆使这些边界量化。本节命题所识别为承载"远离人类聚居"信号的生物群落——高山苔原、北极苔原、真沙漠、冰川覆盖之景观、高海拔裸岩——恰恰是那些越过林线或越过降水线、且其条件历史上从未支持过定居农业的群落。视觉信号因此读出的是底层气候—生物群落系统中真实之物，而非纯粹文化建构。</p>
 
-      <p><strong>支持性论证三：崇高传统。</strong>柏克《关于我们对崇高与美之观念之起源的哲学探究》（1757）与康德《判断力批判》（1790，第三批判）赋予了一个由来已久的直觉以哲学性的清晰表达：广袤、严峻、具有威胁性的景观——阿尔卑斯、大西洋、高地沙漠——所唤起的审美回应，与"仅是美的"那种回应不同，且在某种意义上比之更为深刻。此即<em>崇高</em>。William Cronon《荒野之困》（"The Trouble with Wilderness"，1996）追溯了这种浪漫主义—崇高式的感受性如何被十九世纪美国风景绘画、再被二十世纪美国风光摄影（亚当斯、Eliot Porter、Galen Rowell）继承并强化，从而形成当代西方对"真正的"风光艺术须呈现荒野而非耕作乡野的期待。本节所提之命题，按 Cronon 的术语，描述的是崇高传统视觉语汇所收敛于的那个点，而非一个独立的审美发现——但这种收敛是真实的，而"乔木缺席"这一变量是其中最可靠的速记符号。</p>
+      <figure class="koppen-widget" data-koppen-instance="zh">
+        <figcaption style="padding: 0.55rem 1rem 0; margin: 0; font-style: normal;">
+          <strong style="color: var(--ph-graphite); font-family: var(--ph-font-cn); font-size: 0.95rem;">Köppen-Geiger 气候分类与宜居性</strong>
+          <span style="display: block; margin-top: 0.2rem; color: var(--ph-ink-faint); font-size: 0.8rem; font-family: var(--ph-font-cn);">按宜居性（相对于本节命题）筛选，或按具体气候类别筛选。点击任一区域查看生物群落详情与代表摄影者。</span>
+        </figcaption>
+        <div class="koppen-controls">
+          <span class="label">视图</span>
+          <span class="seg" data-koppen-host>
+            <button data-h="all" class="active">全部</button>
+            <button data-h="inhospitable">不宜居</button>
+            <button data-h="edge">边缘（亚寒带）</button>
+            <button data-h="hospitable">宜居</button>
+          </span>
+          <span class="label">类别</span>
+          <select data-koppen-class>
+            <option value="">— 任意 —</option>
+          </select>
+        </div>
+        <div class="koppen-map" data-koppen-map></div>
+        <div class="koppen-legend">
+          <span class="swatch"><span class="sw" style="background:#c0392b"></span>热沙漠 (BWh)</span>
+          <span class="swatch"><span class="sw" style="background:#e67e22"></span>冷沙漠 (BWk)</span>
+          <span class="swatch"><span class="sw" style="background:#d4ac3a"></span>热半干旱草原 (BSh)</span>
+          <span class="swatch"><span class="sw" style="background:#b89968"></span>冷半干旱草原 (BSk)</span>
+          <span class="swatch"><span class="sw" style="background:#7fa9b8"></span>苔原 (ET)</span>
+          <span class="swatch"><span class="sw" style="background:#dbe6ea"></span>永冻冰盖 (EF)</span>
+          <span class="swatch"><span class="sw" style="background:#9aa67b"></span>边缘：亚寒带 (Dfc/d, Dwc/d)</span>
+          <span class="swatch"><span class="sw" style="background:#5b8a5b"></span>宜居（温带森林 / 热带 / 等）</span>
+        </div>
+      </figure>
 
-      <p><strong>支持性论证四：当代实践。</strong>在当代风光摄影中最完整地体现本节命题的几位摄影者，已在经典中可见。Sebastião Salgado《Genesis》（Taschen, 2013）是一个明确围绕"如世界开端时之景观"组织起来的八年项目——南极冰、巴塔哥尼亚草原、撒哈拉与纳米布沙漠、加拉帕戈斯火山岩——其视觉统一性正是乔木的缺席。Hiroshi Sugimoto《Seascapes》（1980 起至今）将景观还原为两条水平带（海与天），通过去除乔木以及其它一切物事，达成"远离人类聚居"信号。Michael Kenna 极简方画幅作品——常摄于冬日或雾中——则通过选择冠层枯落或不可见的时刻，达成同一信号。Edward Burtynsky 的工业景观，若以本节命题去读，部分地是通过把"缺植被"信号从自然（沙漠）情境移置到工业（矿坑、采石场）情境而工作的——视觉签名相同，所变化者是这种荒凉如今变作人造。</p>
+      <p>第三类支持流经崇高传统。柏克《关于我们对崇高与美之观念之起源的哲学探究》（1757）与康德《判断力批判》（1790，第三批判）赋予了一个由来已久的直觉以哲学性的清晰表达：广袤、严峻、具有威胁性的景观——阿尔卑斯、大西洋、高地沙漠——所唤起的审美回应，与"仅是美的"那种回应不同，且在某种意义上比之更为深刻。此即<em>崇高</em>。William Cronon《荒野之困》（"The Trouble with Wilderness"，1996）追溯了这种浪漫主义—崇高式的感受性如何被十九世纪美国风景绘画、再被二十世纪美国风光摄影（亚当斯、Eliot Porter、Galen Rowell）继承并强化，从而形成当代西方对"真正的"风光艺术须呈现荒野而非耕作乡野的期待。本节所提之命题，按 Cronon 的术语，描述的是崇高传统视觉语汇所收敛于的那个点，而非一个独立的审美发现——但这种收敛是真实的，而"乔木缺席"这一变量是其中最可靠的速记符号。</p>
 
-      <p><strong>未能吸纳的对立例子。</strong>本节命题不能吸纳风光摄影内部的三条谱系，它们重要到不能被打发。</p>
+      <p>第四类支持来自当代实践本身。在当代风光摄影中最完整地体现本节命题的几位摄影者，已在经典中可见。Sebastião Salgado《Genesis》（Taschen, 2013）是一个明确围绕"如世界开端时之景观"组织起来的八年项目——南极冰、巴塔哥尼亚草原、撒哈拉与纳米布沙漠、加拉帕戈斯火山岩——其视觉统一性正是乔木的缺席。Hiroshi Sugimoto《Seascapes》（1980 起至今）将景观还原为两条水平带（海与天），通过去除乔木以及其它一切物事，达成"远离人类聚居"信号。Michael Kenna 极简方画幅作品——常摄于冬日或雾中——则通过选择冠层枯落或不可见的时刻，达成同一信号。Edward Burtynsky 的工业景观，若以本节命题去读，部分地是通过把"缺植被"信号从自然（沙漠）情境移置到工业（矿坑、采石场）情境而工作的——视觉签名相同，所变化者是这种荒凉如今变作人造。</p>
+
+      <p>与此相对，风光摄影内部有三条谱系重要到不能被打发，而本节命题不能吸纳之。</p>
 
       <p>其一是 Eliot Porter 的彩色森林作品——《在荒野中世界得以保存》（Sierra Club, 1962），以及他此后四十年所做的关于新英格兰、缅因、加拉帕戈斯森林内部的染料转印印件。Porter 的论证完全通过作品本身做出：森林内部是一个视觉上不可穷尽的题材，那里所拍摄之物是色彩、光、与肌理，而非视野。上述命题不描述 Porter 所做之事，且无须描述：森林内部摄影是风光内部一种独立的模式，自有其内在逻辑。</p>
 
@@ -547,7 +609,7 @@
 
       <p>其三是中国<em>山水</em>传统（北宋以降的山水画；并经郎静山、汪芜生、当代王岩 Yan Wang Preston 等人转译入摄影）。该传统将树作为本质性的、抒情性的元素加以处理，而非作为聚居的信号。山水中的树通常是单独的、扭曲的、不对称的、攀附于岩石之上的松——其视觉标记是<em>不宜居</em>而非<em>宜居</em>。中国传统对命题的复杂化因此小于前两者：它使用树，但所使用的语调，本节命题已把它归类为属于不宜居一侧。如果把命题中心变量重读为"宜居与不宜居人类生活之条件的在场与否，而乔木只是其多种视觉标记之一"，则命题可以吸纳<em>山水</em>传统。</p>
 
-      <p><strong>重新校准的立场。</strong>命题最初的陈述过强；变量并非乔木<em>之为乔木</em>，而是更一般的"对寻常人类生活并不友好之条件"的信号。乔木的缺席是该信号最可靠的单一替代量，但既非必要（中国松立于崖面亦传达此信号）亦非充分（一座冬日落叶的森林内部仍可被感作有人类居住）。真正成立的是：当代西方风光摄影，经由继承自浪漫崇高的一条链路，已收敛于以"不宜居"为其主要审美语调；在温带纬度，低乔木覆盖度是不宜居最可靠的视觉速记；因此一种关于风光摄影的审美理论必须严肃看待乔木覆盖度这一变量，但不能把整个传统坍缩到这一变量上。Eliot Porter 的森林内部与亚当斯真正爱树的那些作品（《杨树》），处于一种互补的语调之中，而非作为反驳。</p>
+      <p>命题最初的陈述过强。变量并非乔木<em>之为乔木</em>，而是更一般的"对寻常人类生活并不友好之条件"的信号。乔木的缺席是该信号最可靠的单一替代量，但既非必要（中国松立于崖面亦传达此信号）亦非充分（一座冬日落叶的森林内部仍可被感作有人类居住）。真正成立的是：当代西方风光摄影，经由继承自浪漫崇高的一条链路，已收敛于以"不宜居"为其主要审美语调；在温带纬度，低乔木覆盖度是不宜居最可靠的视觉速记；因此一种关于风光摄影的审美理论必须严肃看待乔木覆盖度这一变量，但不能把整个传统坍缩到这一变量上。Eliot Porter 的森林内部与亚当斯真正爱树的那些作品（《杨树》），处于一种互补的语调之中，而非作为反驳。</p>
 
       <div class="sources">
         <span class="sources-label">本节主要参考</span>
@@ -765,6 +827,250 @@
     });
   }, { rootMargin: '-20% 0px -70% 0px' });
   sections.forEach(s => observer.observe(s));
+
+  /* ─────────────────────────────────────────────────────────────────
+     §5 Köppen-Geiger widget
+     Two instances (en/zh), shared GeoJSON, lazy-init on first visibility.
+     ───────────────────────────────────────────────────────────────── */
+  (function initKoppenWidget() {
+    // Class metadata: code -> { en, zh, color, host, photog_en, photog_zh }
+    // Colors: warm reds/oranges/yellows for arid, browns for steppe, cool blues for cold/polar,
+    // muted olive for edge taiga, greens for hospitable.
+    const CLASSES = {
+      1:  {en:'Tropical rainforest',                zh:'热带雨林 (Af)',           color:'#1e6e3a', host:'hospitable',
+           photog_en:'Sebastião Salgado, *Amazônia* (Taschen, 2021)',
+           photog_zh:'Sebastião Salgado《Amazônia》（Taschen, 2021）'},
+      2:  {en:'Tropical monsoon',                   zh:'热带季风 (Am)',           color:'#2a8246', host:'hospitable',
+           photog_en:'Steve McCurry, monsoon series (1983–84)',
+           photog_zh:'Steve McCurry，季风系列（1983–84）'},
+      3:  {en:'Tropical savanna',                   zh:'热带稀树草原 (Aw)',       color:'#7ba34a', host:'hospitable',
+           photog_en:'Nick Brandt, *On This Earth* (2005)',
+           photog_zh:'Nick Brandt《On This Earth》（2005）'},
+      4:  {en:'Hot desert',                         zh:'热沙漠 (BWh)',            color:'#c0392b', host:'inhospitable',
+           photog_en:'Sebastião Salgado, *Genesis* (Taschen, 2013) — Sahara, Namib, Atacama',
+           photog_zh:'Sebastião Salgado《Genesis》（Taschen, 2013）——撒哈拉、纳米布、阿塔卡马'},
+      5:  {en:'Cold desert',                        zh:'冷沙漠 (BWk)',            color:'#e67e22', host:'inhospitable',
+           photog_en:'Andreas Gursky, *Bahrain I* (2005); Tibetan plateau and Gobi imagery',
+           photog_zh:'Andreas Gursky《Bahrain I》（2005）；青藏高原与戈壁影像'},
+      6:  {en:'Hot semi-arid steppe',               zh:'热半干旱草原 (BSh)',      color:'#d4ac3a', host:'inhospitable',
+           photog_en:'Sebastião Salgado, Sahel work (1984–85)',
+           photog_zh:'Sebastião Salgado，萨赫勒系列（1984–85）'},
+      7:  {en:'Cold semi-arid steppe',              zh:'冷半干旱草原 (BSk)',      color:'#b89968', host:'inhospitable',
+           photog_en:'Robert Adams, *The New West* (1974); Mongolian steppe',
+           photog_zh:'Robert Adams《The New West》（1974）；蒙古草原'},
+      8:  {en:'Mediterranean, hot summer',          zh:'地中海气候，炎夏 (Csa)',  color:'#3a8a55', host:'hospitable',
+           photog_en:'Luigi Ghirri, Italian landscape work',
+           photog_zh:'Luigi Ghirri，意大利风景作品'},
+      9:  {en:'Mediterranean, warm summer',         zh:'地中海气候，暖夏 (Csb)',  color:'#3f7e57', host:'hospitable',
+           photog_en:'Robert Adams, Pacific Northwest work',
+           photog_zh:'Robert Adams，太平洋西北作品'},
+      10: {en:'Mediterranean, cold summer',         zh:'地中海气候，冷夏 (Csc)',  color:'#476f59', host:'hospitable',
+           photog_en:'',  photog_zh:''},
+      11: {en:'Subtropical monsoon',                zh:'亚热带季风 (Cwa)',        color:'#5ca15a', host:'hospitable',
+           photog_en:'Lang Jingshan, classical Chinese landscape',
+           photog_zh:'郎静山，中国古典山水'},
+      12: {en:'Subtropical highland',               zh:'亚热带高原 (Cwb)',        color:'#6ba861', host:'hospitable',
+           photog_en:'Wang Wusheng, *Celestial Realm: Yellow Mountains*',
+           photog_zh:'汪芜生《天界：黄山》'},
+      13: {en:'Cold subtropical highland',          zh:'冷亚热带高原 (Cwc)',      color:'#75aa6c', host:'hospitable',
+           photog_en:'',  photog_zh:''},
+      14: {en:'Humid subtropical',                  zh:'湿润亚热带 (Cfa)',        color:'#52a061', host:'hospitable',
+           photog_en:'William Eggleston, southern US work',
+           photog_zh:'William Eggleston，美国南部作品'},
+      15: {en:'Oceanic',                            zh:'海洋性温带 (Cfb)',        color:'#4d9870', host:'hospitable',
+           photog_en:'Fay Godwin, British landscape',
+           photog_zh:'Fay Godwin，英国风景'},
+      16: {en:'Subpolar oceanic',                   zh:'亚极地海洋性 (Cfc)',      color:'#5e9a82', host:'hospitable',
+           photog_en:'Hannes Lochner, Faroe / Iceland coastal',
+           photog_zh:'Hannes Lochner，法罗 / 冰岛海岸'},
+      17: {en:'Mediterranean continental, hot',     zh:'地中海大陆性，炎 (Dsa)',  color:'#71956d', host:'hospitable',
+           photog_en:'',  photog_zh:''},
+      18: {en:'Mediterranean continental, warm',    zh:'地中海大陆性，暖 (Dsb)',  color:'#7c9c74', host:'hospitable',
+           photog_en:'',  photog_zh:''},
+      19: {en:'Subarctic Mediterranean',            zh:'亚寒带地中海 (Dsc)',      color:'#88a37c', host:'hospitable',
+           photog_en:'',  photog_zh:''},
+      20: {en:'Subarctic Mediterranean, severe',    zh:'亚寒带地中海，严寒 (Dsd)', color:'#92aa84', host:'hospitable',
+           photog_en:'',  photog_zh:''},
+      21: {en:'Continental monsoon, hot summer',    zh:'大陆性季风，炎夏 (Dwa)',  color:'#76946f', host:'hospitable',
+           photog_en:'',  photog_zh:''},
+      22: {en:'Continental monsoon, warm summer',   zh:'大陆性季风，暖夏 (Dwb)',  color:'#82996f', host:'hospitable',
+           photog_en:'',  photog_zh:''},
+      23: {en:'Subarctic monsoon',                  zh:'亚寒带季风 (Dwc)',        color:'#9aa67b', host:'edge',
+           photog_en:'Russian / Manchurian taiga photography',
+           photog_zh:'俄罗斯 / 满洲泰加林摄影'},
+      24: {en:'Severe subarctic monsoon',           zh:'极寒亚寒带季风 (Dwd)',    color:'#a3ad82', host:'edge',
+           photog_en:'Yakutia / Oymyakon taiga work',
+           photog_zh:'雅库特 / 奥伊米亚康泰加林作品'},
+      25: {en:'Humid continental, hot summer',      zh:'湿润大陆，炎夏 (Dfa)',    color:'#5e8e5e', host:'hospitable',
+           photog_en:'',  photog_zh:''},
+      26: {en:'Humid continental, warm summer',     zh:'湿润大陆，暖夏 (Dfb)',    color:'#6a9268', host:'hospitable',
+           photog_en:'Bernd & Hilla Becher, German industrial typology',
+           photog_zh:'贝歇夫妇，德国工业类型学'},
+      27: {en:'Subarctic taiga',                    zh:'亚寒带针叶林 (Dfc)',      color:'#9aa67b', host:'edge',
+           photog_en:'Olaf Otto Becker, *Above Zero* — Greenland edge',
+           photog_zh:'Olaf Otto Becker《Above Zero》——格陵兰边缘'},
+      28: {en:'Severe subarctic taiga',             zh:'极寒亚寒带针叶林 (Dfd)',  color:'#a3ad82', host:'edge',
+           photog_en:'Eastern Siberia taiga',
+           photog_zh:'东西伯利亚泰加林'},
+      29: {en:'Tundra',                             zh:'苔原 (ET)',                color:'#7fa9b8', host:'inhospitable',
+           photog_en:'Sebastião Salgado, *Genesis* — Antarctica, Tibetan plateau; Olaf Otto Becker, Greenland',
+           photog_zh:'Sebastião Salgado《Genesis》——南极、青藏高原；Olaf Otto Becker，格陵兰'},
+      30: {en:'Ice cap',                            zh:'永冻冰盖 (EF)',           color:'#dbe6ea', host:'inhospitable',
+           photog_en:'Hiroshi Sugimoto, *Time Exposed*; Sebastian Copeland, polar work',
+           photog_zh:'Hiroshi Sugimoto《Time Exposed》；Sebastian Copeland，极地作品'},
+    };
+
+    const HOST_LABEL = {
+      en: { inhospitable: 'INHOSPITABLE', edge: 'EDGE CASE (TAIGA)', hospitable: 'HOSPITABLE' },
+      zh: { inhospitable: '不宜居', edge: '边缘案例（亚寒带针叶林）', hospitable: '宜居' },
+    };
+
+    let geojsonPromise = null;
+    function loadGeoJSON() {
+      if (!geojsonPromise) {
+        geojsonPromise = fetch('/photography/koppen.geojson').then(r => {
+          if (!r.ok) throw new Error('Failed to load koppen.geojson');
+          return r.json();
+        });
+      }
+      return geojsonPromise;
+    }
+
+    const widgetInstances = new Map();
+
+    function initInstance(figureEl) {
+      const lang = figureEl.dataset.koppenInstance || 'en';
+      const mapEl = figureEl.querySelector('[data-koppen-map]');
+      const select = figureEl.querySelector('[data-koppen-class]');
+      const segHost = figureEl.querySelector('[data-koppen-host]');
+      if (!mapEl || widgetInstances.has(figureEl)) return;
+
+      // Show loading state
+      mapEl.innerHTML = '<div class="koppen-status">' + (lang === 'zh' ? '正在加载地图…' : 'Loading map…') + '</div>';
+
+      // Populate class dropdown sorted by code
+      const codes = Object.keys(CLASSES).map(Number).sort((a,b) => a-b);
+      codes.forEach(c => {
+        const cls = CLASSES[c];
+        const opt = document.createElement('option');
+        opt.value = String(c);
+        opt.textContent = lang === 'zh' ? cls.zh : (cls.en + ' (' + (c<10?'0':'') + c + ')');
+        select.appendChild(opt);
+      });
+
+      // State
+      const state = { host: 'all', classCode: null };
+      let map = null, geoLayer = null, fullData = null;
+
+      function passes(props) {
+        if (state.classCode != null) return props.c === state.classCode;
+        if (state.host === 'all') return true;
+        return props.h === state.host;
+      }
+
+      function styleFn(feat) {
+        const cls = CLASSES[feat.properties.c];
+        const matches = passes(feat.properties);
+        return {
+          color: cls ? cls.color : '#666',
+          weight: 0.4,
+          opacity: matches ? 0.85 : 0.05,
+          fillColor: cls ? cls.color : '#666',
+          fillOpacity: matches ? 0.6 : 0.03,
+          interactive: matches,
+        };
+      }
+
+      function popupHTML(props) {
+        const cls = CLASSES[props.c];
+        if (!cls) return props.k;
+        const code = (props.c < 10 ? '0' : '') + props.c;
+        const name = lang === 'zh' ? cls.zh : cls.en;
+        const hostL = HOST_LABEL[lang][props.h];
+        const photog = lang === 'zh' ? cls.photog_zh : cls.photog_en;
+        let html = '<span class="pop-code">' + props.k + ' · ' + code + '</span>';
+        html += '<span class="pop-host ' + props.h + '"> ' + hostL + '</span>';
+        html += '<span class="pop-name">' + name + '</span>';
+        if (photog) html += '<span class="pop-photog">' + photog.replace(/\*([^*]+)\*/g, '<em>$1</em>') + '</span>';
+        return html;
+      }
+
+      loadGeoJSON().then(data => {
+        fullData = data;
+        mapEl.innerHTML = '';
+        map = L.map(mapEl, {
+          worldCopyJump: false,
+          minZoom: 1,
+          maxZoom: 6,
+          attributionControl: true,
+        }).setView([20, 10], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 6,
+          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · Köppen data: Beck et al. 2023',
+          opacity: 0.55,
+        }).addTo(map);
+
+        geoLayer = L.geoJSON(data, {
+          style: styleFn,
+          onEachFeature: (feat, layer) => {
+            layer.on('click', () => {
+              if (!passes(feat.properties)) return;
+              layer.bindPopup(popupHTML(feat.properties)).openPopup();
+            });
+          },
+        }).addTo(map);
+      }).catch(err => {
+        mapEl.innerHTML = '<div class="koppen-status">' +
+          (lang === 'zh' ? '地图数据加载失败。请刷新重试。' : 'Failed to load map data. Try refreshing.') +
+          '</div>';
+        console.error(err);
+      });
+
+      function refresh() {
+        if (!geoLayer) return;
+        geoLayer.eachLayer(l => l.setStyle(styleFn(l.feature)));
+        // Close any open popup whose feature no longer passes
+        if (map) map.closePopup();
+      }
+
+      // Hospitability segmented buttons
+      segHost.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.host = btn.dataset.h;
+          state.classCode = null;
+          select.value = '';
+          segHost.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+          refresh();
+        });
+      });
+
+      // Class select
+      select.addEventListener('change', () => {
+        const v = select.value;
+        state.classCode = v ? Number(v) : null;
+        if (state.classCode != null) {
+          state.host = 'all';
+          segHost.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.h === 'all'));
+        }
+        refresh();
+      });
+
+      widgetInstances.set(figureEl, true);
+    }
+
+    // Lazy init on first visibility (avoids loading 2 MB until user scrolls to §5)
+    const lazyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          initInstance(e.target);
+          lazyObserver.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    document.querySelectorAll('.koppen-widget').forEach(fig => lazyObserver.observe(fig));
+  })();
 </script>
 
 </body>
