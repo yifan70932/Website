@@ -15,6 +15,9 @@
   <!-- Leaflet for the §5 Köppen-Geiger map widget -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+  <!-- Leaflet.markercluster for the WHC sites widget -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" defer></script>
 </head>
 
 <body class="photography-page" data-lang="en">
@@ -537,6 +540,33 @@
 
       <p>The thesis as initially stated is too strong. The variable is not trees as such but the more general signal of conditions inhospitable to ordinary human life. Tree absence is the most reliable single proxy for that signal but is neither necessary (Chinese pines on cliff faces transmit it) nor sufficient (an interior forest of bare winter trees may still feel humanly inhabited). What is true is that contemporary Western landscape photography has converged, through a chain inherited from the Romantic sublime, on the inhospitable as its principal aesthetic register; that low canopy density is the most reliable shorthand for inhospitability in temperate latitudes; and that an aesthetic theory of landscape photography has therefore to take the canopy-density variable seriously while not collapsing the whole tradition onto it. The Eliot Porter forest interior and the genuinely tree-loving Adams images (<em>Aspens</em>) sit in a complementary register rather than as refutations.</p>
 
+      <figure class="koppen-widget" data-whc-instance="en">
+        <figcaption style="padding: 0.55rem 1rem 0; margin: 0; font-style: normal;">
+          <strong style="color: var(--ph-graphite); font-family: var(--ph-font-body); font-size: 0.92rem;">UNESCO World Heritage Sites</strong>
+          <span style="display: block; margin-top: 0.2rem; color: var(--ph-ink-faint); font-size: 0.78rem;">All 1,247 inscribed sites (through the 47th session, 2025). Filter by category, or isolate the original 12 sites of the first inscription batch (1978).</span>
+        </figcaption>
+        <div class="koppen-controls">
+          <span class="label">Category</span>
+          <span class="seg" data-whc-cat>
+            <button data-cat="all" class="active">All</button>
+            <button data-cat="C">Cultural</button>
+            <button data-cat="N">Natural</button>
+            <button data-cat="M">Mixed</button>
+          </span>
+          <span class="seg" data-whc-batch>
+            <button data-batch="off" class="active">All years</button>
+            <button data-batch="1978">First batch (1978)</button>
+          </span>
+        </div>
+        <div class="koppen-map" data-whc-map></div>
+        <div class="koppen-legend">
+          <span class="swatch"><span class="sw" style="background:#b8884a"></span>Cultural</span>
+          <span class="swatch"><span class="sw" style="background:#3f7e57"></span>Natural</span>
+          <span class="swatch"><span class="sw" style="background:#0a3d62"></span>Mixed</span>
+          <span class="swatch"><span class="sw" style="background:#b8472d"></span>Currently endangered</span>
+        </div>
+      </figure>
+
       <div class="sources">
         <span class="sources-label">
           <span data-lang-content="en">Principal sources for this section</span>
@@ -610,6 +640,33 @@
       <p>其三是中国<em>山水</em>传统（北宋以降的山水画；并经郎静山、汪芜生、当代王岩 Yan Wang Preston 等人转译入摄影）。该传统将树作为本质性的、抒情性的元素加以处理，而非作为聚居的信号。山水中的树通常是单独的、扭曲的、不对称的、攀附于岩石之上的松——其视觉标记是<em>不宜居</em>而非<em>宜居</em>。中国传统对命题的复杂化因此小于前两者：它使用树，但所使用的语调，本节命题已把它归类为属于不宜居一侧。如果把命题中心变量重读为"宜居与不宜居人类生活之条件的在场与否，而乔木只是其多种视觉标记之一"，则命题可以吸纳<em>山水</em>传统。</p>
 
       <p>命题最初的陈述过强。变量并非乔木<em>之为乔木</em>，而是更一般的"对寻常人类生活并不友好之条件"的信号。乔木的缺席是该信号最可靠的单一替代量，但既非必要（中国松立于崖面亦传达此信号）亦非充分（一座冬日落叶的森林内部仍可被感作有人类居住）。真正成立的是：当代西方风光摄影，经由继承自浪漫崇高的一条链路，已收敛于以"不宜居"为其主要审美语调；在温带纬度，低乔木覆盖度是不宜居最可靠的视觉速记；因此一种关于风光摄影的审美理论必须严肃看待乔木覆盖度这一变量，但不能把整个传统坍缩到这一变量上。Eliot Porter 的森林内部与亚当斯真正爱树的那些作品（《杨树》），处于一种互补的语调之中，而非作为反驳。</p>
+
+      <figure class="koppen-widget" data-whc-instance="zh">
+        <figcaption style="padding: 0.55rem 1rem 0; margin: 0; font-style: normal;">
+          <strong style="color: var(--ph-graphite); font-family: var(--ph-font-cn); font-size: 0.95rem;">联合国教科文组织世界遗产</strong>
+          <span style="display: block; margin-top: 0.2rem; color: var(--ph-ink-faint); font-size: 0.8rem; font-family: var(--ph-font-cn);">全部 1247 处已列入遗产（截至第 47 届会议，2025 年）。按类别筛选，或筛出 1978 年首批入选的 12 处。</span>
+        </figcaption>
+        <div class="koppen-controls">
+          <span class="label">类别</span>
+          <span class="seg" data-whc-cat>
+            <button data-cat="all" class="active">全部</button>
+            <button data-cat="C">文化遗产</button>
+            <button data-cat="N">自然遗产</button>
+            <button data-cat="M">复合遗产</button>
+          </span>
+          <span class="seg" data-whc-batch>
+            <button data-batch="off" class="active">全部年份</button>
+            <button data-batch="1978">首批（1978）</button>
+          </span>
+        </div>
+        <div class="koppen-map" data-whc-map></div>
+        <div class="koppen-legend">
+          <span class="swatch"><span class="sw" style="background:#b8884a"></span>文化遗产</span>
+          <span class="swatch"><span class="sw" style="background:#3f7e57"></span>自然遗产</span>
+          <span class="swatch"><span class="sw" style="background:#0a3d62"></span>复合遗产</span>
+          <span class="swatch"><span class="sw" style="background:#b8472d"></span>濒危状态</span>
+        </div>
+      </figure>
 
       <div class="sources">
         <span class="sources-label">本节主要参考</span>
@@ -1069,7 +1126,186 @@
       });
     }, { rootMargin: '200px' });
 
-    document.querySelectorAll('.koppen-widget').forEach(fig => lazyObserver.observe(fig));
+    document.querySelectorAll('.koppen-widget[data-koppen-instance]').forEach(fig => lazyObserver.observe(fig));
+  })();
+
+  /* ─────────────────────────────────────────────────────────────────
+     §5 UNESCO World Heritage Sites widget
+     Two instances (en/zh), shared GeoJSON, lazy-init on first visibility,
+     uses Leaflet.markercluster to handle 1247 markers cleanly.
+     ───────────────────────────────────────────────────────────────── */
+  (function initWHCWidget() {
+    const CAT = {
+      C: { color: '#b8884a', en: 'Cultural', zh: '文化遗产' },
+      N: { color: '#3f7e57', en: 'Natural', zh: '自然遗产' },
+      M: { color: '#0a3d62', en: 'Mixed', zh: '复合遗产' },
+    };
+
+    let geoPromise = null;
+    function loadWHC() {
+      if (!geoPromise) {
+        geoPromise = fetch('/photography/whc-sites.geojson').then(r => {
+          if (!r.ok) throw new Error('Failed to load whc-sites.geojson');
+          return r.json();
+        });
+      }
+      return geoPromise;
+    }
+
+    const initialized = new WeakSet();
+
+    function makeIcon(category, endangered) {
+      const cat = CAT[category] || CAT.C;
+      const color = endangered ? '#b8472d' : cat.color;
+      const size = 9;
+      return L.divIcon({
+        className: '',
+        html: '<div class="whc-dot" style="width:' + size + 'px;height:' + size + 'px;background:' + color + ';"></div>',
+        iconSize: [size, size],
+        iconAnchor: [size/2, size/2],
+      });
+    }
+
+    function clusterIcon(cluster) {
+      const n = cluster.getChildCount();
+      let cls = 'small', size = 30;
+      if (n >= 100) { cls = 'large'; size = 44; }
+      else if (n >= 25) { cls = 'medium'; size = 36; }
+      return L.divIcon({
+        className: '',
+        html: '<div class="whc-cluster ' + cls + '" style="width:' + size + 'px;height:' + size + 'px;line-height:' + size + 'px;">' + n + '</div>',
+        iconSize: [size, size],
+      });
+    }
+
+    function popupHTML(props, lang) {
+      const cat = CAT[props.c] || CAT.C;
+      const catLabel = lang === 'zh' ? cat.zh : cat.en;
+      const name = lang === 'zh' ? (props.nz || props.n) : props.n;
+      const states = lang === 'zh' ? (props.sz || props.s) : props.s;
+      const yearLabel = lang === 'zh' ? '列入' : 'Inscribed';
+      const linkLabel = lang === 'zh' ? '在 UNESCO 网站查看 →' : 'View on UNESCO site →';
+      const dangerLabel = lang === 'zh' ? '濒危' : 'Endangered';
+
+      let html = '<div style="font-weight:600;color:var(--ph-graphite);font-size:0.92rem;line-height:1.3;">' +
+                 escapeHtml(name) +
+                 '<span class="pop-cat ' + props.c + '">' + escapeHtml(catLabel) + '</span>';
+      if (props.d) html += '<span class="pop-danger">' + escapeHtml(dangerLabel) + '</span>';
+      html += '</div>';
+      html += '<span class="pop-meta">' + escapeHtml(states) + ' · ' + yearLabel + ' ' + props.y + '</span>';
+      html += '<a class="pop-link" href="https://whc.unesco.org/en/list/' + props.i + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(linkLabel) + '</a>';
+      return html;
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function initInstance(figureEl) {
+      if (initialized.has(figureEl)) return;
+      initialized.add(figureEl);
+      const lang = figureEl.dataset.whcInstance || 'en';
+      const mapEl = figureEl.querySelector('[data-whc-map]');
+      const segCat = figureEl.querySelector('[data-whc-cat]');
+      const segBatch = figureEl.querySelector('[data-whc-batch]');
+      if (!mapEl) return;
+
+      mapEl.innerHTML = '<div class="koppen-status">' + (lang === 'zh' ? '正在加载世界遗产数据…' : 'Loading World Heritage data…') + '</div>';
+
+      // Wait for both Leaflet AND markercluster (since both are deferred)
+      function whenReady(cb) {
+        if (window.L && window.L.markerClusterGroup) cb();
+        else setTimeout(() => whenReady(cb), 50);
+      }
+
+      whenReady(() => loadWHC().then(data => {
+        mapEl.innerHTML = '';
+        const map = L.map(mapEl, {
+          worldCopyJump: true,
+          minZoom: 2,
+          maxZoom: 12,
+        }).setView([25, 15], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 12,
+          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · UNESCO World Heritage Centre, 2025',
+        }).addTo(map);
+
+        // Build all markers up-front (cheap with DivIcon), filter by adding/removing layers
+        const allMarkers = data.features.map(feat => {
+          const m = L.marker(
+            [feat.geometry.coordinates[1], feat.geometry.coordinates[0]],
+            { icon: makeIcon(feat.properties.c, feat.properties.d) }
+          );
+          m.feature = feat;
+          m.bindPopup(() => popupHTML(feat.properties, document.body.dataset.lang || 'en'));
+          return m;
+        });
+
+        const cluster = L.markerClusterGroup({
+          iconCreateFunction: clusterIcon,
+          showCoverageOnHover: false,
+          maxClusterRadius: 50,
+          spiderfyOnMaxZoom: true,
+          chunkedLoading: true,
+        });
+        cluster.addLayers(allMarkers);
+        map.addLayer(cluster);
+
+        const state = { cat: 'all', batch: 'off' };
+
+        function passes(props) {
+          if (state.cat !== 'all' && props.c !== state.cat) return false;
+          if (state.batch === '1978' && props.y !== 1978) return false;
+          return true;
+        }
+
+        function refresh() {
+          cluster.clearLayers();
+          const visible = allMarkers.filter(m => passes(m.feature.properties));
+          cluster.addLayers(visible);
+          // If first batch only, fit to those markers
+          if (state.batch === '1978' && visible.length > 0) {
+            const grp = L.featureGroup(visible);
+            map.fitBounds(grp.getBounds().pad(0.15));
+          }
+        }
+
+        segCat.querySelectorAll('button').forEach(btn => {
+          btn.addEventListener('click', () => {
+            state.cat = btn.dataset.cat;
+            segCat.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+            refresh();
+          });
+        });
+        segBatch.querySelectorAll('button').forEach(btn => {
+          btn.addEventListener('click', () => {
+            state.batch = btn.dataset.batch;
+            segBatch.querySelectorAll('button').forEach(b => {
+              b.classList.toggle('active', b === btn);
+              b.classList.toggle('batch-active', b === btn && b.dataset.batch === '1978');
+            });
+            refresh();
+          });
+        });
+      }).catch(err => {
+        mapEl.innerHTML = '<div class="koppen-status">' +
+          (lang === 'zh' ? '世界遗产数据加载失败。请刷新重试。' : 'Failed to load WHC data. Try refreshing.') +
+          '</div>';
+        console.error(err);
+      }));
+    }
+
+    const lazyObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          initInstance(e.target);
+          lazyObs.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    document.querySelectorAll('.koppen-widget[data-whc-instance]').forEach(fig => lazyObs.observe(fig));
   })();
 </script>
 

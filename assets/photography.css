@@ -577,6 +577,98 @@ body.photography-page[data-lang="zh"] {
 }
 .photography-page[data-lang="zh"] .leaflet-popup-content .pop-photog { font-style: normal; }
 
+/* ─── WHC popup-specific ───────────────────────────────────────── */
+.photography-page .leaflet-popup-content .pop-meta {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  color: var(--ph-ink-faint);
+  font-family: var(--ph-font-ui);
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content .pop-meta { font-family: var(--ph-font-cn); }
+
+.photography-page .leaflet-popup-content .pop-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--ph-navy);
+  font-family: var(--ph-font-ui);
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content .pop-link { font-family: var(--ph-font-cn); }
+
+.photography-page .leaflet-popup-content .pop-cat {
+  display: inline-block;
+  font-family: var(--ph-font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.05rem 0.35rem;
+  border-radius: 2px;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content .pop-cat {
+  font-family: var(--ph-font-cn);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.photography-page .leaflet-popup-content .pop-cat.C { background: #f4e8d8; color: #8a6630; }
+.photography-page .leaflet-popup-content .pop-cat.N { background: #e0ecdf; color: var(--ph-forest); }
+.photography-page .leaflet-popup-content .pop-cat.M { background: var(--ph-pale-navy); color: var(--ph-navy); }
+
+.photography-page .leaflet-popup-content .pop-danger {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.35rem;
+  background: #f4dad6;
+  color: #b8472d;
+  font-family: var(--ph-font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content .pop-danger {
+  font-family: var(--ph-font-cn);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* WHC marker dot rendered via DivIcon */
+.photography-page .whc-dot {
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.9);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.18);
+}
+
+/* WHC cluster marker (replaces leaflet.markercluster default styling) */
+.photography-page .whc-cluster {
+  background: rgba(10, 61, 98, 0.85);
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-family: var(--ph-font-ui);
+  font-weight: 600;
+  font-size: 0.72rem;
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photography-page .whc-cluster.small { background: rgba(46, 134, 171, 0.85); }
+.photography-page .whc-cluster.medium { background: rgba(10, 61, 98, 0.88); }
+.photography-page .whc-cluster.large { background: rgba(10, 61, 98, 0.95); }
+
+/* When the first-batch toggle is active, give it a distinct look */
+.photography-page .koppen-controls .seg button.batch-active {
+  background: var(--ph-cyan);
+  color: #fff;
+}
+
 /* ─── Figure ────────────────────────────────────────────────────── */
 .photography-page figure {
   margin: 1.75rem 0;
