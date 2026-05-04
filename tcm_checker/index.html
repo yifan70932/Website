@@ -264,6 +264,36 @@
 
     .small { font-size: 13px; color: var(--muted); }
 
+    .evidence-box {
+      margin-top: 10px;
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+      font-size: 14px;
+    }
+
+    .evidence-box summary {
+      cursor: pointer;
+      font-weight: 800;
+      color: #334155;
+    }
+
+    .evidence-box ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    .evidence-box li {
+      margin-bottom: 8px;
+    }
+
+    .evidence-box a {
+      color: #0f5f9e;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .evidence-box a:hover { text-decoration: underline; }
+
     footer {
       max-width: 1180px;
       margin: 0 auto 40px;
@@ -661,6 +691,71 @@
 
     const herbMap = new Map();
 
+    const EVIDENCE = {
+      '马兜铃': [
+        { level: '强证据', type: '肾毒性 / 致癌', source: 'NCI', note: '马兜铃酸与上尿路癌和膀胱癌风险相关。', url: 'https://www.cancer.gov/about-cancer/causes-prevention/risk/substances/aristolochic-acids' },
+        { level: '强证据', type: '肾衰竭 / 癌症', source: 'Grollman 2016', note: '流行病学和分子研究显示 Aristolochia 暴露可导致肾衰竭和癌症。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5341512/' }
+      ],
+      '关木通': [
+        { level: '强证据', type: '马兜铃酸肾病 / 致癌', source: 'NCI', note: '关木通属于马兜铃酸风险代表药材之一。', url: 'https://www.cancer.gov/about-cancer/causes-prevention/risk/substances/aristolochic-acids' }
+      ],
+      '广防己': [
+        { level: '强证据', type: '马兜铃酸肾病 / 致癌', source: 'NCI', note: '广防己与马兜铃酸相关肾毒性和癌症风险相关。', url: 'https://www.cancer.gov/about-cancer/causes-prevention/risk/substances/aristolochic-acids' }
+      ],
+      '青木香': [
+        { level: '强证据', type: '马兜铃酸肾病 / 致癌', source: 'NCI', note: '青木香属于马兜铃酸相关风险药材。', url: 'https://www.cancer.gov/about-cancer/causes-prevention/risk/substances/aristolochic-acids' }
+      ],
+      '麻黄': [
+        { level: '监管禁令', type: '心血管风险 / 中枢神经风险', source: 'NCCIH / FDA', note: 'FDA 禁止含麻黄碱生物碱的膳食补充剂；NCCIH 列出高血压、心脏病发作、癫痫和卒中等风险。', url: 'https://www.nccih.nih.gov/health/ephedra' },
+        { level: '监管禁令', type: '膳食补充剂违法销售', source: 'FDA', note: '含麻黄碱生物碱的膳食补充剂被 FDA 认定为 adulterated dietary supplements。', url: 'https://www.fda.gov/food/dietary-supplement-products-ingredients/ephedra' }
+      ],
+      '何首乌': [
+        { level: '强证据', type: '药物性肝损伤', source: 'LiverTox', note: 'Polygonum multiflorum 与多起临床明显急性肝损伤报告相关，严重者可致命。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK548795/' }
+      ],
+      '补骨脂': [
+        { level: '警戒证据', type: '肝损伤 / 光敏风险', source: 'LiverTox', note: '补骨脂及其相关补充剂被报告与肝损伤有关，且含光敏性成分。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK548561/' }
+      ],
+      '黄芩': [
+        { level: '警戒证据', type: '药物性肝损伤', source: 'LiverTox', note: '黄芩及含黄芩的复方产品被纳入草药肝损伤讨论，需要关注肝毒性警戒。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK548757/' }
+      ],
+      '雷公藤': [
+        { level: '强证据', type: '多系统毒性', source: 'NCCIH', note: '雷公藤可能导致严重副作用，包括生殖系统、骨骼、肝脏等风险，需严格医学监管。', url: 'https://www.nccih.nih.gov/health/thunder-god-vine' }
+      ],
+      '朱砂': [
+        { level: '强证据', type: '汞暴露 / 神经肾毒性', source: 'WHO', note: '汞暴露可损害神经、消化、免疫、肺和肾脏系统。朱砂作为含汞矿物药应高度警惕。', url: 'https://www.who.int/news-room/fact-sheets/detail/mercury-and-health' }
+      ],
+      '雄黄': [
+        { level: '强证据', type: '砷暴露 / 致癌 / 多系统毒性', source: 'WHO', note: '无机砷暴露与癌症、皮肤病变、心血管疾病等健康风险相关。雄黄作为含砷矿物药应高度警惕。', url: 'https://www.who.int/news-room/fact-sheets/detail/arsenic' }
+      ],
+      '砒霜': [
+        { level: '强证据', type: '砷暴露 / 高毒性', source: 'WHO', note: '无机砷具有明确毒性与致癌风险。', url: 'https://www.who.int/news-room/fact-sheets/detail/arsenic' }
+      ],
+      '铅丹': [
+        { level: '强证据', type: '铅暴露 / 神经毒性', source: 'WHO', note: '铅暴露可造成神经、血液、肾脏等系统损害，儿童尤其敏感。', url: 'https://www.who.int/news-room/fact-sheets/detail/lead-poisoning-and-health' }
+      ],
+      '白果': [
+        { level: '临床警戒', type: '银杏毒素 / 儿童中毒', source: 'NCBI / StatPearls', note: '银杏种子过量可引发癫痫等中毒表现，儿童风险更高。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK559318/' }
+      ],
+      '番泻叶': [
+        { level: '临床警戒', type: '泻下依赖 / 电解质紊乱', source: 'LiverTox', note: '番泻叶长期或过量使用可导致腹泻、电解质紊乱和泻剂依赖。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK547922/' }
+      ],
+      '芦荟': [
+        { level: '临床警戒', type: '泻下刺激 / 肝损伤个案', source: 'LiverTox', note: '芦荟口服制品有腹泻、泻下刺激和肝损伤个案报告。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK548634/' }
+      ],
+      '银杏叶': [
+        { level: '相互作用警戒', type: '出血风险 / 药物相互作用', source: 'NCCIH', note: '银杏可能增加出血风险，并与抗凝、抗血小板等药物相互作用。', url: 'https://www.nccih.nih.gov/health/ginkgo' }
+      ],
+      '人参': [
+        { level: '相互作用警戒', type: '血糖 / 抗凝药相互作用', source: 'NCCIH', note: '人参可能影响血糖，并与华法林等药物发生相互作用。', url: 'https://www.nccih.nih.gov/health/asian-ginseng' }
+      ],
+      '苦杏仁': [
+        { level: '毒理证据', type: '氰苷 / 氰化物中毒', source: 'EFSA', note: '杏仁和杏核中的氰苷可释放氰化物，过量摄入有急性中毒风险。', url: 'https://www.efsa.europa.eu/en/efsajournal/pub/4424' }
+      ],
+      '细辛': [
+        { level: '风险警戒', type: '马兜铃酸相关风险', source: 'Review', note: '含马兜铃酸或相关污染风险的草药与肾毒性和癌症风险相关，细辛类需严格质量控制。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6218812/' }
+      ]
+    };
+
     function normalize(value) {
       return String(value || '')
         .replace(/[\s·•、，,。；;：:（）()\[\]【】]/g, '')
@@ -729,6 +824,28 @@
       `;
     }
 
+    function getEvidence(herb) {
+      return EVIDENCE[herb.name] || [];
+    }
+
+    function renderEvidence(herb) {
+      const evidence = getEvidence(herb);
+      if (!evidence.length) return '';
+      const items = evidence.map(item => `
+        <li>
+          <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.source)}</a>
+          <span> · ${escapeHtml(item.level)} · ${escapeHtml(item.type)}</span>
+          <div class="small">${escapeHtml(item.note)}</div>
+        </li>
+      `).join('');
+      return `
+        <details class="evidence-box">
+          <summary>查看危险证据（${evidence.length}）</summary>
+          <ul>${items}</ul>
+        </details>
+      `;
+    }
+
     function renderResults(items) {
       const results = document.getElementById('results');
       results.innerHTML = items.map(item => {
@@ -744,6 +861,7 @@
             </div>
             <div class="usage"><strong>中医理论用途：</strong>${escapeHtml(item.use)}</div>
             <div class="risk-line"><strong>风险提示：</strong>${escapeHtml(item.risk)}</div>
+            ${renderEvidence(item)}
           </div>
         `;
       }).join('');
@@ -817,6 +935,7 @@
             <div class="usage"><strong>传统用途：</strong>${escapeHtml(herb.use)}</div>
             <div class="risk-line"><strong>风险：</strong>${escapeHtml(herb.risk)}</div>
             ${herb.aliases.length ? `<div class="small">别名：${herb.aliases.map(escapeHtml).join('、')}</div>` : ''}
+            ${renderEvidence(herb)}
           </div>
         `;
       }).join('');
