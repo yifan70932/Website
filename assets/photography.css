@@ -192,24 +192,32 @@ body.photography-page[data-lang="zh"] {
   font-style: normal;
 }
 
-.photography-page .epigraph {
+.photography-page .epigraphs {
   margin: 1.5rem 0 0;
+  max-width: 52rem;
+}
+
+.photography-page .epigraph {
+  margin: 0 0 1rem;
   padding: 0 0 0 1.25rem;
   border-left: 2px solid var(--ph-navy);
   font-style: italic;
   color: var(--ph-ink-soft);
   font-size: 0.95rem;
-  max-width: 52rem;
   line-height: 1.55;
+}
+
+.photography-page .epigraph:last-child {
+  margin-bottom: 0;
 }
 
 .photography-page[data-lang="zh"] .epigraph { font-style: normal; }
 
 .photography-page .epigraph .attribution {
   display: block;
-  margin-top: 0.4rem;
+  margin-top: 0.25rem;
   font-style: normal;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--ph-ink-faint);
   font-family: var(--ph-font-ui);
 }
