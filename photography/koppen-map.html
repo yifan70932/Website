@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Köppen-Geiger biomes — yifanova.com</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Inter', -apple-system, sans-serif; }
+    body[data-lang="zh"] { font-family: 'Noto Sans SC', sans-serif; }
+    #map { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #f0f4f7; }
+
+    /* Floating control panel - top left */
+    .panel {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 4px;
+      padding: 0.7rem 0.9rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      max-width: 320px;
+      font-size: 0.85rem;
+      color: #2a2f33;
+    }
+    .panel .row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .panel .row:last-child { margin-bottom: 0; }
+    .panel .label { font-size: 0.74rem; font-weight: 600; color: #6b7378; text-transform: uppercase; letter-spacing: 0.04em; }
+    body[data-lang="zh"] .panel .label { text-transform: none; letter-spacing: 0; }
+
+    .seg { display: inline-flex; border: 1px solid #c8cfd3; border-radius: 3px; overflow: hidden; }
+    .seg button {
+      background: #fff; border: 0; padding: 0.3rem 0.65rem; cursor: pointer;
+      color: #4a5258; font-family: inherit; font-size: inherit;
+      border-right: 1px solid #c8cfd3; transition: background 0.15s, color 0.15s;
+    }
+    .seg button:last-child { border-right: 0; }
+    .seg button:hover { background: #e8eef3; color: #2a2f33; }
+    .seg button.active { background: #0a3d62; color: #fff; }
+
+    select {
+      padding: 0.3rem 0.5rem; border: 1px solid #c8cfd3; border-radius: 3px;
+      background: #fff; font-family: inherit; font-size: inherit;
+      max-width: 14rem; color: #2a2f33;
+    }
+
+    /* Top-right: language toggle + back link */
+    .topright {
+      position: absolute; top: 12px; right: 12px; z-index: 1000;
+      display: flex; gap: 6px;
+    }
+    .topright a, .topright button {
+      background: rgba(255,255,255,0.96); border: 1px solid rgba(0,0,0,0.12);
+      padding: 0.35rem 0.7rem; font-family: inherit; font-size: 0.8rem;
+      color: #4a5258; text-decoration: none; cursor: pointer; border-radius: 3px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .topright a:hover, .topright button:hover { background: #fff; color: #0a3d62; }
+    .topright button.active { background: #0a3d62; color: #fff; border-color: #0a3d62; }
+
+    /* Legend bottom-left */
+    .legend {
+      position: absolute; bottom: 24px; left: 12px; z-index: 1000;
+      background: rgba(255,255,255,0.96); border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 4px; padding: 0.6rem 0.8rem; max-width: 320px;
+      font-size: 0.74rem; color: #4a5258;
+      display: flex; flex-direction: column; gap: 0.25rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .swatch { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .sw { width: 12px; height: 12px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.18); flex-shrink: 0; }
+
+    /* Popup content */
+    .leaflet-popup-content { font-family: 'Inter', -apple-system, sans-serif; margin: 0.6rem 0.85rem; font-size: 0.85rem; line-height: 1.45; }
+    body[data-lang="zh"] .leaflet-popup-content { font-family: 'Noto Sans SC', sans-serif; }
+    .leaflet-popup-content .pop-code {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      background: rgba(10,61,98,0.1); color: #0a3d62;
+      padding: 0.05rem 0.35rem; border-radius: 2px; font-size: 0.85rem; font-weight: 600;
+    }
+    .leaflet-popup-content .pop-host {
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    body[data-lang="zh"] .leaflet-popup-content .pop-host { text-transform: none; letter-spacing: 0; }
+    .leaflet-popup-content .pop-host.inhospitable { color: #b8472d; }
+    .leaflet-popup-content .pop-host.edge { color: #6b6840; }
+    .leaflet-popup-content .pop-host.hospitable { color: #2f6b3f; }
+    .leaflet-popup-content .pop-name { display: block; font-weight: 600; margin: 0.3rem 0 0.15rem; color: #2a2f33; }
+    .leaflet-popup-content .pop-photog { display: block; margin-top: 0.4rem; font-style: italic; font-size: 0.82rem; color: #4a5258; }
+    body[data-lang="zh"] .leaflet-popup-content .pop-photog { font-style: normal; }
+
+    /* Mobile: stack panel/legend */
+    @media (max-width: 640px) {
+      .panel { max-width: calc(100% - 24px); top: 56px; }
+      .topright { flex-wrap: wrap; }
+      .legend { max-width: calc(100% - 24px); font-size: 0.7rem; }
+    }
+  </style>
+</head>
+<body data-lang="en">
+  <div id="map"></div>
+
+  <div class="panel">
+    <div class="row">
+      <span class="label" data-i18n="view">View</span>
+      <span class="seg" data-host>
+        <button data-h="all" class="active" data-i18n="all">All classes</button>
+        <button data-h="inhospitable" data-i18n="inhospitable">Inhospitable</button>
+        <button data-h="edge" data-i18n="edge">Edge</button>
+        <button data-h="hospitable" data-i18n="hospitable">Hospitable</button>
+      </span>
+    </div>
+    <div class="row">
+      <span class="label" data-i18n="class">Class</span>
+      <select data-class>
+        <option value="" data-i18n="any">— any —</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="topright">
+    <button data-lang-set="en" class="active">EN</button>
+    <button data-lang-set="zh">中</button>
+    <a href="/photography/" data-i18n="back">← Wiki</a>
+  </div>
+
+  <div class="legend"></div>
+
+<script>
+(function() {
+  // Köppen class metadata (subset of fields used: name, color, host, photographer)
+  const CLASSES = {
+    1:  {en:'Tropical rainforest', zh:'热带雨林 (Af)', color:'#1e6e3a', host:'hospitable',
+         photog_en:'Sebastião Salgado, *Amazônia* (Taschen, 2021)',
+         photog_zh:'Sebastião Salgado《Amazônia》（Taschen, 2021）'},
+    2:  {en:'Tropical monsoon', zh:'热带季风 (Am)', color:'#2a8246', host:'hospitable',
+         photog_en:'Steve McCurry, monsoon series (1983–84)',
+         photog_zh:'Steve McCurry，季风系列（1983–84）'},
+    3:  {en:'Tropical savanna', zh:'热带稀树草原 (Aw)', color:'#7ba34a', host:'hospitable',
+         photog_en:'Nick Brandt, *On This Earth* (2005)',
+         photog_zh:'Nick Brandt《On This Earth》（2005）'},
+    4:  {en:'Hot desert', zh:'热沙漠 (BWh)', color:'#c0392b', host:'inhospitable',
+         photog_en:'Sebastião Salgado, *Genesis* — Sahara, Namib, Atacama',
+         photog_zh:'Sebastião Salgado《Genesis》——撒哈拉、纳米布、阿塔卡马'},
+    5:  {en:'Cold desert', zh:'冷沙漠 (BWk)', color:'#e67e22', host:'inhospitable',
+         photog_en:'Andreas Gursky, *Bahrain I* (2005); Tibetan plateau and Gobi imagery',
+         photog_zh:'Andreas Gursky《Bahrain I》（2005）；青藏高原与戈壁影像'},
+    6:  {en:'Hot semi-arid steppe', zh:'热半干旱草原 (BSh)', color:'#d4ac3a', host:'inhospitable',
+         photog_en:'Sebastião Salgado, Sahel work (1984–85)',
+         photog_zh:'Sebastião Salgado，萨赫勒系列（1984–85）'},
+    7:  {en:'Cold semi-arid steppe', zh:'冷半干旱草原 (BSk)', color:'#b89968', host:'inhospitable',
+         photog_en:'Robert Adams, *The New West* (1974); Mongolian steppe',
+         photog_zh:'Robert Adams《The New West》（1974）；蒙古草原'},
+    8:  {en:'Mediterranean, hot summer', zh:'地中海气候，炎夏 (Csa)', color:'#3a8a55', host:'hospitable',
+         photog_en:'Luigi Ghirri, Italian landscape work', photog_zh:'Luigi Ghirri，意大利风景作品'},
+    9:  {en:'Mediterranean, warm summer', zh:'地中海气候，暖夏 (Csb)', color:'#3f7e57', host:'hospitable',
+         photog_en:'Robert Adams, Pacific Northwest work', photog_zh:'Robert Adams，太平洋西北作品'},
+    10: {en:'Mediterranean, cold summer', zh:'地中海气候，冷夏 (Csc)', color:'#476f59', host:'hospitable',
+         photog_en:'', photog_zh:''},
+    11: {en:'Subtropical monsoon', zh:'亚热带季风 (Cwa)', color:'#5ca15a', host:'hospitable',
+         photog_en:'Lang Jingshan, classical Chinese landscape', photog_zh:'郎静山，中国古典山水'},
+    12: {en:'Subtropical highland', zh:'亚热带高原 (Cwb)', color:'#6ba861', host:'hospitable',
+         photog_en:'Wang Wusheng, *Celestial Realm: Yellow Mountains*', photog_zh:'汪芜生《天界：黄山》'},
+    13: {en:'Cold subtropical highland', zh:'冷亚热带高原 (Cwc)', color:'#75aa6c', host:'hospitable',
+         photog_en:'', photog_zh:''},
+    14: {en:'Humid subtropical', zh:'湿润亚热带 (Cfa)', color:'#52a061', host:'hospitable',
+         photog_en:'William Eggleston, southern US work', photog_zh:'William Eggleston，美国南部作品'},
+    15: {en:'Oceanic', zh:'海洋性温带 (Cfb)', color:'#4d9870', host:'hospitable',
+         photog_en:'Fay Godwin, British landscape', photog_zh:'Fay Godwin，英国风景'},
+    16: {en:'Subpolar oceanic', zh:'亚极地海洋性 (Cfc)', color:'#5e9a82', host:'hospitable',
+         photog_en:'Hannes Lochner, Faroe / Iceland coastal', photog_zh:'Hannes Lochner，法罗 / 冰岛海岸'},
+    17: {en:'Mediterranean continental, hot', zh:'地中海大陆性，炎 (Dsa)', color:'#71956d', host:'hospitable', photog_en:'', photog_zh:''},
+    18: {en:'Mediterranean continental, warm', zh:'地中海大陆性，暖 (Dsb)', color:'#7c9c74', host:'hospitable', photog_en:'', photog_zh:''},
+    19: {en:'Subarctic Mediterranean', zh:'亚寒带地中海 (Dsc)', color:'#88a37c', host:'hospitable', photog_en:'', photog_zh:''},
+    20: {en:'Subarctic Mediterranean, severe', zh:'亚寒带地中海，严寒 (Dsd)', color:'#92aa84', host:'hospitable', photog_en:'', photog_zh:''},
+    21: {en:'Continental monsoon, hot summer', zh:'大陆性季风，炎夏 (Dwa)', color:'#76946f', host:'hospitable', photog_en:'', photog_zh:''},
+    22: {en:'Continental monsoon, warm summer', zh:'大陆性季风，暖夏 (Dwb)', color:'#82996f', host:'hospitable', photog_en:'', photog_zh:''},
+    23: {en:'Subarctic monsoon', zh:'亚寒带季风 (Dwc)', color:'#9aa67b', host:'edge',
+         photog_en:'Russian / Manchurian taiga photography', photog_zh:'俄罗斯 / 满洲泰加林摄影'},
+    24: {en:'Severe subarctic monsoon', zh:'极寒亚寒带季风 (Dwd)', color:'#a3ad82', host:'edge',
+         photog_en:'Yakutia / Oymyakon taiga work', photog_zh:'雅库特 / 奥伊米亚康泰加林作品'},
+    25: {en:'Humid continental, hot summer', zh:'湿润大陆，炎夏 (Dfa)', color:'#5e8e5e', host:'hospitable', photog_en:'', photog_zh:''},
+    26: {en:'Humid continental, warm summer', zh:'湿润大陆，暖夏 (Dfb)', color:'#6a9268', host:'hospitable',
+         photog_en:'Bernd & Hilla Becher, German industrial typology', photog_zh:'贝歇夫妇，德国工业类型学'},
+    27: {en:'Subarctic taiga', zh:'亚寒带针叶林 (Dfc)', color:'#9aa67b', host:'edge',
+         photog_en:'Olaf Otto Becker, *Above Zero* — Greenland edge', photog_zh:'Olaf Otto Becker《Above Zero》——格陵兰边缘'},
+    28: {en:'Severe subarctic taiga', zh:'极寒亚寒带针叶林 (Dfd)', color:'#a3ad82', host:'edge',
+         photog_en:'Eastern Siberia taiga', photog_zh:'东西伯利亚泰加林'},
+    29: {en:'Tundra', zh:'苔原 (ET)', color:'#7fa9b8', host:'inhospitable',
+         photog_en:'Sebastião Salgado, *Genesis* — Antarctica, Tibetan plateau; Olaf Otto Becker, Greenland',
+         photog_zh:'Sebastião Salgado《Genesis》——南极、青藏高原；Olaf Otto Becker，格陵兰'},
+    30: {en:'Ice cap', zh:'永冻冰盖 (EF)', color:'#dbe6ea', host:'inhospitable',
+         photog_en:'Hiroshi Sugimoto, *Time Exposed*; Sebastian Copeland, polar work',
+         photog_zh:'Hiroshi Sugimoto《Time Exposed》；Sebastian Copeland，极地作品'},
+  };
+
+  const HOST_LABEL = {
+    en: { inhospitable: 'INHOSPITABLE', edge: 'EDGE CASE (TAIGA)', hospitable: 'HOSPITABLE' },
+    zh: { inhospitable: '不宜居', edge: '边缘案例（亚寒带针叶林）', hospitable: '宜居' },
+  };
+
+  // i18n strings for control panel + topright
+  const I18N = {
+    en: { view:'View', class:'Class', any:'— any —', all:'All classes',
+          inhospitable:'Inhospitable', edge:'Edge', hospitable:'Hospitable',
+          back:'← Wiki', loading:'Loading…', failed:'Failed to load map data.' },
+    zh: { view:'视图', class:'类别', any:'— 任意 —', all:'全部',
+          inhospitable:'不宜居', edge:'边缘', hospitable:'宜居',
+          back:'← 返回 Wiki', loading:'加载中…', failed:'地图数据加载失败。' },
+  };
+
+  // Set up the map
+  const map = L.map('map', { worldCopyJump: false, minZoom: 1, maxZoom: 6 }).setView([20, 10], 2);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 6, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · Köppen data: Beck et al. 2023',
+    opacity: 0.55,
+  }).addTo(map);
+
+  const state = { host: 'all', classCode: null, lang: 'en' };
+  let geoLayer = null;
+
+  function passes(props) {
+    if (state.classCode != null) return props.c === state.classCode;
+    if (state.host === 'all') return true;
+    return props.h === state.host;
+  }
+
+  function styleFn(feat) {
+    const cls = CLASSES[feat.properties.c];
+    const matches = passes(feat.properties);
+    return {
+      color: cls ? cls.color : '#666', weight: 0.4,
+      opacity: matches ? 0.85 : 0.05,
+      fillColor: cls ? cls.color : '#666',
+      fillOpacity: matches ? 0.6 : 0.03,
+      interactive: matches,
+    };
+  }
+
+  function popupHTML(props) {
+    const cls = CLASSES[props.c]; if (!cls) return props.k;
+    const code = (props.c < 10 ? '0' : '') + props.c;
+    const name = state.lang === 'zh' ? cls.zh : cls.en;
+    const hostL = HOST_LABEL[state.lang][props.h];
+    const photog = state.lang === 'zh' ? cls.photog_zh : cls.photog_en;
+    let html = '<span class="pop-code">' + props.k + ' · ' + code + '</span>';
+    html += '<span class="pop-host ' + props.h + '"> ' + hostL + '</span>';
+    html += '<span class="pop-name">' + name + '</span>';
+    if (photog) html += '<span class="pop-photog">' + photog.replace(/\*([^*]+)\*/g, '<em>$1</em>') + '</span>';
+    return html;
+  }
+
+  // Populate class dropdown
+  function rebuildSelect() {
+    const sel = document.querySelector('[data-class]');
+    sel.innerHTML = '';
+    const optAny = document.createElement('option');
+    optAny.value = ''; optAny.textContent = I18N[state.lang].any;
+    sel.appendChild(optAny);
+    Object.keys(CLASSES).map(Number).sort((a,b)=>a-b).forEach(c => {
+      const cls = CLASSES[c];
+      const opt = document.createElement('option');
+      opt.value = String(c);
+      opt.textContent = state.lang === 'zh' ? cls.zh : (cls.en + ' (' + (c<10?'0':'') + c + ')');
+      if (state.classCode === c) opt.selected = true;
+      sel.appendChild(opt);
+    });
+  }
+
+  // i18n applies to data-i18n elements
+  function applyI18n() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.dataset.i18n;
+      if (I18N[state.lang][k]) el.textContent = I18N[state.lang][k];
+    });
+    rebuildSelect();
+    refresh();
+  }
+
+  function refresh() {
+    if (!geoLayer) return;
+    geoLayer.eachLayer(l => l.setStyle(styleFn(l.feature)));
+    map.closePopup();
+  }
+
+  // Build legend
+  function buildLegend() {
+    const items = state.lang === 'zh' ? [
+      ['#c0392b', '热沙漠 (BWh)'], ['#e67e22', '冷沙漠 (BWk)'],
+      ['#d4ac3a', '热半干旱 (BSh)'], ['#b89968', '冷半干旱 (BSk)'],
+      ['#7fa9b8', '苔原 (ET)'], ['#dbe6ea', '永冻冰盖 (EF)'],
+      ['#9aa67b', '边缘：亚寒带 (Dfc/d, Dwc/d)'],
+      ['#5b8a5b', '宜居（温带森林 / 热带 / 等）'],
+    ] : [
+      ['#c0392b', 'Hot desert (BWh)'], ['#e67e22', 'Cold desert (BWk)'],
+      ['#d4ac3a', 'Hot steppe (BSh)'], ['#b89968', 'Cold steppe (BSk)'],
+      ['#7fa9b8', 'Tundra (ET)'], ['#dbe6ea', 'Ice cap (EF)'],
+      ['#9aa67b', 'Edge: subarctic (Dfc/d, Dwc/d)'],
+      ['#5b8a5b', 'Hospitable (forested / tropical)'],
+    ];
+    const legend = document.querySelector('.legend');
+    legend.innerHTML = '';
+    items.forEach(([color, label]) => {
+      const sw = document.createElement('span');
+      sw.className = 'swatch';
+      sw.innerHTML = '<span class="sw" style="background:' + color + '"></span>' + label;
+      legend.appendChild(sw);
+    });
+  }
+
+  // Wire up controls
+  document.querySelector('[data-host]').querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.host = btn.dataset.h; state.classCode = null;
+      document.querySelector('[data-class]').value = '';
+      btn.parentElement.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+      refresh();
+    });
+  });
+  document.querySelector('[data-class]').addEventListener('change', e => {
+    const v = e.target.value;
+    state.classCode = v ? Number(v) : null;
+    if (state.classCode != null) {
+      state.host = 'all';
+      document.querySelector('[data-host]').querySelectorAll('button')
+        .forEach(b => b.classList.toggle('active', b.dataset.h === 'all'));
+    }
+    refresh();
+  });
+
+  // Language toggle
+  document.querySelectorAll('[data-lang-set]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.lang = btn.dataset.langSet;
+      document.body.dataset.lang = state.lang;
+      document.documentElement.lang = state.lang === 'zh' ? 'zh' : 'en';
+      document.querySelectorAll('[data-lang-set]').forEach(b => b.classList.toggle('active', b === btn));
+      applyI18n();
+      buildLegend();
+    });
+  });
+
+  // Initial build
+  buildLegend();
+  rebuildSelect();
+
+  // Load GeoJSON
+  fetch('/photography/koppen.geojson').then(r => r.json()).then(data => {
+    geoLayer = L.geoJSON(data, {
+      style: styleFn,
+      onEachFeature: (feat, layer) => {
+        layer.on('click', () => {
+          if (!passes(feat.properties)) return;
+          layer.bindPopup(popupHTML(feat.properties)).openPopup();
+        });
+      },
+    }).addTo(map);
+  }).catch(err => {
+    console.error(err);
+    alert(I18N[state.lang].failed);
+  });
+})();
+</script>
+</body>
+</html>

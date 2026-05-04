@@ -663,6 +663,26 @@ body.photography-page[data-lang="zh"] {
 .photography-page .whc-cluster.medium { background: rgba(10, 61, 98, 0.88); }
 .photography-page .whc-cluster.large { background: rgba(10, 61, 98, 0.95); }
 
+/* "Open in full page" link inside legend */
+.photography-page .map-fullscreen-link {
+  margin-left: auto;
+  font-family: var(--ph-font-ui);
+  font-size: 0.78rem;
+  color: var(--ph-navy);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ph-pale-navy);
+  padding-bottom: 1px;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.photography-page[data-lang="zh"] .map-fullscreen-link { font-family: var(--ph-font-cn); }
+
+.photography-page .map-fullscreen-link:hover {
+  color: var(--ph-cyan);
+  border-color: var(--ph-cyan);
+}
+
 /* When the first-batch toggle is active, give it a distinct look */
 .photography-page .koppen-controls .seg button.batch-active {
   background: var(--ph-cyan);
