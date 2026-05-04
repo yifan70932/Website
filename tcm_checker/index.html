@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>中药材安全与药方风险查询</title>
+  <style>
+    :root {
+      --bg: #f7f8f5;
+      --card: #ffffff;
+      --text: #1f2933;
+      --muted: #64748b;
+      --border: #d8ded2;
+      --green: #2e7d32;
+      --blue: #1565c0;
+      --amber: #b26a00;
+      --orange: #c2410c;
+      --red: #b91c1c;
+      --shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(180deg, #eef3ea 0%, var(--bg) 260px);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 42px 20px 24px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 5vw, 52px);
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+
+    .quote {
+      max-width: 880px;
+      margin: 18px 0 0;
+      padding: 16px 18px;
+      border-left: 5px solid #26352a;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      color: #344054;
+      font-size: 16px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+    }
+
+    .quote cite {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-style: normal;
+      font-size: 14px;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 12px 20px 60px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+
+    .card h3 {
+      margin: 18px 0 8px;
+      font-size: 17px;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 14px;
+    }
+
+    textarea, input, select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 15px;
+      font: inherit;
+      outline: none;
+      background: #fbfcfa;
+    }
+
+    textarea { min-height: 150px; resize: vertical; }
+
+    textarea:focus, input:focus, select:focus {
+      border-color: #8aa77f;
+      box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.12);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      background: #26352a;
+      color: #fff;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button.secondary { background: #e9eee5; color: #243028; }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 0;
+    }
+
+    .tag, .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .A { background: rgba(46, 125, 50, 0.12); color: var(--green); }
+    .B { background: rgba(21, 101, 192, 0.12); color: var(--blue); }
+    .C { background: rgba(178, 106, 0, 0.14); color: var(--amber); }
+    .G { background: rgba(194, 65, 12, 0.13); color: var(--orange); }
+    .X { background: rgba(185, 28, 28, 0.13); color: var(--red); }
+    .U { background: rgba(100, 116, 139, 0.15); color: #475569; }
+
+    .results {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .result-item, .herb-item {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      background: #fbfcfa;
+    }
+
+    .result-top, .herb-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+
+    .herb-name {
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .usage {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 4px 0 0;
+    }
+
+    .risk-line {
+      margin-top: 6px;
+      font-size: 14px;
+    }
+
+    .score-box {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .metric {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      background: #fbfcfa;
+    }
+
+    .metric .num {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .warning {
+      border-left: 5px solid var(--red);
+      background: rgba(185, 28, 28, 0.07);
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-top: 14px;
+      color: #7f1d1d;
+      font-weight: 700;
+    }
+
+    .ok {
+      border-left: 5px solid var(--green);
+      background: rgba(46, 125, 50, 0.08);
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-top: 14px;
+      color: #14532d;
+      font-weight: 700;
+    }
+
+    .library {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      max-height: 700px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .small { font-size: 13px; color: var(--muted); }
+
+    footer {
+      max-width: 1180px;
+      margin: 0 auto 40px;
+      padding: 0 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 880px) {
+      .grid { grid-template-columns: 1fr; }
+      .toolbar { grid-template-columns: 1fr; }
+      .score-box { grid-template-columns: repeat(2, 1fr); }
+      .library { grid-template-columns: 1fr; max-height: none; }
+      .card { padding: 18px; border-radius: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>中药材安全与药方风险查询</h1>
+    <blockquote class="quote">
+      “我还记得先前的医生的议论和方药，和现在所知道的比较起来，便渐渐的悟得中医不过是一种有意的或无意的骗子”
+      <cite>——鲁迅，《呐喊·自序》</cite>
+    </blockquote>
+  </header>
+
+  <main>
+    <section class="grid">
+      <div class="card">
+        <h2>药方风险查询</h2>
+        <p class="note">可直接粘贴说明书成分，例如：苦杏仁、紫苏叶、前胡、桔梗、陈皮、甘草。</p>
+        <textarea id="formulaInput" placeholder="在这里输入药方或中成药成分……"></textarea>
+        <div class="actions">
+          <button type="button" id="analyzeBtn">分析药方</button>
+          <button type="button" class="secondary" data-example="safe">示例：较安全止咳方</button>
+          <button type="button" class="secondary" data-example="risky">示例：清热解毒类</button>
+          <button type="button" class="secondary" id="clearBtn">清空</button>
+        </div>
+        <div class="legend">
+          <span class="tag A">A 食药同源</span>
+          <span class="tag B">B 有限放行</span>
+          <span class="tag C">C 严格监管</span>
+          <span class="tag G">灰 严格限制</span>
+          <span class="tag X">黑 禁用</span>
+          <span class="tag U">未知 未收录</span>
+        </div>
+        <div id="summary"></div>
+        <div id="results" class="results"></div>
+      </div>
+
+      <div class="card">
+        <h2>安全评分说明</h2>
+        <p class="note">评分是教学与政策模拟用途。黑名单一票否决；灰名单和 C 类越多，风险越高。</p>
+        <div class="score-box" id="scoreBox">
+          <div class="metric"><div class="num">—</div><div class="label">安全等级</div></div>
+          <div class="metric"><div class="num">—</div><div class="label">黑名单数量</div></div>
+          <div class="metric"><div class="num">—</div><div class="label">灰/C数量</div></div>
+          <div class="metric"><div class="num">—</div><div class="label">未知数量</div></div>
+        </div>
+        <h3>等级解释</h3>
+        <p class="small"><strong>S/A：</strong>以 A 类或少量 B 类为主，适合作为低风险保留品种。<br>
+        <strong>B：</strong>含少量 B/C 类，通常只适合短期轻症使用。<br>
+        <strong>C/D：</strong>含多味 C 类或灰名单，建议处方化、限疗程、监测不良反应。<br>
+        <strong>F：</strong>含黑名单或明显高毒药材，应禁用。</p>
+        <h3>政策口径</h3>
+        <p class="small">A 类“留面子”：保留食药同源与文化认同。B 类“留功能”：允许小病轻症短期使用。C 类“留余地”：在医院处方与研究条件下有限使用。灰名单严格限制，黑名单全面禁止。</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>常见中药材风险名单</h2>
+      <p class="note">当前数据库收录 <strong><span id="herbCount">—</span></strong> 种常见中药材，覆盖食药同源、止咳化痰、清热解毒、活血止痛、祛风除湿、滋补、矿物药与动物药等高频类别。</p>
+      <div class="toolbar">
+        <input id="searchBox" placeholder="搜索：山楂、附子、止咳、清热、活血……" />
+        <select id="filterSelect">
+          <option value="all">全部类别</option>
+          <option value="A">A类：食药同源</option>
+          <option value="B">B类：有限放行</option>
+          <option value="C">C类：严格监管</option>
+          <option value="G">灰名单：严格限制</option>
+          <option value="X">黑名单：禁用</option>
+        </select>
+      </div>
+      <div id="library" class="library"></div>
+    </section>
+  </main>
+
+  <footer>
+    免责声明：本网页为政策模拟与教学工具，不用于诊断、治疗或替代医生建议。药材类别与风险说明基于本次讨论形成的假想监管框架，实际药政与临床用药应以国家药监部门、药典、说明书和合格医师意见为准。
+  </footer>
+
+  <script>
+    'use strict';
+
+    const CATEGORY_INFO = {
+      A: { label: 'A类 · 食药同源', className: 'A' },
+      B: { label: 'B类 · 有限放行', className: 'B' },
+      C: { label: 'C类 · 严格监管', className: 'C' },
+      G: { label: '灰名单 · 严格限制', className: 'G' },
+      X: { label: '黑名单 · 禁用', className: 'X' },
+      U: { label: '未知 · 未收录', className: 'U' }
+    };
+
+    const herbs = [
+      // A 类：食药同源或低风险文化保留类
+      { name: '山楂', aliases: ['大山楂'], cat: 'A', use: '消食化积，尤其用于肉食积滞、脘腹胀满。', risk: '胃酸过多、胃溃疡者大量使用需谨慎。' },
+      { name: '大枣', aliases: ['红枣'], cat: 'A', use: '补中益气，养血安神，常作调和药。', risk: '含糖较高，糖尿病患者不宜大量食用。' },
+      { name: '枸杞子', aliases: ['枸杞'], cat: 'A', use: '滋补肝肾，益精明目。', risk: '可能与抗凝药物相互作用，需谨慎。' },
+      { name: '龙眼肉', aliases: ['桂圆肉', '桂圆'], cat: 'A', use: '补益心脾，养血安神。', risk: '含糖高，湿热或糖尿病人群不宜大量使用。' },
+      { name: '桑椹', aliases: ['桑葚'], cat: 'A', use: '滋阴补血，生津润燥。', risk: '过量可致腹泻。' },
+      { name: '乌梅', aliases: [], cat: 'A', use: '敛肺生津，涩肠止泻。', risk: '酸性强，胃酸过多者谨慎。' },
+      { name: '椰子', aliases: ['椰子肉', '椰汁'], cat: 'A', use: '补虚生津，民间用于清润。', risk: '高糖或高热量制品需注意。' },
+      { name: '薏苡仁', aliases: ['薏米', '苡米'], cat: 'A', use: '健脾渗湿，利水。', risk: '孕期大量使用需谨慎。' },
+      { name: '白扁豆', aliases: [], cat: 'A', use: '健脾化湿。', risk: '未熟透食用可能引起不适。' },
+      { name: '赤小豆', aliases: ['红豆'], cat: 'A', use: '利水消肿，清热。', risk: '总体安全。' },
+      { name: '绿豆', aliases: [], cat: 'A', use: '清热解暑。', risk: '脾胃虚寒者过量可能腹泻。' },
+      { name: '黑豆', aliases: [], cat: 'A', use: '补肾利水，传统食疗使用。', risk: '总体安全。' },
+      { name: '麦芽', aliases: ['大麦芽'], cat: 'A', use: '消食和中，回乳。', risk: '哺乳期需注意回乳作用。' },
+      { name: '小麦', aliases: ['浮小麦'], cat: 'A', use: '养心安神，浮小麦用于止汗。', risk: '麸质敏感者注意。' },
+      { name: '核桃仁', aliases: ['核桃'], cat: 'A', use: '补肾润肠。', risk: '坚果过敏者禁用。' },
+      { name: '莲子', aliases: [], cat: 'A', use: '补脾止泻，养心安神。', risk: '总体安全。' },
+      { name: '芡实', aliases: [], cat: 'A', use: '补脾止泻，固肾。', risk: '总体安全。' },
+      { name: '黑芝麻', aliases: ['芝麻'], cat: 'A', use: '补肝肾，润肠。', risk: '高脂肪，过量可致腹泻。' },
+      { name: '百合', aliases: [], cat: 'A', use: '润肺止咳，清心安神。', risk: '总体安全。' },
+      { name: '山药', aliases: ['淮山'], cat: 'A', use: '补脾养胃，生津益肺。', risk: '总体安全。' },
+      { name: '莱菔子', aliases: ['萝卜籽'], cat: 'A', use: '消食除胀，降气化痰。', risk: '胃肠虚弱者大量使用可不适。' },
+      { name: '荷叶', aliases: [], cat: 'A', use: '清暑化湿。', risk: '总体安全，减肥宣传常被夸大。' },
+      { name: '菊花', aliases: [], cat: 'A', use: '疏风清热，清肝明目。', risk: '菊科过敏者慎用。' },
+      { name: '金银花', aliases: ['忍冬花'], cat: 'A', use: '清热解毒，疏散风热。', risk: '总体安全，但不应夸大抗病毒疗效。' },
+      { name: '薄荷', aliases: [], cat: 'A', use: '疏散风热，清利头目，利咽。', risk: '胃食管反流者可能不适。' },
+      { name: '薄荷脑', aliases: ['薄荷醇'], cat: 'A', use: '清凉止痒，利咽，外用或含服常见。', risk: '婴幼儿慎用，高浓度刺激。' },
+      { name: '决明子', aliases: [], cat: 'A', use: '清肝明目，润肠通便。', risk: '过量可腹泻。' },
+      { name: '玫瑰花', aliases: ['玫瑰茄'], cat: 'A', use: '理气解郁，常作茶饮。', risk: '总体安全。' },
+      { name: '罗汉果', aliases: [], cat: 'A', use: '清热润肺，利咽，化痰止咳。', risk: '总体安全，含糖制品需注意。' },
+      { name: '陈皮', aliases: ['橘皮'], cat: 'A', use: '理气健脾，燥湿化痰。', risk: '总体安全。' },
+      { name: '紫苏叶', aliases: ['苏叶'], cat: 'A', use: '解表散寒，行气和胃。', risk: '总体安全。' },
+      { name: '胖大海', aliases: [], cat: 'A', use: '清肺利咽，润肠通便。', risk: '脾胃虚寒或腹泻者慎用。' },
+      { name: '诃子肉', aliases: ['诃子'], cat: 'A', use: '涩肠止泻，敛肺利咽。', risk: '便秘者慎用。' },
+      { name: '生姜', aliases: ['姜'], cat: 'A', use: '解表散寒，温中止呕。', risk: '抗凝用药者大量使用需谨慎。' },
+      { name: '干姜', aliases: [], cat: 'A', use: '温中散寒，回阳通脉。', risk: '辛热刺激，胃炎或热证人群慎用。' },
+      { name: '花椒', aliases: [], cat: 'A', use: '温中止痛，杀虫止痒。', risk: '辛辣刺激，外用可致皮炎。' },
+      { name: '胡椒', aliases: [], cat: 'A', use: '温中散寒，下气消痰。', risk: '胃炎、溃疡者慎用。' },
+      { name: '丁香', aliases: [], cat: 'A', use: '温中降逆，温肾助阳。', risk: '刺激性较强，过量不宜。' },
+      { name: '肉桂', aliases: [], cat: 'A', use: '补火助阳，散寒止痛。', risk: '辛热，孕妇和出血倾向者慎用。' },
+      { name: '筚茇', aliases: [], cat: 'A', use: '温中散寒，下气止痛。', risk: '辛热刺激，过量不宜。' },
+      { name: '冰片', aliases: [], cat: 'A', use: '开窍醒神，清热止痛，外用常见。', risk: '婴幼儿和孕妇慎用，高浓度刺激。' },
+      { name: '樟脑', aliases: [], cat: 'A', use: '外用止痛止痒，温和刺激局部。', risk: '不可内服，儿童误服可严重中毒。' },
+      { name: '鸡内金', aliases: [], cat: 'A', use: '消食健胃，化石辅助。', risk: '总体安全。' },
+      { name: '佛手', aliases: [], cat: 'A', use: '疏肝理气，和胃止痛，燥湿化痰。', risk: '总体安全，胃酸过多者大量使用需谨慎。' },
+      { name: '香橼', aliases: [], cat: 'A', use: '疏肝理气，宽中化痰。', risk: '总体安全。' },
+      { name: '砂仁', aliases: [], cat: 'A', use: '化湿开胃，温脾止泻，理气安胎。', risk: '辛香刺激，阴虚火旺者慎用。' },
+      { name: '豆蔻', aliases: ['白豆蔻'], cat: 'A', use: '化湿行气，温中止呕。', risk: '辛香刺激，胃热者慎用。' },
+      { name: '肉豆蔻', aliases: [], cat: 'A', use: '温中行气，涩肠止泻。', risk: '过量可能有神经系统不良反应，不宜长期大剂量。' },
+      { name: '小茴香', aliases: ['茴香'], cat: 'A', use: '散寒止痛，理气和胃。', risk: '总体安全，过量辛热刺激。' },
+      { name: '八角茴香', aliases: ['八角'], cat: 'A', use: '温阳散寒，理气止痛。', risk: '需防混入有毒莽草类伪品。' },
+      { name: '高良姜', aliases: [], cat: 'A', use: '温胃止呕，散寒止痛。', risk: '辛热刺激，胃炎或溃疡者慎用。' },
+      { name: '沙棘', aliases: [], cat: 'A', use: '健脾消食，止咳祛痰，活血散瘀。', risk: '总体安全，胃酸过多者慎用。' },
+      { name: '余甘子', aliases: ['滇橄榄'], cat: 'A', use: '清热凉血，消食健胃，生津止咳。', risk: '酸涩，胃酸过多者慎用。' },
+      { name: '藿香', aliases: ['广藿香'], cat: 'A', use: '化湿醒脾，辟秽和中，解暑。', risk: '总体安全，挥发油过敏者慎用。' },
+      { name: '蒲公英', aliases: [], cat: 'A', use: '清热解毒，消肿散结，利湿通淋。', risk: '菊科过敏者慎用，利尿药合用需注意。' },
+      { name: '鱼腥草', aliases: ['蕺菜'], cat: 'A', use: '清热解毒，排脓消痈，利尿通淋。', risk: '总体低风险，但注射剂风险另计；过敏者慎用。' },
+      { name: '马齿苋', aliases: [], cat: 'A', use: '清热解毒，凉血止痢。', risk: '总体安全，脾胃虚寒者慎用。' },
+      { name: '鲜芦根', aliases: ['芦根'], cat: 'A', use: '清热生津，除烦止呕。', risk: '总体安全。' },
+      { name: '玉竹', aliases: [], cat: 'A', use: '养阴润燥，生津止渴。', risk: '总体安全，痰湿壅滞者慎用。' },
+      { name: '黄精', aliases: [], cat: 'A', use: '补气养阴，健脾润肺。', risk: '滋腻，脾虚湿盛者不宜大量长期使用。' },
+      { name: '天麻', aliases: [], cat: 'A', use: '息风止痉，平抑肝阳，祛风通络。', risk: '总体安全，但疗效常被夸大。' },
+      { name: '酸角', aliases: ['罗望子'], cat: 'A', use: '清热解暑，消食化积。', risk: '酸性较强，胃酸过多者慎用。' },
+      { name: '火麻仁', aliases: ['麻仁'], cat: 'A', use: '润肠通便。', risk: '过量可腹泻，孕妇慎用。' },
+      { name: '郁李仁', aliases: [], cat: 'A', use: '润肠通便，利水消肿。', risk: '泻下作用，孕妇慎用。' },
+      { name: '蜂蜜', aliases: ['炼蜜'], cat: 'A', use: '补中润燥，止痛解毒，常作丸剂辅料。', risk: '婴儿禁用，糖尿病患者需控量。' },
+      { name: '桑叶', aliases: [], cat: 'A', use: '疏散风热，清肺润燥，清肝明目。', risk: '总体低风险，菊科或植物过敏体质慎用。' },
+      { name: '梨', aliases: ['雪梨'], cat: 'A', use: '润肺生津，清热化痰，常作食疗。', risk: '总体安全，含糖制品需注意。' },
+      { name: '柿蒂', aliases: [], cat: 'A', use: '降逆止呃。', risk: '证据有限，胃肠虚寒者慎用。' },
+      { name: '白茅根', aliases: [], cat: 'A', use: '凉血止血，清热利尿。', risk: '总体低风险，利尿药合用需注意。' },
+      { name: '薤白', aliases: [], cat: 'A', use: '通阳散结，行气导滞。', risk: '葱蒜类过敏或胃肠刺激者慎用。' },
+      { name: '茶叶', aliases: ['绿茶', '红茶'], cat: 'A', use: '清头目，除烦渴，化痰消食。', risk: '咖啡因敏感、失眠或胃酸过多者慎用。' },
+      { name: '葱白', aliases: [], cat: 'A', use: '发汗解表，散寒通阳。', risk: '胃肠刺激，过量不宜。' },
+      { name: '韭菜子', aliases: [], cat: 'A', use: '温补肝肾，固精缩尿。', risk: '辛温，阴虚火旺者慎用。' },
+      { name: '南瓜子', aliases: [], cat: 'A', use: '杀虫，传统用于绦虫、蛔虫。', risk: '总体安全，坚果种子过敏者慎用。' },
+
+      // B 类：有限放行
+      { name: '甘草', aliases: [], cat: 'B', use: '补脾益气，祛痰止咳，调和诸药。', risk: '长期或大剂量可致低钾、高血压、水钠潴留。' },
+      { name: '桔梗', aliases: [], cat: 'B', use: '宣肺祛痰，利咽排脓。', risk: '胃部刺激，溃疡或呕吐者慎用。' },
+      { name: '苦杏仁', aliases: ['杏仁'], cat: 'B', use: '降气止咳平喘，润肠。', risk: '含苦杏仁苷，过量可产生氰化物中毒风险，必须控量炮制。' },
+      { name: '厚朴', aliases: [], cat: 'B', use: '行气除满，燥湿消痰。', risk: '孕妇慎用，胃肠刺激。' },
+      { name: '半夏', aliases: ['制半夏'], cat: 'B', use: '燥湿化痰，降逆止呕。', risk: '必须炮制，生品刺激性强。' },
+      { name: '黄连', aliases: [], cat: 'B', use: '清热燥湿，泻火解毒。', risk: '大剂量或长期使用可能有肝胃肠风险。' },
+      { name: '车前子', aliases: ['车前草'], cat: 'B', use: '利尿通淋，渗湿止泻。', risk: '利尿作用，肾病或用利尿药者慎用。' },
+      { name: '酸枣仁', aliases: [], cat: 'B', use: '养心安神，敛汗。', risk: '镇静作用，驾驶或合用镇静药需谨慎。' },
+      { name: '远志', aliases: ['制远志'], cat: 'B', use: '安神益智，祛痰开窍。', risk: '胃刺激，需限量。' },
+      { name: '瓜蒌', aliases: ['栝楼'], cat: 'B', use: '清热化痰，宽胸散结，润肠。', risk: '胃肠虚寒者慎用，孕妇慎用。' },
+      { name: '枳壳', aliases: [], cat: 'B', use: '理气宽中，行滞消胀。', risk: '孕妇慎用，胃肠刺激。' },
+      { name: '枳实', aliases: [], cat: 'B', use: '破气消积，化痰除痞。', risk: '作用较强，孕妇慎用，需限量。' },
+      { name: '木香', aliases: [], cat: 'B', use: '行气止痛，健脾消食。', risk: '需排除含马兜铃酸的青木香混淆；正品木香风险较低。' },
+      { name: '香附', aliases: [], cat: 'B', use: '疏肝解郁，理气调经。', risk: '证据有限，孕期慎用。' },
+      { name: '佩兰', aliases: [], cat: 'B', use: '化湿醒脾，解暑。', risk: '总体低风险，证据有限。' },
+      { name: '茯苓', aliases: ['茯神'], cat: 'B', use: '利水渗湿，健脾宁心。', risk: '总体低风险，利尿药合用需注意。' },
+      { name: '泽兰', aliases: [], cat: 'B', use: '活血调经，利水消肿。', risk: '活血类，孕妇慎用。' },
+      { name: '益母草', aliases: [], cat: 'B', use: '活血调经，利尿消肿。', risk: '孕妇禁用或慎用，出血倾向者慎用。' },
+      { name: '桃仁', aliases: [], cat: 'B', use: '活血祛瘀，润肠通便。', risk: '含苦杏仁苷，孕妇和出血倾向者慎用，需控量。' },
+      { name: '苏子', aliases: ['紫苏子'], cat: 'B', use: '降气化痰，止咳平喘，润肠。', risk: '总体低风险，油脂性腹泻者慎用。' },
+      { name: '旋覆花', aliases: [], cat: 'B', use: '降气化痰，降逆止呕。', risk: '需包煎，过敏体质慎用。' },
+      { name: '枇杷叶', aliases: [], cat: 'B', use: '清肺止咳，降逆止呕。', risk: '需去毛，胃寒者慎用。' },
+      { name: '款冬花', aliases: [], cat: 'B', use: '润肺下气，止咳化痰。', risk: '可能含吡咯里西啶生物碱杂质，需严格质量控制。' },
+      { name: '紫菀', aliases: [], cat: 'B', use: '润肺下气，化痰止咳。', risk: '需质量控制，长期大剂量不宜。' },
+      { name: '白前', aliases: [], cat: 'B', use: '降气化痰，止咳。', risk: '胃肠刺激，需限量。' },
+      { name: '百部', aliases: [], cat: 'B', use: '润肺止咳，杀虫灭虱。', risk: '过量可致胃肠与神经系统不良反应。' },
+      { name: '麦冬', aliases: ['麦门冬'], cat: 'B', use: '养阴生津，润肺清心。', risk: '总体低风险，脾胃虚寒者慎用。' },
+      { name: '沙参', aliases: ['北沙参', '南沙参'], cat: 'B', use: '养阴清肺，益胃生津。', risk: '总体低风险，证据有限。' },
+      { name: '五味子', aliases: [], cat: 'B', use: '收敛固涩，益气生津，补肾宁心。', risk: '可能影响药物代谢酶，合用多药者谨慎。' },
+      { name: '女贞子', aliases: [], cat: 'B', use: '滋补肝肾，明目乌发。', risk: '长期滋补滥用不宜，胃肠不适。' },
+      { name: '旱莲草', aliases: ['墨旱莲'], cat: 'B', use: '滋补肝肾，凉血止血。', risk: '证据有限，脾胃虚寒者慎用。' },
+      { name: '槐花', aliases: ['槐米'], cat: 'B', use: '凉血止血，清肝泻火。', risk: '低血压或脾胃虚寒者慎用。' },
+      { name: '侧柏叶', aliases: [], cat: 'B', use: '凉血止血，化痰止咳。', risk: '证据有限，长期大量不宜。' },
+      { name: '桂枝', aliases: [], cat: 'B', use: '发汗解肌，温通经脉，助阳化气。', risk: '辛温，发热、高血压或出血倾向者慎用。' },
+      { name: '麻黄根', aliases: [], cat: 'B', use: '固表止汗。', risk: '与麻黄不同，但仍需防混淆和质量控制。' },
+      { name: '浮萍', aliases: [], cat: 'B', use: '发汗解表，透疹止痒，利尿消肿。', risk: '来源和污染风险需关注。' },
+      { name: '蔓荆子', aliases: [], cat: 'B', use: '疏散风热，清利头目。', risk: '证据有限，过敏体质慎用。' },
+      { name: '桑白皮', aliases: [], cat: 'B', use: '泻肺平喘，利水消肿。', risk: '低血压或利尿药合用者慎用。' },
+      { name: '葶苈子', aliases: [], cat: 'B', use: '泻肺平喘，行水消肿。', risk: '作用较强，心肾功能异常者需谨慎。' },
+      { name: '海藻', aliases: [], cat: 'B', use: '消痰软坚，利水消肿。', risk: '含碘，甲状腺疾病者慎用。' },
+      { name: '昆布', aliases: [], cat: 'B', use: '消痰软坚，利水消肿。', risk: '含碘，甲状腺疾病者慎用。' },
+      { name: '夏枯草', aliases: [], cat: 'B', use: '清肝泻火，散结消肿。', risk: '证据有限，肝病或长期服药者慎用。' },
+      { name: '马勃', aliases: [], cat: 'B', use: '清肺利咽，止血。', risk: '真菌来源，过敏风险。' },
+      { name: '射干', aliases: [], cat: 'B', use: '清热解毒，利咽，消痰。', risk: '胃肠刺激，孕妇慎用。' },
+      { name: '玄参', aliases: [], cat: 'B', use: '清热凉血，滋阴降火，解毒散结。', risk: '脾胃虚寒者慎用。' },
+      { name: '知母', aliases: [], cat: 'B', use: '清热泻火，滋阴润燥。', risk: '苦寒，脾胃虚寒者慎用。' },
+      { name: '天冬', aliases: ['天门冬'], cat: 'B', use: '养阴润燥，清肺生津。', risk: '滋腻，脾胃虚寒者慎用。' },
+      { name: '石斛', aliases: [], cat: 'B', use: '益胃生津，滋阴清热。', risk: '总体低风险，滋补宣传常被夸大。' },
+      { name: '阿胶', aliases: [], cat: 'B', use: '补血滋阴，润燥止血。', risk: '滋腻碍胃，过敏或消化不良者慎用。' },
+      { name: '艾叶', aliases: [], cat: 'B', use: '温经止血，散寒止痛。', risk: '挥发油成分，过量有神经和肝毒性风险，孕期需谨慎。' },
+      { name: '蒲黄', aliases: [], cat: 'B', use: '止血，化瘀，利尿。', risk: '活血止血类，孕妇慎用。' },
+      { name: '仙鹤草', aliases: [], cat: 'B', use: '收敛止血，止痢，截疟。', risk: '证据有限，便秘者慎用。' },
+      { name: '地榆', aliases: [], cat: 'B', use: '凉血止血，解毒敛疮。', risk: '证据有限，外用品质需注意。' },
+      { name: '茜草', aliases: [], cat: 'B', use: '凉血止血，活血通经。', risk: '活血类，孕妇和出血倾向者慎用。' },
+      { name: '乌药', aliases: [], cat: 'B', use: '行气止痛，温肾散寒。', risk: '辛温，阴虚火旺者慎用。' },
+      { name: '青皮', aliases: [], cat: 'B', use: '疏肝破气，消积化滞。', risk: '作用较强，孕妇和气虚者慎用。' },
+      { name: '沉香', aliases: [], cat: 'B', use: '行气止痛，温中止呕，纳气平喘。', risk: '来源昂贵且易掺伪，阴虚火旺者慎用。' },
+      { name: '檀香', aliases: [], cat: 'B', use: '行气温中，开胃止痛。', risk: '芳香刺激，过敏体质慎用。' },
+      { name: '降香', aliases: [], cat: 'B', use: '化瘀止血，理气止痛。', risk: '活血类，孕妇慎用。' },
+      { name: '王不留行', aliases: [], cat: 'B', use: '活血通经，下乳消肿。', risk: '孕妇慎用，出血倾向者慎用。' },
+      { name: '路路通', aliases: [], cat: 'B', use: '祛风活络，利水通经。', risk: '证据有限，孕妇慎用。' },
+      { name: '络石藤', aliases: [], cat: 'B', use: '祛风通络，凉血消肿。', risk: '证据有限，长期使用需谨慎。' },
+      { name: '忍冬藤', aliases: [], cat: 'B', use: '清热解毒，疏风通络。', risk: '总体低风险，证据有限。' },
+      { name: '海风藤', aliases: [], cat: 'B', use: '祛风湿，通经络。', risk: '证据有限，过敏体质慎用。' },
+      { name: '青风藤', aliases: [], cat: 'B', use: '祛风湿，通经络，利小便。', risk: '可有免疫和胃肠反应，需谨慎。' },
+
+      // C 类：严格监管
+      { name: '黄芩', aliases: [], cat: 'C', use: '清热燥湿，泻火解毒。', risk: '有肝损伤警戒信号，临床证据与安全边界需严格监管。' },
+      { name: '连翘', aliases: [], cat: 'C', use: '清热解毒，消肿散结，疏散风热。', risk: '毒性较低，但循证证据不足，不宜广泛OTC化。' },
+      { name: '柴胡', aliases: [], cat: 'C', use: '疏散退热，疏肝解郁。', risk: '有肝损伤病例报道，应处方化、短疗程。' },
+      { name: '葛根', aliases: [], cat: 'C', use: '解肌退热，生津，升阳止泻。', risk: '安全性较好，但疗效常被夸大。' },
+      { name: '荆芥', aliases: [], cat: 'C', use: '解表散风，透疹。', risk: '证据不足，过敏体质慎用。' },
+      { name: '牛蒡子', aliases: [], cat: 'C', use: '疏散风热，利咽透疹。', risk: '胃肠刺激，证据不足。' },
+      { name: '苍术', aliases: ['制苍术'], cat: 'C', use: '燥湿健脾，祛风散寒。', risk: '长期或大剂量需谨慎。' },
+      { name: '薄荷油', aliases: [], cat: 'C', use: '疏风清热，清凉止痛。', risk: '高浓度刺激，儿童慎用。' },
+      { name: '前胡', aliases: [], cat: 'C', use: '降气化痰，疏散风热。', risk: '循证证据有限，偶见胃肠或过敏反应。' },
+      { name: '浙贝母', aliases: ['贝母'], cat: 'C', use: '清热化痰，散结。', risk: '含生物碱，可能胃肠刺激，不适合长期。' },
+      { name: '大黄', aliases: ['酒大黄'], cat: 'C', use: '泻下攻积，清热泻火，活血。', risk: '长期使用可致电解质紊乱、肠道依赖和肝损伤风险。' },
+      { name: '川芎', aliases: ['川I芎'], cat: 'C', use: '活血行气，祛风止痛。', risk: '活血类，孕妇和出血倾向者慎用。' },
+      { name: '红花', aliases: [], cat: 'C', use: '活血通经，祛瘀止痛。', risk: '孕妇禁用，出血倾向者慎用。' },
+      { name: '当归', aliases: [], cat: 'C', use: '补血活血，调经止痛。', risk: '活血类，抗凝用药者和出血倾向者慎用。' },
+      { name: '山柰', aliases: ['沙姜'], cat: 'C', use: '温中行气，消食止痛。', risk: '辛香刺激，外用可致皮肤刺激。' },
+      { name: '金钱草', aliases: [], cat: 'C', use: '利湿退黄，利尿通淋，排石辅助。', risk: '循证不足，不应替代结石正规治疗。' },
+      { name: '麻黄', aliases: [], cat: 'C', use: '发汗解表，宣肺平喘，利水消肿。', risk: '含麻黄碱类，心血管和滥用风险高，应严格处方监管。' },
+      { name: '丹参', aliases: [], cat: 'C', use: '活血祛瘀，通经止痛，清心除烦。', risk: '可能增加出血风险，与抗凝抗血小板药合用需谨慎。' },
+      { name: '三七', aliases: ['田七'], cat: 'C', use: '化瘀止血，活血定痛。', risk: '活血止血双向作用，抗凝用药者和孕妇慎用。' },
+      { name: '乳香', aliases: [], cat: 'C', use: '活血定痛，消肿生肌。', risk: '胃肠刺激，过敏风险。' },
+      { name: '没药', aliases: [], cat: 'C', use: '活血止痛，消肿生肌。', risk: '胃肠刺激，孕妇慎用。' },
+      { name: '延胡索', aliases: ['元胡'], cat: 'C', use: '活血行气，止痛。', risk: '镇痛活性较强，孕妇慎用，合用镇静药谨慎。' },
+      { name: '郁金', aliases: [], cat: 'C', use: '活血止痛，行气解郁，清心凉血。', risk: '活血类，孕妇慎用，证据不充分。' },
+      { name: '姜黄', aliases: [], cat: 'C', use: '破血行气，通经止痛。', risk: '抗凝用药者慎用，胆道疾病者慎用。' },
+      { name: '鸡血藤', aliases: [], cat: 'C', use: '活血补血，调经，舒筋活络。', risk: '活血类，孕妇和出血倾向者慎用。' },
+      { name: '独活', aliases: [], cat: 'C', use: '祛风除湿，通痹止痛。', risk: '证据有限，可能胃肠刺激或过敏。' },
+      { name: '羌活', aliases: [], cat: 'C', use: '解表散寒，祛风胜湿，止痛。', risk: '辛温燥烈，阴虚或高血压人群谨慎。' },
+      { name: '秦艽', aliases: [], cat: 'C', use: '祛风湿，清湿热，止痹痛。', risk: '证据有限，胃肠不适。' },
+      { name: '威灵仙', aliases: [], cat: 'C', use: '祛风湿，通络止痛。', risk: '刺激性较强，长期大剂量不宜。' },
+      { name: '防己', aliases: ['汉防己'], cat: 'C', use: '祛风湿，止痛，利水消肿。', risk: '需严防与广防己混淆；肾功能异常者慎用。' },
+      { name: '黄柏', aliases: [], cat: 'C', use: '清热燥湿，泻火除蒸，解毒疗疮。', risk: '苦寒，长期大剂量可能胃肠和肝胆风险。' },
+      { name: '龙胆草', aliases: ['龙胆'], cat: 'C', use: '清热燥湿，泻肝胆火。', risk: '苦寒刺激，长期或大剂量不宜。' },
+      { name: '苦参', aliases: [], cat: 'C', use: '清热燥湿，杀虫，利尿。', risk: '含生物碱，肝肾风险需关注，不宜长期。' },
+      { name: '天花粉', aliases: [], cat: 'C', use: '清热生津，消肿排脓。', risk: '孕妇禁用或慎用，过敏风险。' },
+      { name: '白附子', aliases: ['禹白附'], cat: 'C', use: '祛风痰，定惊搐，解毒散结。', risk: '刺激性和毒性需炮制，孕妇慎用。' },
+      { name: '全蝎', aliases: [], cat: 'C', use: '息风镇痉，通络止痛，攻毒散结。', risk: '动物毒性药，过敏和神经毒性风险，需处方监管。' },
+      { name: '蜈蚣', aliases: [], cat: 'C', use: '息风镇痉，通络止痛，攻毒散结。', risk: '动物毒性药，过敏和神经毒性风险，需严格限量。' },
+      { name: '僵蚕', aliases: [], cat: 'C', use: '息风止痉，祛风止痛，化痰散结。', risk: '动物来源，过敏风险。' },
+      { name: '地龙', aliases: ['蚯蚓'], cat: 'C', use: '清热息风，通络，平喘，利尿。', risk: '动物来源，过敏与污染风险。' },
+      { name: '水蛭', aliases: [], cat: 'C', use: '破血通经，逐瘀消癥。', risk: '强活血抗凝，出血风险高，孕妇禁用。' },
+      { name: '虻虫', aliases: [], cat: 'C', use: '破血逐瘀，散积消癥。', risk: '强破血药，出血风险高，孕妇禁用。' },
+      { name: '麝香', aliases: [], cat: 'C', use: '开窍醒神，活血通经，消肿止痛。', risk: '孕妇禁用，来源和监管问题突出。' },
+      { name: '牛黄', aliases: [], cat: 'C', use: '清心解毒，豁痰开窍，息风定惊。', risk: '来源复杂，常与朱砂雄黄同方时风险显著增加。' },
+      { name: '鹿茸', aliases: [], cat: 'C', use: '补肾阳，益精血，强筋骨。', risk: '滋补滥用风险，高血压、炎症活动期慎用。' },
+      { name: '人参', aliases: ['红参', '白参'], cat: 'C', use: '大补元气，补脾益肺，生津安神。', risk: '可影响血压、血糖和抗凝药，滋补滥用不宜。' },
+      { name: '西洋参', aliases: [], cat: 'C', use: '补气养阴，清热生津。', risk: '可能影响抗凝药、血糖控制，需谨慎。' },
+      { name: '黄芪', aliases: [], cat: 'C', use: '补气升阳，固表止汗，利水消肿。', risk: '免疫相关疾病或免疫抑制治疗者需谨慎，证据有限。' },
+      { name: '青蒿', aliases: [], cat: 'C', use: '清虚热，除骨蒸，解暑，截疟。', risk: '有效成分与现代抗疟药相关，但草药制剂剂量不稳定，需监管。' },
+      { name: '白头翁', aliases: [], cat: 'C', use: '清热解毒，凉血止痢。', risk: '苦寒，胃肠刺激，证据有限。' },
+      { name: '赤芍', aliases: [], cat: 'C', use: '清热凉血，散瘀止痛。', risk: '活血类，孕妇和出血倾向者慎用。' },
+      { name: '紫草', aliases: [], cat: 'C', use: '清热凉血，活血解毒，透疹。', risk: '可能含吡咯里西啶类风险，内服需谨慎。' },
+      { name: '山豆根', aliases: [], cat: 'C', use: '清热解毒，利咽消肿。', risk: '毒性较强，可致神经和胃肠不良反应，需严格限量。' },
+      { name: '白花蛇舌草', aliases: [], cat: 'C', use: '清热解毒，利湿通淋。', risk: '抗癌等宣传证据不足，长期使用风险不明。' },
+      { name: '半枝莲', aliases: [], cat: 'C', use: '清热解毒，化瘀利尿。', risk: '常被用于肿瘤辅助宣传，证据不足，需严格监管。' },
+      { name: '败酱草', aliases: [], cat: 'C', use: '清热解毒，排脓破瘀。', risk: '证据有限，脾胃虚寒者慎用。' },
+      { name: '三棱', aliases: [], cat: 'C', use: '破血行气，消积止痛。', risk: '破血类，孕妇禁用，出血倾向者慎用。' },
+      { name: '莪术', aliases: [], cat: 'C', use: '破血行气，消积止痛。', risk: '破血类，孕妇禁用，出血倾向者慎用。' },
+      { name: '灵芝', aliases: [], cat: 'C', use: '补气安神，止咳平喘。', risk: '保健宣传常被夸大，肝损伤个案和相互作用需关注。' },
+      { name: '冬虫夏草', aliases: ['虫草'], cat: 'C', use: '补肺益肾，止血化痰。', risk: '重金属、掺伪和保健滥用问题突出。' },
+
+      // 灰名单：严格限制
+      { name: '板蓝根', aliases: [], cat: 'G', use: '清热解毒，凉血利咽。', risk: '临床证据不足，常被滥用于感冒和防疫。' },
+      { name: '大青叶', aliases: [], cat: 'G', use: '清热解毒，凉血消斑。', risk: '证据不足，长期使用不宜。' },
+      { name: '淡豆豉', aliases: [], cat: 'G', use: '解表除烦。', risk: '证据不足。' },
+      { name: '地黄', aliases: ['生地', '熟地黄', '熟地'], cat: 'G', use: '滋阴补血，清热凉血。', risk: '证据不足，长期滋补滥用易胃肠不适。' },
+      { name: '牡丹皮', aliases: ['丹皮'], cat: 'G', use: '清热凉血，活血化瘀。', risk: '证据不足，活血属性需谨慎。' },
+      { name: '山茱萸', aliases: [], cat: 'G', use: '补益肝肾，收涩固脱。', risk: '证据不足。' },
+      { name: '竹叶', aliases: ['淡竹叶', '竹茹'], cat: 'G', use: '清热除烦，利尿。', risk: '证据不足。' },
+      { name: '防风', aliases: [], cat: 'G', use: '祛风解表，胜湿止痛。', risk: '证据不足，过敏体质慎用。' },
+      { name: '白芷', aliases: [], cat: 'G', use: '解表散寒，祛风止痛，通鼻窍。', risk: '可能光敏或过敏，证据不足。' },
+      { name: '泽泻', aliases: [], cat: 'G', use: '利水渗湿，泄热。', risk: '长期或大剂量有肾脏风险争议。' },
+      { name: '石膏', aliases: [], cat: 'G', use: '清热泻火，除烦止渴。', risk: '矿物药质量控制和杂质风险。' },
+      { name: '蝉蜕', aliases: [], cat: 'G', use: '疏散风热，利咽透疹，明目退翳。', risk: '昆虫来源，过敏风险与证据不足。' },
+      { name: '方儿茶', aliases: ['儿茶'], cat: 'G', use: '收湿敛疮，生肌止血。', risk: '鞣质多，胃肠刺激，证据不足。' },
+      { name: '白术', aliases: [], cat: 'G', use: '健脾益气，燥湿利水。', risk: '证据不足，长期使用需谨慎。' },
+      { name: '白芍', aliases: [], cat: 'G', use: '养血调经，柔肝止痛。', risk: '证据不足。' },
+      { name: '栀子', aliases: [], cat: 'G', use: '泻火除烦，清热利湿。', risk: '有肝胆相关不良反应警戒，需谨慎。' },
+      { name: '海金沙', aliases: [], cat: 'G', use: '利尿通淋，排石辅助。', risk: '证据不足。' },
+      { name: '石韦', aliases: [], cat: 'G', use: '利尿通淋，清肺止咳。', risk: '长期大剂量需谨慎。' },
+      { name: '滑石', aliases: [], cat: 'G', use: '利尿通淋，清热解暑。', risk: '矿物药，需关注杂质和质量控制。' },
+      { name: '槟榔', aliases: [], cat: 'G', use: '杀虫消积，行气利水。', risk: '与口腔癌风险相关，现代监管应严格限制或禁止作为日常产品。' },
+      { name: '升麻', aliases: [], cat: 'G', use: '发表透疹，清热解毒，升举阳气。', risk: '证据有限，肝毒性争议需关注。' },
+      { name: '白鲜皮', aliases: [], cat: 'G', use: '清热燥湿，祛风解毒。', risk: '有肝损伤报道，需严格限制。' },
+      { name: '何首乌', aliases: ['制何首乌', '首乌'], cat: 'G', use: '补肝肾，益精血，乌须发。', risk: '肝损伤风险明确，尤其长期或保健滥用。' },
+      { name: '补骨脂', aliases: [], cat: 'G', use: '补肾助阳，固精缩尿，温脾止泻。', risk: '肝损伤和光敏风险，需严格限制。' },
+      { name: '淫羊藿', aliases: [], cat: 'G', use: '补肾阳，强筋骨，祛风湿。', risk: '滋补滥用、心血管和肝肾风险需关注。' },
+      { name: '肉苁蓉', aliases: [], cat: 'G', use: '补肾阳，益精血，润肠通便。', risk: '证据有限，滋补滥用不宜。' },
+      { name: '巴戟天', aliases: [], cat: 'G', use: '补肾阳，强筋骨，祛风湿。', risk: '证据有限，阴虚火旺者慎用。' },
+      { name: '杜仲', aliases: [], cat: 'G', use: '补肝肾，强筋骨，安胎。', risk: '证据有限，质量控制需关注。' },
+      { name: '川牛膝', aliases: ['牛膝', '怀牛膝'], cat: 'G', use: '逐瘀通经，补肝肾，强筋骨，引血下行。', risk: '活血类，孕妇和出血倾向者慎用。' },
+      { name: '牡蛎', aliases: [], cat: 'G', use: '重镇安神，潜阳补阴，软坚散结。', risk: '矿物/贝壳类，重金属和来源质量需关注。' },
+      { name: '龙骨', aliases: [], cat: 'G', use: '镇惊安神，平肝潜阳，收敛固涩。', risk: '矿物/化石类，重金属和来源质量需关注。' },
+      { name: '磁石', aliases: [], cat: 'G', use: '镇惊安神，平肝潜阳，聪耳明目。', risk: '矿物药，质量和杂质风险。' },
+      { name: '辛夷', aliases: [], cat: 'G', use: '散风寒，通鼻窍。', risk: '过敏风险，鼻炎疗效证据有限。' },
+      { name: '细辛', aliases: [], cat: 'G', use: '解表散寒，祛风止痛，通窍，温肺化饮。', risk: '可能含马兜铃酸相关风险和肾毒性争议，需严格限制。' },
+      { name: '吴茱萸', aliases: [], cat: 'G', use: '散寒止痛，降逆止呕，助阳止泻。', risk: '肝毒性与胃肠刺激风险，需严格限制。' },
+      { name: '川楝子', aliases: [], cat: 'G', use: '疏肝泄热，行气止痛，杀虫。', risk: '肝毒性风险，需严格限制。' },
+      { name: '苦楝皮', aliases: [], cat: 'G', use: '杀虫，疗癣。', risk: '毒性较强，内服风险高。' },
+      { name: '白果', aliases: ['银杏果'], cat: 'G', use: '敛肺定喘，止带缩尿。', risk: '含银杏毒素，儿童和过量食用可中毒。' },
+      { name: '银杏叶', aliases: [], cat: 'G', use: '活血化瘀，通络。', risk: '与抗凝抗血小板药相互作用风险。' },
+      { name: '番泻叶', aliases: [], cat: 'G', use: '泻热导滞，通便。', risk: '长期使用可致肠道依赖和电解质紊乱。' },
+      { name: '芦荟', aliases: [], cat: 'G', use: '泻下通便，清肝杀虫。', risk: '泻下刺激，孕妇禁用或慎用，长期不宜。' },
+      { name: '常山', aliases: [], cat: 'G', use: '涌吐痰饮，截疟。', risk: '毒性和胃肠反应较强，现代应用应严格限制。' },
+      { name: '瓜蒂', aliases: [], cat: 'G', use: '涌吐痰食，祛湿退黄。', risk: '催吐作用强，风险高，不宜常规使用。' },
+      { name: '皂角', aliases: ['皂荚'], cat: 'G', use: '祛痰开窍，散结消肿。', risk: '刺激性和毒性较强，内服需严格限制。' },
+      { name: '土鳖虫', aliases: ['䗪虫'], cat: 'G', use: '破血逐瘀，续筋接骨。', risk: '活血破血，孕妇禁用，过敏风险。' },
+      { name: '穿山甲', aliases: [], cat: 'G', use: '通经下乳，消肿排脓。', risk: '保护动物与非法贸易问题，现代监管应禁用或严格禁止流通。' },
+
+      // 黑名单：禁用
+      { name: '马兜铃', aliases: [], cat: 'X', use: '传统用于行气止痛、清肺降气。', risk: '含马兜铃酸，肾毒性与致癌风险明确。' },
+      { name: '关木通', aliases: [], cat: 'X', use: '传统用于清心利尿。', risk: '马兜铃酸风险，禁用。' },
+      { name: '广防己', aliases: [], cat: 'X', use: '传统用于祛风止痛、利水。', risk: '马兜铃酸风险，禁用。' },
+      { name: '青木香', aliases: [], cat: 'X', use: '传统用于行气止痛。', risk: '马兜铃酸风险，禁用。' },
+      { name: '附子', aliases: [], cat: 'X', use: '传统用于回阳救逆、补火助阳。', risk: '乌头碱心脏毒性，可致命。' },
+      { name: '川乌', aliases: [], cat: 'X', use: '祛风除湿，温经止痛。', risk: '乌头碱心脏毒性，可致命。' },
+      { name: '草乌', aliases: [], cat: 'X', use: '祛风除湿，温经止痛。', risk: '乌头碱心脏毒性，可致命。' },
+      { name: '雷公藤', aliases: [], cat: 'X', use: '传统用于祛风除湿、通络。', risk: '肝毒性、生殖毒性、骨髓抑制等严重风险。' },
+      { name: '马钱子', aliases: [], cat: 'X', use: '通络止痛，散结消肿。', risk: '含番木鳖碱，神经毒性强。' },
+      { name: '巴豆', aliases: [], cat: 'X', use: '峻下冷积。', risk: '强烈泻下和腐蚀性，中毒风险高。' },
+      { name: '千里光', aliases: [], cat: 'X', use: '清热解毒，明目。', risk: '吡咯里西啶生物碱，肝毒性。' },
+      { name: '斑蝥', aliases: [], cat: 'X', use: '攻毒蚀疮，破血逐瘀。', risk: '斑蝥素强毒，肾毒和溶血风险。' },
+      { name: '苍耳子', aliases: [], cat: 'X', use: '通鼻窍，祛风湿。', risk: '肝肾毒性，安全窗口窄。' },
+      { name: '雄黄', aliases: [], cat: 'X', use: '解毒杀虫，燥湿祛痰。', risk: '含砷，重金属毒性。' },
+      { name: '雌黄', aliases: [], cat: 'X', use: '矿物药，传统外用。', risk: '含砷，重金属毒性。' },
+      { name: '朱砂', aliases: [], cat: 'X', use: '镇心安神。', risk: '含汞，神经和肾毒性。' },
+      { name: '铅丹', aliases: [], cat: 'X', use: '外用拔毒生肌。', risk: '含铅，重金属毒性。' },
+      { name: '砒霜', aliases: [], cat: 'X', use: '攻毒、蚀疮。', risk: '砷制剂，高毒。' },
+      { name: '商陆', aliases: [], cat: 'X', use: '逐水消肿。', risk: '强烈泻下和肾毒性。' },
+      { name: '南星', aliases: ['生南星'], cat: 'X', use: '燥湿化痰，祛风止痉。', risk: '生品强刺激毒性，禁用生品。' },
+      { name: '洋金花', aliases: ['曼陀罗'], cat: 'X', use: '传统用于平喘止痛、麻醉。', risk: '含莨菪烷类生物碱，可致谵妄、心律失常和中毒。' },
+      { name: '闹羊花', aliases: [], cat: 'X', use: '传统用于祛风除湿、止痛。', risk: '含木藜芦毒素类，心脏毒性和神经毒性强。' },
+      { name: '雪上一枝蒿', aliases: [], cat: 'X', use: '民间用于止痛、跌打。', risk: '含乌头类生物碱，剧毒，可致心律失常死亡。' },
+      { name: '生半夏', aliases: [], cat: 'X', use: '传统用于化痰止呕。', risk: '生品强刺激毒性，模拟政策下禁用生品。' },
+      { name: '生天南星', aliases: [], cat: 'X', use: '传统用于祛风痰、止痉。', risk: '生品强刺激毒性，模拟政策下禁用生品。' },
+      { name: '生马钱子', aliases: [], cat: 'X', use: '传统用于通络止痛。', risk: '番木鳖碱毒性强，安全窗口极窄。' },
+      { name: '轻粉', aliases: [], cat: 'X', use: '传统外用攻毒杀虫。', risk: '含汞，重金属毒性。' },
+      { name: '红粉', aliases: [], cat: 'X', use: '传统外用拔毒去腐。', risk: '含汞，重金属毒性。' },
+      { name: '白降丹', aliases: [], cat: 'X', use: '传统外用腐蚀祛腐。', risk: '含汞，腐蚀性和重金属毒性。' },
+      { name: '砒石', aliases: [], cat: 'X', use: '传统攻毒蚀疮。', risk: '砷制剂，高毒。' },
+      { name: '甘遂', aliases: [], cat: 'X', use: '泻水逐饮，消肿散结。', risk: '峻下逐水药，毒性强，安全窗口窄。' },
+      { name: '大戟', aliases: ['京大戟'], cat: 'X', use: '泻水逐饮，消肿散结。', risk: '峻下逐水药，毒性强。' },
+      { name: '芫花', aliases: [], cat: 'X', use: '泻水逐饮，祛痰止咳，杀虫疗疮。', risk: '毒性强，胃肠和肝肾风险高。' },
+      { name: '牵牛子', aliases: ['黑丑', '白丑'], cat: 'X', use: '泻水通便，消痰涤饮。', risk: '峻下药，毒性和电解质紊乱风险。' },
+      { name: '红大戟', aliases: [], cat: 'X', use: '泻水逐饮，消肿散结。', risk: '毒性强，模拟政策下禁用。' },
+      { name: '蟾酥', aliases: [], cat: 'X', use: '解毒止痛，开窍醒神。', risk: '强心苷样毒性，心律失常风险高。' }
+    ];
+
+    const herbMap = new Map();
+
+    function normalize(value) {
+      return String(value || '')
+        .replace(/[\s·•、，,。；;：:（）()\[\]【】]/g, '')
+        .replace(/川I芎/g, '川芎')
+        .trim();
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function buildHerbMap() {
+      herbMap.clear();
+      herbs.forEach(herb => {
+        herbMap.set(normalize(herb.name), herb);
+        herb.aliases.forEach(alias => herbMap.set(normalize(alias), herb));
+      });
+    }
+
+    function splitFormula(text) {
+      return String(text || '')
+        .replace(/辅料为[:：]/g, '、')
+        .split(/[、，,；;。\n\r\s]+/)
+        .map(item => item.trim())
+        .filter(Boolean)
+        .map(item => item.replace(/。$/, ''));
+    }
+
+    function matchHerb(token) {
+      const norm = normalize(token);
+      if (herbMap.has(norm)) return herbMap.get(norm);
+
+      for (const [key, herb] of herbMap.entries()) {
+        if (key.length >= 2 && norm.includes(key)) return herb;
+      }
+
+      return { name: token, aliases: [], cat: 'U', use: '未收录。', risk: '需要人工核对。' };
+    }
+
+    function computeGrade(counts, total) {
+      if (counts.X > 0) return 'F';
+      if (total === 0) return '—';
+
+      const riskScore = counts.B * 1 + counts.C * 2 + counts.G * 3 + counts.U * 2.5;
+      const avg = riskScore / total;
+
+      if (avg <= 0.25) return 'S';
+      if (avg <= 0.6) return 'A';
+      if (avg <= 1.1) return 'B';
+      if (avg <= 1.8) return 'C';
+      return 'D';
+    }
+
+    function renderScore(grade, counts) {
+      const scoreBox = document.getElementById('scoreBox');
+      scoreBox.innerHTML = `
+        <div class="metric"><div class="num">${escapeHtml(grade)}</div><div class="label">安全等级</div></div>
+        <div class="metric"><div class="num">${counts.X}</div><div class="label">黑名单数量</div></div>
+        <div class="metric"><div class="num">${counts.C + counts.G}</div><div class="label">灰/C数量</div></div>
+        <div class="metric"><div class="num">${counts.U}</div><div class="label">未知数量</div></div>
+      `;
+    }
+
+    function renderResults(items) {
+      const results = document.getElementById('results');
+      results.innerHTML = items.map(item => {
+        const info = CATEGORY_INFO[item.cat] || CATEGORY_INFO.U;
+        return `
+          <div class="result-item">
+            <div class="result-top">
+              <div>
+                <div class="herb-name">${escapeHtml(item.name)}</div>
+                ${item.original && item.original !== item.name ? `<div class="small">输入项：${escapeHtml(item.original)}</div>` : ''}
+              </div>
+              <span class="pill ${info.className}">${info.label}</span>
+            </div>
+            <div class="usage"><strong>中医理论用途：</strong>${escapeHtml(item.use)}</div>
+            <div class="risk-line"><strong>风险提示：</strong>${escapeHtml(item.risk)}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function analyzeFormula() {
+      const text = document.getElementById('formulaInput').value;
+      const tokens = splitFormula(text);
+      const seen = new Set();
+      const items = [];
+
+      tokens.forEach(token => {
+        const herb = matchHerb(token);
+        const key = `${herb.name}-${herb.cat}`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          items.push({ original: token, ...herb });
+        }
+      });
+
+      const counts = { A: 0, B: 0, C: 0, G: 0, X: 0, U: 0 };
+      items.forEach(item => { counts[item.cat] = (counts[item.cat] || 0) + 1; });
+
+      const grade = computeGrade(counts, items.length);
+      renderScore(grade, counts);
+
+      const summary = document.getElementById('summary');
+      if (items.length === 0) {
+        summary.innerHTML = '';
+        document.getElementById('results').innerHTML = '';
+        return;
+      }
+
+      if (counts.X > 0) {
+        summary.innerHTML = '<div class="warning">发现黑名单药材：模拟政策下应判定为禁用或下架，不建议使用。</div>';
+      } else if (counts.G + counts.C >= 2) {
+        summary.innerHTML = '<div class="warning">未发现黑名单，但含多味 C 类或灰名单药材，建议处方化、短疗程，并关注不良反应。</div>';
+      } else if (counts.U > 0) {
+        summary.innerHTML = '<div class="warning">存在未收录成分，请人工核对说明书和药典信息。</div>';
+      } else {
+        summary.innerHTML = '<div class="ok">未发现黑名单或高风险组合，整体偏低风险。仍需按说明书使用。</div>';
+      }
+
+      renderResults(items);
+    }
+
+    function renderLibrary() {
+      const herbCountEl = document.getElementById('herbCount');
+      if (herbCountEl) herbCountEl.textContent = String(new Set(herbs.map(herb => herb.name)).size);
+
+      const searchBox = document.getElementById('searchBox');
+      const filterSelect = document.getElementById('filterSelect');
+      const library = document.getElementById('library');
+      const query = normalize(searchBox.value).toLowerCase();
+      const filter = filterSelect.value;
+
+      const list = herbs.filter(herb => {
+        const categoryMatch = filter === 'all' || herb.cat === filter;
+        const haystack = normalize([herb.name, ...herb.aliases, herb.use, herb.risk].join('')).toLowerCase();
+        return categoryMatch && (!query || haystack.includes(query));
+      });
+
+      library.innerHTML = list.map(herb => {
+        const info = CATEGORY_INFO[herb.cat] || CATEGORY_INFO.U;
+        return `
+          <div class="herb-item">
+            <div class="herb-top">
+              <div class="herb-name">${escapeHtml(herb.name)}</div>
+              <span class="pill ${info.className}">${info.label}</span>
+            </div>
+            <div class="usage"><strong>传统用途：</strong>${escapeHtml(herb.use)}</div>
+            <div class="risk-line"><strong>风险：</strong>${escapeHtml(herb.risk)}</div>
+            ${herb.aliases.length ? `<div class="small">别名：${herb.aliases.map(escapeHtml).join('、')}</div>` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function loadExample(type) {
+      const examples = {
+        safe: '苦杏仁、紫苏叶、前胡、桔梗、陈皮、甘草',
+        risky: '金银花、黄芩、连翘、板蓝根、大青叶、甘草'
+      };
+      document.getElementById('formulaInput').value = examples[type] || '';
+      analyzeFormula();
+    }
+
+    function clearInput() {
+      document.getElementById('formulaInput').value = '';
+      document.getElementById('summary').innerHTML = '';
+      document.getElementById('results').innerHTML = '';
+      renderScore('—', { A: 0, B: 0, C: 0, G: 0, X: 0, U: 0 });
+    }
+
+    function bindEvents() {
+      document.getElementById('analyzeBtn').addEventListener('click', analyzeFormula);
+      document.getElementById('clearBtn').addEventListener('click', clearInput);
+      document.getElementById('searchBox').addEventListener('input', renderLibrary);
+      document.getElementById('filterSelect').addEventListener('change', renderLibrary);
+      document.querySelectorAll('[data-example]').forEach(button => {
+        button.addEventListener('click', () => loadExample(button.dataset.example));
+      });
+    }
+
+    function runSelfTests() {
+      console.assert(typeof renderLibrary === 'function', 'renderLibrary should be defined');
+      console.assert(matchHerb('附子').cat === 'X', '附子 should be blacklisted');
+      console.assert(matchHerb('红枣').name === '大枣', '红枣 should map to 大枣');
+      console.assert(matchHerb('川I芎').name === '川芎', '川I芎 typo should normalize to 川芎');
+      const tokens = splitFormula('苦杏仁、紫苏叶、前胡、桔梗、陈皮、甘草');
+      console.assert(tokens.length === 6, 'Formula splitting should return 6 tokens');
+      console.assert(computeGrade({ A: 1, B: 0, C: 0, G: 0, X: 1, U: 0 }, 2) === 'F', 'Any blacklisted herb should grade F');
+    }
+
+    function init() {
+      buildHerbMap();
+      bindEvents();
+      renderLibrary();
+      runSelfTests();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
