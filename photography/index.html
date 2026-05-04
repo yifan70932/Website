@@ -135,11 +135,11 @@
 
     <!-- ───── Opening (no section number; merges into §1) ────── -->
     <div data-lang-content="en">
-      <p>As an <em>optical apparatus</em>, photography descends in unbroken line from the Renaissance camera obscura to the present-day CMOS sensor; as <em>latent image</em>, photography is the silver halide grain reduced by exposure, and the analogue voltage awaiting demosaicing; as <em>art</em>, photography is an exploration with its own internal history; as <em>practice</em>, photography is a structured serious leisure in Robert Stebbins's sense; as <em>study</em>, photography is a sustained lifelong trajectory in the adult-education sense.</p>
+      <p>As an <em>optical apparatus</em>, photography descends in unbroken line from the Renaissance camera obscura to the present-day CMOS sensor; as <em>latent image</em>, photography is the silver halide grain reduced by exposure, and the analogue voltage awaiting demosaicing; as <em>art</em>, photography is an exploration with its own internal history; as <em>practice</em>, photography is a structured serious leisure in Robert Stebbins's sense; as <em>study</em>, photography is the canonical case of adult education and a sustained lifelong trajectory.</p>
     </div>
 
     <div data-lang-content="zh">
-      <p>作为<em>光学装置</em>，摄影从文艺复兴的暗箱一脉相承至如今的 CMOS 感光元件；作为<em>潜在图像</em>，摄影是通过曝光而刻蚀的银卤晶体，也是等待去马赛克的模拟电压；作为<em>艺术</em>，摄影是自成历史的探索；作为<em>实践</em>，摄影是 Stebbins 意义上结构化的严肃休闲；作为<em>学习</em>，摄影更是成人教育意义上持续的终身轨迹。</p>
+      <p>作为<em>光学装置</em>，摄影从文艺复兴的暗箱一脉相承至如今的 CMOS 感光元件；作为<em>潜在图像</em>，摄影是通过曝光而刻蚀的银卤晶体，也是等待去马赛克的模拟电压；作为<em>艺术</em>，摄影是自成历史的探索；作为<em>实践</em>，摄影是 Stebbins 意义上结构化的严肃休闲；作为<em>学习</em>，摄影更是经典的成人教育和持续的终身轨迹。</p>
     </div>
 
     <!-- ───── §1 The Optical Apparatus ─────────────────────────── -->
@@ -961,13 +961,7 @@
     <div data-lang-content="en">
       <p class="lede">A digital file or a developed negative is not yet a photograph in the sense that matters to a collector or to a serious printmaker. Becoming a print is a passage through a chain of decisions — colour space, soft proof, paper, ink, profiling, edition, signature — each of which is partly a technical and partly an aesthetic choice. The chain has only become more elaborate since pigment inkjet printing reached fine-art quality around 2000: the Iris print, the giclée, the Piezography monochrome system, the modern UltraChrome and Lucia ink sets, the rise of cotton rag and baryta papers without optical brighteners. This section is the longest in this set of notes, partly because it is where the author works hands-on, partly because the literature is fragmented across manufacturer documentation, archival science, and a handful of working printmakers' books.</p>
 
-      <div class="widget-placeholder">
-        <strong>Widget · Color space comparator (interactive)</strong>
-        CIE 1931 xy chromaticity diagram with toggleable overlays for sRGB, Adobe RGB (1998), Display P3, ProPhoto RGB, and a representative printer + paper gamut (e.g. Epson P900 + Hahnemühle Photo Rag on UltraChrome PRO10). Shows where each space loses out-of-gamut colours and what soft proofing actually constrains.
-        <span class="widget-note">SVG + JS interactive, occupies one figure block</span>
-      </div>
-
-      <p>[Body text on color space, soft proof workflow, paper categories, ink chemistries, archival ratings, edition practice — to be written.]</p>
+      <p>[Body text on color space, soft proof workflow, paper categories, ink chemistries, archival ratings, edition practice — to be written. The interactive comparator below visualises the gamut question that all of this ultimately resolves to.]</p>
 
       <div class="sources">
         <span class="sources-label">
@@ -992,7 +986,7 @@
     <div data-lang-content="zh">
       <p class="lede">一个数字文件或一卷已显影的底片，对于收藏家或一位认真的制版者来说，还不是真正意义上的照片。成为一件印件需要走过一连串决定——色彩空间、软打样、纸张、墨水、profile、版次、签名——其中每一项都既是技术决定，又是美学决定。自从颜料喷墨打印在 2000 年前后达到艺术级品质以来，这条链条只变得更加复杂：Iris 印件、giclée、Piezography 单色系统、当代的 UltraChrome 与 Lucia 墨水组、不含荧光增白剂的棉绒与 baryta 纸的兴起。本节是这份札记中最长的一节，部分因为这是作者亲手操作的领域，部分因为相关文献散落在厂商技术文档、档案学论文与少数实操制版者的著作之间。</p>
 
-      <p>[关于色彩空间、软打样工作流、纸张分类、墨水化学、档案级评级、版次实践的正文待写。]</p>
+      <p>[关于色彩空间、软打样工作流、纸张分类、墨水化学、档案级评级、版次实践的正文待写。下方的互动比较器可视化了所有这些最终所归结的色域问题。]</p>
 
       <div class="sources">
         <span class="sources-label">本节主要参考</span>
@@ -1004,6 +998,32 @@
         <p>International Color Consortium，ICC.1:2010 规范（.icc 配置文件格式）。所有软打样与打印工作流最终所归结的数据结构本身。</p>
       </div>
     </div>
+
+    <!-- ── §3 Color space comparator widget (lang-neutral) ── -->
+    <figure class="colorspace-widget" id="cs-widget">
+      <figcaption class="colorspace-caption">
+        <strong>
+          <span data-lang-content="en">CIE 1931 chromaticity diagram with color-space gamuts</span>
+          <span data-lang-content="zh">CIE 1931 色度图与色域比较</span>
+        </strong>
+        <span class="caption-note">
+          <span data-lang-content="en">The "horseshoe" outline encloses all colors visible to the standard human observer; the curved boundary is the spectral locus (monochromatic light from 380 to 780 nm) and the straight diagonal at the bottom is the line of purples (non-spectral mixtures of violet and red). Each color space is plotted as the triangle whose vertices are its R, G, B primaries — every color the space can encode lies inside that triangle. Colors in the diagram background are approximate: an sRGB display can only accurately render colors inside the sRGB triangle, so colors plotted outside it are "imagined" by your monitor as best it can.</span>
+          <span data-lang-content="zh">"马蹄形"轮廓圈出标准人类观察者能看到的全部颜色；弯曲边缘是 spectral locus（380 至 780 nm 的单色光），底部的直对角线是 line of purples（紫与红的非光谱混合）。每个色彩空间被绘制为以其 R、G、B 三原色为顶点的三角形——该色彩空间能编码的所有颜色都落在该三角形内。背景颜色为近似值：sRGB 显示器只能准确渲染 sRGB 三角形以内的颜色，因此其外的颜色由显示器尽其所能"想象"出来。</span>
+        </span>
+      </figcaption>
+      <div class="colorspace-controls" id="cs-controls">
+        <!-- toggles populated by JS -->
+      </div>
+      <div class="colorspace-canvas-wrap">
+        <div class="cs-stack">
+          <canvas id="cs-canvas" width="600" height="600"></canvas>
+          <svg id="cs-overlay" width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+      </div>
+      <div class="colorspace-coverage" id="cs-coverage">
+        <!-- populated by JS -->
+      </div>
+    </figure>
 
     <!-- ───── §4 From the Decisive Moment to Uncommon Places ──── -->
     <h2 id="sec-art"><span class="sec-num">4 ·</span>
@@ -2002,6 +2022,365 @@
     }, { rootMargin: '200px' });
 
     document.querySelectorAll('.koppen-widget[data-whc-instance]').forEach(fig => lazyObs.observe(fig));
+  })();
+
+  /* ─────────────────────────────────────────────────────────────────
+     §3 Color space comparator widget
+     CIE 1931 chromaticity diagram + 5 toggleable color-space gamuts.
+     Canvas: spectral-locus background gradient. SVG: gamut polygons + labels.
+     ───────────────────────────────────────────────────────────────── */
+  (function initColorSpaceWidget() {
+    const widget = document.getElementById('cs-widget');
+    if (!widget) return;
+
+    // ── Spectral locus, CIE 1931 2-deg observer, 5 nm steps (380-700 nm) ──
+    // Beyond 700 nm chromaticity is essentially constant at the red endpoint,
+    // so we omit the redundant tail.
+    const SPECTRAL = [
+      [380,0.1741,0.0050],[385,0.1740,0.0050],[390,0.1738,0.0049],[395,0.1736,0.0049],
+      [400,0.1733,0.0048],[405,0.1730,0.0048],[410,0.1726,0.0048],[415,0.1721,0.0048],
+      [420,0.1714,0.0051],[425,0.1703,0.0058],[430,0.1689,0.0069],[435,0.1669,0.0086],
+      [440,0.1644,0.0109],[445,0.1611,0.0138],[450,0.1566,0.0177],[455,0.1510,0.0227],
+      [460,0.1440,0.0297],[465,0.1355,0.0399],[470,0.1241,0.0578],[475,0.1096,0.0868],
+      [480,0.0913,0.1327],[485,0.0687,0.2007],[490,0.0454,0.2950],[495,0.0235,0.4127],
+      [500,0.0082,0.5384],[505,0.0039,0.6548],[510,0.0139,0.7502],[515,0.0389,0.8120],
+      [520,0.0743,0.8338],[525,0.1142,0.8262],[530,0.1547,0.8059],[535,0.1929,0.7816],
+      [540,0.2296,0.7543],[545,0.2658,0.7243],[550,0.3016,0.6923],[555,0.3374,0.6588],
+      [560,0.3731,0.6245],[565,0.4087,0.5896],[570,0.4441,0.5547],[575,0.4788,0.5202],
+      [580,0.5125,0.4866],[585,0.5448,0.4544],[590,0.5752,0.4242],[595,0.6029,0.3965],
+      [600,0.6270,0.3725],[605,0.6482,0.3514],[610,0.6658,0.3340],[615,0.6801,0.3197],
+      [620,0.6915,0.3083],[625,0.7006,0.2993],[630,0.7079,0.2920],[635,0.7140,0.2859],
+      [640,0.7190,0.2809],[645,0.7230,0.2769],[650,0.7260,0.2740],[655,0.7283,0.2717],
+      [660,0.7300,0.2700],[665,0.7311,0.2689],[670,0.7320,0.2680],[675,0.7327,0.2673],
+      [680,0.7334,0.2666],[685,0.7340,0.2660],[690,0.7344,0.2656],[695,0.7346,0.2654],
+      [700,0.7347,0.2653],
+    ];
+
+    // Closed boundary polygon: spectral locus + line of purples back to 380nm
+    const BOUNDARY_XY = SPECTRAL.map(p => [p[1], p[2]]);
+    BOUNDARY_XY.push([SPECTRAL[0][1], SPECTRAL[0][2]]); // close
+
+    // Color spaces with R, G, B chromaticity and a display color
+    const SPACES = [
+      { id: 'srgb', name_en: 'sRGB / Rec.709', name_zh: 'sRGB / Rec.709',
+        R: [0.640, 0.330], G: [0.300, 0.600], B: [0.150, 0.060],
+        color: '#d62728', visible: true },
+      { id: 'adobergb', name_en: 'Adobe RGB (1998)', name_zh: 'Adobe RGB (1998)',
+        R: [0.640, 0.330], G: [0.210, 0.710], B: [0.150, 0.060],
+        color: '#1f77b4', visible: true },
+      { id: 'p3', name_en: 'Display P3', name_zh: 'Display P3',
+        R: [0.680, 0.320], G: [0.265, 0.690], B: [0.150, 0.060],
+        color: '#2ca02c', visible: true },
+      { id: 'rec2020', name_en: 'Rec. 2020', name_zh: 'Rec. 2020',
+        R: [0.708, 0.292], G: [0.170, 0.797], B: [0.131, 0.046],
+        color: '#9467bd', visible: false },
+      { id: 'prophoto', name_en: 'ProPhoto RGB', name_zh: 'ProPhoto RGB',
+        R: [0.7347, 0.2653], G: [0.1596, 0.8404], B: [0.0366, 0.0001],
+        color: '#ff7f0e', visible: false },
+    ];
+
+    // Triangle area in xy plane
+    function triArea(p1, p2, p3) {
+      return Math.abs(p1[0]*(p2[1]-p3[1]) + p2[0]*(p3[1]-p1[1]) + p3[0]*(p1[1]-p2[1])) / 2;
+    }
+    // Polygon (Shoelace) area for the visible-gamut boundary
+    function polyArea(pts) {
+      let a = 0;
+      for (let i = 0; i < pts.length - 1; i++) {
+        a += pts[i][0] * pts[i+1][1] - pts[i+1][0] * pts[i][1];
+      }
+      return Math.abs(a) / 2;
+    }
+    const VISIBLE_AREA = polyArea(BOUNDARY_XY);
+
+    // Coordinate mapping: xy domain [0, 0.8] x [0, 0.9] → canvas pixel
+    // SVG/canvas is 600 x 600, but we'll leave 60px margin for labels
+    const MARGIN_L = 50, MARGIN_R = 30, MARGIN_T = 20, MARGIN_B = 50;
+    const W = 600, H = 600;
+    const PLOT_W = W - MARGIN_L - MARGIN_R; // 520
+    const PLOT_H = H - MARGIN_T - MARGIN_B; // 530
+    const X_DOMAIN = 0.8, Y_DOMAIN = 0.9;
+
+    function xyToPx(x, y) {
+      return [
+        MARGIN_L + (x / X_DOMAIN) * PLOT_W,
+        MARGIN_T + PLOT_H - (y / Y_DOMAIN) * PLOT_H,
+      ];
+    }
+
+    // Point-in-polygon (ray cast)
+    function inPoly(px, py, poly) {
+      let inside = false;
+      for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+        const xi = poly[i][0], yi = poly[i][1];
+        const xj = poly[j][0], yj = poly[j][1];
+        const intersect = ((yi > py) !== (yj > py)) &&
+                          (px < (xj - xi) * (py - yi) / (yj - yi + 1e-12) + xi);
+        if (intersect) inside = !inside;
+      }
+      return inside;
+    }
+
+    // ── Approximate xy chromaticity → sRGB color ──
+    // Standard sRGB matrix (D65), then clamp/normalise for display.
+    // Out-of-gamut colors get desaturated toward neutral, never clipped to gray.
+    const M_xy_to_RGB = [
+      [ 3.2406, -1.5372, -0.4986],
+      [-0.9689,  1.8758,  0.0415],
+      [ 0.0557, -0.2040,  1.0570],
+    ];
+    function xyToRGB255(x, y) {
+      // Pick Y arbitrary; chromaticity matters for hue/saturation
+      const Y = 1.0;
+      const X = (x / y) * Y;
+      const Z = ((1 - x - y) / y) * Y;
+      let r = M_xy_to_RGB[0][0]*X + M_xy_to_RGB[0][1]*Y + M_xy_to_RGB[0][2]*Z;
+      let g = M_xy_to_RGB[1][0]*X + M_xy_to_RGB[1][1]*Y + M_xy_to_RGB[1][2]*Z;
+      let b = M_xy_to_RGB[2][0]*X + M_xy_to_RGB[2][1]*Y + M_xy_to_RGB[2][2]*Z;
+      // Find the most negative; lift everything up (desaturate toward white)
+      const minRGB = Math.min(r, g, b, 0);
+      r -= minRGB; g -= minRGB; b -= minRGB;
+      // Normalise so max is 1
+      const maxRGB = Math.max(r, g, b, 1e-6);
+      r /= maxRGB; g /= maxRGB; b /= maxRGB;
+      // Apply sRGB gamma (approximate)
+      function gamma(v) {
+        return v <= 0.0031308 ? 12.92 * v : 1.055 * Math.pow(v, 1/2.4) - 0.055;
+      }
+      r = gamma(r); g = gamma(g); b = gamma(b);
+      return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    }
+
+    // ── Render Canvas: fill spectral locus interior with chromaticity gradient ──
+    function renderCanvas() {
+      const canvas = document.getElementById('cs-canvas');
+      const ctx = canvas.getContext('2d');
+      const imgData = ctx.createImageData(W, H);
+      const data = imgData.data;
+
+      for (let py = 0; py < H; py++) {
+        for (let px = 0; px < W; px++) {
+          // Convert pixel back to xy
+          const x = (px - MARGIN_L) / PLOT_W * X_DOMAIN;
+          const y = ((MARGIN_T + PLOT_H) - py) / PLOT_H * Y_DOMAIN;
+          const idx = (py * W + px) * 4;
+          if (x < 0 || x > X_DOMAIN || y < 0 || y > Y_DOMAIN ||
+              !inPoly(x, y, BOUNDARY_XY)) {
+            // Outside visible gamut → white background
+            data[idx] = 255; data[idx+1] = 255; data[idx+2] = 255; data[idx+3] = 0;
+            continue;
+          }
+          const [r, g, b] = xyToRGB255(x, y);
+          data[idx] = r; data[idx+1] = g; data[idx+2] = b; data[idx+3] = 255;
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+
+      // Draw the spectral locus outline on top of the gradient
+      ctx.strokeStyle = '#222';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      for (let i = 0; i < SPECTRAL.length; i++) {
+        const [pxc, pyc] = xyToPx(SPECTRAL[i][1], SPECTRAL[i][2]);
+        if (i === 0) ctx.moveTo(pxc, pyc); else ctx.lineTo(pxc, pyc);
+      }
+      // Line of purples back to 380nm
+      const [p0x, p0y] = xyToPx(SPECTRAL[0][1], SPECTRAL[0][2]);
+      ctx.lineTo(p0x, p0y);
+      ctx.stroke();
+
+      // Wavelength tick marks at major points
+      ctx.font = '10px ui-sans-serif, system-ui';
+      ctx.fillStyle = '#444';
+      const TICKS = [400, 460, 480, 500, 520, 540, 560, 580, 600, 620, 700];
+      for (const wl of TICKS) {
+        const sp = SPECTRAL.find(s => s[0] === wl);
+        if (!sp) continue;
+        const [tx, ty] = xyToPx(sp[1], sp[2]);
+        ctx.beginPath();
+        ctx.arc(tx, ty, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#222'; ctx.fill();
+        // Position label outside the curve (push outward)
+        const cx = MARGIN_L + PLOT_W / 2;
+        const cy = MARGIN_T + PLOT_H / 2;
+        const dx = tx - cx, dy = ty - cy;
+        const len = Math.sqrt(dx*dx + dy*dy);
+        const lx = tx + (dx/len) * 12;
+        const ly = ty + (dy/len) * 12;
+        ctx.fillStyle = '#666';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(wl, lx, ly);
+      }
+
+      // Axes
+      ctx.strokeStyle = '#666';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(MARGIN_L, MARGIN_T);
+      ctx.lineTo(MARGIN_L, MARGIN_T + PLOT_H);
+      ctx.lineTo(MARGIN_L + PLOT_W, MARGIN_T + PLOT_H);
+      ctx.stroke();
+
+      // Axis labels & ticks
+      ctx.fillStyle = '#444';
+      ctx.font = '11px ui-sans-serif, system-ui';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+      for (let xv = 0; xv <= 0.8; xv += 0.1) {
+        const [tx,] = xyToPx(xv, 0);
+        ctx.beginPath();
+        ctx.moveTo(tx, MARGIN_T + PLOT_H);
+        ctx.lineTo(tx, MARGIN_T + PLOT_H + 4);
+        ctx.strokeStyle = '#666'; ctx.stroke();
+        ctx.fillText(xv.toFixed(1), tx, MARGIN_T + PLOT_H + 6);
+      }
+      ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+      for (let yv = 0; yv <= 0.9; yv += 0.1) {
+        const [, ty] = xyToPx(0, yv);
+        ctx.beginPath();
+        ctx.moveTo(MARGIN_L - 4, ty);
+        ctx.lineTo(MARGIN_L, ty);
+        ctx.stroke();
+        ctx.fillText(yv.toFixed(1), MARGIN_L - 6, ty);
+      }
+      ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+      ctx.font = '12px ui-sans-serif, system-ui';
+      ctx.fillStyle = '#222';
+      ctx.fillText('CIE x', MARGIN_L + PLOT_W / 2, H - 16);
+      ctx.save();
+      ctx.translate(14, MARGIN_T + PLOT_H / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText('CIE y', 0, 0);
+      ctx.restore();
+    }
+
+    // ── Render SVG overlay: gamut triangles + labels for visible spaces ──
+    function renderOverlay() {
+      const svg = document.getElementById('cs-overlay');
+      svg.innerHTML = '';
+      const ns = 'http://www.w3.org/2000/svg';
+
+      for (const sp of SPACES) {
+        if (!sp.visible) continue;
+        const pts = [sp.R, sp.G, sp.B].map(p => xyToPx(p[0], p[1]));
+        const ptsStr = pts.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+
+        const tri = document.createElementNS(ns, 'polygon');
+        tri.setAttribute('points', ptsStr);
+        tri.setAttribute('fill', sp.color);
+        tri.setAttribute('fill-opacity', '0.10');
+        tri.setAttribute('stroke', sp.color);
+        tri.setAttribute('stroke-width', '2');
+        tri.setAttribute('stroke-linejoin', 'round');
+        svg.appendChild(tri);
+
+        // Vertex dots (R, G, B)
+        for (const [vx, vy] of pts) {
+          const dot = document.createElementNS(ns, 'circle');
+          dot.setAttribute('cx', vx); dot.setAttribute('cy', vy);
+          dot.setAttribute('r', '3');
+          dot.setAttribute('fill', sp.color);
+          dot.setAttribute('stroke', '#fff');
+          dot.setAttribute('stroke-width', '1');
+          svg.appendChild(dot);
+        }
+
+        // Label near red primary, slightly offset
+        const [lx, ly] = pts[0]; // R vertex
+        const label = document.createElementNS(ns, 'text');
+        label.setAttribute('x', lx + 6); label.setAttribute('y', ly - 4);
+        label.setAttribute('font-family', 'ui-sans-serif, system-ui');
+        label.setAttribute('font-size', '11');
+        label.setAttribute('font-weight', '600');
+        label.setAttribute('fill', sp.color);
+        label.setAttribute('paint-order', 'stroke');
+        label.setAttribute('stroke', 'rgba(255,255,255,0.85)');
+        label.setAttribute('stroke-width', '3');
+        label.textContent = sp.name_en;
+        svg.appendChild(label);
+      }
+    }
+
+    // ── Render coverage list (bottom of widget) ──
+    function renderCoverage() {
+      const lang = document.body.dataset.lang || 'en';
+      const cov = document.getElementById('cs-coverage');
+      cov.innerHTML = '';
+      const I18N_PCT_VISIBLE = lang === 'zh' ? '可见域' : 'of visible';
+      const I18N_PCT_SRGB = lang === 'zh' ? '相对 sRGB' : 'vs sRGB';
+      const sRGB_AREA = triArea(SPACES[0].R, SPACES[0].G, SPACES[0].B);
+      for (const sp of SPACES) {
+        const a = triArea(sp.R, sp.G, sp.B);
+        const pctVisible = (a / VISIBLE_AREA * 100).toFixed(1);
+        const pctSRGB = (a / sRGB_AREA * 100).toFixed(0);
+        const row = document.createElement('div');
+        row.className = 'cov-row';
+        row.innerHTML = `<span class="cov-swatch" style="background:${sp.color}"></span>` +
+          `<span class="cov-name">${lang === 'zh' ? sp.name_zh : sp.name_en}</span> ` +
+          `<span class="cov-pct">${pctVisible}% ${I18N_PCT_VISIBLE} · ${pctSRGB}% ${I18N_PCT_SRGB}</span>`;
+        cov.appendChild(row);
+      }
+    }
+
+    // ── Render the toggle controls ──
+    function renderControls() {
+      const lang = document.body.dataset.lang || 'en';
+      const wrap = document.getElementById('cs-controls');
+      wrap.innerHTML = '';
+      const labelEl = document.createElement('span');
+      labelEl.style.cssText = 'font-size:0.74rem;font-weight:600;color:var(--ph-ink-faint);letter-spacing:0.04em;margin-right:0.25rem;';
+      labelEl.textContent = lang === 'zh' ? '色彩空间' : 'COLOR SPACES';
+      if (lang === 'zh') labelEl.style.letterSpacing = '0';
+      wrap.appendChild(labelEl);
+
+      for (const sp of SPACES) {
+        const lbl = document.createElement('label');
+        lbl.className = 'cs-toggle' + (sp.visible ? ' cs-active' : '');
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = sp.visible;
+        cb.addEventListener('change', () => {
+          sp.visible = cb.checked;
+          lbl.classList.toggle('cs-active', sp.visible);
+          renderOverlay();
+        });
+        const sw = document.createElement('span');
+        sw.className = 'cs-swatch';
+        sw.style.background = sp.color;
+        const name = document.createElement('span');
+        name.textContent = lang === 'zh' ? sp.name_zh : sp.name_en;
+        lbl.appendChild(cb); lbl.appendChild(sw); lbl.appendChild(name);
+        wrap.appendChild(lbl);
+      }
+    }
+
+    function renderAll() {
+      renderControls();
+      renderCanvas();
+      renderOverlay();
+      renderCoverage();
+    }
+
+    // Lazy init when scrolled near
+    let initialized = false;
+    const lazyObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !initialized) {
+          initialized = true;
+          renderAll();
+          lazyObs.disconnect();
+        }
+      });
+    }, { rootMargin: '300px' });
+    lazyObs.observe(widget);
+
+    // Re-render on language change (lang toggle in topbar)
+    const langObs = new MutationObserver(() => {
+      if (initialized) {
+        renderControls();
+        renderCoverage();
+      }
+    });
+    langObs.observe(document.body, { attributes: true, attributeFilter: ['data-lang'] });
   })();
 </script>
 

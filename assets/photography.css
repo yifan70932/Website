@@ -737,6 +737,163 @@ body.photography-page[data-lang="zh"] {
   border-color: var(--ph-cyan);
 }
 
+/* ─── §3 Color space comparator widget ─────────────────────────── */
+.photography-page .colorspace-widget {
+  margin: 1.75rem 0;
+  max-width: 52rem;
+  border: 1px solid var(--ph-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.photography-page .colorspace-caption {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.85rem;
+  color: var(--ph-graphite);
+}
+
+.photography-page[data-lang="zh"] .colorspace-caption { font-family: var(--ph-font-cn); }
+
+.photography-page .colorspace-caption strong {
+  display: block;
+  font-weight: 600;
+  font-family: var(--ph-font-body);
+  font-size: 0.92rem;
+  color: var(--ph-graphite);
+  margin-bottom: 0.2rem;
+}
+
+.photography-page[data-lang="zh"] .colorspace-caption strong { font-family: var(--ph-font-cn); }
+
+.photography-page .colorspace-caption .caption-note {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--ph-ink-faint);
+  font-size: 0.78rem;
+}
+
+.photography-page .colorspace-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.83rem;
+  align-items: center;
+}
+
+.photography-page[data-lang="zh"] .colorspace-controls { font-family: var(--ph-font-cn); }
+
+.photography-page .cs-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+  border: 1px solid var(--ph-rule);
+  background: #fff;
+  transition: background 0.15s, border-color 0.15s;
+  user-select: none;
+}
+
+.photography-page .cs-toggle:hover {
+  background: var(--ph-pale-navy);
+}
+
+.photography-page .cs-toggle input[type="checkbox"] {
+  margin: 0;
+  cursor: pointer;
+  accent-color: currentColor;
+}
+
+.photography-page .cs-toggle .cs-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+
+.photography-page .cs-toggle.cs-active {
+  background: var(--ph-pale-navy);
+  border-color: var(--ph-navy);
+  font-weight: 500;
+}
+
+.photography-page .colorspace-canvas-wrap {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.photography-page .colorspace-canvas-wrap canvas,
+.photography-page .colorspace-canvas-wrap svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.photography-page .colorspace-canvas-wrap .cs-stack {
+  position: relative;
+}
+
+.photography-page .colorspace-canvas-wrap .cs-stack svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.photography-page .colorspace-coverage {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.78rem;
+  color: var(--ph-ink-soft);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.4rem 1rem;
+}
+
+.photography-page[data-lang="zh"] .colorspace-coverage { font-family: var(--ph-font-cn); }
+
+.photography-page .colorspace-coverage .cov-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.photography-page .colorspace-coverage .cov-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.18);
+  flex-shrink: 0;
+}
+
+.photography-page .colorspace-coverage .cov-name {
+  color: var(--ph-graphite);
+  font-weight: 500;
+}
+
+.photography-page .colorspace-coverage .cov-pct {
+  font-family: var(--ph-font-mono);
+  color: var(--ph-ink-faint);
+  font-size: 0.74rem;
+}
+
 /* When the first-batch toggle is active, give it a distinct look */
 .photography-page .koppen-controls .seg button.batch-active {
   background: var(--ph-cyan);
