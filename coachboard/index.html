@@ -13,34 +13,91 @@
         <p class="kicker">Interactive coaching workspace</p>
         <h1>Football Tactic Board</h1>
       </div>
+
       <div class="hero-actions">
         <button id="exportBtn" class="button primary" type="button">Export PNG</button>
         <button id="resetBtn" class="button ghost" type="button">Reset</button>
       </div>
     </header>
+
     <section class="layout" aria-label="Football tactic board application">
       <section class="board-section" aria-label="Pitch board">
         <div id="captureArea" class="capture-area">
           <div class="board-meta">
             <div>
               <h2>Match Plan</h2>
-              <p id="formationLabel">4-3-3</p>
+              <p id="formationLabel">4-3-3 · Full Field</p>
             </div>
             <p id="notePreview">Add a coaching note below.</p>
           </div>
-          <div id="pitch" class="pitch" role="application" aria-label="Interactive football pitch">
+
+          <div id="pitch" class="pitch view-full" role="application" aria-label="Interactive football pitch">
             <canvas id="drawingCanvas"></canvas>
-            <div class="pitch-markings" aria-hidden="true">
-              <div class="halfway"></div><div class="center-circle"></div><div class="center-spot"></div>
-              <div class="penalty-box left"></div><div class="goal-box left"></div><div class="penalty-arc left"></div>
-              <div class="penalty-box right"></div><div class="goal-box right"></div><div class="penalty-arc right"></div>
-              <div class="goal left"></div><div class="goal right"></div>
+
+            <div class="pitch-markings full-markings" aria-hidden="true">
+              <div class="halfway"></div>
+              <div class="center-circle"></div>
+              <div class="center-spot"></div>
+
+              <div class="penalty-box left"></div>
+              <div class="goal-box left"></div>
+              <div class="penalty-arc left"></div>
+              <div class="corner top-left"></div>
+              <div class="corner bottom-left"></div>
+
+              <div class="penalty-box right"></div>
+              <div class="goal-box right"></div>
+              <div class="penalty-arc right"></div>
+              <div class="corner top-right"></div>
+              <div class="corner bottom-right"></div>
+
+              <div class="goal left"></div>
+              <div class="goal right"></div>
             </div>
+
+            <div class="pitch-markings half-markings" aria-hidden="true">
+              <div class="halfway-half"></div>
+              <div class="half-center-circle"></div>
+              <div class="half-penalty-box"></div>
+              <div class="half-goal-box"></div>
+              <div class="half-penalty-arc"></div>
+              <div class="half-goal"></div>
+              <div class="half-corner left"></div>
+              <div class="half-corner right"></div>
+              <div class="half-penalty-spot"></div>
+            </div>
+
+            <div class="pitch-markings corner-markings" aria-hidden="true">
+              <div class="corner-goal-line"></div>
+              <div class="corner-touch-line"></div>
+              <div class="corner-box"></div>
+              <div class="corner-goal-box"></div>
+              <div class="corner-arc-large"></div>
+              <div class="corner-arc-small"></div>
+              <div class="corner-goal-small"></div>
+            </div>
+
             <div id="playersLayer" class="players-layer"></div>
+            <button id="ball" class="ball hidden" type="button" aria-label="Ball"></button>
           </div>
         </div>
       </section>
+
       <aside class="controls" aria-label="Board controls">
+        <section class="control-card">
+          <h3>Field</h3>
+          <div class="field">
+            <label for="fieldViewSelect">View</label>
+            <select id="fieldViewSelect">
+              <option value="full">Full field</option>
+              <option value="attacking-half">Attacking half</option>
+              <option value="left-corner">Left corner</option>
+              <option value="right-corner">Right corner</option>
+              <option value="free-kick-zone">Free kick zone</option>
+            </select>
+          </div>
+        </section>
+
         <section class="control-card">
           <h3>Setup</h3>
           <div class="field">
@@ -50,14 +107,45 @@
               <option value="442">4-4-2</option>
               <option value="4231">4-2-3-1</option>
               <option value="352">3-5-2</option>
+              <option value="corner">Set piece shape</option>
               <option value="custom">Custom</option>
             </select>
           </div>
+
           <div class="two-col">
-            <label class="checkline"><input id="toggleHome" type="checkbox" checked />Home</label>
-            <label class="checkline"><input id="toggleAway" type="checkbox" checked />Away</label>
+            <label class="checkline">
+              <input id="toggleHome" type="checkbox" checked />
+              Home
+            </label>
+            <label class="checkline">
+              <input id="toggleAway" type="checkbox" checked />
+              Away
+            </label>
           </div>
         </section>
+
+        <section class="control-card">
+          <h3>Colors</h3>
+          <div class="color-grid">
+            <label>
+              Home
+              <input id="homeColor" type="color" value="#f7faf8" />
+            </label>
+            <label>
+              Away
+              <input id="awayColor" type="color" value="#17211b" />
+            </label>
+            <label>
+              Drawing
+              <input id="drawingColor" type="color" value="#ffffff" />
+            </label>
+            <label>
+              Ball
+              <input id="ballColor" type="color" value="#ffffff" />
+            </label>
+          </div>
+        </section>
+
         <section class="control-card">
           <h3>Tools</h3>
           <div class="tool-grid" role="group" aria-label="Drawing tools">
@@ -65,22 +153,36 @@
             <button id="arrowTool" class="tool" type="button" data-tool="arrow">Arrow</button>
             <button id="lineTool" class="tool" type="button" data-tool="line">Line</button>
           </div>
+
           <div class="two-col">
             <button id="clearDrawingsBtn" class="button secondary" type="button">Clear</button>
             <button id="flipBoardBtn" class="button secondary" type="button">Flip</button>
           </div>
         </section>
+
+        <section class="control-card">
+          <h3>Ball</h3>
+          <div class="two-col">
+            <button id="showBallBtn" class="button secondary" type="button">Place ball</button>
+            <button id="hideBallBtn" class="button secondary" type="button">Hide ball</button>
+          </div>
+          <p class="hint">The ball is draggable in Move mode. It is useful for corner routines, free kicks, and pressing demonstrations.</p>
+        </section>
+
         <section class="control-card">
           <h3>Coach Note</h3>
           <div class="field">
             <label for="noteInput">Instruction</label>
-            <textarea id="noteInput" rows="4" placeholder="Example: Press wide, recover centrally, release quickly after winning the ball."></textarea>
+            <textarea id="noteInput" rows="4" placeholder="Example: Near-post run, screen the keeper, second-ball recovery outside the box."></textarea>
           </div>
-          <p class="hint">Drag players to reposition. On touch screens, choose Arrow or Line, then drag on the pitch.</p>
+          <p class="hint">
+            Drag players to reposition. On touch screens, choose Arrow or Line, then drag on the pitch.
+          </p>
         </section>
       </aside>
     </section>
   </main>
+
   <script src="script.js"></script>
 </body>
 </html>
