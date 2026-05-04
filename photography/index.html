@@ -15,6 +15,8 @@
   <!-- Leaflet for the §5 Köppen and §6 WHC map widgets -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+  <!-- model-viewer for the §1 SLR 3D model -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 </head>
 
 <body class="photography-page" data-lang="en">
@@ -163,6 +165,29 @@
 
       <p>The single-lens reflex (SLR) solved the parallax problem of both rangefinder and TLR — the photographer sees, through the same lens that takes the image, exactly what will be exposed. The <em>Exakta</em> (Ihagee, 1936) was the first practical 35mm SLR; the <em>Contax S</em> (Zeiss Ikon, 1949) introduced the eye-level pentaprism that became the standard SLR form factor. The <em>Asahi Pentax</em> (1957) added the instant-return mirror; the <em>Nikon F</em> (1959) consolidated the modern SLR system — interchangeable finders, motor drives, a full lens system, and the durability that made it the press camera of the 1960s and 1970s. In medium format the same revolution arrived with the <em>Hasselblad 1600F</em> (1948) and the modular V-system that followed (500C, 1957; 503CW, 1996), used by Adams in Yosemite, by NASA on the Moon, and by virtually every advertising photographer of the 1970s and 80s.</p>
 
+      <figure class="model-figure">
+        <model-viewer
+          src="/photography/asahi_pentax_k1000.glb"
+          alt="Asahi Pentax K1000 — a 35mm SLR camera"
+          camera-controls
+          touch-action="pan-y"
+          loading="lazy"
+          reveal="auto"
+          interaction-prompt="none"
+          shadow-intensity="0.6"
+          exposure="1.0">
+        </model-viewer>
+        <figcaption class="model-caption">
+          <span class="model-hint">
+            Asahi Pentax K1000 (1976) — a representative mechanical 35mm SLR. Drag to rotate; scroll to zoom. The pentaprism above the lens, the focusing screen below it, and the bayonet K-mount are all visible.
+          </span>
+          <span class="model-attribution">
+            "<a href="https://skfb.ly/orIAG" target="_blank" rel="noopener noreferrer">ASAHI PENTAX K1000</a>" by LOOWIE,
+            licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.
+          </span>
+        </figcaption>
+      </figure>
+
       <p>Outside the small and medium formats, the <em>view camera</em> persisted unchanged in its basic geometry from the daguerreotype era. A bellows connects a rear standard (holding ground glass and film) to a front standard (holding the lens), with movements (rise, fall, shift, tilt, swing) on both standards that allow control of perspective and the plane of focus. Sinar, Linhof, Toyo, Cambo, and Wista produced the dominant systems through the late twentieth century; large-format work — Adams, Weston, Sudek, Sally Mann, the Düsseldorf school's earlier work — depends on this geometry, which no smaller format reproduces.</p>
 
       <h3>The lens, considered separately</h3>
@@ -237,6 +262,29 @@
       <p>双镜头反光（TLR）将中画幅带入同一只手中。<em>Rolleiflex</em>（Franke &amp; Heidecke, 1929）使用两支匹配的镜头——一支拍摄、一支经腰平反光罩取景——拍摄 6×6 厘米的 120 卷片。该画幅在可手持的相机上提供了影室级的分辨率，腰平取景让摄影者与被摄者的关系不那么对峙。Diane Arbus 几乎全部的人像作品皆以 Rolleiflex 拍成。</p>
 
       <p>单镜头反光（SLR）解决了旁轴与双反共有的视差问题——摄影者经由<em>同一支</em>拍摄镜头看到将被曝光的画面。<em>Exakta</em>（Ihagee, 1936）是首台实用的 35mm 单反；<em>Contax S</em>（Zeiss Ikon, 1949）引入了眼平五棱镜，成为单反的标准形态。<em>Asahi Pentax</em>（1957）加入了瞬回反光镜；<em>Nikon F</em>（1959）整合了现代单反系统——可换取景器、马达卷片、完整镜头群、以及使其成为 1960–70 年代新闻相机的耐用度。中画幅的同一场革命随<em>Hasselblad 1600F</em>（1948）与其后的模块化 V 系统（500C, 1957；503CW, 1996）到来——亚当斯在优胜美地、NASA 在月球上、几乎所有 1970–80 年代的广告摄影者都用过它。</p>
+
+      <figure class="model-figure">
+        <model-viewer
+          src="/photography/asahi_pentax_k1000.glb"
+          alt="Asahi Pentax K1000 — 一台 35mm 单镜头反光相机"
+          camera-controls
+          touch-action="pan-y"
+          loading="lazy"
+          reveal="auto"
+          interaction-prompt="none"
+          shadow-intensity="0.6"
+          exposure="1.0">
+        </model-viewer>
+        <figcaption class="model-caption">
+          <span class="model-hint">
+            Asahi Pentax K1000（1976）——一台具代表性的机械式 35mm 单反。拖动以旋转，滚轮缩放。镜头上方的五棱镜、其下的对焦屏、以及 K 卡口的卡笋皆清晰可见。
+          </span>
+          <span class="model-attribution">
+            "<a href="https://skfb.ly/orIAG" target="_blank" rel="noopener noreferrer">ASAHI PENTAX K1000</a>" by LOOWIE，
+            根据 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a> 许可使用。
+          </span>
+        </figcaption>
+      </figure>
 
       <p>在小、中画幅之外，<em>大画幅相机</em>（view camera）的基本几何自达盖尔时代起几乎未变。皮腔连接后组（持磨砂玻璃与底片）与前组（持镜头），两组之上的运动（升、降、横移、俯仰、回转）允许对透视与对焦平面的控制。Sinar、Linhof、Toyo、Cambo、Wista 主导了二十世纪后半叶的市场；大画幅工作——亚当斯、Weston、Sudek、Sally Mann、杜塞尔多夫学派早期作品——依赖的正是这套几何，没有更小画幅可以重现。</p>
 

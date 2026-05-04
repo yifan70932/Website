@@ -683,6 +683,60 @@ body.photography-page[data-lang="zh"] {
   border-color: var(--ph-cyan);
 }
 
+/* ─── 3D model viewer (§1 Pentax K1000) ────────────────────────── */
+.photography-page .model-figure {
+  margin: 1.75rem 0;
+  max-width: 52rem;
+  border: 1px solid var(--ph-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.photography-page .model-figure model-viewer {
+  display: block;
+  width: 100%;
+  height: 420px;
+  background: #f7f8f9;
+  --poster-color: transparent;
+}
+
+.photography-page .model-caption {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.78rem;
+  color: var(--ph-ink-soft);
+}
+
+.photography-page[data-lang="zh"] .model-caption { font-family: var(--ph-font-cn); }
+
+.photography-page .model-caption .model-hint {
+  display: block;
+  color: var(--ph-ink-faint);
+  font-size: 0.74rem;
+  margin-bottom: 0.4rem;
+}
+
+.photography-page .model-caption .model-attribution {
+  display: block;
+  color: var(--ph-ink-faint);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.photography-page .model-caption .model-attribution a {
+  color: var(--ph-cyan);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s;
+}
+
+.photography-page .model-caption .model-attribution a:hover {
+  border-color: var(--ph-cyan);
+}
+
 /* When the first-batch toggle is active, give it a distinct look */
 .photography-page .koppen-controls .seg button.batch-active {
   background: var(--ph-cyan);
