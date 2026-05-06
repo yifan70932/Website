@@ -210,6 +210,13 @@
     line-height: 1.85;
     color: var(--ink-soft);
   }
+  /* On screens wide enough, let Lu Xun's quote breathe in a single line —
+     the four parallel clauses gain rhythm when read uninterrupted. */
+  @media (min-width: 1024px) {
+    .epigraph.zh-only {
+      max-width: 820px;
+    }
+  }
 
   /* ============== INDEX ============== */
   .index-section {
