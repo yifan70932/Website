@@ -1,0 +1,220 @@
+/* ============================================================
+   yifanova.com — Hongloumeng wiki page-specific styles
+   ------------------------------------------------------------
+   Loads after tokens.css and base.css. Inherits the standard
+   palette (navy / sapphire / forest) and the article grid.
+   Adds:
+     · poem block (.poem) for 判词、灯谜、葬花吟 etc.
+     · panci table (.panci-table) — three columns, the poem in
+       a serif column rendered slightly larger than body.
+     · genealogy figure styles (.genealogy)
+     · timeline figure tweaks (.versions-timeline)
+   ============================================================ */
+
+/* ─── Poem block ────────────────────────────────────────────
+   Poems appear inline frequently; we want them centred,
+   slightly serif-darker, with vertical breathing room.
+   ─────────────────────────────────────────────────────────── */
+.poem {
+  margin: 1.25rem auto;
+  padding: 0.75rem 1.5rem;
+  text-align: center;
+  font-family: var(--font-cjk), var(--font-body);
+  font-size: 1.02rem;
+  line-height: 1.95;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  background: var(--rule-soft);
+  border-left: 2px solid var(--navy);
+  border-radius: 0 3px 3px 0;
+  max-width: var(--measure);
+}
+
+.poem .line {
+  display: block;
+}
+
+.poem .stanza-break {
+  display: block;
+  height: 0.4rem;
+}
+
+.poem .source {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-ui), var(--font-cjk);
+  font-size: var(--fs-meta);
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+}
+
+/* When a poem sits inside a figure, drop the background so
+   the figure's caption logic takes over. */
+figure > .poem {
+  background: transparent;
+  border-left: none;
+  padding: 0;
+  margin: 0.5rem auto 0.85rem;
+}
+
+/* ─── Panci (judgment) table ────────────────────────────────
+   Three columns: 人物 · 判词 · 释读. The middle column is the
+   poem itself, set slightly larger; the other two are UI-font.
+   ─────────────────────────────────────────────────────────── */
+.panci-table {
+  font-family: var(--font-cjk), var(--font-body);
+  font-size: 0.95rem;
+}
+
+.panci-table th {
+  font-family: var(--font-ui), var(--font-cjk);
+  font-size: var(--fs-small);
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+.panci-table td.who {
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--navy);
+  vertical-align: top;
+}
+
+.panci-table td.poem-cell {
+  font-family: var(--font-cjk), var(--font-body);
+  letter-spacing: 0.05em;
+  line-height: 1.85;
+  color: var(--ink);
+  white-space: pre-line;
+}
+
+.panci-table td.gloss {
+  font-family: var(--font-cjk), var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+/* ─── Versions timeline figure ──────────────────────────────
+   SVG node + rule styling for §3 timeline. Most of this is set
+   inline on the SVG, but a few base styles live here.
+   ─────────────────────────────────────────────────────────── */
+.versions-timeline {
+  margin: 2.5rem 0;
+}
+
+.versions-timeline svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ─── Genealogy figure ──────────────────────────────────────
+   Used in §11 for the four families' lineage tree.
+   ─────────────────────────────────────────────────────────── */
+.genealogy {
+  margin: 2.5rem 0;
+}
+
+.genealogy svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.genealogy .gen-label {
+  font-family: var(--font-cjk), var(--font-body);
+  font-size: 11.5px;
+  fill: var(--ink);
+}
+
+.genealogy .gen-soft {
+  font-family: var(--font-ui), var(--font-cjk);
+  font-size: 9px;
+  fill: var(--ink-faint);
+}
+
+.genealogy .gen-line {
+  stroke: var(--ink-soft);
+  stroke-width: 0.8;
+  fill: none;
+}
+
+.genealogy .gen-marriage {
+  stroke: var(--forest);
+  stroke-width: 0.8;
+  stroke-dasharray: 3 2;
+  fill: none;
+}
+
+/* ─── Sources block (per-section bibliography) ──────────────
+   A pale-tinted block at the end of dense sections, listing
+   the principal references just for that section.
+   ─────────────────────────────────────────────────────────── */
+.sources {
+  font-family: var(--font-ui), var(--font-cjk);
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  background: var(--rule-soft);
+  border-left: 2px solid var(--forest);
+  padding: 1rem 1.25rem;
+  margin: 1.75rem 0 0;
+  line-height: 1.7;
+  max-width: var(--measure);
+  border-radius: 0 3px 3px 0;
+}
+
+html[lang^="zh"] .sources {
+  font-family: var(--font-cjk), var(--font-ui);
+}
+
+.sources .sources-label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--forest);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+html[lang^="zh"] .sources .sources-label {
+  font-family: var(--font-cjk), var(--font-ui);
+  text-transform: none;
+  letter-spacing: 0.06em;
+}
+
+.sources p {
+  margin: 0 0 0.5rem;
+}
+
+.sources p:last-child { margin-bottom: 0; }
+
+/* ─── Lede paragraph ────────────────────────────────────────
+   The opening paragraph of each major section.
+   ─────────────────────────────────────────────────────────── */
+.lede {
+  font-size: 1.04rem;
+  border-left: 2px solid var(--rule);
+  padding-left: 1rem;
+  color: var(--ink-soft);
+  margin: 0 0 1.5rem;
+  max-width: var(--measure);
+}
+
+html[lang^="zh"] .lede {
+  line-height: 1.85;
+}
+
+/* ─── Inline annotations ────────────────────────────────────
+   Small parenthetical asides for dates, alternative names,
+   pinyin, etc. Stays in the text column.
+   ─────────────────────────────────────────────────────────── */
+.aside-note {
+  font-family: var(--font-ui), var(--font-cjk);
+  font-size: 0.86em;
+  color: var(--ink-faint);
+}
+
+html[lang^="zh"] .aside-note {
+  font-family: var(--font-cjk), var(--font-ui);
+}
