@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toward an Ontology of Skiing — yifanova</title>
+<meta name="description" content="A working notebook on alpine skiing — history, technique, equipment, philosophy, physiology, competition, and injury epidemiology.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../assets/ski.css">
+
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+</head>
+
+<body class="ski-page" data-lang="en">
+
+<!-- ============ TOPBAR ============ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">§</span>
+      <a href="/">yifanova</a>
+      <span style="color: var(--ski-ink-faded); margin: 0 0.4rem;">/</span>
+      <span data-lang-content="en">Toward an Ontology of Skiing</span>
+      <span data-lang-content="zh">形而上的滑雪</span>
+    </div>
+    <div class="lang-toggle" role="group" aria-label="Language toggle">
+      <button data-set-lang="en" class="active" aria-pressed="true">EN</button>
+      <button data-set-lang="zh" aria-pressed="false">中</button>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+<!-- ============ STICKY TOC ============ -->
+<nav class="toc" aria-label="Table of contents">
+  <div class="toc-label">
+    <span data-lang-content="en">Contents</span>
+    <span data-lang-content="zh">目录</span>
+  </div>
+  <ol>
+    <li><span class="toc-num">§</span><a href="#preface"><span data-lang-content="en">Preface</span><span data-lang-content="zh">序</span></a></li>
+    <li><span class="toc-num">I.</span><a href="#history"><span data-lang-content="en">History: from Ullr to Sidecut</span><span data-lang-content="zh">历史：从 Ullr 到 Sidecut</span></a></li>
+    <li><span class="toc-num">II.</span><a href="#building-the-skier"><span data-lang-content="en">How the skier was tempered</span><span data-lang-content="zh">滑雪者是怎样炼成的</span></a></li>
+    <li><span class="toc-num">III.</span><a href="#carving"><span data-lang-content="en">"Carving"</span><span data-lang-content="zh">"Carving"</span></a></li>
+    <li><span class="toc-num">IV.</span><a href="#leisure"><span data-lang-content="en">Serious Leisure</span><span data-lang-content="zh">严肃休闲</span></a></li>
+    <li><span class="toc-num">V.</span><a href="#good"><span data-lang-content="en">"Good skiing"</span><span data-lang-content="zh">"好的滑雪"</span></a></li>
+    <li><span class="toc-num">VI.</span><a href="#research"><span data-lang-content="en">Forty-seven seasons</span><span data-lang-content="zh">四十七个雪季</span></a></li>
+    <li><span class="toc-num">VII.</span><a href="#racing"><span data-lang-content="en">Racing: Celerius, Accuratius, Liberius</span><span data-lang-content="zh">竞速：Celerius, Accuratius, Liberius</span></a></li>
+    <li><span class="toc-num">VIII.</span><a href="#body-on-snow"><span data-lang-content="en">From Eccentric Contraction to ACL Injury</span><span data-lang-content="zh">从离心收缩到 ACL 损伤</span></a></li>
+    <li><span class="toc-num">IX.</span><a href="#material-ground"><span data-lang-content="en">On Mountain, Snow, and Equipment</span><span data-lang-content="zh">论山、雪、和装备</span></a></li>
+    <li><span class="toc-num">X.</span><a href="#refs"><span data-lang-content="en">References</span><span data-lang-content="zh">参考</span></a></li>
+  </ol>
+</nav>
+
+<!-- ============ MAIN ============ -->
+<div class="main">
+
+<!-- HERO -->
+<header class="hero">
+  <h1>
+    <span data-lang-content="en">Toward an Ontology of Skiing</span>
+    <span data-lang-content="zh">形而上的滑雪</span>
+  </h1>
+  <p class="subtitle">
+    <span data-lang-content="en">Notes across history, biomechanics, philosophy, equipment, and the medical literature.</span>
+    <span data-lang-content="zh">跨越历史、生物力学、哲学、装备与医学文献的笔记。</span>
+  </p>
+</header>
+
+
+
+<!-- ============ § PREFACE ============ -->
+<section id="preface">
+
+<div data-lang-content="en">
+<span class="section-num">§ Preface</span>
+<h2>Frame and scope</h2>
+
+<p class="lede">A page of notes that began as a hobbyist's interest in alpine skiing and grew into a set of notes spanning the history of the sport, its biomechanics and exercise physiology, its philosophical structure, its competitive regulation, and its medical epidemiology. The unifying thread is not "how to ski" but the fact that alpine skiing turns out to be a productive lens onto a surprising number of distinct disciplines.</p>
+
+<p>Sections are at varying levels of completeness. Citations follow numbered references in §VI. Where the page takes a position rather than reports a fact, the relevant paragraph is marked with <span class="flag">opinion</span>.</p>
+</div>
+
+<div data-lang-content="zh">
+<span class="section-num">§ 序</span>
+<h2>框架与范围</h2>
+
+<p class="lede">这是一份笔记，最初源于对高山滑雪的兴趣，逐渐扩展为一份跨越运动史、生物力学与运动生理学、哲学结构、竞赛规制及医学流行病学的备忘录。统摄它的并非"如何滑雪"，而是这样一个事实：高山滑雪是观察相当数量不同学科的一面富有意趣的透镜。</p>
+
+<p>各章节成熟度不一。引用统一编号，列于第十四章。凡为立场而非事实之处，相关段落以 <span class="flag">个人观点</span> 标注。</p>
+</div>
+
+</section>
+
+<!-- ============ MAPS ============ -->
+<!-- Stand-alone section. Two interactive maps (US, China) as independent
+     artifacts. Placed after Preface (frame & scope) so they sit logically
+     beside the framing rather than in front of it. -->
+<section id="maps" style="margin: 0 0 2.5rem; padding: 0 0 1.5rem; border-bottom: 1px solid var(--ski-rule);">
+
+<div data-lang-content="en">
+<div style="font-family: var(--ski-font-ui); font-size: 0.72rem; font-variant: small-caps; letter-spacing: 0.08em; color: var(--ski-ink-faint); margin-bottom: 0.4rem;">Skiing as a geographer</div>
+<h3 style="margin: 0 0 1rem; font-size: 1.05rem; font-weight: 600; color: var(--ski-navy); letter-spacing: -0.005em;">Interactive maps</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.85rem;">
+
+  <a href="map.html" style="display: block; padding: 0.85rem 1rem; border: 1px solid var(--ski-rule); border-radius: 4px; text-decoration: none; color: inherit; transition: border-color 0.15s, background 0.15s;" onmouseover="this.style.borderColor='var(--ski-navy)'; this.style.background='var(--ski-paper-deep)';" onmouseout="this.style.borderColor='var(--ski-rule)'; this.style.background='transparent';">
+    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.25rem;">
+      <span style="display: inline-block; width: 0.6rem; height: 0.6rem; background: #a8323e; border-radius: 50%;"></span>
+      <span style="font-family: var(--ski-font-body); font-size: 0.98rem; font-weight: 600; color: var(--ski-navy);">U.S. ski resorts</span>
+    </div>
+    <p style="margin: 0; font-size: 0.83rem; color: var(--ski-ink-soft); line-height: 1.4;">217 outdoor resorts, drive-time isochrones, catchment population. <span style="color: var(--ski-sapphire);">→</span></p>
+  </a>
+
+  <a href="map_cn.html" style="display: block; padding: 0.85rem 1rem; border: 1px solid var(--ski-rule); border-radius: 4px; text-decoration: none; color: inherit; transition: border-color 0.15s, background 0.15s;" onmouseover="this.style.borderColor='var(--ski-navy)'; this.style.background='var(--ski-paper-deep)';" onmouseout="this.style.borderColor='var(--ski-rule)'; this.style.background='transparent';">
+    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.25rem;">
+      <span style="display: inline-block; width: 0.6rem; height: 0.6rem; background: #0a3d62; border-radius: 50%;"></span>
+      <span style="font-family: var(--ski-font-body); font-size: 0.98rem; font-weight: 600; color: var(--ski-navy);">China ski resorts</span>
+    </div>
+    <p style="margin: 0; font-size: 0.83rem; color: var(--ski-ink-soft); line-height: 1.4;">~94 outdoor resorts; all 26 national-tier resorts. <span style="color: var(--ski-sapphire);">→</span></p>
+  </a>
+
+</div>
+</div>
+
+<div data-lang-content="zh">
+<div style="font-family: var(--ski-font-ui); font-size: 0.72rem; font-variant: small-caps; letter-spacing: 0.08em; color: var(--ski-ink-faint); margin-bottom: 0.4rem;">滑雪的地理学者</div>
+<h3 style="margin: 0 0 1rem; font-size: 1.05rem; font-weight: 600; color: var(--ski-navy); letter-spacing: -0.005em; font-family: var(--ski-font-cn);">交互地图</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.85rem;">
+
+  <a href="map.html" style="display: block; padding: 0.85rem 1rem; border: 1px solid var(--ski-rule); border-radius: 4px; text-decoration: none; color: inherit; transition: border-color 0.15s, background 0.15s;" onmouseover="this.style.borderColor='var(--ski-navy)'; this.style.background='var(--ski-paper-deep)';" onmouseout="this.style.borderColor='var(--ski-rule)'; this.style.background='transparent';">
+    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.25rem;">
+      <span style="display: inline-block; width: 0.6rem; height: 0.6rem; background: #a8323e; border-radius: 50%;"></span>
+      <span style="font-family: var(--ski-font-cn); font-size: 0.98rem; font-weight: 600; color: var(--ski-navy);">美国雪场</span>
+    </div>
+    <p style="margin: 0; font-size: 0.85rem; color: var(--ski-ink-soft); line-height: 1.45;">217 个户外雪场、车程等时圈、人口腹地。<span style="color: var(--ski-sapphire);">→</span></p>
+  </a>
+
+  <a href="map_cn.html" style="display: block; padding: 0.85rem 1rem; border: 1px solid var(--ski-rule); border-radius: 4px; text-decoration: none; color: inherit; transition: border-color 0.15s, background 0.15s;" onmouseover="this.style.borderColor='var(--ski-navy)'; this.style.background='var(--ski-paper-deep)';" onmouseout="this.style.borderColor='var(--ski-rule)'; this.style.background='transparent';">
+    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.25rem;">
+      <span style="display: inline-block; width: 0.6rem; height: 0.6rem; background: #0a3d62; border-radius: 50%;"></span>
+      <span style="font-family: var(--ski-font-cn); font-size: 0.98rem; font-weight: 600; color: var(--ski-navy);">中国雪场</span>
+    </div>
+    <p style="margin: 0; font-size: 0.85rem; color: var(--ski-ink-soft); line-height: 1.45;">~94 个户外雪场，含全部 26 家国家级度假地。<span style="color: var(--ski-sapphire);">→</span></p>
+  </a>
+
+</div>
+</div>
+
+</section>
+
+
+
+
+<!-- ============ I. HISTORY: FROM ULLR TO SIDECUT ============ -->
+<section id="history">
+
+<div data-lang-content="en">
+<span class="section-num">I.</span>
+<h2>History: from Ullr to Sidecut</h2>
+
+<p>Skiing as a means of overland travel in deep snow is documented archaeologically from at least 6,000 BCE in the lake regions of present-day Russia and Scandinavia. The transition from utility skiing to skiing as sport, and from Nordic technique to specifically <em>alpine</em> technique, occurred in two distinct geographic phases.</p>
+
+<h3>Norwegian foundation, 19th century</h3>
+
+<p>The sport's first major figure is <span class="term">Sondre Norheim</span> (1825–1897) of Morgedal in the Telemark region of Norway, generally credited with introducing the curved sidecut, a heel-strap binding made of twisted birch root, and the two named turns that anchor early ski technique: the <em>Telemark turn</em> (a kneeling, lunging steered turn made possible by the new bindings) and the <em>Christiania turn</em> (an early form of the parallel turn, named for the city now called Oslo). Norheim's victory at the first national skiing competition in Christiania in 1868 is conventionally taken as the moment Nordic ski sport entered public visibility.<sup class="ref"><a href="#ref-norheim">1</a></sup></p>
+
+<aside class="sidenote">The word <em>slalom</em> is Telemark dialect, from <em>slalåm</em> (literally "slope-track"). Early slalom competitions were judged on style rather than time.</aside>
+
+<h3>Alpine divergence, late 19th to early 20th century</h3>
+
+<p>Norwegian technique — upright stance, single long pole, free-heel binding — was poorly suited to the steeper gradients of the Alps. The decisive break came from the Austrian <span class="term">Mathias Zdarsky</span> (1856–1940), working in Lilienfeld, Lower Austria, from approximately 1890. Zdarsky developed a low forward stance, a metal binding offering greater lateral control, and a stem-based turning technique. His 1897 manual <cite>Lilienfelder Skilauf-Technik</cite> is regarded as the first systematic treatise on alpine ski instruction. The first alpine ski race, organized by Zdarsky on the Muckenkogel in March 1905, is considered the prototype of modern slalom.<sup class="ref"><a href="#ref-zdarsky">2</a></sup></p>
+
+<p>The Austrian instructor <span class="term">Hannes Schneider</span> (1890–1955), based in St. Anton am Arlberg, codified Zdarsky's developments into the <em>Arlberg technique</em> — a structured progression from snowplow through stem christie to parallel — which became the dominant alpine teaching method internationally and remains the recognizable structural basis of beginner-to-intermediate progressions taught today.</p>
+
+<h3>Institutionalization, 20th century</h3>
+
+<p>The <span class="term">Fédération Internationale de Ski</span> (FIS) was founded in 1924, the same year skiing entered the Olympic program at the inaugural Winter Games in Chamonix (Nordic events only). Alpine skiing — initially a downhill-and-slalom combined — was admitted at the 1936 Garmisch-Partenkirchen Games. The first FIS Alpine World Ski Championships were held in 1931. The FIS Alpine Ski World Cup tour was launched in the 1966–67 season and remains the sport's principal annual competition.<sup class="ref"><a href="#ref-fis-history">3</a></sup></p>
+
+<aside class="sidenote">The deep-sidecut "shaped" or "carving" ski, introduced commercially in the mid-1990s and standard in racing by the early 2000s, represents the most consequential equipment change since steel edges. Its effects on technique and on injury patterns are referenced in §IX and §VIII.</aside>
+
+<h3>The post-war French–Austrian technique split</h3>
+
+<p>After the Second World War, alpine ski instruction polarized between two national systems whose technical claims and pedagogical export structures shaped how the rest of the world learned to ski for the following half-century.</p>
+
+<p>The <span class="term">French method</span> was articulated by <span class="term">Émile Allais</span> from 1937 and consolidated in his 1947 manual <cite>Ski Français</cite>. Allais sought to bypass the stem christie altogether, on the argument that it was too slow for short-radius parallel turns on the steep, often heavy snow of the French Alps. The signature French maneuver was the <em>ruade</em> ("horse-kick"): the skier, from a tall stance, retracted the feet upward to lift the ski tails clear of the snow at turn initiation, allowing the skis to be rotated as a unit and re-loaded immediately. The French system also introduced <em>blocage</em> — a hip-driven rotation transmitted to the skis — and, later, <em>avalement</em> (literally "swallowing"): an active leg flexion to absorb the pressure and terrain changes typical of mogul skiing.<sup class="ref"><a href="#ref-allais">39</a></sup></p>
+
+<p>The <span class="term">Austrian method</span> emerged a decade later under <span class="term">Stefan Kruckenhauser</span> (1905–1988), director of the Bundessportheim in St. Christoph am Arlberg from 1934 onward. Kruckenhauser studied frame-by-frame footage of Austrian racers and observed that they did not rotate the upper body <em>into</em> the turn, as the prevailing rotation theory required, but instead pre-turned the shoulders <em>away</em> from the new direction. The technique was published as <em>counter-rotation</em> and crystallized in the 1955 demonstration of <span class="term">Wedeln</span> ("tail-wagging") — a sequence of short-radius, upper-body-quiet, lower-body-driven parallel turns. The first Austrian Ski Curriculum (1956) was translated into many languages and became, for nearly two decades, the de facto international standard.<sup class="ref"><a href="#ref-kruckenhauser">40</a></sup></p>
+
+<aside class="sidenote">Both systems were partly nationalist projects supported by their respective states. Postwar Austria, in particular, exported very large numbers of certified instructors to the rapidly growing North American resort industry — the principal mechanism by which the Austrian system became the structural basis of present-day American and Canadian alpine teaching.</aside>
+
+<p>The synthesis came from outside the ski schools. <span class="term">Georges Joubert</span>, working at Grenoble in the 1960s and 70s, used high-speed cinematography of World Cup racers to demonstrate that the elite skiers of the period did not in fact ski in either the French or Austrian textbook style; in particular, the legs operated <em>independently</em> rather than as a unit, and counter-rotation appeared as a side effect of the lower body's separate rotation rather than as a primary movement. Joubert's <cite>How to Ski the New French Way</cite> (1970, with Jean Vuarnet) and the related body of writing decisively shifted the technical conversation away from national-style debates toward biomechanically grounded analysis. Modern alpine teaching descends, structurally, from the Austrian system — the wedge–stem–parallel progression and the counter-rotation principle — but with the corrections that Joubert's work supplied and that the carving-ski revolution of the 1990s required.</p>
+
+<h3>Modern instruction systems and Interski</h3>
+
+<p>Today, alpine ski instruction is organized through national professional associations, most of which converge under the umbrella of <span class="term">Interski</span>, the international congress of snow-sport teaching nations that meets every four years. Interski currently brings together about thirty-one member nations and three international specialized organizations — the International Ski Instructors Association (<span class="term">ISIA</span>), the International Federation of Snowsport Instructors (IVSI), and the International Association of Education in Science and Snowsports (IAESS). Each member nation is represented by a single recognized teaching body, which sends a demonstration team to the congress to present its current technique and pedagogy.<sup class="ref"><a href="#ref-interski">41</a></sup></p>
+
+<p>Five national systems carry disproportionate weight in the present-day landscape:</p>
+
+<ul>
+  <li><strong>Austria</strong> — represented by Snowsport Austria (Österreichischer Skischulverband), descending directly from Kruckenhauser's Bundessportheim. Austrian credentials remain widely recognized across Alpine Europe and supply a large share of recreational instruction in countries with German-speaking clientele.</li>
+  <li><strong>France</strong> — represented by the École du ski français (<span class="term">ESF</span>) for resort instruction, with the Ecole Nationale de Ski et d'Alpinisme (ENSA) as the elite training institution. The French system is structurally state-controlled: legal instruction in France generally requires the French <em>Diplôme</em> (Carte Professionnelle), which makes it among the most demanding national entry points and a partial exception to the international convertibility of credentials.</li>
+  <li><strong>Switzerland</strong> — represented by Swiss Snowsports, one of the largest active-instructor bodies in Europe.</li>
+  <li><strong>United States</strong> — represented by the Professional Ski Instructors of America / American Association of Snowboard Instructors (<span class="term">PSIA-AASI</span>), founded in 1961 by the unification of regional associations. PSIA articulates technique through the Skills Concept and Five Fundamentals (§II) and operates a four-level certification structure (Levels 1–3 plus an apex educational credential). The system bears the historical imprint of postwar Austrian instructor immigration to the United States.</li>
+  <li><strong>Canada</strong> — represented by the Canadian Ski Instructors' Alliance (<span class="term">CSIA</span>), with a similar four-level structure to PSIA but a stronger weighting toward skiing performance relative to teaching theory in the higher levels.</li>
+</ul>
+
+<p>Other prominent national bodies include the British Association of Snowsport Instructors (BASI), the New Zealand Ski Instructors Alliance (NZSIA), the Australian Professional Snowsport Instructors (APSI), and the Italian Maestri di Sci (AMSI). The functional differences between systems are now smaller than the institutional rivalries; certifications above Level 1 are broadly mutually recognized through ISIA's framework, with the major exception that France maintains a separate, more demanding national entry standard. Stylistic differences persist — Austrian, Japanese, and Korean demonstration teams remain visually distinguishable at Interski — but the underlying technical content has converged considerably since Joubert.<sup class="ref"><a href="#ref-isia-equivalence">42</a></sup></p>
+
+</div>
+
+<div data-lang-content="zh">
+<span class="section-num">I.</span>
+<h2>历史：从 Ullr 到 Sidecut</h2>
+
+<p>用滑雪作为深雪中的越野工具，考古上至少可追溯至公元前 6000 年的当今俄罗斯与斯堪的纳维亚湖区。从作为生活工具的滑雪转变为作为运动的滑雪，再从北欧技术分化出特定的<em>高山</em>技术，发生在地理上明确的两个阶段。</p>
+
+<h3>挪威基础，19 世纪</h3>
+
+<p>这项运动的第一位关键人物是挪威泰勒马克地区莫格达尔的 <span class="term">Sondre Norheim</span>（1825–1897）。一般认为他引入了带侧切的滑板、用桦木根扭制而成的脚跟带固定器，以及两种命名转弯——<em>Telemark turn（泰勒马克式转弯）</em>，一种屈膝前弓、由新固定器使之可能的引导转弯；<em>Christiania turn（克里斯蒂安尼亚式转弯）</em>，平行转弯的早期形式，得名于今奥斯陆。Norheim 在 1868 年克里斯蒂安尼亚举行的首届全国滑雪比赛上夺冠，通常被视为北欧滑雪运动进入公共视野的时刻。<sup class="ref"><a href="#ref-norheim">1</a></sup></p>
+
+<aside class="sidenote"><em>Slalom</em>（回转）一词出自泰勒马克方言 <em>slalåm</em>（字面意为"斜坡-轨道"）。早期回转比赛以风格而非时间评判。</aside>
+
+<h3>高山分化，19 世纪末至 20 世纪初</h3>
+
+<p>北欧技术——直立姿态、单根长杖、自由足跟——并不适合阿尔卑斯更陡的坡度。关键转折来自奥地利人 <span class="term">Mathias Zdarsky</span>（1856–1940），约 1890 年起在下奥地利州 Lilienfeld 工作。Zdarsky 发展出低位前倾站姿、提供更大侧向控制的金属固定器，以及基于楔形（stem）的转弯技术。他 1897 年的教材《Lilienfelder Skilauf-Technik》被视为高山滑雪教学的首份系统性论著。Zdarsky 于 1905 年 3 月在 Muckenkogel 组织的首次高山滑雪比赛被视为现代回转的原型。<sup class="ref"><a href="#ref-zdarsky">2</a></sup></p>
+
+<p>奥地利教练 <span class="term">Hannes Schneider</span>（1890–1955）以阿尔贝格地区圣安东为基地，把 Zdarsky 的发展系统化为<em>Arlberg 技术</em>——从犁式（snowplow）经半犁式（stem christie）再到平行式的结构化进阶——成为国际高山教学的主导方法，至今仍是绝大多数初级到中级教学进阶的可识别骨架。</p>
+
+<h3>制度化，20 世纪</h3>
+
+<p>国际滑雪联合会（<span class="term">FIS</span>）成立于 1924 年，同年滑雪在法国 Chamonix 首届冬奥会上进入奥运项目（最初仅有北欧项目）。高山滑雪——最初为速降与回转的合项——于 1936 年加米施-帕滕基兴冬奥会被纳入。首届 FIS 高山滑雪世锦赛于 1931 年举行。FIS 高山滑雪世界杯自 1966–67 赛季启动，至今仍是该项运动每年最主要的赛事。<sup class="ref"><a href="#ref-fis-history">3</a></sup></p>
+
+<aside class="sidenote">深侧切的"shaped"或"carving"滑板于 1990 年代中期商业化推出，2000 年代初成为竞赛标配。这是钢质板刃以来最具影响的装备变革。其对技术与伤病模式的影响在 §IX 与 §VIII 中讨论。</aside>
+
+<h3>战后法国—奥地利的技术分歧</h3>
+
+<p>第二次世界大战之后，高山滑雪教学在两套国家级体系之间形成了对峙。这两套体系各自的技术主张与教学输出结构，在此后半个世纪里塑造了世界各地学习滑雪的方式。</p>
+
+<p><span class="term">法国体系</span>由 <span class="term">Émile Allais</span> 自 1937 年起明确表述，并以其 1947 年的教材《Ski Français》为系统化的总结。Allais 主张完全跳过半犁式（stem christie），其论据是这种步骤在法国阿尔卑斯陡坡与常见的湿重雪况下，对短半径平行转弯而言节奏过缓。法国体系的标志性动作是 <em>ruade</em>（"踢马"）：滑雪者从高位站姿出发，在转弯起始时上提双足以使板尾离开雪面，从而使双板可作为整体被旋转、并立即重新加载。法国体系还引入了 <em>blocage</em>——由髋部驱动并传递至滑板的旋转——以及后来的 <em>avalement</em>（字面意为"吞咽"）：通过双腿主动屈曲来吸收雪包地形所产生的压力与起伏。<sup class="ref"><a href="#ref-allais">39</a></sup></p>
+
+<p><span class="term">奥地利体系</span>在十年之后由 <span class="term">Stefan Kruckenhauser</span>（1905–1988）确立。Kruckenhauser 自 1934 年起任 St. Christoph am Arlberg 的 Bundessportheim 主任，他通过逐帧分析奥地利选手的影像观察到：选手并不像当时主流的"旋转理论"所要求的那样、把上半身朝转弯方向旋转，反而把肩部预先转向<em>背离</em>新方向。这一技术被表述为<em>反旋转（counter-rotation）</em>，并在 1955 年随 <span class="term">Wedeln</span>（"摆尾")的演示而成形——一种短半径、上身静止、由下肢驱动的连续平行转弯。1956 年首部《奥地利滑雪教学大纲》被译为多种语言，在近二十年里成为事实上的国际标准。<sup class="ref"><a href="#ref-kruckenhauser">40</a></sup></p>
+
+<aside class="sidenote">两套体系都在一定程度上是国家主义工程，分别得到所在国家的支持。战后奥地利尤其向当时正在快速扩张的北美雪场行业大量输出认证教练——这正是奥地利体系成为今日美国与加拿大高山教学结构性基础的主要途径。</aside>
+
+<p>真正综合两者的工作来自滑雪学校之外。<span class="term">Georges Joubert</span> 于 1960、70 年代任职于格勒诺布尔大学，他用世界杯选手的高速摄影证明：当时顶级选手实际上既不按法国体系也不按奥地利体系的教科书风格滑雪——尤其，双腿是<em>独立</em>工作而非作为整体；反旋转更多是下肢独立旋转的副产品，而非主动的核心动作。Joubert 与 Jean Vuarnet 合著的 1970 年《How to Ski the New French Way》及相关著作，决定性地把技术讨论从国家风格之争转向以生物力学为基础的分析。今日的高山教学在结构上承袭奥地利体系——犁式—半犁式—平行式的进阶以及反旋转原则——但带上了 Joubert 的工作所提供的修正，以及 1990 年代 carving 板革命所要求的进一步调整。</p>
+
+<h3>当代教学体系与 Interski</h3>
+
+<p>今日的高山滑雪教学由各国职业协会组织，多数协会汇聚在 <span class="term">Interski</span> 框架之下——这是一个每四年召开一次的国际雪上运动教学大会。Interski 现有约三十一个成员国，加上三个专门性国际组织：国际滑雪教练协会（<span class="term">ISIA</span>）、国际雪上运动教练联合会（IVSI）、以及雪上运动教育与科学国际协会（IAESS）。每个成员国仅由一个被认可的教学组织代表，并派遣示范队赴大会展示该国当前的技术与教学法。<sup class="ref"><a href="#ref-interski">41</a></sup></p>
+
+<p>当代格局中，五个国家体系具有不成比例的影响力：</p>
+
+<ul>
+  <li><strong>奥地利</strong>——由 Snowsport Austria（Österreichischer Skischulverband）代表，直接承袭 Kruckenhauser 在 St. Christoph 的 Bundessportheim 谱系。奥地利资质在阿尔卑斯欧洲被广泛承认，并向德语客源国家供应大量休闲教练。</li>
+  <li><strong>法国</strong>——雪场教学由 École du ski français（<span class="term">ESF</span>）代表，精英培训由国家滑雪与高山学院（ENSA）执行。法国体系在结构上由国家管控：在法国合法授课原则上要求持有法国 <em>Diplôme</em>（Carte Professionnelle）。这使其成为最严格的入门门槛之一，也使法国成为国际资质互认体系中的一个部分例外。</li>
+  <li><strong>瑞士</strong>——由 Swiss Snowsports 代表，是欧洲在职教练人数最多的协会之一。</li>
+  <li><strong>美国</strong>——由 Professional Ski Instructors of America / American Association of Snowboard Instructors（<span class="term">PSIA-AASI</span>）代表，1961 年由若干地区协会合并而成。PSIA 通过 Skills Concept 与 Five Fundamentals（§II）来表达技术，运行一套四级认证结构（Level 1–3 加上一个顶级教育资质）。这一体系带有战后奥地利教练向美国移民的历史印记。</li>
+  <li><strong>加拿大</strong>——由加拿大滑雪教练联盟（<span class="term">CSIA</span>）代表，结构与 PSIA 类似（同为四级），但在高级别中相对更看重滑行表现而非教学理论。</li>
+</ul>
+
+<p>其他重要的国家级协会包括：英国雪上教练协会（BASI）、新西兰滑雪教练联盟（NZSIA）、澳洲职业雪上运动教练协会（APSI）、意大利滑雪教师协会（AMSI）。各体系之间的功能差别如今已小于其机构间的竞争惯性；Level 1 以上的资质在 ISIA 框架下基本可互认，主要的例外是法国仍维持其更严格的国家级入门标准。各国之间的风格差异仍然存在——奥地利、日本、韩国的示范队在 Interski 上至今视觉可辨——但底层技术内容自 Joubert 以来已大幅趋同。<sup class="ref"><a href="#ref-isia-equivalence">42</a></sup></p>
+
+</div>
+
+</section>
+
+
+<!-- ============ II. HOW THE SKIER WAS TEMPERED ============ -->
+<section id="building-the-skier">
+
+<div data-lang-content="en">
+<span class="section-num">II.</span>
+<h2>How the skier was tempered</h2>
+
+<p class="lede">A skier is built up in three layers, and each layer is the precondition for the next. The first layer is the technical fundamentals — the small set of biomechanical primitives without which no advanced movement is possible. The second layer is the structure of skill progression — the dependency network through which a beginner becomes an expert, and along which any individual skier can locate themselves. The third layer is the contemporary phenomenon of <em>quantification</em> — the inertial sensors and ML pipelines that turn the previously intuitive into a stream of measurable signals. This section moves through all three.</p>
+
+<p>Read in this order, the chapter is the answer to a single question: <em>how does one become a skier?</em> The first part — the Five Fundamentals — answers it in the language of biomechanics. The second part — the structure of skill progression — answers it in the language of pedagogy. The third part — CARV and the quantification of skiing — answers it in the language that the technology era has begun to impose on every recreational sport. None of the three is sufficient on its own, and none replaces the others; together they describe the full apparatus of becoming.</p>
+
+<h3>The Five Fundamentals</h3>
+
+<p>The Professional Ski Instructors of America (PSIA) maintain a five-element articulation of what its National Standards consider competent alpine technique. The Five Fundamentals are deliberately abstract — neither tied to a specific maneuver nor to a specific skill level — so that the same five sentences are intended to describe both a beginner wedge turn and a World Cup giant slalom run, differing only in the magnitude and blend of the fundamentals applied.</p>
+
+<p>The fundamentals descend from the older <span class="term">Skills Concept</span>, introduced by the U.S. Demonstration Team at <span class="term">Interski 1975</span> in Štrbské Pleso, Czechoslovakia. The Skills Concept inventories the movements affecting a ski's behavior into three categories — rotary, edging, pressure control — with balance treated as substrate. The Five Fundamentals add a normative layer to that descriptive inventory.<sup class="ref"><a href="#ref-psia">4</a></sup></p>
+
+<aside class="sidenote">PSIA-AASI was founded in 1961 by the unification of regional associations. Its current Skills Concept formulation is shared in form, if not in detail, by most other national alpine teaching bodies.</aside>
+
+<p>Each fundamental below is given first in PSIA's official wording, then in plain biomechanical terms, with the typical error pattern noted. Coaching practice has converged on short imperative phrases — "cues" — that summarize each fundamental. These are quoted as objects of the coaching tradition rather than instructions of this page.</p>
+
+<div class="fundamentals">
+
+  <div class="fundamental">
+    <div class="num">1</div>
+    <div class="body">
+      <h4>Fore–aft balance</h4>
+      <p class="official">Control the relationship of the center of mass to the base of support to direct pressure along the length of the skis.</p>
+      <p>Front-to-back balance determines where on the ski pressure is applied. The fronts of the skis turn, the middle is stable, the tails skid. A centered skier can direct pressure forward to engage the tip; a skier behind the boots cannot, regardless of effort.</p>
+      <p>The most common error in skiing — at every level — is being too far back. Fear, steep terrain, and fatigue all push the skier rearward. The skier feels safer because the body sits "behind" the danger; the ski performs worse because the tip stops working. The result is a skier braking against their own equipment.</p>
+      <span class="cue">In coaching practice the principle is summarized as: "shins on the boot tongue."</span>
+    </div>
+  </div>
+
+  <div class="fundamental">
+    <div class="num">2</div>
+    <div class="body">
+      <h4>Lateral balance and the outside ski</h4>
+      <p class="official">Control pressure from ski to ski and direct pressure toward the outside ski.</p>
+      <p>A turn is asymmetric: the outside ski (downhill ski once the turn is shaped) carries most of the load, having both the longer lever arm against the snow and the larger edge angle. Mikaela Shiffrin's right turn is a left-foot turn; her left turn is a right-foot turn. This holds for all advanced skiers and does not hold for most beginners, who weight both skis equally or weight the inside ski.</p>
+      <span class="cue">In coaching practice the principle is summarized as: "stand on the little toe of the outside foot."</span>
+    </div>
+  </div>
+
+  <div class="fundamental">
+    <div class="num">3</div>
+    <div class="body">
+      <h4>Edge angle: inclination and angulation</h4>
+      <p class="official">Control edge angles through a combination of inclination and angulation.</p>
+      <p>Two mechanisms put a ski on edge. <span class="term">Inclination</span>: the body leans into the turn as a unit, like a bicycle around a corner. <span class="term">Angulation</span>: the body bends at the hip and knee so the lower body tips into the turn while the upper body remains relatively upright. Real skiing combines both; the blend varies with speed and turn radius. Beginners over-incline and fall to the inside; intermediates often only incline (the "A-frame"); advanced skiers angulate at the hip, where modern sidecut comes alive.</p>
+      <span class="cue">In coaching practice the principle is summarized as: "inside hip up, outside hip down."</span>
+    </div>
+  </div>
+
+  <div class="fundamental">
+    <div class="num">4</div>
+    <div class="body">
+      <h4>Rotary control with upper-lower body separation</h4>
+      <p class="official">Control the skis' rotation (turning, pivoting, steering) with leg rotation, separate from the upper body.</p>
+      <p>The legs rotate at the hip socket — the femur turning under a stable pelvis. The upper body faces approximately down the fall line in shorter turns and across the slope in longer ones, but never <em>drives</em> the turn by twisting. Shoulder-driven turns destabilize balance and prevent the femurs from doing their job. The standard remedy is the <em>pivot slip</em>: skiing directly down the fall line while pivoting the skis 90° to either side, with the upper body held still and pointed straight down.</p>
+      <span class="cue">In coaching practice the principle is summarized as: "torso facing the fall line; rotation performed by the legs."</span>
+    </div>
+  </div>
+
+  <div class="fundamental">
+    <div class="num">5</div>
+    <div class="body">
+      <h4>Pressure regulation</h4>
+      <p class="official">Regulate the magnitude of pressure created through ski/snow interaction.</p>
+      <p>The first four fundamentals address direction (fore–aft, side-to-side, edge, rotation); the fifth addresses magnitude. Pressure builds in a turn as edge angle and speed increase, and releases between turns. Skiers regulate it through flexion and extension at the ankle, knee, and hip, and through fore–aft and lateral redistribution along the ski. Two skiers with identical edge angles and stances can produce dramatically different turns based on pressure regulation alone — one carving cleanly, one chattering. PSIA examiner Ann Schorling has called this "the underrated fifth fundamental."</p>
+      <span class="cue">In coaching practice the principle is summarized as: "modulate pressure in response to the feedback from the snow."</span>
+    </div>
+  </div>
+
+</div>
+
+<h4>The athletic stance</h4>
+
+<p>The Five Fundamentals describe principles of movement; the <em>athletic stance</em> describes the postural baseline from which those movements are produced. Without it, the fundamentals cannot be physically expressed regardless of how clearly the skier understands them. The stance is also called the <em>ready position</em> or, less formally, the "skier's stance." It is the resting posture an instructor demonstrates before any turn is made.</p>
+
+<div class="carving-figure">
+  <model-viewer
+    src="./models/stance.glb"
+    alt="Athletic ski stance"
+    camera-controls
+    auto-rotate
+    auto-rotate-delay="3000"
+    rotation-per-second="20deg"
+    shadow-intensity="0.8"
+    exposure="0.7"
+    tone-mapping="commerce"
+    environment-image="neutral"
+    camera-orbit="30deg 80deg auto">
+    <div slot="error" style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-style:italic;text-align:center;padding:1rem;">
+      <span data-lang-content="en">Could not load <code>models/stance.glb</code>.</span>
+      <span data-lang-content="zh">无法加载 <code>models/stance.glb</code>。</span>
+    </div>
+  </model-viewer>
+  <p class="carving-figure-label">
+    <span data-lang-content="en">Athletic stance</span>
+    <span data-lang-content="zh">Athletic stance</span>
+  </p>
+</div>
+
+<p>Six features define the stance. The <strong>ankles, knees, and hips</strong> are simultaneously flexed — every joint is "loaded," none locked. The <strong>shins press forward into the boot tongues</strong> with constant, moderate pressure, putting weight slightly ahead of the balls of the feet (fundamental 1). The <strong>feet are roughly hip-width apart</strong>, parallel — neither pinched together nor splayed. The <strong>upper body is upright</strong>, neither hunched nor arched, with the chest open and the spine in a neutral curve. The <strong>arms are held forward and to the sides</strong>, elbows slightly bent, hands within peripheral vision and roughly at waist height. The <strong>gaze is directed down the hill</strong>, not at the skis.</p>
+
+<p>The stance is best understood as a continuous range rather than a fixed pose. It deepens (knees and hips flexing further) on steeper terrain or at higher speeds, and lengthens (more extended) on gentler terrain. What stays constant is the <em>distribution</em> of joint flexion across ankle, knee, and hip — never collapsed at one joint while another is locked — and the upper-body alignment that allows the legs to work independently beneath. The stance is what the body returns to between turns, what fatigue erodes, and what every other position in skiing departs from and returns to.</p>
+
+<aside class="sidenote">The Skills Concept's three categories — rotary, edging, pressure — map approximately onto fundamentals 4, 3, 5. Fundamentals 1 and 2 are the balance substrate. PSIA explicitly resists a tight one-to-one mapping.</aside>
+
+<p style="margin-top: 2rem; font-style: italic; color: var(--ski-ink-soft);">The fundamentals describe the components. The progression describes their assembly.</p>
+
+<h3>The structure of skill progression</h3>
+
+<p>Alpine technique is conventionally taught as a linear ladder: wedge, wedge christie, parallel, advanced parallel, carving. The ladder is useful as a first sketch but misleading in two structural respects. It implies linear progression where intermediate skiers commonly regress in some skills as they push others, and it implies a single endpoint where in fact the upper structure of the sport branches: <em>carving</em> and <em>short-radius pivot turns</em> are sibling specializations, neither subordinate to the other.</p>
+
+<p><span class="flag">opinion</span> The diagram below is one possible reading of the dependency structure, not PSIA's official sequencing. PSIA's National Standards describe <em>zones</em> (beginner, intermediate, advanced, expert) and skill blends rather than a fixed ladder.</p>
+
+<div class="progression-figure">
+<svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Network diagram of alpine skiing skill progression">
+  <defs>
+    <marker id="arrow-en" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0a3d62"/>
+    </marker>
+    <marker id="arrow-soft-en" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <g><rect x="60" y="40" width="160" height="56" rx="4" fill="#fafaf7" stroke="#0a3d62" stroke-width="1.5"/>
+    <text x="140" y="65" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" font-weight="700" fill="#0a3d62">Wedge</text>
+    <text x="140" y="84" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#6b7280">First friction with the edge</text></g>
+
+  <g><rect x="60" y="140" width="160" height="56" rx="4" fill="#fafaf7" stroke="#0a3d62" stroke-width="1.5"/>
+    <text x="140" y="165" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" font-weight="700" fill="#0a3d62">Wedge Christie</text>
+    <text x="140" y="184" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#6b7280">Outside-ski awareness</text></g>
+
+  <g><rect x="60" y="240" width="160" height="56" rx="4" fill="#fafaf7" stroke="#0a3d62" stroke-width="1.5"/>
+    <text x="140" y="265" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" font-weight="700" fill="#0a3d62">Intermediate Parallel</text>
+    <text x="140" y="284" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#6b7280">Skidded but parallel</text></g>
+
+  <g><rect x="280" y="240" width="160" height="56" rx="4" fill="#fafaf7" stroke="#0a3d62" stroke-width="1.5"/>
+    <text x="360" y="265" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" font-weight="700" fill="#0a3d62">Advanced Parallel</text>
+    <text x="360" y="284" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#6b7280">Angulation, partial edge engagement</text></g>
+
+  <g><rect x="500" y="160" width="180" height="68" rx="4" fill="#e8f1f8" stroke="#0a3d62" stroke-width="2"/>
+    <text x="590" y="186" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="15" font-weight="700" fill="#0a3d62">Carving</text>
+    <text x="590" y="205" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4a5159">Edging dominant</text>
+    <text x="590" y="220" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4a5159">Ski cuts a clean arc</text></g>
+
+  <g><rect x="500" y="304" width="180" height="68" rx="4" fill="#eef2ec" stroke="#3a5a40" stroke-width="2"/>
+    <text x="590" y="330" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="15" font-weight="700" fill="#3a5a40">Short-Radius Turns</text>
+    <text x="590" y="349" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4a5159">Rotary &amp; pressure dominant</text>
+    <text x="590" y="364" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4a5159">Ski pivots, scrapes snow</text></g>
+
+  <g><line x1="590" y1="228" x2="590" y2="304" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="612" y="270" font-family="Inter, sans-serif" font-size="10" font-style="italic" fill="#6b7280">sibling skills</text></g>
+
+  <line x1="140" y1="96" x2="140" y2="138" stroke="#0a3d62" stroke-width="1.5" marker-end="url(#arrow-en)"/>
+  <line x1="140" y1="196" x2="140" y2="238" stroke="#0a3d62" stroke-width="1.5" marker-end="url(#arrow-en)"/>
+  <line x1="220" y1="268" x2="278" y2="268" stroke="#0a3d62" stroke-width="1.5" marker-end="url(#arrow-en)"/>
+  <path d="M 440 254 Q 470 230 498 200" fill="none" stroke="#0a3d62" stroke-width="1.5" marker-end="url(#arrow-en)"/>
+  <path d="M 440 282 Q 470 310 498 332" fill="none" stroke="#0a3d62" stroke-width="1.5" marker-end="url(#arrow-en)"/>
+  <path d="M 500 338 Q 360 410 220 282" fill="none" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#arrow-soft-en)"/>
+  <text x="320" y="430" font-family="Inter, sans-serif" font-size="10" font-style="italic" fill="#6b7280">Short-turn skills feed back into all earlier stages</text>
+
+  <text x="690" y="200" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.05em" fill="#0a3d62" text-anchor="start" font-weight="600">EDGING</text>
+  <text x="690" y="345" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.05em" fill="#3a5a40" text-anchor="start" font-weight="600">ROTARY ·</text>
+  <text x="690" y="357" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.05em" fill="#3a5a40" text-anchor="start" font-weight="600">PRESSURE</text>
+</svg>
+
+<div class="progression-legend">
+  <span><span class="swatch" style="background: #0a3d62;"></span>Edging-led terminus</span>
+  <span><span class="swatch" style="background: #3a5a40;"></span>Rotary/pressure-led terminus</span>
+  <span><span class="swatch" style="background: #fafaf7; border: 1px solid #6b7280;"></span>Foundational stage</span>
+</div>
+</div>
+
+<p>Several structural points the diagram is meant to capture: the first three stages are roughly linear in the sense that skipping any leaves a gap that resurfaces under stress later; advanced parallel is the branch point at which technique can specialize toward edge-dominant carving or rotary-and-pressure-dominant short-radius work; the two termini are siblings with different terrain demands rather than a single goal with a single stepping-stone; and short-radius pivot work has feedback effects on every earlier stage by developing the pressure-regulation and upper–lower separation skills that improve all blends.</p>
+
+<p style="margin-top: 2rem; font-style: italic; color: var(--ski-ink-soft);">Fundamentals and progression are the inherited frameworks. The next sub-section turns to a development of the past decade — the appearance of measurement instruments at amateur scale, and what it has begun to do to skiing as a knowledge practice.</p>
+
+<h3>CARV and the quantification of skiing</h3>
+
+<p class="lede">A small literature within sports science addresses whether ski technique can be meaningfully quantified by wearable instrumentation. The CARV system is the most-developed consumer instantiation of that effort. The interesting question — beyond what the device measures — is whether quantified feedback changes a sport whose canonical knowledge has been tacit (§IX).</p>
+
+<h4>Inertial measurement and skiing</h4>
+
+<p>The standard wearable instrument in skiing biomechanics is the <span class="term">inertial measurement unit</span> (IMU): a chip combining a 3-axis accelerometer and a 3-axis gyroscope, sometimes with a 3-axis magnetometer, that records linear acceleration and angular velocity at high sample rates. IMUs have been used in published studies to measure skier center-of-mass kinematics, posture, trunk orientation, knee angles, edge angle, and turn segmentation, with accuracies sufficient to distinguish expert from novice technique on most metrics.<sup class="ref"><a href="#ref-imu-review">17</a></sup> A 2021 study by Martínez et al. positioned IMUs on the boots of expert alpine skiers and developed an "activity recognition chain" that segments turns, classifies turn style (carving vs. drifting, short vs. medium vs. long radius), and scores motion quality against a reference dataset.<sup class="ref"><a href="#ref-connected">18</a></sup> The system distinguished expert from beginner skiers reliably; it could not reliably distinguish expert from instructor — a result that says something about the resolution of current methods and something about the nature of the skill itself.</p>
+
+<h4>The CARV system</h4>
+
+<p>CARV, developed by U.K.-based Motion Metrics (founded 2013, Kickstarter prototype 2016), is the most prominent consumer attempt to apply IMU-based motion analysis to recreational skiing.<sup class="ref"><a href="#ref-carv">19</a></sup> The system has gone through two distinct hardware generations.</p>
+
+<p><strong>CARV 1 (2017–)</strong> was a 3 mm boot insole containing 36 pressure sensors and a 9-axis motion sensor (accelerometer, gyroscope, magnetometer), reporting motion and plantar pressure data at 20 Hz to a smartphone via Bluetooth. <strong>CARV 2 (2024–)</strong> dropped the pressure sensors, replacing the insole with a small unit that clips externally to the ski boot's power strap. CARV 2 contains a 6-axis IMU (3-axis accelerometer + 3-axis gyroscope), eliminating both the magnetometer and the pressure sensing of the previous generation.</p>
+
+<p>The simplification is informative about the engineering economy. Plantar pressure data is high-resolution and intuitively informative (where on the foot is the load?), but it requires an instrumented insole, factory installation, and is sensitive to the exact fit of the liner inside the shell. IMU-only data lacks the pressure dimension but supports a clip-on form factor and works across boots without re-installation. The CARV 2 design implicitly bets that IMU data alone suffices to identify the technical features the system aims to coach. Whether that bet is right is partly an empirical question — CARV's machine-learned scoring algorithm now has a few seasons of CARV 1 + CARV 2 data to compare — and partly a question about which features of skiing actually matter for coaching.</p>
+
+<h4>What CARV reports</h4>
+
+<p>The system computes per-turn and per-run metrics derived from the IMU stream. The metrics that map most directly onto PSIA's Five Fundamentals are listed below.</p>
+
+<table>
+  <thead>
+    <tr><th>CARV metric</th><th>Description</th><th>PSIA fundamental</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Edge Angle</strong></td><td>Maximum tilt of the ski against the snow surface during the turn</td><td>3 (edge angle)</td></tr>
+    <tr><td><strong>Early Edging</strong></td><td>Rate of edge engagement at turn initiation</td><td>3</td></tr>
+    <tr><td><strong>Edge Similarity</strong></td><td>Symmetry of left and right ski edge angles through the turn</td><td>4 (rotary)</td></tr>
+    <tr><td><strong>Outside Ski Pressure</strong></td><td>Estimated load distribution between outside and inside ski</td><td>2 (lateral balance)</td></tr>
+    <tr><td><strong>Fore:Aft Ratio</strong></td><td>Position of center of mass relative to base of support</td><td>1 (fore–aft balance)</td></tr>
+    <tr><td><strong>Smoothness</strong></td><td>Continuity of motion through the turn (C-shape vs. Z-shape)</td><td>5 (pressure regulation)</td></tr>
+    <tr><td><strong>Turn G-Force</strong></td><td>Centripetal acceleration during the turn</td><td>—</td></tr>
+    <tr><td><strong>Ski:IQ™</strong></td><td>Composite score, machine-learned weighting of the above</td><td>composite</td></tr>
+  </tbody>
+</table>
+
+<p>The mapping is approximate; CARV's marketing language and PSIA's vocabulary do not align term-for-term. But the substantive overlap is real: CARV's metric set is, in effect, a quantitative shadow of PSIA's qualitative fundamentals, with one significant addition (turn G-force as a motivational rather than coaching variable) and one significant absence (anything resembling rotary upper–lower separation, which is hard to measure from a boot-mounted IMU alone).</p>
+
+<aside class="sidenote">A SkiTalk forum critique raised the technical objection that "carving" is defined by the path of the ski edge through the snow, not by foot pressure or boot orientation, and that an IMU at the boot cannot directly measure whether the edge is cutting cleanly. The technical response is that with high-rate IMU data, the ski's position and orientation through the turn can be reconstructed; in a clean carving turn the heading vector remains tangent to the path, while in a skidded turn it deviates. CARV's classification is performed on the IMU time series rather than on direct edge-track measurement.</aside>
+
+</div>
+
+<div data-lang-content="zh">
+<span class="section-num">II.</span>
+<h2>滑雪者是怎样炼成的</h2>
+
+<p class="lede">一名滑雪者由三层逐次叠加而成，每一层都是下一层的前提。第一层是<em>技术基本功</em>——若无此一组生物力学原语，便不会有任何高阶动作。第二层是<em>技能进阶的结构</em>——一名初学者借由这一依赖网络成为专家，每一位滑雪者也都能在网络的某处定位自己。第三层是当代的<em>量化</em>现象——惯性传感器与机器学习流水线，把曾经只能凭直觉的东西转化为一串可测量的信号。本章依次穿越这三层。</p>
+
+<p>按这个顺序来读，整章回答的其实是同一个问题：<em>一个人是怎样成为滑雪者的？</em>第一部分——五项基本功——以生物力学的语言作答。第二部分——技能进阶的结构——以教学法的语言作答。第三部分——CARV 与滑雪量化——以技术时代正在强加于一切休闲运动的语言作答。三者均不能独自支撑全部，亦无谁能取代谁；合起来，方足以描述"成为"的整套装置。</p>
+
+<h3>Five Fundamentals</h3>
+
+<p>美国职业滑雪教练协会（PSIA）维护一组五要素的表述，刻画其国家标准所认为的合格高山技术。Five Fundamentals 在描述上故意保持抽象——既不绑定具体动作，亦不绑定具体水平——使同一组五句话足以同时描述初学者犁式转弯与世界杯大回转，二者仅在量级与基本功之间的配比上有所不同。</p>
+
+<p>Five Fundamentals 源自更早的 <span class="term">Skills Concept（技能体系）</span>，由美国示范队在 1975 年捷克斯洛伐克 Štrbské Pleso 的 <span class="term">Interski</span> 大会引入。Skills Concept 把影响滑板行为的动作归入三类——旋转、立刃、压力控制——以平衡为底层。Five Fundamentals 在这一描述性清单之上加上了一层规范性表述。<sup class="ref"><a href="#ref-psia">4</a></sup></p>
+
+<aside class="sidenote">PSIA-AASI 由若干地区性协会于 1961 年合并而成。其 Skills Concept 表述在形式上、即便不在细节上，被绝大多数其他国家高山教学体系所共享。</aside>
+
+<p>每条基本功下方先列 PSIA 的官方措辞，再以朴素生物力学语言展开，记录典型错误模式。教学实践中，每条基本功通常配有一句简短的指令式概括语，作为现场教学的助记。下面以引用形式给出，意在记录这一教学传统，而非作为本页的指导。</p>
+
+<div class="fundamentals">
+
+  <div class="fundamental">
+    <div class="num">1</div>
+    <div class="body">
+      <h4>前后平衡</h4>
+      <p class="official">控制重心与支撑面的关系，使压力沿滑板长轴方向分布。<br><span style="opacity:0.6">Control the relationship of the center of mass to the base of support to direct pressure along the length of the skis.</span></p>
+      <p>前后方向的平衡决定了压力被施加在滑板的哪个部位。板头转弯，板中稳定，板尾会侧滑。重心居中的滑雪者可将压力前移以激活板头；重心后坐的滑雪者无法做到，无论用力多大。</p>
+      <p>滑雪中最常见的错误——所有水平段皆然——是身体过分后坐。恐惧、陡坡、疲劳都会把人推到后坐位。学生感觉这样更安全，因为身体在"危险"的后方；可是滑板表现变差，因为板头开始失灵。结果是滑雪者用自己的装备给自己刹车。</p>
+      <span class="cue">教学实践中，这一原则常被概括为："胫骨持续顶向靴舌"。</span>
+    </div>
+  </div>
+
+  <div class="fundamental">
+    <div class="num">2</div>
+    <div class="body">
+      <h4>左右平衡与外侧脚</h4>
+      <p class="official">控制压力在两板之间的分配，使压力指向外侧板。<br><span style="opacity:0.6">Control pressure from ski to ski and direct pressure toward the outside ski.</span></p>
+      <p>转弯是不对称的：外侧板（弯成形之后位于山下方的那只）承担大部分载荷，对雪面具有更长的力臂与更大的立刃角度。Mikaela Shiffrin 的右转是一次左脚转弯，左转则是右脚转弯。所有高级滑雪者皆是如此；多数初学者则不然——他们均匀分配两板压力，或更糟地把压力放在内侧板上。</p>
+      <span class="cue">教学实践中，这一原则常被概括为："将体重置于外侧足的小趾一侧"。</span>
+    </div>
+  </div>
+
+  <div class="fundamental">
+    <div class="num">3</div>
+    <div class="body">
+      <h4>立刃角度：倾斜与折屈</h4>
+      <p class="official">通过倾斜（inclination）与折屈（angulation）的组合控制立刃角度。<br><span style="opacity:0.6">Control edge angles through a combination of inclination and angulation.</span></p>
+      <p>两种机制让滑板立起来。<span class="term">Inclination（倾斜）</span>：身体作为一个整体向弯心倾倒，如自行车过弯。<span class="term">Angulation（折屈）</span>：身体在髋与膝处折叠，下半身向弯心倾，上半身相对直立。真实的滑雪两者并用；配比随速度与转弯半径变化。初学者过度倾斜，导致内倒；中级常常只倾斜（"A 字腿"）；高级滑雪者在髋部折屈，现代侧切此时才真正激活。</p>
+      <span class="cue">教学实践中，这一原则常被概括为："内髋上抬，外髋下沉"。</span>
+    </div>
+  </div>
+
+  <div class="fundamental">
+    <div class="num">4</div>
+    <div class="body">
+      <h4>旋转控制与上下分离</h4>
+      <p class="official">用腿的旋转（转向、枢转、引导）控制滑板的旋转，与上半身分离。<br><span style="opacity:0.6">Control the skis' rotation (turning, pivoting, steering) with leg rotation, separate from the upper body.</span></p>
+      <p>双腿在髋臼处旋转——股骨在稳定的骨盆下方转动。上半身在短弯里大致朝向 fall line，在长弯里朝向横切方向，但永远不通过扭转上身来驱动转弯。肩膀驱动的转弯破坏平衡，妨碍股骨工作。标准的修正是 <em>pivot slip（枢转下滑）</em>：径直沿 fall line 下滑，把双板枢转 90° 到一侧再到另一侧，上身始终静止地朝向山下方。</p>
+      <span class="cue">教学实践中，这一原则常被概括为："躯干朝向 fall line，旋转由腿完成"。</span>
+    </div>
+  </div>
+
+  <div class="fundamental">
+    <div class="num">5</div>
+    <div class="body">
+      <h4>压力调节</h4>
+      <p class="official">调节由滑板与雪互动产生的压力大小。<br><span style="opacity:0.6">Regulate the magnitude of pressure created through ski/snow interaction.</span></p>
+      <p>前四条讲方向（前后、左右、立刃、旋转），第五条讲大小。转弯过程中，压力随立刃角度与速度增加而增大，转弯之间释放。滑雪者通过踝、膝、髋的弯伸，以及沿滑板的前后/左右分布来调节压力。两个立刃角度与站姿一致的滑雪者，仅凭压力调节的差异就能产生天差地别的转弯——一个干净 carving，一个抖动失控。PSIA 考官 Ann Schorling 称之为"被低估的第五基本功"。</p>
+      <span class="cue">教学实践中，这一原则常被概括为："顺应雪面的反馈调节压力"。</span>
+    </div>
+  </div>
+
+</div>
+
+<h4>Athletic stance</h4>
+
+<p>Five Fundamentals 描述的是动作原则；<em>athletic stance</em>（运动员姿态，又称 <em>ready position</em>）描述的是产生这些动作所自来的姿态基线。没有这一基线，无论滑雪者对原则的理解多么清晰，他都无法在身体上将它们表达出来。这是任何转弯发生之前，教练所示范的静止姿态。</p>
+
+<div class="carving-figure">
+  <model-viewer
+    src="./models/stance.glb"
+    alt="高山滑雪 athletic stance"
+    camera-controls
+    auto-rotate
+    auto-rotate-delay="3000"
+    rotation-per-second="20deg"
+    shadow-intensity="0.8"
+    exposure="0.7"
+    tone-mapping="commerce"
+    environment-image="neutral"
+    camera-orbit="30deg 80deg auto">
+    <div slot="error" style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-style:italic;text-align:center;padding:1rem;">
+      <span data-lang-content="en">Could not load <code>models/stance.glb</code>.</span>
+      <span data-lang-content="zh">无法加载 <code>models/stance.glb</code>。</span>
+    </div>
+  </model-viewer>
+  <p class="carving-figure-label">
+    <span data-lang-content="en">Athletic stance</span>
+    <span data-lang-content="zh">Athletic stance</span>
+  </p>
+</div>
+
+<p>姿态由六个特征定义。<strong>踝、膝、髋三关节同时屈曲</strong>——每个关节都"上膛"，没有任何一个被锁死。<strong>胫骨持续以中等压力顶住靴舌</strong>，使重心略前于足底前掌（基本功 1）。<strong>双足约与髋同宽</strong>，平行——既不并拢也不外八。<strong>上半身直立</strong>，既不前驼也不后仰，胸部打开，脊柱保持中性曲度。<strong>双臂前伸略向外侧打开</strong>，肘部微屈，双手在外周视野内，约与腰齐高。<strong>视线投向山下方</strong>，而非滑板。</p>
+
+<p>这一姿态最好理解为一个<em>连续区间</em>而非固定姿势。陡坡或高速时它会更深（膝、髋进一步屈曲），缓坡时则更舒展。保持不变的是<em>关节屈曲在踝、膝、髋之间的分配</em>——任何一个关节都不能完全坍塌而另一个被锁死——以及保证双腿能在其下方独立工作的上半身姿态。这是身体在每两个转弯之间所回归的位置；是疲劳所首先侵蚀的对象；亦是滑雪中其他所有姿态的出发点与归宿。</p>
+
+<aside class="sidenote">Skills Concept 三类——旋转、立刃、压力——大致对应基本功 4、3、5。基本功 1 与 2 是它们共同的平衡基底。PSIA 明确不主张严丝合缝的对应。</aside>
+
+<p style="margin-top: 2rem; font-style: italic; color: var(--ski-ink-soft);">基本功描述零件，进阶描述组装。</p>
+
+<h3>技能进阶的结构</h3>
+
+<p>高山技术按惯例被教成一架线性的梯子：犁式、半犁式、平行式、高级平行式、carving。这个梯子作为初步勾勒有用，但在两个结构性方面具有误导性：它暗示线性进阶，而中级滑雪者经常在推进某些技能时退步另一些；它又暗示存在单一终点，而事实上这项运动的上层是分叉的——<em>carving</em> 与<em>挫雪小弯（短半径枢转弯）</em>是同辈专精，谁也不从属于谁。</p>
+
+<p><span class="flag">个人观点</span> 下图是对依赖结构的一种可能读法，不是 PSIA 的官方排序。PSIA 的国家标准使用的是<em>区段（zones）</em>——初学、中级、高级、专家——与技能配比，而非固定梯子。</p>
+
+<div class="progression-figure">
+<svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="高山滑雪技能进阶网络图">
+  <defs>
+    <marker id="arrow-zh" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0a3d62"/>
+    </marker>
+    <marker id="arrow-soft-zh" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <g><rect x="60" y="40" width="160" height="56" rx="4" fill="#fafaf7" stroke="#0a3d62" stroke-width="1.5"/>
+    <text x="140" y="65" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="15" font-weight="600" fill="#0a3d62">犁式</text>
+    <text x="140" y="84" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="11" fill="#6b7280">第一次感受到立刃</text></g>
+
+  <g><rect x="60" y="140" width="160" height="56" rx="4" fill="#fafaf7" stroke="#0a3d62" stroke-width="1.5"/>
+    <text x="140" y="165" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="15" font-weight="600" fill="#0a3d62">半犁式转弯</text>
+    <text x="140" y="184" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="11" fill="#6b7280">外侧脚意识</text></g>
+
+  <g><rect x="60" y="240" width="160" height="56" rx="4" fill="#fafaf7" stroke="#0a3d62" stroke-width="1.5"/>
+    <text x="140" y="265" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="15" font-weight="600" fill="#0a3d62">中级平行式</text>
+    <text x="140" y="284" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="11" fill="#6b7280">侧滑但已平行</text></g>
+
+  <g><rect x="280" y="240" width="160" height="56" rx="4" fill="#fafaf7" stroke="#0a3d62" stroke-width="1.5"/>
+    <text x="360" y="265" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="15" font-weight="600" fill="#0a3d62">高级平行式</text>
+    <text x="360" y="284" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="11" fill="#6b7280">折屈、部分立刃</text></g>
+
+  <g><rect x="500" y="160" width="180" height="68" rx="4" fill="#e8f1f8" stroke="#0a3d62" stroke-width="2"/>
+    <text x="590" y="186" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="16" font-weight="600" fill="#0a3d62">Carving</text>
+    <text x="590" y="205" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="11" fill="#4a5159">立刃主导</text>
+    <text x="590" y="220" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="11" fill="#4a5159">刻出干净的 carving 弧线</text></g>
+
+  <g><rect x="500" y="304" width="180" height="68" rx="4" fill="#eef2ec" stroke="#3a5a40" stroke-width="2"/>
+    <text x="590" y="330" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="16" font-weight="600" fill="#3a5a40">挫雪小弯</text>
+    <text x="590" y="349" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="11" fill="#4a5159">旋转与压力主导</text>
+    <text x="590" y="364" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="11" fill="#4a5159">枢转刮擦雪面</text></g>
+
+  <g><line x1="590" y1="228" x2="590" y2="304" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="612" y="270" font-family="Noto Serif SC, serif" font-size="11" fill="#6b7280">同辈技能</text></g>
+
+  <line x1="140" y1="96" x2="140" y2="138" stroke="#0a3d62" stroke-width="1.5" marker-end="url(#arrow-zh)"/>
+  <line x1="140" y1="196" x2="140" y2="238" stroke="#0a3d62" stroke-width="1.5" marker-end="url(#arrow-zh)"/>
+  <line x1="220" y1="268" x2="278" y2="268" stroke="#0a3d62" stroke-width="1.5" marker-end="url(#arrow-zh)"/>
+  <path d="M 440 254 Q 470 230 498 200" fill="none" stroke="#0a3d62" stroke-width="1.5" marker-end="url(#arrow-zh)"/>
+  <path d="M 440 282 Q 470 310 498 332" fill="none" stroke="#0a3d62" stroke-width="1.5" marker-end="url(#arrow-zh)"/>
+  <path d="M 500 338 Q 360 410 220 282" fill="none" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#arrow-soft-zh)"/>
+  <text x="320" y="430" font-family="Noto Serif SC, serif" font-size="11" fill="#6b7280">小弯训练反向回馈每一个先前阶段</text>
+
+  <text x="690" y="200" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.05em" fill="#0a3d62" text-anchor="start" font-weight="600">EDGING</text>
+  <text x="690" y="345" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.05em" fill="#3a5a40" text-anchor="start" font-weight="600">ROTARY ·</text>
+  <text x="690" y="357" font-family="Inter, sans-serif" font-size="9" letter-spacing="0.05em" fill="#3a5a40" text-anchor="start" font-weight="600">PRESSURE</text>
+</svg>
+
+<div class="progression-legend">
+  <span><span class="swatch" style="background: #0a3d62;"></span>立刃主导终点</span>
+  <span><span class="swatch" style="background: #3a5a40;"></span>旋转/压力主导终点</span>
+  <span><span class="swatch" style="background: #fafaf7; border: 1px solid #6b7280;"></span>基础阶段</span>
+</div>
+</div>
+
+<p>图中所要捕捉的几个结构性要点：前三阶段大致线性，跳过任何一阶都会留下缺口，待日后压力之下重新冒出；高级平行是分叉点，技术可专精向立刃主导的 carving 或旋转/压力主导的小弯；两个终点是同辈关系，对应不同地形需求，而不是单一目标加单一垫脚石；以及，小弯训练对每一个先前阶段具有反馈效应，因为它发展的是压力调节与上下分离这类改善所有配比的技能。</p>
+
+<p style="margin-top: 2rem; font-style: italic; color: var(--ski-ink-soft);">基本功与进阶都是继承下来的框架。下一节转向过去十年才出现的现象——业余尺度上测量仪器的兴起，以及它正在怎样改造滑雪这一作为知识实践的活动。</p>
+
+<h3>CARV 与滑雪量化训练</h3>
+
+<p class="lede">运动科学内有一支较小的文献讨论：滑雪技术能否通过可穿戴仪器获得有意义的量化。CARV 系统是这种努力的最成熟消费级实例。值得思考的问题——超越仪器具体测什么——是：当一项运动其经典知识本属默会（§IX）时，量化反馈是否会改变这项运动本身。</p>
+
+<h4>惯性测量与滑雪</h4>
+
+<p>滑雪生物力学中的标准可穿戴仪器是<span class="term">惯性测量单元（IMU）</span>：一颗集成 3 轴加速度计与 3 轴陀螺仪、有时再加 3 轴磁力计的芯片，以高采样率记录线加速度与角速度。已发表研究使用 IMU 测量滑雪者重心运动学、姿态、躯干朝向、膝关节角度、立刃角度、转弯分段，准确率足以区分多数指标上的专家与新手技术。<sup class="ref"><a href="#ref-imu-review">17</a></sup>2021 年 Martínez 等人将 IMU 置于专家高山滑雪者的雪靴上，开发了一条"活动识别链"：分段转弯、分类转弯风格（carving 与 drifting，短/中/长半径）、并对照参考数据集为运动质量打分。<sup class="ref"><a href="#ref-connected">18</a></sup>该系统能可靠区分专家与初学者，但无法可靠区分专家与教练——这一结果既说明了当前方法的分辨率，也说明了这项技能本身的某种性质。</p>
+
+<h4>CARV 系统</h4>
+
+<p>CARV 由英国 Motion Metrics 开发（公司 2013 年成立，Kickstarter 原型 2016 年发布），是用 IMU 运动分析处理休闲滑雪的最显著消费级尝试。<sup class="ref"><a href="#ref-carv">19</a></sup>该系统经历了两代显著不同的硬件。</p>
+
+<p><strong>CARV 1（2017– ）</strong>是一片 3 mm 厚的雪靴鞋垫，内含 36 个压力传感器与一只 9 轴运动传感器（加速度计、陀螺仪、磁力计），通过蓝牙以 20 Hz 向智能手机回传运动与足底压力数据。<strong>CARV 2（2024– ）</strong>取消了压力传感器，将鞋垫替换为外挂于雪靴绑带的小型设备。CARV 2 内含一只 6 轴 IMU（3 轴加速度计 + 3 轴陀螺仪），相比上代既去除了磁力计，也去除了压力感测。</p>
+
+<p>这种简化对工程经济学颇具揭示性。足底压力数据分辨率高、直觉上信息丰富（载荷在脚上的哪个位置？），但它要求一片仪器化鞋垫、出厂安装，且对内胆在外壳内的实际配合非常敏感。仅有 IMU 的数据缺失了压力维度，但支持外挂形态、可在不同雪靴间通用而无须重新安装。CARV 2 的设计隐含了一个赌注：仅凭 IMU 数据就足以识别该系统希望教练化处理的技术特征。这个赌注是否成立，部分是经验问题——CARV 的机器学习评分算法如今有了几个赛季的 CARV 1 + CARV 2 数据可供对比——部分则是关于"滑雪中哪些特征对教练真正重要"的问题。</p>
+
+<h4>CARV 报告什么</h4>
+
+<p>系统从 IMU 数据流派生出每弯与整段的若干指标。下表列出与 PSIA Five Fundamentals 对应最直接的指标。</p>
+
+<table>
+  <thead>
+    <tr><th>CARV 指标</th><th>含义</th><th>对应 PSIA 基本功</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Edge Angle</strong></td><td>转弯过程中滑板相对雪面的最大倾角</td><td>3（立刃角度）</td></tr>
+    <tr><td><strong>Early Edging</strong></td><td>转弯起始处立刃介入的速率</td><td>3</td></tr>
+    <tr><td><strong>Edge Similarity</strong></td><td>左右板立刃角度在弯中的对称性</td><td>4（旋转）</td></tr>
+    <tr><td><strong>Outside Ski Pressure</strong></td><td>外侧板与内侧板的载荷分配估计</td><td>2（左右平衡）</td></tr>
+    <tr><td><strong>Fore:Aft Ratio</strong></td><td>重心相对支撑面的前后位置</td><td>1（前后平衡）</td></tr>
+    <tr><td><strong>Smoothness</strong></td><td>转弯中运动的连续性（C 形 vs Z 形）</td><td>5（压力调节）</td></tr>
+    <tr><td><strong>Turn G-Force</strong></td><td>转弯中的向心加速度</td><td>—</td></tr>
+    <tr><td><strong>Ski:IQ™</strong></td><td>合成评分，对上述指标进行机器学习加权</td><td>合成</td></tr>
+  </tbody>
+</table>
+
+<p>这种映射是近似的；CARV 的市场化语言与 PSIA 的术语并不一一对齐。但实质重叠是真实的：CARV 的指标集事实上是 PSIA 定性基本功的一份量化阴影，多出一项（Turn G-Force，作为动机性而非教学性变量），缺失一项（任何近似旋转上下分离的指标——这从一只仅安装在雪靴上的 IMU 难以直接测得）。</p>
+
+<aside class="sidenote">SkiTalk 论坛上曾有一条技术批评：carving 由板刃在雪面上的轨迹定义，而非由足部压力或雪靴朝向定义，置于雪靴上的 IMU 无法直接测量板刃是否干净 carving。技术上的回应是：以高采样率的 IMU 数据为基础，可重建滑板在转弯中的位置与朝向；干净 carving 时，行进向量保持与轨迹相切，侧滑则会偏离。CARV 的分类基于 IMU 时间序列，并非直接的板刃轨迹测量。</aside>
+
+</div>
+
+</section>
+
+
+<!-- ============ III. CARVING ============ -->
+<section id="carving">
+
+<div data-lang-content="en">
+<span class="section-num">III.</span>
+<h2>"Carving"</h2>
+
+<p class="lede">High-level carving is the most coordinated articulation of all five fundamentals at once (§II). It is most clearly understood not as a single posture but as a <em>transition</em> — the body moves continuously between two carving arcs, and the skill lives in the bridge that connects them. The 3D figure below shows the apex of a carving turn, the moment of maximum angulation and maximum edge angle. Drag to rotate; release to let it spin.</p>
+</div>
+
+<div data-lang-content="zh">
+<span class="section-num">III.</span>
+<h2>"Carving"</h2>
+
+<p class="lede">高水平 carving 是 Five Fundamentals（§II）同时被最协调地表达出来的形态。它最清楚的理解方式不是某个静止姿态，而是一个 <em>过渡（transition）</em>——身体在两段 carving 弧之间持续移动，而技术真正的难点恰好在于把两段弧连接起来的那座桥。下图所示的 3D 人偶处于 carving 转弯的 apex 时刻——angulation 与立刃角度同时达到最大的瞬间。可拖动旋转；松开后会自动旋转。</p>
+</div>
+
+<div class="carving-figure">
+  <div class="carving-tabs" role="tablist">
+    <button class="carving-tab active" data-carving-tab="left" role="tab" aria-selected="true" aria-controls="carving-pane-left">
+      <span data-lang-content="en">Carving left turn</span>
+      <span data-lang-content="zh">Carving 左转弯</span>
+    </button>
+    <button class="carving-tab" data-carving-tab="right" role="tab" aria-selected="false" aria-controls="carving-pane-right">
+      <span data-lang-content="en">Carving right turn</span>
+      <span data-lang-content="zh">Carving 右转弯</span>
+    </button>
+  </div>
+
+  <div class="carving-pane" id="carving-pane-left" data-carving-pane="left" role="tabpanel">
+    <model-viewer
+      src="./models/carvingleft.glb"
+      alt="High-level carving left-turn apex pose"
+      camera-controls
+      auto-rotate
+      auto-rotate-delay="3000"
+      rotation-per-second="20deg"
+      shadow-intensity="0.8"
+      exposure="0.7"
+      tone-mapping="commerce"
+      environment-image="neutral"
+      camera-orbit="35deg 75deg auto">
+      <div slot="error" style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-style:italic;text-align:center;padding:1rem;">
+        <span data-lang-content="en">Could not load <code>models/carvingleft.glb</code>.</span>
+        <span data-lang-content="zh">无法加载 <code>models/carvingleft.glb</code>。</span>
+      </div>
+    </model-viewer>
+    <p class="carving-figure-label">
+      <span data-lang-content="en">Carving left turn</span>
+      <span data-lang-content="zh">Carving 左转弯</span>
+    </p>
+  </div>
+
+  <div class="carving-pane" id="carving-pane-right" data-carving-pane="right" role="tabpanel" hidden>
+    <model-viewer
+      src="./models/carvingright.glb"
+      alt="High-level carving right-turn apex pose"
+      camera-controls
+      auto-rotate
+      auto-rotate-delay="3000"
+      rotation-per-second="20deg"
+      shadow-intensity="0.8"
+      exposure="0.7"
+      tone-mapping="commerce"
+      environment-image="neutral"
+      camera-orbit="35deg 75deg auto">
+      <div slot="error" style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-style:italic;text-align:center;padding:1rem;">
+        <span data-lang-content="en">Could not load <code>models/carvingright.glb</code>.</span>
+        <span data-lang-content="zh">无法加载 <code>models/carvingright.glb</code>。</span>
+      </div>
+    </model-viewer>
+    <p class="carving-figure-label">
+      <span data-lang-content="en">Carving right turn</span>
+      <span data-lang-content="zh">Carving 右转弯</span>
+    </p>
+  </div>
+</div>
+
+<div data-lang-content="en">
+<h3>What the apex pose shows</h3>
+
+<p>Six features of the figure are worth attention. <strong>Hip angulation</strong>: the hip is pushed away from the turn center while the upper body stays relatively upright — the "anti-bow" or counter shape that makes high edge angles possible. <strong>Outside leg fully extended</strong>: in a left-hand turn the right leg is the loaded outside leg, taking 80–100% of body weight at this moment. <strong>Inside leg compressed</strong>: the left leg is bent and tucked against the outside leg. <strong>Counter rotation</strong>: the shoulder line aims past the current apex toward the next gate, lagged behind the legs' rotation. <strong>Outside hand leading</strong>: the hand on the outside (here the left) is extended forward and across the body, approaching the pole-touch position. <strong>Gaze ahead</strong>: the head looks across the outside shoulder, past the current apex, toward the entrance of the next turn.</p>
+
+<p>Several things the figure cannot show but matter just as much. The <strong>ankle inversion / eversion</strong> (outside ankle rolled to the little toe, inside ankle to the big toe) is what equalizes the edge angles between the two skis despite their asymmetric loads. The <strong>shin pressure on the boot tongue</strong> is constant and firm; releasing it would unbalance the entire structure. And the <strong>cross-under transition</strong> — the active retraction of the outside leg after the apex, the brief weightlessness as the center of mass passes under the body, and the extension of the new outside leg — is the dynamic counterpart to this static pose, and is what links one apex to the next.</p>
+
+<h3>The cross-under transition</h3>
+
+<p>The connection between two carving arcs is itself a coordinated movement, not a passive interval. Past apex, the skier <strong>actively retracts the outside leg</strong> (knee bending, the leg shortening underneath) rather than waiting passively for the edges to release. This produces a momentary unweighting — a brief weightlessness — during which the body's center of mass passes <em>under</em> the body's previous edge and over toward the new turn's inside. Weight then transfers to the new outside leg (the previous inside leg, now extending), and the new turn's edge engagement begins. The legs do the work of switching sides; the upper body stays quiet, projected forward and aimed at the next turn entry.</p>
+
+<p>The contrast is with <em>cross-over</em> transitions, where the skier extends up and the body's mass is moved <em>over</em> the skis from above. Cross-over is appropriate at lower speeds; at high speeds and high edge angles, cross-under is necessary because there is no time to extend up and re-balance, and the legs must compress and re-extend underneath a relatively quiet upper body. Cross-under is what allows World Cup giant slalom skiers to link tight turns at 70 km/h without their upper body bouncing visibly.</p>
+</div>
+
+<div data-lang-content="zh">
+<h3>这个 apex 姿态显示了什么</h3>
+
+<p>图中六个特征值得注意。<strong>髋部 angulation</strong>：髋向外（远离弯心方向）推出，上半身相对直立——"反弓"或 counter 形态，正是它使大立刃角度成为可能。<strong>外腿完全伸直</strong>：左转弯中，右腿是承重的外腿，此刻承担 80–100% 体重。<strong>内腿屈曲收拢</strong>：左腿屈曲，贴向外腿。<strong>Counter rotation（反旋转）</strong>：肩线越过当前 apex、对准下一个旗门，旋转滞后于双腿。<strong>外手前伸引导</strong>：外侧（此处为左）手前伸跨过身体，正向 pole-touch 位置接近。<strong>视线前置</strong>：头部越过外肩，看向当前 apex 之外、下一弯入口。</p>
+
+<p>有几件事图上看不见、但同等重要。<strong>踝部内翻 / 外翻</strong>（外踝向小拇趾扣、内踝向大拇趾扣）正是两板载荷不对称的情况下、立刃角度仍能保持等同的原因。<strong>胫骨持续顶住靴舌的压力</strong>恒定而坚实；一旦放掉，整个结构就会失衡。而<strong>cross-under 过渡</strong>——过 apex 之后外腿的主动收回、重心穿过身体下方时的瞬间失重、以及新外腿的伸长承重——是这个静态姿态的动态对应，也是把一个 apex 连接到下一个的桥梁。</p>
+
+<h3>Cross-under 过渡</h3>
+
+<p>两段 carving 弧之间的连接本身就是一个协调的动作，而不是一个被动的间隔。过 apex 之后，滑雪者<strong>主动收回外侧腿</strong>（屈膝、腿从下方缩短），而非被动等待板刃自然释放。这会产生一瞬间的失重——一段短暂的 weightlessness——在这段时间里，身体重心从板的旧弯一侧 <em>从下方</em> 通过、转移到新弯的内侧。重量随后转移到新外侧腿（即原来的内侧腿，正在伸长），新弯的立刃介入随之开始。两条腿完成"换边"的工作；上半身保持安静、向前投射、瞄准下一弯入口。</p>
+
+<p>与之对比的是 <em>cross-over</em> 过渡：滑雪者向上伸展，身体质量从上方<em>越过</em>滑板移到新弯一侧。Cross-over 是更早期阶段的技术，在低速下合宜；高速、高立刃角下则必须使用 cross-under，因为没有时间向上伸展再重新平衡——双腿必须在相对安静的上半身下方完成压缩与再伸展。Cross-under 正是世界杯大回转选手能在 70 km/h 下连续完成紧密弯而上半身不可见跳动的原因。</p>
+</div>
+
+</section>
+
+
+<!-- ============ IV. SERIOUS LEISURE ============ -->
+<section id="leisure">
+
+<div data-lang-content="en">
+<span class="section-num">IV.</span>
+<h2>Serious Leisure</h2>
+
+<p class="lede">A separate sociological literature treats alpine skiing not as a technical practice or a phenomenology but as a category of leisure activity with characteristic features and characteristic effects on participants' lives. The framework comes from Robert A. Stebbins's <em>serious leisure perspective</em>, developed from the early 1980s onward, and the relevant empirical question is the connection between serious leisure participation and subjective well-being.</p>
+
+<h3>The serious leisure framework</h3>
+
+<p>Stebbins introduced the concept of <span class="term">serious leisure</span> in 1982 as a counterpoint to the dominant scholarly treatment of leisure at the time, which equated leisure with rest and casual entertainment.<sup class="ref"><a href="#ref-stebbins-1982">28</a></sup> He defined it as the systematic pursuit of an amateur, hobbyist, or volunteer activity sufficiently substantial and interesting that the participant finds in it a career — that is, a trajectory of skill development, achievement milestones, and identity formation. Stebbins distinguished serious leisure from <em>casual leisure</em> (immediate, hedonic, low-investment activities like watching television) and later added a third category, <em>project-based leisure</em>, for one-off or time-limited efforts.<sup class="ref"><a href="#ref-stebbins-2007">29</a></sup></p>
+
+<p>Serious leisure is distinguished from casual leisure by six qualities, all of which alpine skiing exhibits in pronounced form:</p>
+
+<ol>
+  <li><strong>The need to persevere</strong> — through difficulty, fatigue, and setbacks. Learning to ski is famously frustrating in its early phase, and progression at every level requires extended, deliberate practice over many seasons.</li>
+  <li><strong>A career trajectory</strong> — recognizable stages of involvement, from beginner through intermediate to expert, with corresponding social roles (student, recreational skier, instructor, racer, ski patroller).</li>
+  <li><strong>Significant personal effort based on specially acquired knowledge, training, or skill</strong> — alpine skiing requires technical skill (the Five Fundamentals, §II), bodily skill (§IX), tacit terrain reading, and accumulated experience that does not transfer from other sports.</li>
+  <li><strong>Durable benefits</strong> — physical fitness (§VIII), enduring friendships built around the activity, identity, self-actualization, and the sustained enjoyment that comes from doing something well.</li>
+  <li><strong>A unique ethos and social world</strong> — skiing has its own subculture with shared vocabulary, dress codes, rituals (first chair, end-of-season corn snow, après-ski), magazines, films, and tribal distinctions among recreational skiers, racers, freeride enthusiasts, ski patrollers, and backcountry travelers.</li>
+  <li><strong>Strong identification with the pursuit</strong> — many committed skiers structure their winters, residences, friendships, and self-conception around the activity. The phenomenon of the "ski bum" — a person who organizes economic life around access to skiing — is a limit case of this identification.</li>
+</ol>
+
+<aside class="sidenote">Empirical applications of Stebbins's framework to specific snow sports include Overholt's case study of skiing as leisure among Armenian youth<sup class="ref"><a href="#ref-overholt">30</a></sup> and ongoing research on volunteer ski patrollers in the U.S. National Ski Patrol as a serious-leisure population.<sup class="ref"><a href="#ref-patrollers">31</a></sup> Stebbins himself is a long-time recreational cross-country skier whose autobiographical reflections feed into the theory.</aside>
+
+<h3>Serious leisure and subjective well-being</h3>
+
+<p>The connection between serious leisure participation and well-being is among the most-tested claims in leisure studies. The constructs are: <span class="term">subjective well-being</span> (SWB), Diener's term for the cognitive and affective evaluation of one's own life,<sup class="ref"><a href="#ref-diener">32</a></sup> and <span class="term">eudaimonic well-being</span>, drawn from Aristotelian flourishing and operationalized in contemporary psychology as self-realization, meaning, and engagement. Stebbins argued that serious leisure differentially supports the eudaimonic component — it produces meaning and self-realization through skill development and identification — whereas casual leisure supports the hedonic component (pleasure, relaxation) but contributes little to enduring fulfillment.<sup class="ref"><a href="#ref-stebbins-happiness">33</a></sup></p>
+
+<p>The empirical literature is mixed in its specifics but consistent in its general finding. Studies across multiple serious-leisure populations — runners,<sup class="ref"><a href="#ref-runners">34</a></sup> seniors in educational programs, hobbyists across various domains — report positive associations between serious leisure engagement and SWB indices, though the effect is often mediated by the specific qualities Stebbins identified (career, identity, social world) rather than direct.<sup class="ref"><a href="#ref-runners">34</a></sup> Direct main effects of serious leisure on SWB are not always statistically significant once mediators are controlled for; what does consistently appear is that activities that allow skill development, identity construction, and embedding in a social world predict higher reported well-being.</p>
+
+<h3>Why this matters for alpine skiing in particular</h3>
+
+<p>Alpine skiing is a near-canonical example of serious leisure for several reasons. First, the skill demands are significant and the learning curve is long, so the "career" structure is unusually clean. Second, the activity has a robust ethos and social world — ski culture is internally coherent across continents and recognizable to outsiders. Third, the activity sustains flow experience (§IX) at a high rate, which contributes to the SWB associations. Fourth, the equipment-and-travel costs and the seasonality together create a structure of commitment — choosing to ski seriously is a non-trivial life arrangement, not an impulse purchase.</p>
+
+<p>The serious-leisure frame offers a useful corrective to two simpler ways of describing recreational skiing. It is not merely <em>exercise</em>, although it is that (§VIII). It is not merely <em>play</em>, although it is that too. It is, in Stebbins's sense, an activity that supplies enduring self-realization through structured pursuit of difficulty — and the well-being effects observed in skiers are continuous with those documented across serious-leisure populations more broadly. The autotelic structure that Csikszentmihalyi (§IX) identified at the moment-to-moment level finds its sociological complement in Stebbins at the life-organizational level.</p>
+
+<p style="font-size: 0.92rem; color: var(--ski-ink-soft); font-style: italic;">For the U.S. participation evidence — the 47-season NSAA skier-visit time series and its statistical analysis against macroeconomic, recession, and Olympic-host indicators — see §VI.</p>
+
+
+</div>
+
+<div data-lang-content="zh">
+<span class="section-num">IV.</span>
+<h2>严肃休闲</h2>
+
+<p class="lede">在前述技术与现象学路径之外，社会学文献中还有一个独立的脉络，把高山滑雪作为一类具有特征性结构、并对参与者生活产生特征性影响的<em>休闲活动</em>来处理。理论框架来自 Robert A. Stebbins（罗伯特·斯特宾斯）自 1980 年代初发展的 <em>serious leisure perspective（严肃休闲视角）</em>；其中实证上最相关的问题是：严肃休闲参与与主观幸福（subjective well-being, SWB）之间的关联。</p>
+
+<h3>严肃休闲框架</h3>
+
+<p>Stebbins 在 1982 年提出 <span class="term">serious leisure（严肃休闲）</span>概念，作为对当时主流休闲研究将"休闲"等同于休息与轻度娱乐的反拨。<sup class="ref"><a href="#ref-stebbins-1982">28</a></sup>他将其定义为对某项业余、爱好或志愿活动的系统性追求——其内容足以充实并具趣味性，使参与者在其中发展出一段<em>事业（career）</em>：一条技能成长、成就节点与身份建构的轨迹。Stebbins 把严肃休闲与 <em>casual leisure（轻度休闲）</em>（即时性、享乐性、低投入的活动，如看电视）区分开来；他后来又加入第三类 <em>project-based leisure（项目型休闲）</em>，处理一次性或时段性的努力。<sup class="ref"><a href="#ref-stebbins-2007">29</a></sup></p>
+
+<p>严肃休闲与轻度休闲的区别由六项品质刻画。高山滑雪在每一项上都具有显著表现：</p>
+
+<ol>
+  <li><strong>需要持续坚持</strong>——穿过困难、疲劳与挫折。学习滑雪在早期阶段以挫败著称，每个水平段的进步都需要数个赛季的有意识、刻意练习。</li>
+  <li><strong>事业轨迹</strong>——可识别的参与阶段，从初学到中级再到专家，伴随相应的社会角色（学生、休闲滑雪者、教练、选手、雪场巡逻员）。</li>
+  <li><strong>基于专门习得的知识、训练或技能的重大个人投入</strong>——高山滑雪需要技术性技能（Five Fundamentals，§II）、身体性技能（§IX）、对地形的默会读取，以及不能从其他运动迁移而来的累积经验。</li>
+  <li><strong>持久的收益</strong>——体能（§VIII）、围绕活动建立的稳定友谊、身份、自我实现，以及"把一件事做好"所带来的持续愉悦。</li>
+  <li><strong>独特的伦理与社会世界</strong>——滑雪有自己的亚文化：共享的术语、着装规范、仪式（first chair、季末玉米雪、après-ski）、杂志、电影，以及休闲滑雪者、选手、自由滑爱好者、雪场巡逻员、野外旅行者之间的部落式区分。</li>
+  <li><strong>对该追求的强烈认同</strong>——许多投入的滑雪者会围绕这项活动安排自己的冬季、居住地、友谊与自我观念。"ski bum（滑雪流浪者）"现象——一个围绕滑雪可达性来组织经济生活的人——是这种认同的极限情形。</li>
+</ol>
+
+<aside class="sidenote">将 Stebbins 框架应用于具体雪上运动的实证研究包括 Overholt 关于亚美尼亚青年滑雪作为休闲的案例研究<sup class="ref"><a href="#ref-overholt">30</a></sup>，以及关于美国国家滑雪巡逻队（NSP）志愿巡逻员作为严肃休闲群体的持续研究。<sup class="ref"><a href="#ref-patrollers">31</a></sup>Stebbins 本人是长年的休闲越野滑雪者，其个人体验也反哺到该理论中。</aside>
+
+<h3>严肃休闲与主观幸福</h3>
+
+<p>严肃休闲参与与幸福感之间的关联，是休闲研究领域被检验最多的命题之一。涉及的概念有两个：<span class="term">主观幸福（SWB）</span>，Diener 用以指对自身生活的认知与情感性评价<sup class="ref"><a href="#ref-diener">32</a></sup>；以及 <span class="term">eudaimonic well-being（实现性幸福）</span>，源自亚里士多德的"繁盛"概念，在当代心理学中被操作化为自我实现、意义与投入。Stebbins 主张：严肃休闲在不同程度上更支持 eudaimonic 维度——它通过技能成长与认同建构产生意义与自我实现；而轻度休闲支持 hedonic 维度（愉悦、放松），却对持久的实现感贡献有限。<sup class="ref"><a href="#ref-stebbins-happiness">33</a></sup></p>
+
+<p>实证文献在具体细节上存在分歧，但在总体结论上趋于一致。涵盖跑步者<sup class="ref"><a href="#ref-runners">34</a></sup>、参与教育项目的老年人、各类爱好者群体的研究均报告：严肃休闲参与与 SWB 指标存在正向关联——尽管这种效应往往由 Stebbins 所识别的具体品质（事业、身份、社会世界）所中介，而非直接作用。<sup class="ref"><a href="#ref-runners">34</a></sup>当中介因素被控制之后，严肃休闲对 SWB 的直接主效应并不总在统计上显著；持续显现的是这一发现：那些允许技能成长、身份建构、并嵌入社会世界的活动，预测更高的自报告幸福感。</p>
+
+<h3>这对高山滑雪意味着什么</h3>
+
+<p>高山滑雪在数个意义上是严肃休闲的近乎典范实例。其一，技能要求显著、学习曲线漫长，"事业"结构因此异常清晰。其二，这项活动具有稳健的伦理与社会世界——滑雪文化在跨大陆尺度上内部连贯，对外部观察者也可识别。其三，这项活动在高频率上支持 flow 体验（§IX），这一点对 SWB 关联有所贡献。其四，装备/旅行成本与季节性共同造就了一种承诺结构——认真选择滑雪是一项不平凡的生活安排，而非一次冲动消费。</p>
+
+<p>严肃休闲框架对两种较简化的休闲滑雪描述都提供了纠偏。它不仅仅是<em>体育锻炼</em>——尽管它确实是（§VIII）。它不仅仅是<em>玩耍</em>——尽管它也是。它，按 Stebbins 的意义，是一种通过对困难的结构化追求来供给持久自我实现的活动；在滑雪者身上观察到的幸福效应，与更广泛的严肃休闲群体上记录到的效应是连续的。契克森米哈伊（§IX）在每一刻层面识别的自成目的结构，在 Stebbins 那里于"生活组织"的层面找到其社会学意义上的对应物。</p>
+
+<p style="font-size: 0.92rem; color: var(--ski-ink-soft); font-style: italic;">关于美国滑雪参与规模的定量证据——NSAA 47 个赛季的滑雪人次时间序列，及其与宏观经济、衰退、冬奥会主办年份等指标的统计分析——见 §VI。</p>
+
+
+</div>
+
+</section>
+
+
+<!-- ============ V. GOOD SKIING ============ -->
+<section id="good">
+
+<div data-lang-content="en">
+<span class="section-num">V.</span>
+<h2>"Good skiing"</h2>
+
+<p class="lede">The question is not rhetorical. Several institutions, communities, and traditions answer it differently, and the answers are not reducible to one another. The disagreements are productive — they illuminate the structure of the activity.</p>
+
+<h3>The normative claim of the Five Fundamentals</h3>
+
+<p>PSIA's Five Fundamentals (§II) constitute one answer: good skiing is skiing that exhibits the right blend of fore–aft balance, lateral balance and outside-ski dominance, edge angle by inclination and angulation, rotary control with upper–lower separation, and pressure regulation. The claim has three notable features. It is <em>blendwise</em> rather than absolute — the same skier on a green run and a black run displays different blends. It is <em>scale-invariant</em> — a beginner wedge and a World Cup giant slalom are, in principle, the same five fundamentals at different magnitudes. And it is <em>qualitative</em> rather than measurable: PSIA examiners certify Level I, II, and III instructors by judgment, not by instrumentation.</p>
+
+<aside class="sidenote">A concrete consequence: two skiers may receive the same PSIA certification by skiing very differently. The standard is a constellation of qualities, not a number to clear.</aside>
+
+<h3>The measurable claim of FIS racing</h3>
+
+<p>Competition supplies a different answer: good skiing is skiing that produces the lowest time between two electronic gates. This is a <em>cardinal</em> answer in the economist's sense — finer-grained than the PSIA's qualitative ranking, with a unique winner per run. The price for that precision is that the answer is parochial: a fast giant slalom run on hard snow is good giant slalom skiing; nothing follows about whether the racer is a good powder skier, a good bump skier, or a good instructor. FIS regulates the equipment (§VII) tightly because, given a fixed timing rule, athletes will optimize ski geometry until either the equipment or the body fails. The 2003 and 2012 sidecut-radius increases for giant slalom are explicit policy responses to that race-to-the-bottom dynamic.<sup class="ref"><a href="#ref-fis-equipment">6</a></sup></p>
+
+<h3>The aesthetic claim</h3>
+
+<p>A third answer cuts across the first two. Good skiing is <em>beautiful</em> skiing: the carving turn that produces a clean parabolic track in the snow, the descent that connects bumps with rhythm rather than survival, the line through trees that looks composed rather than scrambled. Telemark turns are commonly described as more beautiful than alpine parallel turns, even by skiers who would not race them; the kneeling lunge is read aesthetically before functionally. The aesthetic answer is hard to operationalize but persistent: skiers reliably distinguish skiing they admire from skiing they don't, and the distinction tracks neither PSIA certification nor stopwatch.</p>
+
+<h3>The phenomenological claim</h3>
+
+<p>A fourth answer concerns the skier's experience rather than any external feature. Good skiing is skiing in which the activity is absorbing in Csikszentmihalyi's sense (§IX) — challenge matched to skill, awareness merged with action, self-consciousness suspended. By this criterion a beginner having a great morning on a green run is doing better skiing than a mid-pack World Cup racer having a frustrated training day. The phenomenological criterion is taken seriously in recreational skiing culture but rejected by competition culture: the racer's frustration is part of caring about the result, and a coach who told a slumping athlete "but the experience is the point" would be misunderstanding the project.</p>
+
+<h3>That the answers branch is itself the interesting fact</h3>
+
+<p>That carving and short-radius pivot turns are sibling skills (§II) rather than master and apprentice already implies that good skiing has more than one terminus. The four answers above generalize the point. Each is internally coherent; none is reducible to the others; and the institutions that organize alpine skiing (PSIA, FIS, ski schools, magazines, racing clubs, backcountry guides) implicitly back different answers. No collapse onto a single criterion has occurred, partly because the four answers address genuinely different objects (a body's coordination, a course time, an aesthetic surface, a subjective state), and no instrument has so far measured all four at once.</p>
+
+<aside class="sidenote">The CARV system (§II) is a recent attempt to instrument the first answer — to give PSIA's qualitative fundamentals a quantitative shadow. Whether such instrumentation will alter the activity is an open question.</aside>
+
+<h3>An observation on the gap between articulated and embodied technique</h3>
+
+<p>One reason the question persists is that skiers reliably know they are skiing badly long before they can articulate why. A common pattern: a skier who feels "stuck" at intermediate level rarely presents a technical problem absent at the beginner level. What is present is a <em>trust</em> problem — distrust that the equipment will hold an edge if the brakes are released, distrust that the body will find balance under forward commitment. The most common technical fault among such skiers, leaning back, is more accurately described as a fear response than as laziness or unawareness: the body has decided that being far from the danger is safer than committing to it. The articulation of fundamental 1 ("shins on the boot tongue") is precisely correct as description and almost useless as remedy; what works is constructing situations in which forward commitment is rewarded by the snow, until the body's threat assessment updates. This is the gap Polanyi (§IX) called the <em>tacit dimension</em>: even when good skiing can be described, descriptions do not transmit it.</p>
+
+</div>
+
+<div data-lang-content="zh">
+<span class="section-num">V.</span>
+<h2>"好的滑雪"</h2>
+
+<p class="lede">这并非修辞问题。若干机构、社群与传统对此给出不同答案，且这些答案彼此不可相互还原。这些分歧是有意义的——它们揭示了这项活动的结构。</p>
+
+<h3>Five Fundamentals 的规范性主张</h3>
+
+<p>PSIA 的 Five Fundamentals（§II）构成一种答案：好的滑雪是表现出前后平衡、左右平衡与外侧脚主导、由倾斜与折屈得到的立刃角度、配以上下分离的旋转控制、以及压力调节这五者得当配比的滑雪。这一主张有三个显著特征。它是<em>配比式（blendwise）</em>而非绝对的——同一个滑雪者在绿道与黑道上呈现不同的配比。它是<em>尺度不变的</em>——初学者犁式与世界杯大回转原则上是同一组五条，仅是量级不同。它是<em>定性的</em>而非可量化的：PSIA 考官通过判断、而非仪器，认证一、二、三级教练。</p>
+
+<aside class="sidenote">一个具体后果：两位滑雪者可以以截然不同的方式获得同一级 PSIA 认证。这个标准是一组品质的星丛，而非一个需要达到的数字。</aside>
+
+<h3>FIS 竞赛的可测量性主张</h3>
+
+<p>竞赛提供了另一种答案：好的滑雪就是在两道电子计时门之间用时最短的滑雪。这是经济学意义上的<em>基数性</em>答案——比 PSIA 的定性排序粒度更细，每次滑行有唯一胜者。这种精度的代价是答案的局部性：硬雪上一次快的大回转是好的大回转滑雪；至于该选手是不是好的粉雪选手、好的雪包选手或好的教练，由此推不出来。FIS 严格规制装备（§VII），是因为在固定的计时规则下，运动员会持续优化板形几何，直到装备或身体失败为止。2003 年与 2012 年大回转侧切半径的两次提升是对这种"逐底竞争"动力的明确政策回应。<sup class="ref"><a href="#ref-fis-equipment">6</a></sup></p>
+
+<h3>美学性主张</h3>
+
+<p>第三种答案横切前两者。好的滑雪是<em>美的</em>滑雪：在雪面上画出一道干净抛物线弧迹的 carving，以节奏而非求生连接雪包的下行，看起来从容而非慌乱地穿过林间的线路。Telemark 转弯常被描述为比高山平行式更美——哪怕由不会去比赛的滑雪者来评。屈膝前弓的形象先被读作美的，而后才被读作功能的。美学性答案难以操作化，却持久存在：滑雪者可靠地区分自己欣赏的滑雪与不欣赏的滑雪，而这种区分既不跟随 PSIA 认证，也不跟随秒表。</p>
+
+<h3>现象学主张</h3>
+
+<p>第四种答案不在外部特征，而在滑雪者的体验。好的滑雪是契克森米哈伊（§IX）意义上具有沉浸性的滑雪——挑战与技能匹配、意识与行动合一、自我意识被悬置。按这一标准，一位初学者在绿道上拥有美好上午的滑雪，胜过一位中游世界杯选手在挫败的训练日里的滑雪。这一现象学标准在休闲滑雪文化里被认真对待，却被竞赛文化拒绝：选手的挫败感是其在意结果的一部分；倘若教练对状态低迷的运动员说"可重要的是体验"，那是误解了项目本身。</p>
+
+<h3>四种答案分叉本身就是值得思考的事</h3>
+
+<p>Carving 与挫雪小弯是同辈技能（§II）而非师徒关系，已经暗示好的滑雪有多于一个的终点。上面四种答案把这个论点推得更远。每一个内部自洽；没有任何一个可还原至其他；而组织高山滑雪的机构（PSIA、FIS、滑雪学校、杂志、竞赛俱乐部、野外向导）背后都隐含支持着不同答案。迄今没有任何向单一标准的塌缩发生——部分原因是上述四个答案所处理的是真正不同的对象（身体协调、课程用时、美学表面、主观状态），目前没有仪器能同时测量四者。</p>
+
+<aside class="sidenote">CARV 系统（§II）是对第一种答案的一次最近的仪器化尝试——给 PSIA 定性的基本功一个量化的影子。这种仪器化是否会改变滑雪本身，是一个开放问题。</aside>
+
+<h3>关于已表达的技术与已身体化的技术之间的鸿沟</h3>
+
+<p>这个问题持续存在的一个原因是：滑雪者可靠地知道自己正在滑得糟，远早于他们能说清楚为何如此。一种常见的模式：感到中级"卡住"的滑雪者，几乎从未呈现初学阶段未曾出现过的技术问题。他们呈现的是<em>信任</em>问题——不信任装备松开刹车后仍能挂住雪刃，不信任身体在前向承诺中能找到平衡。这类滑雪者最常见的技术错误——身体后仰——更准确地是一种恐惧反应而非懒惰或无意识：身体已经决定，远离危险比委身于它更安全。基本功 1 的表述（"胫骨顶住靴舌"）作为描述精确无误，作为补救措施却几近无用；起作用的是构造一种情境，让前向承诺被雪面奖赏，直到身体的威胁评估更新。这正是波兰尼（§IX）所称的<em>默会维度</em>：即便好的滑雪可以被描述，描述并不能传递它。</p>
+
+</div>
+
+</section>
+
+
+<!-- ============ VI. FORTY-SEVEN SEASONS (RESEARCH) ============ -->
+<section id="research">
+
+<div data-lang-content="en">
+<span class="section-num">VI.</span>
+<h2>Forty-seven seasons</h2>
+
+<p class="lede">An empirical retrospective on U.S. skiing, 1978–2025: how visit volumes have moved with macroeconomic conditions, regional structure, Olympic-host years, and the post-pandemic baseline shift. The full statistical analysis is published as a separate page; the section below introduces the underlying time series and summarizes the five most robust findings.</p>
+
+<p>Quantitative context is supplied by the <span class="term">National Ski Areas Association</span> (NSAA), the U.S. industry trade association, which has tracked total annual <em>skier visits</em> at U.S. resorts since the 1978–79 season. A skier visit is registered every time an individual person uses a lift ticket or pass at a ski area on a given day; the same person skiing five days at one resort and two days at another contributes seven skier visits.<sup class="ref"><a href="#ref-nsaa-historical">43</a></sup></p>
+
+<div class="nsaa-figure">
+<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="U.S. skier visits, 1978-79 through 2024-25">
+  <text x="380" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0a3d62">U.S. skier visits, 1978–79 through 2024–25 (millions)</text>
+
+  <g transform="translate(60, 40)">
+    <line x1="0" y1="0"   x2="660" y2="0"   stroke="#e5e7eb" stroke-dasharray="2 3"/>
+    <line x1="0" y1="60"  x2="660" y2="60"  stroke="#e5e7eb" stroke-dasharray="2 3"/>
+    <line x1="0" y1="120" x2="660" y2="120" stroke="#e5e7eb" stroke-dasharray="2 3"/>
+    <line x1="0" y1="180" x2="660" y2="180" stroke="#e5e7eb" stroke-dasharray="2 3"/>
+    <line x1="0" y1="240" x2="660" y2="240" stroke="#1f2328" stroke-width="1"/>
+    <g font-family="Inter, sans-serif" font-size="9" fill="#6b7280">
+      <text x="-8" y="3"   text-anchor="end">70</text>
+      <text x="-8" y="63"  text-anchor="end">65</text>
+      <text x="-8" y="123" text-anchor="end">60</text>
+      <text x="-8" y="183" text-anchor="end">55</text>
+      <text x="-8" y="243" text-anchor="end">50</text>
+    </g>
+
+    <polyline fill="none" stroke="#0a3d62" stroke-width="2.2"
+      points="0,168 29,156 72,146 86,135 129,158 172,160 215,152 258,160 301,150 330,144 373,128 416,142 459,140 488,121 531,134 545,126 559,128 588,127 602,116 617,57 631,115 645,102"/>
+
+    <g font-family="Inter, sans-serif" font-size="9" fill="#374151">
+      <circle cx="0" cy="168" r="3" fill="#0a3d62"/>
+      <text x="6" y="184">50.2M (78–79)</text>
+
+      <circle cx="215" cy="152" r="3" fill="#0a3d62"/>
+      <text x="220" y="148">54.6M (93–94)</text>
+
+      <circle cx="316" cy="132" r="3" fill="#0a3d62"/>
+      <text x="320" y="124">57.3M (00–01)</text>
+
+      <circle cx="459" cy="114" r="3" fill="#0a3d62"/>
+      <text x="463" y="108">60.5M (10–11)</text>
+
+      <circle cx="617" cy="57" r="4" fill="#a8323e"/>
+      <text x="617" y="48" text-anchor="middle" font-weight="600" fill="#a8323e">65.4M ★ record</text>
+
+      <circle cx="645" cy="102" r="3" fill="#0a3d62"/>
+      <text x="652" y="100" text-anchor="end">61.5M (24–25)</text>
+    </g>
+
+    <g font-family="Inter, sans-serif" font-size="9" fill="#6b7280" text-anchor="middle">
+      <text x="0"   y="258">1978–79</text>
+      <text x="158" y="258">1990</text>
+      <text x="316" y="258">2000</text>
+      <text x="459" y="258">2010</text>
+      <text x="588" y="258">2020</text>
+      <text x="660" y="258">2024–25</text>
+    </g>
+
+    <text x="0" y="278" font-family="Inter, sans-serif" font-size="9" fill="#9ca3af" font-style="italic">Source: National Ski Areas Association (NSAA), Kottke End-of-Season &amp; Demographic Reports. Series shows reported preliminary or final season totals; values for unmarked seasons are interpolated from the published time series for visualization.</text>
+  </g>
+</svg>
+</div>
+
+<p>The series shows a flat-but-positive long-term trend: a low baseline near 50 million visits in the late 1970s, with the moving average creeping upward to about 60 million by the 2010s. Year-to-year variation has historically tracked snowfall, with above-average snow seasons (notably 2007–08, 2010–11, and the record-setting 2022–23 with 225 inches of average national snowfall) producing visit spikes. The 2022–23 season's 65.4 million visits broke the previous record by an unusual 4-million margin; both 2023–24 (60.4 million) and 2024–25 (61.5 million) settled meaningfully above pre-pandemic norms, suggesting a structural lift in the industry's baseline. Industry analysts attribute much of this stability to the shift from day-ticket to season-pass economics: both Vail Resorts' Epic Pass and Alterra Mountain Company's Ikon Pass have decoupled revenue from any given day's weather and produced what NSAA calls a three-year rolling average above 60 million for four consecutive seasons.<sup class="ref"><a href="#ref-nsaa-2024">44</a></sup></p>
+
+<aside class="sidenote">Skier visits are a measure of <em>frequency</em>, not <em>participation</em>. Approximately 10.6 million distinct U.S. residents skied or snowboarded in the 2023–24 season — about 3.1 percent of the population — meaning each participant averages roughly 5.7 visits per season. Skiing is far smaller as a participation sport than golf (47.2 million participants) or bowling (67 million), even before its weather, geography, and cost barriers are taken into account.<sup class="ref"><a href="#ref-nsaa-participation">45</a></sup></aside>
+
+<p>Two structural facts matter for the serious-leisure interpretation. First, all of the top-ten skier-visit seasons on record have occurred since 2005, and half of the top ten in just the last five years; the activity is not in visible decline despite climate-related concerns about snow reliability. Second, ski-area concentration has increased markedly: the largest 12 percent of U.S. resorts ("extra-large" by NSAA's vertical-transportation metric) accounted for 55–57 percent of national skier visits in recent seasons, while the smallest 59 percent of resorts produced only 13 percent. The economic geography of American skiing is increasingly bimodal — a small number of very large destination resorts dominating visit totals, alongside a long tail of small community ski areas with very different economics and clientele.</p>
+
+<p>This long count is the empirical backbone of the research note linked below. Originally introduced in §IV as the quantitative scale of an activity that meets Stebbins's serious-leisure criteria, the same series invites a different, more analytical question: what <em>moves</em> the year-to-year totals? The 47-season record was paired with annual U.S. real GDP, real per-capita disposable income, NBER-dated recessions, and Olympic-year encoding to test whether the material entry barriers of skiing — equipment, lift access, travel, time off — produce a procyclical pattern of the kind one would expect for a "luxury" recreational activity.</p>
+
+<div class="research-highlights" style="margin: 1.5rem 0 2rem; padding: 1.25rem 1.5rem; background: var(--ski-paper-deep); border: 1px solid var(--ski-rule); border-radius: 4px; max-width: 56rem;">
+  <p style="font-family: var(--ski-font-ui); font-size: 0.78rem; font-variant: small-caps; letter-spacing: 0.06em; color: var(--ski-navy); margin: 0 0 0.8rem; font-weight: 600;">Five robust findings</p>
+  <ol style="margin: 0; padding-left: 1.4em; font-size: 0.95rem; line-height: 1.6;">
+    <li style="margin-bottom: 0.55rem;"><strong>Skiing is procyclical at the level, not at the change.</strong> Visits correlate strongly with U.S. wealth in level (<em>r</em> &approx; 0.77 with both real GDP and real disposable income per capita), but year-to-year change in those macros has near-zero relationship with year-to-year change in visits.</li>
+    <li style="margin-bottom: 0.55rem;"><strong>The aggregate macroeconomic relationship is a Rocky Mountain story.</strong> Rocky Mountain visits track real GDP at <em>r</em> &gt; 0.91; the Northeast shows essentially no relationship to U.S. wealth; the Midwest correlates <em>negatively</em>.</li>
+    <li style="margin-bottom: 0.55rem;"><strong>U.S. recessions are not statistically detectable</strong> in the visit series at <em>p</em> &lt; 0.05. Skier demand is inelastic to short-run macro shocks at this aggregation level.</li>
+    <li style="margin-bottom: 0.55rem;"><strong>Olympic-year effects are inconclusive.</strong> The two U.S. host years are split (Lake Placid 1980 above local baseline, Salt Lake City 2002 below it); the average is essentially zero.</li>
+    <li><strong>The post-COVID baseline is meaningfully higher.</strong> 2020–21 through 2024–25 mean visits exceed 2014–15 through 2018–19 mean by 6.6 M per year (+12%, <em>p</em> &approx; 0.003).</li>
+  </ol>
+</div>
+
+<p style="margin-top: 1.5rem;">&rarr; <a href="research.html" style="font-weight: 500;">Read the full research note: <em>Skiing in the United States, 1978&ndash;2025: A multi-variable retrospective</em></a></p>
+
+<p style="margin-top: 0.5rem; color: var(--ski-ink-soft); font-size: 0.92rem;">See also the <a href="map.html" style="font-weight: 500;">interactive map of 217 U.S. resorts</a>, which uses the same NSAA regional scheme and supplied the geographic backbone for the spatial decomposition in this study.</p>
+
+<aside class="sidenote">The research page is in English only and includes downloadable CSV files of the underlying data plus full methodological documentation. The page is independent of the main wiki and can be cited at <code>yifanova.com/ski/research.html</code>.</aside>
+
+</div>
+
+<div data-lang-content="zh">
+<span class="section-num">VI.</span>
+<h2>四十七个雪季</h2>
+
+<p class="lede">关于美国滑雪 1978&ndash;2025 年的实证回顾：滑雪人次如何与宏观经济条件、区域结构、冬奥会主办年份、以及后疫情基线相互关联。完整研究单独成页；本节先呈现底层时间序列，并简要列出五项最稳健的发现。</p>
+
+<p>定量背景由美国行业协会 <span class="term">National Ski Areas Association</span>（NSAA）提供，该协会自 1978–79 赛季起追踪全美雪场的总<em>滑雪者人次（skier visits）</em>。每当有一人在某一天使用一张缆车票或季票，便记录一次 skier visit；同一人在一家雪场滑五天、再去另一家滑两天，共计七次 skier visits。<sup class="ref"><a href="#ref-nsaa-historical">43</a></sup></p>
+
+<div class="nsaa-figure">
+<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="美国滑雪者人次，1978-79 至 2024-25">
+  <text x="380" y="20" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="13" font-weight="600" fill="#0a3d62">美国滑雪者人次，1978–79 至 2024–25（百万）</text>
+
+  <g transform="translate(60, 40)">
+    <line x1="0" y1="0"   x2="660" y2="0"   stroke="#e5e7eb" stroke-dasharray="2 3"/>
+    <line x1="0" y1="60"  x2="660" y2="60"  stroke="#e5e7eb" stroke-dasharray="2 3"/>
+    <line x1="0" y1="120" x2="660" y2="120" stroke="#e5e7eb" stroke-dasharray="2 3"/>
+    <line x1="0" y1="180" x2="660" y2="180" stroke="#e5e7eb" stroke-dasharray="2 3"/>
+    <line x1="0" y1="240" x2="660" y2="240" stroke="#1f2328" stroke-width="1"/>
+    <g font-family="Inter, sans-serif" font-size="9" fill="#6b7280">
+      <text x="-8" y="3"   text-anchor="end">70</text>
+      <text x="-8" y="63"  text-anchor="end">65</text>
+      <text x="-8" y="123" text-anchor="end">60</text>
+      <text x="-8" y="183" text-anchor="end">55</text>
+      <text x="-8" y="243" text-anchor="end">50</text>
+    </g>
+
+    <polyline fill="none" stroke="#0a3d62" stroke-width="2.2"
+      points="0,168 29,156 72,146 86,135 129,158 172,160 215,152 258,160 301,150 330,144 373,128 416,142 459,140 488,121 531,134 545,126 559,128 588,127 602,116 617,57 631,115 645,102"/>
+
+    <g font-family="Inter, sans-serif" font-size="9" fill="#374151">
+      <circle cx="0" cy="168" r="3" fill="#0a3d62"/>
+      <text x="6" y="184">50.2M (78–79)</text>
+
+      <circle cx="215" cy="152" r="3" fill="#0a3d62"/>
+      <text x="220" y="148">54.6M (93–94)</text>
+
+      <circle cx="316" cy="132" r="3" fill="#0a3d62"/>
+      <text x="320" y="124">57.3M (00–01)</text>
+
+      <circle cx="459" cy="114" r="3" fill="#0a3d62"/>
+      <text x="463" y="108">60.5M (10–11)</text>
+
+      <circle cx="617" cy="57" r="4" fill="#a8323e"/>
+      <text x="617" y="48" text-anchor="middle" font-weight="600" fill="#a8323e" font-family="Noto Serif SC, serif">65.4M ★ 历史最高</text>
+
+      <circle cx="645" cy="102" r="3" fill="#0a3d62"/>
+      <text x="652" y="100" text-anchor="end">61.5M (24–25)</text>
+    </g>
+
+    <g font-family="Inter, sans-serif" font-size="9" fill="#6b7280" text-anchor="middle">
+      <text x="0"   y="258">1978–79</text>
+      <text x="158" y="258">1990</text>
+      <text x="316" y="258">2000</text>
+      <text x="459" y="258">2010</text>
+      <text x="588" y="258">2020</text>
+      <text x="660" y="258">2024–25</text>
+    </g>
+
+    <text x="0" y="278" font-family="Noto Serif SC, serif" font-size="10" fill="#9ca3af">数据来源：National Ski Areas Association（NSAA），Kottke 赛末与人口统计报告。曲线显示已发布的初步或最终赛季总数；未标注的年份取自该公开时间序列的插值，仅用于可视化。</text>
+  </g>
+</svg>
+</div>
+
+<p>这条曲线显示出"长期总体平稳但温和向上"的格局：1970 年代末的基线约为 5000 万人次，移动平均缓慢爬升至 2010 年代的约 6000 万。年度间波动历史上紧密追踪降雪量——降雪显著高于均值的赛季（如 2007–08、2010–11，以及 2022–23 全美平均 225 英寸的破纪录降雪季）会带动人次飙升。2022–23 季的 6540 万人次以异常的近 400 万人次的差距打破前纪录；2023–24（6040 万）与 2024–25（6150 万）也都明显高于疫情前的常态，表明产业基线已结构性抬升。行业分析普遍把这种稳定性归因于经济模式从单日票向季票的转移：Vail Resorts 的 Epic Pass 与 Alterra Mountain Company 的 Ikon Pass 已经把营收与具体某天的天气解耦——NSAA 报告称，三年滚动平均人次已连续四个赛季稳定在 6000 万以上。<sup class="ref"><a href="#ref-nsaa-2024">44</a></sup></p>
+
+<aside class="sidenote">滑雪者人次（skier visits）测的是<em>频次</em>，而非<em>参与人数</em>。2023–24 赛季全美约有 1060 万人独立参与了滑雪或单板——约占全国人口的 3.1%——这意味着平均每位参与者每个赛季约 5.7 次访问。作为参与型运动，滑雪规模远小于高尔夫（4720 万参与者）或保龄球（6700 万），何况滑雪还有天气、地理与成本上的多重门槛。<sup class="ref"><a href="#ref-nsaa-participation">45</a></sup></aside>
+
+<p>对严肃休闲解读而言，有两个结构性事实值得留意。其一，NSAA 历史上排名前十的滑雪人次赛季<em>全部</em>都发生在 2005 年之后，前十中的一半就发生在最近五年内；尽管气候相关的雪量可靠性引发广泛担忧，这项活动并没有出现可见衰退。其二，雪场集中度显著上升：按 NSAA 的"垂直运送能力"指标定义，最大的 12% 雪场（"特大型"）在近年的赛季中囊括了全美 55–57% 的滑雪人次，而最小的 59% 的雪场仅产出 13%。美国滑雪的经济地理日益呈现双峰结构——少数巨型目的地雪场主导人次总量，与之并存的是经济模式与客群截然不同的小型社区雪场长尾。</p>
+
+<p>这条长卷是下文链接的研究的实证主干。它在 &sect;IX 中首次出现，用作满足 Stebbins 严肃休闲判据的某项活动的规模性证据；但同一序列也邀请另一种更具分析性的提问：是<em>什么</em>在驱动着年度总数的逐年波动？我们将这份 47 个赛季的时间序列与美国年度实际 GDP、实际人均可支配收入、NBER 划定的衰退年份以及冬奥会年份编码相结合，用以检验：滑雪所具有的物质性进入门槛（装备、缆车、交通、闲暇时间）是否使其呈现出与&ldquo;奢侈型&rdquo;娱乐活动相一致的顺周期模式。</p>
+
+<div class="research-highlights" style="margin: 1.5rem 0 2rem; padding: 1.25rem 1.5rem; background: var(--ski-paper-deep); border: 1px solid var(--ski-rule); border-radius: 4px; max-width: 56rem;">
+  <p style="font-family: var(--ski-font-ui); font-size: 0.85rem; font-variant: small-caps; letter-spacing: 0.06em; color: var(--ski-navy); margin: 0 0 0.8rem; font-weight: 600;">五项稳健的发现</p>
+  <ol style="margin: 0; padding-left: 1.4em; font-size: 0.95rem; line-height: 1.7;">
+    <li style="margin-bottom: 0.55rem;"><strong>滑雪在水平上顺周期，在变化上不顺周期。</strong>滑雪人次与美国财富水平之间存在强相关（与实际 GDP 与实际人均可支配收入的 <em>r</em> 均约为 0.77），但宏观指标的逐年变化与人次的逐年变化之间几乎不相关。</li>
+    <li style="margin-bottom: 0.55rem;"><strong>这种总体宏观相关性，本质上是落基山脉地区的故事。</strong>Rocky Mountain 区域人次与实际 GDP 的相关 <em>r</em> &gt; 0.91；Northeast 与美国财富基本无关；Midwest 呈现<em>负</em>相关。</li>
+    <li style="margin-bottom: 0.55rem;"><strong>美国经济衰退在统计意义上不可见。</strong>在该聚合层级上，<em>p</em> &lt; 0.05 的检验中无法检出衰退年份的显著差异。短期宏观冲击下的滑雪需求是缺乏弹性的。</li>
+    <li style="margin-bottom: 0.55rem;"><strong>冬奥会效应缺乏定论。</strong>两次美国主办年份呈现分裂结果（1980 Lake Placid 高于本地基线，2002 Salt Lake City 低于），平均效应近于零。</li>
+    <li><strong>后疫情基线显著上移。</strong>2020&ndash;21 至 2024&ndash;25 平均人次比 2014&ndash;15 至 2018&ndash;19 平均高 6.6 M（+12%，<em>p</em> &approx; 0.003）。</li>
+  </ol>
+</div>
+
+<p style="margin-top: 1.5rem;">&rarr; <a href="research.html" style="font-weight: 500;">阅读完整研究：<em>Skiing in the United States, 1978&ndash;2025: A multi-variable retrospective</em></a></p>
+
+<p style="margin-top: 0.5rem; color: var(--ski-ink-soft); font-size: 0.92rem;">另参 <a href="map.html" style="font-weight: 500;">217 个美国雪场的交互地图</a>，与本研究采用同一 NSAA 大区划分，亦为本研究的空间分解提供了地理底图。</p>
+
+<aside class="sidenote">研究页仅用英文，包含可下载的原始数据 CSV 与完整方法说明。该页独立于本主 wiki，可单独引用，地址为 <code>yifanova.com/ski/research.html</code>。</aside>
+
+</div>
+
+</section>
+
+
+<!-- ============ VII. RACING: CELERIUS, ACCURATIUS, LIBERIUS ============ -->
+<section id="racing">
+
+<div data-lang-content="en">
+<span class="section-num">VII.</span>
+<h2>Racing: Celerius, Accuratius, Liberius</h2>
+
+<p>The Fédération Internationale de Ski (FIS) recognizes five individual alpine disciplines, each defined by a combination of course geometry, average turn radius, expected speed, and equipment specifications. The Olympic Winter Games include all five.</p>
+
+<h3>The five disciplines</h3>
+
+<table>
+  <thead>
+    <tr><th>Discipline</th><th>Vertical drop (men)</th><th>Avg. speed</th><th>Character</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Slalom (SL)</strong></td><td>180–220 m</td><td>~40 km/h</td><td>Tightest gates, two runs, technical event</td></tr>
+    <tr><td><strong>Giant Slalom (GS)</strong></td><td>250–450 m</td><td>~70 km/h</td><td>Wider, smoother turns, two runs, technical event</td></tr>
+    <tr><td><strong>Super-G (SG)</strong></td><td>400–650 m</td><td>~100 km/h</td><td>Single run, speed event with turning</td></tr>
+    <tr><td><strong>Downhill (DH)</strong></td><td>800–1100 m</td><td>~110 km/h, peaks 130+</td><td>Single run, fastest event, course-inspected</td></tr>
+    <tr><td><strong>Combined / Team</strong></td><td>varies</td><td>varies</td><td>Aggregated SL + speed run, or team format</td></tr>
+  </tbody>
+</table>
+
+<h3>Equipment specifications, World Cup 2024–25</h3>
+
+<p>The FIS publishes equipment regulations annually in <cite>Specifications for Alpine Competition Equipment</cite>. Recent World Cup specifications:<sup class="ref"><a href="#ref-fis-equipment">6</a></sup></p>
+
+<table>
+  <thead>
+    <tr><th>Discipline</th><th>Min. ski length (M / W)</th><th>Min. sidecut radius (M / W)</th><th>Max. stand height</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Slalom</td><td>165 cm / 155 cm</td><td>(no minimum)</td><td>50 mm</td></tr>
+    <tr><td>Giant Slalom</td><td>193 cm / 188 cm</td><td>30 m / 30 m</td><td>50 mm</td></tr>
+    <tr><td>Super-G</td><td>210 cm / 205 cm</td><td>45 m / 40 m</td><td>50 mm</td></tr>
+    <tr><td>Downhill</td><td>218 cm / 210 cm</td><td>50 m / 50 m</td><td>50 mm</td></tr>
+  </tbody>
+</table>
+
+<p>The minimum-radius rules are a safety intervention. Following a sharp rise in serious knee injuries among World Cup racers in the 2000s, FIS raised the GS minimum sidecut radius from 21 m (set in 2003) to 27 m (2007) to 35 m (2012), then relaxed it to 30 m for 2024–25.<sup class="ref"><a href="#ref-fis-equipment">6</a></sup> The policy logic: deeper sidecut allows a tighter natural turn at lower edge angles, which produces both faster times and higher knee loads. Bounding the sidecut from below partially decouples ski geometry from knee stress.</p>
+
+<aside class="sidenote">Equipment regulation in alpine racing is a continuous arms race between athletes optimizing for time and FIS regulating for safety. Most rule changes since the 1990s — minimum length, minimum radius, maximum stand height, helmet standards — are responses to documented injury patterns. See §VIII for the corresponding epidemiology.</aside>
+
+<h3>Edge bevel in race tunes</h3>
+
+<p>Equipment regulations bound the ski as manufactured but not the day-of tuning. Race-stock skis are tuned to side-bevel angles substantially sharper than recreational equipment: World Cup slalom tunes commonly run 0.5° base / 3° side (i.e., an 87° side angle), with conditions-dependent variants approaching 0° / 4° on hard ice. The combination produces edge grip that recreational equipment cannot match and that recreational technique cannot tolerate — the same edge that holds for a racer at 45° of inclination would feel "hooky" and uncontrollable to most non-racers.<sup class="ref"><a href="#ref-bevel">5</a></sup></p>
+
+</div>
+
+<div data-lang-content="zh">
+<span class="section-num">VII.</span>
+<h2>竞速：Celerius, Accuratius, Liberius</h2>
+
+<p>国际滑雪联合会（FIS）承认五项个人高山项目，每项由赛道几何、平均转弯半径、预期速度与装备规格的组合所定义。冬奥会五项全部包括在内。</p>
+
+<h3>五项个人项目</h3>
+
+<table>
+  <thead>
+    <tr><th>项目</th><th>垂直落差（男）</th><th>平均速度</th><th>特点</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>回转 (SL)</strong></td><td>180–220 m</td><td>约 40 km/h</td><td>最密集的旗门，两轮成绩相加，技术项目</td></tr>
+    <tr><td><strong>大回转 (GS)</strong></td><td>250–450 m</td><td>约 70 km/h</td><td>更宽更圆顺的弯，两轮，技术项目</td></tr>
+    <tr><td><strong>超级大回转 (SG)</strong></td><td>400–650 m</td><td>约 100 km/h</td><td>一轮，带转弯的速度项目</td></tr>
+    <tr><td><strong>速降 (DH)</strong></td><td>800–1100 m</td><td>约 110 km/h，峰值 130+</td><td>一轮，最快项目，赛前需踩道</td></tr>
+    <tr><td><strong>全能 / 团体</strong></td><td>不一</td><td>不一</td><td>SL + 速度赛合并，或团体接力</td></tr>
+  </tbody>
+</table>
+
+<h3>装备规格，2024–25 世界杯赛季</h3>
+
+<p>FIS 每年发布《Specifications for Alpine Competition Equipment》。近期世界杯规格如下：<sup class="ref"><a href="#ref-fis-equipment">6</a></sup></p>
+
+<table>
+  <thead>
+    <tr><th>项目</th><th>最短板长（男 / 女）</th><th>最小侧切半径（男 / 女）</th><th>最大站高</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>回转</td><td>165 cm / 155 cm</td><td>（无最低限）</td><td>50 mm</td></tr>
+    <tr><td>大回转</td><td>193 cm / 188 cm</td><td>30 m / 30 m</td><td>50 mm</td></tr>
+    <tr><td>超级大回转</td><td>210 cm / 205 cm</td><td>45 m / 40 m</td><td>50 mm</td></tr>
+    <tr><td>速降</td><td>218 cm / 210 cm</td><td>50 m / 50 m</td><td>50 mm</td></tr>
+  </tbody>
+</table>
+
+<p>最小半径规则是一种安全干预。2000 年代世界杯选手严重膝伤大幅上升之后，FIS 将大回转最小侧切半径自 21 m（2003 年）连续上调至 27 m（2007）、再至 35 m（2012），并于 2024–25 赛季回调至 30 m。<sup class="ref"><a href="#ref-fis-equipment">6</a></sup>政策逻辑：更深的侧切允许在较低立刃角度下完成更紧的自然弯，由此既产生更快的成绩，也产生更高的膝部载荷。从下方约束侧切，是把板形几何与膝部应力部分解耦的一种手段。</p>
+
+<aside class="sidenote">高山竞赛的装备规制是运动员为成绩优化与 FIS 为安全规制之间的持续军备竞赛。1990 年代以来的多数规则变更——最低板长、最小侧切半径、最大站高、头盔标准——都是对已记录的伤病模式的回应。对应的流行病学见 §VIII。</aside>
+
+<h3>赛事调刃与板侧斜角</h3>
+
+<p>装备规制约束的是出厂状态，而非比赛日的调刃。竞赛板的侧面斜角远比休闲板锋利：世界杯回转的常见调刃为 0.5° base / 3° side（即 87° side angle），冰面赛道上甚至会出现 0° / 4°。这种组合所产生的咬合是休闲装备无法匹敌、休闲技术也难以承受的——同一刃在选手 45° 倾斜下挂得稳，对多数非选手却会感到"挂雪"难以控制。<sup class="ref"><a href="#ref-bevel">5</a></sup></p>
+
+</div>
+
+</section>
+
+
+<!-- ============ VIII. FROM ECCENTRIC CONTRACTION TO ACL INJURY ============ -->
+<section id="body-on-snow">
+
+<div data-lang-content="en">
+<span class="section-num">VIII.</span>
+<h2>From Eccentric Contraction to ACL Injury</h2>
+
+<p class="lede">Alpine skiing places a particular load profile on the human body — predominantly <em>eccentric</em> contractions of the lower limb extensors, sustained for the duration of a turn, repeated for the duration of a run, repeated for the duration of a day. The physiological signature of skiing is therefore unusual: it is not primarily a cardiovascular sport, not primarily an endurance sport, not primarily a power sport, but a sport whose distinctive demand is <em>repeated controlled deceleration of the body's mass against the slope</em>. The injury profile follows directly. The first half of this section describes the physiology; the second describes what happens when the physiological system is overloaded, fatigued, or biomechanically misaligned. The two halves describe a single arc.</p>
+
+<h3>Exercise physiology of alpine skiing</h3>
+
+<p>Alpine skiing is unusual among recreational sports in that the working muscle action is predominantly <em>eccentric</em> rather than concentric. The literature treating this began with Berg, Eiken, and Tesch's 1995 study of giant slalom racing<sup class="ref"><a href="#ref-berg1995">11</a></sup> and was generalized in Berg and Eiken's 1999 review<sup class="ref"><a href="#ref-berg1999">12</a></sup>; the most current synthesis is Hydren et al. 2013 in <cite>Journal of Applied Physiology</cite>.<sup class="ref"><a href="#ref-hydren">13</a></sup></p>
+
+<h4>Eccentric loading as the dominant muscle action</h4>
+
+<p>An eccentric contraction occurs when an active muscle is being lengthened — when the external load on the muscle exceeds the force it is producing. Eccentric contractions are how the body absorbs energy: walking downhill, landing from a jump, decelerating a sprint. In alpine skiing, the quadriceps of the outside leg in a turn lengthen under the centripetal load the ski places on the leg, producing high force at long muscle lengths — a textbook eccentric profile. Berg and Eiken reported that quadriceps force during giant slalom racing reaches 100–150% of maximal voluntary contraction in the outside leg through the apex of each turn,<sup class="ref"><a href="#ref-berg1995">11</a></sup> a level sustained essentially nowhere else in normal athletic activity.</p>
+
+<p>The physiological consequences are distinctive. Eccentric contractions produce force at substantially lower metabolic cost than concentric contractions producing comparable force,<sup class="ref"><a href="#ref-hydren">13</a></sup> which partly explains why a long ski day is tolerable despite continuous high-magnitude loading. Eccentric contractions are also a particularly potent stimulus for muscle hypertrophy and strength gain at long muscle lengths — adaptations associated with reduced injury risk and improved performance in deceleration- and direction-change-heavy activities.</p>
+
+<aside class="sidenote">Recent work has refined the simple "purely eccentric" picture: Kröll et al. (2010) and subsequent studies show that recreational skiing actually exhibits a sequence of eccentric, isometric, and concentric phases within a single turn cycle, with the eccentric component most prominent during the loading phase of the outside ski.<sup class="ref"><a href="#ref-kroll">14</a></sup> The dominance of eccentric loading remains, but the action is more biphasic than originally described.</aside>
+
+<h4>Cardiovascular load and intermittent intensity</h4>
+
+<p>Cardiovascular demand in alpine skiing is intermittent and condition-dependent. A typical recreational descent of 3–8 minutes elevates heart rate to 75–90% of maximum on average, with peaks above 90% during sustained turning at speed. Lift rides provide near-complete recovery. Across a full day, the activity profile resembles high-intensity interval training more than steady-state aerobic exercise. Race training and competition push these numbers higher: World Cup downhill efforts of 2 minutes elicit near-maximal cardiac and blood-lactate responses comparable to rowing or 800 m running.</p>
+
+<h4>Cumulative fatigue and injury</h4>
+
+<p>The eccentric load that is the sport's distinctive training stimulus is also a documented injury-risk amplifier when accumulated. Wirth et al. (2015) showed that a four-hour recreational ski day produces measurable eccentric strength deficits in both quadriceps and hamstrings, with some deficits persisting at least 24 hours after skiing.<sup class="ref"><a href="#ref-wirth">15</a></sup> Other groups have shown that a substantial fraction of recreational ski injuries occur in the final hour of skiing<sup class="ref"><a href="#ref-haslinger">16</a></sup> — the empirical signature of cumulative neuromuscular fatigue meeting unchanged terrain. The most common pre-season conditioning protocols for alpine skiers therefore emphasize eccentric quadriceps and hamstring training (single-leg squats with controlled lowering, Nordic hamstring curls, decline-board exercises) rather than the concentric strength training conventional in other lower-body sports.</p>
+
+<h4>Why this matters for the recreational skier</h4>
+
+<p>One implication: a few weeks of skiing each season produces an eccentric-loading stimulus that is unusually difficult to replicate in a gym, which is part of why even casual skiers report rapid leg-strength gains over a season. A second implication: eccentric capacity, more than aerobic capacity, is what runs out at the end of a ski day, and the last hour is the riskiest hour. A third: because eccentric muscle damage manifests as delayed-onset soreness 24–48 hours after the load, the body's signal that yesterday was hard arrives too late to inform today's decisions. Pacing is a learned skill, not an inferred one.</p>
+
+<p style="margin-top: 2rem; font-style: italic; color: var(--ski-ink-soft);">From the demand profile that the body meets, to the failures that occur when the demand exceeds capacity.</p>
+
+<h3>Injury epidemiology</h3>
+
+<h4>Base rates</h4>
+
+<p>The overall incidence of injuries in recreational alpine skiing has declined substantially over the past five decades, from 5–8 injuries per 1000 skier-days in pre-1975 series to 0.4–2.6 per 1000 skier-days in contemporary studies — a 60–95% reduction.<sup class="ref"><a href="#ref-stenroos">20</a></sup><sup class="ref"><a href="#ref-mlki">21</a></sup> The decline coincides with the introduction of release bindings (1960s–70s), plastic boots (1970s), and shaped/carving skis (1990s). Among Alpine countries with good registries (Austria, Finland, Switzerland), recent estimates cluster around 1–3 injuries per 1000 skier-days, with Austrian data showing rates below 1.<sup class="ref"><a href="#ref-stenroos">20</a></sup></p>
+
+<aside class="sidenote">"Skier-day" is the standard denominator in this literature: one person skiing for one day. Injury rates per skier-day are comparable to many other recreational sports. The perception of skiing as unusually dangerous comes mostly from the severity of the rare serious injury, not from incidence.</aside>
+
+<p>Severity matters more than incidence. Although total injuries have fallen, the proportion of those injuries involving the knee — and within knee injuries, the proportion involving the anterior cruciate ligament (ACL) — has risen. Pre-shaped-ski data showed the medial collateral ligament (MCL) as the most commonly injured knee structure; in contemporary series the ACL is dominant, often with concomitant MCL, medial meniscus, and lateral collateral ligament damage.<sup class="ref"><a href="#ref-posch">22</a></sup> The knee accounts for roughly one-third of all alpine ski injuries in current data.<sup class="ref"><a href="#ref-mlki">21</a></sup> Per skier-day, the ACL injury rate in alpine skiing is estimated at 50–70 per 100,000 — among the highest of any common activity, matched only by American football.<sup class="ref"><a href="#ref-skiers-knee">23</a></sup></p>
+
+<h4>The ACL — mechanisms in recreational skiing</h4>
+
+<p>The clinical literature identifies four main non-contact mechanisms of ACL rupture in recreational skiing, all involving a separation of the feet and a twisting force at the knee. The four-mechanism taxonomy was formalized by Posch et al. (2022) building on Bere et al.'s (2011) systematic video analysis of World Cup injuries.<sup class="ref"><a href="#ref-bere">24</a></sup><sup class="ref"><a href="#ref-posch">22</a></sup></p>
+
+<table class="mechanism-table">
+  <thead>
+    <tr><th>Mechanism</th><th>How it happens</th><th>Prevention</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Phantom Foot</strong><br><span style="font-weight:400; color:var(--ski-ink-faint); font-size:0.78rem">flexion–internal rotation</span></td>
+      <td>Skier falls backward, hips below knees; the tail of the inside ski catches; the boot's stiff back lever produces internal tibial rotation and valgus.</td>
+      <td>Maintaining fore–aft balance; the same fundamental that protects skiing performance protects the ACL.</td>
+    </tr>
+    <tr>
+      <td><strong>Boot-Induced Anterior Drawer</strong></td>
+      <td>Skier lands a jump back-weighted; the tail of the ski hits first; the boot back drives the tibia forward relative to the femur; the ACL takes the load.</td>
+      <td>Balanced jumping; absorbing landing with bent knees rather than rigid extension.</td>
+    </tr>
+    <tr>
+      <td><strong>Valgus–External Rotation</strong></td>
+      <td>Forward fall with body rotation; the inside edge of the front of the ski catches; the lower leg externally rotates while the body continues forward. The most common mechanism since the introduction of shaped skis in the late 1990s.</td>
+      <td>Active edge management; the dangerous case is an unintended edge engagement during a fall.</td>
+    </tr>
+    <tr>
+      <td><strong>Forward Fall, No Rotation</strong></td>
+      <td>Less well-characterized; the leg loads while extending and the ACL fails through a combination of compression and quadriceps anterior drawer.</td>
+      <td>Eccentric quadriceps and hamstring strength (see §VIII).</td>
+    </tr>
+  </tbody>
+</table>
+
+<aside class="sidenote">Modern bindings release on rotational and forward forces but cannot reliably release on the loads that produce phantom-foot and valgus-rotation injuries — the lever arm in those falls is often too short to trigger the binding. This is a known limitation, not a defect.<sup class="ref"><a href="#ref-bere">24</a></sup></aside>
+
+<h4>Risk modifiers</h4>
+
+<p>Established risk factors for recreational alpine ski injury (multiple Austrian and Tyrolean cohort studies, Ruedl, Burtscher, and colleagues): female sex (higher knee-injury rates), lower self-rated skill level, fatigue accumulated over the day, late-afternoon skiing, hard or icy snow, and binding settings that are too tight (deviating from the skier's body weight + skill level on the DIN scale).<sup class="ref"><a href="#ref-ruedl">25</a></sup> Fitness and pre-season conditioning attenuate several of these — the connection to §VIII's eccentric-loading literature is direct.</p>
+
+<h4>Helmets, head injury, and fatality</h4>
+
+<p>Helmet use among U.S. skiers and snowboarders rose from approximately 25% in the late 1990s to 80–90% by the late 2010s.<sup class="ref"><a href="#ref-helmet-adoption">35</a></sup> The systematic literature on helmet effectiveness has converged on a clear two-part picture: helmets substantially reduce the rate of non-fatal head injury, and have not measurably reduced the fatality rate.</p>
+
+<p>The pivotal meta-analysis is Russell, Christie, and Hagel (2010) in the <cite>Canadian Medical Association Journal</cite>, pooling 12 case-control and cohort studies. Helmeted skiers and snowboarders had a pooled odds ratio of 0.65 (95% CI 0.55–0.79) for head injury compared to non-helmeted; the protective effect was stronger in children under 13 (OR 0.41, 95% CI 0.27–0.59), and there was no evidence of an increased risk of neck injury (OR 0.89, 95% CI 0.72–1.09).<sup class="ref"><a href="#ref-russell">36</a></sup> Multiple subsequent reviews and the long-term resort-injury work of Jasper Shealy and colleagues report an approximately 60–70% reduction in non-serious head injuries (concussions, skull fracture, closed head injury) attributable to helmet use over the seasons 1995–2012.<sup class="ref"><a href="#ref-shealy-helmets">37</a></sup></p>
+
+<p>The fatality rate, however, has not changed. Across U.S. resorts the fatality rate has remained close to 0.7 per million skier visits, and this rate did not measurably decline as helmet adoption climbed past saturation. Two mechanical factors explain this. First, the fatal injury profile is dominated by high-speed (often 27 mph or more) collisions with fixed objects — most often trees — in which the kinetic energy substantially exceeds what a helmet can absorb; helmet drop-tests against rigid surfaces show effective protection up to roughly 12 mph of impact velocity onto snow.<sup class="ref"><a href="#ref-shealy-helmets">37</a></sup> Second, the typical non-fatal head-injury scenario — a fall from upright posture onto the snow surface — produces a head-impact velocity around 10–12 mph, well within the helmet's design envelope, which is why the non-fatal head-injury reduction is large in the same population in which the fatality rate is unchanged.</p>
+
+<aside class="sidenote">A separate hypothesis — <em>risk compensation</em> — proposes that helmet wearers ski more aggressively, partially or wholly offsetting the helmet's protective effect. The empirical evidence for risk compensation in snow sports is mixed and probably explains a small part rather than all of the fatality-rate flatness; the mechanical explanation above is sufficient on its own.<sup class="ref"><a href="#ref-risk-comp">38</a></sup></aside>
+
+<p>The honest summary, articulated repeatedly by Shealy and other long-term ski-injury researchers: helmets are effective for the most common head-injury scenarios and should be worn; they are not protective in the most common fatal scenario, and skier behavior should not be calibrated to a false sense of invulnerability.</p>
+
+<h4>The Skier's Responsibility Code</h4>
+
+<p>The U.S. National Ski Areas Association first published a Skier's Responsibility Code in 1962 (seven points). The 2022 revision expanded it to ten points and rewrote the language to include snowboarders, mountain bikers, and other slope users. The Code is posted at every U.S. ski area; in states that have enacted it into law, it has legal force in collision-liability determinations.<sup class="ref"><a href="#ref-nsaa">26</a></sup></p>
+
+<ol class="code-list">
+  <li>Always stay in control. You must be able to stop or avoid people or objects.</li>
+  <li>People ahead or downhill of you have the right-of-way. You must avoid them.</li>
+  <li>Stop only where you are visible from above and do not restrict traffic.</li>
+  <li>Look uphill and avoid others before starting downhill or entering a trail.</li>
+  <li>You must prevent runaway equipment.</li>
+  <li>Read and obey all signs, warnings, and hazard markings.</li>
+  <li>Keep off closed trails and out of closed areas.</li>
+  <li>You must know how, and be able to load, ride, and unload lifts safely.</li>
+  <li>Do not use lifts or terrain when impaired by alcohol or drugs.</li>
+  <li>If you are involved in a collision or incident, share contact information with each other and a ski area employee.</li>
+</ol>
+
+<p>Rule 2 is the structurally important one: it cannot be inferred from common sense (it inverts the default road-traffic logic that the trailing party generally has the right-of-way only in narrow circumstances). Most recorded slope collisions involve uphill skiers who have not internalized rule 2.</p>
+
+<h4>Avalanche basics — for anyone leaving the boundary</h4>
+
+<p>Skiing outside marked, patrolled boundaries — side-country, back-country, or any unmanaged terrain — requires formal avalanche education. A web page is not a substitute for an AIARE Level 1 course.<sup class="ref"><a href="#ref-aiare">27</a></sup> What follows is orientation, not training.</p>
+
+<div class="def">
+<span class="label">Avalanche triangle</span>
+Three factors must be present for an avalanche: <strong>terrain</strong> capable of producing one (slope angle of 30–45° is the danger zone), <strong>snowpack</strong> with a weak layer beneath a cohesive slab, and a <strong>trigger</strong> (most often a skier). Removing any one removes the risk.
+</div>
+
+<p>The standard equipment for back-country travel is a <em>transceiver (beacon)</em>, a <em>shovel</em>, and a <em>probe</em>. None is useful without practice. The North American avalanche danger scale runs through five levels — <em>low, moderate, considerable, high, extreme</em> — and the difference between "considerable" and "high" is, statistically, the difference between most accidents happening and most deaths happening. Local avalanche-center forecasts should be read every day before going out.</p>
+
+</div>
+
+<div data-lang-content="zh">
+<span class="section-num">VIII.</span>
+<h2>从离心收缩到 ACL 损伤</h2>
+
+<p class="lede">高山滑雪给人体施加的负荷剖面相当特殊——主要是下肢伸肌的<em>离心收缩</em>（eccentric contraction），在每一个转弯期间持续，在整条赛道下伸期间反复，在一整天的滑行期间反复。滑雪的生理学签名因此异常：它不主要是心血管运动，不主要是耐力运动，亦不主要是力量运动，而是一项独特的运动——其核心需求是<em>身体质量在斜面上反复地、受控地减速</em>。伤病剖面则直接由此而来。本章上半部分描述生理学，下半部分描述当这套生理系统超载、疲劳或生物力学错位时发生了什么。两个半部讲的是同一段弧线。</p>
+
+<h3>高山滑雪的运动生理学</h3>
+
+<p>高山滑雪在休闲运动中之所以独特，在于其工作肌肉动作以<em>离心收缩</em>为主，而非向心收缩。这一文献始于 Berg、Eiken 与 Tesch 1995 年关于大回转的研究<sup class="ref"><a href="#ref-berg1995">11</a></sup>，由 Berg 与 Eiken 1999 年的综述推广<sup class="ref"><a href="#ref-berg1999">12</a></sup>，最新的整合见 Hydren 等 2013 年发表于《Journal of Applied Physiology》的综述。<sup class="ref"><a href="#ref-hydren">13</a></sup></p>
+
+<h4>离心收缩为主导的肌肉动作</h4>
+
+<p>离心收缩发生于已激活的肌肉被拉长之时——外加于肌肉的载荷超过肌肉本身产生的力。离心收缩是身体吸收能量的方式：下坡行走、跳落着陆、冲刺减速。在高山滑雪中，转弯外侧腿的股四头肌在滑板对腿施加的向心载荷下被拉长，在长肌肉长度上产生高力——一份教科书式的离心特征。Berg 与 Eiken 报告：大回转比赛中，外侧腿股四头肌的力在每次转弯顶点达到最大随意收缩（MVC）的 100–150%，<sup class="ref"><a href="#ref-berg1995">11</a></sup>这一水平在正常体育活动里几乎其他任何场景都不会持续出现。</p>
+
+<p>由此带来的生理后果颇具特色。离心收缩在产生与向心收缩相当的力时，其代谢成本显著较低<sup class="ref"><a href="#ref-hydren">13</a></sup>，部分解释了为何一整天滑雪在持续高负荷之下仍可承受。离心收缩也是肌肉肥大与长肌肉长度上力量增长的特别有效刺激——这些适应被关联于减速类与方向变化类活动中更低的伤病风险与更佳的表现。</p>
+
+<aside class="sidenote">近期工作精细化了"纯离心"的简单图景：Kröll 等（2010）及其后续研究显示，休闲滑雪在单一转弯周期内实际上呈现离心—等长—向心的序列，离心成分在外侧板加载阶段最为突出。<sup class="ref"><a href="#ref-kroll">14</a></sup>离心载荷的主导地位依然存在，但动作比最初描述的更具双相性。</aside>
+
+<h4>心血管载荷与间歇式强度</h4>
+
+<p>高山滑雪的心血管需求是间歇性的，且依赖雪况。典型休闲下行 3–8 分钟可使心率平均上升至最大心率的 75–90%，速度持续转弯期间峰值可超过 90%。缆车上行提供近乎完全的恢复。整日累计来看，活动剖面更接近高强度间歇训练，而非稳态有氧。竞技训练与比赛把这些数字进一步推高：世界杯速降的两分钟努力激发的心输出与血乳酸反应已可比拟划船或 800 米跑。</p>
+
+<h4>累积疲劳与伤病</h4>
+
+<p>作为该项运动特征性训练刺激的离心载荷，在累积之下也是已记录的伤病风险放大器。Wirth 等（2015）显示，一个 4 小时的休闲滑雪日会在股四头肌与腘绳肌产生可测量的离心力量缺损，其中部分缺损在滑雪结束后至少 24 小时仍持续存在。<sup class="ref"><a href="#ref-wirth">15</a></sup>其他课题组的研究也表明，相当一部分休闲滑雪伤病发生在滑雪日的最后一小时<sup class="ref"><a href="#ref-haslinger">16</a></sup>——累积神经肌肉疲劳遭遇未变化地形的经验印记。因此，高山滑雪者赛季前训练协议中最常见的部分，是离心型股四头肌与腘绳肌训练（带控制下放的单腿深蹲、北欧式腘绳肌练习、负斜板练习），而非其他下肢运动通行的向心型力量训练。</p>
+
+<h4>对休闲滑雪者意味着什么</h4>
+
+<p>由此可推几条结论。其一，每个赛季几周滑雪所产生的离心刺激，在健身房里不寻常地难以复制，这是休闲滑雪者也常报告一个赛季内腿部力量明显增长的部分原因。其二，在一个滑雪日终点先用尽的是离心能力，而非有氧能力，最后一小时是风险最高的小时。其三，离心型肌肉损伤以 24–48 小时延迟性肌肉酸痛（DOMS）的形式呈现，因此身体对"昨天太重"的信号到达得过晚，无法用来指导今天的决策。配速因此是一项习得能力，而非可以反推的能力。</p>
+
+<p style="margin-top: 2rem; font-style: italic; color: var(--ski-ink-soft);">从身体所应对的负荷剖面，到当负荷超过承载能力时所发生的失败。</p>
+
+<h3>伤病流行病学</h3>
+
+<h4>基础发生率</h4>
+
+<p>休闲高山滑雪的总伤病发生率在过去五十年中显著下降，从 1975 年前的每千滑雪者-日 5–8 起降至当代研究中的 0.4–2.6 起——下降 60–95%。<sup class="ref"><a href="#ref-stenroos">20</a></sup><sup class="ref"><a href="#ref-mlki">21</a></sup>下降时段与可释放固定器（1960–70 年代）、塑料雪靴（1970 年代）以及 shaped / carving 板（1990 年代）的引入重合。在登记体系良好的高山国家（奥地利、芬兰、瑞士），近期估计集中于每千滑雪者-日 1–3 起，奥地利数据显示低于 1。<sup class="ref"><a href="#ref-stenroos">20</a></sup></p>
+
+<aside class="sidenote">"滑雪者-日（skier-day）"是该文献领域的标准分母：一人滑雪一日。按滑雪者-日计算的伤病率与许多其他休闲运动可比。滑雪被知觉为异常危险，主要源于罕见严重伤病的严重性，而非发生率。</aside>
+
+<p>严重程度比发生率更重要。尽管总伤病数下降，伤病中累及膝关节的比例——而在膝伤中累及前交叉韧带（ACL）的比例——却在上升。Shaped 板出现之前的数据显示，内侧副韧带（MCL）是膝中最常受伤结构；当代研究中 ACL 占主导地位，并常合并 MCL、内侧半月板与外侧副韧带损伤。<sup class="ref"><a href="#ref-posch">22</a></sup>当前数据中，膝盖约占高山滑雪伤病总数的三分之一。<sup class="ref"><a href="#ref-mlki">21</a></sup>按滑雪者-日计算，高山滑雪 ACL 损伤率估计为每 100,000 滑雪者-日 50–70 起——是任何常见活动中最高之一，仅美式橄榄球可比。<sup class="ref"><a href="#ref-skiers-knee">23</a></sup></p>
+
+<h4>ACL——休闲滑雪中的损伤机制</h4>
+
+<p>临床文献识别出休闲滑雪中四种主要的非接触性 ACL 撕裂机制，全部涉及双脚分离与膝部扭转载荷。这一四机制分类由 Posch 等（2022）在 Bere 等（2011）对世界杯伤病的系统视频分析基础上正式化。<sup class="ref"><a href="#ref-bere">24</a></sup><sup class="ref"><a href="#ref-posch">22</a></sup></p>
+
+<table class="mechanism-table">
+  <thead>
+    <tr><th>机制</th><th>怎么发生</th><th>预防</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Phantom Foot（幻足）</strong><br><span style="font-weight:400; color:var(--ski-ink-faint); font-size:0.78rem">屈曲—胫骨内旋</span></td>
+      <td>滑雪者向后摔，髋部低于膝盖；内侧板尾挂住；雪靴硬质后缘的杠杆作用产生胫骨内旋与外翻（valgus）。</td>
+      <td>保持前后平衡。保护滑雪表现的同一基本功也保护 ACL。</td>
+    </tr>
+    <tr>
+      <td><strong>Boot-Induced Anterior Drawer（靴致前抽屉）</strong></td>
+      <td>跳跃后重心后坐着陆；板尾先触雪；雪靴后缘把胫骨相对股骨向前推；ACL 承担该载荷。</td>
+      <td>平衡的起跳；着陆时屈膝吸收，而非僵硬伸展。</td>
+    </tr>
+    <tr>
+      <td><strong>Valgus–External Rotation（外翻—胫骨外旋）</strong></td>
+      <td>带身体旋转的前摔；板头内侧刃挂住雪面；小腿外旋而身体继续向前。1990 年代末侧切板（shaped skis）普及之后，这是最常见机制。</td>
+      <td>主动管理立刃。危险情形是摔倒中无意识的立刃介入。</td>
+    </tr>
+    <tr>
+      <td><strong>前摔，无旋转</strong></td>
+      <td>较少被精确刻画；腿在伸展过程中加载，ACL 因压缩与股四头肌前抽屉作用合力而失败。</td>
+      <td>离心型股四头肌与腘绳肌力量（参见 §VIII）。</td>
+    </tr>
+  </tbody>
+</table>
+
+<aside class="sidenote">现代固定器对旋转和前向力可释放，但对 phantom foot 与外翻—外旋损伤所产生的载荷往往无法可靠释放——这些摔倒中力臂过短，触发不了固定器。这是一个已知的局限性，不是缺陷。<sup class="ref"><a href="#ref-bere">24</a></sup></aside>
+
+<h4>风险修正因素</h4>
+
+<p>休闲高山滑雪的已确立风险因素（多项奥地利与蒂罗尔队列研究，Ruedl、Burtscher 等）：女性（更高的膝伤率）、自评水平较低、日内累积疲劳、午后滑雪、硬雪或冰面、固定器设置过紧（与体重 + 水平在 DIN 标度上的偏离）。<sup class="ref"><a href="#ref-ruedl">25</a></sup>体能与赛季前训练能减弱其中数项——与 §VIII 离心载荷文献的连接是直接的。</p>
+
+<h4>头盔、头部伤害与致死</h4>
+
+<p>美国滑雪与单板者的头盔佩戴率从 1990 年代末的约 25% 上升至 2010 年代末的 80–90%。<sup class="ref"><a href="#ref-helmet-adoption">35</a></sup>关于头盔有效性的系统性文献已收敛于一幅清晰的两段式图景：头盔显著降低非致命头部伤害发生率；对致死率没有可测量的降低。</p>
+
+<p>关键的 meta-analysis 是 Russell、Christie 与 Hagel 2010 年发表于《Canadian Medical Association Journal》的研究，合并了 12 项病例对照与队列研究。佩戴头盔的滑雪与单板者相对未戴头盔者，头部伤害合并 odds ratio 为 0.65（95% CI 0.55–0.79）；保护效应在 13 岁以下儿童中更强（OR 0.41，95% CI 0.27–0.59）；亦无颈部伤害风险增加的证据（OR 0.89，95% CI 0.72–1.09）。<sup class="ref"><a href="#ref-russell">36</a></sup>多项后续综述以及 Jasper Shealy 等学者的长期雪场伤病研究报告：1995–2012 各赛季中，头盔将非严重头部损伤（脑震荡、颅骨骨折、闭合性头部损伤）降低约 60–70%。<sup class="ref"><a href="#ref-shealy-helmets">37</a></sup></p>
+
+<p>致死率却没有改变。美国各雪场的致死率长年稳定在每百万滑雪者人次约 0.7 起，并未随头盔佩戴率穿过饱和点而可测地下降。两项力学因素解释这一结果。其一，致命伤害剖面以高速（常 27 mph 以上）撞击固定物体——多数情况是树——为主，这种撞击的动能远超头盔可吸收的能量；头盔对刚性表面的跌落实验显示，仅当雪面冲击速度不超过约 12 mph 时才有效保护。<sup class="ref"><a href="#ref-shealy-helmets">37</a></sup>其二，典型的非致命头部伤害场景——从直立姿态摔到雪面——头部的有效冲击速度约为 10–12 mph，恰落在头盔的设计包络之内；这正是为什么在同一群体中，非致命头部伤害大幅下降而致死率不变。</p>
+
+<aside class="sidenote">另一个独立假说是 <em>风险补偿（risk compensation）</em>：佩戴头盔者会更激进地滑雪，部分或完全抵消头盔的保护效应。雪上运动中风险补偿的实证证据存在分歧，且很可能只能解释致死率持平的一小部分；上文给出的力学解释本身已经足够。<sup class="ref"><a href="#ref-risk-comp">38</a></sup></aside>
+
+<p>Shealy 等长期研究者反复给出的诚实总结是：头盔在最常见的头部伤害场景中有效，应该佩戴；但在最常见的致命场景中并不能提供保护，滑雪者的行为不应据此校准为某种虚假的不可侵犯感。</p>
+
+<h4>滑雪者责任准则</h4>
+
+<p>美国国家滑雪场协会（NSAA）于 1962 年首次发布"滑雪者责任准则"（七条）。2022 年修订扩充至十条，并改写以包括单板滑手、山地车手等其他用雪道者。该准则张贴在美国每一个雪场；在已将其写入州法的州，它在碰撞责任认定中具有法律效力。<sup class="ref"><a href="#ref-nsaa">26</a></sup></p>
+
+<ol class="code-list">
+  <li>始终保持可控。你必须能停下或避开他人与障碍。</li>
+  <li>位于你前方或下方的人享有路权。你必须避让他们。</li>
+  <li>停留之处必须从上方可见，且不阻塞通行。</li>
+  <li>下行前或进入雪道前，先回头看上方并避让他人。</li>
+  <li>必须防止器材脱离失控。</li>
+  <li>阅读并遵守所有标识、警示、危险标记。</li>
+  <li>避开关闭的雪道与封闭区域。</li>
+  <li>必须知道并能够安全地上下与乘坐缆车。</li>
+  <li>受酒精或药物影响时不得使用缆车或地形。</li>
+  <li>若发生碰撞或事故，须与对方及雪场员工交换联系方式。</li>
+</ol>
+
+<p>第二条结构上最重要：它不能从常识推出（它颠倒了一般道路逻辑——一般道路上，后方车辆通常仅在狭窄情形下享有相对前方车辆的路权）。雪道上有记录的碰撞，多数涉及未将第二条内化的上方滑雪者。</p>
+
+<h4>雪崩入门——给所有越界者</h4>
+
+<p>在标记和巡逻的边界之外滑雪——side-country、back-country 或任何无管理地形——需要正式的雪崩教育。一个网页不能替代 AIARE Level 1 课程。<sup class="ref"><a href="#ref-aiare">27</a></sup>下面是方位标，不是培训。</p>
+
+<div class="def">
+<span class="label">雪崩三角</span>
+雪崩需要三个条件同时具备：能产生雪崩的<strong>地形</strong>（坡度 30–45° 是危险区间）；带有薄弱层、上覆有凝聚力雪板的<strong>雪层结构</strong>；以及一个<strong>触发因素</strong>（最常见是一个滑雪者）。去掉任何一项，风险即消除。
+</div>
+
+<p>野外行进的标准装备是<em>雪崩信标（transceiver/beacon）</em>、<em>雪铲</em>、<em>探针</em>。这些器材若无练习则毫无用处。北美雪崩等级分五级——<em>low（低）、moderate（中等）、considerable（明显）、high（高）、extreme（极端）</em>——而 considerable 与 high 之间的差别，统计上正是"大多数事故发生"与"大多数死亡发生"的差别。出门前每天都应阅读当地雪崩中心的预报。</p>
+
+</div>
+
+</section>
+
+
+<!-- ============ IX. ON MOUNTAIN, SNOW, AND EQUIPMENT ============ -->
+<section id="material-ground">
+
+<div data-lang-content="en">
+<span class="section-num">IX.</span>
+<h2>On Mountain, Snow, and Equipment</h2>
+
+<p class="lede">Skiing happens at the intersection of three material things: the <em>mountain</em> on which it occurs, the <em>snow</em> that covers it, and the <em>equipment</em> that mediates between body and surface. None of the three is reducible to the others. The mountain is durable terrain — slope, fall line, exposure, the cold-air drainages and wind-loaded ridges that determine where and how the snow accumulates. The snow is the ephemeral working surface — its crystalline structure, density, temperature, and depth changing daily and within a single run. The equipment is the engineered interface — boots, bindings, skis whose geometry has co-evolved with technique over more than a century. This chapter takes them in that order: the slowest-changing material first, then the medium-term medium, then the artifact under continuous design pressure.</p>
+
+<h3>The mountain</h3>
+
+<p class="lede">Alpine skiing has produced more philosophical writing per capita than almost any other sport. The activity sits on top of three philosophical fault lines that don't usually meet: the epistemology of bodily skill, the phenomenology of moving through a hostile and indifferent landscape, and the psychology of optimal experience.</p>
+
+<h4>Tacit knowledge — Polanyi</h4>
+
+<p>The Hungarian-British chemist and philosopher <span class="term">Michael Polanyi</span> opened his 1966 book <cite>The Tacit Dimension</cite> with a sentence that resonates throughout any practice involving bodily skill: <em>"We can know more than we can tell."</em><sup class="ref"><a href="#ref-polanyi">7</a></sup> His example was bicycle riding. The textbook physical answer to "what makes a moving bicycle stable?" — the cyclist steers into the direction of fall, and the resulting curve produces a centrifugal force that arrests the fall — is correct. No cyclist actually <em>uses</em> this knowledge while riding. The cyclist knows how to ride; the physicist knows the equation; the two knowings do not intersect in any working bicyclist's mind.</p>
+
+<p>Skiing is the same situation, magnified. A carving turn requires the simultaneous coordination of ankle inversion, knee tracking, hip angulation, fore–aft balance, and pressure regulation through the turn arc. Every component can be described — PSIA's National Standards do little else for two hundred pages — and none of those descriptions, individually or summed, will produce a carving turn in a body that has not learned it. The knowledge that skis a turn is not propositional. It is what Polanyi called <em>tacit</em>: a knowing-how that resists reduction to knowing-that.</p>
+
+<aside class="sidenote">Gilbert Ryle made a parallel distinction in <cite>The Concept of Mind</cite> (1949): <em>knowing how</em> versus <em>knowing that</em>.<sup class="ref"><a href="#ref-ryle">8</a></sup> Polanyi's contribution was to argue that the tacit dimension underlies even explicit knowledge — that articulation always lags what is known.</aside>
+
+<h4>The body-subject — Merleau-Ponty</h4>
+
+<p>The French phenomenologist <span class="term">Maurice Merleau-Ponty</span>, in <cite>Phenomenology of Perception</cite> (1945), argued that the body is not a thing the mind has; the body is the subject.<sup class="ref"><a href="#ref-merleau">9</a></sup> His most famous example, the blind man's cane, makes the point: the cane stops being an object and becomes an extension of the body's perceptual reach.</p>
+
+<p>Skis are an extreme case of the cane. After a few weeks on snow, the experienced skier no longer feels the snow through boot, ski, and binding. Snow is felt at the edge — at the contact line, four feet down and eight inches forward of where the physical body ends. The ski has been incorporated into the perceptual body. This is what Merleau-Ponty called <em>incorporation</em>, and it is what allows fine adjustment of edge angle without conscious thought. The mountain itself is also incorporated: experienced skiers describe terrain as having a feel — this run is "fast," that run is "moody," the bumps "want" the skier to go right — because the topography has become part of the perceptual world the skier moves through, not an external object the skier reasons about.</p>
+
+<aside class="sidenote">A useful linguistic test: when a skier loses an edge, do they say "the ski slipped" or "I slipped"? The vocabulary tracks how deep the incorporation has gone.</aside>
+
+<h4>Flow — Csikszentmihalyi</h4>
+
+<p>The Hungarian-American psychologist <span class="term">Mihaly Csikszentmihalyi</span> introduced what he originally called <em>autotelic experience</em>, later popularized as <em>flow</em>, in his 1975 book <cite>Beyond Boredom and Anxiety</cite>.<sup class="ref"><a href="#ref-flow">10</a></sup> His earliest empirical subjects were rock climbers, chess players, and surgeons — people in challenging activities pursued for their own sake. The conditions he identified are now nearly canonical: a clear goal, immediate feedback, a balance between challenge and skill, the merging of action and awareness, and a loss of self-consciousness in the activity.</p>
+
+<p>Skiing meets every condition with almost embarrassing ease. The goal is clear. Feedback is immediate and physical — the ski reports balance and edge in real time. Challenge can be precisely titrated against skill by terrain choice. Action and awareness merge because there is no time to separate them. Self-consciousness drops away because the ski demands too much attention to leave any over for the self. What Csikszentmihalyi called the <em>autotelic personality</em> — the disposition to seek out activities done for their own sake — describes the recreational skier almost by definition. The activity is, in the Greek sense, <em>autotelos</em>: its own end.</p>
+
+<h4>Synthesis</h4>
+
+<p>The three frames describe the same activity from three angles. <strong>Polanyi</strong> accounts for why skiing cannot be learned from a book — the knowledge is tacit, and tacit knowledge is built only through embodied practice. <strong>Merleau-Ponty</strong> describes what the embodied practice produces — a perceptual extension of the self into equipment and terrain. <strong>Csikszentmihalyi</strong> characterizes what the experience is like when the first two have come off well — the merger of self and activity that is its own reward.</p>
+
+<p>Underneath all three sits a structural fact about alpine skiing: it is one of the few activities in modern life in which a person voluntarily accepts the constraints of an indifferent natural force — gravity acting on a slope of crystallized water — and converts those constraints into an artistic medium.</p>
+
+<p style="margin-top: 2rem; font-style: italic; color: var(--ski-ink-soft);">From terrain — the mountain that does not change between seasons — to the surface that changes between hours.</p>
+
+<h3>Snow</h3>
+
+<p>Snow is a material that changes underfoot, sometimes within a single run. Skiing it well requires recognizing what is there, what it allows, and adjusting fundamental 5 (pressure regulation) accordingly. The classification below is a working field glossary — not meteorological taxonomy, but the categories used in practice.</p>
+
+<dl class="glossary">
+  <dt>Powder <span class="alt">— fresh, dry, low-density snow</span></dt>
+  <dd>Light enough that the ski sinks until it finds resistance. Skiing it is more about flotation than edge: stance stays tall, the skis are kept closer in width, and rhythmic flexion–extension makes the skis breathe up and down through the snow. Inside-ski weight matters more here than on hardpack.</dd>
+
+  <dt>Packed Powder <span class="alt">— groomed snow with some softness</span></dt>
+  <dd>The default Eastern morning condition. Edges hold cleanly, the ski responds, technique transfers directly from drills. Most skiers' best skiing happens here.</dd>
+
+  <dt>Hardpack &amp; Boilerplate <span class="alt">— dense, scraped-off, near-icy</span></dt>
+  <dd>Pressure must concentrate on a small surface area to bite. Higher edge angle, weight forward, ankle rolled hard, hands quiet. A tentative edge skids; a committed edge holds.</dd>
+
+  <dt>Ice <span class="alt">— polished, glassy</span></dt>
+  <dd>Acceptance, then commitment. Ice cannot be bullied. Sharp edges (recently tuned) are not optional. The fall line is an ally; fighting across it loses the edge entirely.</dd>
+
+  <dt>Crud <span class="alt">— chopped-up, refrozen, mixed</span></dt>
+  <dd>The snow that punishes inattention. The ski hits a soft pocket, then a hard rim, then a chunk. Strong stance, active flexion–extension, and forward momentum are required. Passive crud-skiing is a common mechanism of knee injury.</dd>
+
+  <dt>Corn <span class="alt">— spring snow, granular, surface-melted-and-refrozen</span></dt>
+  <dd>The reward for skiing late in the season. Soft, forgiving, predictable. The snow grabs the edge, releases on the transition. Carving on corn is among the cleanest sensations the sport offers.</dd>
+
+  <dt>Breakable Crust <span class="alt">— a frozen surface over softer snow underneath</span></dt>
+  <dd>The hardest snow to ski. The crust holds weight some of the time and breaks through at others, with no reliable way to predict which. Conservative line choice and stance discipline are the only honest answer.</dd>
+</dl>
+
+<h4>Injected snow: the engineered surface of racing</h4>
+<p>The snow on which World Cup races are run is, by design, almost nothing like the snow on which recreational skiers ski. Before a downhill or super-G event, the course is <em>water-injected</em>: hoses or specialized lances saturate the snow column with cold water, which then re-freezes into a dense, ice-like surface that approaches the hardness of frozen ground. The reason is reproducibility. With sixty competitors descending a single line, soft snow disintegrates within three or four runs into deep ruts that make later starts unrunnable; injection produces a surface uniform enough that the racer who starts thirtieth confronts roughly the same course as the racer who starts first.<sup class="ref"><a href="#ref-fis-snow">46</a></sup> FIS course-prep standards specify hardness ranges measured by penetrometer; failure to reach the standard can void a competition's results.</p>
+
+<p>The cost is biomechanical. Injected race snow does not absorb impact in the way recreational snow does; a fall onto World Cup slalom snow is closer to a fall onto pavement than to a fall onto the powder of a backcountry slope. Several elite racers — most prominently Lindsey Vonn and Mikaela Shiffrin — have publicly criticized current injection practices as contributing to the high career-injury rate among World Cup skiers, particularly knee injuries from edge-catch falls onto rigid surfaces. The trade-off — fairness of competition vs the safety of those competing — has not been resolved at the regulatory level, and the engineering of the racing surface is now an active topic in alpine sport-science research.</p>
+
+<p style="margin-top: 2rem; font-style: italic; color: var(--ski-ink-soft);">From the natural surface to the engineered tool that meets it.</p>
+
+<h3>Equipment</h3>
+
+<h4>Sidecut</h4>
+<p>A modern alpine ski is wider at tip and tail than at the waist. Laid on edge and decambered under load, the curved edge bites into the snow as a circular arc. The radius of that arc — the <span class="term">sidecut radius</span>, marked on every ski — is the natural turn the ski produces if simply tipped and released. Slalom skis sit around 12–13 m; giant slalom around 17–21 m for recreational versions and up to 35 m for World Cup race stock; powder and freeride skis can reach 25 m or more. A turn shorter than the sidecut radius requires either skidding (rotary work to scrub speed) or extra deformation (more edge angle, more pressure, bending the ski beyond its natural arc); a turn longer than the sidecut radius requires <em>less</em> than the ski wants to give and is held flat or steered out.</p>
+
+<h4>Edge geometry: base bevel and side bevel</h4>
+<p>The metal edges that grip the snow are not square. Each edge is ground to two angles: a <span class="term">base bevel</span> (typically 0.5°–1° — the base of the edge tilts away from the snow by this small angle) and a <span class="term">side bevel</span> (typically 1°–3° — the side of the edge tilts inward from a 90° wall toward the centerline). A larger base bevel makes the ski less "grabby" and easier to pivot; a sharper side bevel (more degrees, equivalently a smaller side angle measured from the ski base, e.g., 87° = 3° side bevel) provides more bite on hard snow at the cost of forgiveness. Recreational skis are commonly finished at 1° / 1° or 1° / 2°. World Cup slalom race stock is typically 0.5° / 3° (an 87° side angle), with even more aggressive 0° / 4° tunes appearing on icy courses.<sup class="ref"><a href="#ref-bevel">5</a></sup></p>
+
+<aside class="sidenote">87° has become a familiar number in racing-tuning shorthand. It is simply a 3° side bevel, expressed as the absolute angle between side and base. The same angle can be written either way; both conventions appear in retail and FIS documentation.</aside>
+
+<h4>Boots</h4>
+<p>On a constrained budget, money goes further on boots than on skis. Two parameters matter most: <span class="term">flex index</span> (cuff stiffness, with higher numbers indicating more direct power transmission and less forgiveness) and <span class="term">last</span> (the foot-shape the boot is built around, expressed as forefoot width in millimeters). Stance and forward lean are tunable by a bootfitter. Pain in a properly sized boot indicates a fit problem rather than a sizing mistake, and is addressable with shell punches, custom footbeds, and similar targeted modifications.</p>
+
+</div>
+
+<div data-lang-content="zh">
+<span class="section-num">IX.</span>
+<h2>论山、雪、和装备</h2>
+
+<p class="lede">滑雪发生在三样物质性事物的交汇处：发生于其上的<em>山</em>、覆盖其表的<em>雪</em>、以及在身体与表面之间居中调和的<em>装备</em>。三者均不可化约为其他二者。山是恒久的地形——坡度、落线、朝向、决定雪在何处与如何堆积的冷空气下泄通道与受风加载的山脊。雪是短暂的工作表面——其晶体结构、密度、温度与厚度逐日变化，乃至同一道下行之内即已变化。装备则是被工程化的接口——雪靴、固定器、滑板，其几何形态在过往一个多世纪中与技术共同演化。本章按这一顺序展开：先是变化最慢的物质，其次是中期介质，最后是处于持续设计压力之下的人造物。</p>
+
+<h3>山</h3>
+
+<p class="lede">高山滑雪在人均哲学产出方面，超过了几乎所有其他运动。这项活动恰好坐落在三条平时不交汇的哲学断层带上：身体技能的认识论，在冷漠而充满阻力的地形里穿行的现象学，以及最优体验的心理学。</p>
+
+<h4>默会知识——波兰尼</h4>
+
+<p>匈牙利裔英国化学家与哲学家 <span class="term">Michael Polanyi（迈克尔·波兰尼）</span>在 1966 年的《默会的维度》（<cite>The Tacit Dimension</cite>）一书中以一句话开篇——这句话在任何涉及身体技能的实践中都会反复回响：<em>"我们能知道的比我们能说出的更多。"</em><sup class="ref"><a href="#ref-polanyi">7</a></sup>他举的例子是骑自行车。"是什么让运动中的自行车保持稳定？"教科书式的物理回答——骑车人向倾倒方向打把，所产生的曲线运动以离心力遏制倾倒——是正确的。但没有任何骑车人在骑行中真的<em>使用</em>这套知识。骑车人知道怎么骑；物理学家知道方程；两种"知道"在任何会骑车的人脑中并不相交。</p>
+
+<p>滑雪是同样的情境，被放大。一次 carving 转弯，需要踝内翻、膝走线、髋折屈、前后平衡，以及在转弯弧线中调节压力的多重协调，同时进行。每一项都可以被描述出来——PSIA 的国家标准用两百页只做这件事——但所有这些描述，无论单独还是合在一起，都不会让一具尚未学会的身体做出一次 carving。能滑出转弯的那种知识不是命题性的。它是波兰尼所说的<em>默会（tacit）</em>——一种"知道如何"，拒绝被还原成"知道事实"。</p>
+
+<aside class="sidenote">吉尔伯特·赖尔（Gilbert Ryle）在《心的概念》（1949）中提出过平行的区分：<em>knowing how</em>（知道如何） vs. <em>knowing that</em>（知道事实）。<sup class="ref"><a href="#ref-ryle">8</a></sup>波兰尼的贡献是进一步主张，默会维度其实支撑着我们的所有显性知识——表达永远滞后于知道。</aside>
+
+<h4>身体—主体——梅洛-庞蒂</h4>
+
+<p>法国现象学家 <span class="term">Maurice Merleau-Ponty（莫里斯·梅洛-庞蒂）</span>在《知觉现象学》（1945）中论证：身体不是心灵所拥有的物，身体本身就是主体。<sup class="ref"><a href="#ref-merleau">9</a></sup>他最著名的例子——盲人的手杖——把这点说得清楚：手杖不再是物，而成为身体感知的延伸。</p>
+
+<p>滑雪板是手杖的极端版本。在雪上待几周之后，有经验的滑雪者不再隔着雪靴、滑板、固定器去感受雪。雪在板刃上被感受——在实际的接触线上，距身体物理边界四英尺以下、八英寸以前。滑板已被纳入感知意义上的身体。这就是梅洛-庞蒂所说的<em>incorporation（合并、纳入）</em>，也正是这种纳入让立刃角度的细微调整可以无须意识地进行。山本身也是被纳入的：有经验的滑雪者描述地形带有"感觉"——这条道"快"，那条道"阴沉"，雪包"想要"向右走——因为地形已成为滑雪者所穿行的感知世界的一部分，而非被外在地推理的对象。</p>
+
+<aside class="sidenote">一个有用的语言学测验：滑雪者失去立刃时，会说"板滑了"还是"我滑了"？所用的词汇追踪着身体合并已经走多深。</aside>
+
+<h4>心流——契克森米哈伊</h4>
+
+<p>匈牙利裔美国心理学家 <span class="term">Mihaly Csikszentmihalyi（米哈里·契克森米哈伊）</span>在 1975 年的《超越无聊与焦虑》（<cite>Beyond Boredom and Anxiety</cite>）中提出了他最初称为 <em>autotelic experience（自成目的体验）</em>的概念，后以 <em>flow（心流）</em>之名广为流传。<sup class="ref"><a href="#ref-flow">10</a></sup>他最早的实证对象是攀岩者、棋手与外科医生——投身于挑战性活动、并以活动本身为目的的人。他归纳的若干条件几乎已成定论：清晰的目标、即时反馈、挑战与技能的平衡、行动与意识的合一、以及活动中自我意识的消退。</p>
+
+<p>滑雪以近乎尴尬的轻易满足每一条。目标清晰。反馈即时而具身——板会实时反馈身体平衡与立刃位置。挑战可通过地形选择被精确滴定到当前技能。行动与意识合一，因为来不及把它们分开。自我意识消退，因为滑板要求的注意力多到不留余裕给自我。契克森米哈伊所说的 <em>autotelic personality（自成目的型人格）</em>——倾向于追求那些以自身为目的的活动的性格——几乎按定义就在描述休闲滑雪者。这项活动按希腊文本义就是 <em>autotelos</em>——以自身为终点。</p>
+
+<h4>综合</h4>
+
+<p>三种框架从三个角度描述同一件事。<strong>波兰尼</strong>解释为什么滑雪不能从书里学——知识是默会的，而默会知识只能通过具身的实践被建立。<strong>梅洛-庞蒂</strong>说明这种具身实践造出来的是什么——自我向装备和地形的感知性延伸。<strong>契克森米哈伊</strong>刻画当前两者完成得好时所呈现的体验——自我与活动合一，本身即是奖赏。</p>
+
+<p>三者之下还有一个关于高山滑雪的结构性事实：它是现代生活里少数几种活动之一——一个人主动接受一种冷漠的自然力量所施加的限制（重力作用于一片水的结晶斜面），并将这一限制转化为艺术的媒介。</p>
+
+<p style="margin-top: 2rem; font-style: italic; color: var(--ski-ink-soft);">从地形——一座在两个雪季之间不会变化的山——转向那个在两小时之间就会变化的表面。</p>
+
+<h3>雪</h3>
+
+<p>雪是一种在脚下不断变化的材料，有时一道滑行之内就变好几次。把它滑好的前提，是认出当前是什么、它允许什么，并据此调整基本功 5（压力管理）。下面是一份现场分类——不是气象学的，而是实际会用到的类别。</p>
+
+<dl class="glossary">
+  <dt>粉雪（Powder）<span class="alt">— 新鲜、干燥、低密度</span></dt>
+  <dd>轻到滑板要下沉一段才找到支撑。滑粉雪靠的是浮力而不是立刃：保持站立姿态、双板间距收窄一些、以节奏化的弯伸让板在雪中"呼吸"般上下。在粉雪里内侧脚的重量分配比硬雪面上更重要。</dd>
+
+  <dt>压实粉雪（Packed Powder）<span class="alt">— 经压雪车整备且仍有柔软度</span></dt>
+  <dd>东部清晨的默认状态。立刃干净抓住，板的反馈直接，所有练习的成果都能转化进来。大多数滑雪者最好的滑行发生在这里。</dd>
+
+  <dt>硬雪 / Boilerplate<span class="alt">— 密实、被刮过、接近冰</span></dt>
+  <dd>压力必须集中在小面积上才能咬住。更大的立刃角度、重心前移、脚踝用力内扣、双手安静。试探性的立刃会侧滑；决心的立刃才能挂住。</dd>
+
+  <dt>冰<span class="alt">— 抛光、玻璃面</span></dt>
+  <dd>接受，然后承诺。冰不容硬碰硬。锋利的板刃（近期打磨过）不是可选项。落山线（fall line）是同盟而非对手；横切对抗将彻底丢失立刃。</dd>
+
+  <dt>糟雪（Crud）<span class="alt">— 被切碎的、再冻结的、混合的</span></dt>
+  <dd>惩罚走神的雪。板撞进一块软窝，下一刻撞上一道硬边，再下一刻是一块大碎块。需要强健的站姿、主动的弯伸、以及让板始终向前的动量。被动地滑糟雪是膝盖受伤的常见机制。</dd>
+
+  <dt>玉米雪（Corn）<span class="alt">— 春季雪，表面融化-再冻结过的颗粒状</span></dt>
+  <dd>滑到季末的奖赏。柔软、宽容、可预测。雪面咬住板刃，过渡时干脆释放。玉米雪上的 carving 是这项运动能给的最干净的感觉之一。</dd>
+
+  <dt>易碎冻壳（Breakable Crust）<span class="alt">— 冻结表面下覆盖更软的雪</span></dt>
+  <dd>所有雪况里最难滑的。冻壳有时候撑得住体重，有时撑不住，且无法可靠预判。唯一诚实的答案是保守的线路选择和严格的站姿纪律。</dd>
+</dl>
+
+<h4>注水雪：竞赛中被工程化的雪面</h4>
+<p>世界杯赛事所用之雪，按其设计几乎与娱乐滑雪者所滑之雪毫无相似可言。downhill 与超级大回转赛前，赛道会经过<em>水注雪</em>处理：通过水管或专用注雪枪，把冷水注满雪柱，再冻结为类似冰面的密实表面，硬度逼近冻土。其理由是可重复性。同一条线上有六十名选手相继下滑，松雪在三到四趟之后即被刨出深沟，使靠后出发的选手无法滑行；水注雪所产生的雪面足够均匀，让第三十号出发的选手所面对的赛道与第一号出发者大体一致。<sup class="ref"><a href="#ref-fis-snow">46</a></sup>FIS 的赛道筹备标准用穿透测试仪规定了硬度区间；未达到该标准的赛事成绩可被作废。</p>
+
+<p>代价是生物力学层面的。水注雪不像娱乐雪那样吸收冲击；摔倒在世界杯回转雪面上更近于摔在水泥路面上，而非摔在野雪缓坡的粉雪里。多位精英选手——尤其是 Lindsey Vonn 与 Mikaela Shiffrin——公开批评现行注水做法，认为它推高了世界杯选手的职业生涯伤病率，特别是边刃失控撞击硬面所致的膝盖损伤。"竞赛公平"与"参赛者安全"之间的取舍，至今未在监管层面得到解决；竞赛雪面的工程化目前已成高山运动科学领域的一项活跃议题。</p>
+
+<p style="margin-top: 2rem; font-style: italic; color: var(--ski-ink-soft);">从自然表面，转向迎接它的那件被工程化的工具。</p>
+
+<h3>装备</h3>
+
+<h4>侧切</h4>
+<p>现代高山滑雪板的板头与板尾比腰部宽。立起来后在体重下反弯（decamber），弯曲的内侧边以圆弧的形式咬入雪面。这条弧的半径就是<span class="term">侧切半径（sidecut radius）</span>——每副板上都有标注——也是单纯把板立起来、放任其转动时它自然想走的弧。回转板（slalom）在 12–13 米左右；大回转（GS）休闲版在 17–21 米，世界杯竞赛板高至 35 米；粉雪与自由式可至 25 米以上。比侧切半径更短的转弯需要侧滑（用旋转技术消速度）或额外形变（更大立刃角度、更大压力，把板压弯到自然弧之外）；比侧切半径更长的转弯则需要让板做<em>少于</em>它想做的，保持较平或主动引导出去。</p>
+
+<h4>板刃几何：基面斜角与侧面斜角</h4>
+<p>抓雪的金属板刃不是直角的。每条板刃打磨为两个角度：<span class="term">基面斜角（base bevel）</span>，通常 0.5°–1°，板刃底部以这个小角度从雪面抬起；<span class="term">侧面斜角（side bevel）</span>，通常 1°–3°，板刃侧面从 90° 直壁向滑板中心线方向倾斜。基面斜角越大，板"挂雪"越少，更易枢转；侧面斜角越大（等价地，从板基面起算的总角度越小，例如 87° = 3° side bevel），在硬雪上的咬合越强，宽容度越低。休闲板常出厂为 1° / 1° 或 1° / 2°。世界杯回转竞赛板通常是 0.5° / 3°（即 87° 侧角），冰面赛道上甚至会出现更激进的 0° / 4°。<sup class="ref"><a href="#ref-bevel">5</a></sup></p>
+
+<aside class="sidenote">87° 是赛道调刃语境里一个常见数字。它就是 3° 的 side bevel，以板侧面与板基面之间的绝对角度表达。同一个角度可以两种方式书写；零售与 FIS 文档中两种写法都出现。</aside>
+
+<h4>雪靴</h4>
+<p>预算受限的情况下，钱花在靴子上比花在板上回报更高。两个参数最要紧：<span class="term">硬度指数（flex index）</span>，数值越高，动力传递越直接，宽容度越低；<span class="term">last（楦型）</span>，靴体所基于的脚型，以前掌宽度毫米数表示。站姿与前倾角度可由调靴师调整。尺码正确的靴子若仍疼痛，意味着配型问题而非尺寸错误，可以通过 shell punch、定制鞋垫等针对性改造解决。</p>
+
+</div>
+
+</section>
+
+
+<!-- ============ X. REFERENCES ============ -->
+<section id="refs">
+
+<div data-lang-content="en">
+<span class="section-num">X.</span>
+<h2>References &amp; further reading</h2>
+
+<ol class="refs">
+  <li id="ref-norheim">Sondre Norheim biographical and historical material from the Norwegian Olympic and Paralympic Committee, the Sondre Norheim Museum (Morgedal), and Britannica. Norheim, S. (1825–1897), credited with the first sidecut, the willow-root heel-strap binding, and the Telemark and Christiania turns; first national skiing competition, Christiania, 1868.</li>
+
+  <li id="ref-zdarsky">Zdarsky, M. (1897). <cite>Lilienfelder Skilauf-Technik</cite>. Hartleben, Vienna. The first systematic alpine ski instruction manual. The first organized alpine ski race, Muckenkogel, March 1905.</li>
+
+  <li id="ref-fis-history">Fédération Internationale de Ski (FIS) institutional history. FIS founded 1924; alpine skiing first contested at the 1936 Garmisch-Partenkirchen Winter Olympics; FIS Alpine Ski World Cup launched 1966–67 season.</li>
+
+  <li id="ref-psia">Professional Ski Instructors of America – American Association of Snowboard Instructors (PSIA-AASI). <cite>Alpine Technical Manual</cite> and <cite>National Standards for Alpine Skiing</cite>. Skills Concept introduced at Interski 1975, Štrbské Pleso. Current articulation: Five Fundamentals of Skiing.</li>
+
+  <li id="ref-bevel">Edge bevel conventions and World Cup tuning practice. Sources: <cite>Edge Bevel Guide</cite>, evo.com; <cite>All About Edge Angles</cite>, datawax.com; <cite>How to Bevel and Tune Ski Edges</cite>, tognar.com. World Cup slalom typically 0.5°/3° (87° side angle); recreational typically 1°/1° to 1°/2°.</li>
+
+  <li id="ref-fis-equipment">Fédération Internationale de Ski (2024). <cite>Specifications for Alpine Competition Equipment 2024/2025</cite>. FIS, Oberhofen am Thunersee. Available at fis-ski.com. Historical evolution of GS minimum sidecut radius (21 m → 27 m → 35 m → 30 m) documented across successive editions of the same publication.</li>
+
+  <li id="ref-polanyi">Polanyi, M. (1966). <cite>The Tacit Dimension</cite>. Doubleday, New York. Reissued University of Chicago Press, 2009.</li>
+
+  <li id="ref-ryle">Ryle, G. (1949). <cite>The Concept of Mind</cite>. Hutchinson, London. The knowing-how / knowing-that distinction is developed in Chapter II.</li>
+
+  <li id="ref-merleau">Merleau-Ponty, M. (1945). <cite>Phénoménologie de la perception</cite>. Gallimard, Paris. English translation by Donald Landes, Routledge, 2012. The blind man's cane example appears in Part I, Chapter 3.</li>
+
+  <li id="ref-flow">Csikszentmihalyi, M. (1975). <cite>Beyond Boredom and Anxiety: Experiencing Flow in Work and Play</cite>. Jossey-Bass, San Francisco. The autotelic experience is introduced in Chapters 2 and 3; rock climbers, chess players, and surgeons constitute the original empirical samples.</li>
+
+  <li id="ref-berg1995">Berg, H. E., Eiken, O., &amp; Tesch, P. A. (1995). Involvement of eccentric muscle actions in giant slalom racing. <cite>Medicine and Science in Sports and Exercise</cite>, 27(12), 1666–1670.</li>
+
+  <li id="ref-berg1999">Berg, H. E., &amp; Eiken, O. (1999). Muscle control in elite alpine skiing. <cite>Medicine and Science in Sports and Exercise</cite>, 31(7), 1065–1067.</li>
+
+  <li id="ref-hydren">Hydren, J. R., Volek, J. S., Maresh, C. M., Comstock, B. A., &amp; Kraemer, W. J. (2013). Review of strength and conditioning for alpine ski racing. <cite>Strength and Conditioning Journal</cite>, 35(1), 10–28. See also Hoppeler, H., &amp; Vogt, M. (2009). Eccentric exercise in alpine skiing, in Müller, E. et al. (eds.), <cite>Science and Skiing IV</cite>, Meyer &amp; Meyer Sport.</li>
+
+  <li id="ref-kroll">Kröll, J., Wakeling, J. M., Seifert, J. G., &amp; Müller, E. (2010). Quadriceps muscle function during recreational alpine skiing. <cite>Medicine and Science in Sports and Exercise</cite>, 42(8), 1545–1556. Refines the simple eccentric-only picture into a biphasic eccentric–isometric–concentric sequence.</li>
+
+  <li id="ref-wirth">Wirth, K., Keiner, M., Sander, A., &amp; Schmidtbleicher, D. (2015). Decrease in eccentric quadriceps and hamstring strength in recreational alpine skiers after prolonged skiing. Cited via PMC5117052.</li>
+
+  <li id="ref-haslinger">Haslinger, S., Blank, C., Morawetz, D., et al. (2018). Effects of recreational ski mountaineering on cumulative muscle fatigue: A longitudinal trial. <cite>Frontiers in Physiology</cite>, 9, 1687.</li>
+
+  <li id="ref-imu-review">Reviews of inertial measurement unit applications in alpine skiing biomechanics include Supej, M. (2010). 3D measurements of alpine skiing with an inertial sensor motion capture suit and GNSS RTK system. <cite>Journal of Sports Sciences</cite>, 28(7), 759–769; and Yu, G., Jang, Y., Kim, J., et al. (2016). Potential of IMU sensors in performance analysis of professional alpine skiers. <cite>Sensors</cite>, 16(4), 463.</li>
+
+  <li id="ref-connected">Martínez, A., Brunauer, R., Venek, V., et al. (2021). Connected skiing: Motion quality quantification in alpine skiing. <cite>Sensors</cite>, 21(11), 3779. PMCID: PMC8199039.</li>
+
+  <li id="ref-carv">Motion Metrics Ltd. (2017–). CARV digital ski coach. Product documentation at getcarv.com. CARV 2 hardware specifications: Nordic Semiconductor announcement, November 2024 — 6-axis IMU using nRF52832 SoC.</li>
+
+  <li id="ref-stenroos">Stenroos, A., &amp; Handolin, L. (2014). Incidence of recreational alpine skiing and snowboarding injuries: Six years experience in the largest ski resort in Finland. <cite>Scandinavian Journal of Surgery</cite>, 104(2), 127–131.</li>
+
+  <li id="ref-mlki">Lewis, J. R., et al. (2023). Multiligament knee injuries in winter sports athletes. <cite>Cartilage</cite>. Reports 5–8 → 2 injuries per 1000 skier-days historical decline; 280% rise in ACL injury rate post-shaped-ski era.</li>
+
+  <li id="ref-posch">Posch, M., Schranz, A., Lener, M., et al. (2022). In recreational alpine skiing the ACL is predominantly injured in all knee injuries needing hospitalisation. <cite>Knee Surgery, Sports Traumatology, Arthroscopy</cite>, 30(6), 2032–2041. PMCID: PMC8126542.</li>
+
+  <li id="ref-skiers-knee">Lubowitz, J. H., &amp; Grauer, J. D. (2003). The skier's knee. <cite>Arthroscopy: The Journal of Arthroscopic and Related Surgery</cite>, 19(1), 75–84. ACL injury rate in alpine skiing 50–70 per 100,000 skier-days.</li>
+
+  <li id="ref-bere">Bere, T., Flørenes, T. W., Krosshaug, T., et al. (2011). Mechanisms of anterior cruciate ligament injury in World Cup alpine skiing: A systematic video analysis of 20 cases. <cite>American Journal of Sports Medicine</cite>, 39(7), 1421–1429.</li>
+
+  <li id="ref-ruedl">Ruedl, G., Pocecco, E., Sommersacher, R., et al. (multiple, 2010–2018). Cohort studies of risk factors for recreational alpine ski injury, conducted in the Tyrolean Alps. Selected: Ruedl, G., Fink, C., Schranz, A., et al. (2012). Impact of environmental factors on knee injuries in male and female recreational skiers. <cite>Scandinavian Journal of Medicine &amp; Science in Sports</cite>, 22(2), 185–189.</li>
+
+  <li id="ref-nsaa">National Ski Areas Association (2022). <cite>Your Responsibility Code</cite> (10-point version). NSAA, Lakewood, CO. nsaa.org.</li>
+
+  <li id="ref-aiare">American Institute for Avalanche Research and Education. AIARE Level 1 curriculum. avtraining.org.</li>
+
+  <li id="ref-stebbins-1982">Stebbins, R. A. (1982). Serious leisure: A conceptual statement. <cite>Pacific Sociological Review</cite>, 25(2), 251–272.</li>
+
+  <li id="ref-stebbins-2007">Stebbins, R. A. (2007). <cite>Serious Leisure: A Perspective for Our Time</cite>. Transaction Publishers, New Brunswick. Subsequent editions and the synthesizing chapter Stebbins, R. A. (2015), "The Serious Leisure Perspective," in <cite>Leisure and Positive Psychology</cite>, Palgrave Macmillan.</li>
+
+  <li id="ref-overholt">Overholt, J. R. (2009). <cite>The nature and meaning of leisure for Armenian youth: A case study of skiing as leisure</cite>. Cited in the bibliography maintained at seriousleisure.net.</li>
+
+  <li id="ref-patrollers">Recent applications of the serious leisure perspective to alpine ski populations. Representative: research on volunteer ski patrollers in the U.S. National Ski Patrol, framed using the Volunteer Process Model and serious leisure (<cite>Managing Sport and Leisure</cite>, 2025, advance online publication, DOI 10.1080/23750472.2025.2561986).</li>
+
+  <li id="ref-diener">Diener, E. (2000). Subjective well-being: The science of happiness and a proposal for a national index. <cite>American Psychologist</cite>, 55(1), 34–43.</li>
+
+  <li id="ref-stebbins-happiness">Stebbins, R. A. (2007). Leisure and happiness: An intricate relationship. Manuscript and subsequent expansions in his Leisure Reflections series.</li>
+
+  <li id="ref-runners">Lundberg, C., &amp; Andersson, T. D. (2024). The influence of serious leisure, training, and consumption on subjective well-being for sport event participants. <cite>Scandinavian Journal of Hospitality and Tourism</cite>. DOI 10.1080/15022250.2023.2296480. Surveyed 933 runners and tested SEM models of serious leisure → SWB.</li>
+
+  <li id="ref-helmet-adoption">U.S. National Ski Areas Association annual industry helmet-use surveys, 1995–present. Helmet use rose from approximately 25% in the late 1990s to 80–90% by the late 2010s.</li>
+
+  <li id="ref-russell">Russell, K., Christie, J., &amp; Hagel, B. E. (2010). The effect of helmets on the risk of head and neck injuries among skiers and snowboarders: A meta-analysis. <cite>Canadian Medical Association Journal</cite>, 182(4), 333–340. DOI 10.1503/cmaj.091080. Pooled OR 0.65 (95% CI 0.55–0.79); pediatric OR 0.41; no neck-injury increase.</li>
+
+  <li id="ref-shealy-helmets">Shealy, J. E., Ettlinger, C. F., &amp; Johnson, R. J. (multiple papers, 1995–2017). Long-running collaboration on resort-level ski-injury surveillance and helmet effectiveness; for example, Shealy, J. E., Johnson, R. J., &amp; Ettlinger, C. F. (2008), "Do helmets reduce fatalities or merely alter the patterns of death?" <cite>Journal of ASTM International</cite>, 5(10). Reports approximately 60–70% reduction in non-serious head injuries 1995–2012, no measurable change in fatality rate (~0.7 per million skier visits), helmet effectiveness limited to roughly 12 mph snow-impact velocity.</li>
+
+  <li id="ref-risk-comp">Reviews of risk-compensation evidence in snow sports include Hagel, B. E., &amp; Meeuwisse, W. (2004). Risk compensation: A "side effect" of sport injury prevention? <cite>Clinical Journal of Sport Medicine</cite>, 14(4), 193–196; and Ruedl, G., et al. (2010). Factors associated with self-reported risk-taking behaviour on ski slopes. <cite>British Journal of Sports Medicine</cite>, 44(3), 204–206.</li>
+
+  <li id="ref-allais">Allais, É. (1947). <cite>Ski Français</cite>. Paris: Flammarion. English translation: <cite>How to Ski by the French Method — Emile Allais' Technic</cite> (1947). For historical analysis, see Lund, M. and Masia, S., "Down-Unweighting: A History," <cite>Skiing History</cite> magazine.</li>
+
+  <li id="ref-kruckenhauser">Kruckenhauser, S. (1956). <cite>Österreichischer Skilehrplan</cite> (Austrian Ski Curriculum). Vienna: Österreichischer Bundesverlag. English edition (1958): <cite>The New Official Austrian Ski System</cite>. See also "Whatever Happened to Wedeln?" <cite>Skiing History</cite>, and the institutional history maintained by Snowsport Austria (Österreichischer Skischulverband).</li>
+
+  <li id="ref-interski">Interski International (interski.org). The international congress of snow-sport teaching nations, founded 1951. Member nations and proceedings of past congresses are documented in the organization's official records; see also Canadian Ski Instructors' Alliance, "International Partnerships" (CSIA, 2024).</li>
+
+  <li id="ref-isia-equivalence">International Ski Instructors Association (ISIA), credentialing framework. National-association comparisons drawn from PSIA-AASI Foreign Equivalency chart (2018) and analytic surveys at Subzero Coaching, ChairliftCareers, and SnowSkool.</li>
+
+  <li id="ref-nsaa-historical">National Ski Areas Association (NSAA), <cite>Historical Skier Visits 1978/79–2023/24</cite> data table (NSAA Industry Statistics, nsaa.org); annual <cite>Kottke End-of-Season &amp; Demographic Report</cite> series.</li>
+
+  <li id="ref-nsaa-2024">National Ski Areas Association (NSAA), preliminary skier-visit press releases for the 2023–24 and 2024–25 seasons (May 2024 and May 2025), reporting 60.4 million and 61.5 million visits respectively. Industry analysis on the Epic / Ikon season-pass effect: Wirth, S., "Strong Attendance, Big Expansions," <cite>Storm Skiing Journal</cite> (2025).</li>
+
+  <li id="ref-nsaa-participation">NSAA participation estimate of 10.6 million distinct U.S. skiers/snowboarders in the 2023–24 season, drawn from the <cite>Kottke End-of-Season &amp; Demographic Report</cite> via NSAA. Comparison participation figures (golf, bowling) cited in Wirth, S., op. cit.</li>
+
+  <li id="ref-fis-snow">FIS (International Ski and Snowboard Federation), <cite>FIS Specifications for Competition Equipment and Commercial Markings</cite> and <cite>FIS World Cup Course Preparation Guidelines</cite>; on water-injection technique and the controversy over its biomechanical consequences, see also Spörri, J., Kröll, J., Gilgien, M., &amp; Müller, E. (2017). "How to prevent injuries in alpine ski racing: what do we know and where do we go from here?" <cite>Sports Medicine</cite>, 47(4), 599–614.</li>
+</ol>
+
+</div>
+
+<div data-lang-content="zh">
+<span class="section-num">X.</span>
+<h2>参考与延伸阅读</h2>
+
+<ol class="refs">
+  <li>Sondre Norheim 生平与历史材料：挪威奥委会与残奥委、Sondre Norheim 博物馆（Morgedal）、Britannica 百科。Norheim, S.（1825–1897），公认的侧切板、桦木根脚跟带固定器、以及 Telemark 与 Christiania 转弯的发明者；首届全国滑雪比赛，克里斯蒂安尼亚，1868 年。</li>
+
+  <li>Zdarsky, M.（1897）。<cite>Lilienfelder Skilauf-Technik</cite>。维也纳：Hartleben。首份系统性高山滑雪教材。首次有组织的高山滑雪比赛，Muckenkogel，1905 年 3 月。</li>
+
+  <li>国际滑雪联合会（FIS）机构史。FIS 成立于 1924 年；高山滑雪首次于 1936 年加米施-帕滕基兴冬奥会上比赛；FIS 高山滑雪世界杯自 1966–67 赛季启动。</li>
+
+  <li>美国职业滑雪教练协会–美国单板教练协会（PSIA-AASI）。<cite>Alpine Technical Manual</cite> 与 <cite>National Standards for Alpine Skiing</cite>。Skills Concept 于 1975 年捷克斯洛伐克 Štrbské Pleso 的 Interski 大会引入；当前表述：Five Fundamentals。</li>
+
+  <li>板刃斜角惯例与世界杯调刃实践。来源：evo.com 之《Edge Bevel Guide》；datawax.com 之《All About Edge Angles》；tognar.com 之《How to Bevel and Tune Ski Edges》。世界杯回转通常为 0.5° / 3°（87° side angle）；休闲常为 1° / 1° 至 1° / 2°。</li>
+
+  <li>Fédération Internationale de Ski（2024）。<cite>Specifications for Alpine Competition Equipment 2024/2025</cite>。FIS，Oberhofen am Thunersee。fis-ski.com 可查。GS 最小侧切半径的历史演变（21 m → 27 m → 35 m → 30 m）记录于该刊连续各版。</li>
+
+  <li>Polanyi, M.（1966）。<cite>The Tacit Dimension</cite>。纽约：Doubleday。University of Chicago Press 2009 年再版。中译《默会的维度》。</li>
+
+  <li>Ryle, G.（1949）。<cite>The Concept of Mind</cite>。伦敦：Hutchinson。"知道如何"与"知道事实"的区分见第二章。</li>
+
+  <li>Merleau-Ponty, M.（1945）。<cite>Phénoménologie de la perception</cite>。巴黎：Gallimard。Donald Landes 英译，Routledge，2012。盲人的手杖例子见第一部分第三章。</li>
+
+  <li>Csikszentmihalyi, M.（1975）。<cite>Beyond Boredom and Anxiety: Experiencing Flow in Work and Play</cite>。旧金山：Jossey-Bass。"自成目的体验"概念引入于第二、三章；攀岩者、棋手、外科医生构成最初实证样本。</li>
+
+  <li>Berg, H. E., Eiken, O., &amp; Tesch, P. A.（1995）。Involvement of eccentric muscle actions in giant slalom racing. <cite>Medicine and Science in Sports and Exercise</cite>, 27(12), 1666–1670.</li>
+
+  <li>Berg, H. E., &amp; Eiken, O.（1999）。Muscle control in elite alpine skiing. <cite>Medicine and Science in Sports and Exercise</cite>, 31(7), 1065–1067.</li>
+
+  <li>Hydren, J. R., Volek, J. S., Maresh, C. M., Comstock, B. A., &amp; Kraemer, W. J.（2013）。Review of strength and conditioning for alpine ski racing. <cite>Strength and Conditioning Journal</cite>, 35(1), 10–28. 另见 Hoppeler, H., &amp; Vogt, M.（2009）。Eccentric exercise in alpine skiing，载 Müller 等（编），<cite>Science and Skiing IV</cite>，Meyer &amp; Meyer Sport。</li>
+
+  <li>Kröll, J., Wakeling, J. M., Seifert, J. G., &amp; Müller, E.（2010）。Quadriceps muscle function during recreational alpine skiing. <cite>Medicine and Science in Sports and Exercise</cite>, 42(8), 1545–1556. 把"纯离心"图景细化为离心—等长—向心的双相序列。</li>
+
+  <li>Wirth, K., Keiner, M., Sander, A., &amp; Schmidtbleicher, D.（2015）。Decrease in eccentric quadriceps and hamstring strength in recreational alpine skiers after prolonged skiing. PMC5117052。</li>
+
+  <li>Haslinger, S., Blank, C., Morawetz, D., 等（2018）。Effects of recreational ski mountaineering on cumulative muscle fatigue: A longitudinal trial. <cite>Frontiers in Physiology</cite>, 9, 1687.</li>
+
+  <li>关于惯性测量单元在高山滑雪生物力学中的应用综述：Supej, M.（2010）。3D measurements of alpine skiing with an inertial sensor motion capture suit and GNSS RTK system. <cite>Journal of Sports Sciences</cite>, 28(7), 759–769; 以及 Yu, G., Jang, Y., Kim, J., 等（2016）。Potential of IMU sensors in performance analysis of professional alpine skiers. <cite>Sensors</cite>, 16(4), 463.</li>
+
+  <li>Martínez, A., Brunauer, R., Venek, V., 等（2021）。Connected skiing: Motion quality quantification in alpine skiing. <cite>Sensors</cite>, 21(11), 3779. PMCID: PMC8199039.</li>
+
+  <li>Motion Metrics Ltd.（2017– ）。CARV 数字滑雪教练。产品文档见 getcarv.com。CARV 2 硬件规格：Nordic Semiconductor 公告，2024 年 11 月——基于 nRF52832 SoC 的 6 轴 IMU。</li>
+
+  <li>Stenroos, A., &amp; Handolin, L.（2014）。Incidence of recreational alpine skiing and snowboarding injuries: Six years experience in the largest ski resort in Finland. <cite>Scandinavian Journal of Surgery</cite>, 104(2), 127–131.</li>
+
+  <li>Lewis, J. R., 等（2023）。Multiligament knee injuries in winter sports athletes. <cite>Cartilage</cite>。报告了每千滑雪者-日 5–8 → 2 起的历史下降；shaped 板时代后 ACL 损伤率上升 280%。</li>
+
+  <li>Posch, M., Schranz, A., Lener, M., 等（2022）。In recreational alpine skiing the ACL is predominantly injured in all knee injuries needing hospitalisation. <cite>Knee Surgery, Sports Traumatology, Arthroscopy</cite>, 30(6), 2032–2041. PMCID: PMC8126542.</li>
+
+  <li>Lubowitz, J. H., &amp; Grauer, J. D.（2003）。The skier's knee. <cite>Arthroscopy: The Journal of Arthroscopic and Related Surgery</cite>, 19(1), 75–84. 高山滑雪 ACL 损伤率每 100,000 滑雪者-日 50–70 起。</li>
+
+  <li>Bere, T., Flørenes, T. W., Krosshaug, T., 等（2011）。Mechanisms of anterior cruciate ligament injury in World Cup alpine skiing: A systematic video analysis of 20 cases. <cite>American Journal of Sports Medicine</cite>, 39(7), 1421–1429.</li>
+
+  <li>Ruedl, G., Pocecco, E., Sommersacher, R., 等（多篇，2010–2018）。蒂罗尔阿尔卑斯地区休闲高山滑雪伤病风险因素队列研究系列。代表作：Ruedl, G., Fink, C., Schranz, A., 等（2012）。Impact of environmental factors on knee injuries in male and female recreational skiers. <cite>Scandinavian Journal of Medicine &amp; Science in Sports</cite>, 22(2), 185–189.</li>
+
+  <li>美国国家滑雪场协会（NSAA）（2022）。<cite>Your Responsibility Code</cite>（十条版）。Lakewood, CO。nsaa.org。</li>
+
+  <li>美国雪崩研究与教育研究所（AIARE）。AIARE Level 1 课程。avtraining.org。</li>
+
+  <li>Stebbins, R. A.（1982）。Serious leisure: A conceptual statement. <cite>Pacific Sociological Review</cite>, 25(2), 251–272.</li>
+
+  <li>Stebbins, R. A.（2007）。<cite>Serious Leisure: A Perspective for Our Time</cite>。Transaction Publishers，New Brunswick。后续版本及综合性章节 Stebbins, R. A.（2015），"The Serious Leisure Perspective"，载 <cite>Leisure and Positive Psychology</cite>，Palgrave Macmillan。</li>
+
+  <li>Overholt, J. R.（2009）。<cite>The nature and meaning of leisure for Armenian youth: A case study of skiing as leisure</cite>。见 seriousleisure.net 维护的目录。</li>
+
+  <li>近期将严肃休闲视角应用于高山滑雪人群的研究。代表性工作包括对美国国家滑雪巡逻队（NSP）志愿巡逻员的研究，结合志愿过程模型与严肃休闲框架（<cite>Managing Sport and Leisure</cite>，2025 在线发表，DOI 10.1080/23750472.2025.2561986）。</li>
+
+  <li>Diener, E.（2000）。Subjective well-being: The science of happiness and a proposal for a national index. <cite>American Psychologist</cite>, 55(1), 34–43.</li>
+
+  <li>Stebbins, R. A.（2007）。Leisure and happiness: An intricate relationship。手稿及其后续在 Leisure Reflections 系列中的延展。</li>
+
+  <li>Lundberg, C., &amp; Andersson, T. D.（2024）。The influence of serious leisure, training, and consumption on subjective well-being for sport event participants. <cite>Scandinavian Journal of Hospitality and Tourism</cite>。DOI 10.1080/15022250.2023.2296480。对 933 名跑步者进行的调查并以 SEM 模型检验严肃休闲 → SWB 路径。</li>
+
+  <li>美国国家滑雪场协会（NSAA）历年雪场头盔佩戴率调查，1995 年至今。佩戴率从 1990 年代末的约 25% 上升至 2010 年代末的 80–90%。</li>
+
+  <li>Russell, K., Christie, J., &amp; Hagel, B. E.（2010）。The effect of helmets on the risk of head and neck injuries among skiers and snowboarders: A meta-analysis. <cite>Canadian Medical Association Journal</cite>, 182(4), 333–340。DOI 10.1503/cmaj.091080。合并 OR 0.65（95% CI 0.55–0.79）；儿童 OR 0.41；颈部伤害无增加。</li>
+
+  <li>Shealy, J. E., Ettlinger, C. F., &amp; Johnson, R. J.（1995–2017 多篇）。雪场层面滑雪伤病监测与头盔有效性的长期合作工作。代表作如 Shealy, J. E., Johnson, R. J., &amp; Ettlinger, C. F.（2008），"Do helmets reduce fatalities or merely alter the patterns of death?"，<cite>Journal of ASTM International</cite>, 5(10)。报告 1995–2012 年非严重头部损伤下降约 60–70%；致死率无可测量变化（每百万滑雪者人次约 0.7 起）；头盔有效保护范围限于约 12 mph 雪面冲击速度。</li>
+
+  <li>关于雪上运动风险补偿证据的综述包括 Hagel, B. E., &amp; Meeuwisse, W.（2004）。Risk compensation: A "side effect" of sport injury prevention? <cite>Clinical Journal of Sport Medicine</cite>, 14(4), 193–196；以及 Ruedl, G., 等（2010）。Factors associated with self-reported risk-taking behaviour on ski slopes. <cite>British Journal of Sports Medicine</cite>, 44(3), 204–206。</li>
+
+  <li>Allais, É.（1947）。<cite>Ski Français</cite>。Paris: Flammarion。英译本：<cite>How to Ski by the French Method — Emile Allais' Technic</cite>（1947）。历史分析参见 Lund, M. 与 Masia, S., "Down-Unweighting: A History"，<cite>Skiing History</cite> 杂志。</li>
+
+  <li>Kruckenhauser, S.（1956）。<cite>Österreichischer Skilehrplan</cite>（奥地利滑雪教学大纲）。Vienna: Österreichischer Bundesverlag。1958 年英文版：<cite>The New Official Austrian Ski System</cite>。另见 "Whatever Happened to Wedeln?"，<cite>Skiing History</cite>；以及奥地利滑雪运动协会（Österreichischer Skischulverband）所维护的机构史料。</li>
+
+  <li>Interski International（interski.org）。国际雪上运动教学大会，成立于 1951 年。成员国名录与历届大会议事记录由该组织正式文献维护；亦见加拿大滑雪教练联盟（CSIA）"International Partnerships"（2024）。</li>
+
+  <li>国际滑雪教练协会（ISIA）资质互认框架。各国协会比较依据 PSIA-AASI Foreign Equivalency 图表（2018）以及 Subzero Coaching、ChairliftCareers 与 SnowSkool 的分析性综述。</li>
+
+  <li>National Ski Areas Association（NSAA），<cite>Historical Skier Visits 1978/79–2023/24</cite> 数据表（NSAA Industry Statistics, nsaa.org）；年度 <cite>Kottke End-of-Season &amp; Demographic Report</cite> 系列。</li>
+
+  <li>National Ski Areas Association（NSAA），2023–24 与 2024–25 赛季滑雪人次初步数据新闻稿（2024 年 5 月与 2025 年 5 月），分别报告 6040 万与 6150 万人次。关于 Epic / Ikon 季票效应的产业分析：Wirth, S., "Strong Attendance, Big Expansions"，<cite>Storm Skiing Journal</cite>（2025）。</li>
+
+  <li>NSAA 关于 2023–24 赛季全美约 1060 万独立滑雪与单板参与者的估计，引自 NSAA <cite>Kottke End-of-Season &amp; Demographic Report</cite>。对照参与人数（高尔夫、保龄球）数据见 Wirth, S., 同上。</li>
+
+  <li>FIS（国际滑雪与单板联合会），<cite>FIS Specifications for Competition Equipment and Commercial Markings</cite> 与 <cite>FIS World Cup Course Preparation Guidelines</cite>；关于水注雪技术及其生物力学争议，参见 Spörri, J., Kröll, J., Gilgien, M., &amp; Müller, E.（2017）。"How to prevent injuries in alpine ski racing: what do we know and where do we go from here?" <cite>Sports Medicine</cite>, 47(4), 599–614。</li>
+</ol>
+
+</div>
+
+</section>
+
+
+
+<!-- ============ FOOTER ============ -->
+<footer class="page-footer">
+
+<div data-lang-content="en">
+<span class="colophon-label">Colophon</span>
+<p>Set in Atkinson Hyperlegible (body) and Inter (UI). Technical content follows PSIA-AASI National Standards. A working notebook; revision history tracked in git. Part of <a href="/">yifanova.com</a>.</p>
+</div>
+
+<div data-lang-content="zh">
+<span class="colophon-label">版权说明</span>
+<p>正文使用 Atkinson Hyperlegible（西文）与 Noto Serif SC（中文），UI 使用 Inter。技术内容依据 PSIA-AASI 国家标准。一份持续修订的笔记，修订历史记录于 git。<a href="/">yifanova.com</a> 的一部分。</p>
+</div>
+
+</footer>
+
+</div><!-- /.main -->
+</div><!-- /.layout -->
+
+<!-- ============ JS: language toggle ============ -->
+<script>
+(function() {
+  var body = document.body;
+  var btns = document.querySelectorAll('[data-set-lang]');
+  var stored = null;
+  try { stored = localStorage.getItem('ski-lang'); } catch (e) {}
+  if (stored !== 'en' && stored !== 'zh') {
+    var nav = (navigator.language || 'en').toLowerCase();
+    stored = nav.indexOf('zh') === 0 ? 'zh' : 'en';
+  }
+  setLang(stored);
+
+  btns.forEach(function(b) {
+    b.addEventListener('click', function() {
+      setLang(b.getAttribute('data-set-lang'));
+    });
+  });
+
+  function setLang(l) {
+    body.setAttribute('data-lang', l);
+    btns.forEach(function(b) {
+      var on = b.getAttribute('data-set-lang') === l;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    try { localStorage.setItem('ski-lang', l); } catch (e) {}
+  }
+})();
+
+/* ============ Carving figure tabs ============ */
+(function() {
+  var tabs = document.querySelectorAll('[data-carving-tab]');
+  var panes = document.querySelectorAll('[data-carving-pane]');
+  if (!tabs.length || !panes.length) return;
+
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var which = tab.getAttribute('data-carving-tab');
+      tabs.forEach(function(t) {
+        var on = t.getAttribute('data-carving-tab') === which;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      panes.forEach(function(p) {
+        var on = p.getAttribute('data-carving-pane') === which;
+        if (on) p.removeAttribute('hidden');
+        else p.setAttribute('hidden', '');
+      });
+    });
+  });
+})();
+
+</script>
+
+</body>
+</html>

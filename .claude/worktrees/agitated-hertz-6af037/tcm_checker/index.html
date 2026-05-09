@@ -1,0 +1,2952 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>中药材安全与药方风险查询</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    :root {
+      --bg: #f4f1ea;
+      --paper: #fbfaf6;
+      --card: #ffffff;
+      --ink: #1a1a1a;
+      --ink-soft: #2c2c2c;
+      --muted: #6b6b6b;
+      --muted-2: #8a8580;
+      --rule: #d4cfc4;
+      --rule-strong: #2c2c2c;
+      --accent: #6b1e1e;
+      --accent-soft: #8a3232;
+      --green: #2d5a3d;
+      --blue: #1e3a5f;
+      --amber: #8a6a1e;
+      --orange: #a04a1e;
+      --red: #6b1e1e;
+      --highlight: #f5e6a3;
+      --shadow-sm: 0 1px 2px rgba(20, 20, 20, 0.04);
+      --shadow: 0 2px 6px rgba(20, 20, 20, 0.06);
+      --serif: 'Source Serif 4', 'Songti SC', 'STSong', 'SimSun', Georgia, serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(20, 20, 20, 0.012) 28px, rgba(20, 20, 20, 0.012) 29px);
+    }
+
+    header.site-header {
+      background: var(--paper);
+      border-bottom: 2px solid var(--rule-strong);
+      padding: 32px 28px 24px;
+    }
+
+    .site-header-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    h1.site-title {
+      font-family: var(--serif);
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      margin: 0 0 14px;
+      color: var(--ink);
+    }
+
+    .site-subtitle {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-style: italic;
+      color: var(--muted);
+      margin: 0 0 18px;
+      max-width: 720px;
+      line-height: 1.5;
+    }
+
+    .site-epigraph {
+      font-family: var(--serif);
+      font-size: 14px;
+      color: var(--muted);
+      padding: 12px 0 4px;
+      margin-top: 18px;
+      border-top: 1px solid var(--rule);
+      max-width: 760px;
+    }
+
+    .site-epigraph .quote-text {
+      font-style: italic;
+      line-height: 1.55;
+    }
+
+    .site-epigraph .quote-attr {
+      display: block;
+      margin-top: 6px;
+      font-style: normal;
+      font-size: 12.5px;
+      color: var(--muted-2);
+      letter-spacing: 0.02em;
+    }
+
+    main {
+      max-width: 1140px;
+      margin: 32px auto 48px;
+      padding: 0 28px;
+      display: grid;
+      gap: 28px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 28px;
+    }
+
+    .grid > .card {
+      margin: 0;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 28px 30px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card h2 {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 6px;
+      color: var(--ink);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .card h2::before {
+      content: "§ ";
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .note {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 12px 0 18px;
+      line-height: 1.6;
+    }
+
+    .small {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 6px;
+    }
+
+    textarea, input[type="text"] {
+      width: 100%;
+      font-family: var(--mono);
+      font-size: 14px;
+      padding: 12px 14px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: var(--paper);
+      color: var(--ink);
+      resize: vertical;
+      transition: border-color 0.15s;
+    }
+
+    textarea:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: var(--ink-soft);
+    }
+
+    textarea {
+      min-height: 96px;
+    }
+
+    button.primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    button.primary:hover {
+      background: var(--accent);
+    }
+
+    button.secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: transparent;
+      color: var(--ink-soft);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    button.secondary:hover {
+      border-color: var(--ink-soft);
+      color: var(--ink);
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .grade-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 22px;
+      padding: 22px 24px;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      margin-top: 6px;
+    }
+
+    .grade-letter {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 38px;
+      font-weight: 700;
+      color: #fff;
+      border-radius: 50%;
+      letter-spacing: -0.02em;
+    }
+
+    .grade-letter.S { background: var(--green); }
+    .grade-letter.A { background: var(--blue); }
+    .grade-letter.B { background: var(--amber); }
+    .grade-letter.C { background: var(--orange); }
+    .grade-letter.D { background: var(--red); }
+    .grade-letter.F { background: #1a1a1a; }
+
+    .metric {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .metric .label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .metric .value {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      border-radius: 3px;
+      border: 1px solid;
+    }
+
+    .pill.A { background: rgba(45, 90, 61, 0.08); color: var(--green); border-color: rgba(45, 90, 61, 0.3); }
+    .pill.B { background: rgba(30, 58, 95, 0.08); color: var(--blue); border-color: rgba(30, 58, 95, 0.3); }
+    .pill.C { background: rgba(138, 106, 30, 0.08); color: var(--amber); border-color: rgba(138, 106, 30, 0.3); }
+    .pill.G { background: rgba(160, 74, 30, 0.08); color: var(--orange); border-color: rgba(160, 74, 30, 0.3); }
+    .pill.X { background: rgba(107, 30, 30, 0.08); color: var(--red); border-color: rgba(107, 30, 30, 0.3); }
+    .pill.U { background: rgba(107, 107, 107, 0.08); color: var(--muted); border-color: rgba(107, 107, 107, 0.3); }
+
+    .herb-list-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .herb-list-item:last-child {
+      border-bottom: none;
+    }
+
+    .herb-list-item strong {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    .interactions {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .interaction-item {
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--accent);
+      border-radius: 3px;
+      padding: 16px 18px;
+      background: var(--paper);
+    }
+
+    .interaction-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .interaction-drug {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .interaction-effect {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(107, 30, 30, 0.06);
+      padding: 4px 10px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .interaction-herbs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    .pill-mini {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      background: var(--paper);
+      color: var(--ink-soft);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      font-family: var(--serif);
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    .interaction-note {
+      margin-bottom: 6px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    .interaction-item a, .negative-study a, .evidence-summary a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(107, 30, 30, 0.3);
+    }
+
+    .interaction-item a:hover, .negative-study a:hover, .evidence-summary a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    /* ============= EVIDENCE / NEGATIVE STUDIES SECTION ============= */
+    .evidence-card {
+      background: linear-gradient(180deg, #fbfaf6 0%, #ffffff 280px);
+    }
+
+    .epigraph-box {
+      margin: 18px 0 28px;
+      padding: 22px 26px 22px 32px;
+      background: var(--paper);
+      border-left: 4px solid var(--ink);
+      position: relative;
+      font-family: var(--serif);
+    }
+
+    .epigraph-box::before {
+      content: "\201C";
+      position: absolute;
+      top: -8px;
+      left: 14px;
+      font-family: var(--serif);
+      font-size: 64px;
+      color: var(--rule);
+      line-height: 1;
+    }
+
+    .epigraph-text {
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: var(--ink-soft);
+      font-style: italic;
+      margin: 0 0 10px;
+    }
+
+    .epigraph-text .hl {
+      background: linear-gradient(transparent 55%, var(--highlight) 55%, var(--highlight) 90%, transparent 90%);
+      font-style: normal;
+      font-weight: 700;
+      color: var(--ink);
+      padding: 0 2px;
+    }
+
+    .epigraph-attr {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-size: 12.5px;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      text-align: right;
+      font-family: var(--sans);
+      font-weight: 600;
+    }
+
+    .negative-studies {
+      display: grid;
+      gap: 24px;
+      margin-top: 8px;
+    }
+
+    .negative-study {
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 24px 28px;
+      background: var(--card);
+      counter-increment: study;
+      position: relative;
+    }
+
+    .negative-study::before {
+      content: counter(study, decimal-leading-zero);
+      position: absolute;
+      top: 22px;
+      right: 28px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted-2);
+      letter-spacing: 0.1em;
+    }
+
+    .negative-studies {
+      counter-reset: study;
+    }
+
+    .study-header {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--rule);
+    }
+
+    .study-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 2px;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .study-tag.tier-1 {
+      background: var(--accent);
+    }
+
+    .study-n {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      background: var(--paper);
+      color: var(--ink-soft);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .negative-study h3 {
+      font-family: var(--serif);
+      margin: 6px 0 14px;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    .negative-study p {
+      margin: 0 0 12px;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    .negative-study .hl-result {
+      background: linear-gradient(transparent 55%, var(--highlight) 55%, var(--highlight) 90%, transparent 90%);
+      font-weight: 700;
+      color: var(--ink);
+      padding: 0 2px;
+    }
+
+    .negative-study .hl-strong {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .study-takeaway {
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: var(--paper);
+      border-left: 3px solid var(--accent);
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+
+    .study-takeaway strong {
+      color: var(--ink);
+    }
+
+    .study-citation {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--rule);
+      font-family: var(--serif);
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--muted);
+      text-indent: -1.6em;
+      padding-left: 1.6em;
+    }
+
+    .study-citation a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .study-citation a:hover {
+      text-decoration: underline;
+    }
+
+    .evidence-summary {
+      margin-top: 30px;
+      padding: 24px 28px;
+      background: var(--ink);
+      color: #f4f1ea;
+      border-radius: 3px;
+    }
+
+    .evidence-summary h3 {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 700;
+      margin: 0 0 12px;
+      letter-spacing: -0.005em;
+      color: #fff;
+    }
+
+    .evidence-summary p {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(244, 241, 234, 0.9);
+    }
+
+    .evidence-summary p:last-child {
+      margin-bottom: 0;
+    }
+
+    .evidence-summary em {
+      font-style: italic;
+      color: var(--highlight);
+      font-weight: 600;
+    }
+
+    /* ============= FOOTER ============= */
+    footer {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 28px 28px 48px;
+      border-top: 1px solid var(--rule);
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-family: var(--serif);
+    }
+
+    /* Selectors used by JS that we need to keep working */
+    #results, #lib-results, #grade-card, #explanation { /* placeholder for JS targets */ }
+
+    /* ============= COMPONENTS USED BY EXISTING HTML ============= */
+    h3 {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+      margin: 18px 0 8px;
+      padding-bottom: 4px;
+    }
+
+    h3::before {
+      content: "› ";
+      color: var(--accent);
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .actions button:not(.secondary), #analyzeBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .actions button:not(.secondary):hover, #analyzeBtn:hover {
+      background: var(--accent);
+    }
+
+    .actions .secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      background: transparent;
+      color: var(--ink-soft);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .actions .secondary:hover {
+      border-color: var(--ink-soft);
+      color: var(--ink);
+    }
+
+    .legend {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 18px 0 6px;
+      padding: 10px 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border-radius: 2px;
+      border: 1px solid;
+      font-family: var(--sans);
+    }
+
+    .tag.A { background: rgba(45, 90, 61, 0.08); color: var(--green); border-color: rgba(45, 90, 61, 0.4); }
+    .tag.B { background: rgba(30, 58, 95, 0.08); color: var(--blue); border-color: rgba(30, 58, 95, 0.4); }
+    .tag.C { background: rgba(138, 106, 30, 0.08); color: var(--amber); border-color: rgba(138, 106, 30, 0.4); }
+    .tag.G { background: rgba(160, 74, 30, 0.08); color: var(--orange); border-color: rgba(160, 74, 30, 0.4); }
+    .tag.X { background: rgba(107, 30, 30, 0.08); color: var(--red); border-color: rgba(107, 30, 30, 0.4); }
+    .tag.U { background: rgba(107, 107, 107, 0.08); color: var(--muted); border-color: rgba(107, 107, 107, 0.4); }
+
+    #summary {
+      margin-top: 14px;
+    }
+
+    #summary:not(:empty) {
+      padding: 14px 16px;
+      background: var(--paper);
+      border-left: 3px solid var(--ink);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    .results {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .result-item {
+      padding: 14px 16px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: var(--card);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px 16px;
+      align-items: start;
+    }
+
+    .result-item h4 {
+      font-family: var(--serif);
+      font-size: 16px;
+      margin: 0 0 4px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .result-item .meta {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-top: 4px;
+    }
+
+    .result-item .evidence {
+      grid-column: 1 / -1;
+      margin-top: 8px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--rule);
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    .result-item .evidence-label {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 8px;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 2px;
+      margin-right: 6px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .result-item .evidence a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(107, 30, 30, 0.3);
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 14px 0 18px;
+      align-items: center;
+    }
+
+    #searchBox {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px 14px;
+      font-family: var(--sans);
+      font-size: 14px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    #searchBox:focus {
+      outline: none;
+      border-color: var(--ink-soft);
+    }
+
+    #filterSelect {
+      padding: 10px 14px;
+      font-family: var(--sans);
+      font-size: 14px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .library {
+      display: grid;
+      gap: 10px;
+      max-height: 520px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .library::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .library::-webkit-scrollbar-track {
+      background: var(--paper);
+    }
+
+    .library::-webkit-scrollbar-thumb {
+      background: var(--rule);
+      border-radius: 2px;
+    }
+
+    .lib-item {
+      padding: 12px 14px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: var(--card);
+      display: grid;
+      gap: 4px;
+    }
+
+    .lib-item-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .lib-item-name {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .lib-item-aliases {
+      font-size: 12px;
+      color: var(--muted-2);
+      font-family: var(--serif);
+    }
+
+    .lib-item-use {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    .lib-item-risk {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+      padding-top: 4px;
+      border-top: 1px dotted var(--rule);
+    }
+
+    .score-box {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+      padding: 18px;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+    }
+
+    .score-box .metric {
+      text-align: center;
+      padding: 8px 4px;
+    }
+
+    .score-box .metric .num {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .score-box .metric .label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ============= HERB / RESULT ITEMS (rendered by JS) ============= */
+    .herb-item, .result-item {
+      padding: 16px 18px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: var(--card);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .herb-top, .result-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--rule);
+    }
+
+    .herb-name {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+
+    .usage, .risk-line {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin: 6px 0;
+    }
+
+    .usage strong, .risk-line strong {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .risk-line {
+      color: var(--ink-soft);
+    }
+
+    .risk-line strong {
+      color: var(--accent);
+    }
+
+    /* ============= EVIDENCE BOX (危险证据折叠) ============= */
+    .evidence-box {
+      margin-top: 10px;
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--accent);
+      border-radius: 3px;
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .evidence-box summary {
+      padding: 10px 14px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+
+    .evidence-box summary::-webkit-details-marker { display: none; }
+
+    .evidence-box summary::after {
+      content: "▾";
+      float: right;
+      font-size: 10px;
+      color: var(--muted-2);
+      transition: transform 0.2s;
+    }
+
+    .evidence-box[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .evidence-box ul {
+      margin: 0;
+      padding: 8px 16px 14px 30px;
+      border-top: 1px dashed var(--rule);
+      list-style: square;
+    }
+
+    .evidence-box li {
+      margin-bottom: 8px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    .evidence-box li:last-child { margin-bottom: 0; }
+
+    .evidence-box li a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(107, 30, 30, 0.3);
+    }
+
+    .evidence-box li span {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ============= CHEMISTRY / MOLECULAR MECHANISM ============= */
+    .chemistry-box {
+      margin-top: 14px;
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--ink);
+      border-radius: 3px;
+      background: linear-gradient(180deg, #fbfaf6 0%, #ffffff 100%);
+      overflow: hidden;
+    }
+
+    .chemistry-box summary {
+      padding: 11px 16px;
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink);
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .chemistry-box summary:hover {
+      background: rgba(20, 20, 20, 0.03);
+    }
+
+    .chemistry-box summary::-webkit-details-marker { display: none; }
+
+    .chemistry-box summary::after {
+      content: "▾";
+      float: right;
+      font-size: 10px;
+      transition: transform 0.2s;
+      color: var(--muted-2);
+    }
+
+    .chemistry-box[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .chem-icon {
+      display: inline-block;
+      margin-right: 6px;
+      color: var(--accent);
+      font-size: 14px;
+    }
+
+    .chem-body {
+      padding: 4px 16px 16px;
+      border-top: 1px dashed var(--rule);
+    }
+
+    .chem-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(212, 207, 196, 0.6);
+      font-size: 13.5px;
+      line-height: 1.65;
+    }
+
+    .chem-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .chem-label {
+      font-family: var(--sans);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+
+    .chem-value {
+      font-family: var(--serif);
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+
+    .chem-vs {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 3px;
+      border: 1px solid;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .chem-vs.inverse {
+      background: rgba(107, 30, 30, 0.06);
+      border-color: rgba(107, 30, 30, 0.25);
+    }
+
+    .chem-vs.null {
+      background: rgba(107, 107, 107, 0.06);
+      border-color: rgba(107, 107, 107, 0.25);
+    }
+
+    .chem-vs.partial {
+      background: rgba(138, 106, 30, 0.06);
+      border-color: rgba(138, 106, 30, 0.3);
+    }
+
+    .vs-header {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .vs-icon {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .chem-vs.inverse .vs-icon { color: var(--accent); }
+    .chem-vs.null .vs-icon { color: var(--muted); }
+    .chem-vs.partial .vs-icon { color: var(--amber); }
+
+    .vs-text {
+      font-family: var(--serif);
+      color: var(--ink-soft);
+    }
+
+    .vs-text strong {
+      color: var(--ink);
+    }
+
+    .vs-note {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(0, 0, 0, 0.08);
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 880px) {
+
+      .grid { grid-template-columns: 1fr; }
+      .toolbar { grid-template-columns: 1fr; }
+      .score-box { grid-template-columns: repeat(2, 1fr); }
+      .library { grid-template-columns: 1fr; max-height: none; }
+      .card { padding: 18px; border-radius: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="eyebrow">中药材与药方风险评估</div>
+      <h1 class="site-title">药方风险评估系统</h1>
+      <p class="site-subtitle">基于循证医学证据的中药材分类、风险等级与药物相互作用查询。<br> 本工具采纳现代循证医学判断：中医药体系缺乏可靠的疗效证据，并存在严重的毒理学风险。</p>
+      <div class="site-epigraph">
+        <div class="quote-text"> <b> 我还记得先前的医生的议论和方药，和现在所知道的比较起来，便渐渐的悟得中医不过是一种有意的或无意的骗子。</b> </div>
+        <span class="quote-attr">—— 鲁迅，《呐喊·自序》（1922）</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="grid">
+      <div class="card">
+        <h2>药方风险查询</h2>
+        <p class="note">可直接粘贴说明书成分，例如：苦杏仁、紫苏叶、前胡、桔梗、陈皮、甘草。</p>
+        <textarea id="formulaInput" placeholder="在这里输入药方或中成药成分……"></textarea>
+        <div class="actions">
+          <button type="button" id="analyzeBtn">分析药方</button>
+          <button type="button" class="secondary" data-example="safe">示例：较安全止咳方</button>
+          <button type="button" class="secondary" data-example="risky">示例：高风险方</button>
+          <button type="button" class="secondary" id="clearBtn">清空</button>
+        </div>
+        <div class="legend">
+          <span class="tag A">A 食药同源</span>
+          <span class="tag B">B 有限放行</span>
+          <span class="tag C">C 严格监管</span>
+          <span class="tag G">灰 严格限制</span>
+          <span class="tag X">黑 禁用</span>
+          <span class="tag U">未知 未收录</span>
+        </div>
+        <div id="summary"></div>
+        <div id="results" class="results"></div>
+      </div>
+
+      <div class="card">
+        <h2>风险评分说明</h2>
+        <p class="note">评分是教学与政策模拟用途。黑名单一票否决；灰名单和 C 类越多，风险越高。</p>
+        <div class="score-box" id="scoreBox">
+          <div class="metric"><div class="num">—</div><div class="label">风险等级</div></div>
+          <div class="metric"><div class="num">—</div><div class="label">黑名单数量</div></div>
+          <div class="metric"><div class="num">—</div><div class="label">灰/C数量</div></div>
+          <div class="metric"><div class="num">—</div><div class="label">未知数量</div></div>
+        </div>
+        <h3>等级解释</h3>
+        <p class="small"><strong>S/A：</strong>以 A 类或少量 B 类为主，适合作为低风险保留品种。<br>
+        <strong>B：</strong>含少量 B/C 类，通常只适合短期轻症使用。<br>
+        <strong>C/D：</strong>含多味 C 类或灰名单，建议处方化、限疗程、监测不良反应。<br>
+        <strong>F：</strong>含黑名单或明显高毒药材，应禁用。</p>
+        <h3>政策口径</h3>
+        <p class="small">A 类“留面子”：保留食药同源与文化认同。B 类“留功能”：允许小病轻症短期使用。C 类“留余地”：在医院处方与研究条件下有限使用。灰名单严格限制，黑名单全面禁止。</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>常见中药材风险名单</h2>
+      <p class="note">当前数据库收录 <strong><span id="herbCount">—</span></strong> 种常见中药材，覆盖食用类、植物类、动物类、矿物类等不同来源；按 A/B/C/灰/黑五级风险分类。</p>
+      <div class="toolbar">
+        <input id="searchBox" placeholder="搜索：山楂、附子、甘草、人参、马兜铃……" />
+        <select id="filterSelect">
+          <option value="all">全部类别</option>
+          <option value="A">A类：食药同源</option>
+          <option value="B">B类：有限放行</option>
+          <option value="C">C类：严格监管</option>
+          <option value="G">灰名单：严格限制</option>
+          <option value="X">黑名单：禁用</option>
+        </select>
+      </div>
+      <div id="library" class="library"></div>
+    </section>
+
+    <section class="card">
+      <h2>中药-西药相互作用速查</h2>
+      <p class="note">若正在长期服用某类现代医学药品,在尝试任何中药前请先核对此表。证据基于循证医学综述,以药效学/药代动力学机制为依据。</p>
+      <div class="interactions">
+        <div class="interaction-item">
+          <div class="interaction-top">
+            <div class="interaction-drug">华法林 / 抗凝药 (Warfarin, DOACs)</div>
+            <div class="interaction-effect">出血风险增加</div>
+          </div>
+          <div class="interaction-herbs"><span class="pill-mini">丹参</span> <span class="pill-mini">当归</span> <span class="pill-mini">川芎</span> <span class="pill-mini">红花</span> <span class="pill-mini">桃仁</span> <span class="pill-mini">银杏叶</span> <span class="pill-mini">生姜</span> <span class="pill-mini">三七</span> <span class="pill-mini">水蛭</span> <span class="pill-mini">人参</span></div>
+          <div class="small interaction-note">90 种中药与抗凝/抗血小板药存在文献记载的相互作用,大多数为药效学叠加导致的出血风险。</div>
+          <div class="small"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3650066/" target="_blank" rel="noopener noreferrer">PLOS ONE (Tsai 等,2013)</a></div>
+        </div>
+        <div class="interaction-item">
+          <div class="interaction-top">
+            <div class="interaction-drug">阿司匹林 / 抗血小板药 (Clopidogrel)</div>
+            <div class="interaction-effect">出血风险增加</div>
+          </div>
+          <div class="interaction-herbs"><span class="pill-mini">丹参</span> <span class="pill-mini">银杏叶</span> <span class="pill-mini">当归</span> <span class="pill-mini">川芎</span> <span class="pill-mini">红花</span> <span class="pill-mini">生姜</span> <span class="pill-mini">姜黄</span></div>
+          <div class="small interaction-note">与抗凝药合用风险类似;阿司匹林是文献记载与中药相互作用第二多的西药。</div>
+          <div class="small"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3650066/" target="_blank" rel="noopener noreferrer">PLOS ONE (Tsai 等,2013)</a></div>
+        </div>
+        <div class="interaction-item">
+          <div class="interaction-top">
+            <div class="interaction-drug">地高辛 / 强心苷</div>
+            <div class="interaction-effect">心律失常风险</div>
+          </div>
+          <div class="interaction-herbs"><span class="pill-mini">甘草</span> <span class="pill-mini">蟾酥</span> <span class="pill-mini">人参</span></div>
+          <div class="small interaction-note">甘草通过低钾增加地高辛毒性;蟾酥含蟾蜍二烯内酯,本身即类洋地黄成分,合用极危险。</div>
+          <div class="small"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1769273/" target="_blank" rel="noopener noreferrer">Heart (BMJ) / Frontiers</a></div>
+        </div>
+        <div class="interaction-item">
+          <div class="interaction-top">
+            <div class="interaction-drug">降压药 / 利尿剂</div>
+            <div class="interaction-effect">降压效果减弱 / 低钾血症</div>
+          </div>
+          <div class="interaction-herbs"><span class="pill-mini">甘草</span> <span class="pill-mini">麻黄</span> <span class="pill-mini">人参</span></div>
+          <div class="small interaction-note">甘草引起钠潴留对抗降压药并加重低钾;麻黄拟交感神经,直接升高血压、心率。</div>
+          <div class="small"><a href="https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2021.719197/full" target="_blank" rel="noopener noreferrer">Frontiers in Nutrition</a></div>
+        </div>
+        <div class="interaction-item">
+          <div class="interaction-top">
+            <div class="interaction-drug">免疫抑制剂 (他克莫司、环孢素)</div>
+            <div class="interaction-effect">血药浓度异常 / 排异 / 中毒</div>
+          </div>
+          <div class="interaction-herbs"><span class="pill-mini">五味子</span> <span class="pill-mini">生姜</span> <span class="pill-mini">姜黄</span> <span class="pill-mini">人参</span></div>
+          <div class="small interaction-note">五味子(Wuzhi 胶囊)显著增加他克莫司浓度;贯叶连翘(St. John's wort)通过 CYP3A4 诱导降低浓度致排异,虽非中药但常被混用。</div>
+          <div class="small"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9611668/" target="_blank" rel="noopener noreferrer">MDPI Pharmaceutics / J Ethnopharmacol</a></div>
+        </div>
+        <div class="interaction-item">
+          <div class="interaction-top">
+            <div class="interaction-drug">降糖药 (胰岛素、磺脲类)</div>
+            <div class="interaction-effect">血糖控制紊乱</div>
+          </div>
+          <div class="interaction-herbs"><span class="pill-mini">人参</span> <span class="pill-mini">西洋参</span> <span class="pill-mini">苦瓜</span> <span class="pill-mini">黄连</span></div>
+          <div class="small interaction-note">人参类影响血糖方向不一致(可升可降),与降糖药合用使血糖更难控制。</div>
+          <div class="small"><a href="https://www.nccih.nih.gov/health/asian-ginseng" target="_blank" rel="noopener noreferrer">NCCIH</a></div>
+        </div>
+        <div class="interaction-item">
+          <div class="interaction-top">
+            <div class="interaction-drug">CYP3A4 底物药物 (他汀、钙拮抗剂等)</div>
+            <div class="interaction-effect">血药浓度升高 / 毒性</div>
+          </div>
+          <div class="interaction-herbs"><span class="pill-mini">五味子</span> <span class="pill-mini">姜黄</span> <span class="pill-mini">生姜</span></div>
+          <div class="small interaction-note">上述中药为 CYP3A4 抑制剂,与他汀、地尔硫卓、咪达唑仑等同代谢途径药物合用可致血药浓度升高。</div>
+          <div class="small"><a href="https://www.mdpi.com/1422-0067/26/11/5188" target="_blank" rel="noopener noreferrer">MDPI IJMS</a></div>
+        </div>
+        <div class="interaction-item">
+          <div class="interaction-top">
+            <div class="interaction-drug">糖皮质激素 / 醛固酮系统药物</div>
+            <div class="interaction-effect">低钾、高血压加重</div>
+          </div>
+          <div class="interaction-herbs"><span class="pill-mini">甘草</span></div>
+          <div class="small interaction-note">甘草酸抑制 11β-HSD2,使内源/外源皮质醇活性增强,与激素或盐皮质激素受体相关药物叠加。</div>
+          <div class="small"><a href="https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2021.719197/full" target="_blank" rel="noopener noreferrer">Frontiers in Nutrition</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card evidence-card">
+      <h2>关键阴性研究证据汇编</h2>
+
+      <div class="epigraph-box">
+        <p class="epigraph-text"><b>但我总希望这昏乱思想遗传的祸害，不至于有梅毒那样猛烈，竟至百无一免。即使同梅毒一样，现在发明了六百零六，肉体上的病，既可医治；我希望也有一种七百零七的药，可以医治思想上的病。这药原来也已发明，就是<span class="hl">"科学"</span>一味。只希望那班精神上掉了鼻子的朋友，不要又打着"祖传老病"的旗号来反对吃药，中国的昏乱病，便也总有全愈的一天。</b></p>
+        <span class="epigraph-attr">—— 鲁迅，《热风·随感录三十八（合群的爱国的自大）》（1918）</span>
+      </div>
+
+      <p class="note">下列研究均为大样本、随机化、双盲、安慰剂对照、发表于顶级期刊的金标准 RCT 或系统综述。每项研究都直接检验了中医药/针灸的某个核心疗效宣称。引用格式遵循 APA 第 7 版。</p>
+
+      <div class="negative-studies">
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag tier-1">2024 · The Lancet</span>
+            <span class="study-n">N = 1,641</span>
+          </div>
+          <h3>中风醒脑口服液（FYTF-919）治疗急性脑出血：CHAIN 试验</h3>
+          <p>"中风醒脑口服液"是中国治疗急性脑出血的常用中成药复方，基于"化瘀吸收血肿、抗炎"等理论被广泛使用。CHAIN 试验在中国 26 家医院招募 1,641 名中重度脑出血患者，随机给予中风醒脑口服液或外观、口味完全一致的安慰剂，持续 28 天。</p>
+          <p><span class="hl-strong">主要结局：</span>90 天 utility-weighted 改良 Rankin 量表评分，<span class="hl-result">试验组 0.44，安慰剂组 0.44，差值 0.01（95% CI -0.02 至 0.04），p = 0.63</span>。功能恢复、生存率、生活质量——三项关键指标均无差异。</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>这是首篇以中药复方为主题、发表在 Lancet 的 RCT。其阴性结果之所以决定性，在于它的设计排除了所有传统辩护词——剂量为临床推荐剂量、患者为典型适应症、复方本身就是固定方（不存在"个体化"问题）、主要研究者来自广州中医药大学。
+          </div>
+          <div class="study-citation">CHAIN Investigators. (2024). Traditional Chinese medicine FYTF-919 (Zhongfeng Xingnao oral prescription) for the treatment of acute intracerebral haemorrhage: A multicentre, randomised, placebo-controlled, double-blind, clinical trial. <em>The Lancet, 404</em>(10468), 2187–2196. <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(24)02261-X/abstract" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/S0140-6736(24)02261-X</a></div>
+        </article>
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag tier-1">2008 · JAMA</span>
+            <span class="study-n">N = 3,069</span>
+          </div>
+          <h3>银杏叶提取物预防痴呆：GEM 研究</h3>
+          <p>美国国立补充与替代医学中心（NCCAM）资助的大型 RCT，在 5 个学术医学中心招募 3,069 名 75 岁以上、认知正常或轻度认知损害的老年人，随机服用 EGb761 银杏叶提取物 120 mg 每日两次或安慰剂，中位随访 6.1 年。</p>
+          <p><span class="hl-strong">主要结局：</span>全因痴呆和阿尔茨海默病的发病率，<span class="hl-result">两组间无显著差异（HR 1.12，95% CI 0.94–1.33）</span>。JAMA 同期社论结论原文："常规使用的银杏叶提取物不能预防有或无认知障碍人群的痴呆，对阿尔茨海默病也无效——使用者不应期待它有用。"</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>银杏是全球销量最大的"植物药"之一，"改善记忆""保护脑血管"的市场宣传无处不在。GEM 是迄今为止唯一一项有足够样本量和随访时间来真正检验这一核心宣称的研究，其阴性结果至今未被任何同等量级的研究推翻。
+          </div>
+          <div class="study-citation">DeKosky, S. T., Williamson, J. D., Fitzpatrick, A. L., Kronmal, R. A., Ives, D. G., Saxton, J. A., Lopez, O. L., Burke, G., Carlson, M. C., Fried, L. P., Kuller, L. H., Robbins, J. A., Tracy, R. P., Woolard, N. F., Dunn, L., Snitz, B. E., Nahin, R. L., &amp; Furberg, C. D. (2008). Ginkgo biloba for prevention of dementia: A randomized controlled trial. <em>JAMA, 300</em>(19), 2253–2262. <a href="https://jamanetwork.com/journals/jama/fullarticle/182929" target="_blank" rel="noopener noreferrer">https://doi.org/10.1001/jama.2008.683</a></div>
+        </article>
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag">2007 · Arch Intern Med</span>
+            <span class="study-n">N = 1,162</span>
+          </div>
+          <h3>针灸 vs 假针灸 vs 常规治疗：GERAC 慢性腰痛试验</h3>
+          <p>由德国法定医保资助、为评估针灸医保覆盖性而设计的大型 RCT。在 340 家门诊诊所招募 1,162 名慢性腰痛患者（平均病程 8 年），三臂随机：（1）按中医经络理论的"真针灸"，（2）在非穴位浅刺的"假针灸"，（3）指南推荐的常规治疗（药物+理疗+运动）。10 次 30 分钟治疗，持续 5 周。</p>
+          <p><span class="hl-strong">主要结局：</span>6 个月时疼痛改善的应答率，<span class="hl-result">真针灸 47.6% vs 假针灸 44.2%（差值 3.4%，95% CI -3.7% 至 10.3%，p = 0.39）</span>。两种针灸的效果均显著优于常规治疗（27.4%），但<span class="hl-strong">真针灸与假针灸之间无显著差异</span>。</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>这是对中医"经络穴位特异性"理论的直接证伪。如果穴位真的具有解剖-生理学上的特殊性，那么扎对位置应该比扎错位置有效。但 GERAC 显示——以及后续多项类似设计的 RCT 一致显示——无论扎在哪里，效果都一样。这说明针灸的疗效是<span class="hl-strong">非特异性安慰剂效应 + 期待效应 + 治疗仪式</span>的产物，而非穴位经络的特异性药理作用。
+          </div>
+          <div class="study-citation">Haake, M., Müller, H. H., Schade-Brittinger, C., Basler, H. D., Schäfer, H., Maier, C., Endres, H. G., Trampisch, H. J., &amp; Molsberger, A. (2007). German Acupuncture Trials (GERAC) for chronic low back pain: Randomized, multicenter, blinded, parallel-group trial with 3 groups. <em>Archives of Internal Medicine, 167</em>(17), 1892–1898. <a href="https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/413107" target="_blank" rel="noopener noreferrer">https://doi.org/10.1001/Archinte.167.17.1892</a></div>
+        </article>
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag">2013 · Stroke</span>
+            <span class="study-n">N = 1,100</span>
+          </div>
+          <h3>NeuroAiD（MLC601）治疗急性缺血性卒中：CHIMES 试验</h3>
+          <p>国际多中心（中国、新加坡、菲律宾、泰国、斯里兰卡）双盲、安慰剂对照 RCT，检验中药复方 NeuroAiD 治疗急性缺血性卒中的效果。患者在卒中发作后 72 小时内入组，治疗 3 个月，随访至 2 年（CHIMES-E 延续研究）。</p>
+          <p><span class="hl-strong">主要结局：</span>3 个月时改良 Rankin 量表评分，<span class="hl-result">中药组在统计学上不优于安慰剂（OR 1.09，95% CI 0.86–1.32，p = 0.474）</span>。原文结论："MLC601 在用于中等严重程度急性缺血性卒中患者时，在 3 个月改善结局方面在统计学上不优于安慰剂。"</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>这项试验由中医药支持机构（CHIMES Society / Moleac）赞助——即由<span class="hl-strong">利益相关方自己设计</span>的试验，在严格盲法下仍得出阴性结果，可信度反而极高。后续 2 年延续研究中所谓"6–18 个月时有效"的事后分析，未被主流卒中指南采纳。
+          </div>
+          <div class="study-citation">Chen, C. L. H., Young, S. H., Gan, H. H., Singh, R., Lao, A. Y., Baroque, A. C., Chang, H. M., Hiyadan, J. H. B., Chua, C. L., Advincula, J. M., Muengtaweepongsa, S., Chan, B. P. L., De Silva, H. A., Towanabut, S., Suwanwela, N. C., Poungvarin, N., Chankrachang, S., Wong, K. S. L., Eow, G. B., … Bousser, M. G. (2013). Chinese medicine NeuroAiD efficacy on stroke recovery: A double-blind, placebo-controlled, randomized study. <em>Stroke, 44</em>(8), 2093–2100. <a href="https://pubmed.ncbi.nlm.nih.gov/23780952/" target="_blank" rel="noopener noreferrer">https://doi.org/10.1161/STROKEAHA.113.002055</a></div>
+        </article>
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag">2007 · Postgrad Med J</span>
+            <span class="study-n">系统综述</span>
+          </div>
+          <h3>"个体化辨证论治"的循证检验：Guo, Canter &amp; Ernst 综述</h3>
+          <p>"中医必须个体化辨证论治、不能用 RCT 评价"是中医捍卫者最常见的辩护。Ernst 团队（英国 Exeter 大学补充与替代医学系）系统检索了所有以"个体化草药处方"（包括中医、欧洲草药、阿育吠陀）为干预的随机对照试验。</p>
+          <p><span class="hl-strong">主要结局：</span>全球只检索到 3 项符合标准的 RCT。膝骨关节炎试验中，趋势可由基线差异和均值回归解释；肠易激综合征试验中，<span class="hl-result">个体化治疗优于安慰剂但劣于标准化中药方</span>；化疗毒性预防试验中，<span class="hl-result">个体化中药与安慰剂无差异</span>。综述结论原文："没有令人信服的证据支持在任何适应症上使用个体化草药治疗。"</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>这项综述击中了"中医不能用现代科学方法评价"的核心辩护。当真的有人按"辨证论治"的方式做了 RCT，结果是：<span class="hl-strong">个体化处方既无优势，反而可能不如固定方</span>。即在中医自己的规则下，也找不到证据。
+          </div>
+          <div class="study-citation">Guo, R., Canter, P. H., &amp; Ernst, E. (2007). A systematic review of randomised clinical trials of individualised herbal medicine in any indication. <em>Postgraduate Medical Journal, 83</em>(984), 633–637. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2600130/" target="_blank" rel="noopener noreferrer">https://doi.org/10.1136/pgmj.2007.060202</a></div>
+        </article>
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag">2022 · J Evid Based Med</span>
+            <span class="study-n">综述：所有 Cochrane 中药综述</span>
+          </div>
+          <h3>Cochrane 数据库中中药系统综述的整体评估</h3>
+          <p>Cochrane 系统综述被公认为循证医学的最高证据等级。这项荟萃综述检索了 Cochrane 数据库中所有以中药为主题的系统综述，评估其结论的确定性和方法学质量（按 GRADE 和 AMSTAR 2 标准）。</p>
+          <p><span class="hl-strong">主要结局：</span><span class="hl-result">绝大多数 Cochrane 中药综述的结论是"证据不足以得出结论"或"效应不确定"</span>。即使是少数报告"有效"的综述，其证据质量按 GRADE 评估多为"低"或"极低"。原文结论："尽管中药被广泛使用，其有效性的证据在很大程度上仍然不确定。"</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>过去 20 多年，Cochrane 协作组发表了数百篇中药系统综述，覆盖几乎所有主要疾病。当全球最严格的循证医学机构系统、独立、按统一标准评估全部中药文献时，得出的整体判断不是"中药有效"或"中药无效"，而是"<span class="hl-strong">现有研究质量太差，无法支持任何明确结论</span>"——这本身就是对"中医千年验证有效"宣称的根本反驳。
+          </div>
+          <div class="study-citation">Wu, X. Y., Tang, J. L., Mao, C., Yuan, J. Q., Qin, Y., &amp; Chung, V. C. H. (2022). Cochrane systematic reviews on traditional Chinese medicine: What matters—the quantity or quality of evidence? <em>Journal of Evidence-Based Medicine, 15</em>(4), 372–382. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9741948/" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/jebm.12502</a></div>
+        </article>
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag">2012 · Cochrane Reviews 综述</span>
+            <span class="study-n">6 项 Cochrane 综述</span>
+          </div>
+          <h3>中药治疗冠心病：6 项 Cochrane 综述的整体评估</h3>
+          <p>该综述系统整合了 Cochrane 数据库中所有以中药治疗冠心病（不稳定型心绞痛、稳定型心绞痛、心衰、急性心梗）为主题的 6 项 Cochrane 系统综述。冠心病是中药使用最广泛的适应症之一，"活血化瘀""通脉""养心"等理论应用极广。</p>
+          <p><span class="hl-strong">主要结局：</span><span class="hl-result">6 项 Cochrane 综述无一支持中药对冠心病有确定的治疗效果</span>。原文结论："这些综述均未得到支持中药制剂有效性的明确结论，原因是证据薄弱。"</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>冠心病是有清晰客观结局指标（死亡率、再梗死率、PCI 率）的疾病，不能用主观症状量表搪塞。在这一最经得起检验的领域，中药同样未能通过 Cochrane 标准的检验。
+          </div>
+          <div class="study-citation">Liu, Z. L., Liu, Z. J., Liu, J. P., Yang, M., &amp; Kwong, J. (2012). Traditional Chinese herbal products for coronary heart disease: An overview of Cochrane reviews. <em>Evidence-Based Complementary and Alternative Medicine, 2012</em>, 591636. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3320001/" target="_blank" rel="noopener noreferrer">https://doi.org/10.1155/2012/591636</a></div>
+        </article>
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag">2021 · Front Pharmacol</span>
+            <span class="study-n">N = 1,773 样本</span>
+          </div>
+          <h3>全球中药材重金属污染：1,773 样本调查</h3>
+          <p>这不是一项疗效研究，而是一项<span class="hl-strong">质量与安全性</span>研究。研究者用电感耦合等离子体质谱（ICP-MS）检测了来自全球的 1,773 份中药材样本中镉（Cd）、铅（Pb）、砷（As）、汞（Hg）、铜（Cu）的含量，按《中国药典》限值评估。</p>
+          <p><span class="hl-strong">主要结局：</span><span class="hl-result">30.51%（541 份）样本至少有一种重金属超出《中国药典》限值</span>。其中 25 种常用药材的铅、镉、砷、汞估计每日摄入量超过暂定可耐受日摄入量（PTDI）。其他独立研究在韩国、新加坡、美国市售中药也观察到类似比例的重金属超标。</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>即使忽略疗效问题——假设某种中药真的"有效"——使用者也面临三分之一概率摄入超标重金属的风险。这是一个<span class="hl-strong">系统性产业问题</span>而非个别造假：土壤污染、加工不规范、矿物药故意添加、传统炮制工艺无法清除现代污染物。"天然=安全"是中药市场最大的认知错误。
+          </div>
+          <div class="study-citation">Luo, L., Wang, B., Jiang, J., Fitzgerald, M., Huang, Q., Yu, Z., Li, H., Zhang, J., Wei, J., Yang, C., Zhang, H., Dong, L., &amp; Chen, S. (2021). Heavy metal contaminations in herbal medicines: Determination, comprehensive risk assessments, and solutions. <em>Frontiers in Pharmacology, 11</em>, 595335. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7883644/" target="_blank" rel="noopener noreferrer">https://doi.org/10.3389/fphar.2020.595335</a></div>
+        </article>
+
+        <article class="negative-study">
+          <div class="study-header">
+            <span class="study-tag">2015 · Sci Rep</span>
+            <span class="study-n">N = 26 样本（DNA 测序）</span>
+          </div>
+          <h3>中药商品的成分掺假与污染：基因组学审计</h3>
+          <p>研究者使用 DNA 测序、毒理学分析和重金属检测三种独立方法，对澳大利亚市售的 26 种中药商品进行了"审计"。这是首次对中药使用现代分子生物学方法进行身份核验。</p>
+          <p><span class="hl-strong">主要结局：</span><span class="hl-result">92% 的中药样本存在某种形式的成分掺假和/或污染</span>。包括：标签未声明的植物成分、标签未声明的西药（包括对乙酰氨基酚、抗组胺药、糖皮质激素）、未声明的动物 DNA（包括《濒危野生动植物种国际贸易公约》CITES 保护物种），以及多种重金属（其中一份砷含量超过限值的 10 倍以上）。</p>
+          <div class="study-takeaway">
+            <strong>意义：</strong>"中药"作为一个商品类别，其<span class="hl-strong">实际成分与标签宣称严重不符</span>。消费者购买的"金银花胶囊"实际可能含有意外植物、未声明西药、保护动物制品、或重金属。这种系统性掺假使任何"中药 X 治疗 Y 有效"的临床观察都不可解释——你不知道患者实际吃下的是什么。
+          </div>
+          <div class="study-citation">Coghlan, M. L., Maker, G., Crighton, E., Haile, J., Murray, D. C., White, N. E., Byard, R. W., Bellgard, M. I., Mullaney, I., Trengove, R., Allcock, R. J. N., Nash, C., Hoban, C., Jarrett, K., Edwards, R., Musgrave, I. F., &amp; Bunce, M. (2015). Combined DNA, toxicological and heavy metal analyses provides an auditing toolkit to improve pharmacovigilance of traditional Chinese medicine (TCM). <em>Scientific Reports, 5</em>, 17475. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4675079/" target="_blank" rel="noopener noreferrer">https://doi.org/10.1038/srep17475</a></div>
+        </article>
+
+      </div>
+
+      <div class="evidence-summary">
+        <h3>共同模式</h3>
+        <p>当中医药接受现代医学的金标准检验——大样本、随机化、双盲、安慰剂对照、独立数据监查——时，结果几乎一致地呈现以下三种之一：<em>与安慰剂无差异</em>、<em>效应小到无临床意义</em>、或<em>证据质量太差以至于无法得出结论</em>。这不是个别研究的偶然，而是一个<em>横跨数十年、覆盖各类适应症、独立于研究地点和资助方的稳定模式</em>。</p>
+        <p>在中文文献中显示"有效"的小样本、开放标签、以"有效率"为指标的研究，一旦研究设计变得严格，效应就消失。这种模式在科学史上有标准解释：所谓的"疗效"主要是<em>安慰剂效应、自然病程、回归均值与系统性偏倚</em>的混合产物，而非治疗本身的特异性药理作用。</p>
+        <p>同时，中药材本身存在<em>系统性重金属污染、农药残留、成分掺假与未声明西药添加</em>等质量问题。"天然 = 安全"是这一行业最具误导性的市场标语——这恰恰是为什么本工具的减害分类（A/B/C/灰/黑名单）有其实际意义：在一个无法摆脱的文化-产业现实中，至少避开会真正伤人的东西。</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <strong>免责声明 ·</strong> 本工具不用于诊断、治疗或替代医师建议。药材分类与风险说明基于作者依据循证医学证据自行整理的减害框架，非任何监管机构的官方清单。实际用药应以国家药监部门、药典、产品说明书和合格医师意见为准。<br>
+    <strong>方法论立场 ·</strong> 本工具采纳现代循证医学的整体判断：中医药体系作为一个整体，迄今缺乏足以支持其疗效宣称的高质量证据，并存在可观的毒理学、相互作用与质量风险。
+  </footer>
+
+  <script>
+    'use strict';
+
+    const CATEGORY_INFO = {
+      A: { label: 'A类 · 食药同源', className: 'A' },
+      B: { label: 'B类 · 有限放行', className: 'B' },
+      C: { label: 'C类 · 严格监管', className: 'C' },
+      G: { label: '灰名单 · 严格限制', className: 'G' },
+      X: { label: '黑名单 · 禁用', className: 'X' },
+      U: { label: '未知 · 未收录', className: 'U' }
+    };
+
+    const herbs = [
+      // A 类：食药同源或低风险文化保留类
+      { name: '山楂', aliases: ['大山楂'], cat: 'A', use: '消食化积，尤其用于肉食积滞、脘腹胀满。', risk: '胃酸过多、胃溃疡者大量使用需谨慎。' },
+      { name: '大枣', aliases: ['红枣'], cat: 'A', use: '补中益气，养血安神，常作调和药。', risk: '含糖较高，糖尿病患者不宜大量食用。' },
+      { name: '枸杞子', aliases: ['枸杞'], cat: 'A', use: '滋补肝肾，益精明目。', risk: '可能与抗凝药物相互作用，需谨慎。' },
+      { name: '龙眼肉', aliases: ['桂圆肉', '桂圆'], cat: 'A', use: '补益心脾，养血安神。', risk: '含糖较高，糖尿病患者需控量。' },
+      { name: '桑椹', aliases: ['桑葚'], cat: 'A', use: '滋阴补血，生津润燥。', risk: '过量可致腹泻。' },
+      { name: '乌梅', aliases: [], cat: 'A', use: '敛肺生津，涩肠止泻。', risk: '酸性强，胃酸过多者谨慎。' },
+      { name: '椰子', aliases: ['椰子肉', '椰汁'], cat: 'A', use: '补虚生津，民间用于清润。', risk: '高糖或高热量制品需注意。' },
+      { name: '薏苡仁', aliases: ['薏米', '苡米'], cat: 'A', use: '健脾渗湿，利水。', risk: '孕期大量使用需谨慎。' },
+      { name: '白扁豆', aliases: [], cat: 'A', use: '健脾化湿。', risk: '未熟透食用可能引起不适。' },
+      { name: '赤小豆', aliases: ['红豆'], cat: 'A', use: '利水消肿，清热。', risk: '总体安全。' },
+      { name: '绿豆', aliases: [], cat: 'A', use: '清热解暑。', risk: '过量可致腹泻。' },
+      { name: '黑豆', aliases: [], cat: 'A', use: '补肾利水，传统食疗使用。', risk: '总体安全。' },
+      { name: '麦芽', aliases: ['大麦芽'], cat: 'A', use: '消食和中，回乳。', risk: '哺乳期需注意回乳作用。' },
+      { name: '小麦', aliases: ['浮小麦'], cat: 'A', use: '养心安神，浮小麦用于止汗。', risk: '麸质敏感者注意。' },
+      { name: '核桃仁', aliases: ['核桃'], cat: 'A', use: '补肾润肠。', risk: '坚果过敏者禁用。' },
+      { name: '莲子', aliases: [], cat: 'A', use: '补脾止泻，养心安神。', risk: '总体安全。' },
+      { name: '芡实', aliases: [], cat: 'A', use: '补脾止泻，固肾。', risk: '总体安全。' },
+      { name: '黑芝麻', aliases: ['芝麻'], cat: 'A', use: '补肝肾，润肠。', risk: '高脂肪，过量可致腹泻。' },
+      { name: '百合', aliases: [], cat: 'A', use: '润肺止咳，清心安神。', risk: '总体安全。' },
+      { name: '山药', aliases: ['淮山'], cat: 'A', use: '补脾养胃，生津益肺。', risk: '总体安全。' },
+      { name: '莱菔子', aliases: ['萝卜籽'], cat: 'A', use: '消食除胀，降气化痰。', risk: '胃肠虚弱者大量使用可不适。' },
+      { name: '荷叶', aliases: [], cat: 'A', use: '清暑化湿。', risk: '总体安全，减肥宣传常被夸大。' },
+      { name: '菊花', aliases: [], cat: 'A', use: '疏风清热，清肝明目。', risk: '菊科过敏者慎用。' },
+      { name: '金银花', aliases: ['忍冬花'], cat: 'A', use: '清热解毒，疏散风热。', risk: '总体安全，但不应夸大抗病毒疗效。' },
+      { name: '薄荷', aliases: [], cat: 'A', use: '疏散风热，清利头目，利咽。', risk: '胃食管反流者可能不适。' },
+      { name: '薄荷脑', aliases: ['薄荷醇'], cat: 'A', use: '清凉止痒，利咽，外用或含服常见。', risk: '婴幼儿慎用，高浓度刺激。' },
+      { name: '决明子', aliases: [], cat: 'A', use: '清肝明目，润肠通便。', risk: '过量可腹泻。' },
+      { name: '玫瑰花', aliases: ['玫瑰茄'], cat: 'A', use: '理气解郁，常作茶饮。', risk: '总体安全。' },
+      { name: '罗汉果', aliases: [], cat: 'A', use: '清热润肺，利咽，化痰止咳。', risk: '总体安全，含糖制品需注意。' },
+      { name: '陈皮', aliases: ['橘皮'], cat: 'A', use: '理气健脾，燥湿化痰。', risk: '总体安全。' },
+      { name: '紫苏叶', aliases: ['苏叶'], cat: 'A', use: '解表散寒，行气和胃。', risk: '总体安全。' },
+      { name: '胖大海', aliases: [], cat: 'A', use: '清肺利咽，润肠通便。', risk: '易腹泻者慎用。' },
+      { name: '诃子肉', aliases: ['诃子'], cat: 'A', use: '涩肠止泻，敛肺利咽。', risk: '便秘者慎用。' },
+      { name: '生姜', aliases: ['姜'], cat: 'A', use: '解表散寒，温中止呕。', risk: '抗凝用药者大量使用需谨慎。' },
+      { name: '干姜', aliases: [], cat: 'A', use: '温中散寒，回阳通脉。', risk: '辛辣刺激，胃炎或胃食管反流者慎用。' },
+      { name: '花椒', aliases: [], cat: 'A', use: '温中止痛，杀虫止痒。', risk: '辛辣刺激，外用可致皮炎。' },
+      { name: '胡椒', aliases: [], cat: 'A', use: '温中散寒，下气消痰。', risk: '胃炎、溃疡者慎用。' },
+      { name: '丁香', aliases: [], cat: 'A', use: '温中降逆，温肾助阳。', risk: '刺激性较强，过量不宜。' },
+      { name: '肉桂', aliases: [], cat: 'A', use: '补火助阳，散寒止痛。', risk: '辛热，孕妇和出血倾向者慎用。' },
+      { name: '筚茇', aliases: [], cat: 'A', use: '温中散寒，下气止痛。', risk: '辛热刺激，过量不宜。' },
+      { name: '冰片', aliases: [], cat: 'A', use: '开窍醒神，清热止痛，外用常见。', risk: '婴幼儿和孕妇慎用，高浓度刺激。' },
+      { name: '樟脑', aliases: [], cat: 'A', use: '外用止痛止痒，温和刺激局部。', risk: '不可内服，儿童误服可严重中毒。' },
+      { name: '鸡内金', aliases: [], cat: 'A', use: '消食健胃，化石辅助。', risk: '总体安全。' },
+      { name: '佛手', aliases: [], cat: 'A', use: '疏肝理气，和胃止痛，燥湿化痰。', risk: '总体安全，胃酸过多者大量使用需谨慎。' },
+      { name: '香橼', aliases: [], cat: 'A', use: '疏肝理气，宽中化痰。', risk: '总体安全。' },
+      { name: '砂仁', aliases: [], cat: 'A', use: '化湿开胃，温脾止泻，理气安胎。', risk: '辛香刺激，过量可致咽干、口干等不适。' },
+      { name: '豆蔻', aliases: ['白豆蔻'], cat: 'A', use: '化湿行气，温中止呕。', risk: '辛香刺激，胃炎或胃食管反流者慎用。' },
+      { name: '肉豆蔻', aliases: [], cat: 'A', use: '温中行气，涩肠止泻。', risk: '过量可能有神经系统不良反应，不宜长期大剂量。' },
+      { name: '小茴香', aliases: ['茴香'], cat: 'A', use: '散寒止痛，理气和胃。', risk: '总体安全，过量辛热刺激。' },
+      { name: '八角茴香', aliases: ['八角'], cat: 'A', use: '温阳散寒，理气止痛。', risk: '需防混入有毒莽草类伪品。' },
+      { name: '高良姜', aliases: [], cat: 'A', use: '温胃止呕，散寒止痛。', risk: '辛热刺激，胃炎或溃疡者慎用。' },
+      { name: '沙棘', aliases: [], cat: 'A', use: '健脾消食，止咳祛痰，活血散瘀。', risk: '总体安全，胃酸过多者慎用。' },
+      { name: '余甘子', aliases: ['滇橄榄'], cat: 'A', use: '清热凉血，消食健胃，生津止咳。', risk: '酸涩，胃酸过多者慎用。' },
+      { name: '藿香', aliases: ['广藿香'], cat: 'A', use: '化湿醒脾，辟秽和中，解暑。', risk: '总体安全，挥发油过敏者慎用。' },
+      { name: '蒲公英', aliases: [], cat: 'A', use: '清热解毒，消肿散结，利湿通淋。', risk: '菊科过敏者慎用，利尿药合用需注意。' },
+      { name: '鱼腥草', aliases: ['蕺菜'], cat: 'A', use: '清热解毒，排脓消痈，利尿通淋。', risk: '总体低风险，但注射剂风险另计；过敏者慎用。' },
+      { name: '马齿苋', aliases: [], cat: 'A', use: '清热解毒，凉血止痢。', risk: '总体安全，易腹泻者慎用。' },
+      { name: '鲜芦根', aliases: ['芦根'], cat: 'A', use: '清热生津，除烦止呕。', risk: '总体安全。' },
+      { name: '玉竹', aliases: [], cat: 'A', use: '养阴润燥，生津止渴。', risk: '总体安全。' },
+      { name: '黄精', aliases: [], cat: 'A', use: '补气养阴，健脾润肺。', risk: '油腻，胃肠功能较弱者不宜大量长期使用。' },
+      { name: '天麻', aliases: [], cat: 'A', use: '息风止痉，平抑肝阳，祛风通络。', risk: '总体安全，但疗效常被夸大。' },
+      { name: '酸角', aliases: ['罗望子'], cat: 'A', use: '清热解暑，消食化积。', risk: '酸性较强，胃酸过多者慎用。' },
+      { name: '火麻仁', aliases: ['麻仁'], cat: 'A', use: '润肠通便。', risk: '过量可腹泻，孕妇慎用。' },
+      { name: '郁李仁', aliases: [], cat: 'A', use: '润肠通便，利水消肿。', risk: '泻下作用，孕妇慎用。' },
+      { name: '蜂蜜', aliases: ['炼蜜'], cat: 'A', use: '补中润燥，止痛解毒，常作丸剂辅料。', risk: '婴儿禁用，糖尿病患者需控量。' },
+      { name: '桑叶', aliases: [], cat: 'A', use: '疏散风热，清肺润燥，清肝明目。', risk: '总体低风险，菊科或植物过敏体质慎用。' },
+      { name: '梨', aliases: ['雪梨'], cat: 'A', use: '润肺生津，清热化痰，常作食疗。', risk: '总体安全，含糖制品需注意。' },
+      { name: '柿蒂', aliases: [], cat: 'A', use: '降逆止呃。', risk: '证据有限，胃肠虚寒者慎用。' },
+      { name: '白茅根', aliases: [], cat: 'A', use: '凉血止血，清热利尿。', risk: '总体低风险，利尿药合用需注意。' },
+      { name: '薤白', aliases: [], cat: 'A', use: '通阳散结，行气导滞。', risk: '葱蒜类过敏或胃肠刺激者慎用。' },
+      { name: '茶叶', aliases: ['绿茶', '红茶'], cat: 'A', use: '清头目，除烦渴，化痰消食。', risk: '咖啡因敏感、失眠或胃酸过多者慎用。' },
+      { name: '葱白', aliases: [], cat: 'A', use: '发汗解表，散寒通阳。', risk: '胃肠刺激，过量不宜。' },
+      { name: '韭菜子', aliases: [], cat: 'A', use: '温补肝肾，固精缩尿。', risk: '辛辣刺激，过量可致咽干、口干。' },
+      { name: '南瓜子', aliases: [], cat: 'A', use: '杀虫，传统用于绦虫、蛔虫。', risk: '总体安全，坚果种子过敏者慎用。' },
+
+      // B 类：有限放行
+      { name: '甘草', aliases: [], cat: 'B', use: '补脾益气，祛痰止咳，调和诸药。', risk: '长期或大剂量可致低钾、高血压、水钠潴留。' },
+      { name: '桔梗', aliases: [], cat: 'B', use: '宣肺祛痰，利咽排脓。', risk: '胃部刺激，溃疡或呕吐者慎用。' },
+      { name: '苦杏仁', aliases: ['杏仁'], cat: 'B', use: '降气止咳平喘，润肠。', risk: '含苦杏仁苷，过量可产生氰化物中毒风险，必须控量炮制。' },
+      { name: '厚朴', aliases: [], cat: 'B', use: '行气除满，燥湿消痰。', risk: '孕妇慎用，胃肠刺激。' },
+      { name: '半夏', aliases: ['制半夏'], cat: 'B', use: '燥湿化痰，降逆止呕。', risk: '必须炮制，生品刺激性强。' },
+      { name: '黄连', aliases: [], cat: 'B', use: '清热燥湿，泻火解毒。', risk: '大剂量或长期使用可能有肝胃肠风险。' },
+      { name: '车前子', aliases: ['车前草'], cat: 'B', use: '利尿通淋，渗湿止泻。', risk: '利尿作用，肾病或用利尿药者慎用。' },
+      { name: '酸枣仁', aliases: [], cat: 'B', use: '养心安神，敛汗。', risk: '镇静作用，驾驶或合用镇静药需谨慎。' },
+      { name: '远志', aliases: ['制远志'], cat: 'B', use: '安神益智，祛痰开窍。', risk: '胃刺激，需限量。' },
+      { name: '瓜蒌', aliases: ['栝楼'], cat: 'B', use: '清热化痰，宽胸散结，润肠。', risk: '可致胃肠不适，孕妇慎用。' },
+      { name: '枳壳', aliases: [], cat: 'B', use: '理气宽中，行滞消胀。', risk: '孕妇慎用，胃肠刺激。' },
+      { name: '枳实', aliases: [], cat: 'B', use: '破气消积，化痰除痞。', risk: '作用较强，孕妇慎用，需限量。' },
+      { name: '木香', aliases: [], cat: 'B', use: '行气止痛，健脾消食。', risk: '需排除含马兜铃酸的青木香混淆；正品木香风险较低。' },
+      { name: '香附', aliases: [], cat: 'B', use: '疏肝解郁，理气调经。', risk: '证据有限，孕期慎用。' },
+      { name: '佩兰', aliases: [], cat: 'B', use: '化湿醒脾，解暑。', risk: '总体低风险，证据有限。' },
+      { name: '茯苓', aliases: ['茯神'], cat: 'B', use: '利水渗湿，健脾宁心。', risk: '总体低风险，利尿药合用需注意。' },
+      { name: '泽兰', aliases: [], cat: 'B', use: '活血调经，利水消肿。', risk: '可能影响子宫平滑肌或凝血功能，孕妇慎用。' },
+      { name: '益母草', aliases: [], cat: 'B', use: '活血调经，利尿消肿。', risk: '孕妇禁用或慎用，出血倾向者慎用。' },
+      { name: '桃仁', aliases: [], cat: 'B', use: '活血祛瘀，润肠通便。', risk: '含苦杏仁苷，孕妇和出血倾向者慎用，需控量。' },
+      { name: '苏子', aliases: ['紫苏子'], cat: 'B', use: '降气化痰，止咳平喘，润肠。', risk: '总体低风险，油脂性腹泻者慎用。' },
+      { name: '旋覆花', aliases: [], cat: 'B', use: '降气化痰，降逆止呕。', risk: '需包煎，过敏体质慎用。' },
+      { name: '枇杷叶', aliases: [], cat: 'B', use: '清肺止咳，降逆止呕。', risk: '需去毛，空腹服用易胃肠不适者慎用。' },
+      { name: '款冬花', aliases: [], cat: 'B', use: '润肺下气，止咳化痰。', risk: '可能含吡咯里西啶生物碱杂质，需严格质量控制。' },
+      { name: '紫菀', aliases: [], cat: 'B', use: '润肺下气，化痰止咳。', risk: '需质量控制，长期大剂量不宜。' },
+      { name: '白前', aliases: [], cat: 'B', use: '降气化痰，止咳。', risk: '胃肠刺激，需限量。' },
+      { name: '百部', aliases: [], cat: 'B', use: '润肺止咳，杀虫灭虱。', risk: '过量可致胃肠与神经系统不良反应。' },
+      { name: '麦冬', aliases: ['麦门冬'], cat: 'B', use: '养阴生津，润肺清心。', risk: '总体低风险，易腹泻者慎用。' },
+      { name: '沙参', aliases: ['北沙参', '南沙参'], cat: 'B', use: '养阴清肺，益胃生津。', risk: '总体低风险，证据有限。' },
+      { name: '五味子', aliases: [], cat: 'B', use: '收敛固涩，益气生津，补肾宁心。', risk: '可能影响药物代谢酶，合用多药者谨慎。' },
+      { name: '女贞子', aliases: [], cat: 'B', use: '滋补肝肾，明目乌发。', risk: '长期使用安全性数据有限，可致胃肠不适。' },
+      { name: '旱莲草', aliases: ['墨旱莲'], cat: 'B', use: '滋补肝肾，凉血止血。', risk: '证据有限，易腹泻者慎用。' },
+      { name: '槐花', aliases: ['槐米'], cat: 'B', use: '凉血止血，清肝泻火。', risk: '低血压或易腹泻者慎用。' },
+      { name: '侧柏叶', aliases: [], cat: 'B', use: '凉血止血，化痰止咳。', risk: '证据有限，长期大量不宜。' },
+      { name: '桂枝', aliases: [], cat: 'B', use: '发汗解肌，温通经脉，助阳化气。', risk: '辛温，发热、高血压或出血倾向者慎用。' },
+      { name: '麻黄根', aliases: [], cat: 'B', use: '固表止汗。', risk: '与麻黄不同，但仍需防混淆和质量控制。' },
+      { name: '浮萍', aliases: [], cat: 'B', use: '发汗解表，透疹止痒，利尿消肿。', risk: '来源和污染风险需关注。' },
+      { name: '蔓荆子', aliases: [], cat: 'B', use: '疏散风热，清利头目。', risk: '证据有限，过敏体质慎用。' },
+      { name: '桑白皮', aliases: [], cat: 'B', use: '泻肺平喘，利水消肿。', risk: '低血压或利尿药合用者慎用。' },
+      { name: '葶苈子', aliases: [], cat: 'B', use: '泻肺平喘，行水消肿。', risk: '作用较强，心肾功能异常者需谨慎。' },
+      { name: '海藻', aliases: [], cat: 'B', use: '消痰软坚，利水消肿。', risk: '含碘，甲状腺疾病者慎用。' },
+      { name: '昆布', aliases: [], cat: 'B', use: '消痰软坚，利水消肿。', risk: '含碘，甲状腺疾病者慎用。' },
+      { name: '夏枯草', aliases: [], cat: 'B', use: '清肝泻火，散结消肿。', risk: '证据有限，肝病或长期服药者慎用。' },
+      { name: '马勃', aliases: [], cat: 'B', use: '清肺利咽，止血。', risk: '真菌来源，过敏风险。' },
+      { name: '射干', aliases: [], cat: 'B', use: '清热解毒，利咽，消痰。', risk: '胃肠刺激，孕妇慎用。' },
+      { name: '玄参', aliases: [], cat: 'B', use: '清热凉血，滋阴降火，解毒散结。', risk: '易腹泻或胃肠功能较弱者慎用。' },
+      { name: '知母', aliases: [], cat: 'B', use: '清热泻火，滋阴润燥。', risk: '味苦寒凉，易腹泻或胃肠功能较弱者慎用。' },
+      { name: '天冬', aliases: ['天门冬'], cat: 'B', use: '养阴润燥，清肺生津。', risk: '油腻，胃肠功能较弱者慎用。' },
+      { name: '石斛', aliases: [], cat: 'B', use: '益胃生津，滋阴清热。', risk: '总体低风险，但所谓"滋补""强身"等市场宣传缺乏循证证据。' },
+      { name: '阿胶', aliases: [], cat: 'B', use: '补血滋阴，润燥止血。', risk: '滋腻碍胃，过敏或消化不良者慎用。' },
+      { name: '艾叶', aliases: [], cat: 'B', use: '温经止血，散寒止痛。', risk: '挥发油成分，过量有神经和肝毒性风险，孕期需谨慎。' },
+      { name: '蒲黄', aliases: [], cat: 'B', use: '止血，化瘀，利尿。', risk: '可能影响凝血功能，孕妇慎用。' },
+      { name: '仙鹤草', aliases: [], cat: 'B', use: '收敛止血，止痢，截疟。', risk: '证据有限，便秘者慎用。' },
+      { name: '地榆', aliases: [], cat: 'B', use: '凉血止血，解毒敛疮。', risk: '证据有限，外用品质需注意。' },
+      { name: '茜草', aliases: [], cat: 'B', use: '凉血止血，活血通经。', risk: '可能影响凝血功能，孕妇及出血倾向者慎用。' },
+      { name: '乌药', aliases: [], cat: 'B', use: '行气止痛，温肾散寒。', risk: '辛辣刺激，过量可致咽干、口干。' },
+      { name: '青皮', aliases: [], cat: 'B', use: '疏肝破气，消积化滞。', risk: '作用较强，孕妇及体弱者慎用。' },
+      { name: '沉香', aliases: [], cat: 'B', use: '行气止痛，温中止呕，纳气平喘。', risk: '来源昂贵且易掺伪，缺乏可靠疗效证据。' },
+      { name: '檀香', aliases: [], cat: 'B', use: '行气温中，开胃止痛。', risk: '芳香刺激，过敏体质慎用。' },
+      { name: '降香', aliases: [], cat: 'B', use: '化瘀止血，理气止痛。', risk: '可能影响子宫平滑肌或凝血功能，孕妇慎用。' },
+      { name: '王不留行', aliases: [], cat: 'B', use: '活血通经，下乳消肿。', risk: '孕妇慎用，出血倾向者慎用。' },
+      { name: '路路通', aliases: [], cat: 'B', use: '祛风活络，利水通经。', risk: '证据有限，孕妇慎用。' },
+      { name: '络石藤', aliases: [], cat: 'B', use: '祛风通络，凉血消肿。', risk: '证据有限，长期使用需谨慎。' },
+      { name: '忍冬藤', aliases: [], cat: 'B', use: '清热解毒，疏风通络。', risk: '总体低风险，证据有限。' },
+      { name: '海风藤', aliases: [], cat: 'B', use: '祛风湿，通经络。', risk: '证据有限，过敏体质慎用。' },
+      { name: '青风藤', aliases: [], cat: 'B', use: '祛风湿，通经络，利小便。', risk: '可致免疫系统反应及胃肠不适，需谨慎使用。' },
+
+      // C 类：严格监管
+      { name: '黄芩', aliases: [], cat: 'C', use: '清热燥湿，泻火解毒。', risk: '有肝损伤警戒信号，临床证据与安全边界需严格监管。' },
+      { name: '连翘', aliases: [], cat: 'C', use: '清热解毒，消肿散结，疏散风热。', risk: '毒性较低，但循证证据不足，不宜广泛OTC化。' },
+      { name: '柴胡', aliases: [], cat: 'C', use: '疏散退热，疏肝解郁。', risk: '有肝损伤病例报道，应处方化、短疗程。' },
+      { name: '葛根', aliases: [], cat: 'C', use: '解肌退热，生津，升阳止泻。', risk: '安全性较好，但疗效常被夸大。' },
+      { name: '荆芥', aliases: [], cat: 'C', use: '解表散风，透疹。', risk: '证据不足，过敏体质慎用。' },
+      { name: '牛蒡子', aliases: [], cat: 'C', use: '疏散风热，利咽透疹。', risk: '胃肠刺激，证据不足。' },
+      { name: '苍术', aliases: ['制苍术'], cat: 'C', use: '燥湿健脾，祛风散寒。', risk: '长期或大剂量需谨慎。' },
+      { name: '薄荷油', aliases: [], cat: 'C', use: '疏风清热，清凉止痛。', risk: '高浓度刺激，儿童慎用。' },
+      { name: '前胡', aliases: [], cat: 'C', use: '降气化痰，疏散风热。', risk: '循证证据有限，偶见胃肠或过敏反应。' },
+      { name: '浙贝母', aliases: ['贝母'], cat: 'C', use: '清热化痰，散结。', risk: '含生物碱，可能胃肠刺激，不适合长期。' },
+      { name: '大黄', aliases: ['酒大黄'], cat: 'C', use: '泻下攻积，清热泻火，活血。', risk: '长期使用可致电解质紊乱、肠道依赖和肝损伤风险。' },
+      { name: '川芎', aliases: ['川I芎'], cat: 'C', use: '活血行气，祛风止痛。', risk: '可能影响凝血功能，孕妇及出血倾向者慎用。' },
+      { name: '红花', aliases: [], cat: 'C', use: '活血通经，祛瘀止痛。', risk: '孕妇禁用，出血倾向者慎用。' },
+      { name: '当归', aliases: [], cat: 'C', use: '补血活血，调经止痛。', risk: '可能影响凝血功能，抗凝用药者及出血倾向者慎用。' },
+      { name: '山柰', aliases: ['沙姜'], cat: 'C', use: '温中行气，消食止痛。', risk: '辛香刺激，外用可致皮肤刺激。' },
+      { name: '金钱草', aliases: [], cat: 'C', use: '利湿退黄，利尿通淋，排石辅助。', risk: '循证不足，不应替代结石正规治疗。' },
+      { name: '麻黄', aliases: [], cat: 'C', use: '发汗解表，宣肺平喘，利水消肿。', risk: '含麻黄碱类，可致血压升高、心律失常，并有滥用风险，应严格处方监管。' },
+      { name: '丹参', aliases: [], cat: 'C', use: '活血祛瘀，通经止痛，清心除烦。', risk: '可能增加出血风险，与抗凝抗血小板药合用需谨慎。' },
+      { name: '三七', aliases: ['田七'], cat: 'C', use: '化瘀止血，活血定痛。', risk: '影响凝血功能，抗凝用药者和孕妇慎用。' },
+      { name: '乳香', aliases: [], cat: 'C', use: '活血定痛，消肿生肌。', risk: '胃肠刺激，过敏风险。' },
+      { name: '没药', aliases: [], cat: 'C', use: '活血止痛，消肿生肌。', risk: '胃肠刺激，孕妇慎用。' },
+      { name: '延胡索', aliases: ['元胡'], cat: 'C', use: '活血行气，止痛。', risk: '镇痛活性较强，孕妇慎用，合用镇静药谨慎。' },
+      { name: '郁金', aliases: [], cat: 'C', use: '活血止痛，行气解郁，清心凉血。', risk: '可能影响凝血功能，孕妇慎用；疗效证据不充分。' },
+      { name: '姜黄', aliases: [], cat: 'C', use: '破血行气，通经止痛。', risk: '抗凝用药者慎用，胆道疾病者慎用。' },
+      { name: '鸡血藤', aliases: [], cat: 'C', use: '活血补血，调经，舒筋活络。', risk: '可能影响凝血功能，孕妇及出血倾向者慎用。' },
+      { name: '独活', aliases: [], cat: 'C', use: '祛风除湿，通痹止痛。', risk: '证据有限，可能胃肠刺激或过敏。' },
+      { name: '羌活', aliases: [], cat: 'C', use: '解表散寒，祛风胜湿，止痛。', risk: '辛辣刺激，高血压人群谨慎使用。' },
+      { name: '秦艽', aliases: [], cat: 'C', use: '祛风湿，清湿热，止痹痛。', risk: '证据有限，胃肠不适。' },
+      { name: '威灵仙', aliases: [], cat: 'C', use: '祛风湿，通络止痛。', risk: '刺激性较强，长期大剂量不宜。' },
+      { name: '防己', aliases: ['汉防己'], cat: 'C', use: '祛风湿，止痛，利水消肿。', risk: '需严防与广防己混淆；肾功能异常者慎用。' },
+      { name: '黄柏', aliases: [], cat: 'C', use: '清热燥湿，泻火除蒸，解毒疗疮。', risk: '苦寒，长期大剂量可能胃肠和肝胆风险。' },
+      { name: '龙胆草', aliases: ['龙胆'], cat: 'C', use: '清热燥湿，泻肝胆火。', risk: '苦寒刺激，长期或大剂量不宜。' },
+      { name: '苦参', aliases: [], cat: 'C', use: '清热燥湿，杀虫，利尿。', risk: '含生物碱，肝肾风险需关注，不宜长期。' },
+      { name: '天花粉', aliases: [], cat: 'C', use: '清热生津，消肿排脓。', risk: '孕妇禁用或慎用，过敏风险。' },
+      { name: '白附子', aliases: ['禹白附'], cat: 'C', use: '祛风痰，定惊搐，解毒散结。', risk: '刺激性和毒性需炮制，孕妇慎用。' },
+      { name: '全蝎', aliases: [], cat: 'C', use: '息风镇痉，通络止痛，攻毒散结。', risk: '动物毒性药，过敏和神经毒性风险，需处方监管。' },
+      { name: '蜈蚣', aliases: [], cat: 'C', use: '息风镇痉，通络止痛，攻毒散结。', risk: '动物毒性药，过敏和神经毒性风险，需严格限量。' },
+      { name: '僵蚕', aliases: [], cat: 'C', use: '息风止痉，祛风止痛，化痰散结。', risk: '动物来源，过敏风险。' },
+      { name: '地龙', aliases: ['蚯蚓'], cat: 'C', use: '清热息风，通络，平喘，利尿。', risk: '动物来源，过敏与污染风险。' },
+      { name: '水蛭', aliases: [], cat: 'C', use: '破血通经，逐瘀消癥。', risk: '具强抗凝活性（含水蛭素），出血风险高，孕妇禁用。' },
+      { name: '虻虫', aliases: [], cat: 'C', use: '破血逐瘀，散积消癥。', risk: '具强抗凝活性，出血风险高，孕妇禁用。' },
+      { name: '麝香', aliases: [], cat: 'C', use: '开窍醒神，活血通经，消肿止痛。', risk: '孕妇禁用，来源和监管问题突出。' },
+      { name: '牛黄', aliases: [], cat: 'C', use: '清心解毒，豁痰开窍，息风定惊。', risk: '来源复杂，常与朱砂雄黄同方时风险显著增加。' },
+      { name: '鹿茸', aliases: [], cat: 'C', use: '补肾阳，益精血，强筋骨。', risk: '长期大剂量使用证据不足，高血压、急性炎症期慎用。' },
+      { name: '人参', aliases: ['红参', '白参'], cat: 'C', use: '大补元气，补脾益肺，生津安神。', risk: '可影响血压、血糖控制，并与抗凝药存在相互作用；长期大剂量证据不足。' },
+      { name: '西洋参', aliases: [], cat: 'C', use: '补气养阴，清热生津。', risk: '可能影响抗凝药、血糖控制，需谨慎。' },
+      { name: '黄芪', aliases: [], cat: 'C', use: '补气升阳，固表止汗，利水消肿。', risk: '免疫相关疾病或免疫抑制治疗者需谨慎，证据有限。' },
+      { name: '青蒿', aliases: [], cat: 'C', use: '清虚热，除骨蒸，解暑，截疟。', risk: '有效成分与现代抗疟药相关，但草药制剂剂量不稳定，需监管。' },
+      { name: '白头翁', aliases: [], cat: 'C', use: '清热解毒，凉血止痢。', risk: '苦寒，胃肠刺激，证据有限。' },
+      { name: '赤芍', aliases: [], cat: 'C', use: '清热凉血，散瘀止痛。', risk: '可能影响凝血功能，孕妇及出血倾向者慎用。' },
+      { name: '紫草', aliases: [], cat: 'C', use: '清热凉血，活血解毒，透疹。', risk: '可能含吡咯里西啶类风险，内服需谨慎。' },
+      { name: '山豆根', aliases: [], cat: 'C', use: '清热解毒，利咽消肿。', risk: '毒性较强，可致神经系统和胃肠不良反应，需严格限量。' },
+      { name: '白花蛇舌草', aliases: [], cat: 'C', use: '清热解毒，利湿通淋。', risk: '抗癌等宣传证据不足，长期使用风险不明。' },
+      { name: '半枝莲', aliases: [], cat: 'C', use: '清热解毒，化瘀利尿。', risk: '常被用于肿瘤辅助宣传，证据不足，需严格监管。' },
+      { name: '败酱草', aliases: [], cat: 'C', use: '清热解毒，排脓破瘀。', risk: '证据有限，易腹泻者慎用。' },
+      { name: '三棱', aliases: [], cat: 'C', use: '破血行气，消积止痛。', risk: '具强抗凝/促子宫收缩活性，孕妇禁用，出血倾向者慎用。' },
+      { name: '莪术', aliases: [], cat: 'C', use: '破血行气，消积止痛。', risk: '具强抗凝/促子宫收缩活性，孕妇禁用，出血倾向者慎用。' },
+      { name: '灵芝', aliases: [], cat: 'C', use: '补气安神，止咳平喘。', risk: '保健宣传常被夸大，肝损伤个案和相互作用需关注。' },
+      { name: '冬虫夏草', aliases: ['虫草'], cat: 'C', use: '补肺益肾，止血化痰。', risk: '重金属、掺伪和保健滥用问题突出。' },
+
+      // 灰名单：严格限制
+      { name: '板蓝根', aliases: [], cat: 'G', use: '清热解毒，凉血利咽。', risk: '临床证据不足，常被滥用于感冒和防疫。' },
+      { name: '大青叶', aliases: [], cat: 'G', use: '清热解毒，凉血消斑。', risk: '证据不足，长期使用不宜。' },
+      { name: '淡豆豉', aliases: [], cat: 'G', use: '解表除烦。', risk: '证据不足。' },
+      { name: '地黄', aliases: ['生地', '熟地黄', '熟地'], cat: 'G', use: '滋阴补血，清热凉血。', risk: '疗效证据不足，长期使用易致胃肠不适。' },
+      { name: '牡丹皮', aliases: ['丹皮'], cat: 'G', use: '清热凉血，活血化瘀。', risk: '疗效证据不足，可能影响凝血功能，需谨慎使用。' },
+      { name: '山茱萸', aliases: [], cat: 'G', use: '补益肝肾，收涩固脱。', risk: '证据不足。' },
+      { name: '竹叶', aliases: ['淡竹叶', '竹茹'], cat: 'G', use: '清热除烦，利尿。', risk: '证据不足。' },
+      { name: '防风', aliases: [], cat: 'G', use: '祛风解表，胜湿止痛。', risk: '证据不足，过敏体质慎用。' },
+      { name: '白芷', aliases: [], cat: 'G', use: '解表散寒，祛风止痛，通鼻窍。', risk: '可能光敏或过敏，证据不足。' },
+      { name: '泽泻', aliases: [], cat: 'G', use: '利水渗湿，泄热。', risk: '长期或大剂量有肾脏风险争议。' },
+      { name: '石膏', aliases: [], cat: 'G', use: '清热泻火，除烦止渴。', risk: '矿物药质量控制和杂质风险。' },
+      { name: '蝉蜕', aliases: [], cat: 'G', use: '疏散风热，利咽透疹，明目退翳。', risk: '昆虫来源，过敏风险与证据不足。' },
+      { name: '方儿茶', aliases: ['儿茶'], cat: 'G', use: '收湿敛疮，生肌止血。', risk: '鞣质多，胃肠刺激，证据不足。' },
+      { name: '白术', aliases: [], cat: 'G', use: '健脾益气，燥湿利水。', risk: '证据不足，长期使用需谨慎。' },
+      { name: '白芍', aliases: [], cat: 'G', use: '养血调经，柔肝止痛。', risk: '证据不足。' },
+      { name: '栀子', aliases: [], cat: 'G', use: '泻火除烦，清热利湿。', risk: '有肝胆相关不良反应警戒，需谨慎。' },
+      { name: '海金沙', aliases: [], cat: 'G', use: '利尿通淋，排石辅助。', risk: '证据不足。' },
+      { name: '石韦', aliases: [], cat: 'G', use: '利尿通淋，清肺止咳。', risk: '长期大剂量需谨慎。' },
+      { name: '滑石', aliases: [], cat: 'G', use: '利尿通淋，清热解暑。', risk: '矿物药，需关注杂质和质量控制。' },
+      { name: '槟榔', aliases: [], cat: 'G', use: '杀虫消积，行气利水。', risk: '与口腔癌风险相关，现代监管应严格限制或禁止作为日常产品。' },
+      { name: '升麻', aliases: [], cat: 'G', use: '发表透疹，清热解毒，升举阳气。', risk: '证据有限，肝毒性争议需关注。' },
+      { name: '白鲜皮', aliases: [], cat: 'G', use: '清热燥湿，祛风解毒。', risk: '有肝损伤报道，需严格限制。' },
+      { name: '何首乌', aliases: ['制何首乌', '首乌'], cat: 'G', use: '补肝肾，益精血，乌须发。', risk: '肝损伤风险明确，尤其长期或保健滥用。' },
+      { name: '补骨脂', aliases: [], cat: 'G', use: '补肾助阳，固精缩尿，温脾止泻。', risk: '肝损伤和光敏风险，需严格限制。' },
+      { name: '淫羊藿', aliases: [], cat: 'G', use: '补肾阳，强筋骨，祛风湿。', risk: '长期使用证据不足，需关注心血管及肝肾不良反应。' },
+      { name: '肉苁蓉', aliases: [], cat: 'G', use: '补肾阳，益精血，润肠通便。', risk: '疗效证据有限，长期大剂量使用不宜。' },
+      { name: '巴戟天', aliases: [], cat: 'G', use: '补肾阳，强筋骨，祛风湿。', risk: '疗效证据有限，过量可致咽干、失眠等不适。' },
+      { name: '杜仲', aliases: [], cat: 'G', use: '补肝肾，强筋骨，安胎。', risk: '证据有限，质量控制需关注。' },
+      { name: '川牛膝', aliases: ['牛膝', '怀牛膝'], cat: 'G', use: '逐瘀通经，补肝肾，强筋骨，引血下行。', risk: '可能影响凝血功能，孕妇及出血倾向者慎用。' },
+      { name: '牡蛎', aliases: [], cat: 'G', use: '重镇安神，潜阳补阴，软坚散结。', risk: '矿物/贝壳类，重金属和来源质量需关注。' },
+      { name: '龙骨', aliases: [], cat: 'G', use: '镇惊安神，平肝潜阳，收敛固涩。', risk: '矿物/化石类，重金属和来源质量需关注。' },
+      { name: '磁石', aliases: [], cat: 'G', use: '镇惊安神，平肝潜阳，聪耳明目。', risk: '矿物药，质量和杂质风险。' },
+      { name: '辛夷', aliases: [], cat: 'G', use: '散风寒，通鼻窍。', risk: '过敏风险，鼻炎疗效证据有限。' },
+      { name: '细辛', aliases: [], cat: 'G', use: '解表散寒，祛风止痛，通窍，温肺化饮。', risk: '可能含马兜铃酸相关风险和肾毒性争议，需严格限制。' },
+      { name: '吴茱萸', aliases: [], cat: 'G', use: '散寒止痛，降逆止呕，助阳止泻。', risk: '肝毒性与胃肠刺激风险，需严格限制。' },
+      { name: '川楝子', aliases: [], cat: 'G', use: '疏肝泄热，行气止痛，杀虫。', risk: '肝毒性风险，需严格限制。' },
+      { name: '苦楝皮', aliases: [], cat: 'G', use: '杀虫，疗癣。', risk: '毒性较强，内服风险高。' },
+      { name: '白果', aliases: ['银杏果'], cat: 'G', use: '敛肺定喘，止带缩尿。', risk: '含银杏毒素，儿童和过量食用可中毒。' },
+      { name: '银杏叶', aliases: [], cat: 'G', use: '活血化瘀，通络。', risk: '与抗凝抗血小板药相互作用风险。' },
+      { name: '番泻叶', aliases: [], cat: 'G', use: '泻热导滞，通便。', risk: '长期使用可致肠道依赖和电解质紊乱。' },
+      { name: '芦荟', aliases: [], cat: 'G', use: '泻下通便，清肝杀虫。', risk: '泻下刺激，孕妇禁用或慎用，长期不宜。' },
+      { name: '常山', aliases: [], cat: 'G', use: '涌吐痰饮，截疟。', risk: '毒性和胃肠反应较强，现代应用应严格限制。' },
+      { name: '瓜蒂', aliases: [], cat: 'G', use: '涌吐痰食，祛湿退黄。', risk: '催吐作用强，风险高，不宜常规使用。' },
+      { name: '皂角', aliases: ['皂荚'], cat: 'G', use: '祛痰开窍，散结消肿。', risk: '刺激性和毒性较强，内服需严格限制。' },
+      { name: '土鳖虫', aliases: ['䗪虫'], cat: 'G', use: '破血逐瘀，续筋接骨。', risk: '具抗凝及促子宫收缩活性，孕妇禁用；并有过敏风险。' },
+      { name: '穿山甲', aliases: [], cat: 'G', use: '通经下乳，消肿排脓。', risk: '保护动物与非法贸易问题，现代监管应禁用或严格禁止流通。' },
+
+      // 黑名单：禁用
+      { name: '马兜铃', aliases: [], cat: 'X', use: '传统用于行气止痛、清肺降气。', risk: '含马兜铃酸，肾毒性与致癌风险明确。' },
+      { name: '关木通', aliases: [], cat: 'X', use: '传统用于清心利尿。', risk: '马兜铃酸风险，禁用。' },
+      { name: '广防己', aliases: [], cat: 'X', use: '传统用于祛风止痛、利水。', risk: '马兜铃酸风险，禁用。' },
+      { name: '青木香', aliases: [], cat: 'X', use: '传统用于行气止痛。', risk: '马兜铃酸风险，禁用。' },
+      { name: '附子', aliases: [], cat: 'X', use: '传统用于回阳救逆、补火助阳。', risk: '乌头碱心脏毒性，可致命。' },
+      { name: '川乌', aliases: [], cat: 'X', use: '祛风除湿，温经止痛。', risk: '乌头碱心脏毒性，可致命。' },
+      { name: '草乌', aliases: [], cat: 'X', use: '祛风除湿，温经止痛。', risk: '乌头碱心脏毒性，可致命。' },
+      { name: '雷公藤', aliases: [], cat: 'X', use: '传统用于祛风除湿、通络。', risk: '肝毒性、生殖毒性、骨髓抑制等严重风险。' },
+      { name: '马钱子', aliases: [], cat: 'X', use: '通络止痛，散结消肿。', risk: '含番木鳖碱，神经毒性强。' },
+      { name: '巴豆', aliases: [], cat: 'X', use: '峻下冷积。', risk: '强烈泻下和腐蚀性，中毒风险高。' },
+      { name: '千里光', aliases: [], cat: 'X', use: '清热解毒，明目。', risk: '吡咯里西啶生物碱，肝毒性。' },
+      { name: '斑蝥', aliases: [], cat: 'X', use: '攻毒蚀疮，破血逐瘀。', risk: '斑蝥素强毒，肾毒和溶血风险。' },
+      { name: '苍耳子', aliases: [], cat: 'X', use: '通鼻窍，祛风湿。', risk: '肝肾毒性，安全窗口窄。' },
+      { name: '雄黄', aliases: [], cat: 'X', use: '解毒杀虫，燥湿祛痰。', risk: '含砷，重金属毒性。' },
+      { name: '雌黄', aliases: [], cat: 'X', use: '矿物药，传统外用。', risk: '含砷，重金属毒性。' },
+      { name: '朱砂', aliases: [], cat: 'X', use: '镇心安神。', risk: '含汞，神经和肾毒性。' },
+      { name: '铅丹', aliases: [], cat: 'X', use: '外用拔毒生肌。', risk: '含铅，重金属毒性。' },
+      { name: '砒霜', aliases: [], cat: 'X', use: '攻毒、蚀疮。', risk: '砷制剂，高毒。' },
+      { name: '商陆', aliases: [], cat: 'X', use: '逐水消肿。', risk: '强烈泻下和肾毒性。' },
+      { name: '南星', aliases: ['生南星'], cat: 'X', use: '燥湿化痰，祛风止痉。', risk: '生品强刺激毒性，禁用生品。' },
+      { name: '洋金花', aliases: ['曼陀罗'], cat: 'X', use: '传统用于平喘止痛、麻醉。', risk: '含莨菪烷类生物碱，可致谵妄、心律失常和中毒。' },
+      { name: '闹羊花', aliases: [], cat: 'X', use: '传统用于祛风除湿、止痛。', risk: '含木藜芦毒素类，心脏毒性和神经毒性强。' },
+      { name: '雪上一枝蒿', aliases: [], cat: 'X', use: '民间用于止痛、跌打。', risk: '含乌头类生物碱，剧毒，可致心律失常死亡。' },
+      { name: '生半夏', aliases: [], cat: 'X', use: '传统用于化痰止呕。', risk: '生品强刺激毒性，模拟政策下禁用生品。' },
+      { name: '生天南星', aliases: [], cat: 'X', use: '传统用于祛风痰、止痉。', risk: '生品强刺激毒性，模拟政策下禁用生品。' },
+      { name: '生马钱子', aliases: [], cat: 'X', use: '传统用于通络止痛。', risk: '番木鳖碱毒性强，安全窗口极窄。' },
+      { name: '轻粉', aliases: [], cat: 'X', use: '传统外用攻毒杀虫。', risk: '含汞，重金属毒性。' },
+      { name: '红粉', aliases: [], cat: 'X', use: '传统外用拔毒去腐。', risk: '含汞，重金属毒性。' },
+      { name: '白降丹', aliases: [], cat: 'X', use: '传统外用腐蚀祛腐。', risk: '含汞，腐蚀性和重金属毒性。' },
+      { name: '砒石', aliases: [], cat: 'X', use: '传统攻毒蚀疮。', risk: '砷制剂，高毒。' },
+      { name: '甘遂', aliases: [], cat: 'X', use: '泻水逐饮，消肿散结。', risk: '峻下逐水药，毒性强，安全窗口窄。' },
+      { name: '大戟', aliases: ['京大戟'], cat: 'X', use: '泻水逐饮，消肿散结。', risk: '峻下逐水药，毒性强。' },
+      { name: '芫花', aliases: [], cat: 'X', use: '泻水逐饮，祛痰止咳，杀虫疗疮。', risk: '毒性强，胃肠和肝肾风险高。' },
+      { name: '牵牛子', aliases: ['黑丑', '白丑'], cat: 'X', use: '泻水通便，消痰涤饮。', risk: '峻下药，毒性和电解质紊乱风险。' },
+      { name: '红大戟', aliases: [], cat: 'X', use: '泻水逐饮，消肿散结。', risk: '毒性强，模拟政策下禁用。' },
+      { name: '蟾酥', aliases: [], cat: 'X', use: '解毒止痛，开窍醒神。', risk: '强心苷样毒性，心律失常风险高。' }
+    ];
+
+    const herbMap = new Map();
+
+    const EVIDENCE = {
+      '马兜铃': [
+        { level: '强证据', type: '肾毒性 / 致癌', source: 'NCI', note: '马兜铃酸明确与上尿路癌、膀胱癌及马兜铃酸肾病相关。', url: 'https://www.cancer.gov/about-cancer/causes-prevention/risk/substances/aristolochic-acids' },
+        { level: '强证据', type: '肾衰竭 / 癌症', source: 'Grollman 等综述', note: '流行病学与分子研究显示 Aristolochia 暴露可致肾衰竭和泌尿系癌症。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5341512/' }
+      ],
+      '关木通': [
+        { level: '强证据', type: '马兜铃酸肾病 / 致癌', source: 'NCI', note: '关木通是导致 1990 年代比利时"中草药肾病"事件的主要药材之一。', url: 'https://www.cancer.gov/about-cancer/causes-prevention/risk/substances/aristolochic-acids' }
+      ],
+      '广防己': [
+        { level: '强证据', type: '马兜铃酸肾病 / 致癌', source: 'NCI', note: '含马兜铃酸,与肾毒性和泌尿系癌症风险相关。', url: 'https://www.cancer.gov/about-cancer/causes-prevention/risk/substances/aristolochic-acids' }
+      ],
+      '青木香': [
+        { level: '强证据', type: '马兜铃酸肾病 / 致癌', source: 'NCI', note: '含马兜铃酸,与中医所谓"木香"易混淆,需严格区分。', url: 'https://www.cancer.gov/about-cancer/causes-prevention/risk/substances/aristolochic-acids' }
+      ],
+      '细辛': [
+        { level: '警戒证据', type: '马兜铃酸污染 / 肾毒性', source: '综述 (PMC)', note: 'Asarum 属植物可能含或污染马兜铃酸,质量控制不严时存在肾毒性与致癌风险。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6218812/' }
+      ],
+      '附子': [
+        { level: '强证据', type: '心脏毒性 / 致死', source: 'PubMed Case Report', note: '乌头碱估计致死量约 2 mg;附子(炮制后)仍有大量中毒和死亡案例。', url: 'https://pubmed.ncbi.nlm.nih.gov/8429578/' },
+        { level: '强证据', type: '室性心律失常 / 致死', source: '法医毒理学综述', note: '中国法医文献记录了多起致死性乌头中毒,包括附子、川乌、草乌。', url: 'https://www.sciencedirect.com/science/article/abs/pii/S0379073825001161' }
+      ],
+      '川乌': [
+        { level: '强证据', type: '心脏毒性 / 致死', source: 'PMC Case Report', note: '川乌、草乌中毒可致双向性室性心动过速、休克和死亡;7-11 g 即可致毒。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4520923/' },
+        { level: '强证据', type: '中毒高发', source: 'Toxins 综述', note: '2001-2010 年间全球报告约 5000 例乌头碱中毒,中国大陆 2003-2015 年至少 53 例致死。', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6215299/' }
+      ],
+      '草乌': [
+        { level: '强证据', type: '心脏毒性 / 致死', source: 'Toxins 综述', note: '草乌(Aconitum kusnezoffii)与川乌同含乌头碱、中乌头碱、次乌头碱,煲汤煮食仍可致命。', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4179150/' }
+      ],
+      '雪上一枝蒿': [
+        { level: '毒理证据', type: '乌头碱类剧毒', source: 'Toxins 综述', note: '同属 Aconitum,含二萜类生物碱,民间中毒和致死案例频发。', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6215299/' }
+      ],
+      '朱砂': [
+        { level: '强证据', type: '汞暴露 / 神经肾毒性', source: 'WHO', note: '汞暴露损害神经、消化、免疫、肺和肾脏系统;朱砂(HgS)长期使用可累积。', url: 'https://www.who.int/news-room/fact-sheets/detail/mercury-and-health' },
+        { level: '毒理证据', type: '肾脏 OAT1/OAT3 抑制', source: 'PMC', note: '朱砂在小鼠实验中显著抑制肾脏有机阴离子转运蛋白,与肾损伤机制相关。', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4695662/' }
+      ],
+      '轻粉': [
+        { level: '强证据', type: '汞暴露 / 重金属毒性', source: 'WHO', note: '轻粉(Hg₂Cl₂,氯化亚汞)为汞化合物,WHO 列汞为十大公共卫生关注化学品之一。', url: 'https://www.who.int/news-room/fact-sheets/detail/mercury-and-health' }
+      ],
+      '红粉': [
+        { level: '强证据', type: '汞暴露 / 腐蚀性', source: 'WHO', note: '红粉(HgO,氧化汞)为汞化合物,皮肤外用亦可吸收致汞中毒。', url: 'https://www.who.int/news-room/fact-sheets/detail/mercury-and-health' }
+      ],
+      '白降丹': [
+        { level: '强证据', type: '汞暴露 / 强腐蚀', source: 'WHO', note: '白降丹含氯化高汞与氯化亚汞,腐蚀性极强,内服外用均有汞中毒风险。', url: 'https://www.who.int/news-room/fact-sheets/detail/mercury-and-health' }
+      ],
+      '雄黄': [
+        { level: '强证据', type: '砷暴露 / 致癌', source: 'WHO', note: '无机砷暴露与癌症、皮肤病变、心血管疾病相关;雄黄(As₄S₄)经体内代谢仍可释放有毒砷。', url: 'https://www.who.int/news-room/fact-sheets/detail/arsenic' },
+        { level: '毒理证据', type: '肾脏 OAT 抑制', source: 'PMC', note: '雄黄在动物实验中抑制肾脏 OAT1/OAT3,与肾损伤机制相关。', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4695662/' }
+      ],
+      '雌黄': [
+        { level: '强证据', type: '砷暴露 / 致癌', source: 'WHO', note: '雌黄(As₂S₃)为砷化合物,与雄黄同属砷矿物药。', url: 'https://www.who.int/news-room/fact-sheets/detail/arsenic' }
+      ],
+      '砒霜': [
+        { level: '强证据', type: '砷暴露 / 高毒性', source: 'WHO', note: 'As₂O₃,无机砷,具明确毒性与致癌风险,LD50 极低。', url: 'https://www.who.int/news-room/fact-sheets/detail/arsenic' }
+      ],
+      '砒石': [
+        { level: '强证据', type: '砷暴露 / 高毒性', source: 'WHO', note: '砒石为含砷矿物原料,主要成分 As₂O₃,与砒霜同源。', url: 'https://www.who.int/news-room/fact-sheets/detail/arsenic' }
+      ],
+      '铅丹': [
+        { level: '强证据', type: '铅暴露 / 神经毒性', source: 'WHO', note: '铅暴露损害神经、血液、肾脏等系统,儿童尤其敏感,无安全剂量。', url: 'https://www.who.int/news-room/fact-sheets/detail/lead-poisoning-and-health' }
+      ],
+      '马钱子': [
+        { level: '强证据', type: '番木鳖碱 / 惊厥致死', source: 'NCBI StatPearls', note: '马钱子含 1-1.4% 番木鳖碱,作用于甘氨酸受体,可致清醒性惊厥、横纹肌溶解、心肺骤停。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK459306/' },
+        { level: '临床警戒', type: '中医诊所中毒', source: 'Hong Kong HATRL 系列', note: '香港 13 年间记录 12 例番木鳖碱中毒,均来源于"马钱子",含中医师自身。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8817065/' }
+      ],
+      '生马钱子': [
+        { level: '强证据', type: '番木鳖碱 / 急性致死', source: 'LiverTox', note: '未经炮制的马钱子毒性极强,治疗剂量与中毒剂量几乎等同。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK589896/' }
+      ],
+      '洋金花': [
+        { level: '强证据', type: '抗胆碱中毒 / 谵妄', source: 'PubMed', note: '曼陀罗花含莨菪碱、东莨菪碱,可致瞳孔散大、心动过速、谵妄、惊厥及致死。', url: 'https://pubmed.ncbi.nlm.nih.gov/7631497/' },
+        { level: '临床警戒', type: '抗胆碱综合征', source: 'PMC', note: '中草药相关抗胆碱中毒大多由"洋金花"治疗哮喘、咳嗽引起。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12574777/' }
+      ],
+      '闹羊花': [
+        { level: '毒理证据', type: '木藜芦毒素 / 心脏神经毒性', source: 'Datura 属相关综述', note: '闹羊花(羊踯躅)含木藜芦毒素 (grayanotoxin),与"疯蜜"中毒相似,可致心律失常和昏迷。', url: 'https://en.wikipedia.org/wiki/Grayanotoxin' }
+      ],
+      '巴豆': [
+        { level: '强证据', type: '佛波酯 / 促癌 / 强刺激', source: 'Hecker 等经典文献', note: '巴豆油含佛波酯类(phorbol esters),为典型促癌剂(tumor promoter),并具强烈致泻和腐蚀性。', url: 'https://link.springer.com/chapter/10.1007/978-3-7091-7094-6_7' },
+        { level: '监管证据', type: '禁用于传统药', source: '泰国 1978 年起禁令', note: '泰国传统医学已禁用巴豆种子;1-2 mL 巴豆油即可致命。', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12386474/' }
+      ],
+      '甘遂': [
+        { level: '毒理证据', type: '二萜酯类 / 强烈刺激', source: '中药毒理学综述', note: '甘遂含巨大戟二萜酯类,与巴豆类似具强烈泻下与刺激性,治疗窗极窄。', url: 'https://www.who.int/news-room/fact-sheets/detail/arsenic' }
+      ],
+      '大戟': [
+        { level: '毒理证据', type: '二萜酯类 / 致泻 / 强刺激', source: '大戟科毒理学', note: '大戟科植物含与巴豆同类的促癌性二萜酯,生品毒性强。', url: 'https://link.springer.com/chapter/10.1007/978-3-7091-7094-6_7' }
+      ],
+      '红大戟': [
+        { level: '毒理证据', type: '强刺激 / 致泻', source: '大戟科毒理学', note: '红大戟与京大戟药用相似,含强刺激性二萜类,毒性窗窄。', url: 'https://link.springer.com/chapter/10.1007/978-3-7091-7094-6_7' }
+      ],
+      '芫花': [
+        { level: '毒理证据', type: '芫花酯 / 促癌 / 强刺激', source: '瑞香科毒理学', note: '芫花含瑞香烷型二萜酯,与佛波酯同类,具促癌活性和强刺激性。', url: 'https://link.springer.com/chapter/10.1007/978-3-7091-7094-6_7' }
+      ],
+      '牵牛子': [
+        { level: '毒理证据', type: '强烈泻下 / 电解质紊乱', source: '中药毒理学', note: '牵牛子含树脂苷类,峻下逐水,过量致严重腹泻、脱水和电解质紊乱。', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6215299/' }
+      ],
+      '商陆': [
+        { level: '毒理证据', type: '商陆毒素 / 肾毒性 / 强刺激', source: '中药毒理学综述', note: '商陆根含商陆毒素(phytolaccatoxin)与皂苷,可致严重胃肠刺激、惊厥和肾损伤。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK548795/' }
+      ],
+      '千里光': [
+        { level: '强证据', type: 'PA 生物碱 / 肝窦阻塞综合征', source: 'Journal of Hepatology', note: '千里光属(Senecio)含吡咯里西啶生物碱,可致肝窦阻塞综合征(VOD/SOS),严重者肝衰竭。', url: 'https://www.journal-of-hepatology.eu/article/S0168-8278(03)00231-9/fulltext' }
+      ],
+      '款冬花': [
+        { level: '警戒证据', type: 'PA 生物碱污染', source: '欧洲药品委员会综述', note: '款冬花(Tussilago farfara)含吡咯里西啶生物碱,与肝窦阻塞综合征相关。', url: 'https://www.sciencedirect.com/topics/medicine-and-dentistry/pyrrolizidine-alkaloid' }
+      ],
+      '紫草': [
+        { level: '警戒证据', type: 'PA 生物碱 / 肝毒性', source: '欧洲药品委员会综述', note: '紫草属植物含 PA 生物碱,长期内服与肝损伤相关。', url: 'https://www.journal-of-hepatology.eu/article/S0168-8278(03)00231-9/fulltext' }
+      ],
+      '蟾酥': [
+        { level: '强证据', type: '蟾蜍二烯内酯 / 心脏毒性', source: 'Heart (BMJ)', note: '蟾酥含蟾蜍二烯内酯,作用类似洋地黄,可致严重心律失常、死亡;美国 FDA 已禁用类似产品。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC1769273/' },
+        { level: '临床警戒', type: '类洋地黄中毒致死', source: 'Toxicon', note: '"Chan Su"和"Love Stone"等含蟾酥制剂在美国导致多起致死病例。', url: 'https://www.sciencedirect.com/science/article/abs/pii/S0041010198002244' }
+      ],
+      '斑蝥': [
+        { level: '毒理证据', type: '斑蝥素 / 肾毒 / 溶血', source: '中药毒理学综述', note: '斑蝥素(cantharidin)为强烈泡疹剂,口服可致肾衰、消化道腐蚀、溶血和心律失常。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK548795/' }
+      ],
+      '雷公藤': [
+        { level: '强证据', type: '多系统毒性', source: 'NCCIH', note: '雷公藤可致严重副作用,包括生殖毒性、骨髓抑制、肝肾毒性。', url: 'https://www.nccih.nih.gov/health/thunder-god-vine' },
+        { level: '强证据', type: '生殖毒性 + 肝肾毒性', source: 'Frontiers in Pharmacology', note: '雷公藤的全球不良反应发生率约 30.75%,治疗剂量与毒性剂量极接近。', url: 'https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2019.01250/full' }
+      ],
+      '苍耳子': [
+        { level: '强证据', type: '羧基苍术苷 / 急性肝衰竭', source: 'J Ethnopharmacol', note: '苍耳子含羧基苍术苷(carboxyatractyloside),抑制线粒体能量代谢,可致急性肝衰竭,儿童致死病例已报道。', url: 'https://www.sciencedirect.com/science/article/abs/pii/S0378874113009045' },
+        { level: '临床警戒', type: '肝移植病例', source: 'J Pediatr Gastroenterol Nutr', note: '已有因苍耳子中毒需肝移植的儿童病例报告。', url: 'https://www.webmd.com/vitamins/ai/ingredientmono-1518/siberian-cocklebur' }
+      ],
+      '何首乌': [
+        { level: '强证据', type: '药物性肝损伤', source: 'LiverTox', note: '何首乌(Polygonum multiflorum)与多起临床急性肝损伤报告相关,部分可致肝衰竭。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK548795/' }
+      ],
+      '补骨脂': [
+        { level: '警戒证据', type: '肝损伤 / 光敏', source: 'LiverTox', note: '补骨脂及含补骨脂的复方与肝损伤报告相关,并含光敏性呋喃香豆素。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK548561/' }
+      ],
+      '黄芩': [
+        { level: '警戒证据', type: '药物性肝损伤', source: 'LiverTox', note: '含黄芩的复方制剂(如 PC-SPES、Limbrel)被纳入草药肝损伤监测,需关注肝毒性。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK548757/' }
+      ],
+      '吴茱萸': [
+        { level: '毒理证据', type: '肝毒性 / 心血管刺激', source: 'Frontiers in Pharmacology', note: '吴茱萸含吴茱萸碱、吴茱萸次碱,具肝毒性与拟交感神经活性,过量可致心血管不良反应。', url: 'https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2021.751107/full' }
+      ],
+      '川楝子': [
+        { level: '毒理证据', type: '川楝素 / 肝毒性', source: '中药毒理学综述', note: '川楝子含川楝素(toosendanin),具神经-肝双重毒性,过量可致肝细胞坏死。', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6215299/' }
+      ],
+      '苦楝皮': [
+        { level: '毒理证据', type: '川楝素类 / 内服毒性高', source: '中药毒理学综述', note: '与川楝子同源,含川楝素,内服毒性与神经损伤风险显著。', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6215299/' }
+      ],
+      '白鲜皮': [
+        { level: '警戒证据', type: '肝损伤报告', source: 'LiverTox / 个案报道', note: '白鲜皮已被纳入中药肝损伤讨论,有特异质性肝炎个案报告。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK548795/' }
+      ],
+      '升麻': [
+        { level: '警戒证据', type: '肝损伤个案', source: 'LiverTox', note: 'Cimicifuga 属(包括黑升麻)与特异质性肝损伤个案相关,因果关系尚有争议但已被监管机构警告。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK548298/' }
+      ],
+      '栀子': [
+        { level: '警戒证据', type: '京尼平 / 肠肝毒性', source: '中药毒理学综述', note: '栀子含京尼平苷(geniposide),长期或大剂量可致肝胆损伤,在大鼠中显示明确肝毒性。', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6215299/' }
+      ],
+      '白果': [
+        { level: '临床警戒', type: '银杏毒素 / 儿童中毒', source: 'NCBI StatPearls', note: '银杏种子中的 4-O-methylpyridoxine 可拮抗维生素 B6,过量可致癫痫、惊厥,儿童尤其敏感。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK559318/' }
+      ],
+      '银杏叶': [
+        { level: '相互作用', type: '出血风险 / 抗凝相互作用', source: 'NCCIH', note: '银杏可能增加出血风险,并与华法林、抗血小板药相互作用。', url: 'https://www.nccih.nih.gov/health/ginkgo' }
+      ],
+      '槟榔': [
+        { level: '强证据', type: '一级致癌物 / 口腔癌', source: 'IARC Monograph 100E', note: 'IARC 将槟榔(含或不含烟草)列为 1 类致癌物,与口腔、咽、食管癌明确因果关系。', url: 'https://publications.iarc.fr/Book-And-Report-Series/Iarc-Monographs-On-The-Identification-Of-Carcinogenic-Hazards-To-Humans/Personal-Habits-And-Indoor-Combustions-2012' }
+      ],
+      '番泻叶': [
+        { level: '临床警戒', type: '泻下依赖 / 电解质紊乱', source: 'LiverTox', note: '番泻叶长期或过量使用可致腹泻、电解质紊乱、泻剂依赖,亦有肝损伤个案。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK547922/' }
+      ],
+      '芦荟': [
+        { level: '临床警戒', type: '泻下刺激 / 肝损伤', source: 'LiverTox', note: '芦荟口服制剂(尤其全叶提取物)有腹泻、电解质紊乱和肝损伤个案报告。', url: 'https://www.ncbi.nlm.nih.gov/books/NBK548634/' }
+      ],
+      '苦杏仁': [
+        { level: '毒理证据', type: '氰苷 / 氰化物中毒', source: 'EFSA', note: '杏仁、杏核中的苦杏仁苷(amygdalin)可释放氰化物,过量摄入有急性中毒风险。', url: 'https://www.efsa.europa.eu/en/efsajournal/pub/4424' }
+      ],
+      '麻黄': [
+        { level: '监管证据', type: '心血管 / 中枢神经风险', source: 'NCCIH', note: 'NCCIH 列出麻黄相关高血压、心脏病发作、癫痫和卒中等风险。', url: 'https://www.nccih.nih.gov/health/ephedra' },
+        { level: '监管证据', type: 'FDA 禁令', source: 'FDA', note: '美国 FDA 禁止销售含麻黄碱生物碱的膳食补充剂。', url: 'https://www.fda.gov/food/dietary-supplement-products-ingredients/ephedra' }
+      ],
+      '石膏': [
+        { level: '警戒证据', type: '矿物药质量控制', source: 'WHO 重金属相关', note: '矿物药石膏(CaSO₄)易受重金属(铅、砷、镉、汞)污染,需严格质量控制。', url: 'https://www.who.int/news-room/fact-sheets/detail/lead-poisoning-and-health' }
+      ],
+      '滑石': [
+        { level: '警戒证据', type: '滑石粉 / 石棉污染', source: 'IARC', note: 'IARC 将含石棉的滑石粉列为 1 类致癌物;不含石棉的滑石围绕卵巢癌的致癌性仍有争议。', url: 'https://publications.iarc.fr/_publications/media/download/3007/19a86a2e8aaf6fa3bbd2ef6f37bc2b03f9b7ac95.pdf' }
+      ],
+      '龙骨': [
+        { level: '警戒证据', type: '矿物药质量控制', source: 'WHO 重金属相关', note: '龙骨为古脊椎动物化石,可能含重金属杂质和氟化物,缺乏现代药效证据。', url: 'https://www.who.int/news-room/fact-sheets/detail/lead-poisoning-and-health' }
+      ],
+      '牡蛎': [
+        { level: '警戒证据', type: '重金属富集', source: 'WHO 重金属相关', note: '贝壳类矿物药可能富集铅、镉等重金属;现代证据不支持其镇静、安神等宣称。', url: 'https://www.who.int/news-room/fact-sheets/detail/lead-poisoning-and-health' }
+      ],
+      '磁石': [
+        { level: '警戒证据', type: '矿物药质量控制', source: 'WHO 重金属相关', note: '磁石(Fe₃O₄)可能含重金属杂质,缺乏现代药效证据。', url: 'https://www.who.int/news-room/fact-sheets/detail/lead-poisoning-and-health' }
+      ],
+      '人参': [
+        { level: '相互作用', type: '血糖 / 抗凝相互作用', source: 'NCCIH', note: '人参可能影响血糖,与华法林、降糖药、单胺氧化酶抑制剂相互作用。', url: 'https://www.nccih.nih.gov/health/asian-ginseng' }
+      ],
+      '甘草': [
+        { level: '强证据', type: '假性醛固酮增多 / 低钾', source: 'Frontiers in Nutrition', note: '甘草酸抑制 11β-HSD2,可致高血压、低钾血症、水钠潴留;与利尿剂、地高辛、糖皮质激素严重相互作用。', url: 'https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2021.719197/full' },
+        { level: '临床警戒', type: '心血管不良事件', source: 'PMC 病例系列', note: '长期食用甘草可致严重低钾、高血压、心律失常,与噻嗪类、袢利尿剂合用风险倍增。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11242244/' }
+      ],
+      '丹参': [
+        { level: '相互作用', type: '出血 / 抗凝增效', source: 'PLOS ONE', note: '丹参与华法林同用可显著增加出血风险,机制涉及药效学协同与 CYP 酶抑制。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3650066/' }
+      ],
+      '当归': [
+        { level: '相互作用', type: '出血 / 抗凝增效', source: 'PLOS ONE', note: '当归与华法林同用可增加出血风险,香豆素类成分具天然抗凝活性。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3650066/' }
+      ],
+      '生姜': [
+        { level: '相互作用', type: '抗凝增效', source: 'PMC 综述', note: '大剂量生姜可抑制血小板聚集,与抗凝抗血小板药同用增加出血风险。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4325561/' }
+      ],
+      '姜黄': [
+        { level: '相互作用', type: '抗凝增效 / CYP3A4 抑制', source: 'PMC', note: '姜黄素抑制 CYP3A4,与他克莫司、华法林等同用可增加血药浓度或出血风险。', url: 'https://www.mdpi.com/1422-0067/26/11/5188' }
+      ],
+      '三七': [
+        { level: '相互作用', type: '抗凝双向作用', source: 'PMC 综述', note: '三七含人参皂苷类,具止血与抗凝双向活性,与抗凝药合用结果不可预测。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4325561/' }
+      ],
+      '红花': [
+        { level: '相互作用', type: '抗凝增效', source: 'PMC 综述', note: '红花活血,与华法林、阿司匹林、氯吡格雷合用增加出血风险。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3650066/' }
+      ],
+      '桃仁': [
+        { level: '相互作用', type: '抗血小板增效', source: 'PMC 综述', note: '桃仁醇提物抑制血小板聚集,延长凝血酶时间,与抗凝药合用风险增加。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4325561/' }
+      ],
+      '川芎': [
+        { level: '相互作用', type: '抗凝增效', source: 'PMC 综述', note: '川芎所含阿魏酸等成分有抗血小板和抗凝活性,与抗凝抗血小板药合用风险增加。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3650066/' }
+      ],
+      '五味子': [
+        { level: '相互作用', type: 'CYP3A4 抑制 / 增加他克莫司浓度', source: 'PMC', note: '五味子(Schisandra)抑制 CYP3A4/3A5,可显著增加他克莫司、环孢素血药浓度,导致毒性。', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9103789/' }
+      ],
+      '水蛭': [
+        { level: '相互作用', type: '抗凝 / 出血风险', source: '中药毒理学综述', note: '水蛭含水蛭素(hirudin),为直接凝血酶抑制剂,与现代抗凝药合用出血风险极高。', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3650066/' }
+      ]
+    };
+
+    const CHEMISTRY = {
+      '马兜铃': {
+        compounds: '马兜铃酸 I/II（aristolochic acid I/II），硝基菲类化合物',
+        mechanism: '经体内代谢生成 N-羟基马兜铃内酰胺，与 DNA 腺嘌呤共价结合形成 dA-AAI 加合物，导致 TP53 抑癌基因发生 A:T→T:A 颠换突变；同时直接损伤近端肾小管上皮细胞。',
+        evidence: '美国 NCI 与 IARC 1 类致癌物。在巴尔干肾病和"中草药肾病"病例中检出特异性 DNA 加合物与 TP53 突变。',
+        vs_traditional: '机制不成立',
+        vs_note: '"行气止痛"无对应化学机制；其真实生物活性为致癌与肾毒性。'
+      },
+      '关木通': {
+        compounds: '马兜铃酸（与马兜铃同源）',
+        mechanism: '同马兜铃：DNA 加合物形成 → TP53 突变 → 上尿路癌；近端肾小管坏死。',
+        evidence: '1990 年代比利时"中草药减肥肾病"事件主要肇事药材，导致大批患者肾衰与膀胱癌。',
+        vs_traditional: '反向',
+        vs_note: '所谓"利尿"实际为肾小管损伤后的多尿期表现，是肾衰的征兆而非疗效。'
+      },
+      '广防己': {
+        compounds: '马兜铃酸 I/II',
+        mechanism: '同上：DNA 共价结合 → 致癌；肾近端小管毒性。',
+        evidence: 'IARC 1 类致癌物族成员，已被多国药监禁用。',
+        vs_traditional: '机制不成立',
+        vs_note: '与无马兜铃酸的"粉防己"为不同植物，但中医文献长期混用。'
+      },
+      '青木香': {
+        compounds: '马兜铃酸 I/II',
+        mechanism: '同上：DNA 加合物 → A:T→T:A 颠换 → 肿瘤发生。',
+        evidence: '中国药典 2005 版起已删除其药用地位。',
+        vs_traditional: '机制不成立',
+        vs_note: '与不含马兜铃酸的"木香"（菊科）为完全不同植物，中医文献长期混淆。'
+      },
+      '附子': {
+        compounds: '乌头碱（aconitine, C₃₄H₄₇NO₁₁），双酯型二萜生物碱；另含次乌头碱、新乌头碱',
+        mechanism: '与心肌、神经细胞电压门控钠通道（Nav1.5 等）的神经毒素结合位点 2 高亲和结合，使通道在去极化后无法正常失活，导致钠通道持续开放、细胞内钠超载、L 型钙通道激活与胞内钙紊乱，引起延迟后除极和双向性室性心动过速。',
+        evidence: '人致死量约 1–2 mg 乌头碱；炮制可使双酯型水解为毒性较低的单酯型，但炮制不足或剂量不当仍致命。',
+        vs_traditional: '反向',
+        vs_note: '"回阳救逆"对应的临床征象（心率加快、出汗、口麻）实为钠通道毒性的早期中毒症状，被传统医学误读为"阳气恢复"。'
+      },
+      '川乌': {
+        compounds: '乌头碱、次乌头碱、新乌头碱（同附子）',
+        mechanism: '同附子：钠通道持续激活 → 室性心律失常。',
+        evidence: '香港、四川等地多起煲汤中毒致死案例；2003–2015 年间中国大陆至少 53 例致死。',
+        vs_traditional: '反向',
+        vs_note: '所谓"温经散寒"对应的发热出汗实为肾上腺素能/胆碱能紊乱的中毒前驱表现。'
+      },
+      '草乌': {
+        compounds: '乌头碱类（高于川乌含量）',
+        mechanism: '同附子。',
+        evidence: '草乌（Aconitum kusnezoffii）毒性更强，传统使用风险更高。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '雷公藤': {
+        compounds: '雷公藤甲素（triptolide），二萜三环氧化合物；雷公藤红素',
+        mechanism: '与转录因子 TFIIH 复合物的 XPB（ERCC3）亚基共价结合，抑制其 DNA 依赖性 ATP 酶活性，阻断 RNA 聚合酶 II 介导的全基因组转录，并诱导 RNAPII 主亚基蛋白酶体降解；同时抑制核苷酸切除修复。',
+        evidence: '强力广谱细胞毒，是雷公藤抗肿瘤、免疫抑制和生殖毒性、骨髓抑制的共同分子基础。',
+        vs_traditional: '机制不成立',
+        vs_note: '"祛风除湿"无对应机制；其抗炎效应来源于全身性转录抑制（即剂量不足时的免疫抑制），与剂量稍增即出现的多器官毒性是同一机制。'
+      },
+      '马钱子': {
+        compounds: '番木鳖碱（strychnine, C₂₁H₂₂N₂O₂），吲哚类生物碱',
+        mechanism: '选择性拮抗脊髓和脑干甘氨酸能抑制性中间神经元的甘氨酸受体，解除运动神经元的去抑制，引起反射性肌肉过度兴奋，表现为弓背反张、清醒性强直惊厥。',
+        evidence: '人致死量约 30–100 mg；香港 13 年间 12 例中毒病例（中医诊所来源）。',
+        vs_traditional: '反向',
+        vs_note: '"通络止痛"对应的肌肉紧张感实为甘氨酸抑制解除后的全身性神经过兴奋状态，是中毒前奏。'
+      },
+      '巴豆': {
+        compounds: '巴豆油（含佛波酯类，phorbol esters，特别是 phorbol-12-myristate-13-acetate 类似物）',
+        mechanism: '佛波酯激活蛋白激酶 C（PKC）信号通路，导致细胞增殖、炎症介质大量释放与上皮屏障破坏；强促肿瘤剂（tumor promoter），是经典实验肿瘤学的二阶段致癌模型试剂。',
+        evidence: '巴豆油 1–2 mL 即可致死；佛波酯是 Hecker 1960s 经典促癌研究的标准试剂。',
+        vs_traditional: '反向',
+        vs_note: '"峻下冷积"对应的剧烈腹泻是肠上皮 PKC 激活后水钠分泌紊乱与黏膜损伤的结果，是急性中毒表现。'
+      },
+      '千里光': {
+        compounds: '吡咯里西啶生物碱（pyrrolizidine alkaloids, PA），如 senecionine',
+        mechanism: '经肝细胞色素 P450 代谢生成吡咯醇活性中间体，与肝窦内皮细胞和肝细胞 DNA、蛋白共价结合，引起肝窦阻塞综合征（SOS/VOD），严重者进展为肝衰竭。',
+        evidence: 'SOS/VOD 在 PA 暴露人群中已有大量临床和病理学证据。',
+        vs_traditional: '机制不成立',
+        vs_note: '"清热解毒、明目"无对应机制；真实活性为代谢激活后的肝毒性。'
+      },
+      '斑蝥': {
+        compounds: '斑蝥素（cantharidin, C₁₀H₁₂O₄），萜类酸酐',
+        mechanism: '抑制蛋白磷酸酶 PP1 与 PP2A，导致细胞内蛋白磷酸化失衡，引起上皮和肾小管细胞凋亡与坏死；皮肤接触致泡疹，口服致严重肾毒性、溶血与心律失常。',
+        evidence: '人致死量约 10 mg；传统所谓"以毒攻毒"使用者中毒案例频发。',
+        vs_traditional: '反向',
+        vs_note: '"破血逐瘀"对应的全身反应是磷酸酶抑制后的细胞凋亡与多器官损伤。'
+      },
+      '苍耳子': {
+        compounds: '羧基苍术苷（carboxyatractyloside, CATR）',
+        mechanism: '抑制线粒体内膜的 ADP/ATP 转运蛋白（adenine nucleotide translocase, ANT），阻断 ATP 输出，使细胞能量代谢崩溃，主要损伤肝细胞，表现为急性肝衰竭、低血糖与凝血障碍。',
+        evidence: '已有儿童因苍耳子中毒需肝移植的病例报告。',
+        vs_traditional: '机制不成立',
+        vs_note: '"通鼻窍"无可证伪的鼻黏膜药理对应；真实活性为线粒体毒性。'
+      },
+      '雄黄': {
+        compounds: '四硫化四砷（As₄S₄），可在体内或加热条件下转化为可溶性三氧化二砷（As₂O₃）',
+        mechanism: '砷与含巯基酶（如丙酮酸脱氢酶）的半胱氨酸残基结合，抑制能量代谢；高价砷与细胞 DNA 修复蛋白结合致基因毒性；长期暴露致皮肤、肺、膀胱、肝癌。',
+        evidence: 'WHO/IARC 1 类致癌物；雄黄"安全"的常见辩护忽视了其在胃酸和加热下向可溶性砷的转化。',
+        vs_traditional: '反向',
+        vs_note: '"解毒"宣称与重金属本身的毒性直接矛盾。'
+      },
+      '雌黄': {
+        compounds: '三硫化二砷（As₂S₃）',
+        mechanism: '同雄黄：砷暴露 → 巯基酶抑制 → 细胞凋亡；致癌。',
+        evidence: 'IARC 1 类致癌物族。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '朱砂': {
+        compounds: '硫化汞（HgS）',
+        mechanism: '汞离子与含巯基蛋白结合，抑制谷胱甘肽过氧化物酶等关键酶；优先损伤神经系统（中枢神经汞积聚）和肾近端小管；可经胃酸部分溶解释放可溶性汞。',
+        evidence: 'WHO 列汞为十大公共卫生关注化学物之一；多起儿童朱砂中毒致脑病和肾损伤的病例。',
+        vs_traditional: '反向',
+        vs_note: '"镇心安神"对应的镇静作用实为汞中毒的中枢抑制表现。'
+      },
+      '铅丹': {
+        compounds: '四氧化三铅（Pb₃O₄）',
+        mechanism: '铅模拟钙离子，干扰钙信号通路与神经递质释放；抑制血红素合成（ALA 脱水酶）致贫血；损伤近端肾小管；儿童神经发育敏感期暴露致不可逆智力损伤。',
+        evidence: 'WHO 明确无安全暴露阈值。',
+        vs_traditional: '机制不成立',
+        vs_note: '所谓"拔毒生肌"在循证医学中无任何对应；铅外用仍可经皮吸收。'
+      },
+      '砒霜': {
+        compounds: '三氧化二砷（As₂O₃）',
+        mechanism: '与含巯基酶共价结合 → 多酶系抑制 → 细胞凋亡；高剂量致急性多器官衰竭。',
+        evidence: '人致死量约 70–200 mg；现代医学仅在急性早幼粒细胞白血病的严格剂量监测下使用。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '砒石': {
+        compounds: '砷矿原料，主要成分 As₂O₃',
+        mechanism: '同砒霜。',
+        evidence: '同砒霜。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '商陆': {
+        compounds: '商陆毒素（phytolaccatoxin）、商陆皂苷',
+        mechanism: '皂苷类对胃肠黏膜与红细胞膜有强烈刺激和溶血作用；强促泻；高剂量损伤肾小管。',
+        evidence: '全株有毒，根毒性最强。',
+        vs_traditional: '反向',
+        vs_note: '"逐水消肿"对应的多尿与呕吐为急性中毒征象。'
+      },
+      '南星': {
+        compounds: '生品含针晶状草酸钙（calcium oxalate raphides）和不明蛋白酶',
+        mechanism: '针晶物理刺穿黏膜细胞，伴蛋白酶共同释放介质，引起口咽剧烈灼痛、肿胀；重者可致喉头水肿。',
+        evidence: '生南星中毒在民间频发。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '洋金花': {
+        compounds: '莨菪烷类生物碱：东莨菪碱（scopolamine）、阿托品（atropine, hyoscyamine）',
+        mechanism: '竞争性拮抗毒蕈碱型乙酰胆碱受体（M1–M5），抑制副交感神经系统；引起瞳孔散大、心动过速、皮肤潮红、汗腺停止、肠麻痹、谵妄、惊厥。',
+        evidence: '抗胆碱中毒综合征经典致病原；现代医学仅用纯化阿托品/东莨菪碱并严格控量。',
+        vs_traditional: '部分巧合',
+        vs_note: '"麻醉镇痛"对应阿托品的中枢抑制效应，但传统粉末剂量极不稳定，治疗剂量与中毒剂量重叠。'
+      },
+      '闹羊花': {
+        compounds: '木藜芦毒素（grayanotoxins, GTX I/II/III），二萜类',
+        mechanism: '与电压门控钠通道神经毒素结合位点 2 结合，使通道维持开放状态、不能正常失活；导致心肌和神经细胞持续去极化，产生缓脉、低血压、晕厥（"疯蜜中毒"机制）。',
+        evidence: '与"疯蜜"（mad honey）中毒同源；1–3 mg/kg 可致严重心律失常。',
+        vs_traditional: '反向',
+        vs_note: '"祛风除湿、止痛"对应的麻木感实为神经毒性表现。'
+      },
+      '雪上一枝蒿': {
+        compounds: '雪上一枝蒿甲素等乌头碱类（Aconitum 属）',
+        mechanism: '同附子：钠通道持续开放 → 室性心律失常。',
+        evidence: '云南民间常见中毒源。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '生半夏': {
+        compounds: '草酸钙针晶、半夏蛋白（凝集素）、3,4-二羟基苯甲醛等',
+        mechanism: '针晶物理刺激与凝集素协同损伤口腔咽喉黏膜；炮制（白矾、姜汁煮）破坏针晶与蛋白后毒性显著降低。',
+        evidence: '生品口服后口舌剧痛、肿胀，严重者呼吸困难。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '生天南星': {
+        compounds: '同生半夏：草酸钙针晶 + 凝集素',
+        mechanism: '同生半夏。',
+        evidence: '生品毒性强于生半夏。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '生马钱子': {
+        compounds: '番木鳖碱（含量高于炮制品）',
+        mechanism: '同马钱子。',
+        evidence: '炮制（砂烫、油炸）只能部分降低生物碱含量，仍有狭窄治疗窗。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '轻粉': {
+        compounds: '氯化亚汞（Hg₂Cl₂, calomel）',
+        mechanism: '同朱砂：汞与巯基酶结合 → 神经/肾毒性。氯化亚汞溶解度高于硫化汞，生物可利用度更高。',
+        evidence: '历史上欧洲也曾误用为通便药，导致大量汞中毒病例。',
+        vs_traditional: '机制不成立',
+        vs_note: '"攻毒杀虫"无对应机制，外用亦可经皮吸收致系统性汞中毒。'
+      },
+      '红粉': {
+        compounds: '氧化汞（HgO）',
+        mechanism: '同朱砂；HgO 溶解度高，毒性强。',
+        evidence: 'WHO 重点监测重金属。',
+        vs_traditional: '机制不成立',
+        vs_note: ''
+      },
+      '白降丹': {
+        compounds: '氯化高汞（HgCl₂）+ 氯化亚汞混合物',
+        mechanism: 'HgCl₂ 是经典实验性肾毒剂；强腐蚀性 + 系统性汞毒性。',
+        evidence: '人口服 LD50 约 1–4 g。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '甘遂': {
+        compounds: '巨大戟二萜醇酯类（同 phorbol 类）',
+        mechanism: '激活 PKC，引起肠上皮分泌紊乱、剧烈腹泻；同样具促肿瘤活性。',
+        evidence: '与巴豆同属大戟科二萜酯类。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '大戟': {
+        compounds: '大戟二萜酯类（与巴豆同类）',
+        mechanism: '同甘遂：PKC 激活 → 肠分泌亢进；促癌活性。',
+        evidence: '大戟科植物乳汁广泛含此类化合物。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '红大戟': {
+        compounds: '与大戟同类二萜酯',
+        mechanism: '同上。',
+        evidence: '同上。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '芫花': {
+        compounds: '瑞香烷型二萜酯（daphnane diterpene esters，与佛波酯同类）',
+        mechanism: 'PKC 激活 → 强烈胃肠刺激与致泻；具促癌活性。',
+        evidence: '瑞香科植物经典毒性成分。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '牵牛子': {
+        compounds: '牵牛子苷（pharbitin）等树脂苷',
+        mechanism: '在小肠内被胆汁与酶水解释放刺激性苷元，直接刺激肠壁神经丛 → 强烈肠蠕动 → 水样腹泻、电解质紊乱。',
+        evidence: '过量致严重脱水、低钾、低钠。',
+        vs_traditional: '反向',
+        vs_note: ''
+      },
+      '蟾酥': {
+        compounds: '蟾蜍二烯内酯类（bufadienolides）：蟾毒灵（bufalin）、华蟾毒精（cinobufagin）等',
+        mechanism: '高亲和结合心肌细胞 Na⁺/K⁺-ATPase 的 α 亚基（"洋地黄受体"），抑制钠泵 → 细胞内钠升高 → Na⁺/Ca²⁺ 交换体反向运转 → 细胞内钙升高 → 心肌收缩力增强（正性肌力），同时易致延迟后除极和致命性心律失常。',
+        evidence: '蟾酥与洋地黄、毒毛旋花苷为同一药理类，蟾蜍来源中药致心律失常死亡的病例已发表于 BMJ Heart。',
+        vs_traditional: '反向',
+        vs_note: '"开窍醒神"对应的心率改变与意识波动实为强心苷毒性的典型表现。'
+      },
+      '麻黄': {
+        compounds: '麻黄碱（ephedrine, C₁₀H₁₅NO）、伪麻黄碱（pseudoephedrine），苯乙胺类生物碱（结构上属于取代型苯丙胺）',
+        mechanism: '间接拟交感神经作用为主：促进突触前神经末梢去甲肾上腺素释放；并直接弱激动 α₁、β₁、β₂ 肾上腺素受体。结果：血管收缩、心率增加、心肌收缩力增强、支气管扩张、中枢兴奋。',
+        evidence: '麻黄碱的现代医学使用早已被纯化、剂量化（如哮喘急救、术中升压）；草药制剂剂量不稳定，已多次报道猝死、心梗、脑卒中。',
+        vs_traditional: '部分巧合',
+        vs_note: '"宣肺平喘"对应 β₂ 受体激动的支气管扩张；"发汗解表"对应交感兴奋的出汗与心率升高——但传统理论的"肺主皮毛"等解释框架与肾上腺素能机制无对应。'
+      },
+      '甘草': {
+        compounds: '甘草酸（glycyrrhizin，皂苷），其活性代谢物甘草次酸（glycyrrhetinic acid）',
+        mechanism: '甘草次酸抑制 11β-羟类固醇脱氢酶 2 型（11β-HSD2），使皮质醇不能在肾远曲小管被代谢为可的松，过量皮质醇激动盐皮质激素受体，产生"假性醛固酮增多综合征"：水钠潴留、高血压、低钾血症。',
+        evidence: '机制为分子内分泌学经典；多起长期食用甘草引起严重低钾性瘫痪与高血压的病例。',
+        vs_traditional: '反向',
+        vs_note: '"补脾益气"对应的轻度水肿与精神振奋实为皮质醇活性增强的早期表现，长期使用即转为顽固高血压与低钾。'
+      },
+      '大黄': {
+        compounds: '蒽醌苷类：番泻苷 A/B（sennosides）、芦荟大黄素（aloe-emodin）',
+        mechanism: '蒽醌苷在结肠被肠道菌群水解为活性蒽醌，刺激肠肌间神经丛、抑制结肠 Na⁺/K⁺-ATPase 与水分吸收，引起强力泻下；长期使用致结肠黑变病、电解质紊乱与泻剂依赖。',
+        evidence: '与现代刺激性泻药（番泻苷片）同一活性成分；FDA 已警告非处方蒽醌泻药的长期使用风险。',
+        vs_traditional: '部分巧合',
+        vs_note: '"泻下攻积"对应蒽醌的真实泻下机制，但"清热泻火"的火-寒框架与之无对应。'
+      },
+      '丹参': {
+        compounds: '丹参酮 IIA（tanshinone IIA，二萜醌）、丹参素（danshensu）、丹酚酸 B',
+        mechanism: '抗血小板：抑制血小板聚集与黏附（部分通过抑制 TXA₂ 合成）；体外有抗氧化、抗炎活性；与华法林合用通过药效学叠加增加出血风险。',
+        evidence: '丹参-华法林相互作用为药理学经典案例；多项 PLOS ONE 综述（Tsai 2013）记录。',
+        vs_traditional: '部分巧合',
+        vs_note: '"活血化瘀"对应抗血小板效应——但这一效应是与抗凝药协同的出血风险，而非"祛瘀通络"的好处。'
+      },
+      '川芎': {
+        compounds: '川芎嗪（tetramethylpyrazine）、阿魏酸（ferulic acid）',
+        mechanism: '阿魏酸抑制血小板聚集与 TXB₂ 合成；川芎嗪扩张血管、轻度抗血小板。',
+        evidence: '与抗凝药合用增加出血风险已记录于多个药物-中药相互作用数据库。',
+        vs_traditional: '部分巧合',
+        vs_note: ''
+      },
+      '当归': {
+        compounds: '阿魏酸、藁本内酯（ligustilide）、香豆素类',
+        mechanism: '香豆素类有天然抗凝活性（与华法林同源结构）；阿魏酸抑制血小板。',
+        evidence: '当归-华法林相互作用导致 INR 显著升高的病例已发表。',
+        vs_traditional: '部分巧合',
+        vs_note: ''
+      },
+      '红花': {
+        compounds: '羟基红花黄色素 A（hydroxysafflor yellow A）、红花苷',
+        mechanism: '抑制血小板聚集；动物实验中促进子宫收缩。',
+        evidence: '与抗凝药合用增加出血；孕妇大剂量使用与流产相关。',
+        vs_traditional: '部分巧合',
+        vs_note: ''
+      },
+      '三七': {
+        compounds: '人参皂苷 Rb1、Rg1，三七皂苷 R1（notoginsenoside R1）',
+        mechanism: '体外/体内同时显示抗血小板和促止血两种活性，方向取决于剂量与基础凝血状态；与抗凝药相互作用方向不可预测。',
+        evidence: '"活血止血双向"是药理学的真实观察，但临床使用时的方向无法预判。',
+        vs_traditional: '部分巧合',
+        vs_note: '"双向调节"在传统医学中被解释为"智能"，实则反映剂量-效应不稳定性，是临床缺陷而非优点。'
+      },
+      '姜黄': {
+        compounds: '姜黄素（curcumin, C₂₁H₂₀O₆），多酚类',
+        mechanism: '抑制 CYP3A4、CYP2C9、P-糖蛋白；体外抗炎、抗氧化（生物利用度极低）。与他克莫司、华法林同用可显著升高其血药浓度或出血风险。',
+        evidence: '口服姜黄素生物利用度 <1%，所谓"全身抗炎"在临床剂量下机制不成立；但其 CYP 抑制相互作用真实存在。',
+        vs_traditional: '机制不成立',
+        vs_note: '"破血行气"在分子层面无对应；姜黄素的真实临床意义主要是药物相互作用风险。'
+      },
+      '延胡索': {
+        compounds: '延胡索乙素（dl-tetrahydropalmatine, THP），原小檗碱型生物碱',
+        mechanism: '阻断中枢多巴胺 D₁/D₂ 受体；激活下行抑制性疼痛通路；具中等镇静、镇痛活性。',
+        evidence: 'THP 在动物模型中镇痛活性确实存在，但远弱于阿片类；中国曾作为非处方镇静药使用。',
+        vs_traditional: '部分巧合',
+        vs_note: '"活血止痛"对应的真实机制是中枢镇痛，与"血"无任何关系。'
+      },
+      '青蒿': {
+        compounds: '青蒿素（artemisinin），倍半萜内酯（含过氧桥）',
+        mechanism: '在疟原虫富铁环境中过氧桥被裂解，产生自由基，烷基化疟原虫蛋白致其死亡。屠呦呦获 2015 年诺贝尔奖。',
+        evidence: '现代抗疟一线药（ACT 联合疗法）的核心成分；草药煎剂含量极低且不稳定。',
+        vs_traditional: '部分巧合',
+        vs_note: '青蒿素的发现常被作为"中医智慧"案例，但屠呦呦从葛洪《肘后备急方》获得的关键启示是"绞汁服"——即避开高温煎煮——这恰恰说明传统使用方式（煎汤）会破坏活性成分；纯化、工业化生产的青蒿素与传统煎剂是不同物质。'
+      },
+      '苦参': {
+        compounds: '苦参碱（matrine）、氧化苦参碱（oxymatrine），喹诺里西啶生物碱',
+        mechanism: '阻断电压门控钾通道、抑制神经元放电；抗心律失常作用与抗心律失常药同类风险（致心律失常副作用）；高剂量致中枢神经抑制。',
+        evidence: '苦参注射剂致心脏骤停的病例已报告。',
+        vs_traditional: '机制不成立',
+        vs_note: ''
+      },
+      '水蛭': {
+        compounds: '水蛭素（hirudin），65 个氨基酸的多肽',
+        mechanism: '高亲和、特异性、不可逆抑制凝血酶（thrombin），阻断纤维蛋白原向纤维蛋白转化与血小板活化；现代医学已开发重组水蛭素（lepirudin、bivalirudin）作为抗凝药。',
+        evidence: '机制清晰；与现代抗凝药合用出血风险极高。',
+        vs_traditional: '部分巧合',
+        vs_note: '"破血通经"对应真实抗凝活性，但传统使用的是不纯活体或干燥制品，剂量不可控。'
+      },
+      '紫草': {
+        compounds: '紫草素（shikonin）、PA 类生物碱',
+        mechanism: '紫草素具体外抗炎、抗肿瘤活性；PA 类经肝 CYP 代谢生成吡咯醇 → 肝窦阻塞综合征。',
+        evidence: 'PA 介导的肝毒性证据强；紫草素的临床有效性证据弱。',
+        vs_traditional: '机制不成立',
+        vs_note: ''
+      },
+      '山楂': {
+        compounds: '果胶（可溶性膳食纤维）、有机酸（柠檬酸、苹果酸、奎宁酸）、寡聚原花青素（OPCs），含微量山楂素',
+        mechanism: '有机酸轻度刺激胃酸分泌，加速蛋白消化；果胶延缓胃排空与糖吸收；OPCs 体外抗氧化。无任何特异性"消化肉食"机制。',
+        evidence: '山楂的"促消化"作用与任何高酸度食物（柠檬、醋、酸奶）等同；现代营养学不视其为药物。',
+        vs_traditional: '部分巧合',
+        vs_note: '"消食化积"对应胃酸刺激下蛋白消化的轻度增强；但传统"专消肉食积滞"的说法在分子层面无对应——胃蛋白酶对蛋白的消化与"肉/素"无差别选择性。'
+      },
+      '大枣': {
+        compounds: '糖类（果糖、葡萄糖，占干重 60–80%）、环磷酸腺苷（cAMP）、三萜酸（齐墩果酸、桦木酸）',
+        mechanism: '主要生理效应来自高糖含量（快速供能、轻度血糖升高、情绪改善）；cAMP 含量虽高但口服后被胃肠水解，不进入循环。',
+        evidence: '大枣的"补气养血"宣称在血液学指标（血红蛋白、铁、维生素 B12）上无可重复证据；其"养神"效应可由糖摄入与心理预期解释。',
+        vs_traditional: '机制不成立',
+        vs_note: '"补中益气、养血安神"在分子层面无对应；其真实作用是高糖食品对血糖与情绪的短期效应。'
+      },
+      '枸杞子': {
+        compounds: '玉米黄质（zeaxanthin）、β-胡萝卜素、枸杞多糖（LBP）、维生素 C',
+        mechanism: '玉米黄质沉积于视网膜黄斑区，与叶黄素共同过滤蓝光；这是真实的眼部营养素角色。LBP 体外有抗氧化、免疫调节活性，但口服后被胃肠水解为单糖。',
+        evidence: '玉米黄质对黄斑变性的预防作用有 AREDS2 等大型临床研究支持，但有效剂量需 2 mg/日以上，相当于每日数百克枸杞。',
+        vs_traditional: '部分巧合',
+        vs_note: '"明目"的传统宣称与玉米黄质的眼部营养作用恰好吻合——但这与"肝肾"无任何关系；同样的玉米黄质在玉米、橙椒、蛋黄中含量更高，疗效与"枸杞"无关。'
+      },
+      '乌梅': {
+        compounds: '柠檬酸、苹果酸、琥珀酸（合占干重约 30%），少量三萜烯酸',
+        mechanism: '强酸性 pH 刺激唾液分泌、轻度胃酸刺激；纯粹的味觉-反射效应，无特异性药理作用。',
+        evidence: '"生津"效应与任何强酸性食物（柠檬、酸梅）相同。',
+        vs_traditional: '机制不成立',
+        vs_note: '"敛肺、涩肠止泻"在分子层面无对应；其全部生理效应可由高酸度食物的味觉反射解释。'
+      },
+      '薏苡仁': {
+        compounds: '淀粉、蛋白质、薏苡仁脂（coixenolide，三萜酯类）、薏苡素（coixol）',
+        mechanism: '主要为高淀粉、低 GI 食物；薏苡仁脂在动物模型有抗肿瘤活性，但口服生物利用度未明确建立；薏苡素为 4-甲氧基苯甲酰胺，弱镇静活性。',
+        evidence: '薏苡仁的"利水""抗癌"宣称在人体研究中证据等级低；作为食物其碳水化合物功能成立。',
+        vs_traditional: '机制不成立',
+        vs_note: '"健脾渗湿"无对应机制；其作为粗粮的低 GI 与膳食纤维效应与任何全谷物相当。'
+      },
+      '绿豆': {
+        compounds: '蛋白质（球蛋白、牡荆素 vitexin）、多酚类、低聚糖、维生素 B 族',
+        mechanism: '高蛋白、高膳食纤维食物；牡荆素体外有抗氧化与轻度抗炎活性，但口服生物利用度极低；煮汤后大部分溶解物为多糖与无机盐。',
+        evidence: '"绿豆汤解暑"的真实机制是补充水、电解质与糖——与任何凉饮等同。',
+        vs_traditional: '机制不成立',
+        vs_note: '"清热解暑"无对应的"热毒"分子；解暑效应纯粹是水电解质与温度。所谓"绿豆解药"在 CYP 酶层面无可重复证据。'
+      },
+      '黑豆': {
+        compounds: '花青素（cyanidin-3-glucoside，主要在豆皮）、异黄酮、植物蛋白',
+        mechanism: '花青素为强抗氧化剂，但口服后大部分被肠菌降解，进入血液者甚少；异黄酮有弱雌激素活性。',
+        evidence: '黑豆的健康效应与黄豆、黑米、紫薯等其他花青素来源相当。',
+        vs_traditional: '机制不成立',
+        vs_note: '"补肾"无对应机制；黑色食物补肾"以形补形"的论证在生理学中没有任何依据。'
+      },
+      '山药': {
+        compounds: '淀粉、薯蓣皂苷元（diosgenin，含量极低）、黏液质（甘露聚糖）',
+        mechanism: '主要为淀粉类食物；薯蓣皂苷元为合成糖皮质激素与孕激素的工业原料，但口服无生理活性（不能在人体内自发转化）。黏液质有润滑作用。',
+        evidence: '山药的"补益"宣称无临床证据；作为低 GI 主食价值成立。',
+        vs_traditional: '机制不成立',
+        vs_note: '"补脾益肺"无对应机制；薯蓣皂苷元虽是激素工业原料，但口服食用山药不产生任何激素效应。'
+      },
+      '荷叶': {
+        compounds: '荷叶碱（nuciferine，阿朴啡型生物碱）、莲心碱',
+        mechanism: '荷叶碱在体外抑制脂肪酸合成酶、激动 5-HT₂A/₂C 受体（具弱致幻活性）；动物实验中显示轻度减重效应，但临床证据等级低。',
+        evidence: '荷叶减肥茶的体重效应在严格 RCT 中未被证实超过安慰剂。',
+        vs_traditional: '机制不成立',
+        vs_note: '"清暑化湿"无对应机制；荷叶碱的真实药理是中枢神经活性而非"祛湿"。'
+      },
+      '菊花': {
+        compounds: '芹菜素（apigenin）、木犀草素（luteolin）、绿原酸',
+        mechanism: '芹菜素与木犀草素为典型类黄酮抗氧化剂，体外抑制 COX-2 与 5-脂氧合酶；但口服生物利用度极低（<10%），血药浓度远低于体外有效浓度。',
+        evidence: '菊花茶的"明目""清热"宣称在临床上无可重复证据；作为低咖啡因饮品价值成立。',
+        vs_traditional: '机制不成立',
+        vs_note: '"疏风清热、清肝明目"在分子层面无对应；类黄酮抗氧化在饮茶剂量下不产生临床可观察的效应。'
+      },
+      '金银花': {
+        compounds: '绿原酸（chlorogenic acid）、木犀草苷、马钱苷',
+        mechanism: '绿原酸具体外抗氧化、弱抗菌活性；但其口服生物利用度低（约 33%），血药浓度远低于体外抑菌 IC₅₀；其"抗病毒"作用在体内剂量下无证据。',
+        evidence: '"金银花抗病毒"是新冠疫情期间被夸大宣传的典型案例，无临床 RCT 支持。',
+        vs_traditional: '机制不成立',
+        vs_note: '"清热解毒、疏散风热"作为解释框架与现代药理学无对应；体外活性 ≠ 体内疗效是中药市场最常见的误导。'
+      },
+      '薄荷': {
+        compounds: '薄荷醇（menthol，C₁₀H₂₀O，单萜醇）、薄荷酮',
+        mechanism: '薄荷醇选择性激动 TRPM8（瞬时受体电位 melastatin 8）冷觉离子通道，使感觉神经元产生"凉感"——并非真正降温，而是温度感觉的化学劫持；高浓度同时激活 TRPA1 致刺激感。',
+        evidence: 'TRPM8-薄荷醇结合机制有原子分辨率结构基础（Nature Communications 2020）；这是中药材中机制最清晰的化合物之一。',
+        vs_traditional: '部分巧合',
+        vs_note: '"疏散风热、清利头目"对应的"凉感"是 TRPM8 通道激活的纯粹感觉错觉，并非真正的"热"被"清"——温度计在薄荷作用下不会变化。'
+      },
+      '决明子': {
+        compounds: '蒽醌类：大黄酚（chrysophanol）、大黄素（emodin）、橙黄决明素',
+        mechanism: '与大黄、番泻叶同属蒽醌类刺激性泻药；在结肠被肠菌水解为活性蒽醌，刺激肠肌间神经丛、抑制水分吸收。',
+        evidence: '与大黄、番泻叶为同一药理类，长期使用同样有结肠黑变病风险。',
+        vs_traditional: '部分巧合',
+        vs_note: '"润肠通便"对应蒽醌的真实泻下机制——但所谓"清肝明目"在分子层面无任何对应。'
+      },
+      '罗汉果': {
+        compounds: '罗汉果苷 V（mogroside V，三萜糖苷，甜度为蔗糖 300 倍）',
+        mechanism: '高甜度低热量天然甜味剂；不被人体消化吸收（直接经肠菌代谢）；几乎不影响血糖。',
+        evidence: '罗汉果苷已被 FDA 批准为 GRAS（一般认为安全）食品成分；其"清热润肺"的疗效宣称无证据。',
+        vs_traditional: '机制不成立',
+        vs_note: '"清热润肺"无对应机制；其唯一可证实的功能是作为低热量甜味剂。'
+      },
+      '陈皮': {
+        compounds: '橙皮苷（hesperidin）、川陈皮素（nobiletin）、柠檬烯（limonene，挥发油）',
+        mechanism: '柠檬烯具弱促胆汁分泌、轻度抗痉挛活性；橙皮苷类黄酮口服生物利用度低；川陈皮素体外抑制磷酸二酯酶。',
+        evidence: '陈皮作为食物香料价值成立；作为药物的"理气化痰"宣称在 RCT 中无可重复证据。',
+        vs_traditional: '机制不成立',
+        vs_note: '"理气健脾、燥湿化痰"无对应机制；柠檬烯的轻度胆汁与肠道效应不能支撑这一传统宣称。'
+      },
+      '生姜': {
+        compounds: '6-姜辣素（6-gingerol）、6-姜烯酚（6-shogaol）、姜酮',
+        mechanism: '姜辣素类非竞争性抑制 5-HT₃ 受体（与昂丹司琼同一靶点，但亲和力远低）；同时抑制 NK-1 受体和胆碱能 M3 受体；具确实的弱镇吐活性。',
+        evidence: '姜对妊娠呕吐与化疗呕吐的辅助效应有多项 RCT 证据，但效应弱于现代镇吐药。',
+        vs_traditional: '部分巧合',
+        vs_note: '"温中止呕"对应的镇吐效应是 5-HT₃/NK-1 受体抑制——这与"中焦虚寒"的解释框架无任何对应。生姜对呕吐有效，与"温""寒"无关。'
+      },
+      '蜂蜜': {
+        compounds: '果糖（约 38%）、葡萄糖（约 31%）、水（约 17%）、微量酶（葡萄糖氧化酶生成微量过氧化氢）、微量花粉与酚类',
+        mechanism: '高渗透压（>80% 糖）抑制细菌生长；过氧化氢具弱抗菌活性。儿童咳嗽：高粘度涂层咽喉、糖刺激味觉受体减轻咳嗽反射（机制与糖浆、糖水类似）。',
+        evidence: '蜂蜜对儿童咳嗽的轻度缓解作用有 Cochrane 综述支持，但效应与糖浆等同；外用伤口愈合有部分证据。婴儿（<1 岁）禁用——肉毒杆菌芽孢风险。',
+        vs_traditional: '部分巧合',
+        vs_note: '"润燥"对应的真实作用是高糖糖浆涂层效应；"补中"无对应机制。'
+      },
+      '桑叶': {
+        compounds: '1-脱氧野尻霉素（1-deoxynojirimycin, DNJ，亚胺糖类似物）、芦丁',
+        mechanism: 'DNJ 在小肠竞争性抑制 α-葡萄糖苷酶（与阿卡波糖同类机制），延缓二糖向单糖的水解，降低餐后血糖峰值。',
+        evidence: '多项 RCT 显示 DNJ 富集桑叶提取物在 6–12 mg DNJ 剂量下显著降低餐后血糖；但天然桑叶 DNJ 含量约 0.1%，需大剂量摄取。机制与阿卡波糖同类。',
+        vs_traditional: '部分巧合',
+        vs_note: '"清肺平肝"无对应机制；桑叶 DNJ 的真实临床价值是延缓糖吸收，与"清肺"概念毫无关系——而且是富集提取物而非茶饮才有效。'
+      },
+      '梨': {
+        compounds: '水（约 84%）、果糖、纤维素、少量熊果苷（arbutin）',
+        mechanism: '高水分、高纤维食物；糖与水分对干燥气道有润滑感。',
+        evidence: '"润肺止咳"的真实机制等同于喝任何含糖温饮。',
+        vs_traditional: '机制不成立',
+        vs_note: '"润燥"无对应分子机制；与喝温水加糖效果等同。'
+      },
+      '茶叶': {
+        compounds: '咖啡因（约 2-4%）、茶氨酸（L-theanine）、儿茶素（特别是 EGCG）、茶多酚',
+        mechanism: '咖啡因拮抗腺苷 A1/A2A 受体 → 中枢兴奋、抗疲劳；茶氨酸通过 GABA 受体调节产生"放松而清醒"的协同效应；EGCG 体外抗氧化但口服生物利用度低。',
+        evidence: '茶的中枢兴奋作用有大量药理学证据；但 EGCG 的"抗癌""降脂"宣称在临床剂量下证据弱。',
+        vs_traditional: '部分巧合',
+        vs_note: '茶在中医文献中传统宣称众多（"清神、明目、消食、利尿"），其中"清神"对应咖啡因的中枢兴奋；其他多数宣称无对应机制。'
+      },
+      '蒲公英': {
+        compounds: '菊糖（inulin，水溶性膳食纤维）、蒲公英甾醇、绿原酸、咖啡酸',
+        mechanism: '菊糖具温和利尿作用（渗透压效应 + 钾含量高）；其他成分体外有抗炎、抗氧化活性，但口服剂量下无临床效应。',
+        evidence: '蒲公英的利尿作用有动物实验支持，但人体强度温和；"清热解毒"无对应。',
+        vs_traditional: '部分巧合',
+        vs_note: ''
+      },
+      '鱼腥草': {
+        compounds: '鱼腥草素（houttuynin/decanoyl acetaldehyde，挥发油成分）、槲皮素',
+        mechanism: '鱼腥草素体外有弱抗菌活性（针对革兰氏阳性菌），但化学不稳定、口服后迅速降解；其挥发油的特殊气味是辛烷醛类化合物。',
+        evidence: '鱼腥草口服制剂的"抗病毒""抗炎"宣称在严格 RCT 中无可重复证据；鱼腥草注射液曾因严重过敏反应（含死亡）被国家药监局警告并限制使用。',
+        vs_traditional: '机制不成立',
+        vs_note: '"清热解毒"无对应机制；其注射剂的过敏问题恰是中药"自然=安全"叙事的反例。'
+      },
+      '苦杏仁': {
+        compounds: '苦杏仁苷（amygdalin，C₂₀H₂₇NO₁₁，氰苷）',
+        mechanism: '苦杏仁苷在小肠经 β-葡萄糖苷酶水解释放苯甲醛与氢氰酸（HCN）；HCN 抑制线粒体细胞色素 c 氧化酶 → 细胞窒息。少量 HCN 在止咳剂量下作用于延髓咳嗽中枢，但治疗窗极窄。',
+        evidence: '已有多起苦杏仁/苦杏仁苷"维生素 B17"假药致氰化物中毒死亡的病例；FDA 反复警告。儿童中毒剂量约 5–10 颗苦杏仁。',
+        vs_traditional: '反向',
+        vs_note: '"止咳平喘"对应的咳嗽抑制是氢氰酸对中枢的轻度抑制——是中毒前驱效应而非真正的疗效。任何剂量增加即转为氰化物急性中毒。'
+      },
+      '黄连': {
+        compounds: '小檗碱（berberine，C₂₀H₁₈NO₄⁺，异喹啉生物碱）、黄连碱、巴马汀',
+        mechanism: '小檗碱：(1) 激活 AMP 活化蛋白激酶（AMPK），改善胰岛素敏感性、降低血糖（与二甲双胍部分机制重叠）；(2) 调节肠道菌群，增加 Akkermansia 等有益菌；(3) 体外抗菌（针对革兰氏阳性菌为主）。',
+        evidence: '小檗碱降糖、降脂作用有多项 RCT 支持，目前作为辅助治疗药物在多国销售。但其口服生物利用度极低（<1%），疗效几乎完全依赖肠菌代谢与肠道局部作用。',
+        vs_traditional: '部分巧合',
+        vs_note: '小檗碱是少数被现代药理学确认的"中药活性物质"——但"清热燥湿"的传统解释框架与 AMPK 激活、菌群调节这些真实机制毫无关系。这恰好说明：传统经验偶然命中有效化合物，不等于传统理论解释正确。'
+      },
+      '黄柏': {
+        compounds: '小檗碱（含量与黄连相近）、黄柏碱',
+        mechanism: '同黄连：AMPK 激活、肠菌调节、弱抗菌。',
+        evidence: '与黄连为小檗碱的两个主要植物来源。',
+        vs_traditional: '部分巧合',
+        vs_note: '"清热燥湿、退虚热"的传统解释与小檗碱的真实机制（代谢调节）毫无对应。'
+      },
+      '黄芩': {
+        compounds: '黄芩苷（baicalin）、黄芩素（baicalein），黄酮类',
+        mechanism: '体外抑制 12-脂氧合酶、5-脂氧合酶；体内活性主要由肠菌水解后的黄芩素介导，但生物利用度低；可经 CYP1A2 等代谢与多种西药相互作用。',
+        evidence: '黄芩复方制剂（如 Limbrel/PC-SPES）在美国曾因肝毒性被 FDA 警告下架；临床抗炎效应证据弱。',
+        vs_traditional: '机制不成立',
+        vs_note: ''
+      },
+      '桔梗': {
+        compounds: '桔梗皂苷（platycodins，三萜皂苷）',
+        mechanism: '皂苷类对胃黏膜有轻度刺激作用，反射性增加呼吸道分泌，从而稀释痰液——这是经典"祛痰药"机制（与刺激性祛痰药氯化铵、碘化钾同类）。',
+        evidence: '反射性祛痰是真实机制，但效应弱；皂苷对胃肠刺激较强。',
+        vs_traditional: '部分巧合',
+        vs_note: '"宣肺祛痰"对应的真实机制是胃黏膜刺激-呼吸道反射，不是"宣肺"——所谓"上达肺脏"的经络解释在生理学中无对应。'
+      },
+      '桃仁': {
+        compounds: '苦杏仁苷（与苦杏仁同源）、脂肪油',
+        mechanism: '苦杏仁苷水解释放氢氰酸——同苦杏仁机制；脂肪油有润肠作用。',
+        evidence: '与苦杏仁同属氰苷植物；过量风险类似。',
+        vs_traditional: '反向',
+        vs_note: '"活血祛瘀"无对应机制；其镇咳和润肠作用分别来自氢氰酸与脂肪油，与"血瘀"概念无任何关系。'
+      },
+      '酸枣仁': {
+        compounds: '皂苷类：酸枣仁皂苷 A/B（jujuboside A/B）；黄酮类：斯皮诺素（spinosin）',
+        mechanism: '斯皮诺素调节 GABA-A 受体（增加 GABRA1/A5 mRNA 表达），通过 GABA 能系统产生镇静催眠效应；同时调节 5-HT 系统。',
+        evidence: '酸枣仁汤治疗失眠的 Meta 分析显示对睡眠质量的改善优于安慰剂（PSQI 评分），效应大致等同于低剂量苯二氮卓类。',
+        vs_traditional: '部分巧合',
+        vs_note: '"养心安神"对应的真实机制是 GABA 能镇静——这与现代抗焦虑药同类，与"心""神"概念毫无关系。'
+      },
+      '茯苓': {
+        compounds: '茯苓多糖（β-葡聚糖，主要为茯苓聚糖）、三萜酸（茯苓酸）',
+        mechanism: '茯苓多糖口服后大部分被肠菌降解，进入血液者甚少；动物实验中有免疫调节、利尿作用，但效应弱。',
+        evidence: '茯苓的"利水""安神"宣称在严格临床试验中无可重复证据。',
+        vs_traditional: '机制不成立',
+        vs_note: '"利水渗湿、健脾安神"在分子层面无对应；作为食用真菌的多糖效应与香菇、银耳类似。'
+      },
+      '五味子': {
+        compounds: '联苯环辛烯木脂素（schisandrin A/B、五味子甲素/乙素）',
+        mechanism: '强效抑制 CYP3A4/3A5（"五脂胶囊"作为他克莫司增效剂的临床用途即基于此）；体外抗氧化、保肝活性弱。',
+        evidence: '与他克莫司、环孢素合用可显著提高其血药浓度（药物相互作用）；自身的"敛肺、滋肾"宣称无可重复证据。',
+        vs_traditional: '机制不成立',
+        vs_note: '"敛肺滋肾、生津敛汗"无对应机制；五味子在现代医学中的真实价值是 CYP 抑制相互作用——是风险而非疗效。'
+      },
+      '艾叶': {
+        compounds: '挥发油：1,8-桉叶素、α-侧柏酮（α-thujone）、樟脑',
+        mechanism: 'α-侧柏酮为 GABA-A 受体非竞争性拮抗剂，过量致中枢兴奋、惊厥（与艾草同源的苦艾酒 absinthe 因此被禁过百年）；外用主要为温热效应。',
+        evidence: '艾灸的疗效大部分可由温热刺激 TRPV1（与热敷相同机制）解释；α-侧柏酮的口服神经毒性在大剂量下确证。',
+        vs_traditional: '反向',
+        vs_note: '"温经止血"中的"温"主要是物理温热作用；而内服艾叶大剂量时的"亢奋"实为 GABA 拮抗的早期神经兴奋——是中毒征兆。'
+      },
+      '阿胶': {
+        compounds: '驴皮水解产物：胶原蛋白水解物（甘氨酸、脯氨酸、羟脯氨酸为主的多肽与游离氨基酸）',
+        mechanism: '与口服任何胶原蛋白补充剂（包括牛胶、猪胶、明胶）相同：在胃肠中被水解为氨基酸吸收，进入氨基酸池后与膳食蛋白质完全等价。',
+        evidence: '"阿胶补血"在血红蛋白、铁蛋白、网织红细胞等任何客观血液学指标上无 RCT 证据。其与等热量牛奶或鸡蛋的差别仅在味道。',
+        vs_traditional: '机制不成立',
+        vs_note: '"补血止血、滋阴润燥"在分子层面无对应；阿胶不含铁、不含维生素 B12、不含叶酸——即不含任何真正与"补血"相关的营养素。这是中医"以形补形""色赤补血"思维的典型案例。'
+      },
+      '杜仲': {
+        compounds: '杜仲胶（聚异戊二烯，类似橡胶）、松脂素双糖苷（pinoresinol diglucoside）、绿原酸',
+        mechanism: '松脂素类木脂素体外有抗高血压活性（动物模型轻度降压），但人体临床证据等级低；杜仲胶为非药用工业材料。',
+        evidence: '"补肝肾、强筋骨"在 RCT 中无可重复证据；个别研究显示对血压有微弱效应。',
+        vs_traditional: '机制不成立',
+        vs_note: '"补肝肾"无对应机制；"强筋骨"的传统解释（与含杜仲胶的物理强度类比）属于"以形补形"。'
+      },
+      '银杏叶': {
+        compounds: '银杏内酯 A/B/C（ginkgolides，二萜）、白果内酯（bilobalide）、银杏黄酮苷',
+        mechanism: '银杏内酯 B 是血小板活化因子（PAF）受体拮抗剂；白果内酯具弱神经保护活性；多组分联合产生轻度抗血小板与脑血流改善作用。',
+        evidence: 'GEM 大型 RCT（JAMA 2008，n=3,069）显示银杏叶提取物 EGb761 对预防痴呆与认知衰退完全无效。但其与抗凝药合用时的出血风险真实存在。',
+        vs_traditional: '机制不成立',
+        vs_note: '"敛肺平喘、活血"无对应机制；银杏内酯的真实临床意义主要是与抗凝药的相互作用风险——是危害而非疗效。GEM 试验已经证明所谓"健脑"宣称在严格设计下无效。'
+      },
+      '白果': {
+        compounds: '银杏毒素（ginkgotoxin/4′-O-methylpyridoxine，维生素 B6 拮抗剂）',
+        mechanism: '银杏毒素竞争性抑制磷酸吡哆醛激酶（pyridoxal phosphate kinase），干扰维生素 B6 依赖的神经递质合成（特别是 GABA），引起癫痫样惊厥。',
+        evidence: '儿童食用约 10–50 颗白果即可引起急性中毒；机制清晰，急救可静脉注射维生素 B6 解毒。',
+        vs_traditional: '反向',
+        vs_note: '"敛肺平喘、止带"无对应机制；银杏毒素作用是惊厥风险而非疗效。中医文献"小儿不可多食"的经验描述恰好对应了其神经毒性。'
+      }
+
+    };
+
+    function normalize(value) {
+      return String(value || '')
+        .replace(/[\s·•、，,。；;：:（）()\[\]【】]/g, '')
+        .replace(/川I芎/g, '川芎')
+        .trim();
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function buildHerbMap() {
+      herbMap.clear();
+      herbs.forEach(herb => {
+        herbMap.set(normalize(herb.name), herb);
+        herb.aliases.forEach(alias => herbMap.set(normalize(alias), herb));
+      });
+    }
+
+    function splitFormula(text) {
+      return String(text || '')
+        .replace(/辅料为[:：]/g, '、')
+        .split(/[、，,；;。\n\r\s]+/)
+        .map(item => item.trim())
+        .filter(Boolean)
+        .map(item => item.replace(/。$/, ''));
+    }
+
+    function matchHerb(token) {
+      const norm = normalize(token);
+      if (herbMap.has(norm)) return herbMap.get(norm);
+
+      for (const [key, herb] of herbMap.entries()) {
+        if (key.length >= 2 && norm.includes(key)) return herb;
+      }
+
+      return { name: token, aliases: [], cat: 'U', use: '未收录。', risk: '需要人工核对。' };
+    }
+
+    function computeGrade(counts, total) {
+      if (counts.X > 0) return 'F';
+      if (total === 0) return '—';
+
+      const riskScore = counts.B * 1 + counts.C * 2 + counts.G * 3 + counts.U * 2.5;
+      const avg = riskScore / total;
+
+      if (avg <= 0.25) return 'S';
+      if (avg <= 0.6) return 'A';
+      if (avg <= 1.1) return 'B';
+      if (avg <= 1.8) return 'C';
+      return 'D';
+    }
+
+    function renderScore(grade, counts) {
+      const scoreBox = document.getElementById('scoreBox');
+      scoreBox.innerHTML = `
+        <div class="metric"><div class="num">${escapeHtml(grade)}</div><div class="label">风险等级</div></div>
+        <div class="metric"><div class="num">${counts.X}</div><div class="label">黑名单数量</div></div>
+        <div class="metric"><div class="num">${counts.C + counts.G}</div><div class="label">灰/C数量</div></div>
+        <div class="metric"><div class="num">${counts.U}</div><div class="label">未知数量</div></div>
+      `;
+    }
+
+    function getEvidence(herb) {
+      return EVIDENCE[herb.name] || [];
+    }
+
+    function renderEvidence(herb) {
+      const evidence = getEvidence(herb);
+      if (!evidence.length) return '';
+      const items = evidence.map(item => `
+        <li>
+          <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.source)}</a>
+          <span> · ${escapeHtml(item.level)} · ${escapeHtml(item.type)}</span>
+          <div class="small">${escapeHtml(item.note)}</div>
+        </li>
+      `).join('');
+      return `
+        <details class="evidence-box">
+          <summary>查看危险证据（${evidence.length}）</summary>
+          <ul>${items}</ul>
+        </details>
+      `;
+    }
+
+    function renderChemistry(herb) {
+      const c = CHEMISTRY[herb.name];
+      if (!c) return '';
+      const vsLabels = {
+        '反向':       { tone: 'inverse', icon: '⇌' },
+        '机制不成立': { tone: 'null',    icon: '∅' },
+        '部分巧合':   { tone: 'partial', icon: '≈' },
+        '无对应':     { tone: 'null',    icon: '∅' }
+      };
+      const vsInfo = vsLabels[c.vs_traditional] || vsLabels['机制不成立'];
+      const vsNote = c.vs_note ? `<div class="vs-note">${escapeHtml(c.vs_note)}</div>` : '';
+      return `
+        <details class="chemistry-box" open>
+          <summary><span class="chem-icon">⚛</span> 分子层面：实际作用机制</summary>
+          <div class="chem-body">
+            <div class="chem-row"><span class="chem-label">关键化合物</span><div class="chem-value">${escapeHtml(c.compounds)}</div></div>
+            <div class="chem-row"><span class="chem-label">作用机制</span><div class="chem-value">${escapeHtml(c.mechanism)}</div></div>
+            <div class="chem-row"><span class="chem-label">证据基础</span><div class="chem-value">${escapeHtml(c.evidence)}</div></div>
+            <div class="chem-vs ${vsInfo.tone}">
+              <div class="vs-header">
+                <span class="vs-icon">${vsInfo.icon}</span>
+                <span class="vs-text">与"中医传统宣称"的关系：<strong>${escapeHtml(c.vs_traditional)}</strong></span>
+              </div>
+              ${vsNote}
+            </div>
+          </div>
+        </details>
+      `;
+    }
+
+    function renderResults(items) {
+      const results = document.getElementById('results');
+      results.innerHTML = items.map(item => {
+        const info = CATEGORY_INFO[item.cat] || CATEGORY_INFO.U;
+        return `
+          <div class="result-item">
+            <div class="result-top">
+              <div>
+                <div class="herb-name">${escapeHtml(item.name)}</div>
+                ${item.original && item.original !== item.name ? `<div class="small">输入项：${escapeHtml(item.original)}</div>` : ''}
+              </div>
+              <span class="pill ${info.className}">${info.label}</span>
+            </div>
+            <div class="usage"><strong>中医传统宣称用途：</strong>${escapeHtml(item.use)}</div>
+            <div class="risk-line"><strong>风险提示：</strong>${escapeHtml(item.risk)}</div>
+            ${renderChemistry(item)}
+            ${renderEvidence(item)}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function analyzeFormula() {
+      const text = document.getElementById('formulaInput').value;
+      const tokens = splitFormula(text);
+      const seen = new Set();
+      const items = [];
+
+      tokens.forEach(token => {
+        const herb = matchHerb(token);
+        const key = `${herb.name}-${herb.cat}`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          items.push({ original: token, ...herb });
+        }
+      });
+
+      const counts = { A: 0, B: 0, C: 0, G: 0, X: 0, U: 0 };
+      items.forEach(item => { counts[item.cat] = (counts[item.cat] || 0) + 1; });
+
+      const grade = computeGrade(counts, items.length);
+      renderScore(grade, counts);
+
+      const summary = document.getElementById('summary');
+      if (items.length === 0) {
+        summary.innerHTML = '';
+        document.getElementById('results').innerHTML = '';
+        return;
+      }
+
+      if (counts.X > 0) {
+        summary.innerHTML = '<div class="warning">发现黑名单药材：模拟政策下应判定为禁用或下架，不建议使用。</div>';
+      } else if (counts.G + counts.C >= 2) {
+        summary.innerHTML = '<div class="warning">未发现黑名单，但含多味 C 类或灰名单药材，建议处方化、短疗程，并关注不良反应。</div>';
+      } else if (counts.U > 0) {
+        summary.innerHTML = '<div class="warning">存在未收录成分，请人工核对说明书和药典信息。</div>';
+      } else {
+        summary.innerHTML = '<div class="ok">未发现黑名单或高风险组合，整体偏低风险。仍需按说明书使用。</div>';
+      }
+
+      renderResults(items);
+    }
+
+    function renderLibrary() {
+      const herbCountEl = document.getElementById('herbCount');
+      if (herbCountEl) herbCountEl.textContent = String(new Set(herbs.map(herb => herb.name)).size);
+
+      const searchBox = document.getElementById('searchBox');
+      const filterSelect = document.getElementById('filterSelect');
+      const library = document.getElementById('library');
+      const query = normalize(searchBox.value).toLowerCase();
+      const filter = filterSelect.value;
+
+      const list = herbs.filter(herb => {
+        const categoryMatch = filter === 'all' || herb.cat === filter;
+        const haystack = normalize([herb.name, ...herb.aliases, herb.use, herb.risk].join('')).toLowerCase();
+        return categoryMatch && (!query || haystack.includes(query));
+      });
+
+      library.innerHTML = list.map(herb => {
+        const info = CATEGORY_INFO[herb.cat] || CATEGORY_INFO.U;
+        return `
+          <div class="herb-item">
+            <div class="herb-top">
+              <div class="herb-name">${escapeHtml(herb.name)}</div>
+              <span class="pill ${info.className}">${info.label}</span>
+            </div>
+            <div class="usage"><strong>传统宣称用途：</strong>${escapeHtml(herb.use)}</div>
+            <div class="risk-line"><strong>风险：</strong>${escapeHtml(herb.risk)}</div>
+            ${herb.aliases.length ? `<div class="small">别名：${herb.aliases.map(escapeHtml).join('、')}</div>` : ''}
+            ${renderChemistry(herb)}
+            ${renderEvidence(herb)}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function loadExample(type) {
+      const examples = {
+        safe: '苦杏仁、紫苏叶、前胡、桔梗、陈皮、甘草',
+        risky: '金银花、黄芩、连翘、板蓝根、大青叶、甘草'
+      };
+      document.getElementById('formulaInput').value = examples[type] || '';
+      analyzeFormula();
+    }
+
+    function clearInput() {
+      document.getElementById('formulaInput').value = '';
+      document.getElementById('summary').innerHTML = '';
+      document.getElementById('results').innerHTML = '';
+      renderScore('—', { A: 0, B: 0, C: 0, G: 0, X: 0, U: 0 });
+    }
+
+    function bindEvents() {
+      document.getElementById('analyzeBtn').addEventListener('click', analyzeFormula);
+      document.getElementById('clearBtn').addEventListener('click', clearInput);
+      document.getElementById('searchBox').addEventListener('input', renderLibrary);
+      document.getElementById('filterSelect').addEventListener('change', renderLibrary);
+      document.querySelectorAll('[data-example]').forEach(button => {
+        button.addEventListener('click', () => loadExample(button.dataset.example));
+      });
+    }
+
+    function runSelfTests() {
+      console.assert(typeof renderLibrary === 'function', 'renderLibrary should be defined');
+      console.assert(matchHerb('附子').cat === 'X', '附子 should be blacklisted');
+      console.assert(matchHerb('红枣').name === '大枣', '红枣 should map to 大枣');
+      console.assert(matchHerb('川I芎').name === '川芎', '川I芎 typo should normalize to 川芎');
+      const tokens = splitFormula('苦杏仁、紫苏叶、前胡、桔梗、陈皮、甘草');
+      console.assert(tokens.length === 6, 'Formula splitting should return 6 tokens');
+      console.assert(computeGrade({ A: 1, B: 0, C: 0, G: 0, X: 1, U: 0 }, 2) === 'F', 'Any blacklisted herb should grade F');
+    }
+
+    function init() {
+      buildHerbMap();
+      bindEvents();
+      renderLibrary();
+      runSelfTests();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

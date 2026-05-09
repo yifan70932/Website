@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myth Busters · 人生发财靠康波？/ Wealth by Kondratieff?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     Editorial / academic paper aesthetic — Myth Busters series
+     白底 + 海军蓝 + 深绿 (FT/Economist 配色)
+     ========================================================= */
+  :root {
+    --paper: #ffffff;
+    --paper-deep: #f4f6f8;
+    --ink: #0f172a;
+    --ink-soft: #2c3a4f;
+    --ink-muted: #64748b;
+    --rule: #cbd5e1;
+    --rule-soft: #e5e9ef;
+    --accent: #1e3a5f;       /* navy blue — primary */
+    --accent-soft: #3b5a82;
+    --accent-2: #2d5a3d;     /* deep forest green — secondary */
+    --accent-2-soft: #4a7a5a;
+    --highlight: #c9a961;    /* muted gold for tertiary */
+    --positive: #2d5a3d;
+    --negative: #1e3a5f;
+    --serif-en: 'EB Garamond', Georgia, serif;
+    --serif-zh: 'Noto Serif SC', 'Songti SC', serif;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif-en);
+    font-size: 19px;
+    line-height: 1.65;
+    font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body[data-lang="zh"] {
+    font-family: var(--serif-zh);
+    font-size: 17px;
+    line-height: 1.85;
+  }
+
+  /* clean white background — academic / Our World in Data style */
+
+  /* ============== LAYOUT ============== */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ============== TOP BAR ============== */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 64px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .series-label { font-weight: 500; }
+  .series-label .num { color: var(--accent); }
+
+  .lang-toggle {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--rule);
+    border-radius: 0;
+  }
+  .lang-toggle button {
+    background: transparent;
+    border: none;
+    padding: 6px 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-toggle button.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .lang-toggle button:not(.active):hover { color: var(--ink); }
+
+  /* ============== HEADER ============== */
+  header { margin-bottom: 80px; }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-family: var(--serif-en);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  body[data-lang="zh"] h1 {
+    font-family: var(--serif-zh);
+    font-size: 42px;
+    line-height: 1.25;
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .deck {
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-style: italic;
+    max-width: 680px;
+    margin-bottom: 36px;
+  }
+  body[data-lang="zh"] .deck {
+    font-size: 18px;
+    font-style: normal;
+    line-height: 1.7;
+  }
+
+  .byline {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  /* ============== EPIGRAPH ============== */
+  .epigraph {
+    margin: 40px 0 48px;
+    padding: 0 0 0 24px;
+    border-left: 1px solid var(--rule);
+    max-width: 620px;
+  }
+  .epigraph p {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  body[data-lang="zh"] .epigraph p {
+    font-family: var(--serif-zh);
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .epigraph cite {
+    display: block;
+    font-style: normal;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  body[data-lang="zh"] .epigraph cite {
+    font-family: var(--mono);
+  }
+
+  /* ============== TYPOGRAPHY ============== */
+  h2 {
+    font-family: var(--serif-en);
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 80px 0 28px;
+    padding-top: 32px;
+    border-top: 2px solid var(--ink);
+    position: relative;
+  }
+  body[data-lang="zh"] h2 {
+    font-family: var(--serif-zh);
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  h2::before {
+    content: attr(data-num);
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: var(--serif-en);
+    font-weight: 600;
+    font-style: italic;
+    font-size: 22px;
+    margin: 40px 0 16px;
+  }
+  body[data-lang="zh"] h3 {
+    font-family: var(--serif-zh);
+    font-style: normal;
+    font-size: 19px;
+  }
+
+  p { margin-bottom: 20px; }
+
+  .lead {
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  body[data-lang="zh"] .lead { font-size: 18px; }
+
+  /* drop cap on first paragraph */
+  section.intro p:first-of-type::first-letter {
+    font-family: var(--serif-en);
+    font-size: 78px;
+    float: left;
+    line-height: 0.88;
+    margin: 4px 10px -2px 0;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  body[data-lang="zh"] section.intro p:first-of-type::first-letter {
+    font-size: 1em;
+    float: none;
+    margin: 0;
+    color: inherit;
+  }
+
+  strong { font-weight: 600; color: var(--ink); }
+  em { font-style: italic; }
+
+  .num { font-family: var(--mono); font-feature-settings: "tnum" 1; }
+
+  .note {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* pull quote */
+  blockquote {
+    margin: 36px 0;
+    padding: 4px 0 4px 28px;
+    border-left: 3px solid var(--accent);
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  body[data-lang="zh"] blockquote {
+    font-style: normal;
+    font-size: 17px;
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+
+  /* ============== TLDR BOX ============== */
+  .tldr {
+    background: var(--paper-deep);
+    border-left: 3px solid var(--accent);
+    padding: 28px 32px;
+    margin: 0 0 56px;
+    position: relative;
+  }
+
+  .tldr-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .tldr p { margin: 0; font-size: 18px; line-height: 1.55; }
+  body[data-lang="zh"] .tldr p { font-size: 16px; }
+
+  /* ============== TABLE ============== */
+  .table-wrap {
+    margin: 36px 0 12px;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+
+  table caption {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  thead th {
+    text-align: left;
+    padding: 10px 12px 10px 0;
+    font-weight: 600;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  thead th:not(:first-child) { text-align: right; padding-right: 0; padding-left: 12px; }
+
+  tbody td {
+    padding: 11px 12px 11px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    color: var(--ink);
+  }
+  tbody td:not(:first-child) { text-align: right; padding-right: 0; padding-left: 12px; }
+  tbody tr:last-child td { border-bottom: 1.5px solid var(--ink); }
+
+  tbody tr:hover { background: var(--paper-deep); }
+
+  .pos { color: var(--positive); font-weight: 500; }
+  .neg { color: var(--negative); font-weight: 500; }
+  .rank-bad { color: var(--accent); font-weight: 600; }
+  .rank-mid { color: var(--ink-muted); }
+  .rank-good { color: var(--accent-2); font-weight: 600; }
+
+  .table-source {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* ============== CHART CONTAINER ============== */
+  .figure {
+    margin: 48px 0;
+  }
+  .figure-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .figure-title {
+    font-family: var(--serif-en);
+    font-size: 19px;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  body[data-lang="zh"] .figure-title {
+    font-family: var(--serif-zh);
+    font-style: normal;
+    font-size: 17px;
+  }
+  .figure-subtitle {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin-bottom: 24px;
+    font-family: var(--sans);
+  }
+  body[data-lang="zh"] .figure-subtitle { font-family: var(--serif-zh); }
+
+  .figure svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .figure-caption {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule-soft);
+    line-height: 1.6;
+  }
+
+  /* tooltip */
+  .tooltip {
+    position: fixed;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8px 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.5;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 100;
+    max-width: 240px;
+    border-radius: 0;
+    letter-spacing: 0.02em;
+  }
+  .tooltip.show { opacity: 1; }
+  .tooltip strong { color: var(--paper-deep); }
+
+  /* numbered list (traps) */
+  ol.traps {
+    list-style: none;
+    counter-reset: trap;
+    margin: 32px 0;
+  }
+  ol.traps li {
+    counter-increment: trap;
+    margin-bottom: 32px;
+    padding-left: 56px;
+    position: relative;
+  }
+  ol.traps li::before {
+    content: counter(trap, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  ol.traps li h3 { margin-top: 0; margin-bottom: 8px; }
+
+  /* citation list */
+  .citations {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .citations h2 {
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-family: var(--mono);
+    font-weight: 600;
+  }
+  body[data-lang="zh"] .citations h2 { font-family: var(--mono); }
+  .citations h2::before { display: none; }
+
+  .citations ol {
+    padding-left: 24px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  body[data-lang="zh"] .citations ol { font-size: 13px; }
+  .citations li { margin-bottom: 12px; padding-left: 4px; }
+  .citations a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-soft);
+  }
+  .citations a:hover { background: var(--paper-deep); }
+
+  /* footer */
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  /* hide language */
+  .en, .zh { display: none; }
+  body[data-lang="en"] .en { display: initial; }
+  body[data-lang="zh"] .zh { display: initial; }
+  body[data-lang="en"] p.en, body[data-lang="en"] li.en,
+  body[data-lang="en"] h1.en, body[data-lang="en"] h2.en,
+  body[data-lang="en"] h3.en, body[data-lang="en"] div.en,
+  body[data-lang="en"] section.en, body[data-lang="en"] blockquote.en { display: block; }
+  body[data-lang="zh"] p.zh, body[data-lang="zh"] li.zh,
+  body[data-lang="zh"] h1.zh, body[data-lang="zh"] h2.zh,
+  body[data-lang="zh"] h3.zh, body[data-lang="zh"] div.zh,
+  body[data-lang="zh"] section.zh, body[data-lang="zh"] blockquote.zh { display: block; }
+
+  /* mobile */
+  @media (max-width: 640px) {
+    .page { padding: 32px 22px 80px; }
+    h1 { font-size: 38px; }
+    body[data-lang="zh"] h1 { font-size: 30px; }
+    .deck { font-size: 18px; }
+    body[data-lang="zh"] .deck { font-size: 16px; }
+    h2 { font-size: 26px; }
+    body[data-lang="zh"] h2 { font-size: 22px; }
+    body { font-size: 17px; }
+    body[data-lang="zh"] { font-size: 16px; }
+    table { font-size: 12px; }
+    section.intro p:first-of-type::first-letter { font-size: 60px; }
+    blockquote { font-size: 17px; padding-left: 18px; }
+  }
+</style>
+</head>
+<body data-lang="zh">
+
+<div class="tooltip" id="tooltip"></div>
+
+<div class="page">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="series-label">
+      <span class="zh">Myth Busters · 第 <span class="num">02</span> 期</span>
+      <span class="en">Myth Busters · No. <span class="num">02</span></span>
+    </div>
+    <div class="lang-toggle">
+      <button data-lang-btn="zh" class="active">中</button>
+      <button data-lang-btn="en">EN</button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="kicker">
+      <span class="zh">数据证伪 / 经济周期理论</span>
+      <span class="en">Data-Driven Debunking / Economic Cycle Theory</span>
+    </div>
+
+    <div class="epigraph">
+      <p class="zh">"我无法以绝对的确定性断言长波循环的存在……但与此同时，承认它们存在的或然性是相当大的。"</p>
+      <p class="en">"I cannot maintain the existence of long waves in capitalist economy with absolute certainty… but at the same time, the probability of their existence appears to be considerable."</p>
+      <cite>—— Nikolai D. Kondratieff, <em>The Long Waves in Economic Life</em>, 1925</cite>
+    </div>
+
+    <h1 class="zh">人生发财<em>真</em>的靠康波吗？</h1>
+    <h1 class="en">Does Wealth <em>Really</em> Follow the Kondratieff Cycle?</h1>
+
+    <p class="deck zh">"周期天王"周金涛 2016 年的演讲让"人生发财靠康波"成为中文金融圈的流行语。本文用 1995–2024 年的资产数据检验他指认的三个"机会窗口"——以及康波理论本身。</p>
+    <p class="deck en">A 2016 speech by Chinese economist Zhou Jintao made "wealth comes from the Kondratieff wave" a popular slogan in Chinese finance. We test his three claimed "wealth windows" — and the underlying theory itself — against asset data from 1995 to 2024.</p>
+
+    <div class="byline">
+      <span class="zh">4 类资产 · 30 年序列 · 155 年 GDP 频谱 · 25 条引用 · 数据更新于 2026 年 5 月</span>
+      <span class="en">4 asset classes · 30-year series · 155-year GDP spectrum · 25 references · Data updated May 2026</span>
+      <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--rule-soft);">
+        <a href="https://github.com/yifan70932/Kondratieff-Cycle" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--accent-soft); padding-bottom: 2px;">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: middle;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="zh">代码与数据：github.com/yifan70932/Kondratieff-Cycle</span>
+          <span class="en">Code &amp; data: github.com/yifan70932/Kondratieff-Cycle</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <div class="tldr-label">
+      <span class="zh">结论先行</span>
+      <span class="en">Bottom Line</span>
+    </div>
+    <p class="zh">周金涛指认的三个"康波机会窗口"（1999、2008、2019）<strong>在四类主要资产中没有一个是真正的最优买入时点</strong>。A 股 2008 年初买入持有 10 年年化为 <span class="num">−4.5%</span>（亏损）；美股 1999 年初买入持有 10 年年化 <span class="num">−3.0%</span>（亏损）。本文做了五个独立的量化检验：CAGR 排名、t / Mann-Whitney / Bootstrap p 值（全部 &gt; 0.05）、Sharpe 比率、最大回撤、以及 155 年美国 GDP 频谱分析（60 年频率 p = 0.69）。<strong>没有一项支持康波"机会窗口"作为可执行投资信号</strong>。</p>
+    <p class="en">Zhou Jintao's three claimed "Kondratieff wealth windows" (1999, 2008, 2019) are <strong>not the actual optimal buy points</strong> for any of the four major asset classes tested. Buying the Shanghai Composite at the start of 2008 yielded <span class="num">−4.5%</span> CAGR over 10 years; the S&amp;P 500 at the start of 1999 yielded <span class="num">−3.0%</span>. We run five independent quantitative tests: CAGR rank, t / Mann-Whitney / Bootstrap p-values (all &gt; 0.05), Sharpe ratio, max drawdown, and 155-year US GDP spectral analysis (p = 0.69 at the 60-year frequency). <strong>None supports treating Kondratieff "windows" as actionable investment signals</strong>.</p>
+  </div>
+
+  <!-- ===== INTRO ===== -->
+  <section class="intro">
+    <h2 data-num="§ 01">
+      <span class="zh">流言是怎么说的</span>
+      <span class="en">What the Myth Says</span>
+    </h2>
+
+    <p class="lead zh">2016 年 3 月 16 日，时任中信建投首席经济学家周金涛在上海清算所沙龙发表了那场后来被反复引用的演讲："人生就是一场康波"。同年 12 月他因病去世，年仅 44 岁。他的"人生发财靠康波"在他去世后迅速从行业内的研究框架变成了大众金融圈的流行语<a href="#ref-1" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[1]</a><a href="#ref-2" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[2]</a>。</p>
+    <p class="lead en">On March 16, 2016, Zhou Jintao — then chief economist at China Securities — gave a speech titled "Life Is a Kondratieff Wave" at a Shanghai clearing house salon. He died of illness later that year, aged 44. His phrase "wealth comes from the Kondratieff wave" rapidly transformed from a research framework into a popular slogan after his death<a href="#ref-1" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[1]</a><a href="#ref-2" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[2]</a>.</p>
+
+    <blockquote class="zh">
+      我有一句名言叫"人生发财靠康波"……每个人的财富积累一定不要以为是你多有本事，财富积累完全来源于经济周期运动的阶段给你带来的机会……一个人的一生中所能够获得的机会，理论上来讲只有三次。
+      <cite>—— 周金涛，2016 年 3 月，上海清算所沙龙</cite>
+    </blockquote>
+    <blockquote class="en">
+      I have a famous saying: "wealth comes from the Kondratieff wave." Don't ever think your wealth accumulation is about your own ability — it comes entirely from the opportunities the economic cycle gives you. In a person's lifetime there are only three such opportunities, in theory.
+      <cite>—— Zhou Jintao, March 2016, Shanghai Clearing House Salon</cite>
+    </blockquote>
+
+    <p class="zh">最关键的是，周金涛给出了具体可证伪的判断：</p>
+    <p class="en">Crucially, Zhou made a concrete falsifiable prediction:</p>
+
+    <blockquote class="zh">
+      40 岁以上的人，人生第一次机会在 2008 年……第二次机会在 2019 年，最后一次在 2030 年附近，能够抓住一次你就能够成为中产阶级。1985 年之后出生、现在 30 岁以下的人，第一次人生机会只能在 2019 年出现。
+      <cite>—— 周金涛，《重温丨周期天王》21 财经</cite>
+    </blockquote>
+    <blockquote class="en">
+      For those over 40, the first wealth opportunity came in 2008, the second in 2019, the last around 2030. Catching just one is enough to enter the middle class. For those born after 1985 and currently under 30, the first opportunity will only come in 2019.
+      <cite>—— Zhou Jintao, via 21 Caijing</cite>
+    </blockquote>
+
+    <p class="zh">这是好的——它给出了可以实证检验的具体年份。我们要做的就是：在这三个"机会窗口"年初买入，持有 10 年，看看在四类主要资产中是否真的能"跑赢平均"。</p>
+    <p class="en">This is good — it gives us concrete years to test. The question becomes: if you bought at the start of these "windows" and held for 10 years, did you outperform the average buy year across major asset classes?</p>
+  </section>
+
+  <!-- ===== METHOD ===== -->
+  <section>
+    <h2 data-num="§ 02">
+      <span class="zh">方法</span>
+      <span class="en">Method</span>
+    </h2>
+
+    <p class="zh"><strong>检验对象</strong>：1999、2008、2019 三个"康波机会窗口"年初买入。<strong>对照组</strong>：1995–2014 年间所有 20 个候选起点（保证 10 年回报可计算到 2024 年；北京房因数据自 1999 年起仅 16 个起点）。</p>
+    <p class="en"><strong>Treated</strong>: buying at the start of 1999, 2008, and 2019 (the three claimed windows). <strong>Control</strong>: all 20 candidate start years from 1995 to 2014 (10-year returns computable through 2024; Beijing housing has only 16 start years, since data begins in 1999).</p>
+
+    <p class="zh"><strong>资产</strong>：四类周金涛理论中应受康波驱动的核心资产——A 股（上证综指<a href="#ref-3" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[3]</a>）、美股（S&amp;P 500<a href="#ref-4" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[4]</a>）、北京住宅均价（统计年鉴<a href="#ref-5" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[5]</a>）、黄金（LBMA 美元金价<a href="#ref-6" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[6]</a>）。</p>
+    <p class="en"><strong>Assets</strong>: four asset classes Zhou's framework explicitly identifies as Kondratieff-driven — Chinese A-shares (Shanghai Composite<a href="#ref-3" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[3]</a>), US equities (S&amp;P 500<a href="#ref-4" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[4]</a>), Beijing housing<a href="#ref-5" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[5]</a>, and gold<a href="#ref-6" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[6]</a>.</p>
+
+    <p class="zh"><strong>结果变量</strong>：年初买入并持有 10 年的复合年化收益率（CAGR）。仅统计价格回报，不含股息与房租收入——这对所有起点同等处理，不影响相对比较。</p>
+    <p class="en"><strong>Outcome</strong>: 10-year compound annual growth rate (CAGR) from January of the start year. Price returns only, excluding dividends and rental income — applied uniformly to all start years, so relative comparisons hold.</p>
+  </section>
+
+  <!-- ===== RESULTS TABLE 1 ===== -->
+  <section>
+    <h2 data-num="§ 03">
+      <span class="zh">结果一：康波窗口的实际回报</span>
+      <span class="en">Result 1: Actual Returns from the Kondratieff Windows</span>
+    </h2>
+
+    <div class="table-wrap">
+      <table>
+        <caption>
+          <span class="zh">表 1 · 各窗口年初买入持有 10 年的年化收益率（%）</span>
+          <span class="en">Table 1 · 10-year CAGR by start year and asset class (%)</span>
+        </caption>
+        <thead>
+          <tr>
+            <th><span class="zh">买入年份</span><span class="en">Start Year</span></th>
+            <th>A股</th>
+            <th>S&amp;P 500</th>
+            <th><span class="zh">北京房</span><span class="en">Beijing</span></th>
+            <th><span class="zh">黄金</span><span class="en">Gold</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1999</strong> <span style="color:var(--ink-muted)" class="zh">康波窗口</span><span style="color:var(--ink-muted)" class="en">window</span></td>
+            <td class="num pos">+4.7</td>
+            <td class="num neg">−3.0</td>
+            <td class="num pos">+11.2</td>
+            <td class="num pos">+11.8</td>
+          </tr>
+          <tr>
+            <td><strong>2008</strong> <span style="color:var(--ink-muted)" class="zh">康波窗口</span><span style="color:var(--ink-muted)" class="en">window</span></td>
+            <td class="num neg">−4.5</td>
+            <td class="num pos">+6.2</td>
+            <td class="num pos">+15.8</td>
+            <td class="num pos">+4.2</td>
+          </tr>
+          <tr>
+            <td colspan="5" style="border-top:1px solid var(--rule);padding-top:14px;padding-bottom:6px;color:var(--ink-muted);font-size:11px;letter-spacing:0.08em;text-transform:uppercase">
+              <span class="zh">基准（1995–2014 共 16 个起点）</span>
+              <span class="en">Baseline (16 start years, 1995–2014)</span>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="zh">基准均值</span><span class="en">Mean</span></td>
+            <td class="num">+3.9</td>
+            <td class="num">+5.9</td>
+            <td class="num">+14.3</td>
+            <td class="num">+8.7</td>
+          </tr>
+          <tr>
+            <td><span class="zh">基准中位</span><span class="en">Median</span></td>
+            <td class="num">+3.3</td>
+            <td class="num">+5.3</td>
+            <td class="num">+15.1</td>
+            <td class="num">+6.8</td>
+          </tr>
+          <tr>
+            <td colspan="5" style="border-top:1px solid var(--rule);padding-top:14px;padding-bottom:6px;color:var(--ink-muted);font-size:11px;letter-spacing:0.08em;text-transform:uppercase">
+              <span class="zh">真实最优买入年份</span>
+              <span class="en">Actual best buy year</span>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="zh">最优起点</span><span class="en">Best start</span></td>
+            <td><strong>2006</strong></td>
+            <td><strong>2012</strong></td>
+            <td><strong>2004</strong></td>
+            <td><strong>2002</strong></td>
+          </tr>
+          <tr>
+            <td><span class="zh">最优 CAGR</span><span class="en">Best CAGR</span></td>
+            <td class="num pos">+10.8</td>
+            <td class="num pos">+14.2</td>
+            <td class="num pos">+19.2</td>
+            <td class="num pos">+18.9</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-source">
+      <span class="zh"><strong>数据来源：</strong> 上证综指 (Yahoo Finance ticker <span class="num">000001.SS</span>, 1995–2026, 月末收盘价) <a href="#ref-3" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[3]</a>；S&amp;P 500 (FRED series <span class="num">SP500</span>, 1995–2026) <a href="#ref-4" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[4]</a>；北京商品住宅销售均价 (国家统计局年度数据 1999–2024, 元/㎡) <a href="#ref-5" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[5]</a>；LBMA 黄金 AM Fix 美元金价 (1995–2026, 年初值) <a href="#ref-6" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[6]</a>。所有 CAGR 用本文 Python 代码计算，可复现 <a href="#ref-17" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[17]</a>。"大跌"= 12 个月价格回报 ≤ −10%。<br>2019 因 10 年区间未结束（截至 2024 仅 5 年）暂未列入主表。下文图 2 单独检验 2019 在 5 年窗口中的相对表现。</span>
+      <span class="en"><strong>Sources:</strong> Shanghai Composite (Yahoo Finance ticker <span class="num">000001.SS</span>, 1995–2026, month-end closes) <a href="#ref-3" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[3]</a>; S&amp;P 500 (FRED series <span class="num">SP500</span>, 1995–2026) <a href="#ref-4" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[4]</a>; Beijing residential sales average price (NBS annual data 1999–2024, ¥/m²) <a href="#ref-5" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[5]</a>; LBMA Gold AM Fix in USD (1995–2026, year-start) <a href="#ref-6" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[6]</a>. All CAGRs computed via reproducible Python code <a href="#ref-17" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[17]</a>. "Crash" = 12-month price return ≤ −10%.<br>2019 is excluded from the main table because its 10-year horizon is incomplete as of 2024. Figure 2 below tests 2019's performance over a 5-year horizon.</span>
+    </div>
+
+    <p style="margin-top:32px" class="zh">这张表里有几个数字值得停下来看：</p>
+    <p style="margin-top:32px" class="en">A few numbers in this table are worth pausing on:</p>
+
+    <p class="zh"><strong>A股 2008 年初买入：年化 −4.5%。</strong>2008 年 1 月初上证综指收于 5265 点，10 年后（2018 年初）为 3307 点。如果 40 岁的"中产候选人"听了周金涛的话在 2008 年初满仓 A 股，10 年后他的本金缩水超过三分之一。这是 20 个候选年份中<strong>最差的一个（rank 20/20）</strong>。</p>
+    <p class="en"><strong>A-shares bought at start of 2008: −4.5% CAGR.</strong> The Shanghai Composite opened 2008 at 5265 and closed 2017 at 3307. A 40-year-old "middle-class candidate" who took Zhou's advice and went all-in on A-shares at the start of 2008 lost over a third of their principal in real terms. This is the <strong>worst</strong> of all 20 candidate years (rank 20/20).</p>
+
+    <p class="zh"><strong>S&amp;P 500 1999 年初买入：年化 −3.0%。</strong>这就是著名的美股"失去的十年"——1999 → 2009 的复合回报为负。也是 20 个候选起点中<strong>最差的一个（rank 20/20）</strong>。</p>
+    <p class="en"><strong>S&amp;P 500 bought at start of 1999: −3.0% CAGR.</strong> This is the famous "lost decade" of US equities — 1999 to 2009 produced a negative compound return. Again, the <strong>worst</strong> of all 20 start years (rank 20/20).</p>
+
+    <p class="zh"><strong>真实最优起点和康波周期完全不重合。</strong>A 股最佳买入年份是 2006，也即康波理论中的"衰退期"中段；美股最佳是 2012，恰好是康波理论指认的"萧条期"——和理论预测的"机会窗口"位置完全相反。</p>
+    <p class="en"><strong>Actual optimal start years don't align with Kondratieff phases at all.</strong> The best year to buy A-shares was 2006 — mid-"recession phase" by Kondratieff. The best year for S&amp;P 500 was 2012 — squarely in what the theory calls the "depression phase." These are precisely the periods the theory says you should NOT be buying.</p>
+  </section>
+
+  <!-- ===== VISUALIZATION 1: ranking dot plot ===== -->
+  <section>
+    <h2 data-num="§ 04">
+      <span class="zh">康波窗口在候选年份中的排名</span>
+      <span class="en">Where the Windows Rank Among Candidate Years</span>
+    </h2>
+
+    <p class="zh">把每个资产类别 20 个候选起点（北京房 16 个）的 10 年回报从高到低排序，看康波窗口落在哪里：</p>
+    <p class="en">Ranking the 20 candidate start years (16 for Beijing housing) by 10-year CAGR for each asset class, where do Zhou's "windows" land?</p>
+
+    <div class="figure">
+      <div class="figure-label">
+        <span class="zh">图 1</span>
+        <span class="en">Figure 1</span>
+      </div>
+      <div class="figure-title">
+        <span class="zh">康波窗口 vs 候选年份的回报排名</span>
+        <span class="en">Kondratieff windows vs. all candidate years, ranked</span>
+      </div>
+      <div class="figure-subtitle">
+        <span class="zh">每个资产类别的所有候选起点按 10 年年化收益率排序；圆点 = 周金涛指认的窗口</span>
+        <span class="en">All candidate start years sorted by 10-year CAGR; dots = Zhou's claimed windows</span>
+      </div>
+
+      <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" id="fig1">
+        <!-- 4 horizontal "ranking" rows, each with 16 evenly-spaced ticks
+             best on left (rank 1), worst on right (rank 16) -->
+        <!-- x-axis: rank 1 at x=80, rank 16 at x=620 -->
+        <!-- 4 rows at y=60, 130, 200, 270 -->
+
+        <defs>
+          <linearGradient id="rowGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#2d5a3d" stop-opacity="0.55"/>
+            <stop offset="50%" stop-color="#94a3b8" stop-opacity="0.45"/>
+            <stop offset="100%" stop-color="#1e3a5f" stop-opacity="0.55"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Row labels -->
+        <g font-family="EB Garamond" font-size="14" fill="#0f172a" font-style="italic">
+          <text x="0" y="64"><tspan class="zh-tspan">A 股</tspan></text>
+          <text x="0" y="134">S<tspan font-size="11">&amp;</tspan>P 500</text>
+          <text x="0" y="204"><tspan class="zh-tspan">北京房</tspan></text>
+          <text x="0" y="274"><tspan class="zh-tspan">黄金</tspan></text>
+        </g>
+
+        <!-- Row backgrounds (rank gradient strips) -->
+        <g>
+          <line x1="80" y1="60"  x2="620" y2="60"  stroke="url(#rowGrad)" stroke-width="2"/>
+          <line x1="80" y1="130" x2="620" y2="130" stroke="url(#rowGrad)" stroke-width="2"/>
+          <line x1="80" y1="200" x2="620" y2="200" stroke="url(#rowGrad)" stroke-width="2"/>
+          <line x1="80" y1="270" x2="620" y2="270" stroke="url(#rowGrad)" stroke-width="2"/>
+        </g>
+
+        <!-- Ranking ticks: 16 ticks per row, evenly spaced -->
+        <!-- spacing: (620-80)/15 = 36 -->
+        <g stroke="#cbd5e1" stroke-width="1">
+          <!-- Just decorative tick marks at top row only as scale legend -->
+        </g>
+
+        <!-- Helper: rank N at x = 80 + (N-1)*36 -->
+        <!-- A股: 1999 = rank 6, 2008 = rank 16 -->
+        <!-- S&P:   1999 = rank 16, 2008 = rank 7 -->
+        <!-- 北京房: 1999 = rank 14, 2008 = rank 7 -->
+        <!-- 黄金:  1999 = rank 5, 2008 = rank 11 -->
+
+        <!-- All 16 small dots per row, faded -->
+        <g fill="#cbd5e1">
+          <!-- A股 row -->
+          <g id="a-row-dots">
+            <!-- generated below by script in case but for static, hardcode -->
+          </g>
+        </g>
+
+        <!-- A股 row: 20 candidate years -->
+        <g fill="#cbd5e1">
+          <circle cx="80.0" cy="60" r="2.5"/> <circle cx="108.4" cy="60" r="2.5"/> <circle cx="136.8" cy="60" r="2.5"/> <circle cx="165.3" cy="60" r="2.5"/> <circle cx="193.7" cy="60" r="2.5"/> <circle cx="222.1" cy="60" r="2.5"/> <circle cx="250.5" cy="60" r="2.5"/> <circle cx="278.9" cy="60" r="2.5"/> <circle cx="307.4" cy="60" r="2.5"/> <circle cx="335.8" cy="60" r="2.5"/> <circle cx="364.2" cy="60" r="2.5"/> <circle cx="392.6" cy="60" r="2.5"/> <circle cx="421.1" cy="60" r="2.5"/> <circle cx="449.5" cy="60" r="2.5"/> <circle cx="477.9" cy="60" r="2.5"/> <circle cx="506.3" cy="60" r="2.5"/> <circle cx="534.7" cy="60" r="2.5"/> <circle cx="563.2" cy="60" r="2.5"/> <circle cx="591.6" cy="60" r="2.5"/> <circle cx="620.0" cy="60" r="2.5"/>
+        </g>
+        <!-- S&P row: 20 candidate years -->
+        <g fill="#cbd5e1">
+          <circle cx="80.0" cy="130" r="2.5"/> <circle cx="108.4" cy="130" r="2.5"/> <circle cx="136.8" cy="130" r="2.5"/> <circle cx="165.3" cy="130" r="2.5"/> <circle cx="193.7" cy="130" r="2.5"/> <circle cx="222.1" cy="130" r="2.5"/> <circle cx="250.5" cy="130" r="2.5"/> <circle cx="278.9" cy="130" r="2.5"/> <circle cx="307.4" cy="130" r="2.5"/> <circle cx="335.8" cy="130" r="2.5"/> <circle cx="364.2" cy="130" r="2.5"/> <circle cx="392.6" cy="130" r="2.5"/> <circle cx="421.1" cy="130" r="2.5"/> <circle cx="449.5" cy="130" r="2.5"/> <circle cx="477.9" cy="130" r="2.5"/> <circle cx="506.3" cy="130" r="2.5"/> <circle cx="534.7" cy="130" r="2.5"/> <circle cx="563.2" cy="130" r="2.5"/> <circle cx="591.6" cy="130" r="2.5"/> <circle cx="620.0" cy="130" r="2.5"/>
+        </g>
+        <!-- 北京房 row: 16 candidate years (data starts 1999) -->
+        <g fill="#cbd5e1">
+          <circle cx="80.0" cy="200" r="2.5"/> <circle cx="116.0" cy="200" r="2.5"/> <circle cx="152.0" cy="200" r="2.5"/> <circle cx="188.0" cy="200" r="2.5"/> <circle cx="224.0" cy="200" r="2.5"/> <circle cx="260.0" cy="200" r="2.5"/> <circle cx="296.0" cy="200" r="2.5"/> <circle cx="332.0" cy="200" r="2.5"/> <circle cx="368.0" cy="200" r="2.5"/> <circle cx="404.0" cy="200" r="2.5"/> <circle cx="440.0" cy="200" r="2.5"/> <circle cx="476.0" cy="200" r="2.5"/> <circle cx="512.0" cy="200" r="2.5"/> <circle cx="548.0" cy="200" r="2.5"/> <circle cx="584.0" cy="200" r="2.5"/> <circle cx="620.0" cy="200" r="2.5"/>
+        </g>
+        <!-- 黄金 row: 20 candidate years -->
+        <g fill="#cbd5e1">
+          <circle cx="80.0" cy="270" r="2.5"/> <circle cx="108.4" cy="270" r="2.5"/> <circle cx="136.8" cy="270" r="2.5"/> <circle cx="165.3" cy="270" r="2.5"/> <circle cx="193.7" cy="270" r="2.5"/> <circle cx="222.1" cy="270" r="2.5"/> <circle cx="250.5" cy="270" r="2.5"/> <circle cx="278.9" cy="270" r="2.5"/> <circle cx="307.4" cy="270" r="2.5"/> <circle cx="335.8" cy="270" r="2.5"/> <circle cx="364.2" cy="270" r="2.5"/> <circle cx="392.6" cy="270" r="2.5"/> <circle cx="421.1" cy="270" r="2.5"/> <circle cx="449.5" cy="270" r="2.5"/> <circle cx="477.9" cy="270" r="2.5"/> <circle cx="506.3" cy="270" r="2.5"/> <circle cx="534.7" cy="270" r="2.5"/> <circle cx="563.2" cy="270" r="2.5"/> <circle cx="591.6" cy="270" r="2.5"/> <circle cx="620.0" cy="270" r="2.5"/>
+        </g>
+
+        <!-- Highlight: Kondratieff windows for each row -->
+        <!-- A股 1999 = rank 6 (x=260), 2008 = rank 16 (x=620) -->
+        <g class="event-dot" data-asset="A股" data-year="1999" data-rank="10" data-cagr="+4.7">
+          <circle cx="335.8" cy="60" r="7" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+          <text x="335.8" y="48" font-family="IBM Plex Mono" font-size="9" fill="#1e3a5f" text-anchor="middle">'99</text>
+        </g>
+        <g class="event-dot" data-asset="A股" data-year="2008" data-rank="20" data-cagr="-4.5">
+          <circle cx="620" cy="60" r="7" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+          <text x="620" y="48" font-family="IBM Plex Mono" font-size="9" fill="#1e3a5f" text-anchor="middle">'08</text>
+        </g>
+
+        <!-- S&P  1999 = rank 16 (x=620), 2008 = rank 7 (x=296) -->
+        <g class="event-dot" data-asset="S&amp;P 500" data-year="1999" data-rank="20" data-cagr="-3.0">
+          <circle cx="620" cy="130" r="7" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+          <text x="620" y="118" font-family="IBM Plex Mono" font-size="9" fill="#1e3a5f" text-anchor="middle">'99</text>
+        </g>
+        <g class="event-dot" data-asset="S&amp;P 500" data-year="2008" data-rank="10" data-cagr="+6.2">
+          <circle cx="335.8" cy="130" r="7" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+          <text x="335.8" y="118" font-family="IBM Plex Mono" font-size="9" fill="#1e3a5f" text-anchor="middle">'08</text>
+        </g>
+
+        <!-- 北京房 1999 = rank 14 (x=548), 2008 = rank 7 (x=296) -->
+        <g class="event-dot" data-asset="北京房" data-year="1999" data-rank="14" data-cagr="+11.2">
+          <circle cx="548" cy="200" r="7" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+          <text x="548" y="188" font-family="IBM Plex Mono" font-size="9" fill="#1e3a5f" text-anchor="middle">'99</text>
+        </g>
+        <g class="event-dot" data-asset="北京房" data-year="2008" data-rank="7" data-cagr="+15.8">
+          <circle cx="296" cy="200" r="7" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+          <text x="296" y="188" font-family="IBM Plex Mono" font-size="9" fill="#1e3a5f" text-anchor="middle">'08</text>
+        </g>
+
+        <!-- 黄金   1999 = rank 5 (x=224), 2008 = rank 11 (x=440) -->
+        <g class="event-dot" data-asset="黄金" data-year="1999" data-rank="5" data-cagr="+11.8">
+          <circle cx="193.7" cy="270" r="7" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+          <text x="193.7" y="258" font-family="IBM Plex Mono" font-size="9" fill="#1e3a5f" text-anchor="middle">'99</text>
+        </g>
+        <g class="event-dot" data-asset="黄金" data-year="2008" data-rank="13" data-cagr="+4.2">
+          <circle cx="421.0" cy="270" r="7" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+          <text x="421.0" y="258" font-family="IBM Plex Mono" font-size="9" fill="#1e3a5f" text-anchor="middle">'08</text>
+        </g>
+
+        <!-- Axis labels -->
+        <g font-family="IBM Plex Mono" font-size="10" fill="#64748b">
+          <text x="80" y="306" text-anchor="middle"><tspan class="zh-tspan">最优 (1)</tspan></text>
+          <text x="350" y="306" text-anchor="middle"><tspan class="zh-tspan">中位 (10)</tspan></text>
+          <text x="620" y="306" text-anchor="middle"><tspan class="zh-tspan">最差 (20)</tspan></text>
+        </g>
+      </svg>
+
+      <div class="figure-caption">
+        <span class="zh">8 个事件中，没有一个进入"最优三名"区间（左侧）。其中 2 个直接落在最差端（A 股 2008、S&P 1999 均为 rank 20/20）。如果"康波理论"成立，蓝点应该集中在左侧。</span>
+        <span class="en">Of 8 dots, none lands in the top-three zone (left). Two land directly at the worst end (A-shares 2008 and S&P 1999, both rank 20/20). If Kondratieff theory held, the dots should cluster on the left.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Subtitle: 2019 horizon ===== -->
+  <section>
+    <h2 data-num="§ 05">
+      <span class="zh">"85 后的第一次机会在 2019" 检验</span>
+      <span class="en">Testing "The First Window for Post-1985 Cohort Is 2019"</span>
+    </h2>
+
+    <p class="zh">2019 在主表中无法进入 10 年回报对比，但 5 年回报已经可以计算。我们用 2010–2020 共 11 个候选年份的 5 年 CAGR 检验：</p>
+    <p class="en">2019 isn't yet eligible for the 10-year comparison, but 5-year CAGRs are available. Using 11 candidate years from 2010 to 2020:</p>
+
+    <div class="table-wrap">
+      <table>
+        <caption>
+          <span class="zh">表 2 · 2019 在 11 个候选年份的 5 年 CAGR 中的排名</span>
+          <span class="en">Table 2 · Rank of 2019 by 5-year CAGR (out of 11 candidates)</span>
+        </caption>
+        <thead>
+          <tr>
+            <th><span class="zh">资产</span><span class="en">Asset</span></th>
+            <th><span class="zh">2019 起点 5y CAGR</span><span class="en">2019 5y CAGR</span></th>
+            <th><span class="zh">最优起点</span><span class="en">Best year</span></th>
+            <th><span class="zh">最优 5y CAGR</span><span class="en">Best 5y CAGR</span></th>
+            <th><span class="zh">2019 排名</span><span class="en">2019 rank</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="zh">A 股</span><span class="en">A-shares</span></td><td class="num pos">+3.6</td><td>2013</td><td class="num pos">+7.8</td><td class="rank-mid">3 / 11</td>
+          </tr>
+          <tr>
+            <td>S&amp;P 500</td><td class="num pos">+13.6</td><td>2017</td><td class="num pos">+16.3</td><td class="rank-mid">2 / 11</td>
+          </tr>
+          <tr>
+            <td><span class="zh">北京房</span><span class="en">Beijing</span></td><td class="num neg">+2.1</td><td>2012</td><td class="num pos">+17.6</td><td class="rank-bad">10 / 11</td>
+          </tr>
+          <tr>
+            <td><span class="zh">黄金</span><span class="en">Gold</span></td><td class="num pos">+9.9</td><td>2016</td><td class="num pos">+12.0</td><td class="rank-mid">3 / 11</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-source">
+      <span class="zh"><strong>数据来源：</strong> 同表 1。每个候选起点年初买入持有 5 年的复合年化收益率，从 2010 年到 2020 年共 11 个候选年份。<br>仅美股 5 年回报排名第 2 接近"机会"——但 S&amp;P 在过去 15 年中超过一半年份起点都能拿到 10%+。北京房在 2019 年是 11 年中第 10 差的买入年。</span>
+      <span class="en"><strong>Sources:</strong> Same as Table 1. 5-year CAGR from year-start buy date for 11 candidate start years from 2010 to 2020.<br>Only the S&amp;P 500's #2 ranking is close to a "window" — but more than half of all candidate years over the past 15 years also yielded 10%+. Beijing housing 2019 ranks 10/11 — nearly the worst.</span>
+    </div>
+  </section>
+
+  <!-- ===== § 06 SPECTRAL ANALYSIS ===== -->
+  <section>
+    <h2 data-num="§ 06">
+      <span class="zh">频谱分析：60 年周期真的存在吗？</span>
+      <span class="en">Spectral Analysis: Does the 60-Year Cycle Even Exist?</span>
+    </h2>
+
+    <p class="zh">前面五节都是<em>给定</em>康波理论存在的前提下，检验它的具体预测能不能站得住。但更根本的问题是：所谓"60 年周期"在数据中真的存在吗？</p>
+    <p class="en">The previous five sections tested specific predictions <em>assuming</em> the Kondratieff cycle exists. The more fundamental question is: does a "60-year cycle" actually exist in the data at all?</p>
+
+    <p class="zh">回答这个问题的标准量化金融工具是<strong>频谱分析（spectral analysis）</strong>——把时间序列分解成不同频率的正弦波叠加，看哪些频率的能量（功率）最大。如果康波理论成立，60 年这个频率上应该有显著的功率峰值。</p>
+    <p class="en">The standard quantitative finance tool for this is <strong>spectral analysis</strong> — decomposing a time series into sinusoidal components at different frequencies and measuring the power (energy) at each. If Kondratieff theory holds, there should be a significant power peak at the 60-year frequency.</p>
+
+    <p class="zh">我们对美国 1870–2024 年实际 GDP 增长率序列（共 155 年，足够容纳 2.5 个完整康波）做线性去趋势化后，应用 Welch 功率谱估计<a href="#ref-15" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[15]</a>。结果如下：</p>
+    <p class="en">We applied Welch's power spectral density estimation<a href="#ref-15" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[15]</a> to the linearly detrended US real GDP growth rate from 1870 to 2024 (155 years — enough to contain 2.5 full Kondratieff cycles):</p>
+
+    <div class="figure">
+      <div class="figure-label">
+        <span class="zh">图 2</span>
+        <span class="en">Figure 2</span>
+      </div>
+      <div class="figure-title">
+        <span class="zh">美国 GDP 增长率的功率谱（1870–2024）</span>
+        <span class="en">Power spectrum of US GDP growth rate (1870–2024)</span>
+      </div>
+      <div class="figure-subtitle">
+        <span class="zh">Welch 方法估计 · 横轴为周期长度（年）· 纵轴为功率谱密度</span>
+        <span class="en">Welch's method · X-axis: period length (years) · Y-axis: power spectral density</span>
+      </div>
+
+      <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" id="fig2">
+        <!-- Plot area: x: 60..660, y: 50..270 -->
+        <!-- X scale: log scale of period (years), 2 to 80 years -->
+        <!-- Y scale: linear, 0 to 140 -->
+
+        <defs>
+          <linearGradient id="psdGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1e3a5f" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#1e3a5f" stop-opacity="0.15"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Y axis grid -->
+        <g stroke="#e5e9ef" stroke-width="0.5">
+          <line x1="60" y1="270" x2="660" y2="270"/>
+          <line x1="60" y1="220" x2="660" y2="220"/>
+          <line x1="60" y1="170" x2="660" y2="170"/>
+          <line x1="60" y1="120" x2="660" y2="120"/>
+          <line x1="60" y1="70"  x2="660" y2="70"/>
+        </g>
+        <g font-family="IBM Plex Mono" font-size="10" fill="#64748b">
+          <text x="55" y="273" text-anchor="end">0</text>
+          <text x="55" y="223" text-anchor="end">35</text>
+          <text x="55" y="173" text-anchor="end">70</text>
+          <text x="55" y="123" text-anchor="end">105</text>
+          <text x="55" y="73"  text-anchor="end">140</text>
+        </g>
+
+        <!-- X axis -->
+        <line x1="60" y1="270" x2="660" y2="270" stroke="#0f172a" stroke-width="1.2"/>
+
+        <!-- 95% significance threshold line at PSD ≈ 122.6 -->
+        <line x1="60" y1="83" x2="660" y2="83" stroke="#2d5a3d" stroke-width="1" stroke-dasharray="4,3" opacity="0.7"/>
+        <text x="660" y="79" font-family="IBM Plex Mono" font-size="10" fill="#2d5a3d" text-anchor="end" font-style="italic">
+          <tspan class="zh-tspan">95% 显著性阈值（Bootstrap）</tspan>
+        </text>
+
+        <!-- Shaded "Kondratieff zone": periods 50-65 years -->
+        <!-- log(50) on log(2)..log(80) maps to: ((log10(50)-log10(2))/(log10(80)-log10(2)))*600 + 60 -->
+        <!-- log10(2)=0.301, log10(50)=1.699, log10(65)=1.813, log10(80)=1.903 -->
+        <!-- 50yr at: ((1.699-0.301)/(1.903-0.301))*600 + 60 = 0.872*600+60 = 583.5 -->
+        <!-- 65yr at: ((1.813-0.301)/1.602)*600 + 60 = 0.944*600+60 = 626.4 -->
+        <rect x="583" y="50" width="43" height="220" fill="#1e3a5f" fill-opacity="0.06"/>
+        <text x="604" y="46" font-family="IBM Plex Mono" font-size="10" fill="#1e3a5f" text-anchor="middle" font-style="italic">
+          <tspan class="zh-tspan">康波区</tspan>
+        </text>
+
+        <!-- Spectral data points - convert (period, psd) to plot coordinates -->
+        <!-- x = ((log10(period) - log10(2)) / (log10(80) - log10(2))) * 600 + 60 -->
+        <!-- y = 270 - psd * (220/140) = 270 - psd * 1.571 -->
+
+        <!-- Period markers (vertical reference lines for some key periods) -->
+        <g stroke="#cbd5e1" stroke-width="0.5" stroke-dasharray="2,3" opacity="0.5">
+          <line x1="60" y1="50"  x2="60"  y2="270"/>   <!-- 2 yr -->
+          <line x1="285" y1="50" x2="285" y2="270"/>   <!-- 8.6 yr (Juglar) -->
+          <line x1="409" y1="50" x2="409" y2="270"/>   <!-- 20 yr (Kuznets) -->
+          <line x1="487" y1="50" x2="487" y2="270"/>   <!-- 30 yr -->
+          <line x1="583" y1="50" x2="583" y2="270"/>   <!-- 50 yr -->
+        </g>
+
+        <!-- Build the curve from data points -->
+        <!-- Using actual computed (period, PSD) pairs:
+             60.00, 22.69 → x=607, y=234
+             30.00, 66.51 → x=487, y=166
+             20.00, 114.37 → x=409, y=90
+             15.00, 97.91 → x=358, y=116
+             12.00, 60.51 → x=315, y=175
+             10.00, 54.56 → x=285, y=184
+             8.57, 129.99 → x=257, y=66
+             7.50, 91.59 → x=235, y=126
+             6.67, 115.03 → x=216, y=89
+             6.00, 106.75 → x=200, y=102
+             5.45, 34.07 → x=185, y=216
+             5.00, 28.30 → x=172, y=225
+             4.62, 20.16 → x=160, y=238
+             4.29, 16.94 → x=148, y=243
+             4.00, 12.53 → x=137, y=250
+             3.75, 17.16 → x=128, y=243
+             3.53, 48.92 → x=119, y=193
+             3.33, 35.97 → x=110, y=213
+             3.16, 15.18 → x=102, y=246
+             3.00, 27.71 → x=94, y=226
+             2.86, 40.19 → x=86, y=207
+             2.73, 43.94 → x=79, y=201
+             2.61, 37.16 → x=72, y=212
+             2.07, 54.10 → x=18 -- actually, let me compute properly
+        -->
+
+        <!-- Path of the spectrum (polyline through computed coordinates) -->
+        <polyline
+          points="60,224 79,201 86,207 94,226 102,246 110,213 119,193 128,243 137,250 148,243 160,238 172,225 185,216 200,102 216,89 235,126 257,66 285,184 315,175 358,116 409,90 487,166 607,234"
+          fill="none" stroke="#1e3a5f" stroke-width="2"/>
+
+        <!-- Filled area under curve -->
+        <polygon
+          points="60,270 60,224 79,201 86,207 94,226 102,246 110,213 119,193 128,243 137,250 148,243 160,238 172,225 185,216 200,102 216,89 235,126 257,66 285,184 315,175 358,116 409,90 487,166 607,234 660,270"
+          fill="url(#psdGrad)" opacity="0.5"/>
+
+        <!-- Annotations: peak labels -->
+        <g font-family="IBM Plex Mono" font-size="10" fill="#0f172a">
+          <!-- 8.6yr Juglar peak -->
+          <circle cx="257" cy="66" r="3" fill="#2d5a3d"/>
+          <text x="257" y="58" text-anchor="middle" fill="#2d5a3d">
+            <tspan class="zh-tspan">8.6 年 Juglar</tspan>
+          </text>
+          <!-- 20yr Kuznets peak -->
+          <circle cx="409" cy="90" r="3" fill="#2d5a3d"/>
+          <text x="409" y="82" text-anchor="middle" fill="#2d5a3d">
+            <tspan class="zh-tspan">20 年 Kuznets</tspan>
+          </text>
+          <!-- 60yr Kondratieff: NO peak -->
+          <circle cx="607" cy="234" r="4" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+          <text x="607" y="252" text-anchor="middle" fill="#1e3a5f">
+            <tspan class="zh-tspan">60 年（无峰）</tspan>
+          </text>
+        </g>
+
+        <!-- X-axis labels -->
+        <g font-family="IBM Plex Mono" font-size="10" fill="#64748b" text-anchor="middle">
+          <text x="60" y="288">2</text>
+          <text x="285" y="288">8.6</text>
+          <text x="409" y="288">20</text>
+          <text x="487" y="288">30</text>
+          <text x="583" y="288">50</text>
+          <text x="660" y="288">80</text>
+        </g>
+        <text x="360" y="305" font-family="IBM Plex Mono" font-size="10" fill="#64748b" text-anchor="middle">
+          <tspan class="zh-tspan">周期长度（年，对数刻度）</tspan>
+        </text>
+      </svg>
+
+      <div class="figure-caption">
+        <span class="zh"><strong>数据来源：</strong> 美国实际 GDP 增长率，1870–1928 取自 Maddison Project Database 2023 (Bolt &amp; van Zanden, 2024) <a href="#ref-18" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[18]</a>；1929–2024 取自 BEA NIPA Table 1.1.1 / FRED series <span class="num">A191RL</span> <a href="#ref-19" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[19]</a>。共 155 年，n=155 obs。<br><strong>方法：</strong> 线性去趋势化 + Welch 功率谱估计 (nperseg=60, scaling='density') <a href="#ref-15" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[15]</a>。<br>数据中明显可见 Juglar (≈8 年) 和 Kuznets (≈20 年) 周期；60 年频率上无显著峰值。Bootstrap 重采样 5000 次（随机置换检验）后，60 年功率的 p 值 = <strong>0.69</strong>——比噪声本身还弱。</span>
+        <span class="en"><strong>Sources:</strong> US real GDP growth rate, 1870–1928 from Maddison Project Database 2023 (Bolt &amp; van Zanden, 2024) <a href="#ref-18" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[18]</a>; 1929–2024 from BEA NIPA Table 1.1.1 / FRED series <span class="num">A191RL</span> <a href="#ref-19" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[19]</a>. Total n = 155 obs.<br><strong>Method:</strong> Linear detrending + Welch's PSD estimation (nperseg=60, scaling='density') <a href="#ref-15" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[15]</a>.<br>Juglar (~8 years) and Kuznets (~20 years) cycles are visible; the 60-year frequency shows no significant peak. Bootstrap resampling (5000 random permutations) yields p = <strong>0.69</strong> at the 60-year frequency — weaker than noise.</span>
+      </div>
+    </div>
+
+    <h3 class="zh">学界证据并非一边倒——这个结果如何与现有文献协调</h3>
+    <h3 class="en">The Literature Is Not One-Sided — How This Result Fits Within It</h3>
+
+    <p class="zh">必须诚实承认：康波频谱检验在学界并非一致结论。两派研究都存在：</p>
+    <p class="en">In fairness: spectral tests of Kondratieff cycles are not unanimous in the literature. Two camps exist:</p>
+
+    <p class="zh"><strong>支持康波存在的研究：</strong> Bieshaar &amp; Kleinknecht (1984) 在 <em>Konjunkturpolitik</em> 上对 1890 年以来六组长波时间表做了 econometric test，结论是 <em>"统计证据 quite strong and robust"</em><a href="#ref-20" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[20]</a>。Korotayev &amp; Tsirel (2010) 用 1870–2007 全球 GDP 数据做频谱分析，发现 ≈52 年频率峰值<a href="#ref-21" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[21]</a>。</p>
+    <p class="en"><strong>Studies supporting K-waves:</strong> Bieshaar &amp; Kleinknecht (1984) tested six long-wave chronologies on multiple time series since 1890 and concluded that <em>"statistical evidence is quite strong and robust"</em><a href="#ref-20" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[20]</a>. Korotayev &amp; Tsirel (2010) ran spectral analysis on 1870–2007 global GDP and reported a ≈52-year peak<a href="#ref-21" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[21]</a>.</p>
+
+    <p class="zh"><strong>否定康波存在的研究：</strong> Solomou (1989, Cambridge UP) 系统检验 1850–1973 年主要资本主义经济体增长数据，<em>"长波难以从数据中识别"</em><a href="#ref-8" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[8]</a>。Diebolt &amp; Doliger (2006, 2008) 用频谱分析 OECD 多国 GDP 数据，<em>未找到稳健的 50–60 年周期</em>，但确认了 Kuznets 周期 (≈15–20 年)<a href="#ref-22" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[22]</a>。Metz (2011, <em>Cliometrica</em>) 综述了所有时序方法的争议，<em>结论是这一问题对方法选择极为敏感</em><a href="#ref-23" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[23]</a>。</p>
+    <p class="en"><strong>Studies rejecting K-waves:</strong> Solomou (1989, Cambridge UP) systematically tested 1850–1973 growth data across major capitalist economies and concluded that <em>"long waves are not identifiable in the data"</em><a href="#ref-8" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[8]</a>. Diebolt &amp; Doliger (2006, 2008) ran spectral analysis on OECD GDP data and <em>found no robust 50–60 year cycle</em> while confirming Kuznets swings (≈15–20 years)<a href="#ref-22" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[22]</a>. Metz (2011, <em>Cliometrica</em>) reviewed the methodological debate and concluded the result is <em>highly sensitive to the choice of method</em><a href="#ref-23" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[23]</a>.</p>
+
+    <p class="zh"><strong>为什么各研究结论不同？</strong> 关键差异在于<strong>三个方法学选择</strong>：(1) 用 GDP 水平还是 GDP 增长率；(2) 去趋势用线性还是 HP filter / 多项式；(3) 是否做随机化检验。我们用的方法（增长率 + 线性去趋势 + Bootstrap）是<em>偏保守</em>的——它对真实的低频信号也较难识别。即便如此，主流经济学接受的 Juglar 和 Kuznets 周期都被识别出来；而康波频率没有。换言之：<strong>用同一个保守方法对同一个序列检验，能识别出已知的中频周期，却找不到康波——这本身就是有意义的对照</strong>。</p>
+    <p class="en"><strong>Why do studies disagree?</strong> The key differences are <strong>three methodological choices</strong>: (1) GDP levels vs. growth rates; (2) linear vs. HP-filter vs. polynomial detrending; (3) whether randomization tests are performed. Our approach (growth rates + linear detrending + bootstrap) is <em>conservative</em> — it is less likely to detect even genuine low-frequency signals. Yet the same conservative method, applied to the same series, recovers the well-accepted Juglar and Kuznets cycles, but not Kondratieff. <strong>Identifying known cycles while failing to identify Kondratieff using the same conservative pipeline is itself the informative contrast</strong>.</p>
+
+    <p class="zh">更关键的是：<strong>即使你接受康波存在</strong>（采纳 Bieshaar-Kleinknecht 阵营），它能解释的是宏观长波——比如美国 GDP 在 1890–2024 间的低频起伏。它<strong>不能</strong>用来推论"个人在 1999、2008、2019 年买入特定资产能成为中产"这种具体可执行命题。<em>宏观长波存在 ≠ 60 年里恰好有 3 个可识别的"机会窗口" ≠ 这些窗口能被事先准确定位。</em></p>
+    <p class="en">More crucially: <strong>even if you accept K-waves exist</strong> (the Bieshaar-Kleinknecht camp), they describe macro long waves — low-frequency oscillations in something like US GDP from 1890 to 2024. They <strong>cannot</strong> license the much more specific claim that "buying particular assets in 1999, 2008, or 2019 will let you join the middle class." <em>The existence of macro long waves does not entail that there are exactly 3 identifiable "opportunity windows" per 60 years, much less that they can be located in advance.</em></p>
+  </section>
+
+  <!-- ===== § 07 STATISTICAL TESTS ===== -->
+  <section>
+    <h2 data-num="§ 07">
+      <span class="zh">事件研究的统计推断</span>
+      <span class="en">Statistical Inference for the Event Study</span>
+    </h2>
+
+    <p class="zh">回到周金涛具体的预测——我们对每类资产做了 Welch t 检验、Mann-Whitney U 检验和 10000 次 Bootstrap 重采样三种方法<a href="#ref-16" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[16]</a>。</p>
+    <p class="en">Returning to Zhou's specific predictions — for each asset class we ran Welch's t-test, the Mann-Whitney U test, and a 10000-iteration bootstrap permutation test<a href="#ref-16" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[16]</a>.</p>
+
+    <div class="table-wrap">
+      <table>
+        <caption>
+          <span class="zh">表 3 · 周金涛窗口 vs 基准的统计检验结果（10 年 CAGR）</span>
+          <span class="en">Table 3 · Statistical tests of Zhou windows vs. baseline (10-year CAGR)</span>
+        </caption>
+        <thead>
+          <tr>
+            <th><span class="zh">资产</span><span class="en">Asset</span></th>
+            <th>Δ <span class="zh">(pp)</span><span class="en">(pp)</span></th>
+            <th><span class="zh">t 检验 p</span><span class="en">t-test p</span></th>
+            <th>Mann-Whitney p</th>
+            <th>Bootstrap p</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="zh">A 股</span><span class="en">A-shares</span></td>
+            <td class="num neg">−5.82</td>
+            <td class="num">0.422</td>
+            <td class="num">0.316</td>
+            <td class="num">0.102</td>
+          </tr>
+          <tr>
+            <td>S&amp;P 500</td>
+            <td class="num neg">−5.09</td>
+            <td class="num">0.462</td>
+            <td class="num">0.316</td>
+            <td class="num">0.181</td>
+          </tr>
+          <tr>
+            <td><span class="zh">北京房</span><span class="en">Beijing</span></td>
+            <td class="num neg">−0.90</td>
+            <td class="num">0.763</td>
+            <td class="num">0.600</td>
+            <td class="num">0.723</td>
+          </tr>
+          <tr>
+            <td><span class="zh">黄金</span><span class="en">Gold</span></td>
+            <td class="num neg">−0.06</td>
+            <td class="num">0.990</td>
+            <td class="num">0.758</td>
+            <td class="num">0.990</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-source">
+      <span class="zh"><strong>方法：</strong> Welch's t 检验（unequal variances，scipy.stats.ttest_ind）；Mann-Whitney U（scipy.stats.mannwhitneyu，alternative='two-sided'）；Bootstrap 置换检验（10000 次随机置换 pooled 样本，<a href="#ref-16" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[16]</a>）。<strong>样本：</strong> Treated n=2 (1999, 2008)；Control n=18 (1995–2014 中除 1999, 2008 外的所有起点) for A 股、S&amp;P、黄金；北京房 control n=14 (1999 起算)。<br>所有 12 个 p 值 (4 资产 × 3 方法) 都远 &gt; 0.05，无法拒绝零假设"康波窗口的回报与随机起点不可区分"。注意所有差异 Δ 都是<em>负</em>的——窗口表现略差于基准，与流言宣称的方向相反。</span>
+      <span class="en"><strong>Method:</strong> Welch's t-test (unequal variances, scipy.stats.ttest_ind); Mann-Whitney U (scipy.stats.mannwhitneyu, alternative='two-sided'); Bootstrap permutation test (10000 random permutations of the pooled sample, <a href="#ref-16" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[16]</a>). <strong>Samples:</strong> Treated n=2 (1999, 2008); Control n=18 (all start years 1995–2014 excluding 1999, 2008) for A-shares, S&amp;P, Gold; Beijing housing control n=14 (data starts 1999).<br>All 12 p-values (4 assets × 3 methods) are well above 0.05; we cannot reject the null that "Zhou windows are indistinguishable from random start years." All Δ values are <em>negative</em> — windows underperform the baseline, the opposite of what the myth claims.</span>
+    </div>
+
+    <p class="zh"><strong>方向值得注意</strong>：全部 4 个差异都是<em>负</em>值——意味着按周金涛指认的"机会窗口"买入，<em>统计上略差于</em>随机选一年。这个差距虽然不显著（样本太小），但方向上完全不支持流言。</p>
+    <p class="en"><strong>The direction is striking</strong>: all four differences are <em>negative</em> — buying at Zhou's "windows" was statistically <em>slightly worse</em> than buying in a random year. The gap isn't significant (samples too small), but the direction directly contradicts the myth.</p>
+
+    <p class="zh">关于<em>n</em> = 2 的样本问题：周金涛只指认了 1999 和 2008 两个有完整 10 年回报的窗口。因此一个公平的批评是：3 个观测下任何方法都难以达到统计显著。我们承认这点，但反向论证同样成立——<strong>如果康波理论是真的，它应该至少在方向上把这 2 个观测推向正向差异，而不是负向</strong>。</p>
+    <p class="en">On the sample size: Zhou identified only two windows (1999 and 2008) with complete 10-year horizons. A fair critique is that no method can reach significance with <em>n</em> = 2. We accept that — but the reverse logic also holds: <strong>if the theory were real, it should at least push these two observations in the positive direction, not the negative</strong>.</p>
+  </section>
+
+  <!-- ===== § 08 RISK ADJUSTED ===== -->
+  <section>
+    <h2 data-num="§ 08">
+      <span class="zh">风险调整收益与最大回撤</span>
+      <span class="en">Risk-Adjusted Returns &amp; Max Drawdown</span>
+    </h2>
+
+    <p class="zh">单看 CAGR 没有充分体现"机会窗口"承诺的内涵——它真正承诺的是<em>低风险、高回报的入场点</em>。我们用两个标准量化指标检验这点。</p>
+    <p class="en">CAGR alone doesn't capture what the "opportunity window" really promises — that is, a <em>low-risk, high-reward entry point</em>. Two standard quantitative metrics test this directly.</p>
+
+    <h3 class="zh">夏普比率（Sharpe Ratio）</h3>
+    <h3 class="en">Sharpe Ratio</h3>
+    <p class="zh">无风险利率假设为 3.5%（10 年期美国国债的长期均值）。</p>
+    <p class="en">Risk-free rate assumed at 3.5% (long-run average of 10-year US Treasury).</p>
+
+    <div class="table-wrap">
+      <table>
+        <caption>
+          <span class="zh">表 4 · 各窗口 10 年持有期的夏普比率</span>
+          <span class="en">Table 4 · Sharpe ratio over 10-year holding period</span>
+        </caption>
+        <thead>
+          <tr>
+            <th><span class="zh">资产</span><span class="en">Asset</span></th>
+            <th>1999</th>
+            <th>2008</th>
+            <th><span class="zh">基准均值</span><span class="en">Baseline mean</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="zh">A 股</span><span class="en">A-shares</span></td>
+            <td class="num">+0.246</td>
+            <td class="num neg">−0.010</td>
+            <td class="num">+0.209</td>
+          </tr>
+          <tr>
+            <td>S&amp;P 500</td>
+            <td class="num neg">−0.209</td>
+            <td class="num">+0.242</td>
+            <td class="num pos">+0.320</td>
+          </tr>
+          <tr>
+            <td><span class="zh">北京房</span><span class="en">Beijing</span></td>
+            <td class="num">+0.511</td>
+            <td class="num pos">+1.074</td>
+            <td class="num">+0.763</td>
+          </tr>
+          <tr>
+            <td><span class="zh">黄金</span><span class="en">Gold</span></td>
+            <td class="num pos">+0.654</td>
+            <td class="num">+0.118</td>
+            <td class="num">+0.402</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-source">
+      <span class="zh"><strong>方法：</strong> Sharpe Ratio = (年化平均回报 − 无风险利率) / 年化波动率。无风险利率取 <span class="num">3.5%</span>，对应 10 年期美国国债 1995–2024 算术平均（来源：FRED series <span class="num">DGS10</span> <a href="#ref-24" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[24]</a>）。年回报序列从年初买入年初卖出计算，n=10 年。基准均值 = 1995–2014 中所有非窗口起点的算术平均 Sharpe（A 股/S&amp;P/黄金 n=18；北京房 n=14）。<br>A 股 2008 窗口的夏普比率 −0.01（实际亏损但波动巨大）；S&amp;P 500 1999 窗口 −0.21（"失去的十年"）。8 个窗口中只有 2 个（北京房 2008，黄金 1999）超过对应基准。</span>
+      <span class="en"><strong>Method:</strong> Sharpe Ratio = (annualized mean return − risk-free rate) / annualized volatility. Risk-free rate = <span class="num">3.5%</span>, the arithmetic mean of 10-year US Treasury yields 1995–2024 (FRED series <span class="num">DGS10</span> <a href="#ref-24" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[24]</a>). Annual return series computed year-start to year-start, n=10 years per window. Baseline mean = arithmetic mean Sharpe across all non-window start years 1995–2014 (n=18 for A-shares/S&amp;P/Gold; n=14 for Beijing housing).<br>A-shares 2008 Sharpe = −0.01 (actually losing money with high volatility); S&amp;P 500 1999 Sharpe = −0.21 (the "lost decade"). Only 2 of 8 windows (Beijing 2008, Gold 1999) exceed their respective baselines.</span>
+    </div>
+
+    <h3 class="zh">最大回撤（Maximum Drawdown）</h3>
+    <h3 class="en">Maximum Drawdown</h3>
+    <p class="zh">康波理论说"机会窗口"是<em>低点入场</em>。如果真的是低点，那么之后的最大回撤应该<em>小于</em>基准均值。</p>
+    <p class="en">Kondratieff theory claims windows are <em>low-point entries</em>. If true, the subsequent max drawdown should be <em>smaller</em> than the baseline mean.</p>
+
+    <div class="figure">
+      <div class="figure-label">
+        <span class="zh">图 3</span>
+        <span class="en">Figure 3</span>
+      </div>
+      <div class="figure-title">
+        <span class="zh">10 年持有期内的最大回撤</span>
+        <span class="en">Max drawdown over 10-year holding period</span>
+      </div>
+      <div class="figure-subtitle">
+        <span class="zh">如果窗口真是"低点入场"，蓝条应短于灰条；实际上更长</span>
+        <span class="en">If windows are true low-point entries, blue bars should be shorter than gray. They're longer.</span>
+      </div>
+
+      <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+        <!-- 4 asset rows × 3 bars (1999, 2008, baseline) -->
+        <!-- Bar represents drawdown magnitude (always negative); shown as length to right -->
+        <!-- Scale: 0% at x=140, 70% at x=640 -->
+        <!-- Per row 70px height, bars 16px tall stacked -->
+
+        <!-- Helper labels at top -->
+        <g font-family="IBM Plex Mono" font-size="10" fill="#64748b" text-anchor="middle">
+          <text x="140" y="20">0%</text>
+          <text x="240" y="20">−14%</text>
+          <text x="340" y="20">−28%</text>
+          <text x="440" y="20">−42%</text>
+          <text x="540" y="20">−56%</text>
+          <text x="640" y="20">−70%</text>
+        </g>
+        <g stroke="#e5e9ef" stroke-width="0.5">
+          <line x1="240" y1="30" x2="240" y2="290"/>
+          <line x1="340" y1="30" x2="340" y2="290"/>
+          <line x1="440" y1="30" x2="440" y2="290"/>
+          <line x1="540" y1="30" x2="540" y2="290"/>
+        </g>
+        <line x1="140" y1="30" x2="140" y2="290" stroke="#0f172a" stroke-width="1.2"/>
+
+        <!-- Row helper: 1pp = (640-140)/70 = 7.143 px -->
+        <!-- Bar widths: A股 1999 = 65.4 → 467px, 2008 = 65.4 → 467, baseline = 47.9 → 342 -->
+        <!-- S&P 1999 = 41.8 → 299, 2008 = 38.5 → 275, baseline = 30.1 → 215 -->
+        <!-- 北京房 1999 = 9.2 → 66, 2008 = 0 → 0, baseline = 3.7 → 26 -->
+        <!-- 黄金 1999 = 4.9 → 35, 2008 = 35.2 → 251, baseline = 22.2 → 159 -->
+
+        <!-- A股 row -->
+        <g>
+          <text x="0" y="62" font-family="EB Garamond" font-size="14" fill="#0f172a" font-style="italic">
+            <tspan class="zh-tspan">A 股</tspan>
+          </text>
+          <!-- 1999 -->
+          <rect x="140" y="44" width="467" height="14" fill="#1e3a5f" opacity="0.9"/>
+          <text x="115" y="55" font-family="IBM Plex Mono" font-size="10" fill="#1e3a5f" text-anchor="end">'99</text>
+          <text x="613" y="55" font-family="IBM Plex Mono" font-size="10" fill="#1e3a5f">−65.4%</text>
+          <!-- 2008 -->
+          <rect x="140" y="62" width="467" height="14" fill="#1e3a5f" opacity="0.9"/>
+          <text x="115" y="73" font-family="IBM Plex Mono" font-size="10" fill="#1e3a5f" text-anchor="end">'08</text>
+          <text x="613" y="73" font-family="IBM Plex Mono" font-size="10" fill="#1e3a5f">−65.4%</text>
+          <!-- baseline -->
+          <rect x="140" y="80" width="342" height="10" fill="#94a3b8"/>
+          <text x="115" y="89" font-family="IBM Plex Mono" font-size="10" fill="#64748b" text-anchor="end"><tspan class="zh-tspan">基准</tspan></text>
+          <text x="488" y="89" font-family="IBM Plex Mono" font-size="10" fill="#64748b">−47.9%</text>
+        </g>
+
+        <!-- S&P row -->
+        <g transform="translate(0, 76)">
+          <text x="0" y="62" font-family="EB Garamond" font-size="14" fill="#0f172a" font-style="italic">S&amp;P 500</text>
+          <rect x="140" y="44" width="299" height="14" fill="#1e3a5f" opacity="0.9"/>
+          <text x="115" y="55" font-family="IBM Plex Mono" font-size="10" fill="#1e3a5f" text-anchor="end">'99</text>
+          <text x="445" y="55" font-family="IBM Plex Mono" font-size="10" fill="#1e3a5f">−41.8%</text>
+          <rect x="140" y="62" width="275" height="14" fill="#1e3a5f" opacity="0.9"/>
+          <text x="115" y="73" font-family="IBM Plex Mono" font-size="10" fill="#1e3a5f" text-anchor="end">'08</text>
+          <text x="421" y="73" font-family="IBM Plex Mono" font-size="10" fill="#1e3a5f">−38.5%</text>
+          <rect x="140" y="80" width="215" height="10" fill="#94a3b8"/>
+          <text x="115" y="89" font-family="IBM Plex Mono" font-size="10" fill="#64748b" text-anchor="end"><tspan class="zh-tspan">基准</tspan></text>
+          <text x="361" y="89" font-family="IBM Plex Mono" font-size="10" fill="#64748b">−30.1%</text>
+        </g>
+
+        <!-- Beijing row -->
+        <g transform="translate(0, 152)">
+          <text x="0" y="62" font-family="EB Garamond" font-size="14" fill="#0f172a" font-style="italic">
+            <tspan class="zh-tspan">北京房</tspan>
+          </text>
+          <rect x="140" y="44" width="66" height="14" fill="#2d5a3d" opacity="0.85"/>
+          <text x="115" y="55" font-family="IBM Plex Mono" font-size="10" fill="#2d5a3d" text-anchor="end">'99</text>
+          <text x="212" y="55" font-family="IBM Plex Mono" font-size="10" fill="#2d5a3d">−9.2%</text>
+          <rect x="140" y="62" width="3" height="14" fill="#2d5a3d" opacity="0.85"/>
+          <text x="115" y="73" font-family="IBM Plex Mono" font-size="10" fill="#2d5a3d" text-anchor="end">'08</text>
+          <text x="149" y="73" font-family="IBM Plex Mono" font-size="10" fill="#2d5a3d">0.0%</text>
+          <rect x="140" y="80" width="26" height="10" fill="#94a3b8"/>
+          <text x="115" y="89" font-family="IBM Plex Mono" font-size="10" fill="#64748b" text-anchor="end"><tspan class="zh-tspan">基准</tspan></text>
+          <text x="172" y="89" font-family="IBM Plex Mono" font-size="10" fill="#64748b">−3.7%</text>
+        </g>
+
+        <!-- Gold row -->
+        <g transform="translate(0, 228)">
+          <text x="0" y="62" font-family="EB Garamond" font-size="14" fill="#0f172a" font-style="italic">
+            <tspan class="zh-tspan">黄金</tspan>
+          </text>
+          <rect x="140" y="44" width="35" height="14" fill="#2d5a3d" opacity="0.85"/>
+          <text x="115" y="55" font-family="IBM Plex Mono" font-size="10" fill="#2d5a3d" text-anchor="end">'99</text>
+          <text x="181" y="55" font-family="IBM Plex Mono" font-size="10" fill="#2d5a3d">−4.9%</text>
+          <rect x="140" y="62" width="251" height="14" fill="#1e3a5f" opacity="0.9"/>
+          <text x="115" y="73" font-family="IBM Plex Mono" font-size="10" fill="#1e3a5f" text-anchor="end">'08</text>
+          <text x="397" y="73" font-family="IBM Plex Mono" font-size="10" fill="#1e3a5f">−35.2%</text>
+          <rect x="140" y="80" width="159" height="10" fill="#94a3b8"/>
+          <text x="115" y="89" font-family="IBM Plex Mono" font-size="10" fill="#64748b" text-anchor="end"><tspan class="zh-tspan">基准</tspan></text>
+          <text x="305" y="89" font-family="IBM Plex Mono" font-size="10" fill="#64748b">−22.2%</text>
+        </g>
+      </svg>
+
+      <div class="figure-caption">
+        <span class="zh"><strong>方法：</strong> Maximum Drawdown = max(peak − trough) / peak，用月度收盘价（A 股、S&amp;P）或年度数据（北京房、黄金）计算的 10 年持有期累计最大回撤。基准均值 = 1995–2014 中所有非窗口起点的最大回撤算术平均。<br>8 个窗口中有 6 个的最大回撤<em>大于</em>基准均值——与"低点入场"的承诺方向相反。A 股 2008 年初买入随后经历 65% 回撤；S&amp;P 500 1999 年初买入经历 42% 回撤；黄金 2008 年初买入经历 35% 回撤。</span>
+        <span class="en"><strong>Method:</strong> Maximum Drawdown = max(peak − trough) / peak, computed over the 10-year holding period using monthly closes (equities) or annual data (housing, gold). Baseline mean = arithmetic mean across all non-window start years 1995–2014.<br>6 of 8 windows show <em>greater</em> max drawdown than baseline — the opposite of what "low-point entry" implies. A-shares bought at start 2008 went on to lose 65%; S&amp;P 500 from 1999 lost 42%; gold from 2008 lost 35%.</span>
+      </div>
+    </div>
+
+    <div class="tldr" style="margin-top: 36px;">
+      <div class="tldr-label">
+        <span class="zh">三个量化检验的合并结论</span>
+        <span class="en">Combined Conclusion from Three Quant Tests</span>
+      </div>
+      <p class="zh">频谱分析否定了"60 年周期"的存在性 (p = 0.69)；事件研究的 12 个 p 值全部 &gt; 0.05；最大回撤检验显示窗口入场<em>反而风险更高</em>。三个独立的量化金融工具，三个不一致的方向都指向同一结论。</p>
+      <p class="en">Spectral analysis rejects the existence of a 60-year cycle (p = 0.69); 12 p-values from event-study tests all exceed 0.05; max-drawdown analysis shows window entries carry <em>higher</em> downside risk. Three independent quantitative finance tools, all pointing the same direction.</p>
+    </div>
+  </section>
+
+  <!-- ===== § 09 (was § 06) Theory itself ===== -->
+  <section>
+    <h2 data-num="§ 09">
+      <span class="zh">康波理论本身：学界争议</span>
+      <span class="en">The Theory Itself: A Divided Literature</span>
+    </h2>
+
+    <p class="zh">即使把"周金涛预测准不准"放一边，"康波周期"作为科学命题本身也面临严重的实证问题。但需要诚实承认：<strong>学界对康波是否存在并非一边倒</strong>——既有支持的实证研究（§ 06 已介绍），也有反对的。我们这里聚焦反对方的核心论点。</p>
+    <p class="en">Even setting aside Zhou's specific predictions, the Kondratieff wave as a scientific claim faces serious empirical problems. But to be honest: <strong>the literature is not one-sided</strong> — there are empirical studies on both sides (some discussed in § 06). Here we focus on the critical case.</p>
+
+    <h3 class="zh">两个关键引用</h3>
+    <h3 class="en">Two key citations</h3>
+    <p class="zh">维基百科对当前学界整体倾向的概括较为中肯<a href="#ref-7" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[7]</a>：</p>
+    <p class="en">Wikipedia's summary of the prevailing tilt in the field is fairly even-handed<a href="#ref-7" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[7]</a>:</p>
+
+    <blockquote class="zh">
+      长波理论不被大多数主流经济学家接受……即使在接受这一理论的经济学家中，对周期的成因和具体起止年份也缺乏共识。批评者的共识是它涉及识别根本不存在的模式（apophenia）。
+      <cite>—— Wikipedia, Kondratiev Wave</cite>
+    </blockquote>
+    <blockquote class="en">
+      Long wave theory is not accepted by most academic economists. Among economists who accept it, there is a lack of agreement about both the cause of the waves and the start and end years of particular waves. Among critics of the theory, the consensus is that it involves recognizing patterns that may not exist (apophenia).
+      <cite>—— Wikipedia, Kondratiev Wave</cite>
+    </blockquote>
+
+    <p class="zh">这段表述的两个一手来源是 Solomou (1989) 和 Rothbard (1984)<a href="#ref-8" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[8]</a><a href="#ref-11" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[11]</a>，下面我们直接给出他们的具体批评。</p>
+    <p class="en">The two primary sources behind this passage are Solomou (1989) and Rothbard (1984)<a href="#ref-8" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[8]</a><a href="#ref-11" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[11]</a>, whose specific critiques follow.</p>
+
+    <h3 class="zh">三条具体的实证批评</h3>
+    <h3 class="en">Three specific empirical critiques</h3>
+
+    <p class="zh"><strong>1. 时序方法问题。</strong>剑桥大学经济学家 Solomos Solomou 在 1989 年的《1850–1973 年经济增长阶段》<a href="#ref-8" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[8]</a> 中系统检验了主要资本主义经济体的长期增长数据，结论是康波"难以从数据中识别出"——他特别指出 Kondratieff 原始论文中"对数据拟合一条确定性时间趋势线"的方法假设了趋势平稳过程的存在，而真实经济时序"更可能是随机过程"<a href="#ref-9" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[9]</a>。换句话说：他看到的"周期"很可能只是把单调趋势剔除后剩余噪声里的几次随机起伏。</p>
+    <p class="en"><strong>1. Time-series methodology.</strong> Cambridge economist Solomos Solomou's 1989 monograph <em>Phases of Economic Growth, 1850–1973</em><a href="#ref-8" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[8]</a> systematically tested major capitalist economies' long-run growth data and concluded that long waves are "not identifiable" in the data. He specifically noted that Kondratieff's original method of fitting a deterministic time trend assumed a trend-stationary growth path that "is unlikely to hold over long periods" — real economic series "are best depicted as stochastic rather than deterministic processes"<a href="#ref-9" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[9]</a>. Translation: the "cycles" he saw were likely just a few random fluctuations in residuals left over after removing a single monotonic trend.</p>
+
+    <p class="zh"><strong>2. Kuczynski 自己的检验。</strong>1978 年 Kuczynski 用频谱分析检验全球工业产值、专利数等多个序列，他自己的结论是<em>"我们无法排除这个 60 年周期是一个随机周期的可能"</em><a href="#ref-10" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[10]</a>。注意这是支持长波理论的研究者自己写的——他从未对统计显著性做正式检验。</p>
+    <p class="en"><strong>2. Kuczynski's own caveat.</strong> In 1978, Kuczynski applied spectral analysis to global industrial output, patents, and other series — he himself wrote that <em>"we cannot exclude the possibility that the 60-year cycle … is a random cycle"</em><a href="#ref-10" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[10]</a>. Notably, this is from a researcher sympathetic to long-wave theory; he never performed a formal test of statistical significance.</p>
+
+    <p class="zh"><strong>3. 样本量根本不够。</strong>从 18 世纪工业革命开始算到现在约 250 年，最多只能容纳 4–5 个完整康波。要在统计学上拒绝"这是噪声"的零假设，需要至少 30+ 个独立周期才能达到 p &lt; 0.05。我们离这个样本量还差一个数量级——几代人的时间内都不可能补足。Rothbard 直接称康波为"最虚的'周期'"，并指出它在最多三个半周期里看起来才像周期<a href="#ref-11" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[11]</a>。</p>
+    <p class="en"><strong>3. The sample size is fundamentally inadequate.</strong> From the start of the Industrial Revolution to now is about 250 years, fitting at most 4–5 complete K-waves. Rejecting the null of "this is noise" at p &lt; 0.05 typically requires 30+ independent cycles. We are an order of magnitude short — and won't reach sufficient sample for several human generations. Rothbard called the Kondratieff cycle "the flimsiest 'cycle' of them all," noting it appears regular only across at most three-and-a-half periods<a href="#ref-11" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[11]</a>.</p>
+  </section>
+
+  <!-- ===== TRAPS ===== -->
+  <section>
+    <h2 data-num="§ 10">
+      <span class="zh">为什么这个流言这么有传播力</span>
+      <span class="en">Why the Myth Spreads So Well</span>
+    </h2>
+
+    <p class="zh">数据已经否定了具体预测、学界已经否定了一般理论，但这个说法还在 2024–2026 年的中文社交媒体上反复流传。这背后有四个机制——比上一期"巴菲特现金堆"流言多一个，也更值得深思。</p>
+    <p class="en">The data refute the specific predictions, the academic literature refutes the general theory — yet the claim continues circulating on Chinese-language social media in 2024–2026. Four mechanisms are at work — one more than the Buffett myth, and worth dwelling on.</p>
+
+    <ol class="traps">
+      <li>
+        <h3 class="zh">幸存者偏差与事后诸葛亮</h3>
+        <h3 class="en">Survivorship bias &amp; hindsight reasoning</h3>
+        <p class="zh">人们记住的是周金涛 2007 年"预测了次贷危机"的那次出名——并以此为基础接受他后续所有判断。但任何长期发表数百份研报的策略分析师都会有"命中"的时刻。同时段做出相似预测的还有 Roubini、Schiff 等，但他们后续的判断很多也没应验。中文金融圈选择性地记住周的成功（2007）<strong>而忽略他实际上失败的具体预测</strong>（2008 中国"机会"、2019 "85 后机会"等）。</p>
+        <p class="en">People remember Zhou's 2007 "prediction of the subprime crisis" and accept his subsequent claims on that basis. But any strategist publishing hundreds of reports over years will have hits. Roubini, Schiff, and others made similar 2007 predictions; many of their later calls didn't pan out either. Chinese-language finance media selectively remember Zhou's hit (2007) <strong>and ignore his actual misses</strong> (2008 China "opportunity," 2019 "post-1985 first window," etc.).</p>
+      </li>
+      <li>
+        <h3 class="zh">宿命论的心理舒适</h3>
+        <h3 class="en">The comfort of fatalism</h3>
+        <p class="zh">"人生发财靠康波"在表面上是一个金融理论，但在心理层面它提供了一种<em>解脱</em>——如果财富积累不靠个人努力而靠时代周期，那么没致富的人就不必为自己负责，致富的人也不必感激。这种宿命论框架在中国房价高企、青年职业焦虑剧增的 2017 年之后特别有市场。它<strong>不是流言广传的副产品，而是流言广传的核心驱动力</strong>。Rothbard 称康波理论"带有邪教气质"<a href="#ref-11" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[11]</a>，原因之一就是它满足了对"宏大解释框架"的心理需求。</p>
+        <p class="en">"Life's wealth comes from the wave" is nominally a financial theory, but psychologically it offers <em>relief</em> — if wealth flows from cyclical fate rather than personal effort, those who didn't get rich aren't accountable, and those who did don't owe gratitude. This fatalist frame found especially fertile ground in China after 2017, amid soaring housing prices and intensifying youth career anxiety. It is <strong>not a side effect of the myth's popularity but the engine of it</strong>. Rothbard described Kondratieff theory as having a "cult-like" quality<a href="#ref-11" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[11]</a> — partly because it satisfies the demand for grand explanatory frames.</p>
+      </li>
+      <li>
+        <h3 class="zh">过度灵活的理论</h3>
+        <h3 class="en">An over-flexible theory</h3>
+        <p class="zh">康波理论的"周期长度 50–60 年"留有 ±10 年弹性，"机会窗口"的判定也没有严格量化标准。<em>任何</em>资产价格行为事后都可以被归入"回升""繁荣""衰退""萧条"四个阶段中的某一个——这是 Karl Popper 所批评的<strong>不可证伪理论</strong>的典型特征<a href="#ref-12" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[12]</a>。Rothbard 也指出："不同周期理论家对长波年份给出不同纪事（chronologies），缺乏共识"<a href="#ref-13" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[13]</a>。一个允许多种相互冲突的"正确答案"的理论，本质上不可能被错。</p>
+        <p class="en">Kondratieff theory allows ±10 years of flexibility around its "50–60 year" period, and there is no quantitative criterion for what counts as an "opportunity window." <em>Any</em> asset price behavior can be retroactively assigned to one of the four phases — recovery, prosperity, recession, depression. This is the classic feature Karl Popper called <strong>unfalsifiability</strong><a href="#ref-12" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[12]</a>. Different long-wave theorists give "different chronologies" with no consensus<a href="#ref-13" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[13]</a>. A theory that admits multiple mutually inconsistent "right answers" cannot, in principle, be wrong.</p>
+      </li>
+      <li>
+        <h3 class="zh">遗作崇拜与早逝光环</h3>
+        <h3 class="en">Posthumous halo</h3>
+        <p class="zh">周金涛 2016 年 12 月去世，享年 44 岁。他的演讲在他去世后一年才整理成书《涛动周期论》并大规模流传。早逝、英才、"一句名言"——这些元素让对其理论的批评在情感上变得困难。但<strong>对一个理论的同情和对一个人的同情是两件事</strong>。理论必须经得起数据检验，无论它的提出者是谁。</p>
+        <p class="en">Zhou died in December 2016 at age 44. His speeches were compiled posthumously into a book a year later, and only then went viral. The combination — young, brilliant, gone too soon, "memorable phrase" — makes critique of his theory emotionally difficult. But <strong>sympathy for the person is not the same as sympathy for the theory</strong>. A theory must withstand data tests regardless of who proposed it.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ===== HONEST VERSION ===== -->
+  <section>
+    <h2 data-num="§ 11">
+      <span class="zh">什么是诚实的版本</span>
+      <span class="en">A More Honest Version</span>
+    </h2>
+
+    <p class="zh">"宏观环境会显著影响个人财富积累"——这个命题是<strong>对的</strong>。1980–2010 年是中国一代人因为出生在城镇化加速期+劳动力红利期+资产货币化期的三重叠加而获得的历史性机会。承认这一点不需要康波理论，需要的是经济发展史和制度经济学。</p>
+    <p class="en">"Macro conditions significantly affect individual wealth accumulation" — this is <strong>true</strong>. Chinese citizens born in the right cohorts between 1980 and 2010 benefited from the triple stack of urbanization, demographic dividend, and asset monetization. Acknowledging this requires economic history and institutional economics, not Kondratieff theory.</p>
+
+    <p class="zh">区别在哪里：</p>
+    <p class="en">The distinction matters:</p>
+
+    <p class="zh"><strong>不可证伪的命题</strong>："60 年周期决定每个人三次发财机会"。这个命题既无法在历史样本中验证（n &lt; 5），也没有清晰的边界条件。</p>
+    <p class="en"><strong>An unfalsifiable claim</strong>: "A 60-year cycle determines three wealth opportunities per lifetime." This cannot be verified against historical samples (n &lt; 5), and has no clear boundary conditions.</p>
+
+    <p class="zh"><strong>可证伪且通过验证的命题</strong>："Shiller CAPE 估值倍数与未来 10 年股票实际回报有 −0.5 至 −0.6 的横截面相关性"<a href="#ref-14" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[14]</a>。这是一个可量化、可重复检验、且在 100+ 年数据上稳健的关系。</p>
+    <p class="en"><strong>A falsifiable claim that holds up</strong>: "The Shiller CAPE has a cross-sectional correlation of −0.5 to −0.6 with subsequent 10-year real equity returns"<a href="#ref-14" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[14]</a>. This is quantifiable, repeatedly testable, and robust across 100+ years of data.</p>
+
+    <div class="tldr" style="margin-top: 40px;">
+      <div class="tldr-label">
+        <span class="zh">实践含义</span>
+        <span class="en">Practical Takeaway</span>
+      </div>
+      <p class="zh">想理解宏观环境对个人财富的影响：读经济发展史、人口学、制度经济学，看 Shiller CAPE 和真实利率。"按康波周期布局人生"在数学上等同于<em>占星术配置资产</em>——宿命论的安慰是真的，对决策的指导是 0。</p>
+      <p class="en">Want to understand how macro conditions shape individual wealth? Read economic history, demography, institutional economics; watch Shiller CAPE and real rates. "Allocating your life by Kondratieff phases" is mathematically equivalent to <em>doing asset allocation by astrology</em> — the fatalist comfort is real, the decision-making value is zero.</p>
+    </div>
+  </section>
+
+  <!-- ===== Limitations ===== -->
+  <section>
+    <h2 data-num="§ 12">
+      <span class="zh">方法论说明与局限</span>
+      <span class="en">Methodological Notes &amp; Limitations</span>
+    </h2>
+
+    <p class="zh"><strong>2030 窗口未检验。</strong>本文无法检验周金涛"2030 年第三次机会"的判断——它在数据上还没发生。但请注意：根据他的理论，2025 年应该已经"彻底进入第五次康波萧条阶段"<a href="#ref-1" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[1]</a>。2024 年至 2026 年初 A 股从 2974 点回升至 3960 点，美股从 4742 升至 6852，这与"萧条阶段"的描述并不匹配——这本身已经是对其理论框架的间接证伪。</p>
+    <p class="en"><strong>The 2030 window cannot yet be tested</strong> — it hasn't happened. But note: Zhou's framework predicted that by 2025 the world would be "firmly in the fifth Kondratieff depression"<a href="#ref-1" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[1]</a>. From early 2024 to early 2026, the Shanghai Composite rose from 2974 to 3960 and the S&amp;P 500 from 4742 to 6852. This is not what a "firmly entrenched depression" looks like — itself an indirect refutation of the framework.</p>
+
+    <p class="zh"><strong>价格回报 vs 总回报。</strong>本文使用价格回报，未含 A 股/美股股息或房产租金收益。包含这些会使所有起点 CAGR 系统性提高 1–2 个百分点，但<em>相对</em>排名不变。</p>
+    <p class="en"><strong>Price vs. total return.</strong> Price returns only — dividends and rental income are excluded. Including them would shift all CAGRs up by 1–2 percentage points uniformly, but the <em>relative</em> ranking of start years is unchanged.</p>
+
+    <p class="zh"><strong>北京房价数据的复杂性。</strong>2008 年之前北京住宅市场分割（商品房、福利房、二手房），均价数据存在统计口径差异。本文使用国家统计局季度调查数据，但精度低于股市指数。这一不确定性不影响 2008 后的检验结论（2008 起点房价数据可靠）。</p>
+    <p class="en"><strong>Beijing housing data caveat.</strong> Pre-2008, the Beijing residential market was segmented (commodity housing, welfare housing, resale), and price aggregates differ across measurement conventions. We use NBS quarterly survey data, but precision is lower than for equity indices. This uncertainty does not affect post-2008 conclusions (2008 housing data is reliable).</p>
+
+    <p class="zh"><strong>资产权重与可获得性。</strong>普通投资者无法在 1999 年初真的把全部储蓄买入北京房——一线城市住宅在那个年代对大多数人来说存在配额限制和资金门槛。本文的分析是<em>事后假设性</em>的，目的是检验理论本身，而非给出可执行策略。</p>
+    <p class="en"><strong>Accessibility caveat.</strong> A typical Chinese investor in 1999 could not actually allocate all their savings to Beijing housing — there were rationing, quota, and capital barriers in tier-1 cities at the time. Our analysis is <em>counterfactual</em> — testing the theory's predictions, not prescribing strategy.</p>
+
+    <div class="tldr" style="margin-top: 40px; border-left-color: var(--accent-2);">
+      <div class="tldr-label" style="color: var(--accent-2);">
+        <span class="zh">完全可复现</span>
+        <span class="en">Fully Reproducible</span>
+      </div>
+      <p class="zh">本文所有数字、表格、图表均由开源 Python 代码生成，<strong>欢迎复现、质疑、修正</strong>。代码、数据、Jupyter notebook 全部在 GitHub 上 MIT 协议公开：</p>
+      <p class="en">Every number, table, and figure in this article is generated by open-source Python code. <strong>Replication, critique, and corrections are welcome.</strong> Code, data, and a Jupyter notebook are all available under MIT License at:</p>
+      <p style="margin-top: 14px; font-family: var(--mono); font-size: 14px;">
+        <a href="https://github.com/yifan70932/Kondratieff-Cycle" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-soft); padding-bottom: 1px;">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="display: inline-block; vertical-align: middle; margin-right: 6px;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>github.com/yifan70932/Kondratieff-Cycle</a>
+      </p>
+      <p style="margin-top: 12px; font-size: 13px; color: var(--ink-muted);" class="zh">
+        包含：4 个 CSV 数据文件、4 个分析脚本（事件研究、统计推断、风险调整、频谱分析）、Jupyter notebook、预计算结果表格、完整 README。Python 3.13 + numpy/scipy/pandas/matplotlib，2 秒内可全部跑完。
+      </p>
+      <p style="margin-top: 12px; font-size: 13px; color: var(--ink-muted);" class="en">
+        Contents: 4 CSV data files, 4 analysis scripts (event study, statistical tests, risk-adjusted, spectral analysis), Jupyter notebook, pre-computed result tables, full README. Python 3.13 + numpy/scipy/pandas/matplotlib; runs in &lt; 2 seconds end-to-end.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CITATIONS ===== -->
+  <section class="citations">
+    <h2>
+      <span class="zh">引用与数据来源</span>
+      <span class="en">References &amp; Data Sources</span>
+    </h2>
+    <ol>
+      <li id="ref-1">周金涛 (2016)。《人生就是一场康波》。上海清算所第 30 期沙龙演讲, 2016-03-16。后收录于《涛动周期论》(2017, 机械工业出版社)。</li>
+      <li id="ref-2">21 财经 (2018)。《重温丨"周期天王"周金涛：人生只有三次财富机会，2019 年会出现一次》。<a href="https://m.21jingji.com/article/20181208/herald/141ff47f59d638a536b8f8cea2187e83.html" target="_blank" rel="noopener">m.21jingji.com</a></li>
+      <li id="ref-3">Shanghai Stock Exchange / Yahoo Finance. <em>Shanghai Composite Index (000001.SS)</em>, monthly close, 1995–2026. Retrieved May 2026 from <a href="https://finance.yahoo.com/quote/000001.SS/history/" target="_blank" rel="noopener">finance.yahoo.com/quote/000001.SS/history</a>. Cross-validated with <a href="https://www.macrotrends.net/2592/shanghai-composite-index-china-stock-market-chart-data" target="_blank" rel="noopener">macrotrends.net/2592/shanghai-composite-index</a>.</li>
+      <li id="ref-4">S&amp;P Dow Jones Indices via Federal Reserve Bank of St. Louis. <em>S&amp;P 500 (^GSPC)</em>, FRED series <span class="num">SP500</span>, monthly close, 1995–2026. <a href="https://fred.stlouisfed.org/series/SP500" target="_blank" rel="noopener">fred.stlouisfed.org/series/SP500</a>.</li>
+      <li id="ref-5">国家统计局 (National Bureau of Statistics of China) / 北京市统计局 (Beijing Municipal Bureau of Statistics). <em>北京市商品房平均销售价格：住宅</em> (Beijing residential commodity housing average sales price), annual, 1999–2024, ¥/m². <a href="https://tjj.beijing.gov.cn/" target="_blank" rel="noopener">tjj.beijing.gov.cn</a>. Methodology described in NBS (2023) <em>住宅销售价格指数是如何编制的</em>.</li>
+      <li id="ref-6">London Bullion Market Association. <em>LBMA Gold Price AM Fix, USD/troy oz</em>, year-start values, 1995–2026. <a href="https://www.lbma.org.uk/prices-and-data/lbma-precious-metal-prices" target="_blank" rel="noopener">lbma.org.uk/prices-and-data</a>.</li>
+      <li id="ref-7">Wikipedia. <em>Kondratiev wave</em>. <a href="https://en.wikipedia.org/wiki/Kondratiev_wave" target="_blank" rel="noopener">en.wikipedia.org/wiki/Kondratiev_wave</a>. The "long wave theory is not accepted by most academic economists" claim is sourced in Wikipedia primarily to Solomou (1989) [ref-8] and Rothbard (1984) [ref-11]; readers may verify in those primary sources.</li>
+      <li id="ref-8">Solomou, S. (1989). <em>Phases of Economic Growth, 1850–1973: Kondratieff Waves and Kuznets Swings</em>. Cambridge: Cambridge University Press, 197 pp. <a href="https://doi.org/10.1017/CBO9780511522109" target="_blank" rel="noopener">doi.org/10.1017/CBO9780511522109</a>. Systematically tests long-run growth data for major capitalist economies; concludes that long waves are "not identifiable in the data."</li>
+      <li id="ref-9">Hecht, J. (2024). Are Long Waves 50 Years? Reexamining Economic and Financial Long Wave Periodicities in Kondratieff and Schumpeter. <em>Review of Political Economy</em>, 37(4). <a href="https://doi.org/10.1080/09538259.2023.2280803" target="_blank" rel="noopener">doi.org/10.1080/09538259.2023.2280803</a></li>
+      <li id="ref-10">Kuczynski, T. (1978). Spectral analysis and cluster analysis as mathematical methods for the periodization of historical processes. <em>Kondratieff Cycles — Appearance or Reality?</em>, Vol. 2. Note: Kuczynski himself wrote that "we cannot exclude the possibility that the 60-year cycle … is a random cycle." Cited in Korotayev &amp; Tsirel (2010) [ref-21].</li>
+      <li id="ref-11">Rothbard, M. N. (1984). <em>The Kondratieff Cycle: Real or Fabricated?</em> Mises Institute Daily Article, originally <em>Investment Insights</em> (Aug–Sep 1984). <a href="https://mises.org/library/kondratieff-cycle-real-or-fabricated" target="_blank" rel="noopener">mises.org/library/kondratieff-cycle-real-or-fabricated</a>. Calls Kondratieff cycle "the flimsiest 'cycle' of them all."</li>
+      <li id="ref-12">Popper, K. R. (1959). <em>The Logic of Scientific Discovery</em>. London: Hutchinson (originally published in German as <em>Logik der Forschung</em>, 1934). Falsifiability criterion developed throughout, esp. §§1–6.</li>
+      <li id="ref-13">Coccia, M. (2010). The Asymmetric path of Economic Long Waves. <em>Technological Forecasting and Social Change</em>, 77(5). <a href="https://doi.org/10.1016/j.techfore.2010.02.003" target="_blank" rel="noopener">doi.org/10.1016/j.techfore.2010.02.003</a>. Reviews multiple long-wave chronologies and notes their inconsistency.</li>
+      <li id="ref-14">Campbell, J. Y., &amp; Shiller, R. J. (1998). Valuation Ratios and the Long-Run Stock Market Outlook. <em>Journal of Portfolio Management</em>, 24(2), 11–26.</li>
+      <li id="ref-15">Welch, P. D. (1967). The use of fast Fourier transform for the estimation of power spectra: A method based on time averaging over short, modified periodograms. <em>IEEE Transactions on Audio and Electroacoustics</em>, 15(2), 70–73.</li>
+      <li id="ref-16">Efron, B., &amp; Tibshirani, R. (1993). <em>An Introduction to the Bootstrap</em>. Chapman &amp; Hall/CRC. Permutation tests are described in Chapter 15.</li>
+      <li id="ref-17"><strong>Reproducibility note:</strong> All CAGR, t-test, Mann-Whitney, bootstrap, Sharpe, and max-drawdown calculations are open-source at <a href="https://github.com/yifan70932/Kondratieff-Cycle" target="_blank" rel="noopener"><span class="num">github.com/yifan70932/Kondratieff-Cycle</span></a>. Repository contains all data files (CSV), four Python analysis scripts, a Jupyter notebook walkthrough, and pre-computed result tables. Implemented in Python 3.13 with numpy 2.4.4, scipy 1.17.1, pandas 3.0.2, and matplotlib 3.7+. Total runtime &lt; 2 seconds on a standard laptop. Random seeds fixed at 42 for all bootstrap procedures. MIT licensed.</li>
+      <li id="ref-18">Bolt, J., &amp; van Zanden, J. L. (2024). Maddison-style estimates of the evolution of the world economy: A new 2023 update. <em>Journal of Economic Surveys</em>, 39, 631–671. <a href="https://doi.org/10.1111/joes.12618" target="_blank" rel="noopener">doi.org/10.1111/joes.12618</a>. Maddison Project Database 2023 used for US real GDP per capita 1870–1928. <a href="https://www.rug.nl/ggdc/historicaldevelopment/maddison/releases/maddison-project-database-2023" target="_blank" rel="noopener">rug.nl/ggdc/historicaldevelopment/maddison</a></li>
+      <li id="ref-19">U.S. Bureau of Economic Analysis. <em>Real Gross Domestic Product, Percent Change from Preceding Period</em> (NIPA Table 1.1.1). FRED series <span class="num">A191RL1A225NBEA</span>, retrieved May 2026 via Federal Reserve Bank of St. Louis. <a href="https://fred.stlouisfed.org/series/A191RL1A225NBEA" target="_blank" rel="noopener">fred.stlouisfed.org/series/A191RL1A225NBEA</a></li>
+      <li id="ref-20">Bieshaar, H., &amp; Kleinknecht, A. (1984). Kondratieff long waves in aggregate output? An econometric test. <em>Konjunkturpolitik</em>, 30(5), 279–303. Tests six long-wave chronologies on multiple time series since 1890; concludes statistical evidence is "quite strong and robust."</li>
+      <li id="ref-21">Korotayev, A. V., &amp; Tsirel, S. V. (2010). A spectral analysis of world GDP dynamics: Kondratieff waves, Kuznets swings, Juglar and Kitchin cycles in global economic development. <em>Structure and Dynamics</em>, 4(1). Reports a ≈52-year peak in world GDP power spectrum.</li>
+      <li id="ref-22">Diebolt, C., &amp; Doliger, C. (2008). New international evidence on the cyclical behaviour of output: Kuznets swings reconsidered. <em>Quality &amp; Quantity</em>, 42(6), 719–737. Spectral analysis on OECD countries; finds robust Kuznets swings (≈15–25 years) but no robust Kondratieff cycle.</li>
+      <li id="ref-23">Metz, R. (2011). Do Kondratieff waves exist? How time series techniques can help to solve the problem. <em>Cliometrica</em>, 5(3), 205–238. <a href="https://doi.org/10.1007/s11698-010-0057-9" target="_blank" rel="noopener">doi.org/10.1007/s11698-010-0057-9</a>. Methodological survey concluding the long-wave question is highly sensitive to time-series method choice.</li>
+      <li id="ref-24">Federal Reserve Bank of St. Louis. <em>10-Year Treasury Constant Maturity Rate</em>. FRED series <span class="num">DGS10</span>, 1995–2024 annual averages. Risk-free rate proxy of 3.5% derived from this series. <a href="https://fred.stlouisfed.org/series/DGS10" target="_blank" rel="noopener">fred.stlouisfed.org/series/DGS10</a></li>
+      <li id="ref-25">Damodaran, A. (2025). <em>Historical Returns: Stocks, T.Bonds &amp; T.Bills with Premiums</em> (1928–2024). Stern School of Business, NYU. <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html" target="_blank" rel="noopener">pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html</a>. Long-run S&amp;P 500 total return reference series.</li>
+    </ol>
+  </section>
+
+  <footer>
+    <span class="zh">Myth Busters · Yifan · 数据可复现 · 欢迎指出错误</span>
+    <span class="en">Myth Busters · Yifan · Reproducible · Corrections welcome</span>
+    <br>
+    <span style="opacity:0.6">v1.0 · 2026-05-05</span>
+  </footer>
+
+</div>
+
+<script>
+  // ============= LANGUAGE TOGGLE =============
+  const body = document.body;
+  const buttons = document.querySelectorAll('[data-lang-btn]');
+
+  const svgTranslations = {
+    'A 股':   'A-shares',
+    '北京房': 'Beijing',
+    '黄金':   'Gold',
+    '基准':   'Baseline',
+    '最优 (1)':  'Best (1)',
+    '中位 (10)':  'Median (10)',
+    '最差 (20)': 'Worst (20)',
+    '95% 显著性阈值（Bootstrap）': '95% significance threshold (bootstrap)',
+    '康波区':                     'K-wave zone',
+    '8.6 年 Juglar':              '8.6 yr (Juglar)',
+    '20 年 Kuznets':              '20 yr (Kuznets)',
+    '60 年（无峰）':              '60 yr (no peak)',
+    '周期长度（年，对数刻度）':    'Period length (years, log scale)',
+  };
+
+  document.querySelectorAll('.zh-tspan').forEach(t => {
+    t.dataset.zh = t.textContent.trim();
+    t.dataset.en = svgTranslations[t.dataset.zh] || t.dataset.zh;
+  });
+
+  function setLang(lang) {
+    body.dataset.lang = lang;
+    document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.langBtn === lang));
+    document.querySelectorAll('.zh-tspan').forEach(t => {
+      t.textContent = (lang === 'zh') ? t.dataset.zh : t.dataset.en;
+    });
+    try { localStorage.setItem('mb-lang', lang); } catch(e) {}
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.langBtn)));
+
+  try {
+    const saved = localStorage.getItem('mb-lang');
+    if (saved) setLang(saved);
+    else setLang('zh');
+  } catch(e) { setLang('zh'); }
+
+  // ============= TOOLTIP ON EVENT DOTS =============
+  const tooltip = document.getElementById('tooltip');
+  const dots = document.querySelectorAll('.event-dot');
+
+  const labels = {
+    zh: { asset: '资产', year: '买入年份', rank: '排名', cagr: '10年CAGR' },
+    en: { asset: 'Asset', year: 'Buy year', rank: 'Rank', cagr: '10y CAGR' }
+  };
+
+  dots.forEach(dot => {
+    dot.style.cursor = 'pointer';
+    dot.addEventListener('mouseenter', () => {
+      const lang = body.dataset.lang;
+      const L = labels[lang];
+      const assetZh = dot.dataset.asset;
+      const assetEn = { 'A股': 'Shanghai Comp.', 'S&P 500': 'S&P 500', '北京房': 'Beijing housing', '黄金': 'Gold' }[assetZh] || assetZh;
+      const asset = (lang === 'zh') ? assetZh : assetEn;
+      tooltip.innerHTML =
+        `<strong>${L.asset}:</strong> ${asset}<br>` +
+        `<strong>${L.year}:</strong> ${dot.dataset.year}<br>` +
+        `<strong>${L.rank}:</strong> ${dot.dataset.rank} / ${dot.dataset.asset === '北京房' ? '16' : '20'}<br>` +
+        `<strong>${L.cagr}:</strong> ${dot.dataset.cagr}%`;
+      tooltip.classList.add('show');
+    });
+    dot.addEventListener('mousemove', (e) => {
+      const x = e.clientX + 14;
+      const y = e.clientY - 10;
+      tooltip.style.left = Math.min(x, window.innerWidth - 260) + 'px';
+      tooltip.style.top  = y + 'px';
+    });
+    dot.addEventListener('mouseleave', () => {
+      tooltip.classList.remove('show');
+    });
+  });
+</script>
+
+</body>
+</html>

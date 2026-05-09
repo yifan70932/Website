@@ -1,0 +1,2645 @@
+/* ====================================================================
+   yifanova.com/flying — self-contained stylesheet
+   Independent of base.css and tokens.css.
+   All selectors scoped under .flying-page.
+   English primary typography; Chinese secondary.
+   Sticky TOC on the left side at ≥1100px; collapses to top on narrow.
+
+   Text column: 50rem (~900 px @ 18 px base) — wider than ski (48rem)
+   per spec, so prose feels less cramped on desktop while still
+   respecting reading-line research (~70–80 char/line at this width).
+   ==================================================================== */
+
+:root {
+  --fl-ink:        #1f2328;
+  --fl-ink-soft:   #4a5159;
+  --fl-ink-faint:  #6b7280;
+  --fl-ink-faded:  #9ca3af;
+  --fl-rule:       #e5e7eb;
+  --fl-rule-soft:  #f1f3f5;
+  --fl-paper:      #fafaf7;
+  --fl-paper-deep: #f5f4ee;
+  --fl-navy:       #0a3d62;
+  --fl-sapphire:   #1e5fa8;
+  --fl-forest:     #3a5a40;
+  --fl-amber:      #b45309;
+  --fl-pale-blue:  #e8f1f8;
+  --fl-pale-fst:   #eef2ec;
+
+  --fl-font-body:  "Atkinson Hyperlegible", "Source Sans 3", system-ui, -apple-system, sans-serif;
+  --fl-font-ui:    "Inter", system-ui, sans-serif;
+  --fl-font-cn:    "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", serif;
+  --fl-font-mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.flying-page, .flying-page * { box-sizing: border-box; }
+
+body.flying-page {
+  margin: 0;
+  background: var(--fl-paper);
+  color: var(--fl-ink);
+  font-family: var(--fl-font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  font-feature-settings: "kern", "liga", "calt";
+  -webkit-font-smoothing: antialiased;
+}
+
+body.flying-page[data-lang="zh"] {
+  font-family: var(--fl-font-cn);
+  line-height: 1.78;
+}
+
+/* ─── Language switching ─────────────────────────────────────────── */
+.flying-page [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] [data-lang-content="en"] { display: revert; }
+.flying-page[data-lang="zh"] [data-lang-content="zh"] { display: revert; }
+
+/* ─── Topbar ─────────────────────────────────────────────────────── */
+.flying-page .topbar {
+  border-bottom: 1px solid var(--fl-rule);
+  background: rgba(250, 250, 247, 0.92);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.flying-page .topbar-inner {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.flying-page .brand {
+  font-family: var(--fl-font-ui);
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  color: var(--fl-ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flying-page .brand-mark { color: var(--fl-navy); font-weight: 600; }
+.flying-page .brand a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted var(--fl-rule);
+}
+.flying-page .brand a:hover { color: var(--fl-navy); border-bottom-color: var(--fl-navy); }
+
+/* ─── Language toggle ────────────────────────────────────────────── */
+.flying-page .lang-toggle {
+  display: inline-flex;
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--fl-paper-deep);
+}
+
+.flying-page .lang-toggle button {
+  font-family: var(--fl-font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.7rem;
+  background: transparent;
+  border: 0;
+  color: var(--fl-ink-faint);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.flying-page .lang-toggle button.active { background: var(--fl-navy); color: white; }
+.flying-page .lang-toggle button:not(.active):hover { color: var(--fl-navy); background: var(--fl-pale-blue); }
+
+/* ─── Two-column layout: TOC sidebar + main content ──────────────── */
+.flying-page .layout {
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+@media (min-width: 1100px) {
+  .flying-page .layout {
+    display: grid;
+    grid-template-columns: 14rem 1fr;
+    gap: 3rem;
+    align-items: start;
+    padding: 0 2rem 6rem;
+    padding-top: 2rem;
+  }
+}
+
+.flying-page .main {
+  /* Wider reading column than ski page: paragraphs cap at 50rem (~900 px). */
+  max-width: 64rem;
+  padding-top: 3rem;
+  position: relative;
+}
+
+@media (min-width: 1100px) {
+  .flying-page .main {
+    max-width: 64rem;
+    padding-top: 0;
+  }
+}
+
+/* ─── Article header ─────────────────────────────────────────────── */
+.flying-page .article-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--fl-rule);
+}
+
+.flying-page h1 {
+  font-weight: 700;
+  font-size: clamp(2rem, 4.2vw, 2.6rem);
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--fl-ink);
+  margin: 0 0 0.6rem;
+  max-width: 50rem;
+}
+
+.flying-page .subtitle {
+  font-size: 1.1rem;
+  color: var(--fl-ink-soft);
+  font-style: italic;
+  margin: 0 0 1.5rem;
+  max-width: 50rem;
+}
+.flying-page[data-lang="zh"] .subtitle { font-style: normal; }
+
+.flying-page .epigraph {
+  font-family: var(--fl-font-body);
+  font-style: italic;
+  color: var(--fl-ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  /* No left bar, no background — purely typographic. */
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 1.75rem 0 0 2.5rem;
+  max-width: 42rem;
+  /* Traditional epigraph indent rather than callout. */
+}
+.flying-page[data-lang="zh"] .epigraph {
+  font-family: var(--fl-font-cn);
+  font-style: normal;
+  line-height: 1.85;
+}
+.flying-page .epigraph .attribution {
+  display: block;
+  font-style: normal;
+  font-family: var(--fl-font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  color: var(--fl-ink-faint);
+  text-transform: none;
+  margin-top: 0.5rem;
+  /* En-dash convention preceding the attribution name. */
+}
+.flying-page .epigraph .attribution::before {
+  content: "— ";
+}
+.flying-page[data-lang="zh"] .epigraph .attribution {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.flying-page .article-meta {
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  color: var(--fl-ink-faint);
+  margin-top: 1.25rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.flying-page[data-lang="zh"] .article-meta {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+/* ─── Headings inside the body ───────────────────────────────────── */
+.flying-page h2 {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--fl-navy);
+  line-height: 1.25;
+  margin: 3.2rem 0 1rem;
+  letter-spacing: -0.005em;
+  max-width: 50rem;
+}
+
+.flying-page h2 .sec-num {
+  display: inline-block;
+  font-family: var(--fl-font-ui);
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--fl-ink-faint);
+  margin-right: 0.5em;
+  letter-spacing: 0.04em;
+}
+.flying-page[data-lang="zh"] h2 .sec-num {
+  font-family: var(--fl-font-cn);
+}
+
+.flying-page h3 {
+  font-family: var(--fl-font-ui);
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fl-ink-soft);
+  margin: 2rem 0 0.5rem;
+  max-width: 50rem;
+}
+.flying-page[data-lang="zh"] h3 {
+  font-family: var(--fl-font-cn);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Anchor offset for TOC nav ─────────────────────────────────── */
+.flying-page h2[id] { scroll-margin-top: 4rem; }
+html { scroll-behavior: smooth; }
+
+/* ─── Body prose ─────────────────────────────────────────────────── */
+.flying-page p {
+  margin: 0 0 1.1em;
+  max-width: 50rem;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.flying-page[data-lang="zh"] p {
+  hyphens: none;
+  -webkit-hyphens: none;
+  text-align: justify;
+}
+
+.flying-page a {
+  color: var(--fl-navy);
+  text-decoration: underline;
+  text-decoration-color: var(--fl-rule);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.15s ease;
+}
+.flying-page a:hover { text-decoration-color: var(--fl-navy); }
+
+.flying-page em { font-style: italic; }
+.flying-page strong { font-weight: 700; color: var(--fl-ink); }
+
+.flying-page .term {
+  font-family: var(--fl-font-ui);
+  font-weight: 600;
+  color: var(--fl-forest);
+  font-size: 0.96em;
+}
+.flying-page[data-lang="zh"] .term {
+  font-family: var(--fl-font-cn);
+}
+
+.flying-page code, .flying-page .mono {
+  font-family: var(--fl-font-mono);
+  font-size: 0.88em;
+  background: var(--fl-rule-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  color: var(--fl-ink);
+}
+
+.flying-page .cjk { font-family: var(--fl-font-cn); }
+.flying-page .lat { font-family: var(--fl-font-body); }
+
+/* ─── Block elements ─────────────────────────────────────────────── */
+.flying-page blockquote {
+  margin: 1.5rem 0;
+  padding: 0.9rem 1.25rem;
+  border-left: 3px solid var(--fl-navy);
+  background: var(--fl-pale-blue);
+  border-radius: 0 3px 3px 0;
+  color: var(--fl-ink-soft);
+  font-style: italic;
+  max-width: 50rem;
+}
+.flying-page blockquote p:last-child { margin-bottom: 0; }
+.flying-page[data-lang="zh"] blockquote { font-style: normal; }
+
+.flying-page hr {
+  border: none;
+  border-top: 1px solid var(--fl-rule);
+  margin: 3rem 0;
+  max-width: 50rem;
+}
+
+/* ─── Figures ────────────────────────────────────────────────────── */
+.flying-page figure {
+  margin: 2.5rem 0;
+}
+
+.flying-page figure svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.flying-page figcaption {
+  font-family: var(--fl-font-ui);
+  font-size: 0.82rem;
+  color: var(--fl-ink-faint);
+  margin-top: 0.85rem;
+  line-height: 1.55;
+  max-width: 50rem;
+}
+.flying-page[data-lang="zh"] figcaption {
+  font-family: var(--fl-font-cn);
+  line-height: 1.7;
+}
+
+/* Figure caption variant used as a header above a widget rather
+   than a footer below it. Used for widgets in §5 (accidents map,
+   CZ3456 CVR) where the caption introduces what follows. */
+.flying-page figcaption.figure-caption {
+  display: block;
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--fl-navy);
+  font-weight: 600;
+  margin: 0 0 0.85rem 0;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--fl-rule);
+  max-width: none;
+}
+.flying-page[data-lang="zh"] figcaption.figure-caption {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-size: 0.92rem;
+}
+
+.flying-page figure.full-bleed {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Placeholder for not-yet-built widgets. */
+.flying-page .widget-placeholder {
+  border: 1px dashed var(--fl-rule);
+  background: var(--fl-paper-deep);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-family: var(--fl-font-ui);
+  font-size: 0.85rem;
+  color: var(--fl-ink-faint);
+  letter-spacing: 0.03em;
+  border-radius: 4px;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+.flying-page[data-lang="zh"] .widget-placeholder {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0.02em;
+}
+.flying-page .widget-placeholder strong {
+  display: block;
+  color: var(--fl-ink-soft);
+  font-size: 0.95rem;
+  margin-bottom: 0.4em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.flying-page[data-lang="zh"] .widget-placeholder strong {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+/* ─── Sidenotes (inline callout style on narrow, gutter on wide) ── */
+.flying-page .sidenote {
+  font-family: var(--fl-font-ui);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--fl-ink-soft);
+  background: var(--fl-rule-soft);
+  border-left: 2px solid var(--fl-sapphire);
+  padding: 0.75rem 1rem;
+  margin: 1.5rem 0;
+  border-radius: 0 3px 3px 0;
+  max-width: 50rem;
+}
+.flying-page[data-lang="zh"] .sidenote {
+  font-family: var(--fl-font-cn);
+  line-height: 1.7;
+}
+
+/* ─── Table of contents ──────────────────────────────────────────── */
+.flying-page .toc {
+  font-family: var(--fl-font-ui);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.flying-page[data-lang="zh"] .toc {
+  font-family: var(--fl-font-cn);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.flying-page .toc-title {
+  font-family: var(--fl-font-ui);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--fl-ink-faint);
+  margin-bottom: 1rem;
+}
+.flying-page[data-lang="zh"] .toc-title {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.flying-page .toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.flying-page .toc li { margin: 0; padding: 0; }
+.flying-page .toc a {
+  display: block;
+  padding: 0.4rem 0 0.4rem 0.7rem;
+  color: var(--fl-ink-soft);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  line-height: 1.4;
+}
+.flying-page .toc a:hover {
+  color: var(--fl-navy);
+  border-left-color: var(--fl-rule);
+}
+.flying-page .toc a.active {
+  color: var(--fl-navy);
+  border-left-color: var(--fl-navy);
+  font-weight: 500;
+}
+
+/* TOC sub-list (used under §9 for the key tool anchors) */
+.flying-page .toc .toc-sublist {
+  margin: 0.15rem 0 0.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+.flying-page .toc .toc-sublist a {
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  font-size: 0.84em;
+  color: var(--fl-ink-faint);
+  font-family: var(--fl-font-ui);
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 400;
+}
+.flying-page[data-lang="zh"] .toc .toc-sublist a {
+  font-family: var(--fl-font-ui);
+}
+.flying-page .toc .toc-sublist a::after {
+  content: " ↗";
+  opacity: 0.4;
+  font-size: 0.85em;
+  margin-left: 0.25em;
+}
+.flying-page .toc .toc-sublist a:hover {
+  color: var(--fl-sapphire);
+  border-left-color: var(--fl-rule);
+}
+.flying-page .toc .toc-sublist a:hover::after {
+  opacity: 1;
+}
+
+/* Desktop TOC: sticky in left margin */
+@media (min-width: 1100px) {
+  .flying-page .toc {
+    grid-column: 1;
+    position: sticky;
+    top: 4rem;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  .flying-page .toc::-webkit-scrollbar { width: 4px; }
+  .flying-page .toc::-webkit-scrollbar-thumb {
+    background: var(--fl-rule);
+    border-radius: 2px;
+  }
+  .flying-page .main { grid-column: 2; min-width: 0; }
+  .flying-page .toc-mobile-toggle { display: none; }
+}
+
+/* Mobile / tablet collapsible drawer */
+@media (max-width: 1099px) {
+  .flying-page .toc {
+    margin: 0 0 2rem;
+    border: 1px solid var(--fl-rule);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--fl-paper-deep);
+  }
+  .flying-page .toc-mobile-toggle {
+    display: flex;
+    width: 100%;
+    text-align: left;
+    padding: 0.7rem 1rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    font-family: var(--fl-font-ui);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--fl-ink-soft);
+    justify-content: space-between;
+    align-items: center;
+  }
+  .flying-page[data-lang="zh"] .toc-mobile-toggle {
+    font-family: var(--fl-font-cn);
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
+  .flying-page .toc-mobile-toggle::after {
+    content: '▾';
+    font-size: 1em;
+    transition: transform 0.2s;
+  }
+  .flying-page .toc.expanded .toc-mobile-toggle::after { transform: rotate(180deg); }
+  .flying-page .toc.expanded .toc-mobile-toggle {
+    border-bottom-color: var(--fl-rule);
+  }
+  .flying-page .toc-title { display: none; }
+  .flying-page .toc-list-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+  .flying-page .toc.expanded .toc-list-wrapper {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .flying-page .toc ol { padding: 0.5rem 1rem 1rem; }
+  .flying-page .toc a { padding: 0.35rem 0 0.35rem 0.6rem; }
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────── */
+.flying-page .page-footer {
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--fl-rule);
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  color: var(--fl-ink-faint);
+  display: flex;
+  justify-content: space-between;
+  letter-spacing: 0.02em;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: 50rem;
+}
+.flying-page[data-lang="zh"] .page-footer {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0;
+}
+.flying-page .page-footer a {
+  color: var(--fl-ink-faint);
+  text-decoration: none;
+  margin-left: 1rem;
+}
+.flying-page .page-footer a:hover { color: var(--fl-navy); }
+
+/* ─── §1 Airfoil widget ──────────────────────────────────────────── */
+.flying-page .airfoil-widget {
+  background: var(--fl-paper-deep);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  column-gap: 1rem;
+  row-gap: 0.85rem;
+  align-items: start;
+}
+
+.flying-page .airfoil-stage {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.flying-page .airfoil-side {
+  grid-column: 2;
+  grid-row: 1;
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.flying-page .airfoil-controls {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1.5rem;
+  font-family: var(--fl-font-ui);
+  font-size: 0.85rem;
+  color: var(--fl-ink-soft);
+  border-top: 1px solid var(--fl-rule);
+  padding-top: 0.85rem;
+}
+.flying-page[data-lang="zh"] .airfoil-controls {
+  font-family: var(--fl-font-cn);
+}
+
+.flying-page .airfoil-controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.flying-page .airfoil-controls input[type="range"] {
+  width: 12rem;
+  accent-color: var(--fl-navy);
+}
+
+.flying-page .airfoil-readout {
+  font-family: var(--fl-font-mono);
+  font-size: 0.85rem;
+  color: var(--fl-navy);
+  font-weight: 600;
+  min-width: 4em;
+  text-align: right;
+}
+
+/* ─── Flap selector (Cessna 172 single-slotted flap) ─── */
+.flying-page .airfoil-flaps {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.flying-page .airfoil-flaps-label {
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  color: var(--fl-ink-soft);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.flying-page[data-lang="zh"] .airfoil-flaps-label {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.flying-page .airfoil-flaps-buttons {
+  display: inline-flex;
+  border: 1px solid var(--fl-rule);
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--fl-paper);
+}
+.flying-page .airfoil-flaps-buttons button {
+  font-family: var(--fl-font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.32rem 0.55rem;
+  background: var(--fl-paper);
+  border: none;
+  border-right: 1px solid var(--fl-rule);
+  color: var(--fl-ink-soft);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+  min-width: 2.4rem;
+}
+.flying-page .airfoil-flaps-buttons button:last-child {
+  border-right: none;
+}
+.flying-page .airfoil-flaps-buttons button:hover {
+  background: var(--fl-rule-soft);
+  color: var(--fl-navy);
+}
+.flying-page .airfoil-flaps-buttons button.active {
+  background: var(--fl-navy);
+  color: #fafaf7;
+  font-weight: 700;
+}
+
+.flying-page .airfoil-status {
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--fl-ink-faint);
+  font-style: italic;
+  flex: 1 1 auto;
+  text-align: right;
+  min-width: 12rem;
+}
+.flying-page[data-lang="zh"] .airfoil-status {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0.02em;
+  font-style: normal;
+}
+.flying-page .airfoil-status.stalled {
+  color: #c0392b;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.flying-page .airfoil-svg,
+.flying-page .airfoil-clplot {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: transparent;
+}
+
+/* On narrow screens, stack the Cl plot beneath the airfoil */
+@media (max-width: 720px) {
+  .flying-page .airfoil-widget {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .flying-page .airfoil-side {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .flying-page .airfoil-controls {
+    grid-row: 3;
+  }
+  .flying-page .airfoil-status {
+    text-align: left;
+  }
+}
+
+/* ─── §3 FMC/CDU widget ─────────────────────────────────────────── */
+/* Title bar above the FMC figure: identifies the device and links
+   out to the standalone simulator page for readers who want the
+   full set of pages. Sits inside the same <figure> as .fmc-widget,
+   so it shares the figure's full-bleed width. */
+.flying-page .fmc-widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding: 0 0.25rem 0.6rem;
+  margin: 1.25rem 0 -0.5rem;  /* negative bottom merges into widget */
+  border-bottom: 1px solid var(--fl-rule);
+  font-family: var(--fl-font-ui);
+}
+.flying-page .fmc-widget-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--fl-ink);
+  text-transform: uppercase;
+}
+.flying-page[data-lang="zh"] .fmc-widget-title {
+  font-family: var(--fl-font-cn);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+.flying-page .fmc-widget-link {
+  font-size: 0.85rem;
+  color: var(--fl-sapphire);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.flying-page .fmc-widget-link:hover {
+  text-decoration: underline;
+}
+.flying-page[data-lang="zh"] .fmc-widget-link {
+  font-family: var(--fl-font-cn);
+}
+.flying-page .fmc-widget-title [data-lang-content],
+.flying-page .fmc-widget-link [data-lang-content] {
+  display: none;
+}
+.flying-page[data-lang="en"] .fmc-widget-title [data-lang-content="en"],
+.flying-page[data-lang="en"] .fmc-widget-link [data-lang-content="en"],
+.flying-page[data-lang="zh"] .fmc-widget-title [data-lang-content="zh"],
+.flying-page[data-lang="zh"] .fmc-widget-link [data-lang-content="zh"] {
+  display: inline;
+}
+
+.flying-page .fmc-widget {
+  background: var(--fl-paper-deep);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: minmax(0, 480px) minmax(0, 1fr);
+  column-gap: 1.5rem;
+  row-gap: 1rem;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .flying-page .fmc-widget {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── The CDU body ── */
+/* ── The CDU body — 经典波音灰外壳 ── */
+.flying-page .fmc-cdu {
+  background-color: #5b656b;
+  border: 2px solid #4a5359;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.35),
+    inset 0 2px 4px rgba(255,255,255,0.18),
+    inset 0 -2px 4px rgba(0,0,0,0.4);
+  user-select: none;
+  width: 100%;
+  max-width: 460px;
+  justify-self: start;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* ── Screen + flanking LSK columns ── */
+.flying-page .fmc-screen-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 18px;
+}
+
+.flying-page .fmc-screen {
+  /* CRT-style black background */
+  background-color: #050505;
+  flex: 1;
+  height: 280px;
+  border-radius: 5px;
+  padding: 10px 14px;
+  margin: 0 4px;
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  line-height: 14px;
+  color: #ffffff;
+  white-space: pre;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 12px rgba(0,0,0,0.95),
+    inset 0 0 1px rgba(255,255,255,0.05);
+  text-shadow: 0 0 1px rgba(255,255,255,0.4);
+}
+
+/* Highlight classes inside the screen text — multi-color CRT per user reference */
+.flying-page .fmc-screen .fmc-label   { color: #ffffff; }   /* white line-titles */
+.flying-page .fmc-screen .fmc-prompt  { color: #00ffff; }   /* cyan prompts */
+.flying-page .fmc-screen .fmc-data    { color: #00ff00; }   /* green data */
+.flying-page .fmc-screen .fmc-dim     { color: #5a8c5a; }   /* dim placeholder */
+.flying-page .fmc-screen .fmc-scratch { color: #ffffff; }   /* white scratchpad */
+.flying-page .fmc-screen .fmc-msg     { color: #ff00ff; }   /* magenta messages */
+.flying-page .fmc-screen .fmc-mod     { color: #ff00ff; }   /* magenta MOD header */
+.flying-page .fmc-screen .fmc-cursor  {
+  display: inline-block;
+  width: 8px;
+  background: #ffffff;
+  animation: fmc-blink 0.9s step-end infinite;
+}
+@keyframes fmc-blink {
+  50% { background: transparent; }
+}
+
+/* ── LSK columns ── */
+.flying-page .fmc-lsk-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 280px;
+}
+.flying-page .fmc-lsk {
+  width: 35px;
+  height: 20px;
+  background-color: #2b3033;
+  color: transparent;
+  border: 1px solid #111;
+  border-radius: 3px;
+  font-family: var(--fl-font-mono);
+  font-size: 0;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  transition: transform 0.05s, box-shadow 0.05s;
+}
+.flying-page .fmc-lsk:hover { background-color: #353a3d; }
+.flying-page .fmc-lsk:active {
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+  transform: translateY(1px);
+}
+/* The dash markings on each LSK row — small white tab between key and screen */
+.flying-page .fmc-lsk::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 1.5px;
+  background: #d8d8d8;
+  transform: translateY(-50%);
+}
+.flying-page .fmc-lsk-left .fmc-lsk::after  { right: -10px; }
+.flying-page .fmc-lsk-right .fmc-lsk::after { left:  -10px; }
+
+/* ── Function keys area ── */
+/* The fnrows together form a 6-column grid; spacers leave gaps. */
+.flying-page .fmc-fnrow {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.flying-page .fmc-fnrow:last-child { margin-bottom: 0; }
+.flying-page .fmc-fn {
+  background-color: #1e2226;
+  color: #e0e0e0;
+  border: 2px solid #111;
+  border-radius: 4px;
+  font-family: 'Arial', sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  padding: 4px 1px;
+  cursor: pointer;
+  box-shadow:
+    0 3px 5px rgba(0,0,0,0.6),
+    inset 0 1px 1px rgba(255,255,255,0.1);
+  text-align: center;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  white-space: pre-line;
+  transition: all 0.1s;
+}
+.flying-page .fmc-fn:hover { background-color: #2a2e32; }
+.flying-page .fmc-fn:active {
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.8);
+  transform: translateY(2px);
+}
+.flying-page .fmc-fn.active {
+  background-color: #4a3a10;
+  color: #ffe888;
+  box-shadow:
+    inset 0 0 4px rgba(180,140,40,0.5),
+    0 2px 4px rgba(0,0,0,0.6);
+}
+
+/* EXEC button: special with indicator strip on top */
+.flying-page .fmc-fn.fmc-exec {
+  background-color: #2a2a2a;
+  position: relative;
+}
+.flying-page .fmc-fn.fmc-exec::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 3px;
+  background-color: #333;
+  border-radius: 1px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.5);
+}
+.flying-page .fmc-fn.fmc-exec:not(:disabled)::before {
+  background-color: #00ff00;
+  box-shadow: 0 0 4px rgba(0,255,0,0.7);
+}
+.flying-page .fmc-fn.fmc-exec:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+.flying-page .fmc-fn-spacer {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* ── Alphanumeric keypad ── */
+/* Two-column layout: numeric pad (left, ~35%) + alphabet pad (right, ~65%) */
+.flying-page .fmc-keypad {
+  display: grid;
+  grid-template-columns: 35% 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+.flying-page .fmc-numpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+.flying-page .fmc-numpad .fmc-key {
+  height: 34px;
+  border-radius: 50%;
+  font-size: 15px;
+}
+.flying-page .fmc-alphapad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+}
+.flying-page .fmc-alphapad .fmc-key {
+  height: 34px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.flying-page .fmc-key {
+  background-color: #1e2226;
+  color: #e0e0e0;
+  border: 2px solid #111;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow:
+    0 3px 5px rgba(0,0,0,0.6),
+    inset 0 1px 1px rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.1s;
+}
+.flying-page .fmc-key:hover { background-color: #2a2e32; }
+.flying-page .fmc-key:active {
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.8);
+  transform: translateY(2px);
+}
+.flying-page .fmc-key-wide  { font-size: 11px; letter-spacing: 0.05em; }
+.flying-page .fmc-key-clr {
+  font-size: 11px;
+  background-color: #5a3320;
+  color: #ffd0b0;
+}
+.flying-page .fmc-key-clr:hover { background-color: #6a4330; }
+.flying-page .fmc-key-del { font-size: 11px; }
+.flying-page .fmc-key-spacer {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Hide nameplate (we don't need it with the new shell aesthetic) */
+.flying-page .fmc-nameplate { display: none; }
+
+/* ── CDU nameplate ── */
+.flying-page .fmc-nameplate {
+  margin-top: 8px;
+  text-align: center;
+}
+.flying-page .fmc-nameplate-text {
+  font-family: var(--fl-font-mono);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: #707274;
+  text-transform: uppercase;
+}
+
+/* ── Right column: ND + tutorial ── */
+.flying-page .fmc-aux {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.flying-page .fmc-nd {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  border-radius: 4px;
+  align-self: start;
+}
+
+/* ── Per-page reference manual (right column) ── */
+.flying-page .fmc-manual {
+  font-family: var(--fl-font-ui);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--fl-ink);
+  background: var(--fl-paper);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 0.85rem 1rem 1rem;
+}
+.flying-page[data-lang="zh"] .fmc-manual {
+  font-family: var(--fl-font-cn);
+  line-height: 1.7;
+}
+.flying-page .fmc-manual-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--fl-rule-soft);
+}
+.flying-page .fmc-manual-tag {
+  font-family: var(--fl-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fl-ink-faint);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.flying-page[data-lang="zh"] .fmc-manual-tag {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0.06em;
+}
+.flying-page .fmc-manual-tag[data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .fmc-manual-tag[data-lang-content="en"],
+.flying-page[data-lang="zh"] .fmc-manual-tag[data-lang-content="zh"] {
+  display: inline;
+}
+.flying-page .fmc-manual-title {
+  font-family: var(--fl-font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--fl-navy);
+}
+.flying-page .fmc-manual-body p {
+  margin: 0 0 0.55rem;
+}
+.flying-page .fmc-manual-body p:last-child {
+  margin-bottom: 0;
+}
+.flying-page .fmc-manual-body code,
+.flying-page .fmc-manual-body .mono {
+  font-family: var(--fl-font-mono);
+  font-size: 0.78rem;
+  background: var(--fl-rule-soft);
+  padding: 0.05em 0.3em;
+  border-radius: 2px;
+  color: var(--fl-navy);
+}
+.flying-page .fmc-manual-body dl {
+  margin: 0.4rem 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.7rem;
+  row-gap: 0.2rem;
+}
+.flying-page .fmc-manual-body dt {
+  font-family: var(--fl-font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--fl-navy);
+  white-space: nowrap;
+}
+.flying-page .fmc-manual-body dd {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--fl-ink-soft);
+}
+.flying-page[data-lang="zh"] .fmc-manual-body dd {
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+.flying-page .fmc-manual-body em {
+  font-style: italic;
+  color: var(--fl-ink-faint);
+}
+
+/* Highlight pulse when the user should press a specific button */
+@keyframes fmc-pulse {
+  0%, 100% { box-shadow: inset 0 -1px 0 rgba(0,0,0,0.5),
+                          0 0 0 0 rgba(232,209,71,0.5); }
+  50%      { box-shadow: inset 0 -1px 0 rgba(0,0,0,0.5),
+                          0 0 0 4px rgba(232,209,71,0); }
+}
+.flying-page .fmc-cdu .fmc-pulse { animation: fmc-pulse 1.4s ease-in-out infinite; }
+
+/* Compact FMC mobile adjustments */
+@media (max-width: 760px) {
+  .flying-page .fmc-cdu { max-width: 100%; justify-self: stretch; }
+  .flying-page .fmc-nd { max-width: 100%; }
+}
+
+/* ─── §3 METAR/TAF decoder widget ───────────────────────────────── */
+.flying-page .metar-widget {
+  background: var(--fl-paper-deep);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  font-family: var(--fl-font-ui);
+  font-size: 0.88rem;
+  color: var(--fl-ink);
+}
+.flying-page[data-lang="zh"] .metar-widget {
+  font-family: var(--fl-font-cn);
+}
+
+/* Input row */
+.flying-page .metar-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--fl-rule);
+  margin-bottom: 1.25rem;
+}
+.flying-page .metar-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fl-ink-faint);
+  font-weight: 600;
+}
+.flying-page[data-lang="zh"] .metar-label {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.flying-page #metar-icao-input {
+  font-family: var(--fl-font-mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  width: 6rem;
+  padding: 0.42rem 0.6rem;
+  border: 1px solid var(--fl-rule);
+  border-radius: 3px;
+  background: var(--fl-paper);
+  color: var(--fl-navy);
+  text-transform: uppercase;
+}
+.flying-page #metar-icao-input:focus {
+  outline: none;
+  border-color: var(--fl-sapphire);
+  box-shadow: 0 0 0 2px rgba(30, 95, 168, 0.18);
+}
+.flying-page .metar-fetch-btn {
+  font-family: var(--fl-font-ui);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.42rem 1rem;
+  border: 1px solid var(--fl-navy);
+  border-radius: 3px;
+  background: var(--fl-navy);
+  color: #fafaf7;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background 0.1s;
+}
+.flying-page[data-lang="zh"] .metar-fetch-btn {
+  font-family: var(--fl-font-cn);
+  letter-spacing: 0.02em;
+}
+.flying-page .metar-fetch-btn:hover {
+  background: var(--fl-sapphire);
+  border-color: var(--fl-sapphire);
+}
+.flying-page .metar-fetch-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.flying-page .metar-status {
+  font-size: 0.82rem;
+  color: var(--fl-ink-faint);
+  font-style: italic;
+  margin-left: auto;
+}
+.flying-page .metar-status.error { color: #c0392b; font-style: normal; }
+.flying-page .metar-status.success { color: #2d6e3e; font-style: normal; }
+
+/* Sections (METAR / TAF) */
+.flying-page .metar-section {
+  margin-bottom: 1.5rem;
+}
+.flying-page .metar-section:last-child {
+  margin-bottom: 0;
+}
+.flying-page .metar-section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--fl-rule-soft);
+}
+.flying-page .metar-section-title {
+  font-family: var(--fl-font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--fl-navy);
+}
+.flying-page .metar-section-meta {
+  font-size: 0.78rem;
+  color: var(--fl-ink-faint);
+  font-style: italic;
+}
+.flying-page[data-lang="zh"] .metar-section-meta {
+  font-style: normal;
+}
+
+.flying-page .metar-raw {
+  font-family: var(--fl-font-mono);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--fl-ink);
+  background: var(--fl-paper);
+  padding: 0.75rem 0.95rem;
+  border: 1px solid var(--fl-rule-soft);
+  border-radius: 3px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0 0 0.85rem 0;
+}
+
+/* Decoded fields (key-value pairs in a stacked layout) */
+.flying-page .metar-decoded {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 0.6rem 1.5rem;
+  font-size: 0.85rem;
+}
+.flying-page .metar-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.flying-page .metar-field-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fl-ink-faint);
+}
+.flying-page[data-lang="zh"] .metar-field-label {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.flying-page .metar-field-value {
+  font-size: 0.88rem;
+  color: var(--fl-ink);
+  line-height: 1.4;
+}
+.flying-page .metar-field-value strong {
+  color: var(--fl-navy);
+  font-weight: 600;
+}
+
+/* TAF timeline */
+.flying-page .taf-timeline-wrap {
+  margin: 0.85rem 0;
+  padding: 0.5rem;
+  background: var(--fl-paper);
+  border: 1px solid var(--fl-rule-soft);
+  border-radius: 3px;
+  overflow-x: auto;
+}
+.flying-page .taf-timeline {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 600px;
+}
+
+/* TAF period decoded list */
+.flying-page #taf-decoded {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.flying-page .taf-period {
+  background: var(--fl-paper);
+  border: 1px solid var(--fl-rule-soft);
+  border-left: 3px solid var(--fl-navy);
+  border-radius: 3px;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.flying-page .taf-period.fm     { border-left-color: var(--fl-navy); }
+.flying-page .taf-period.tempo  { border-left-color: #b08838; }
+.flying-page .taf-period.becmg  { border-left-color: #3a7a4f; }
+.flying-page .taf-period.prob   { border-left-color: #8a4ea2; }
+.flying-page .taf-period-header {
+  font-family: var(--fl-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--fl-ink-faint);
+  margin-bottom: 0.25rem;
+}
+.flying-page .taf-period-type {
+  font-weight: 700;
+  color: var(--fl-navy);
+}
+.flying-page .taf-period.tempo .taf-period-type { color: #b08838; }
+.flying-page .taf-period.becmg .taf-period-type { color: #3a7a4f; }
+.flying-page .taf-period.prob  .taf-period-type { color: #8a4ea2; }
+
+/* Compact mobile layout */
+@media (max-width: 600px) {
+  .flying-page .metar-input-row {
+    flex-wrap: wrap;
+  }
+  .flying-page .metar-status {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* ─── §4 Approach plate annotator ────────────────────────────────── */
+.flying-page .plate-widget {
+  background: var(--fl-paper-deep);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
+  column-gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .flying-page .plate-widget {
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+  }
+}
+
+.flying-page .plate-stage {
+  background: #fdfcf7;
+  border: 1px solid #d8d4c5;
+  border-radius: 2px;
+  padding: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  min-width: 0;
+}
+
+.flying-page .plate-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Hover regions: large rectangles encompassing each plate area */
+.flying-page .plate-region rect:first-child {
+  transition: fill 0.15s, stroke 0.15s;
+  cursor: help;
+  pointer-events: all;     /* needed because rect has fill:none */
+}
+.flying-page .plate-region:hover rect:first-child {
+  fill: rgba(232, 209, 71, 0.08);
+  stroke: var(--fl-sapphire);
+  stroke-width: 1.4;
+}
+.flying-page .plate-region.active rect:first-child {
+  fill: rgba(232, 209, 71, 0.14);
+  stroke: var(--fl-navy);
+  stroke-width: 1.4;
+}
+
+/* For 'briefing' the rect:first-child works; for those that have textured rect
+   like url(#plate-grid), we still want the same border behaviour */
+
+/* Plan-view inner elements (KLUMP, runway, VOR, etc.) */
+.flying-page .plate-element {
+  cursor: help;
+  transition: filter 0.15s;
+}
+.flying-page .plate-element:hover {
+  filter: drop-shadow(0 0 2px var(--fl-sapphire))
+          drop-shadow(0 0 6px rgba(30,95,168,0.4));
+}
+.flying-page .plate-element.active {
+  filter: drop-shadow(0 0 2px var(--fl-navy))
+          drop-shadow(0 0 6px rgba(10,61,98,0.5));
+}
+
+/* Sidebar */
+.flying-page .plate-side {
+  position: sticky;
+  top: 1rem;
+}
+
+.flying-page .plate-help {
+  background: var(--fl-paper);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1rem 1.1rem;
+  font-family: var(--fl-font-ui);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--fl-ink-soft);
+  min-height: 16rem;
+}
+.flying-page[data-lang="zh"] .plate-help {
+  font-family: var(--fl-font-cn);
+  line-height: 1.7;
+}
+
+.flying-page .plate-help strong {
+  display: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fl-ink-faint);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.flying-page[data-lang="en"] .plate-help-default strong[data-lang-content="en"],
+.flying-page[data-lang="zh"] .plate-help-default strong[data-lang-content="zh"] {
+  display: block;
+}
+.flying-page[data-lang="zh"] .plate-help strong {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.flying-page .plate-help-default p[data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .plate-help-default p[data-lang-content="en"],
+.flying-page[data-lang="zh"] .plate-help-default p[data-lang-content="zh"] {
+  display: block;
+}
+
+.flying-page .plate-help p {
+  margin: 0;
+}
+
+.flying-page .plate-help-detail {
+  display: block;
+}
+.flying-page .plate-help-detail[hidden] { display: none; }
+
+.flying-page .plate-help-tag {
+  display: inline-block;
+  font-family: var(--fl-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  background: var(--fl-pale-blue);
+  color: var(--fl-navy);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  margin-bottom: 0.55rem;
+  text-transform: uppercase;
+}
+
+.flying-page .plate-help-detail strong {
+  display: block !important;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--fl-navy);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 0.45rem;
+  line-height: 1.3;
+}
+
+.flying-page .plate-help-detail p {
+  font-size: 0.83rem;
+  color: var(--fl-ink-soft);
+}
+
+@media (max-width: 760px) {
+  .flying-page .plate-side { position: static; }
+  .flying-page .plate-help { min-height: 0; }
+}
+
+/* ─── §6 CVR widget ──────────────────────────────────────────── */
+.flying-page .cvr-widget {
+  background: var(--fl-paper-deep);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin: 2rem 0;
+  font-family: var(--fl-font-ui);
+  font-size: 0.88rem;
+  color: var(--fl-ink);
+}
+.flying-page[data-lang="zh"] .cvr-widget { font-family: var(--fl-font-cn); }
+
+.flying-page .cvr-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--fl-rule);
+  margin-bottom: 1rem;
+}
+.flying-page #cvr-audio {
+  flex: 1 1 320px;
+  min-width: 280px;
+  max-width: 100%;
+  height: 36px;
+}
+.flying-page .cvr-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.flying-page .cvr-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  color: var(--fl-ink-faint);
+  letter-spacing: 0.04em;
+}
+.flying-page #cvr-filter {
+  font-family: var(--fl-font-ui);
+  font-size: 0.85rem;
+  padding: 0.32rem 0.5rem;
+  border: 1px solid var(--fl-rule);
+  border-radius: 3px;
+  background: var(--fl-paper);
+  color: var(--fl-ink);
+  cursor: pointer;
+}
+.flying-page[data-lang="zh"] #cvr-filter { font-family: var(--fl-font-cn); }
+.flying-page #cvr-filter:focus {
+  outline: none;
+  border-color: var(--fl-sapphire);
+  box-shadow: 0 0 0 2px rgba(30, 95, 168, 0.18);
+}
+
+/* Transcript scroll area */
+.flying-page .cvr-transcript-wrap {
+  max-height: 32rem;
+  overflow-y: auto;
+  background: var(--fl-paper);
+  border: 1px solid var(--fl-rule-soft);
+  border-radius: 3px;
+}
+.flying-page .cvr-transcript {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+.flying-page .cvr-entry {
+  display: grid;
+  grid-template-columns: 4rem 7rem 1fr;
+  gap: 0.6rem 0.85rem;
+  padding: 0.5rem 0.85rem;
+  border-bottom: 1px solid var(--fl-rule-soft);
+  cursor: pointer;
+  transition: background 0.1s;
+  border-left: 3px solid transparent;
+}
+.flying-page .cvr-entry:hover { background: var(--fl-paper-deep); }
+.flying-page .cvr-entry.active {
+  background: rgba(30, 95, 168, 0.08);
+  border-left-color: var(--fl-sapphire);
+}
+.flying-page .cvr-time {
+  font-family: var(--fl-font-mono);
+  font-size: 0.78rem;
+  color: var(--fl-ink-faint);
+  align-self: start;
+  padding-top: 0.1rem;
+}
+.flying-page .cvr-spk {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--fl-navy);
+  align-self: start;
+  padding-top: 0.1rem;
+}
+.flying-page .cvr-text {
+  align-self: start;
+}
+.flying-page .cvr-text-zh,
+.flying-page .cvr-text-en {
+  display: block;
+}
+.flying-page .cvr-text-en {
+  margin-top: 0.15rem;
+  color: var(--fl-ink-faint);
+  font-size: 0.81rem;
+  font-style: italic;
+}
+.flying-page[data-lang="zh"] .cvr-text-zh { color: var(--fl-ink); font-style: normal; font-size: 0.86rem; margin-top: 0; }
+.flying-page[data-lang="zh"] .cvr-text-en { color: var(--fl-ink-faint); font-style: italic; font-size: 0.81rem; margin-top: 0.15rem; }
+.flying-page[data-lang="en"] .cvr-text-en { color: var(--fl-ink); font-style: normal; font-size: 0.86rem; margin-top: 0; }
+.flying-page[data-lang="en"] .cvr-text-zh { color: var(--fl-ink-faint); font-size: 0.81rem; margin-top: 0.15rem; }
+
+/* Channel-specific colors on the speaker label */
+.flying-page .cvr-entry[data-ch="cz3456_internal"] .cvr-spk { color: var(--fl-navy); }
+.flying-page .cvr-entry[data-ch="cz3456_atc"] .cvr-spk { color: #1e5fa8; }
+.flying-page .cvr-entry[data-ch="other_atc"] .cvr-spk { color: #6b6655; }
+
+/* Warning rows: distinct visual style */
+.flying-page .cvr-entry[data-ch="warning"],
+.flying-page .cvr-entry[data-ch="event"] {
+  background: rgba(140, 100, 50, 0.04);
+  font-style: italic;
+}
+.flying-page .cvr-entry[data-ch="warning"] .cvr-spk,
+.flying-page .cvr-entry[data-ch="event"] .cvr-spk {
+  color: #8c4a1a;
+  font-style: normal;
+}
+.flying-page .cvr-entry[data-ch="warning"] .cvr-spk::before {
+  content: "⚠ ";
+}
+
+/* Filter: hide non-CZ3456 rows when filter is "cz3456" */
+.flying-page .cvr-widget[data-filter="cz3456"] .cvr-entry[data-ch="other_atc"] {
+  display: none;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .flying-page .cvr-entry {
+    grid-template-columns: 3.4rem 1fr;
+  }
+  .flying-page .cvr-spk {
+    grid-column: 2;
+    padding-top: 0;
+    margin-bottom: 0.1rem;
+  }
+  .flying-page .cvr-time { grid-row: 1 / span 2; }
+  .flying-page .cvr-text { grid-column: 2; }
+}
+
+/* ─── §6 accident map figure ─────────────────────────────────── */
+.flying-page .accidents-widget {
+  background: var(--fl-paper-deep);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin: 2rem 0;
+  font-family: var(--fl-font-ui);
+  font-size: 0.88rem;
+  color: var(--fl-ink);
+}
+.flying-page[data-lang="zh"] .accidents-widget { font-family: var(--fl-font-cn); }
+
+/* Layout: map on left, list on right (collapses on mobile) */
+.flying-page .accidents-body {
+  display: grid;
+  grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr);
+  gap: 1rem;
+  height: 44rem;
+}
+@media (max-width: 800px) {
+  .flying-page .accidents-body {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
+
+/* Map container */
+.flying-page .accidents-map {
+  position: relative;
+  border: 1px solid var(--fl-rule-soft);
+  border-radius: 3px;
+  overflow: hidden;
+  background: #f0f0f0;
+  min-height: 38rem;
+}
+@media (max-width: 800px) {
+  .flying-page .accidents-map { min-height: 28rem; height: 28rem; }
+}
+
+/* Side list */
+.flying-page .accidents-list-wrap {
+  border: 1px solid var(--fl-rule-soft);
+  border-radius: 3px;
+  background: var(--fl-paper);
+  overflow-y: auto;
+  max-height: 44rem;
+}
+@media (max-width: 800px) {
+  .flying-page .accidents-list-wrap { max-height: 26rem; }
+}
+.flying-page .accidents-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.84rem;
+}
+.flying-page .accident-entry {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--fl-rule-soft);
+  cursor: pointer;
+  transition: background 0.1s;
+  border-left: 3px solid transparent;
+}
+.flying-page .accident-entry:hover { background: var(--fl-paper-deep); }
+.flying-page .accident-entry.active {
+  background: rgba(30, 95, 168, 0.08);
+  border-left-color: var(--fl-sapphire);
+}
+.flying-page .accident-row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.flying-page .accident-date {
+  font-family: var(--fl-font-mono);
+  font-size: 0.78rem;
+  color: var(--fl-ink-faint);
+}
+.flying-page .accident-fatalities {
+  font-family: var(--fl-font-mono);
+  font-size: 0.78rem;
+  color: var(--fl-navy);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.flying-page .accident-title {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--fl-ink);
+  margin-bottom: 0.1rem;
+}
+.flying-page .accident-meta {
+  font-size: 0.78rem;
+  color: var(--fl-ink-faint);
+}
+
+/* Time slider */
+.flying-page .accidents-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--fl-rule);
+  margin-bottom: 0.8rem;
+}
+.flying-page .accidents-slider-wrap {
+  flex: 1 1 280px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--fl-ink-faint);
+  letter-spacing: 0.04em;
+}
+.flying-page .accidents-slider-wrap input[type="range"] {
+  flex: 1;
+  min-width: 100px;
+  accent-color: var(--fl-sapphire);
+}
+.flying-page .accidents-year-display {
+  font-family: var(--fl-font-mono);
+  font-size: 0.85rem;
+  color: var(--fl-ink);
+  font-weight: 600;
+  min-width: 5.5rem;
+}
+
+/* Leaflet popup styling overrides — match wiki tone */
+.flying-page .leaflet-popup-content-wrapper {
+  border-radius: 3px;
+  font-family: var(--fl-font-ui);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  max-width: 320px;
+}
+.flying-page[data-lang="zh"] .leaflet-popup-content-wrapper { font-family: var(--fl-font-cn); }
+.flying-page .leaflet-popup-content {
+  margin: 0.7rem 0.85rem;
+}
+.flying-page .acc-popup-title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 0.2rem;
+  color: var(--fl-navy);
+}
+.flying-page .acc-popup-meta {
+  font-family: var(--fl-font-mono);
+  font-size: 0.74rem;
+  color: var(--fl-ink-faint);
+  margin-bottom: 0.45rem;
+}
+.flying-page .acc-popup-summary {
+  margin: 0.45rem 0;
+  font-size: 0.82rem;
+  color: var(--fl-ink);
+}
+.flying-page .acc-popup-links {
+  margin-top: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--fl-rule-soft);
+  font-size: 0.78rem;
+}
+.flying-page .acc-popup-links a {
+  display: inline-block;
+  margin-right: 0.6rem;
+  color: var(--fl-sapphire);
+  text-decoration: none;
+}
+.flying-page .acc-popup-links a:hover { text-decoration: underline; }
+
+/* Marker color/size tier definitions are applied inline via JS */
+
+/* ════════════════════════════════════════════════════════════
+   §3.1 — Phonetic alphabet table
+   A 26-cell grid showing each letter + its ICAO codeword + a
+   pronunciation respelling. Renders responsively: 6/cols on
+   wide screens, 4/cols on tablet, 2/cols on phone.
+   ════════════════════════════════════════════════════════════ */
+.flying-page .phonetic-alphabet-figure {
+  margin: 1.5rem 0 1.75rem;
+}
+.flying-page .phonetic-alphabet-table {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  background: var(--fl-rule);          /* thin grid lines */
+  border: 1px solid var(--fl-rule);
+  border-radius: 3px;
+  overflow: hidden;
+}
+@media (max-width: 800px) {
+  .flying-page .phonetic-alphabet-table { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 480px) {
+  .flying-page .phonetic-alphabet-table { grid-template-columns: repeat(3, 1fr); }
+}
+.flying-page .phonetic-cell {
+  background: var(--fl-paper);
+  padding: 0.75rem 0.5rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1.15;
+}
+.flying-page .phonetic-letter {
+  font-family: var(--fl-font-mono);
+  font-size: 1.55rem;
+  font-weight: 500;
+  color: var(--fl-navy);
+  margin-bottom: 0.25rem;
+}
+.flying-page .phonetic-word {
+  font-family: var(--fl-font-ui);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--fl-ink);
+  letter-spacing: 0.01em;
+}
+.flying-page .phonetic-pron {
+  margin-top: 0.18rem;
+  font-family: var(--fl-font-ui);
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--fl-ink-faint);
+  letter-spacing: 0.02em;
+}
+
+/* ════════════════════════════════════════════════════════════
+   §3.1 — ATC Dialogue Generator widget
+   Mimics the visual register of the FMC widget header so the
+   two adjacent components feel like part of the same toolkit.
+   ════════════════════════════════════════════════════════════ */
+.flying-page .atc-widget-header {
+  margin: 1.5rem 0 0.5rem;
+  padding: 0 0.25rem 0.6rem;
+  border-bottom: 1px solid var(--fl-rule);
+  font-family: var(--fl-font-ui);
+}
+.flying-page .atc-widget-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--fl-ink);
+  text-transform: uppercase;
+}
+.flying-page[data-lang="zh"] .atc-widget-title {
+  font-family: var(--fl-font-cn);
+  font-weight: 600;
+  text-transform: none;
+}
+.flying-page .atc-widget-title [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-widget-title [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-widget-title [data-lang-content="zh"] { display: inline; }
+
+.flying-page .atc-widget {
+  background: var(--fl-paper-deep);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1.1rem 1.2rem 1.25rem;
+}
+
+/* Top control bar: phase buttons on the left, regen button on the right */
+/* New top control row: VFR/IFR mode toggle | spacer | structure checkbox | regen */
+.flying-page .atc-mode-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem 0.85rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--fl-rule);
+  margin-bottom: 0.85rem;
+}
+.flying-page .atc-mode-spacer { flex: 1; }
+
+/* VFR/IFR segmented toggle — two buttons with shared border */
+.flying-page .atc-mode-toggle {
+  display: inline-flex;
+  border: 1px solid var(--fl-rule);
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--fl-paper);
+}
+.flying-page .atc-mode-toggle button {
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 0.85rem;
+  border: none;
+  background: transparent;
+  color: var(--fl-ink-soft);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.flying-page .atc-mode-toggle button + button {
+  border-left: 1px solid var(--fl-rule);
+}
+.flying-page .atc-mode-toggle button:hover {
+  color: var(--fl-sapphire);
+}
+.flying-page .atc-mode-toggle button.active {
+  background: var(--fl-sapphire);
+  color: #fff;
+}
+
+/* Show-structure checkbox label */
+.flying-page .atc-structure-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  color: var(--fl-ink-soft);
+  cursor: pointer;
+  user-select: none;
+}
+.flying-page[data-lang="zh"] .atc-structure-toggle { font-family: var(--fl-font-cn); }
+.flying-page .atc-structure-toggle [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-structure-toggle [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-structure-toggle [data-lang-content="zh"] { display: inline; }
+.flying-page .atc-structure-toggle input[type="checkbox"] {
+  accent-color: var(--fl-sapphire);
+  cursor: pointer;
+}
+
+.flying-page .atc-phase-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  flex: 1 1 auto;
+  margin-bottom: 0.85rem;
+}
+.flying-page .atc-phase-buttons button {
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--fl-rule);
+  background: var(--fl-paper);
+  color: var(--fl-ink);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.flying-page .atc-phase-buttons button:hover {
+  border-color: var(--fl-sapphire);
+  color: var(--fl-sapphire);
+}
+.flying-page .atc-phase-buttons button.active {
+  background: var(--fl-sapphire);
+  border-color: var(--fl-sapphire);
+  color: #fff;
+}
+.flying-page[data-lang="zh"] .atc-phase-buttons button { font-family: var(--fl-font-cn); }
+.flying-page .atc-phase-buttons button [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-phase-buttons button [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-phase-buttons button [data-lang-content="zh"] { display: inline; }
+
+/* Four-W legend — only visible when structure toggle is on */
+.flying-page .atc-w-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.85rem;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.85rem;
+  background: var(--fl-paper);
+  border: 1px solid var(--fl-rule);
+  border-radius: 3px;
+  font-family: var(--fl-font-ui);
+  font-size: 0.74rem;
+  color: var(--fl-ink-soft);
+}
+/* The HTML `hidden` attribute would normally trigger display:none, but
+   our class rule above sets display:flex with higher specificity. We
+   need this explicit rule so JS toggling [hidden] actually hides it. */
+.flying-page .atc-w-legend[hidden] { display: none; }
+.flying-page[data-lang="zh"] .atc-w-legend { font-family: var(--fl-font-cn); }
+.flying-page .atc-w-legend [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-w-legend [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-w-legend [data-lang-content="zh"] { display: inline; }
+.flying-page .atc-w-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+}
+/* Four-W colour palette. Used both for the legend chips and (when
+   structure is on) for inline highlights inside transmissions. */
+.flying-page .atc-w1 { color: #1e5fa8; border-bottom: 1.5px solid #1e5fa8; }   /* sapphire */
+.flying-page .atc-w2 { color: #3a5a40; border-bottom: 1.5px solid #3a5a40; }   /* forest */
+.flying-page .atc-w3 { color: #b45309; border-bottom: 1.5px solid #b45309; }   /* amber */
+.flying-page .atc-w4 { color: #6b21a8; border-bottom: 1.5px solid #6b21a8; }   /* purple */
+.flying-page .atc-w-chip.atc-w1 { background: #e8f1f8; }
+.flying-page .atc-w-chip.atc-w2 { background: #eef2ec; }
+.flying-page .atc-w-chip.atc-w3 { background: #fef3c7; }
+.flying-page .atc-w-chip.atc-w4 { background: #f3e8ff; }
+/* When highlighting is OFF (no .atc-w wrappers in the rendered HTML),
+   transmissions render as plain inline text — nothing to do. */
+.flying-page .atc-regen-btn {
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--fl-rule);
+  background: var(--fl-paper);
+  color: var(--fl-ink-soft);
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: color 0.12s, border-color 0.12s;
+}
+.flying-page .atc-regen-btn:hover {
+  border-color: var(--fl-ink-soft);
+  color: var(--fl-ink);
+}
+.flying-page[data-lang="zh"] .atc-regen-btn { font-family: var(--fl-font-cn); }
+.flying-page .atc-regen-btn [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-regen-btn [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-regen-btn [data-lang-content="zh"] { display: inline; }
+
+/* The dialog body — each line is a speaker label + transmission +
+   optional decode subtext. */
+.flying-page .atc-dialog {
+  font-family: var(--fl-font-mono);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--fl-ink);
+  min-height: 12rem;
+}
+.flying-page .atc-dialog-empty {
+  color: var(--fl-ink-faint);
+  font-family: var(--fl-font-ui);
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+.flying-page[data-lang="zh"] .atc-dialog-empty { font-family: var(--fl-font-cn); font-style: normal; }
+
+.flying-page .atc-line {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 0.5rem 0.85rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px dotted var(--fl-rule);
+}
+.flying-page .atc-line:last-child { border-bottom: none; }
+
+.flying-page .atc-speaker {
+  font-family: var(--fl-font-ui);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fl-ink-faint);
+  padding-top: 0.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.flying-page .atc-speaker.is-pilot { color: var(--fl-sapphire); }
+.flying-page .atc-speaker.is-controller { color: var(--fl-forest); }
+
+.flying-page .atc-transmission { color: var(--fl-ink); }
+
+.flying-page .atc-decode {
+  display: block;
+  margin-top: 0.25rem;
+  font-family: var(--fl-font-ui);
+  font-size: 0.74rem;
+  color: var(--fl-ink-faint);
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+.flying-page[data-lang="zh"] .atc-decode { font-family: var(--fl-font-cn); font-style: normal; }
+.flying-page .atc-decode [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .atc-decode [data-lang-content="en"],
+.flying-page[data-lang="zh"] .atc-decode [data-lang-content="zh"] { display: inline; }
+
+@media (max-width: 600px) {
+  .flying-page .atc-line {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+  .flying-page .atc-speaker { font-size: 0.7rem; }
+}
+
+/* See-also: a minimal bookmark list under widgets that gestures at
+   external resources without editorializing about them. Renders as
+   a single line of monospaced URLs separated by " · ". */
+.flying-page .see-also {
+  list-style: none;
+  margin: 0.85rem 0 1.75rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+  font-family: var(--fl-font-mono);
+  font-size: 0.78rem;
+  color: var(--fl-ink-faint);
+}
+.flying-page .see-also li {
+  display: inline;
+}
+.flying-page .see-also li + li::before {
+  content: "· ";
+  margin-right: 0.4rem;
+  color: var(--fl-ink-faded);
+}
+.flying-page .see-also a {
+  color: var(--fl-sapphire);
+  text-decoration: none;
+}
+.flying-page .see-also a:hover { text-decoration: underline; }
+
+/* ════════════════════════════════════════════════════════════
+   §2.2 — Aerodynamics widgets (flight control surfaces)
+   Each widget has:
+     - the Cessna 172 three-view SVG on the left (or top on narrow screens)
+     - a control panel on the right with sliders for each surface
+   ════════════════════════════════════════════════════════════ */
+.flying-page .aero-widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding: 0 0.25rem 0.6rem;
+  margin: 1.25rem 0 -0.5rem;
+  border-bottom: 1px solid var(--fl-rule);
+  font-family: var(--fl-font-ui);
+}
+.flying-page .aero-widget-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--fl-ink);
+  text-transform: uppercase;
+}
+.flying-page[data-lang="zh"] .aero-widget-title {
+  font-family: var(--fl-font-cn);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+.flying-page .aero-widget-title [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .aero-widget-title [data-lang-content="en"],
+.flying-page[data-lang="zh"] .aero-widget-title [data-lang-content="zh"] { display: inline; }
+
+/* ════════════════════════════════════════════════════════════
+   §2.2 — Cessna 3D flight controls widget
+   Layout:
+     - Left: 3D viewport (Three.js canvas) — large, ~2/3 width
+     - Right: control panel with sliders + mode toggle + reset
+     - Below figure: small attribution line (.see-also style)
+   On wide screens: 2-column grid. On narrow screens: stack.
+   ════════════════════════════════════════════════════════════ */
+.flying-page .cessna3d-widget {
+  background: var(--fl-paper-deep);
+  border: 1px solid var(--fl-rule);
+  border-radius: 4px;
+  padding: 1.25rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+@media (max-width: 720px) {
+  .flying-page .cessna3d-widget { grid-template-columns: 1fr; }
+}
+
+.flying-page .cessna3d-viewport {
+  position: relative;
+  background: var(--fl-pale-blue);
+  border: 1px solid var(--fl-rule);
+  border-radius: 3px;
+  min-height: 480px;
+  overflow: hidden;
+}
+.flying-page .cessna3d-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Launch button — covers the viewport before the 3D scene loads */
+.flying-page .cessna3d-launch-btn {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: max-content;
+  height: max-content;
+  font-family: var(--fl-font-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  padding: 0.85rem 1.6rem;
+  border: 1px solid var(--fl-sapphire);
+  background: var(--fl-paper);
+  color: var(--fl-sapphire);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.flying-page .cessna3d-launch-btn:hover {
+  background: var(--fl-sapphire);
+  color: var(--fl-paper);
+}
+.flying-page[data-lang="zh"] .cessna3d-launch-btn { font-family: var(--fl-font-cn); }
+.flying-page .cessna3d-launch-btn [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .cessna3d-launch-btn [data-lang-content="en"],
+.flying-page[data-lang="zh"] .cessna3d-launch-btn [data-lang-content="zh"] { display: inline; }
+
+/* Loading + help notes — small text overlays inside viewport */
+.flying-page .cessna3d-loading,
+.flying-page .cessna3d-help,
+.flying-page .cessna3d-error {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--fl-ink-soft);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+  pointer-events: none;
+}
+.flying-page .cessna3d-loading {
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+}
+.flying-page .cessna3d-error { color: var(--fl-amber); }
+.flying-page[data-lang="zh"] .cessna3d-loading,
+.flying-page[data-lang="zh"] .cessna3d-help { font-family: var(--fl-font-cn); }
+.flying-page .cessna3d-loading [data-lang-content],
+.flying-page .cessna3d-help [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .cessna3d-loading [data-lang-content="en"],
+.flying-page[data-lang="en"] .cessna3d-help [data-lang-content="en"],
+.flying-page[data-lang="zh"] .cessna3d-loading [data-lang-content="zh"],
+.flying-page[data-lang="zh"] .cessna3d-help [data-lang-content="zh"] { display: inline; }
+
+/* Control panel — sliders, grouping, mode toggle, reset */
+.flying-page .cessna3d-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: var(--fl-font-ui);
+  font-size: 0.85rem;
+  color: var(--fl-ink);
+}
+.flying-page[data-lang="zh"] .cessna3d-controls { font-family: var(--fl-font-cn); }
+.flying-page .cessna3d-controls [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .cessna3d-controls [data-lang-content="en"],
+.flying-page[data-lang="zh"] .cessna3d-controls [data-lang-content="zh"] { display: inline; }
+
+.flying-page .cessna3d-controls-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px dotted var(--fl-rule);
+}
+.flying-page .cessna3d-controls-group:last-of-type { border-bottom: none; }
+.flying-page .cessna3d-controls-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fl-ink-faint);
+  margin-bottom: 0.2rem;
+}
+.flying-page[data-lang="zh"] .cessna3d-controls-label {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+/* Mode toggle row: checkbox + reset button side by side */
+.flying-page .cessna3d-mode-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.flying-page .cessna3d-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  color: var(--fl-ink-soft);
+  cursor: pointer;
+  user-select: none;
+}
+.flying-page .cessna3d-mode-toggle input[type="checkbox"] {
+  accent-color: var(--fl-sapphire);
+  cursor: pointer;
+}
+.flying-page .cessna3d-mode-toggle input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.flying-page .cessna3d-reset-btn {
+  font-family: var(--fl-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--fl-rule);
+  background: var(--fl-paper);
+  color: var(--fl-ink-soft);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s;
+}
+.flying-page .cessna3d-reset-btn:hover:not(:disabled) {
+  border-color: var(--fl-ink-soft);
+  color: var(--fl-ink);
+}
+.flying-page .cessna3d-reset-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.flying-page[data-lang="zh"] .cessna3d-reset-btn { font-family: var(--fl-font-cn); }
+.flying-page .cessna3d-reset-btn [data-lang-content] { display: none; }
+.flying-page[data-lang="en"] .cessna3d-reset-btn [data-lang-content="en"],
+.flying-page[data-lang="zh"] .cessna3d-reset-btn [data-lang-content="zh"] { display: inline; }
+
+/* Slider styles — shared with the older widget set; safe to keep
+   as-is so other widgets that reuse .aero-slider continue to work. */
+.flying-page .aero-slider-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.82rem;
+  color: var(--fl-ink-soft);
+  letter-spacing: 0.01em;
+}
+.flying-page .aero-slider-value {
+  font-family: var(--fl-font-mono);
+  font-size: 0.78rem;
+  color: var(--fl-sapphire);
+  font-weight: 500;
+}
+.flying-page .aero-slider {
+  width: 100%;
+  accent-color: var(--fl-sapphire);
+  margin: 0;
+}
+.flying-page .aero-slider:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ════════════════════════════════════════════════════════════
+   Reading lists (used inside §9 — Flying as Lifelong Learning)
+   Bibliographic entries: title, author, year, source. Each <li>
+   may also contain links (DOIs, PDFs, web tools). The visual
+   register is restrained — these are reference entries, not
+   prose, so the list should read as a clean catalogue.
+   ════════════════════════════════════════════════════════════ */
+.flying-page .reading-list {
+  list-style: none;
+  margin: 0.75rem 0 1.75rem;
+  padding: 0;
+  font-family: var(--fl-font-ui);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--fl-ink);
+}
+.flying-page[data-lang="zh"] .reading-list {
+  font-family: var(--fl-font-cn);
+  line-height: 1.7;
+}
+.flying-page .reading-list li {
+  padding: 0.45rem 0 0.45rem 1.1rem;
+  border-bottom: 1px solid var(--fl-rule-soft);
+  position: relative;
+}
+.flying-page .reading-list li:last-child { border-bottom: none; }
+.flying-page .reading-list li::before {
+  content: "·";
+  position: absolute;
+  left: 0.2rem;
+  top: 0.45rem;
+  color: var(--fl-ink-faint);
+}
+.flying-page .reading-list a {
+  color: var(--fl-sapphire);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--fl-rule);
+}
+.flying-page .reading-list a:hover {
+  color: var(--fl-navy);
+  border-bottom-color: var(--fl-navy);
+}
+.flying-page .reading-list em {
+  font-style: italic;
+  color: var(--fl-navy);
+}
+
+/* Anchor-target highlight: when the user clicks a TOC sub-link,
+   the targeted entry briefly flashes so it's locatable in a
+   long list. */
+.flying-page .reading-list li:target {
+  background: var(--fl-rule-soft);
+  border-left: 2px solid var(--fl-sapphire);
+  padding-left: 1rem;
+}
+
+/* H4 inside §9 is used as paper-section sub-divider */
+.flying-page #sec-further + div + h3,
+.flying-page #sec-further ~ h3 {
+  margin-top: 2.5rem;
+  font-family: var(--fl-font-ui);
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fl-navy);
+}
+.flying-page #sec-further ~ h4 {
+  margin: 1.5rem 0 0.5rem;
+  font-family: var(--fl-font-ui);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fl-ink-soft);
+  font-weight: 600;
+}
+.flying-page[data-lang="zh"] #sec-further ~ h4 {
+  font-family: var(--fl-font-cn);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}

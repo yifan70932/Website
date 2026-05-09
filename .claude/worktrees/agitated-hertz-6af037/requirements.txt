@@ -1,0 +1,10 @@
+# Dependencies for the watchlist analyzer in _analyzer/.
+# NumPy held below 2.0 because some transitive deps still ship NumPy 1.x
+# wheels and trigger _ARRAY_API_not_found errors with NumPy 2.x.
+numpy<2
+pandas
+scipy
+statsmodels
+plotly
+yfinance
+requests

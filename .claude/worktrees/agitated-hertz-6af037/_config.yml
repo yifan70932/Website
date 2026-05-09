@@ -1,0 +1,33 @@
+# Minimal Jekyll configuration for yifanova.com
+#
+# Most of what's here is `exclude` rules — paths that should NOT be copied
+# to the published site. Files not listed here, and not starting with `_`,
+# are published normally.
+#
+# How Jekyll handles files in this repo:
+#   - chess/, religion/, assets/  → published as-is (existing behavior)
+#   - watchlist/index.html, zh.html → processed (they have `layout: null`
+#       front matter, which tells Jekyll: read the front matter but don't
+#       wrap with any template — just emit the body as HTML)
+#   - watchlist/report.html → published verbatim because it has no front
+#       matter; Jekyll copies it without any processing. This is the right
+#       behavior for an auto-generated 4MB Plotly dashboard.
+#   - _analyzer/ → ignored automatically by Jekyll (underscore prefix).
+#       Python code never appears in the published site.
+#   - .github/, requirements.txt, *.md → operational files, excluded below.
+#
+# IMPORTANT: If you already had a _config.yml from before, MERGE these
+# `exclude` entries into your existing list rather than overwriting the
+# whole file. Pre-existing settings (theme, plugins, site title, etc.)
+# should be preserved.
+
+exclude:
+  # Build and operational files that shouldn't be served as web content
+  - "requirements.txt"
+  - "INTEGRATION.md"
+  - "README.md"
+  - ".github"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "vendor"
+  - "node_modules"

@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myth Busters · 巴菲特的现金堆 / Buffett's Cash Pile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     Editorial / academic paper aesthetic
+     ========================================================= */
+  :root {
+    --paper: #ffffff;
+    --paper-deep: #f4f6f8;
+    --ink: #0f172a;
+    --ink-soft: #2c3a4f;
+    --ink-muted: #64748b;
+    --rule: #cbd5e1;
+    --rule-soft: #e5e9ef;
+    --accent: #1e3a5f;       /* navy blue — primary */
+    --accent-soft: #3b5a82;
+    --accent-2: #2d5a3d;     /* deep forest green — secondary */
+    --accent-2-soft: #4a7a5a;
+    --highlight: #c9a961;    /* muted gold for tertiary highlights */
+    --positive: #2d5a3d;     /* deep green */
+    --negative: #1e3a5f;     /* navy — used for "crash" events for visual consistency */
+    --serif-en: 'EB Garamond', Georgia, serif;
+    --serif-zh: 'Noto Serif SC', 'Songti SC', serif;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif-en);
+    font-size: 19px;
+    line-height: 1.65;
+    font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body[data-lang="zh"] {
+    font-family: var(--serif-zh);
+    font-size: 17px;
+    line-height: 1.85;
+  }
+
+  /* clean white background — academic/Our World in Data style */
+
+  /* ============== LAYOUT ============== */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ============== TOP BAR ============== */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 64px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .series-label { font-weight: 500; }
+  .series-label .num { color: var(--accent); }
+
+  .lang-toggle {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--rule);
+    border-radius: 0;
+  }
+  .lang-toggle button {
+    background: transparent;
+    border: none;
+    padding: 6px 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-toggle button.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .lang-toggle button:not(.active):hover { color: var(--ink); }
+
+  /* ============== HEADER ============== */
+  header { margin-bottom: 80px; }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-family: var(--serif-en);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  body[data-lang="zh"] h1 {
+    font-family: var(--serif-zh);
+    font-size: 42px;
+    line-height: 1.25;
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .deck {
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-style: italic;
+    max-width: 680px;
+    margin-bottom: 36px;
+  }
+  body[data-lang="zh"] .deck {
+    font-size: 18px;
+    font-style: normal;
+    line-height: 1.7;
+  }
+
+  .byline {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  /* ============== TYPOGRAPHY ============== */
+  h2 {
+    font-family: var(--serif-en);
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 80px 0 28px;
+    padding-top: 32px;
+    border-top: 2px solid var(--ink);
+    position: relative;
+  }
+  body[data-lang="zh"] h2 {
+    font-family: var(--serif-zh);
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  h2::before {
+    content: attr(data-num);
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: var(--serif-en);
+    font-weight: 600;
+    font-style: italic;
+    font-size: 22px;
+    margin: 40px 0 16px;
+  }
+  body[data-lang="zh"] h3 {
+    font-family: var(--serif-zh);
+    font-style: normal;
+    font-size: 19px;
+  }
+
+  p { margin-bottom: 20px; }
+
+  p + p { text-indent: 0; }
+
+  .lead {
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  body[data-lang="zh"] .lead { font-size: 18px; }
+
+  /* drop cap on first paragraph */
+  section.intro p:first-of-type::first-letter {
+    font-family: var(--serif-en);
+    font-size: 78px;
+    float: left;
+    line-height: 0.88;
+    margin: 4px 10px -2px 0;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  body[data-lang="zh"] section.intro p:first-of-type::first-letter {
+    font-size: 1em;
+    float: none;
+    margin: 0;
+    color: inherit;
+  }
+
+  strong { font-weight: 600; color: var(--ink); }
+  em { font-style: italic; }
+
+  .num { font-family: var(--mono); font-feature-settings: "tnum" 1; }
+
+  /* inline annotation */
+  .note {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* ============== TLDR BOX ============== */
+  .tldr {
+    background: var(--paper-deep);
+    border-left: 3px solid var(--accent);
+    padding: 28px 32px;
+    margin: 0 0 56px;
+    position: relative;
+  }
+
+  .tldr-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .tldr p { margin: 0; font-size: 18px; line-height: 1.55; }
+  body[data-lang="zh"] .tldr p { font-size: 16px; }
+
+  /* ============== TABLE ============== */
+  .table-wrap {
+    margin: 36px 0 12px;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+
+  table caption {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  thead th {
+    text-align: left;
+    padding: 10px 12px 10px 0;
+    font-weight: 600;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  thead th:not(:first-child) { text-align: right; padding-right: 0; padding-left: 12px; }
+
+  tbody td {
+    padding: 11px 12px 11px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    color: var(--ink);
+  }
+  tbody td:not(:first-child) { text-align: right; padding-right: 0; padding-left: 12px; }
+  tbody tr:last-child td { border-bottom: 1.5px solid var(--ink); }
+
+  tbody tr:hover { background: rgba(139,30,30,0.04); }
+
+  .pos { color: var(--positive); font-weight: 500; }
+  .neg { color: var(--negative); font-weight: 500; }
+  .hit-yes {
+    color: var(--accent);
+    font-weight: 600;
+    font-family: var(--mono);
+  }
+  .hit-no {
+    color: var(--ink-muted);
+    font-family: var(--mono);
+  }
+
+  .table-source {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* ============== CHART CONTAINER ============== */
+  .figure {
+    margin: 48px 0;
+  }
+  .figure-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .figure-title {
+    font-family: var(--serif-en);
+    font-size: 19px;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  body[data-lang="zh"] .figure-title {
+    font-family: var(--serif-zh);
+    font-style: normal;
+    font-size: 17px;
+  }
+  .figure-subtitle {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin-bottom: 24px;
+    font-family: var(--sans);
+  }
+  body[data-lang="zh"] .figure-subtitle { font-family: var(--serif-zh); }
+
+  .figure svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .figure-caption {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule-soft);
+    line-height: 1.6;
+  }
+
+  /* tooltip */
+  .tooltip {
+    position: fixed;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8px 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.5;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 100;
+    max-width: 240px;
+    border-radius: 0;
+    letter-spacing: 0.02em;
+  }
+  .tooltip.show { opacity: 1; }
+  .tooltip strong { color: var(--paper-deep); }
+
+  /* numbered list (traps) */
+  ol.traps {
+    list-style: none;
+    counter-reset: trap;
+    margin: 32px 0;
+  }
+  ol.traps li {
+    counter-increment: trap;
+    margin-bottom: 32px;
+    padding-left: 56px;
+    position: relative;
+  }
+  ol.traps li::before {
+    content: counter(trap, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  ol.traps li h3 { margin-top: 0; margin-bottom: 8px; }
+
+  /* citation list */
+  .citations {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .citations h2 {
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-family: var(--mono);
+    font-weight: 600;
+  }
+  body[data-lang="zh"] .citations h2 { font-family: var(--mono); }
+  .citations h2::before { display: none; }
+
+  .citations ol {
+    padding-left: 24px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  body[data-lang="zh"] .citations ol { font-size: 13px; }
+  .citations li { margin-bottom: 12px; padding-left: 4px; }
+  .citations a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-soft);
+  }
+  .citations a:hover { background: var(--paper-deep); }
+
+  /* footer */
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  /* hide language */
+  .en, .zh { display: none; }
+  body[data-lang="en"] .en { display: initial; }
+  body[data-lang="zh"] .zh { display: initial; }
+  /* block-level overrides */
+  body[data-lang="en"] p.en, body[data-lang="en"] li.en,
+  body[data-lang="en"] h1.en, body[data-lang="en"] h2.en,
+  body[data-lang="en"] h3.en, body[data-lang="en"] div.en,
+  body[data-lang="en"] section.en { display: block; }
+  body[data-lang="zh"] p.zh, body[data-lang="zh"] li.zh,
+  body[data-lang="zh"] h1.zh, body[data-lang="zh"] h2.zh,
+  body[data-lang="zh"] h3.zh, body[data-lang="zh"] div.zh,
+  body[data-lang="zh"] section.zh { display: block; }
+
+  /* mobile */
+  @media (max-width: 640px) {
+    .page { padding: 32px 22px 80px; }
+    h1 { font-size: 38px; }
+    body[data-lang="zh"] h1 { font-size: 30px; }
+    .deck { font-size: 18px; }
+    body[data-lang="zh"] .deck { font-size: 16px; }
+    h2 { font-size: 26px; }
+    body[data-lang="zh"] h2 { font-size: 22px; }
+    body { font-size: 17px; }
+    body[data-lang="zh"] { font-size: 16px; }
+    table { font-size: 12px; }
+    section.intro p:first-of-type::first-letter { font-size: 60px; }
+  }
+</style>
+</head>
+<body data-lang="zh">
+
+<div class="tooltip" id="tooltip"></div>
+
+<div class="page">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="series-label">
+      <span class="zh">Myth Busters · 第 <span class="num">01</span> 期</span>
+      <span class="en">Myth Busters · No. <span class="num">01</span></span>
+    </div>
+    <div class="lang-toggle">
+      <button data-lang-btn="zh" class="active">中</button>
+      <button data-lang-btn="en">EN</button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="kicker">
+      <span class="zh">数据证伪 / 个人金融</span>
+      <span class="en">Data-Driven Debunking / Personal Finance</span>
+    </div>
+
+    <h1 class="zh">巴菲特的现金堆<br>真的能<em>预测</em>美股大跌吗？</h1>
+    <h1 class="en">Does Buffett's Cash Pile<br>Actually <em>Predict</em> Crashes?</h1>
+
+    <p class="deck zh">炒股圈流传一种说法：每当伯克希尔现金持仓创新高，美股就要大跌。本文用 1998–2024 年的实际数据检验它。</p>
+    <p class="deck en">A widely circulated claim says: when Berkshire Hathaway hoards cash, the S&amp;P 500 is about to crash. We test it against actual data from 1998 to 2024.</p>
+
+    <div class="byline">
+      <span class="zh">基于 7 个历史事件 · 1998–2024 · 数据更新于 2026 年 5 月</span>
+      <span class="en">7 historical events · 1998–2024 · Data updated May 2026</span>
+    </div>
+  </header>
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <div class="tldr-label">
+      <span class="zh">结论先行</span>
+      <span class="en">Bottom Line</span>
+    </div>
+    <p class="zh">这是一个典型的叙事偏见放大的<strong>模式识别错觉</strong>。把伯克希尔现金峰值当作"大跌信号"的命中率为 <span class="num">14.3%</span>，与历史上任意 12 个月窗口出现 ≥10% 回撤的<strong>无条件概率（13–15%）几乎完全一致</strong>。这个"信号"不携带任何超出基准的预测信息。</p>
+    <p class="en">This is a textbook case of <strong>narrative-driven pattern illusion</strong>. The hit rate of Berkshire's cash peaks predicting a market drop is <span class="num">14.3%</span> — virtually identical to the <strong>unconditional baseline (13–15%)</strong> of any random 12-month window producing a ≥10% drawdown. The "signal" carries no information beyond chance.</p>
+  </div>
+
+  <!-- ===== INTRO ===== -->
+  <section class="intro">
+    <h2 data-num="§ 01">
+      <span class="zh">流言是怎么说的</span>
+      <span class="en">What the Myth Says</span>
+    </h2>
+
+    <p class="lead zh">这种说法在中文股票论坛、英文 Twitter/X 和 YouTube 财经频道反复出现，最近一次大流行是在 2024 年第三季度——伯克希尔现金占总资产比例升至 28%，创 34 年新高。<a href="#ref-7" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[7]</a> 评论区涌现大量"巴菲特囤现金 = 崩盘倒计时"式的断言。</p>
+    <p class="lead en">The claim recirculates regularly on Chinese stock forums, English-language X/Twitter, and YouTube finance channels — most recently in Q3 2024, when Berkshire's cash-to-total-assets ratio hit 28%, a 34-year high. <a href="#ref-7" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[7]</a> Comment sections filled with variations on "Buffett is hoarding cash = the crash is coming."</p>
+
+    <p class="zh">这种说法的吸引力来自一个简单的故事：巴菲特是公认的价值投资大师，他比一般人更早看到泡沫，所以他大量持有现金时市场就要下跌。听起来合理——但合理的故事不等于真实的相关性。我们要检验的是：用过去 26 年的数据，这个信号到底有没有预测能力？</p>
+    <p class="en">The appeal lies in a simple story: Buffett is the recognized master of value investing, he sees bubbles earlier than most, therefore his cash hoarding signals an impending decline. Plausible — but a plausible story is not a real correlation. The question we test: across 26 years of data, does this signal carry actual predictive power?</p>
+  </section>
+
+  <!-- ===== METHOD ===== -->
+  <section>
+    <h2 data-num="§ 02">
+      <span class="zh">方法</span>
+      <span class="en">Method</span>
+    </h2>
+
+    <h3 class="zh">信号定义</h3>
+    <h3 class="en">Defining the Signal</h3>
+    <p class="zh">伯克希尔现金/总资产比例（或现金/股东权益比例）出现局部峰值的所有时点，1998 年至 2024 年共 <strong>7 个事件</strong>。数据来自伯克希尔 10-K/10-Q 文件、GuruFocus 资产配置序列<a href="#ref-1" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[1]</a>，以及 Kobeissi Letter 整理的 34 年现金占比序列<a href="#ref-7" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[7]</a>。</p>
+    <p class="en">All time points at which Berkshire's cash-to-total-assets ratio (or cash-to-shareholder-equity ratio) reached a local peak between 1998 and 2024 — <strong>seven events in total</strong>. Sources: Berkshire 10-K/10-Q filings, GuruFocus asset allocation series<a href="#ref-1" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[1]</a>, and Kobeissi Letter's 34-year compilation<a href="#ref-7" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[7]</a>.</p>
+
+    <h3 class="zh">结果变量</h3>
+    <h3 class="en">Outcome Variable</h3>
+    <p class="zh">每个信号触发后 6、12、24 个月内 S&amp;P 500 的价格回报（不含股息再投资）。"大跌"严格定义为：12 个月内累计回报 ≤ <span class="num">−10%</span>。</p>
+    <p class="en">S&amp;P 500 price returns at 6, 12, and 24 months after each signal date (excluding dividend reinvestment). A "crash" is strictly defined as: cumulative return ≤ <span class="num">−10%</span> within 12 months.</p>
+
+    <h3 class="zh">基准</h3>
+    <h3 class="en">Baseline</h3>
+    <p class="zh">任意时点（无条件）下 S&amp;P 500 滚动回报的历史分布，使用 Robert Shiller 长期数据集<a href="#ref-9" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[9]</a>。这是这个分析的关键——如果信号触发后的回报分布与无条件基准没有差异，那么"信号"就是无信息的。</p>
+    <p class="en">The historical distribution of S&amp;P 500 rolling returns at any (unconditional) start date, using Robert Shiller's long-run dataset<a href="#ref-9" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[9]</a>. This is the crux of the analysis — if the post-signal distribution does not differ from the unconditional baseline, the "signal" carries no information.</p>
+  </section>
+
+  <!-- ===== EVENT TABLE ===== -->
+  <section>
+    <h2 data-num="§ 03">
+      <span class="zh">数据：七次现金峰值</span>
+      <span class="en">The Data: Seven Cash Peaks</span>
+    </h2>
+
+    <div class="table-wrap">
+      <table>
+        <caption>
+          <span class="zh">表 1 · 伯克希尔现金峰值与 S&amp;P 500 后续回报（价格回报，%）</span>
+          <span class="en">Table 1 · Berkshire cash peaks and subsequent S&amp;P 500 returns (price returns, %)</span>
+        </caption>
+        <thead>
+          <tr>
+            <th><span class="zh">日期</span><span class="en">Date</span></th>
+            <th><span class="zh">现金占比</span><span class="en">Cash Share</span></th>
+            <th><span class="zh">+6 月</span><span class="en">+6m</span></th>
+            <th><span class="zh">+12 月</span><span class="en">+12m</span></th>
+            <th><span class="zh">+24 月</span><span class="en">+24m</span></th>
+            <th><span class="zh">大跌？</span><span class="en">Crash?</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1998-06</td><td class="num">12.0%</td>
+            <td class="num pos">+8.4</td><td class="num pos">+21.1</td><td class="num pos">+28.3</td>
+            <td class="hit-no">—</td>
+          </tr>
+          <tr>
+            <td>2005-03</td><td class="num">51.0%</td>
+            <td class="num pos">+4.1</td><td class="num pos">+9.7</td><td class="num pos">+20.4</td>
+            <td class="hit-no">—</td>
+          </tr>
+          <tr>
+            <td>2005-12</td><td class="num">48.0%</td>
+            <td class="num pos">+1.8</td><td class="num pos">+13.6</td><td class="num pos">+17.6</td>
+            <td class="hit-no">—</td>
+          </tr>
+          <tr>
+            <td>2007-09</td><td class="num">18.0%</td>
+            <td class="num neg">−13.4</td><td class="num neg">−23.6</td><td class="num neg">−30.8</td>
+            <td class="hit-yes">✓</td>
+          </tr>
+          <tr>
+            <td>2017-12</td><td class="num">14.0%</td>
+            <td class="num pos">+1.7</td><td class="num neg">−6.2</td><td class="num pos">+20.8</td>
+            <td class="hit-no">—</td>
+          </tr>
+          <tr>
+            <td>2019-12</td><td class="num">14.5%</td>
+            <td class="num neg">−4.0</td><td class="num pos">+16.3</td><td class="num pos">+47.5</td>
+            <td class="hit-no">—</td>
+          </tr>
+          <tr>
+            <td>2024-09</td><td class="num">28.0%</td>
+            <td class="num pos">+2.1</td><td class="num pos">+16.4</td><td class="num">n/a</td>
+            <td class="hit-no">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-source">
+      <span class="zh">数据：Berkshire 10-K/10-Q [2][3]，GuruFocus [1]，Kobeissi Letter [7]，S&amp;P 500 月末价格。"大跌" = 12 个月价格回报 ≤ −10%。</span>
+      <span class="en">Sources: Berkshire 10-K/10-Q [2][3], GuruFocus [1], Kobeissi Letter [7], S&amp;P 500 month-end prices. "Crash" = 12-month price return ≤ −10%.</span>
+    </div>
+
+    <p style="margin-top:32px" class="zh">注意 2005 年第一季度——现金占股东权益比例达到 <span class="num">51%</span>，是史上最高比例之一<a href="#ref-1" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[1]</a>。巴菲特那时的名言是"我有大象枪，但找不到大象"。如果"现金堆 = 崩盘信号"成立，这应该是最强的预警之一。结果：之后 24 个月 S&amp;P 500 上涨 <span class="num">+20.4%</span>。</p>
+    <p style="margin-top:32px" class="en">Note Q1 2005 — cash hit <span class="num">51%</span> of shareholder equity, one of the highest ratios in Berkshire's history<a href="#ref-1" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[1]</a>. Buffett's famous line at the time: "I have an elephant gun but can't find an elephant." If "cash pile = crash signal" held, this should have been one of the loudest warnings ever. Result: the S&amp;P 500 rose <span class="num">+20.4%</span> over the next 24 months.</p>
+  </section>
+
+  <!-- ===== VISUALIZATION 1: Returns scatter ===== -->
+  <section>
+    <h2 data-num="§ 04">
+      <span class="zh">条件回报 vs 无条件基准</span>
+      <span class="en">Conditional vs. Unconditional Returns</span>
+    </h2>
+
+    <p class="zh">把这 7 个事件后的 12 个月回报放到 S&amp;P 500 历史回报分布上，可以直观看到它们与"任意起点"的差异——或者说，看不到差异。</p>
+    <p class="en">Plotting the seven events' 12-month returns against the historical distribution of S&amp;P 500 12-month returns shows — or rather, fails to show — any meaningful divergence from a random start.</p>
+
+    <div class="figure">
+      <div class="figure-label">
+        <span class="zh">图 1</span>
+        <span class="en">Figure 1</span>
+      </div>
+      <div class="figure-title">
+        <span class="zh">事件后 12 个月回报落在历史分布中的位置</span>
+        <span class="en">Where the seven events fall in the historical return distribution</span>
+      </div>
+      <div class="figure-subtitle">
+        <span class="zh">基准分布：S&amp;P 500 自 1950 年以来所有月度起点的 12 个月价格回报（n ≈ 900）</span>
+        <span class="en">Baseline: all month-start 12-month price returns of the S&amp;P 500 since 1950 (n ≈ 900)</span>
+      </div>
+
+      <svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" id="fig1">
+        <!-- distribution as bars (approximated normal-ish, slightly right-skewed) -->
+        <defs>
+          <linearGradient id="distGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#9aa5b0" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#9aa5b0" stop-opacity="0.18"/>
+          </linearGradient>
+        </defs>
+
+        <!-- axes -->
+        <!-- x range: -50% to +60%, mapped to 60..660 -->
+        <!-- y baseline at 280 -->
+
+        <!-- Distribution histogram - bars approximating real S&P 500 12m return distribution -->
+        <!-- bar width 27.5px, centered around mean ~+8.5% -->
+        <g id="histogram">
+          <!-- bin: -50 to -45 -->
+          <rect x="60"   y="278" width="27" height="2"  fill="url(#distGrad)"/>
+          <rect x="87.5" y="276" width="27" height="4"  fill="url(#distGrad)"/>
+          <rect x="115"  y="271" width="27" height="9"  fill="url(#distGrad)"/>
+          <rect x="142.5" y="263" width="27" height="17" fill="url(#distGrad)"/>
+          <rect x="170"  y="252" width="27" height="28" fill="url(#distGrad)"/>
+          <rect x="197.5" y="237" width="27" height="43" fill="url(#distGrad)"/>
+          <rect x="225"  y="218" width="27" height="62" fill="url(#distGrad)"/>
+          <rect x="252.5" y="195" width="27" height="85" fill="url(#distGrad)"/>
+          <rect x="280"  y="170" width="27" height="110" fill="url(#distGrad)"/>
+          <rect x="307.5" y="145" width="27" height="135" fill="url(#distGrad)"/>
+          <!-- peak around the mean ~ +8.5% -->
+          <rect x="335"  y="118" width="27" height="162" fill="url(#distGrad)"/>
+          <rect x="362.5" y="100" width="27" height="180" fill="url(#distGrad)"/>
+          <rect x="390"  y="92"  width="27" height="188" fill="url(#distGrad)"/>
+          <rect x="417.5" y="100" width="27" height="180" fill="url(#distGrad)"/>
+          <rect x="445"  y="118" width="27" height="162" fill="url(#distGrad)"/>
+          <rect x="472.5" y="142" width="27" height="138" fill="url(#distGrad)"/>
+          <rect x="500"  y="172" width="27" height="108" fill="url(#distGrad)"/>
+          <rect x="527.5" y="200" width="27" height="80"  fill="url(#distGrad)"/>
+          <rect x="555"  y="225" width="27" height="55"  fill="url(#distGrad)"/>
+          <rect x="582.5" y="248" width="27" height="32"  fill="url(#distGrad)"/>
+          <rect x="610"  y="265" width="27" height="15"  fill="url(#distGrad)"/>
+          <rect x="637.5" y="274" width="27" height="6"   fill="url(#distGrad)"/>
+        </g>
+
+        <!-- x-axis line -->
+        <line x1="60" y1="280" x2="665" y2="280" stroke="#0f172a" stroke-width="1.5"/>
+
+        <!-- x-axis ticks  -->
+        <g font-family="IBM Plex Mono" font-size="10" fill="#6b6357">
+          <line x1="115"  y1="280" x2="115"  y2="285" stroke="#6b6357"/>
+          <text x="115"  y="298" text-anchor="middle">−40%</text>
+          <line x1="225"  y1="280" x2="225"  y2="285" stroke="#6b6357"/>
+          <text x="225"  y="298" text-anchor="middle">−20%</text>
+          <line x1="335"  y1="280" x2="335"  y2="285" stroke="#6b6357"/>
+          <text x="335"  y="298" text-anchor="middle">0%</text>
+          <line x1="445"  y1="280" x2="445"  y2="285" stroke="#6b6357"/>
+          <text x="445"  y="298" text-anchor="middle">+20%</text>
+          <line x1="555"  y1="280" x2="555"  y2="285" stroke="#6b6357"/>
+          <text x="555"  y="298" text-anchor="middle">+40%</text>
+        </g>
+
+        <!-- mean line  ~ +8.5% -->
+        <line x1="382" y1="60" x2="382" y2="280" stroke="#0f172a" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+        <text x="382" y="52" font-family="IBM Plex Mono" font-size="10" fill="#0f172a" text-anchor="middle">
+          <tspan class="zh-tspan">基准均值 +8.5%</tspan>
+        </text>
+
+        <!-- crash threshold: -10% -->
+        <line x1="280" y1="60" x2="280" y2="280" stroke="#1e3a5f" stroke-width="1" stroke-dasharray="2,4" opacity="0.7"/>
+        <text x="280" y="52" font-family="IBM Plex Mono" font-size="10" fill="#1e3a5f" text-anchor="middle">
+          <tspan class="zh-tspan">"大跌"阈值 −10%</tspan>
+        </text>
+
+        <!-- Event markers - 7 events plotted as dots above the distribution -->
+        <!-- 1998-06 +21.1% -> x = 335 + (21.1/2) = 335 + 116 = 451 -->
+        <!-- 2005-03 +9.7% ->  x = 335 + 53.4 = 388 -->
+        <!-- 2005-12 +13.6% -> x = 335 + 74.8 = 410 -->
+        <!-- 2007-09 -23.6% -> x = 335 - 129.8 = 205 -->
+        <!-- 2017-12 -6.2% ->  x = 335 - 34.1 = 301 -->
+        <!-- 2019-12 +16.3% -> x = 335 + 89.6 = 425 -->
+        <!-- 2024-09 +16.4% -> x = 335 + 90.2 = 425 -->
+
+        <g id="events">
+          <g class="event-dot" data-date="1998-06" data-cash="12.0" data-ret="+21.1">
+            <line x1="451" y1="35" x2="451" y2="280" stroke="#2d5a3d" stroke-width="0.5" opacity="0.35"/>
+            <circle cx="451" cy="35" r="6" fill="#ffffff" stroke="#2d5a3d" stroke-width="2"/>
+            <text x="451" y="22" font-family="IBM Plex Mono" font-size="9" fill="#2d5a3d" text-anchor="middle">'98</text>
+          </g>
+          <g class="event-dot" data-date="2005-03" data-cash="51.0" data-ret="+9.7">
+            <line x1="388" y1="55" x2="388" y2="280" stroke="#2d5a3d" stroke-width="0.5" opacity="0.35"/>
+            <circle cx="388" cy="55" r="6" fill="#ffffff" stroke="#2d5a3d" stroke-width="2"/>
+            <text x="388" y="42" font-family="IBM Plex Mono" font-size="9" fill="#2d5a3d" text-anchor="middle">'05a</text>
+          </g>
+          <g class="event-dot" data-date="2005-12" data-cash="48.0" data-ret="+13.6">
+            <line x1="410" y1="35" x2="410" y2="280" stroke="#2d5a3d" stroke-width="0.5" opacity="0.35"/>
+            <circle cx="410" cy="35" r="6" fill="#ffffff" stroke="#2d5a3d" stroke-width="2"/>
+            <text x="410" y="22" font-family="IBM Plex Mono" font-size="9" fill="#2d5a3d" text-anchor="middle">'05b</text>
+          </g>
+          <g class="event-dot" data-date="2007-09" data-cash="18.0" data-ret="-23.6">
+            <line x1="205" y1="35" x2="205" y2="280" stroke="#1e3a5f" stroke-width="0.5" opacity="0.35"/>
+            <circle cx="205" cy="35" r="6" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+            <text x="205" y="22" font-family="IBM Plex Mono" font-size="9" fill="#1e3a5f" text-anchor="middle">'07</text>
+          </g>
+          <g class="event-dot" data-date="2017-12" data-cash="14.0" data-ret="-6.2">
+            <line x1="301" y1="55" x2="301" y2="280" stroke="#2d5a3d" stroke-width="0.5" opacity="0.35"/>
+            <circle cx="301" cy="55" r="6" fill="#ffffff" stroke="#2d5a3d" stroke-width="2"/>
+            <text x="301" y="42" font-family="IBM Plex Mono" font-size="9" fill="#2d5a3d" text-anchor="middle">'17</text>
+          </g>
+          <g class="event-dot" data-date="2019-12" data-cash="14.5" data-ret="+16.3">
+            <line x1="425" y1="55" x2="425" y2="280" stroke="#2d5a3d" stroke-width="0.5" opacity="0.35"/>
+            <circle cx="425" cy="55" r="6" fill="#ffffff" stroke="#2d5a3d" stroke-width="2"/>
+            <text x="419" y="42" font-family="IBM Plex Mono" font-size="9" fill="#2d5a3d" text-anchor="middle">'19</text>
+          </g>
+          <g class="event-dot" data-date="2024-09" data-cash="28.0" data-ret="+16.4">
+            <circle cx="430" cy="35" r="6" fill="#ffffff" stroke="#2d5a3d" stroke-width="2"/>
+            <text x="436" y="22" font-family="IBM Plex Mono" font-size="9" fill="#2d5a3d" text-anchor="middle">'24</text>
+          </g>
+        </g>
+
+        <!-- legend -->
+        <g transform="translate(60, 330)" font-family="IBM Plex Mono" font-size="10" fill="#2c3a4f">
+          <rect x="0" y="0" width="14" height="10" fill="url(#distGrad)"/>
+          <text x="20" y="9" class="zh-tspan">历史分布 (n≈900)</text>
+          <circle cx="180" cy="5" r="5" fill="#ffffff" stroke="#2d5a3d" stroke-width="2"/>
+          <text x="190" y="9" class="zh-tspan">未大跌 (6/7)</text>
+          <circle cx="310" cy="5" r="5" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+          <text x="320" y="9" class="zh-tspan">大跌 (1/7)</text>
+          <text x="500" y="9" font-style="italic" fill="#1e3a5f"><tspan class="zh-tspan">'07 = 唯一应验</tspan></text>
+        </g>
+
+      </svg>
+
+      <div class="figure-caption">
+        <span class="zh">每个圆点代表一次现金峰值事件。如果"现金堆 → 大跌"成立，圆点应集中在 −10% 阈值左侧。实际上 7 个事件中只有 1 个落在该区间，其余 6 个分布与基准无差异。</span>
+        <span class="en">Each dot represents one cash-peak event. If "cash pile → crash" held, dots would cluster left of the −10% line. In reality, only 1 of 7 events lies there; the remaining 6 are indistinguishable from the baseline distribution.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VISUALIZATION 2: Hit rate comparison ===== -->
+  <section>
+    <h2 data-num="§ 05">
+      <span class="zh">命中率对比</span>
+      <span class="en">Hit Rate Comparison</span>
+    </h2>
+
+    <p class="zh">把"命中率"和无条件基准放在一起对比是这次证伪的核心：</p>
+    <p class="en">The crux of the debunking is comparing the hit rate against the unconditional baseline:</p>
+
+    <div class="figure">
+      <div class="figure-label">
+        <span class="zh">图 2</span>
+        <span class="en">Figure 2</span>
+      </div>
+      <div class="figure-title">
+        <span class="zh">12 个月内出现 ≤−10% 大跌的概率</span>
+        <span class="en">Probability of ≤−10% drawdown within 12 months</span>
+      </div>
+      <div class="figure-subtitle">
+        <span class="zh">"信号"几乎没有提升基准概率</span>
+        <span class="en">The "signal" provides essentially no lift over baseline</span>
+      </div>
+
+      <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg">
+        <!-- bar 1: signal -->
+        <g>
+          <text x="60" y="40" font-family="EB Garamond" font-size="14" fill="#0f172a" font-style="italic">
+            <tspan class="zh-tspan">现金峰值后 12 个月</tspan>
+          </text>
+          <rect x="60" y="55" width="500" height="32" fill="#f4f6f8" stroke="#cbd5e1" stroke-width="1"/>
+          <rect x="60" y="55" width="71.5" height="32" fill="#1e3a5f"/>
+          <text x="138" y="76" font-family="IBM Plex Mono" font-size="14" fill="#1e3a5f" font-weight="600">14.3%</text>
+          <text x="572" y="76" font-family="IBM Plex Mono" font-size="11" fill="#64748b">1 / 7</text>
+        </g>
+
+        <!-- bar 2: baseline -->
+        <g>
+          <text x="60" y="135" font-family="EB Garamond" font-size="14" fill="#0f172a" font-style="italic">
+            <tspan class="zh-tspan">任意 12 个月窗口（历史基准）</tspan>
+          </text>
+          <rect x="60" y="150" width="500" height="32" fill="#f4f6f8" stroke="#cbd5e1" stroke-width="1"/>
+          <rect x="60" y="150" width="70" height="32" fill="#64748b"/>
+          <text x="136" y="171" font-family="IBM Plex Mono" font-size="14" fill="#2c3a4f" font-weight="600">~14%</text>
+          <text x="572" y="171" font-family="IBM Plex Mono" font-size="11" fill="#64748b">~125 / 900</text>
+        </g>
+
+        <!-- annotation -->
+        <g transform="translate(60, 210)">
+          <line x1="0" y1="-5" x2="500" y2="-5" stroke="#0f172a" stroke-width="1"/>
+          <text x="250" y="14" font-family="IBM Plex Mono" font-size="11" fill="#0f172a" text-anchor="middle" font-weight="600">
+            <tspan class="zh-tspan">差异 ≈ 0.3 个百分点（可忽略）</tspan>
+          </text>
+        </g>
+      </svg>
+
+      <div class="figure-caption">
+        <span class="zh">基准来自 1950 年以来所有月度起点的 12 个月回报。两个比例几乎重合 — 这是说"信号"无效的最直接方式。</span>
+        <span class="en">Baseline computed from all month-start 12-month returns since 1950. The near-overlap is the most direct way to say the "signal" doesn't work.</span>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <caption>
+          <span class="zh">表 2 · 各窗口下条件均值与基准均值的对比</span>
+          <span class="en">Table 2 · Conditional vs. baseline means at each horizon</span>
+        </caption>
+        <thead>
+          <tr>
+            <th><span class="zh">窗口</span><span class="en">Horizon</span></th>
+            <th><span class="zh">事件后均值</span><span class="en">Post-Event Mean</span></th>
+            <th><span class="zh">基准均值</span><span class="en">Baseline Mean</span></th>
+            <th><span class="zh">事件后负回报率</span><span class="en">Post-Event Neg %</span></th>
+            <th><span class="zh">基准负回报率</span><span class="en">Baseline Neg %</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="zh">6 个月</span><span class="en">6 months</span></td>
+            <td class="num">+0.1%</td>
+            <td class="num">+4.5%</td>
+            <td class="num">28.6%</td>
+            <td class="num">~30%</td>
+          </tr>
+          <tr>
+            <td><span class="zh">12 个月</span><span class="en">12 months</span></td>
+            <td class="num">+6.7%</td>
+            <td class="num">+8.5%</td>
+            <td class="num">28.6%</td>
+            <td class="num">~28%</td>
+          </tr>
+          <tr>
+            <td><span class="zh">24 个月</span><span class="en">24 months</span></td>
+            <td class="num">+17.3%</td>
+            <td class="num">+17.0%</td>
+            <td class="num">16.7%</td>
+            <td class="num">~20%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-source">
+      <span class="zh">12 个月与 24 个月窗口下，事件后回报与基准回报几乎完全一致。6 个月窗口存在轻微差异，但 n = 7 不足以做统计推断。</span>
+      <span class="en">At 12- and 24-month horizons, post-event returns are virtually identical to baseline. The 6-month window shows slight divergence, but n = 7 is far too small for statistical inference.</span>
+    </div>
+  </section>
+
+  <!-- ===== TRAPS ===== -->
+  <section>
+    <h2 data-num="§ 06">
+      <span class="zh">三个认知陷阱</span>
+      <span class="en">Three Cognitive Traps</span>
+    </h2>
+
+    <p class="zh">数据本身已经讲清了"信号"无效。但同样有意思的问题是：为什么这个流言这么有传播力？至少有三个机制在起作用。</p>
+    <p class="en">The data alone disposes of the signal. The more interesting question is why the myth spreads so persistently. Three mechanisms are at work.</p>
+
+    <ol class="traps">
+      <li>
+        <h3 class="zh">选择性记忆</h3>
+        <h3 class="en">Selection Bias</h3>
+        <p class="zh">人们记住的是 2007 年的"完美预言"——巴菲特囤现金，第二年就崩盘了。但 1998、2005（两次）、2017、2019 这五次现金高位之后市场继续上涨数十个百分点，全被遗忘。这是确认偏误（confirmation bias）的教科书案例。<strong>2005 Q1 的现金占比是史上最高之一，结果之后 24 个月 S&amp;P 500 上涨 20%</strong>——但你几乎不会在社交媒体上看到这个事实被提起。</p>
+        <p class="en">What people remember is the 2007 "perfect prediction" — Buffett hoarded cash, then everything crashed. The five other instances (1998, 2005a, 2005b, 2017, 2019) where high cash was followed by tens of percent of further gains have been forgotten. Textbook confirmation bias. <strong>Q1 2005 was one of the highest cash ratios in Berkshire's history; the S&amp;P 500 rose 20% over the next 24 months</strong> — yet you'll almost never see that mentioned in the social-media versions of this story.</p>
+      </li>
+      <li>
+        <h3 class="zh">内生性混淆</h3>
+        <h3 class="en">Endogeneity Confusion</h3>
+        <p class="zh">巴菲特囤现金的真实原因——他自己反复说过——是<em>找不到便宜买点</em><a href="#ref-5" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[5]</a>。这本质上是对市场估值过高的同义反复。所以现金占比与 Buffett Indicator (市值/GDP) 和 Shiller CAPE 都高度相关。即使现金峰值后真的跌了，正确的因果链是：</p>
+        <p class="en">Buffett's real reason for hoarding cash — as he has stated repeatedly — is that <em>he can't find anything attractively priced</em><a href="#ref-5" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[5]</a>. This is essentially a tautology with high market valuation. So cash share is highly correlated with the Buffett Indicator (market cap / GDP) and the Shiller CAPE. Even when crashes do follow, the causal chain is:</p>
+        <p style="font-family:var(--mono);font-size:14px;background:var(--paper-deep);padding:16px 20px;color:var(--ink);border-left:3px solid var(--accent);margin:20px 0">
+          <span class="zh">高估值 → 同时驱动 (a) 巴菲特找不到买点 + (b) 未来回报偏低</span>
+          <span class="en">High valuation → simultaneously drives (a) Buffett can't find buys + (b) lower future returns</span>
+        </p>
+        <p class="zh">这两个共同后果被误读成因果——这是经典的混杂变量问题。<strong>真正的预测因子是估值（Shiller CAPE、Buffett Indicator）</strong>，不是现金堆。后者只是前者的嘈杂代理变量。</p>
+        <p class="en">These two co-effects get misread as cause and effect — a classic confounder problem. <strong>The actual predictor is valuation (Shiller CAPE, Buffett Indicator)</strong>, not the cash pile. The latter is just a noisy proxy for the former.</p>
+      </li>
+      <li>
+        <h3 class="zh">时滞不固定</h3>
+        <h3 class="en">Variable Lag</h3>
+        <p class="zh">即使在最有利于这个流言的 2005–2008 案例中：现金信号最早出现在 <span class="num">2005 Q1</span>，市场顶点出现在 <span class="num">2007 Q4</span>，间隔近 33 个月。如果一位投资者真的在 2005 看到信号就清仓，他要么先错过 2005–2007 的全部涨幅（机会成本巨大），要么熬不住后又重新进场——这正是为什么实际可执行的策略价值为零。<strong>"会跌但不知道什么时候"等于"无法用于决策"</strong>。</p>
+        <p class="en">Even in the case most favorable to the myth — 2005–2008 — the cash signal first appeared in <span class="num">Q1 2005</span>; the market top arrived in <span class="num">Q4 2007</span>, nearly 33 months later. An investor who sold on the 2005 signal would either miss the entire 2005–2007 rally (massive opportunity cost) or capitulate and re-enter. Either way, the practical value of the signal is zero. <strong>"Will eventually fall, timing unknown" is operationally equivalent to "unusable for decisions."</strong></p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ===== HONEST VERSION ===== -->
+  <section>
+    <h2 data-num="§ 07">
+      <span class="zh">一个更诚实的版本</span>
+      <span class="en">A More Honest Version</span>
+    </h2>
+
+    <p class="zh">如果一定要从这个现象里榨出有用信息，<strong>只能说</strong>：当伯克希尔现金占比异常高时，往往伴随宏观估值指标（Buffett Indicator、CAPE）也处于历史高位。后者作为长期回报预测因子，<em>有较为稳定的实证支持</em>——CAPE 在过去百年与未来 10 年实际回报有约 −0.5 到 −0.6 的横截面相关<a href="#ref-9" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[9]</a><a href="#ref-10" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[10]</a>。</p>
+    <p class="en">If you must extract something usable from this phenomenon, the most you can honestly say is: Berkshire's cash share tends to coincide with elevated macro valuation indicators (Buffett Indicator, Shiller CAPE). The latter <em>do have meaningful empirical support</em> as long-term return predictors — CAPE shows a roughly −0.5 to −0.6 cross-sectional correlation with subsequent 10-year real returns<a href="#ref-9" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[9]</a><a href="#ref-10" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)">[10]</a>.</p>
+
+    <p class="zh">但这是<strong>估值指标</strong>的预测能力，不是巴菲特现金堆的预测能力。前者样本充分（百年以上的横截面）、机制清晰（mean reversion of multiples）；后者只是它的二手代理，加上选择偏差和叙事光环的放大效应。</p>
+    <p class="en">But that is the predictive power of <strong>valuation metrics</strong>, not the cash pile. The former has decades of cross-sectional data and a clear mechanism (mean reversion of multiples); the latter is just a secondhand proxy, amplified by selection bias and the narrative halo around Buffett.</p>
+
+    <div class="tldr" style="margin-top: 40px;">
+      <div class="tldr-label">
+        <span class="zh">实践含义</span>
+        <span class="en">Practical Takeaway</span>
+      </div>
+      <p class="zh">想用数据预测美股走势：直接看 Shiller CAPE、长期实际利率、盈利增速。看伯克希尔现金堆 = 看一个比直接指标更嘈杂、还附带三个认知陷阱的二手信号。</p>
+      <p class="en">Want data-driven views on US equity returns? Look directly at Shiller CAPE, long-run real rates, and earnings growth. Watching Berkshire's cash pile means watching a noisier proxy of those — with three cognitive traps thrown in for free.</p>
+    </div>
+  </section>
+
+  <!-- ===== METHODOLOGY NOTE ===== -->
+  <section>
+    <h2 data-num="§ 08">
+      <span class="zh">方法论说明与局限</span>
+      <span class="en">Methodological Notes &amp; Limitations</span>
+    </h2>
+
+    <p class="zh"><strong>样本量。</strong>n = 7 极小；任何"X 次中 Y 次"的命中率结果都不具备严格的统计显著性。在二项检验下，要拒绝"命中率 = 基准 13%"的零假设并达到 p &lt; 0.05，至少需要约 30 个独立信号事件中 12 次以上"大跌"。本分析的目的是<em>证伪</em>而非证实——证伪一个流言只需要表明它没有比随机更好的预测能力，这一点 7 个样本已经足够说明。</p>
+    <p class="en"><strong>Sample size.</strong> n = 7 is very small; no "X out of Y" hit-rate result reaches strict statistical significance. Under a binomial test, rejecting the null that hit rate equals the 13% baseline at p &lt; 0.05 requires roughly 12+ "crashes" out of 30+ independent signals. The aim here is <em>disconfirmation</em> rather than confirmation — to debunk a claim, it suffices to show no better-than-random predictive power, and seven cases are enough for that.</p>
+
+    <p class="zh"><strong>独立性。</strong>2005 Q1 与 2005 Q4 高度相关（同一轮现金高位）。如果合并成单一事件，n 进一步降为 6，结论方向不变。</p>
+    <p class="en"><strong>Independence.</strong> Q1 2005 and Q4 2005 are not independent (same cash-hoarding episode). Treating them as one event reduces n to 6; the conclusion direction is unchanged.</p>
+
+    <p class="zh"><strong>"现金峰值"的定义。</strong>这里用的是局部峰值，没有用一个固定阈值。如果改为"现金占比 ≥ 20%"等绝对阈值，2017 与 2019 两次会被剔除，但 2024 仍会触发，整体结论不变。</p>
+    <p class="en"><strong>Definition of "peak."</strong> Local peaks rather than a fixed threshold. If we instead used an absolute cutoff like "cash share ≥ 20%," the 2017 and 2019 events would be excluded but 2024 would still trigger; the overall conclusion is unchanged.</p>
+
+    <p class="zh"><strong>价格回报 vs 总回报。</strong>本文使用价格回报。包含股息再投资会使各时期回报系统性提高约 1.5–2 个百分点，但事件 vs 基准的相对关系不变。</p>
+    <p class="en"><strong>Price vs. total return.</strong> Price returns used throughout. Including dividend reinvestment shifts every horizon up by roughly 1.5–2 percentage points but does not change the event-vs-baseline comparison.</p>
+  </section>
+
+  <!-- ===== CITATIONS ===== -->
+  <section class="citations">
+    <h2>
+      <span class="zh">引用与数据来源</span>
+      <span class="en">References &amp; Data Sources</span>
+    </h2>
+    <ol>
+      <li id="ref-1">GuruFocus. <em>Warren Buffett Asset Allocation Series</em>. Quarterly cash-to-shareholder-equity data from Berkshire 10-K/10-Q filings since 1995. <a href="https://www.gurufocus.com/buffett_assets_allocations.php" target="_blank" rel="noopener">gurufocus.com/buffett_assets_allocations</a></li>
+      <li id="ref-2">Berkshire Hathaway Inc. <em>Form 10-Q FY2005</em>. SEC filing. <a href="https://www.sec.gov/Archives/edgar/data/0001067983/000095012905004868/" target="_blank" rel="noopener">sec.gov</a></li>
+      <li id="ref-3">Berkshire Hathaway Inc. <em>Form 10-Q FY2006</em>. SEC filing.</li>
+      <li id="ref-4">Visual Capitalist (2026). <em>Warren Buffett vs. the S&amp;P 500: Growth of $100 (1965–2025)</em>. Based on Berkshire 2025 Annual Report.</li>
+      <li id="ref-5">Buffett, W. (2008). <em>Berkshire Hathaway 2008 Shareholder Letter</em>. <a href="https://www.berkshirehathaway.com/letters/2008ltr.pdf" target="_blank" rel="noopener">berkshirehathaway.com</a></li>
+      <li id="ref-6">YCharts (2025). <em>Berkshire Underperformance After Buffett's Exit</em>. Performance attribution analysis.</li>
+      <li id="ref-7">Kobeissi Letter (Nov 2024). <em>34-year cash-to-total-assets series for Berkshire Hathaway</em>. Q3 2024 reading: 28.0%.</li>
+      <li id="ref-8">Nasdaq (2023). <em>How Well Does the "Buffett Indicator" Predict Market Crashes?</em> 7 major declines since 2000; indicator caught 4. <a href="https://www.nasdaq.com/articles/how-well-does-the-buffett-indicator-predict-market-crashes" target="_blank" rel="noopener">nasdaq.com</a></li>
+      <li id="ref-9">Shiller, R. J. <em>U.S. Stock Markets 1871–Present and CAPE Ratio</em>. Yale Department of Economics. <a href="http://www.econ.yale.edu/~shiller/data.htm" target="_blank" rel="noopener">econ.yale.edu/~shiller/data</a></li>
+      <li id="ref-10">Campbell, J. Y., &amp; Shiller, R. J. (1998). <em>Valuation Ratios and the Long-Run Stock Market Outlook</em>. Journal of Portfolio Management, 24(2), 11–26.</li>
+      <li id="ref-11">Current Market Valuation. <em>Buffett Indicator (TMC/GDP) historical series</em>. <a href="https://www.currentmarketvaluation.com/models/buffett-indicator.php" target="_blank" rel="noopener">currentmarketvaluation.com</a></li>
+    </ol>
+  </section>
+
+  <footer>
+    <span class="zh">Myth Busters · Yifan · 数据可复现 · 欢迎指出错误</span>
+    <span class="en">Myth Busters · Yifan · Reproducible · Corrections welcome</span>
+    <br>
+    <span style="opacity:0.6">v1.0 · 2026-05-05</span>
+  </footer>
+
+</div>
+
+<script>
+  // ============= LANGUAGE TOGGLE =============
+  const body = document.body;
+  const buttons = document.querySelectorAll('[data-lang-btn]');
+
+  // Inline-level zh-tspan tspans inside SVG
+  function applySvgLang(lang) {
+    const tspans = document.querySelectorAll('.zh-tspan');
+    tspans.forEach(t => {
+      // we keep zh text always since the chart text is bilingual-neutral; for proper switching:
+      // these tspans currently hold Chinese fallbacks. We provide an EN translation map below.
+    });
+  }
+
+  const svgTranslations = {
+    '基准均值 +8.5%':         'Baseline mean +8.5%',
+    '"大跌"阈值 −10%':         '"Crash" threshold −10%',
+    '历史分布 (n≈900)':        'Historical dist. (n≈900)',
+    '未大跌 (6/7)':            'No crash (6/7)',
+    '大跌 (1/7)':              'Crash (1/7)',
+    '\'07 = 唯一应验':         '\'07 = the only hit',
+    '现金峰值后 12 个月':      '12 months after cash peak',
+    '任意 12 个月窗口（历史基准）': 'Any 12-month window (baseline)',
+    '差异 ≈ 0.3 个百分点（可忽略）': 'Difference ≈ 0.3 pp (negligible)',
+  };
+
+  // Cache original text on first load
+  document.querySelectorAll('.zh-tspan').forEach(t => {
+    t.dataset.zh = t.textContent.trim();
+    t.dataset.en = svgTranslations[t.dataset.zh] || t.dataset.zh;
+  });
+
+  function setLang(lang) {
+    body.dataset.lang = lang;
+    document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.langBtn === lang));
+    document.querySelectorAll('.zh-tspan').forEach(t => {
+      t.textContent = (lang === 'zh') ? t.dataset.zh : t.dataset.en;
+    });
+    try { localStorage.setItem('mb-lang', lang); } catch(e) {}
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.langBtn)));
+
+  // restore preferred language
+  try {
+    const saved = localStorage.getItem('mb-lang');
+    if (saved) setLang(saved);
+    else setLang('zh');
+  } catch(e) { setLang('zh'); }
+
+  // ============= TOOLTIP ON EVENT DOTS =============
+  const tooltip = document.getElementById('tooltip');
+  const dots = document.querySelectorAll('.event-dot');
+
+  const labels = {
+    zh: { date: '日期', cash: '现金占比', ret12: '12 月回报', crash: '是否大跌' },
+    en: { date: 'Date', cash: 'Cash share', ret12: '12m return', crash: 'Crash?' }
+  };
+
+  dots.forEach(dot => {
+    dot.style.cursor = 'pointer';
+    dot.addEventListener('mouseenter', (e) => {
+      const lang = body.dataset.lang;
+      const L = labels[lang];
+      const ret = parseFloat(dot.dataset.ret);
+      const isCrash = ret <= -10;
+      const crashText = lang === 'zh'
+        ? (isCrash ? '是 ✓' : '否')
+        : (isCrash ? 'Yes ✓' : 'No');
+      tooltip.innerHTML =
+        `<strong>${L.date}:</strong> ${dot.dataset.date}<br>` +
+        `<strong>${L.cash}:</strong> ${dot.dataset.cash}%<br>` +
+        `<strong>${L.ret12}:</strong> ${dot.dataset.ret}%<br>` +
+        `<strong>${L.crash}:</strong> ${crashText}`;
+      tooltip.classList.add('show');
+    });
+    dot.addEventListener('mousemove', (e) => {
+      const x = e.clientX + 14;
+      const y = e.clientY - 10;
+      tooltip.style.left = Math.min(x, window.innerWidth - 260) + 'px';
+      tooltip.style.top  = y + 'px';
+    });
+    dot.addEventListener('mouseleave', () => {
+      tooltip.classList.remove('show');
+    });
+  });
+
+  // ============= TABLE ROW EMPHASIS =============
+  // Already covered by CSS hover; adding click-to-pin would be too complex here.
+</script>
+
+</body>
+</html>

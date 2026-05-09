@@ -1,0 +1,273 @@
+/* ============================================================
+   yifanova.com — gametree component styles
+   ------------------------------------------------------------
+   Pairs with gametree.js. Uses design tokens from tokens.css.
+   ============================================================ */
+
+.gametree-container {
+  margin: 2.5rem 0;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.gametree-instruction {
+  font-family: var(--font-ui);
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  margin: 0 0 1rem;
+  line-height: 1.5;
+  max-width: var(--measure);
+}
+html[lang^="zh"] .gametree-instruction {
+  font-family: var(--font-cjk), var(--font-ui);
+  line-height: 1.7;
+}
+
+.gametree-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ─── Edges ─────────────────────────────────────────────── */
+
+.gametree-svg .edge {
+  stroke: var(--rule);
+  stroke-width: 1.2;
+  fill: none;
+  transition: stroke 0.3s, stroke-width 0.3s;
+}
+.gametree-svg .edge-chosen {
+  stroke: var(--forest);
+  stroke-width: 2;
+}
+.gametree-svg .edge-unchosen {
+  stroke: var(--rule);
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+  opacity: 0.55;
+}
+
+/* During animation: ink-black pulse along the chosen edge from the
+   currently-highlighted node, distinct from the static forest green. */
+.gametree-svg .edge-pulse {
+  stroke: var(--ink);
+  stroke-width: 2.8;
+}
+
+/* ─── Internal nodes ────────────────────────────────────── */
+
+.gametree-svg .node-max {
+  fill: var(--bg);
+  stroke: var(--navy);
+  stroke-width: 1.5;
+  transition: fill 0.3s, stroke 0.3s, stroke-width 0.3s;
+}
+.gametree-svg .node-min {
+  fill: var(--navy);
+  stroke: var(--navy);
+  stroke-width: 1.5;
+  transition: fill 0.3s, stroke 0.3s, stroke-width 0.3s;
+}
+.gametree-svg .node-solved.node-max {
+  fill: #f5f7f3;
+}
+
+/* Animation highlight: ink-black ring */
+.gametree-svg .node-highlight {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+/* Stub nodes: same colour but dashed outline to signal "subtree hidden" */
+.gametree-svg .node-stub {
+  stroke-dasharray: 3 2.5;
+  opacity: 0.85;
+}
+
+/* Invisible larger circle that catches clicks on stub nodes */
+.gametree-svg .node-hit {
+  fill: transparent;
+  pointer-events: all;
+}
+.gametree-svg .node-group:hover .node-hit + .node-stub,
+.gametree-svg g:hover > .node-stub {
+  opacity: 1;
+  stroke-width: 2;
+}
+
+/* Letters and labels: don't intercept clicks */
+.gametree-svg .node-letter-max,
+.gametree-svg .node-letter-min,
+.gametree-svg .node-value,
+.gametree-svg .node-label-leaf,
+.gametree-svg .node-stub-dots {
+  pointer-events: none;
+  user-select: none;
+}
+
+.gametree-svg .node-letter-max {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--ink-soft);
+}
+.gametree-svg .node-letter-min {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--bg);
+}
+
+.gametree-svg .node-stub-dots {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  fill: var(--ink-faint);
+  letter-spacing: 0.06em;
+}
+
+/* Value labels above circles */
+.gametree-svg .node-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  transition: fill 0.3s;
+}
+.gametree-svg .val-win   { fill: var(--forest); }
+.gametree-svg .val-loss  { fill: #b85450; }
+.gametree-svg .val-draw  { fill: var(--ink-faint); }
+.gametree-svg .val-unsolved {
+  fill: var(--ink-faint);
+  font-style: italic;
+  opacity: 0.6;
+}
+
+/* ─── Leaves ────────────────────────────────────────────── */
+
+.gametree-svg .node-leaf {
+  fill: var(--bg);
+  stroke-width: 1.5;
+}
+.gametree-svg .leaf-win  { stroke: var(--forest); }
+.gametree-svg .leaf-loss { stroke: #b85450; }
+.gametree-svg .leaf-draw { stroke: var(--ink-faint); }
+
+.gametree-svg .node-label-leaf {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+
+/* ─── Controls ─────────────────────────────────────────── */
+
+.gametree-controls {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.gametree-btn-primary {
+  font-family: var(--font-ui);
+  font-size: var(--fs-small);
+  padding: 0.5rem 1rem;
+  background: var(--navy);
+  color: var(--bg);
+  border: 1px solid var(--navy);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+html[lang^="zh"] .gametree-btn-primary {
+  font-family: var(--font-cjk), var(--font-ui);
+}
+.gametree-btn-primary:hover:not(:disabled) {
+  background: var(--bg);
+  color: var(--navy);
+}
+.gametree-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.gametree-result {
+  font-family: var(--font-ui);
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.gametree-result.shown { opacity: 1; }
+html[lang^="zh"] .gametree-result {
+  font-family: var(--font-cjk), var(--font-ui);
+}
+
+/* ─── Legend ───────────────────────────────────────────── */
+
+.gametree-legend {
+  margin-top: 1rem;
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  color: var(--ink-faint);
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  line-height: 1.8;
+}
+html[lang^="zh"] .gametree-legend {
+  font-family: var(--font-cjk), var(--font-ui);
+}
+
+.leg-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.leg-circle {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid var(--navy);
+}
+.leg-circle.leg-w { background: var(--bg); }
+.leg-circle.leg-b { background: var(--navy); }
+
+.leg-stub-marker {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--navy);
+  background: var(--bg);
+  text-align: center;
+  font-size: 10px;
+  line-height: 9px;
+  color: var(--ink-faint);
+  font-weight: 600;
+}
+
+.leg-swatch {
+  display: inline-block;
+  width: 13px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1.5px solid var(--rule);
+}
+.leg-swatch.leg-win  { border-color: var(--forest); }
+.leg-swatch.leg-loss { border-color: #b85450; }
+.leg-swatch.leg-draw { border-color: var(--ink-faint); }
+
+.leg-line.leg-chosen {
+  display: inline-block;
+  width: 18px;
+  height: 2px;
+  background: var(--forest);
+}

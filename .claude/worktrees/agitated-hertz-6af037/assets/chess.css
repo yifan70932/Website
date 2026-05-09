@@ -1,0 +1,330 @@
+/* ============================================================
+   yifanova.com — interactive chess board styles (chess.css)
+   Layout: large centered board with status + controls below.
+   ============================================================ */
+
+.chess-widget {
+  margin: 2.5rem 0 3rem;
+}
+
+.chess-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ─── Board ──────────────────────────────────────────────── */
+
+.chess-board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: 32rem;
+  height: 32rem;
+  max-width: min(90vw, 32rem);
+  max-height: min(90vw, 32rem);
+  aspect-ratio: 1 / 1;
+  border: 2px solid var(--ink);
+  background: #f0ece1;
+  user-select: none;
+}
+
+.chess-sq {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.6rem, 5.6vw, 2.6rem);
+  line-height: 1;
+  position: relative;
+  transition: background-color 0.12s;
+  font-family: serif;
+}
+
+.chess-sq.light { background: #f0ece1; }
+.chess-sq.dark  { background: #0a3d62; }
+
+.chess-sq:hover {
+  outline: 2px solid var(--sapphire);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.chess-sq.selected {
+  background: #f6dc7a !important;
+}
+
+/* Legal-move squares: subtle dot in middle. */
+.chess-sq.legal-move::after {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  background: rgba(58, 90, 64, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Legal-capture squares: ring around the existing piece. */
+.chess-sq.legal-capture::after {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border: 3px solid rgba(192, 57, 43, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.chess-sq.in-check {
+  background: #f3a5a1 !important;
+}
+
+.chess-piece {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.chess-piece.w {
+  color: #fafafa;
+  text-shadow:
+    -1.5px -1.5px 0 #0a3d62,
+     1.5px -1.5px 0 #0a3d62,
+    -1.5px  1.5px 0 #0a3d62,
+     1.5px  1.5px 0 #0a3d62,
+     0    -1.5px 0 #0a3d62,
+     0     1.5px 0 #0a3d62,
+    -1.5px  0    0 #0a3d62,
+     1.5px  0    0 #0a3d62;
+}
+
+.chess-piece.b {
+  color: #1f2328;
+  text-shadow:
+    -0.5px -0.5px 0 #f0ece1,
+     0.5px -0.5px 0 #f0ece1,
+    -0.5px  0.5px 0 #f0ece1,
+     0.5px  0.5px 0 #f0ece1;
+}
+
+/* ─── Coordinate labels (a–h, 1–8) ──────────────────────── */
+/* Real DOM elements (not ::before/::after) so they don't conflict with
+   legal-move/capture indicators which already use ::after. */
+
+.chess-coord {
+  position: absolute;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 3;
+  line-height: 1;
+}
+.chess-coord-rank { top: 2px; left: 4px; }
+.chess-coord-file { bottom: 2px; right: 4px; }
+
+/* On light cream squares: navy labels. On navy squares: cream labels. */
+.chess-sq.light .chess-coord { color: #0a3d62; }
+.chess-sq.dark  .chess-coord { color: #f0ece1; }
+
+/* ─── Info bar (under board) ─────────────────────────────── */
+
+.chess-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 32rem;
+  font-family: var(--font-ui);
+}
+
+html[lang^="zh"] .chess-info {
+  font-family: var(--font-cjk), var(--font-ui);
+}
+
+.chess-status {
+  flex: 1 1 auto;
+  font-size: var(--fs-meta);
+  font-weight: 600;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.9rem;
+  background: var(--rule-soft);
+  border-left: 3px solid var(--sapphire);
+  text-align: center;
+}
+html[lang^="zh"] .chess-status {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.chess-status.in-check {
+  border-left-color: #c0392b;
+  color: #c0392b;
+}
+
+.chess-status.game-over {
+  border-left-color: var(--forest);
+  color: var(--forest);
+}
+
+.chess-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+}
+
+.chess-controls button {
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.9rem;
+  background: var(--bg);
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+html[lang^="zh"] .chess-controls button {
+  font-family: var(--font-cjk), var(--font-ui);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.chess-controls button:hover {
+  background: var(--pale-blue);
+  color: var(--navy);
+  border-color: var(--sapphire);
+}
+
+/* ─── Mobile ─────────────────────────────────────────────── */
+
+@media (max-width: 700px) {
+  .chess-board {
+    width: 90vw;
+    height: 90vw;
+  }
+  .chess-info {
+    flex-direction: column;
+  }
+  .chess-status {
+    width: 100%;
+  }
+}
+
+/* ─── Stockfish analysis panel ───────────────────────────── */
+
+.chess-sf {
+  width: 100%;
+  max-width: 32rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+  font-family: var(--font-ui);
+}
+html[lang^="zh"] .chess-sf {
+  font-family: var(--font-cjk), var(--font-ui);
+}
+
+.chess-sf-bar {
+  width: 100%;
+  height: 6px;
+  background: #1f2328;
+  border-radius: 1px;
+  overflow: hidden;
+  position: relative;
+}
+
+.chess-sf-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: #fafafa;
+  border-right: 1px solid var(--rule);
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chess-sf-readout {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: var(--fs-meta);
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.chess-sf-eval {
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+  font-size: 1rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+.chess-sf-detail {
+  flex: 1;
+  text-align: right;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: var(--fs-small);
+  color: var(--ink-faint);
+}
+html[lang^="zh"] .chess-sf-detail {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+/* ─── Caption above the chess board ──────────────────────── */
+
+.chess-widget-figure {
+  margin: 2.5rem 0 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.chess-caption {
+  max-width: 36rem;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  text-align: left;
+}
+html[lang^="zh"] .chess-caption {
+  font-family: var(--font-cjk), var(--font-body);
+  line-height: 1.7;
+}
+.chess-caption a {
+  color: var(--sapphire);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.chess-caption a:hover {
+  color: var(--navy);
+}
+
+/* The .chess-widget itself no longer needs its own outer margin
+   since .chess-widget-figure provides it. */
+.chess-widget-figure .chess-widget {
+  margin: 0;
+}

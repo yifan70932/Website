@@ -1,0 +1,831 @@
+/* ====================================================================
+   yifanova.com/ski — self-contained stylesheet
+   Independent of base.css and tokens.css.
+   All selectors scoped under .ski-page.
+   English primary typography; Chinese secondary.
+   Sticky TOC on the left side at ≥1100px; collapses to top on narrow.
+   ==================================================================== */
+
+:root {
+  --ski-ink:        #1f2328;
+  --ski-ink-soft:   #4a5159;
+  --ski-ink-faint:  #6b7280;
+  --ski-ink-faded:  #9ca3af;
+  --ski-rule:       #e5e7eb;
+  --ski-rule-soft:  #f1f3f5;
+  --ski-paper:      #fafaf7;
+  --ski-paper-deep: #f5f4ee;
+  --ski-navy:       #0a3d62;
+  --ski-sapphire:   #1e5fa8;
+  --ski-forest:     #3a5a40;
+  --ski-pale-blue:  #e8f1f8;
+  --ski-pale-fst:   #eef2ec;
+
+  --ski-font-body:  "Atkinson Hyperlegible", "Source Sans 3", system-ui, -apple-system, sans-serif;
+  --ski-font-ui:    "Inter", system-ui, sans-serif;
+  --ski-font-cn:    "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", serif;
+  --ski-font-mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.ski-page, .ski-page * { box-sizing: border-box; }
+
+body.ski-page {
+  margin: 0;
+  background: var(--ski-paper);
+  color: var(--ski-ink);
+  font-family: var(--ski-font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  font-feature-settings: "kern", "liga", "calt";
+  -webkit-font-smoothing: antialiased;
+}
+
+body.ski-page[data-lang="zh"] {
+  font-family: var(--ski-font-cn);
+  line-height: 1.75;
+}
+
+/* ─── Language switching ─────────────────────────────────────────── */
+.ski-page [data-lang-content] { display: none; }
+.ski-page[data-lang="en"] [data-lang-content="en"] { display: revert; }
+.ski-page[data-lang="zh"] [data-lang-content="zh"] { display: revert; }
+
+/* ─── Topbar ─────────────────────────────────────────────────────── */
+.ski-page .topbar {
+  border-bottom: 1px solid var(--ski-rule);
+  background: rgba(250, 250, 247, 0.92);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.ski-page .topbar-inner {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ski-page .brand {
+  font-family: var(--ski-font-ui);
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  color: var(--ski-ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ski-page .brand-mark { color: var(--ski-navy); font-weight: 600; }
+.ski-page .brand a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted var(--ski-rule);
+}
+.ski-page .brand a:hover { color: var(--ski-navy); border-bottom-color: var(--ski-navy); }
+
+/* ─── Language toggle ────────────────────────────────────────────── */
+.ski-page .lang-toggle {
+  display: inline-flex;
+  border: 1px solid var(--ski-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--ski-paper-deep);
+}
+
+.ski-page .lang-toggle button {
+  font-family: var(--ski-font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.7rem;
+  background: transparent;
+  border: 0;
+  color: var(--ski-ink-faint);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.ski-page .lang-toggle button.active { background: var(--ski-navy); color: white; }
+.ski-page .lang-toggle button:not(.active):hover { color: var(--ski-navy); background: var(--ski-pale-blue); }
+
+/* ─── Two-column layout: TOC sidebar + main content ──────────────── */
+.ski-page .layout {
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+@media (min-width: 1100px) {
+  .ski-page .layout {
+    display: grid;
+    grid-template-columns: 14rem 1fr;
+    gap: 3rem;
+    padding: 0 2rem 6rem;
+  }
+}
+
+.ski-page .main {
+  /* Wider reading column with right-side gutter for sidenotes on wide screens */
+  max-width: 64rem;
+  padding-top: 3rem;
+  position: relative;
+}
+
+/* On wide screens, reserve right gutter for floating sidenotes.
+   Main text stays bounded so line length is comfortable; sidenotes
+   live in the gutter to the right. */
+@media (min-width: 1280px) {
+  .ski-page .main {
+    max-width: 64rem;
+    padding-right: 0;
+  }
+}
+
+/* ─── Hero ───────────────────────────────────────────────────────── */
+.ski-page .hero {
+  padding: 2rem 0 2rem 0;
+  border-bottom: 1px solid var(--ski-rule);
+  margin-bottom: 2rem;
+}
+
+.ski-page .hero h1 {
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+  font-family: var(--ski-font-body);
+  line-height: 1.1;
+}
+
+.ski-page .hero .subtitle {
+  font-size: 1.125rem;
+  color: var(--ski-ink-soft);
+  font-style: italic;
+  max-width: 48rem;
+  line-height: 1.5;
+  margin: 0 0 1.25rem 0;
+}
+
+.ski-page[data-lang="zh"] .hero .subtitle { font-style: normal; }
+
+.ski-page .hero .meta {
+  font-family: var(--ski-font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ski-ink-faint);
+}
+
+.ski-page[data-lang="zh"] .hero .meta { text-transform: none; letter-spacing: 0.05em; }
+
+/* ─── Sticky TOC sidebar ─────────────────────────────────────────── */
+.ski-page nav.toc {
+  font-family: var(--ski-font-ui);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--ski-ink-faint);
+  padding: 3rem 0 2rem;
+}
+
+.ski-page[data-lang="zh"] nav.toc {
+  font-family: var(--ski-font-cn);
+  font-size: 0.85rem;
+}
+
+@media (min-width: 1100px) {
+  .ski-page nav.toc {
+    position: sticky;
+    top: 4rem;
+    align-self: start;
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+}
+
+.ski-page nav.toc .toc-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ski-ink-faded);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.ski-page[data-lang="zh"] nav.toc .toc-label { letter-spacing: 0.05em; }
+
+.ski-page nav.toc ol {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.ski-page nav.toc li {
+  padding: 0.25rem 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.ski-page nav.toc .toc-num {
+  font-family: var(--ski-font-mono);
+  color: var(--ski-ink-faded);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  min-width: 1.8rem;
+  font-weight: 500;
+}
+
+.ski-page nav.toc a {
+  text-decoration: none;
+  color: var(--ski-ink-soft);
+  flex-grow: 1;
+  border-bottom: 1px dotted transparent;
+  transition: color 0.12s, border-color 0.12s;
+}
+
+.ski-page nav.toc a:hover {
+  color: var(--ski-navy);
+  border-bottom-color: var(--ski-navy);
+}
+
+/* On narrow screens, TOC is a tighter inline block */
+@media (max-width: 1099px) {
+  .ski-page nav.toc {
+    background: var(--ski-paper-deep);
+    border: 1px solid var(--ski-rule);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0 2.5rem;
+  }
+}
+
+/* ─── Headings ───────────────────────────────────────────────────── */
+.ski-page h1, .ski-page h2, .ski-page h3 {
+  font-family: var(--ski-font-body);
+  color: var(--ski-ink);
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.ski-page[data-lang="zh"] h1,
+.ski-page[data-lang="zh"] h2,
+.ski-page[data-lang="zh"] h3 {
+  font-family: var(--ski-font-cn);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.ski-page h2 {
+  font-size: 1.7rem;
+  color: var(--ski-navy);
+  margin: 0 0 0.75rem 0;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--ski-rule);
+  font-weight: 700;
+}
+
+.ski-page h3 {
+  font-size: 1.1rem;
+  margin: 2rem 0 0.4rem 0;
+  color: var(--ski-ink);
+  font-weight: 700;
+}
+
+/* ─── Section numbering ──────────────────────────────────────────── */
+.ski-page section { margin-bottom: 4rem; scroll-margin-top: 4rem; }
+
+.ski-page section .section-num {
+  font-family: var(--ski-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--ski-navy);
+  display: block;
+  margin-top: 3.5rem;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.ski-page section .section-num + h2 { margin-top: 0; }
+
+/* ─── Body text ──────────────────────────────────────────────────── */
+.ski-page p {
+  margin: 0 0 1rem 0;
+  max-width: 48rem;
+}
+
+.ski-page p.lede {
+  font-size: 1.05rem;
+  color: var(--ski-ink-soft);
+  margin-bottom: 1.25rem;
+}
+
+.ski-page a {
+  color: var(--ski-navy);
+  text-decoration: underline;
+  text-decoration-color: var(--ski-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.ski-page a:hover { text-decoration-color: var(--ski-navy); }
+
+.ski-page strong { color: var(--ski-ink); font-weight: 700; }
+.ski-page em { color: var(--ski-ink); }
+
+/* Inline footnote-style superscript reference */
+.ski-page sup.ref { font-size: 0.7em; line-height: 0; vertical-align: super; }
+.ski-page sup.ref a { color: var(--ski-sapphire); text-decoration: none; }
+.ski-page sup.ref a:hover { text-decoration: underline; }
+
+/* ─── Sidenotes (margin notes) ───────────────────────────────────── */
+/* Sidenote: stacked under triggering paragraph on narrow screens.
+   On wide screens (≥1280px), float right into the margin gutter so it
+   sits beside the related paragraph without breaking the reading flow. */
+.ski-page .sidenote {
+  display: block;
+  font-family: var(--ski-font-ui);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ski-ink-soft);
+  margin: 0.75rem 0 1rem;
+  padding: 0.5rem 0 0.5rem 0.9rem;
+  border-left: 2px solid var(--ski-sapphire);
+  max-width: 32rem;
+}
+
+@media (min-width: 1280px) {
+  .ski-page .sidenote {
+    float: right;
+    clear: right;
+    width: 14rem;
+    max-width: 14rem;
+    margin: 0.25rem 0 1rem 1.25rem;
+    padding: 0.25rem 0 0.25rem 0.85rem;
+    font-size: 0.78rem;
+  }
+}
+
+.ski-page[data-lang="zh"] .sidenote { font-family: var(--ski-font-cn); font-size: 0.88rem; }
+@media (min-width: 1280px) {
+  .ski-page[data-lang="zh"] .sidenote { font-size: 0.84rem; }
+}
+
+/* ─── Term highlight, opinion flag ───────────────────────────────── */
+.ski-page .term {
+  color: var(--ski-forest);
+  font-weight: 600;
+}
+
+.ski-page .flag {
+  display: inline-block;
+  font-family: var(--ski-font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ski-forest);
+  background: var(--ski-pale-fst);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  margin-right: 0.25rem;
+  vertical-align: 0.05em;
+}
+
+.ski-page[data-lang="zh"] .flag { text-transform: none; letter-spacing: 0.02em; }
+
+/* ─── Blockquote ─────────────────────────────────────────────────── */
+.ski-page blockquote {
+  margin: 1.25rem 0;
+  padding: 0.75rem 1.25rem;
+  border-left: 3px solid var(--ski-navy);
+  background: var(--ski-pale-blue);
+  color: var(--ski-ink);
+  max-width: 48rem;
+  font-size: 0.95rem;
+}
+
+.ski-page blockquote p:last-child { margin-bottom: 0; }
+
+/* ─── Tables ─────────────────────────────────────────────────────── */
+.ski-page table {
+  width: 100%;
+  max-width: 48rem;
+  border-collapse: collapse;
+  font-family: var(--ski-font-ui);
+  font-size: 0.85rem;
+  margin: 1.5rem 0;
+}
+
+.ski-page table th, .ski-page table td {
+  text-align: left;
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid var(--ski-rule);
+  vertical-align: top;
+}
+
+.ski-page table th {
+  font-weight: 600;
+  border-bottom: 2px solid var(--ski-ink);
+  background: var(--ski-rule-soft);
+}
+
+.ski-page table tbody tr:nth-child(even) { background: var(--ski-rule-soft); }
+
+.ski-page[data-lang="zh"] table { font-family: var(--ski-font-cn); font-size: 0.92rem; }
+
+/* ─── Lists ──────────────────────────────────────────────────────── */
+.ski-page ul, .ski-page ol {
+  max-width: 48rem;
+  padding-left: 1.5rem;
+}
+.ski-page ul li, .ski-page ol li { margin-bottom: 0.4rem; }
+
+/* ─── Definition / callout box ───────────────────────────────────── */
+.ski-page .def {
+  background: var(--ski-pale-fst);
+  border-left: 3px solid var(--ski-forest);
+  padding: 0.85rem 1.1rem;
+  margin: 1.25rem 0;
+  max-width: 48rem;
+  font-size: 0.95rem;
+}
+.ski-page .def .label {
+  font-family: var(--ski-font-ui);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ski-forest);
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+.ski-page[data-lang="zh"] .def .label { text-transform: none; letter-spacing: 0.02em; }
+
+/* ─── Five Fundamentals — numbered cards ─────────────────────────── */
+.ski-page .fundamentals { margin: 1.5rem 0 2rem 0; max-width: 56rem; }
+
+.ski-page .fundamental {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--ski-rule);
+}
+.ski-page .fundamental:first-child { border-top: 2px solid var(--ski-ink); }
+.ski-page .fundamental:last-child { border-bottom: 1px solid var(--ski-rule); }
+
+.ski-page .fundamental .num {
+  font-family: var(--ski-font-mono);
+  font-size: 1.9rem;
+  font-weight: 200;
+  color: var(--ski-navy);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.ski-page .fundamental .body h3 { margin: 0 0 0.4rem 0; font-size: 1.05rem; }
+
+.ski-page .fundamental .body .official {
+  font-family: var(--ski-font-ui);
+  font-size: 0.82rem;
+  color: var(--ski-ink-soft);
+  font-style: italic;
+  margin-bottom: 0.6rem;
+  border-left: 2px solid var(--ski-rule);
+  padding-left: 0.7rem;
+  line-height: 1.45;
+}
+
+.ski-page[data-lang="zh"] .fundamental .body .official {
+  font-family: var(--ski-font-cn);
+  font-style: normal;
+  font-size: 0.9rem;
+}
+
+.ski-page .fundamental .body p { font-size: 0.95rem; }
+
+.ski-page .fundamental .body .cue {
+  margin-top: 0.4rem;
+  font-family: var(--ski-font-ui);
+  font-size: 0.82rem;
+  color: var(--ski-ink-soft);
+  background: transparent;
+  border-left: 2px dotted var(--ski-rule);
+  padding: 0.1rem 0 0.1rem 0.7rem;
+  display: block;
+  max-width: 48rem;
+  font-style: italic;
+}
+
+.ski-page[data-lang="zh"] .fundamental .body .cue { font-family: var(--ski-font-cn); font-style: normal; }
+
+/* ─── Progression network diagram ────────────────────────────────── */
+.ski-page .progression-figure {
+  margin: 1.5rem 0 2rem;
+  background: var(--ski-paper-deep);
+  border: 1px solid var(--ski-rule);
+  border-radius: 4px;
+  padding: 1.5rem 1rem;
+  max-width: 56rem;
+}
+
+.ski-page .progression-figure svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+
+.ski-page .progression-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 0.85rem;
+  font-family: var(--ski-font-ui);
+  font-size: 0.7rem;
+  color: var(--ski-ink-soft);
+}
+
+.ski-page[data-lang="zh"] .progression-legend { font-family: var(--ski-font-cn); }
+
+.ski-page .progression-legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+.ski-page .progression-legend .swatch { display: inline-block; width: 11px; height: 11px; border-radius: 2px; }
+
+/* ─── Code-of-conduct list ───────────────────────────────────────── */
+.ski-page .code-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0;
+  counter-reset: code-counter;
+  max-width: 48rem;
+}
+
+.ski-page .code-list li {
+  counter-increment: code-counter;
+  padding: 0.5rem 0 0.5rem 2.3rem;
+  position: relative;
+  border-bottom: 1px dotted var(--ski-rule);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.ski-page .code-list li:last-child { border-bottom: 0; }
+
+.ski-page .code-list li::before {
+  content: counter(code-counter, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  font-family: var(--ski-font-mono);
+  font-size: 0.7rem;
+  color: var(--ski-navy);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* ─── ACL mechanism table ────────────────────────────────────────── */
+.ski-page .mechanism-table { font-size: 0.82rem; }
+
+/* ─── Snow-condition glossary ────────────────────────────────────── */
+.ski-page .glossary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 1.25rem 0;
+  max-width: 56rem;
+  border-top: 2px solid var(--ski-ink);
+  border-bottom: 1px solid var(--ski-rule);
+}
+
+.ski-page .glossary dt {
+  font-weight: 600;
+  color: var(--ski-navy);
+  font-family: var(--ski-font-body);
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--ski-rule);
+  font-size: 0.95rem;
+}
+
+.ski-page .glossary dt:first-child { border-top: 0; margin-top: 0; padding-top: 0.5rem; }
+
+.ski-page[data-lang="zh"] .glossary dt { font-family: var(--ski-font-cn); }
+
+.ski-page .glossary dt .alt {
+  font-family: var(--ski-font-ui);
+  font-size: 0.72rem;
+  color: var(--ski-ink-faint);
+  font-weight: 400;
+  margin-left: 0.4rem;
+  letter-spacing: 0.02em;
+}
+
+.ski-page[data-lang="zh"] .glossary dt .alt { font-family: var(--ski-font-ui); }
+
+.ski-page .glossary dd {
+  margin: 0.2rem 0 0.4rem 0;
+  color: var(--ski-ink-soft);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  max-width: 48rem;
+}
+
+.ski-page[data-lang="zh"] .glossary dd { font-size: 0.9rem; line-height: 1.7; }
+
+/* ─── References ─────────────────────────────────────────────────── */
+.ski-page .refs {
+  font-family: var(--ski-font-ui);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--ski-ink-soft);
+  max-width: 48rem;
+  list-style: none;
+  padding-left: 0;
+  counter-reset: ref-counter;
+}
+
+.ski-page[data-lang="zh"] .refs { font-family: var(--ski-font-cn); font-size: 0.92rem; }
+
+.ski-page .refs li {
+  counter-increment: ref-counter;
+  margin-bottom: 0.55rem;
+  padding-left: 2rem;
+  position: relative;
+  scroll-margin-top: 5rem;
+}
+
+.ski-page .refs li::before {
+  content: counter(ref-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--ski-font-mono);
+  font-size: 0.72rem;
+  color: var(--ski-navy);
+  font-weight: 600;
+  width: 1.5rem;
+  text-align: right;
+}
+
+.ski-page .refs cite { font-style: italic; color: var(--ski-ink); }
+.ski-page[data-lang="zh"] .refs cite { font-style: normal; }
+
+/* ─── Footer ─────────────────────────────────────────────────────── */
+.ski-page footer.page-footer {
+  margin-top: 5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--ski-rule);
+  font-family: var(--ski-font-ui);
+  font-size: 0.82rem;
+  color: var(--ski-ink-faint);
+  max-width: 48rem;
+}
+
+.ski-page footer.page-footer .colophon-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ski-ink-faded);
+  margin-bottom: 0.5rem;
+  display: block;
+  font-weight: 600;
+}
+
+.ski-page[data-lang="zh"] footer.page-footer { font-family: var(--ski-font-cn); }
+.ski-page[data-lang="zh"] footer.page-footer .colophon-label {
+  font-family: var(--ski-font-ui);
+  letter-spacing: 0.05em;
+  text-transform: none;
+}
+
+/* ─── Print ──────────────────────────────────────────────────────── */
+@media print {
+  .ski-page .topbar, .ski-page .lang-toggle, .ski-page nav.toc { display: none; }
+  body.ski-page { font-size: 11pt; background: white; color: black; }
+  .ski-page .layout { display: block; padding: 0; max-width: none; }
+  .ski-page .main { max-width: none; padding: 0; }
+}
+
+/* ─── Mobile ─────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  body.ski-page { font-size: 16px; }
+  .ski-page .layout { padding: 0 1rem 4rem; }
+  .ski-page .topbar-inner { padding: 0.5rem 1rem; }
+  .ski-page .main { padding-top: 1.5rem; }
+  .ski-page .hero h1 { font-size: 2rem; }
+  .ski-page h2 { font-size: 1.4rem; }
+  .ski-page .fundamental { grid-template-columns: 2.2rem 1fr; gap: 0.75rem; }
+  .ski-page .fundamental .num { font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ski-page * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+/* ─── Carving figure (model-viewer + tabs) ─────────────────────── */
+.ski-page .carving-figure {
+  margin: 1.5rem 0 2rem;
+  /* Deeper stage background so the colored 3D figure has clear contrast.
+     The default page paper (#fafaf7) is too close to off-white materials
+     in the GLB; this medium-warm-gray creates clear figure/ground separation. */
+  background: #e6e2d6;
+  border: 1px solid var(--ski-rule);
+  border-radius: 4px;
+  padding: 1rem 1rem 1rem;
+  max-width: 48rem;
+}
+
+.ski-page .carving-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid var(--ski-rule);
+  padding-bottom: 0;
+}
+
+.ski-page .carving-tab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.45rem 0.9rem;
+  font-family: var(--ski-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--ski-ink-soft);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+}
+
+.ski-page[data-lang="zh"] .carving-tab {
+  font-family: var(--ski-font-cn);
+  letter-spacing: 0.02em;
+  font-size: 0.85rem;
+}
+
+.ski-page .carving-tab:hover {
+  color: var(--ski-ink);
+}
+
+.ski-page .carving-tab.active {
+  color: var(--ski-navy);
+  border-bottom-color: var(--ski-navy);
+  font-weight: 600;
+}
+
+.ski-page .carving-pane[hidden] {
+  display: none;
+}
+
+.ski-page model-viewer {
+  display: block;
+  width: 100%;
+  height: 480px;
+  background: linear-gradient(to bottom, #f5f4ee 0%, #e8e6dd 100%);
+  border-radius: 3px;
+  border: 1px solid var(--ski-rule);
+  --poster-color: transparent;
+}
+
+@media (max-width: 600px) {
+  .ski-page model-viewer { height: 380px; }
+}
+
+.ski-page .carving-figure-label {
+  font-family: var(--ski-font-ui);
+  font-size: 0.78rem;
+  color: var(--ski-ink-soft);
+  text-align: center;
+  margin: 0.6rem 0 0;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.ski-page[data-lang="zh"] .carving-figure-label {
+  font-family: var(--ski-font-cn);
+  font-style: normal;
+  font-size: 0.85rem;
+}
+
+/* ─── NSAA skier-visits figure ─────────────────────────────────── */
+.ski-page .nsaa-figure {
+  margin: 1.5rem 0 2rem;
+  background: var(--ski-paper-deep);
+  border: 1px solid var(--ski-rule);
+  border-radius: 4px;
+  padding: 1rem 1rem 0.75rem;
+  max-width: 56rem;
+  overflow-x: auto;
+  clear: right; /* never overlap floated sidenotes on wide screens */
+}
+
+.ski-page .nsaa-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 600px;
+  max-width: 760px;
+  margin: 0 auto;
+}

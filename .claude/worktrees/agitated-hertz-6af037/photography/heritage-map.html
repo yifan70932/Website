@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNESCO World Heritage Sites — yifanova.com</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Inter', -apple-system, sans-serif; }
+    body[data-lang="zh"] { font-family: 'Noto Sans SC', sans-serif; }
+    #map { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #f0f4f7; }
+
+    .panel {
+      position: absolute; top: 12px; left: 12px; z-index: 1000;
+      background: rgba(255,255,255,0.96); border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 4px; padding: 0.7rem 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      max-width: 360px; font-size: 0.85rem; color: #2a2f33;
+    }
+    .panel .row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+    .panel .row:last-child { margin-bottom: 0; }
+    .panel .label { font-size: 0.74rem; font-weight: 600; color: #6b7378; text-transform: uppercase; letter-spacing: 0.04em; }
+    body[data-lang="zh"] .panel .label { text-transform: none; letter-spacing: 0; }
+
+    .seg { display: inline-flex; border: 1px solid #c8cfd3; border-radius: 3px; overflow: hidden; }
+    .seg button {
+      background: #fff; border: 0; padding: 0.3rem 0.65rem; cursor: pointer;
+      color: #4a5258; font-family: inherit; font-size: inherit;
+      border-right: 1px solid #c8cfd3; transition: background 0.15s, color 0.15s;
+    }
+    .seg button:last-child { border-right: 0; }
+    .seg button:hover { background: #e8eef3; color: #2a2f33; }
+    .seg button.active { background: #0a3d62; color: #fff; }
+    .seg button.batch-active { background: #0e7c8a; color: #fff; }
+
+    .topright {
+      position: absolute; top: 12px; right: 12px; z-index: 1000;
+      display: flex; gap: 6px;
+    }
+    .topright a, .topright button {
+      background: rgba(255,255,255,0.96); border: 1px solid rgba(0,0,0,0.12);
+      padding: 0.35rem 0.7rem; font-family: inherit; font-size: 0.8rem;
+      color: #4a5258; text-decoration: none; cursor: pointer; border-radius: 3px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .topright a:hover, .topright button:hover { background: #fff; color: #0a3d62; }
+    .topright button.active { background: #0a3d62; color: #fff; border-color: #0a3d62; }
+
+    .legend {
+      position: absolute; bottom: 24px; left: 12px; z-index: 1000;
+      background: rgba(255,255,255,0.96); border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 4px; padding: 0.6rem 0.8rem;
+      font-size: 0.74rem; color: #4a5258;
+      display: flex; flex-direction: column; gap: 0.25rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .swatch { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .sw { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.9); box-shadow: 0 0 0 1px rgba(0,0,0,0.18); flex-shrink: 0; }
+
+    .whc-dot { border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.9); box-shadow: 0 0 0 1px rgba(0,0,0,0.18); }
+
+    .leaflet-popup-content { font-family: 'Inter', -apple-system, sans-serif; margin: 0.6rem 0.85rem; font-size: 0.85rem; line-height: 1.45; }
+    body[data-lang="zh"] .leaflet-popup-content { font-family: 'Noto Sans SC', sans-serif; }
+    .leaflet-popup-content .pop-cat {
+      display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 0.05rem 0.35rem; border-radius: 2px; margin-left: 0.4rem; vertical-align: middle;
+    }
+    body[data-lang="zh"] .leaflet-popup-content .pop-cat { text-transform: none; letter-spacing: 0; }
+    .leaflet-popup-content .pop-cat.C { background: #f4e8d8; color: #8a6630; }
+    .leaflet-popup-content .pop-cat.N { background: #e0ecdf; color: #2f6b3f; }
+    .leaflet-popup-content .pop-cat.M { background: rgba(10,61,98,0.1); color: #0a3d62; }
+    .leaflet-popup-content .pop-danger {
+      display: inline-block; margin-left: 0.4rem; padding: 0.05rem 0.35rem;
+      background: #f4dad6; color: #b8472d; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; border-radius: 2px; vertical-align: middle;
+    }
+    body[data-lang="zh"] .leaflet-popup-content .pop-danger { text-transform: none; letter-spacing: 0; }
+    .leaflet-popup-content .pop-meta { display: block; margin-top: 0.25rem; font-size: 0.78rem; color: #6b7378; }
+    .leaflet-popup-content .pop-link { display: inline-block; margin-top: 0.5rem; font-size: 0.78rem; color: #0a3d62; }
+
+    @media (max-width: 640px) {
+      .panel { max-width: calc(100% - 24px); top: 56px; }
+      .topright { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body data-lang="en">
+  <div id="map"></div>
+
+  <div class="panel">
+    <div class="row">
+      <span class="label" data-i18n="cat">Category</span>
+      <span class="seg" data-cat>
+        <button data-c="all" class="active" data-i18n="all">All</button>
+        <button data-c="C" data-i18n="cultural">Cultural</button>
+        <button data-c="N" data-i18n="natural">Natural</button>
+        <button data-c="M" data-i18n="mixed">Mixed</button>
+      </span>
+    </div>
+    <div class="row">
+      <span class="seg" data-batch>
+        <button data-b="off" class="active" data-i18n="allyears">All years</button>
+        <button data-b="1978" data-i18n="firstbatch">First batch (1978)</button>
+      </span>
+    </div>
+  </div>
+
+  <div class="topright">
+    <button data-lang-set="en" class="active">EN</button>
+    <button data-lang-set="zh">中</button>
+    <a href="/photography/" data-i18n="back">← Wiki</a>
+  </div>
+
+  <div class="legend"></div>
+
+<script>
+(function() {
+  const CAT = {
+    C: { color: '#b8884a', en: 'Cultural', zh: '文化遗产' },
+    N: { color: '#3f7e57', en: 'Natural', zh: '自然遗产' },
+    M: { color: '#0a3d62', en: 'Mixed', zh: '复合遗产' },
+  };
+  const I18N = {
+    en: { cat:'Category', all:'All', cultural:'Cultural', natural:'Natural', mixed:'Mixed',
+          allyears:'All years', firstbatch:'First batch (1978)', back:'← Wiki',
+          inscribed:'Inscribed', view:'View on UNESCO site →', endangered:'Endangered',
+          legend_c:'Cultural', legend_n:'Natural', legend_m:'Mixed', legend_d:'Currently endangered',
+          loading:'Loading World Heritage data…', failed:'Failed to load WHC data.' },
+    zh: { cat:'类别', all:'全部', cultural:'文化遗产', natural:'自然遗产', mixed:'复合遗产',
+          allyears:'全部年份', firstbatch:'首批（1978）', back:'← 返回 Wiki',
+          inscribed:'列入', view:'在 UNESCO 网站查看 →', endangered:'濒危',
+          legend_c:'文化遗产', legend_n:'自然遗产', legend_m:'复合遗产', legend_d:'濒危状态',
+          loading:'正在加载世界遗产数据…', failed:'世界遗产数据加载失败。' },
+  };
+
+  const state = { cat: 'all', batch: 'off', lang: 'en' };
+
+  const map = L.map('map', { worldCopyJump: true, minZoom: 2, maxZoom: 12, preferCanvas: true })
+    .setView([25, 15], 2);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 12, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · UNESCO World Heritage Centre, 2025',
+  }).addTo(map);
+
+  function makeIcon(category, endangered) {
+    const cat = CAT[category] || CAT.C;
+    const color = endangered ? '#b8472d' : cat.color;
+    const size = 8;
+    return L.divIcon({
+      className: '',
+      html: '<div class="whc-dot" style="width:' + size + 'px;height:' + size + 'px;background:' + color + ';"></div>',
+      iconSize: [size, size], iconAnchor: [size/2, size/2],
+    });
+  }
+
+  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function popupHTML(props) {
+    const cat = CAT[props.c] || CAT.C;
+    const catLabel = state.lang === 'zh' ? cat.zh : cat.en;
+    const name = state.lang === 'zh' ? (props.nz || props.n) : props.n;
+    const states = state.lang === 'zh' ? (props.sz || props.s) : props.s;
+    let html = '<div style="font-weight:600;font-size:0.92rem;line-height:1.3;color:#2a2f33;">' +
+               escapeHtml(name) + '<span class="pop-cat ' + props.c + '">' + escapeHtml(catLabel) + '</span>';
+    if (props.d) html += '<span class="pop-danger">' + escapeHtml(I18N[state.lang].endangered) + '</span>';
+    html += '</div>';
+    html += '<span class="pop-meta">' + escapeHtml(states) + ' · ' + I18N[state.lang].inscribed + ' ' + props.y + '</span>';
+    html += '<a class="pop-link" href="https://whc.unesco.org/en/list/' + props.i + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(I18N[state.lang].view) + '</a>';
+    return html;
+  }
+
+  let allMarkers = [];
+  const layer = L.layerGroup().addTo(map);
+
+  function passes(p) {
+    if (state.cat !== 'all' && p.c !== state.cat) return false;
+    if (state.batch === '1978' && p.y !== 1978) return false;
+    return true;
+  }
+
+  function refresh() {
+    layer.clearLayers();
+    const visible = allMarkers.filter(m => passes(m.feature.properties));
+    visible.forEach(m => layer.addLayer(m));
+    if (state.batch === '1978' && visible.length > 0) {
+      const grp = L.featureGroup(visible);
+      map.fitBounds(grp.getBounds().pad(0.15));
+    }
+  }
+
+  function applyI18n() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.dataset.i18n;
+      if (I18N[state.lang][k]) el.textContent = I18N[state.lang][k];
+    });
+    buildLegend();
+    map.closePopup();
+  }
+
+  function buildLegend() {
+    const items = [
+      ['#b8884a', I18N[state.lang].legend_c],
+      ['#3f7e57', I18N[state.lang].legend_n],
+      ['#0a3d62', I18N[state.lang].legend_m],
+      ['#b8472d', I18N[state.lang].legend_d],
+    ];
+    const legend = document.querySelector('.legend');
+    legend.innerHTML = '';
+    items.forEach(([color, label]) => {
+      const sw = document.createElement('span');
+      sw.className = 'swatch';
+      sw.innerHTML = '<span class="sw" style="background:' + color + '"></span>' + label;
+      legend.appendChild(sw);
+    });
+  }
+
+  // Wire up controls
+  document.querySelector('[data-cat]').querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.cat = btn.dataset.c;
+      btn.parentElement.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+      refresh();
+    });
+  });
+  document.querySelector('[data-batch]').querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.batch = btn.dataset.b;
+      btn.parentElement.querySelectorAll('button').forEach(b => {
+        b.classList.toggle('active', b === btn);
+        b.classList.toggle('batch-active', b === btn && b.dataset.b === '1978');
+      });
+      refresh();
+    });
+  });
+  document.querySelectorAll('[data-lang-set]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.lang = btn.dataset.langSet;
+      document.body.dataset.lang = state.lang;
+      document.documentElement.lang = state.lang === 'zh' ? 'zh' : 'en';
+      document.querySelectorAll('[data-lang-set]').forEach(b => b.classList.toggle('active', b === btn));
+      applyI18n();
+    });
+  });
+
+  buildLegend();
+
+  // Load
+  fetch('/photography/whc-sites.geojson').then(r => r.json()).then(data => {
+    allMarkers = data.features.map(feat => {
+      const m = L.marker(
+        [feat.geometry.coordinates[1], feat.geometry.coordinates[0]],
+        { icon: makeIcon(feat.properties.c, feat.properties.d) }
+      );
+      m.feature = feat;
+      m.bindPopup(() => popupHTML(feat.properties));
+      return m;
+    });
+    refresh();
+  }).catch(err => {
+    console.error(err);
+    alert(I18N[state.lang].failed);
+  });
+})();
+</script>
+</body>
+</html>

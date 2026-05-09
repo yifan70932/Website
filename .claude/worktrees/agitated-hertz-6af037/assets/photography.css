@@ -1,0 +1,1265 @@
+/* ====================================================================
+   yifanova.com/photography — self-contained stylesheet
+   Independent of base.css and tokens.css.
+   All selectors scoped under .photography-page.
+   English primary typography; Chinese secondary.
+   Sticky TOC on the left side at ≥1100px; collapses to top on narrow.
+
+   Text column: 52rem — slightly wider than flying (50rem) to give
+   image-heavy paragraphs more breathing room. Reading-line research
+   (~75–85 char/line at this width) still respected.
+
+   Palette: graphite / sepia / platinum, evoking darkroom and archival
+   print materiality. Distinct from flying's navy/forest/amber.
+   ==================================================================== */
+
+:root {
+  --ph-ink:        #1a1d21;
+  --ph-ink-soft:   #3d434a;
+  --ph-ink-faint:  #6a7079;
+  --ph-ink-faded:  #a0a5ac;
+  --ph-rule:       #e4e6ea;
+  --ph-rule-soft:  #f1f3f5;
+  --ph-paper:      #ffffff;
+  --ph-paper-deep: #f7f8fa;
+  --ph-graphite:   #1a1d21;
+  --ph-navy:       #0a3d62;
+  --ph-navy-soft:  #1e5fa8;
+  --ph-cyan:       #0e7c8a;
+  --ph-cyan-soft:  #2a99a8;
+  --ph-forest:     #2f6b3f;
+  --ph-forest-soft:#4a8a5c;
+  --ph-pale-navy:  #e8f1f8;
+  --ph-pale-cyan:  #e6f3f5;
+  --ph-pale-fst:   #ecf3ee;
+
+  --ph-font-body:  "Atkinson Hyperlegible", "Source Sans 3", system-ui, -apple-system, sans-serif;
+  --ph-font-ui:    "Inter", system-ui, sans-serif;
+  --ph-font-cn:    "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", serif;
+  --ph-font-mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.photography-page, .photography-page * { box-sizing: border-box; }
+
+body.photography-page {
+  margin: 0;
+  background: var(--ph-paper);
+  color: var(--ph-ink);
+  font-family: var(--ph-font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  font-feature-settings: "kern", "liga", "calt";
+  -webkit-font-smoothing: antialiased;
+}
+
+body.photography-page[data-lang="zh"] {
+  font-family: var(--ph-font-cn);
+  line-height: 1.78;
+}
+
+/* ─── Language switching ─────────────────────────────────────────── */
+.photography-page [data-lang-content] { display: none; }
+.photography-page[data-lang="en"] [data-lang-content="en"] { display: revert; }
+.photography-page[data-lang="zh"] [data-lang-content="zh"] { display: revert; }
+
+/* ─── Topbar ─────────────────────────────────────────────────────── */
+.photography-page .topbar {
+  border-bottom: 1px solid var(--ph-rule);
+  background: rgba(255, 255, 255, 0.92);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.photography-page .topbar-inner {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.photography-page .brand {
+  font-family: var(--ph-font-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+}
+
+.photography-page .brand-mark { color: var(--ph-graphite); font-weight: 600; }
+.photography-page .brand a {
+  color: var(--ph-ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.photography-page .brand a:hover { color: var(--ph-graphite); border-bottom-color: var(--ph-graphite); }
+
+.photography-page .lang-toggle {
+  display: inline-flex;
+  gap: 0;
+  font-family: var(--ph-font-ui);
+  font-size: 0.85rem;
+  border: 1px solid var(--ph-rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.photography-page .lang-toggle button {
+  background: transparent;
+  border: 0;
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+  color: var(--ph-ink-soft);
+  font-family: inherit;
+  font-size: inherit;
+  transition: background 0.15s, color 0.15s;
+}
+
+.photography-page .lang-toggle button.active { background: var(--ph-graphite); color: var(--ph-paper); }
+.photography-page .lang-toggle button:not(.active):hover { color: var(--ph-graphite); background: var(--ph-pale-navy); }
+
+/* ─── Two-column layout: TOC sidebar + main content ──────────────── */
+.photography-page .layout {
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+@media (min-width: 1100px) {
+  .photography-page .layout {
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    gap: 3rem;
+    align-items: start;
+    padding: 0 2rem 6rem;
+    padding-top: 2rem;
+  }
+}
+
+.photography-page .main {
+  /* Reading column: paragraphs cap at 52rem (~935 px @ 18px). */
+  max-width: 64rem;
+  padding-top: 3rem;
+  position: relative;
+}
+
+@media (min-width: 1100px) {
+  .photography-page .main {
+    max-width: 64rem;
+    padding-top: 0;
+  }
+}
+
+/* ─── Article header ─────────────────────────────────────────────── */
+.photography-page .article-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--ph-rule);
+}
+
+.photography-page h1 {
+  font-family: var(--ph-font-body);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.75rem;
+  color: var(--ph-navy);
+  max-width: 52rem;
+}
+
+.photography-page[data-lang="zh"] h1 {
+  font-family: var(--ph-font-cn);
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+
+.photography-page .subtitle {
+  font-family: var(--ph-font-ui);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--ph-ink-soft);
+  margin: 0 0 1.5rem;
+  max-width: 50rem;
+  font-weight: 400;
+}
+
+.photography-page[data-lang="zh"] .subtitle {
+  font-family: var(--ph-font-cn);
+  font-style: normal;
+}
+
+.photography-page .epigraphs {
+  margin: 1.5rem 0 0;
+  max-width: 52rem;
+}
+
+.photography-page .epigraph {
+  margin: 0 0 1rem;
+  padding: 0 0 0 1.25rem;
+  border-left: 2px solid var(--ph-navy);
+  font-style: italic;
+  color: var(--ph-ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.photography-page .epigraph:last-child {
+  margin-bottom: 0;
+}
+
+.photography-page[data-lang="zh"] .epigraph { font-style: normal; }
+
+.photography-page .epigraph .attribution {
+  display: block;
+  margin-top: 0.25rem;
+  font-style: normal;
+  font-size: 0.82rem;
+  color: var(--ph-ink-faint);
+  font-family: var(--ph-font-ui);
+}
+
+.photography-page[data-lang="zh"] .epigraph .attribution { font-family: var(--ph-font-cn); }
+
+.photography-page .epigraph .attribution::before { content: "— "; }
+
+/* ─── Headings ──────────────────────────────────────────────────── */
+.photography-page h2 {
+  font-family: var(--ph-font-body);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 4rem 0 1.25rem;
+  color: var(--ph-navy);
+  max-width: 52rem;
+  scroll-margin-top: 4.5rem;
+}
+
+.photography-page[data-lang="zh"] h2 {
+  font-family: var(--ph-font-cn);
+  font-weight: 600;
+}
+
+.photography-page h2 .sec-num {
+  font-family: var(--ph-font-ui);
+  font-weight: 500;
+  color: var(--ph-navy);
+  margin-right: 0.45rem;
+  font-size: 0.95em;
+  letter-spacing: 0;
+}
+
+.photography-page h3 {
+  font-family: var(--ph-font-body);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  margin: 2.5rem 0 0.75rem;
+  color: var(--ph-navy);
+  max-width: 52rem;
+  scroll-margin-top: 4.5rem;
+}
+
+.photography-page[data-lang="zh"] h3 {
+  font-family: var(--ph-font-cn);
+  font-weight: 600;
+}
+
+/* ─── Paragraph & inline ────────────────────────────────────────── */
+.photography-page p {
+  max-width: 52rem;
+  margin: 0 0 1.1rem;
+}
+
+.photography-page em { font-style: italic; }
+.photography-page strong { font-weight: 700; color: var(--ph-graphite); }
+
+.photography-page a {
+  color: var(--ph-navy);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ph-navy-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.photography-page a:hover {
+  color: var(--ph-graphite);
+  border-bottom-color: var(--ph-graphite);
+}
+
+.photography-page .term {
+  font-weight: 600;
+  color: var(--ph-graphite);
+}
+
+.photography-page .cjk { font-family: var(--ph-font-cn); }
+.photography-page .lat { font-family: var(--ph-font-body); }
+
+/* ─── Lede paragraph (chapter opener) ────────────────────────────── */
+.photography-page .lede {
+  font-size: 1.05rem;
+  color: var(--ph-ink);
+  border-left: 2px solid var(--ph-rule);
+  padding-left: 1.25rem;
+  margin: 0 0 1.75rem;
+  max-width: 52rem;
+}
+
+.photography-page[data-lang="zh"] .lede { line-height: 1.78; }
+
+/* ─── Sources / further-reading block at chapter end ─────────────── */
+.photography-page .sources {
+  font-size: 0.9rem;
+  color: var(--ph-ink-soft);
+  background: var(--ph-rule-soft);
+  border-left: 2px solid var(--ph-cyan);
+  padding: 1rem 1.25rem;
+  margin: 1.75rem 0 0;
+  max-width: 52rem;
+  line-height: 1.55;
+}
+
+.photography-page .sources .sources-label {
+  display: block;
+  font-family: var(--ph-font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ph-cyan);
+  margin-bottom: 0.5rem;
+}
+
+.photography-page[data-lang="zh"] .sources .sources-label {
+  font-family: var(--ph-font-cn);
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.photography-page .sources p { margin: 0 0 0.5rem; max-width: none; }
+.photography-page .sources p:last-child { margin-bottom: 0; }
+
+/* ─── Sidenote ───────────────────────────────────────────────────── */
+.photography-page .sidenote {
+  font-size: 0.88rem;
+  color: var(--ph-ink-soft);
+  border-left: 2px solid var(--ph-cyan-soft);
+  padding: 0.5rem 0 0.5rem 1rem;
+  margin: 1.25rem 0;
+  max-width: 50rem;
+  line-height: 1.55;
+}
+
+.photography-page .sidenote .sidenote-num {
+  display: inline-block;
+  font-family: var(--ph-font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ph-cyan);
+  vertical-align: super;
+  margin-right: 0.35rem;
+}
+
+.photography-page .sn-ref {
+  font-family: var(--ph-font-ui);
+  font-size: 0.72em;
+  vertical-align: super;
+  font-weight: 600;
+  border-bottom: 0;
+  color: var(--ph-cyan);
+  margin-left: 0.05em;
+}
+
+/* ─── Widget placeholder (for §1 shutter, §3 colorspace etc.) ────── */
+.photography-page .widget-placeholder {
+  border: 1px dashed var(--ph-ink-faded);
+  background: var(--ph-paper-deep);
+  padding: 2.5rem 1.5rem;
+  margin: 1.75rem 0;
+  text-align: center;
+  font-family: var(--ph-font-ui);
+  font-size: 0.9rem;
+  color: var(--ph-ink-faint);
+  border-radius: 2px;
+  max-width: 52rem;
+}
+
+.photography-page .widget-placeholder strong {
+  display: block;
+  color: var(--ph-graphite);
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.photography-page .widget-placeholder .widget-note {
+  display: block;
+  margin-top: 0.6rem;
+  font-style: italic;
+  color: var(--ph-ink-faded);
+  font-size: 0.82rem;
+}
+
+/* ─── Köppen-Geiger map widget ─────────────────────────────────── */
+.photography-page .koppen-widget {
+  margin: 1.75rem 0;
+  max-width: 52rem;
+  border: 1px solid var(--ph-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.photography-page .koppen-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.85rem;
+  align-items: center;
+}
+
+.photography-page[data-lang="zh"] .koppen-controls { font-family: var(--ph-font-cn); }
+
+.photography-page .koppen-controls .label {
+  color: var(--ph-ink-faint);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-right: 0.25rem;
+}
+
+.photography-page[data-lang="zh"] .koppen-controls .label {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.photography-page .koppen-controls .seg {
+  display: inline-flex;
+  border: 1px solid var(--ph-rule);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.photography-page .koppen-controls .seg button {
+  background: #fff;
+  border: 0;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  color: var(--ph-ink-soft);
+  font-family: inherit;
+  font-size: inherit;
+  border-right: 1px solid var(--ph-rule);
+  transition: background 0.15s, color 0.15s;
+}
+
+.photography-page .koppen-controls .seg button:last-child { border-right: 0; }
+
+.photography-page .koppen-controls .seg button:hover {
+  background: var(--ph-pale-navy);
+  color: var(--ph-graphite);
+}
+
+.photography-page .koppen-controls .seg button.active {
+  background: var(--ph-navy);
+  color: #fff;
+}
+
+.photography-page .koppen-controls select {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--ph-rule);
+  border-radius: 3px;
+  background: #fff;
+  color: var(--ph-ink);
+  font-family: inherit;
+  font-size: inherit;
+  max-width: 12rem;
+}
+
+.photography-page .koppen-map {
+  height: 460px;
+  width: 100%;
+  background: #f0f4f7;
+}
+
+.photography-page .koppen-legend {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.78rem;
+  color: var(--ph-ink-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.25rem;
+  align-items: center;
+}
+
+.photography-page[data-lang="zh"] .koppen-legend { font-family: var(--ph-font-cn); }
+
+.photography-page .koppen-legend .swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.photography-page .koppen-legend .sw {
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.photography-page .koppen-status {
+  padding: 1.5rem;
+  text-align: center;
+  font-family: var(--ph-font-ui);
+  color: var(--ph-ink-faint);
+  font-size: 0.85rem;
+}
+
+/* Leaflet popup styled to match wiki */
+.photography-page .leaflet-popup-content-wrapper {
+  border-radius: 3px;
+  font-family: var(--ph-font-body);
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content-wrapper {
+  font-family: var(--ph-font-cn);
+}
+.photography-page .leaflet-popup-content {
+  margin: 0.6rem 0.85rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.photography-page .leaflet-popup-content .pop-code {
+  font-family: var(--ph-font-mono);
+  background: var(--ph-pale-navy);
+  color: var(--ph-navy);
+  padding: 0.05rem 0.35rem;
+  border-radius: 2px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.photography-page .leaflet-popup-content .pop-name {
+  display: block;
+  font-weight: 600;
+  margin: 0.3rem 0 0.15rem;
+  color: var(--ph-graphite);
+}
+.photography-page .leaflet-popup-content .pop-host {
+  font-size: 0.75rem;
+  font-family: var(--ph-font-ui);
+  color: var(--ph-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content .pop-host {
+  font-family: var(--ph-font-cn);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.photography-page .leaflet-popup-content .pop-host.inhospitable { color: #b8472d; }
+.photography-page .leaflet-popup-content .pop-host.edge { color: #6b6840; }
+.photography-page .leaflet-popup-content .pop-host.hospitable { color: var(--ph-forest); }
+.photography-page .leaflet-popup-content .pop-photog {
+  display: block;
+  margin-top: 0.4rem;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--ph-ink-soft);
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content .pop-photog { font-style: normal; }
+
+/* ─── WHC popup-specific ───────────────────────────────────────── */
+.photography-page .leaflet-popup-content .pop-meta {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  color: var(--ph-ink-faint);
+  font-family: var(--ph-font-ui);
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content .pop-meta { font-family: var(--ph-font-cn); }
+
+.photography-page .leaflet-popup-content .pop-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--ph-navy);
+  font-family: var(--ph-font-ui);
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content .pop-link { font-family: var(--ph-font-cn); }
+
+.photography-page .leaflet-popup-content .pop-cat {
+  display: inline-block;
+  font-family: var(--ph-font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.05rem 0.35rem;
+  border-radius: 2px;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content .pop-cat {
+  font-family: var(--ph-font-cn);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.photography-page .leaflet-popup-content .pop-cat.C { background: #f4e8d8; color: #8a6630; }
+.photography-page .leaflet-popup-content .pop-cat.N { background: #e0ecdf; color: var(--ph-forest); }
+.photography-page .leaflet-popup-content .pop-cat.M { background: var(--ph-pale-navy); color: var(--ph-navy); }
+
+.photography-page .leaflet-popup-content .pop-danger {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.35rem;
+  background: #f4dad6;
+  color: #b8472d;
+  font-family: var(--ph-font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+.photography-page[data-lang="zh"] .leaflet-popup-content .pop-danger {
+  font-family: var(--ph-font-cn);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* WHC marker dot rendered via DivIcon */
+.photography-page .whc-dot {
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.9);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.18);
+}
+
+/* WHC cluster marker (replaces leaflet.markercluster default styling) */
+.photography-page .whc-cluster {
+  background: rgba(10, 61, 98, 0.85);
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-family: var(--ph-font-ui);
+  font-weight: 600;
+  font-size: 0.72rem;
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photography-page .whc-cluster.small { background: rgba(46, 134, 171, 0.85); }
+.photography-page .whc-cluster.medium { background: rgba(10, 61, 98, 0.88); }
+.photography-page .whc-cluster.large { background: rgba(10, 61, 98, 0.95); }
+
+/* "Open in full page" link inside legend */
+.photography-page .map-fullscreen-link {
+  margin-left: auto;
+  font-family: var(--ph-font-ui);
+  font-size: 0.78rem;
+  color: var(--ph-navy);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ph-pale-navy);
+  padding-bottom: 1px;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.photography-page[data-lang="zh"] .map-fullscreen-link { font-family: var(--ph-font-cn); }
+
+.photography-page .map-fullscreen-link:hover {
+  color: var(--ph-cyan);
+  border-color: var(--ph-cyan);
+}
+
+/* ─── 3D model viewer (§1 Pentax K1000) ────────────────────────── */
+.photography-page .model-figure {
+  margin: 1.75rem 0;
+  max-width: 52rem;
+  border: 1px solid var(--ph-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.photography-page .model-figure model-viewer {
+  display: block;
+  width: 100%;
+  height: 420px;
+  background: #f7f8f9;
+  --poster-color: transparent;
+}
+
+.photography-page .model-caption {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.78rem;
+  color: var(--ph-ink-soft);
+}
+
+.photography-page[data-lang="zh"] .model-caption { font-family: var(--ph-font-cn); }
+
+.photography-page .model-caption .model-hint {
+  display: block;
+  color: var(--ph-ink-faint);
+  font-size: 0.74rem;
+  margin-bottom: 0.4rem;
+}
+
+.photography-page .model-caption .model-attribution {
+  display: block;
+  color: var(--ph-ink-faint);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.photography-page .model-caption .model-attribution a {
+  color: var(--ph-cyan);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s;
+}
+
+.photography-page .model-caption .model-attribution a:hover {
+  border-color: var(--ph-cyan);
+}
+
+/* ─── §3 Color space comparator widget ─────────────────────────── */
+.photography-page .colorspace-widget {
+  margin: 1.75rem 0;
+  max-width: 52rem;
+  border: 1px solid var(--ph-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.photography-page .colorspace-caption {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.85rem;
+  color: var(--ph-graphite);
+}
+
+.photography-page[data-lang="zh"] .colorspace-caption { font-family: var(--ph-font-cn); }
+
+.photography-page .colorspace-caption strong {
+  display: block;
+  font-weight: 600;
+  font-family: var(--ph-font-body);
+  font-size: 0.92rem;
+  color: var(--ph-graphite);
+  margin-bottom: 0.2rem;
+}
+
+.photography-page[data-lang="zh"] .colorspace-caption strong { font-family: var(--ph-font-cn); }
+
+.photography-page .colorspace-caption .caption-note {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--ph-ink-faint);
+  font-size: 0.78rem;
+}
+
+.photography-page .colorspace-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.83rem;
+  align-items: center;
+}
+
+.photography-page[data-lang="zh"] .colorspace-controls { font-family: var(--ph-font-cn); }
+
+.photography-page .cs-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+  border: 1px solid var(--ph-rule);
+  background: #fff;
+  transition: background 0.15s, border-color 0.15s;
+  user-select: none;
+}
+
+.photography-page .cs-toggle:hover {
+  background: var(--ph-pale-navy);
+}
+
+.photography-page .cs-toggle input[type="checkbox"] {
+  margin: 0;
+  cursor: pointer;
+  accent-color: currentColor;
+}
+
+.photography-page .cs-toggle .cs-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+
+.photography-page .cs-toggle.cs-active {
+  background: var(--ph-pale-navy);
+  border-color: var(--ph-navy);
+  font-weight: 500;
+}
+
+.photography-page .colorspace-canvas-wrap {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.photography-page .colorspace-canvas-wrap canvas,
+.photography-page .colorspace-canvas-wrap svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.photography-page .colorspace-canvas-wrap .cs-stack {
+  position: relative;
+}
+
+.photography-page .colorspace-canvas-wrap .cs-stack svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.photography-page .colorspace-coverage {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.78rem;
+  color: var(--ph-ink-soft);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.5rem 1rem;
+}
+
+.photography-page[data-lang="zh"] .colorspace-coverage { font-family: var(--ph-font-cn); }
+
+.photography-page .colorspace-coverage .cov-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.photography-page .colorspace-coverage .cov-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.18);
+  flex-shrink: 0;
+}
+
+.photography-page .colorspace-coverage .cov-name {
+  color: var(--ph-graphite);
+  font-weight: 500;
+}
+
+.photography-page .colorspace-coverage .cov-pct {
+  font-family: var(--ph-font-mono);
+  color: var(--ph-ink-faint);
+  font-size: 0.74rem;
+  white-space: nowrap;
+}
+
+/* When the first-batch toggle is active, give it a distinct look */
+.photography-page .koppen-controls .seg button.batch-active {
+  background: var(--ph-cyan);
+  color: #fff;
+}
+
+/* ─── Figure ────────────────────────────────────────────────────── */
+.photography-page figure {
+  margin: 1.75rem 0;
+  max-width: 52rem;
+}
+
+.photography-page figcaption {
+  font-family: var(--ph-font-ui);
+  font-size: 0.85rem;
+  color: var(--ph-ink-faint);
+  margin-top: 0.5rem;
+  line-height: 1.45;
+  font-style: italic;
+}
+
+.photography-page[data-lang="zh"] figcaption {
+  font-family: var(--ph-font-cn);
+  font-style: normal;
+}
+
+/* ─── Table of contents ─────────────────────────────────────────── */
+.photography-page .toc {
+  font-family: var(--ph-font-ui);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.photography-page[data-lang="zh"] .toc {
+  font-family: var(--ph-font-cn);
+  font-size: 0.92rem;
+}
+
+.photography-page .toc-title {
+  font-family: var(--ph-font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ph-cyan);
+  margin: 0 0 0.85rem;
+  padding: 0;
+}
+
+.photography-page[data-lang="zh"] .toc-title {
+  font-family: var(--ph-font-cn);
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.photography-page .toc ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.photography-page .toc li { margin: 0; padding: 0; }
+
+.photography-page .toc a {
+  display: block;
+  padding: 0.32rem 0;
+  color: var(--ph-ink-soft);
+  text-decoration: none;
+  border-bottom: 0;
+  transition: color 0.15s;
+}
+
+.photography-page .toc a:hover {
+  color: var(--ph-graphite);
+}
+
+.photography-page .toc a.active {
+  color: var(--ph-navy);
+  font-weight: 600;
+}
+
+/* Desktop TOC: sticky in left margin */
+@media (min-width: 1100px) {
+  .photography-page .toc {
+    grid-column: 1;
+    position: sticky;
+    top: 4rem;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  .photography-page .toc::-webkit-scrollbar { width: 4px; }
+  .photography-page .toc::-webkit-scrollbar-thumb {
+    background: var(--ph-rule);
+    border-radius: 2px;
+  }
+  .photography-page .main { grid-column: 2; min-width: 0; }
+  .photography-page .toc-mobile-toggle { display: none; }
+}
+
+/* Mobile / tablet collapsible drawer */
+@media (max-width: 1099px) {
+  .photography-page .toc {
+    margin: 0 0 2rem;
+    border: 1px solid var(--ph-rule);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--ph-paper-deep);
+  }
+  .photography-page .toc-mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: transparent;
+    border: 0;
+    padding: 0.75rem 1rem;
+    font-family: var(--ph-font-ui);
+    font-size: 0.9rem;
+    color: var(--ph-graphite);
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .photography-page[data-lang="zh"] .toc-mobile-toggle {
+    font-family: var(--ph-font-cn);
+  }
+  .photography-page .toc-mobile-toggle::after {
+    content: "▾";
+    font-size: 0.7rem;
+    margin-left: 0.5rem;
+    transition: transform 0.2s;
+  }
+  .photography-page .toc-mobile-toggle[aria-expanded="true"]::after { transform: rotate(180deg); }
+  .photography-page .toc .toc-title { display: none; }
+  .photography-page .toc ol {
+    display: none;
+    padding: 0 1rem 1rem;
+  }
+  .photography-page .toc-mobile-toggle[aria-expanded="true"] + .toc-title { display: none; }
+  .photography-page .toc-mobile-toggle[aria-expanded="true"] ~ ol { display: block; }
+}
+
+/* ─── Reference tables ─────────────────────────────────────────── */
+.photography-page .ref-table-wrapper {
+  margin: 1.75rem 0;
+  max-width: 52rem;
+  overflow-x: auto;
+  border: 1px solid var(--ph-rule);
+  border-radius: 4px;
+  background: #fff;
+}
+
+/* Collapsible <details> wrapper around each ref-table */
+.photography-page details.ref-table-collapse {
+  margin: 1.25rem 0;
+  max-width: 52rem;
+  border: 1px solid var(--ph-rule);
+  border-radius: 4px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.photography-page details.ref-table-collapse > summary {
+  padding: 0.75rem 1rem 0.75rem 2.4rem;
+  background: var(--ph-paper-deep);
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  font-family: var(--ph-font-ui);
+  font-size: 0.85rem;
+  color: var(--ph-graphite);
+  user-select: none;
+  transition: background 0.12s;
+}
+
+.photography-page[data-lang="zh"] details.ref-table-collapse > summary { font-family: var(--ph-font-cn); }
+
+.photography-page details.ref-table-collapse > summary:hover {
+  background: var(--ph-pale-navy);
+}
+
+/* Custom triangle disclosure marker */
+.photography-page details.ref-table-collapse > summary::-webkit-details-marker { display: none; }
+
+.photography-page details.ref-table-collapse > summary::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 1.05rem;
+  width: 0;
+  height: 0;
+  border-left: 6px solid var(--ph-navy);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  transition: transform 0.18s ease;
+  transform-origin: 30% 50%;
+}
+
+.photography-page details.ref-table-collapse[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.photography-page details.ref-table-collapse > summary strong {
+  display: block;
+  font-weight: 600;
+  font-family: var(--ph-font-body);
+  font-size: 0.92rem;
+  color: var(--ph-graphite);
+  margin-bottom: 0.2rem;
+}
+
+.photography-page[data-lang="zh"] details.ref-table-collapse > summary strong { font-family: var(--ph-font-cn); }
+
+.photography-page details.ref-table-collapse > summary .caption-note {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--ph-ink-faint);
+  font-size: 0.78rem;
+}
+
+.photography-page details.ref-table-collapse > summary .summary-hint {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 0.74rem;
+  color: var(--ph-cyan);
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+.photography-page details.ref-table-collapse > .ref-table-body {
+  overflow-x: auto;
+  border-top: 1px solid var(--ph-rule);
+}
+
+.photography-page .ref-table-caption {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--ph-rule);
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.85rem;
+  color: var(--ph-graphite);
+}
+
+.photography-page[data-lang="zh"] .ref-table-caption { font-family: var(--ph-font-cn); }
+
+.photography-page .ref-table-caption strong {
+  display: block;
+  font-weight: 600;
+  font-family: var(--ph-font-body);
+  font-size: 0.92rem;
+  color: var(--ph-graphite);
+  margin-bottom: 0.2rem;
+}
+
+.photography-page[data-lang="zh"] .ref-table-caption strong { font-family: var(--ph-font-cn); }
+
+.photography-page .ref-table-caption .caption-note {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--ph-ink-faint);
+  font-size: 0.78rem;
+}
+
+.photography-page table.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--ph-font-body);
+  font-size: 0.85rem;
+  color: var(--ph-ink);
+}
+
+.photography-page[data-lang="zh"] table.ref-table { font-family: var(--ph-font-cn); }
+
+.photography-page table.ref-table th,
+.photography-page table.ref-table td {
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid var(--ph-rule);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+.photography-page table.ref-table th {
+  background: var(--ph-paper-deep);
+  font-family: var(--ph-font-ui);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--ph-ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  border-bottom: 1.5px solid var(--ph-rule);
+}
+
+.photography-page[data-lang="zh"] table.ref-table th {
+  font-family: var(--ph-font-cn);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.photography-page table.ref-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.photography-page table.ref-table .num {
+  font-family: var(--ph-font-mono);
+  font-size: 0.82rem;
+  white-space: nowrap;
+  color: var(--ph-graphite);
+}
+
+.photography-page table.ref-table .model {
+  font-style: italic;
+  color: var(--ph-ink-soft);
+}
+
+.photography-page[data-lang="zh"] table.ref-table .model { font-style: normal; }
+
+.photography-page table.ref-table .group-row td {
+  background: var(--ph-paper-deep);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--ph-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-family: var(--ph-font-ui);
+}
+
+.photography-page[data-lang="zh"] table.ref-table .group-row td {
+  font-family: var(--ph-font-cn);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ─── Footer ────────────────────────────────────────────────────── */
+.photography-page .page-footer {
+  border-top: 1px solid var(--ph-rule);
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  font-family: var(--ph-font-ui);
+  font-size: 0.82rem;
+  color: var(--ph-ink-faint);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 64rem;
+}
+
+.photography-page[data-lang="zh"] .page-footer {
+  font-family: var(--ph-font-cn);
+}
+
+.photography-page .page-footer a {
+  color: var(--ph-ink-soft);
+  border-bottom: 0;
+}
+
+.photography-page .page-footer a:hover { color: var(--ph-graphite); }
+
+/* ─── Horizontal rule ────────────────────────────────────────────── */
+.photography-page hr {
+  border: 0;
+  border-top: 1px solid var(--ph-rule);
+  margin: 3rem 0;
+  max-width: 52rem;
+}
