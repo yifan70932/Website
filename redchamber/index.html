@@ -223,10 +223,22 @@
 
       <h3>人物关系：四大家族的网络</h3>
 
-      <p>下图为<em>贾、史、王、薛</em>四大家族姻亲网络与宁荣二府世代谱的简化关系图，作为本札记后续讨论的快速查阅参考。十二钗的横向关系（姑表、姨表、邻居、丫鬟）由颜色与连线类型区分。</p>
+      <p>下图为<em>贾、史、王、薛</em>四大家族姻亲网络与宁荣二府世代谱的简化关系图，附第一回出场的<em>叙事框架人物</em>（甄士隐、贾雨村、冷子兴等）。点击任一节点查看该人物的简要信息（册位、判词、关键回目）；选中节点时，相关连线上会标注该人物视角的具体关系（如"父"、"姑表妹"、"业师"等）。线型区分关系类型：实线为血缘父子（母女），双横线为夫妻，虚线为其他重要关系（姑表、姨表、主仆、师生）。本图聚焦于第五回判词册中出现的核心人物及与全书结构密切相关者，不涵盖全部七百余位有名出场人物。</p>
 
       <div class="family-network" id="family-network-widget">
-        <p style="color:var(--hlm-ink-faint);font-style:italic;text-align:center;padding:2rem 0;">[人物关系图 SVG widget — 待绘制]</p>
+        <div class="fn-legend">
+          <span><span class="fn-legend-line solid"></span>父子 / 母子</span>
+          <span><span class="fn-legend-line marriage"></span>夫妻</span>
+          <span><span class="fn-legend-line dashed"></span>姑表 / 姨表 / 收养</span>
+          <span class="fn-legend-zhu"><span class="fn-dot zhu"></span>主子</span>
+          <span class="fn-legend-zhu"><span class="fn-dot ya"></span>丫鬟（副册／又副册）</span>
+        </div>
+        <div class="fn-svg-wrap">
+          <svg id="fn-svg" viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="fn-detail" id="fn-detail">
+          <p class="fn-hint">点击任一人物节点查看详情</p>
+        </div>
       </div>
 
     </section>
@@ -1075,10 +1087,6 @@
       <p><strong>欧丽娟台大公开课《红楼梦》</strong>（台大开放式课程；YouTube、B 站均有完整视频）。当代华语世界文学批评派最系统的公开课。</p>
       <p><strong>白先勇台大公开课《红楼梦》导读</strong>（2014–2015；YouTube、B 站可见）。程乙本派系统讲解。</p>
 
-      <hr style="border:none;border-top:1px dashed var(--hlm-rule);margin:3rem 0;">
-
-      <p style="text-align:center;color:var(--hlm-ink-faint);font-style:italic;font-size:0.9rem;">本札记持续修订；最近一次更新见页脚日期。</p>
-
     </section>
 
     <footer class="page-footer">
@@ -1342,6 +1350,500 @@
     renderGrid();
     renderDetail();
   })();
+
+  /* ─────────────────────────────────────────────────────────
+     人物关系图 widget (§ 1)
+     数据驱动的 SVG 渲染：节点按家族分组定位，关系作为边连接
+     ───────────────────────────────────────────────────────── */
+  (function familyNetwork() {
+    const svg = document.getElementById('fn-svg');
+    const detail = document.getElementById('fn-detail');
+    if (!svg || !detail) return;
+
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+
+    // ─── 节点数据 ────────────────────────────────────────────────
+    // 按家族（house）分四个区域；x/y 为 viewBox 坐标 (0,0)–(1100,760)
+    // type: 'zhu' 主子 / 'ya' 丫鬟 / 'outsider' 外来者；dead: 已逝
+    const nodes = {
+      // ─── 贾府 (x: 60–680) ────────────────────────────────────
+      jia_daishan: { name: '贾代善', x: 340, y: 50, house: 'rong', dead: true,
+                    note: '荣国公贾源之子，袭爵；史太君（贾母）之夫；故事开始时已逝' },
+      jia_mu: { name: '贾母', x: 410, y: 50, house: 'rong',
+               note: '史侯之女，史太君，贾府辈分最高的长者；荣国府的实际权威',
+               panci: null,
+               relations: '贾代善之妻 / 贾赦、贾政、贾敏之母 / 史湘云之姑奶' },
+      jia_daihua: { name: '贾代化', x: 775, y: 50, house: 'ning', dead: true,
+                   note: '宁国公贾演之子，袭爵；贾敬之父；故事开始时已逝' },
+
+      jia_she: { name: '贾赦', x: 260, y: 170, house: 'rong',
+                note: '贾母长子，袭一等将军爵；不务正业，第 48 回强取石呆子古扇',
+                relations: '贾母之子 / 邢夫人之夫 / 贾琏、迎春之父' },
+      xing: { name: '邢夫人', x: 320, y: 170, house: 'rong', type: 'outsider',
+             note: '贾赦续弦，无所出；性格懦弱寡淡',
+             relations: '贾赦之妻 / 邢岫烟之姑母' },
+      jia_zheng: { name: '贾政', x: 430, y: 170, house: 'rong',
+                  note: '贾母次子，工部员外郎；正派但拘谨；荣国府实际当家',
+                  relations: '贾母之子 / 王夫人之夫 / 元春、贾珠、宝玉、探春、贾环之父' },
+      wang_furen: { name: '王夫人', x: 490, y: 170, house: 'rong',
+                   note: '王子腾、薛姨妈之姊；笃信佛事；处置晴雯、金钏等多人',
+                   relations: '贾政之妻 / 王熙凤之姑母 / 薛姨妈之姊' },
+      jia_min: { name: '贾敏', x: 130, y: 170, house: 'rong', dead: true,
+                note: '贾母四女，最受贾母疼爱；嫁林如海；早逝',
+                relations: '贾母之女 / 林如海之妻 / 黛玉之母' },
+      jia_jing: { name: '贾敬', x: 775, y: 170, house: 'ning', dead: true,
+                 note: '贾代化之子，乙卯科进士；后入道，一心炼丹，不理家事；第 63 回吞丹而卒',
+                 relations: '贾代化之子 / 贾珍、惜春之父' },
+
+      jia_lian: { name: '贾琏', x: 145, y: 305, house: 'rong',
+                 note: '贾赦庶长子；与王熙凤同管荣府；好色懦弱',
+                 relations: '贾赦之子 / 王熙凤之夫 / 巧姐之父' },
+      xifeng: { name: '王熙凤', x: 215, y: 305, house: 'rong',
+               panci: '正册 第三\n凡鸟偏从末世来，都知爱慕此生才。\n一从二令三人木，哭向金陵事更哀。',
+               note: '王子腾之侄女，王夫人内侄女；荣国府实际管家；精明狠辣',
+               relations: '王家之女 / 贾琏之妻 / 巧姐之母 / 王夫人之内侄女' },
+      yingchun: { name: '迎春', x: 290, y: 305, house: 'rong',
+                 panci: '正册 第四\n子系中山狼，得志便猖狂。\n金闺花柳质，一载赴黄粱。',
+                 note: '贾赦庶女，二木头；嫁孙绍祖被虐而死；脂批伏其惨结于第 73 回累金凤',
+                 relations: '贾赦之女 / 迎春八十回后被虐死于夫家' },
+      yuanchun: { name: '元春', x: 360, y: 305, house: 'rong',
+                 panci: '正册 第二\n二十年来辨是非，榴花开处照宫闱。\n三春争及初春景，虎兕相逢大梦归。',
+                 note: '贾政长女，封贤德妃；第 18 回归省大观园即由其所建；八十回后死于宫廷争斗',
+                 relations: '贾政、王夫人之女 / 宝玉之姊' },
+      jia_zhu: { name: '贾珠', x: 430, y: 305, house: 'rong', dead: true,
+                note: '贾政长子，二十岁前后病逝；李纨之夫，贾兰之父',
+                relations: '贾政之子 / 李纨之夫 / 贾兰之父' },
+      lihuang: { name: '李纨', x: 500, y: 305, house: 'rong',
+                panci: '正册 第十一\n桃李春风结子完，到头谁似一盆兰。\n如冰水好空相妒，枉与他人作笑谈。',
+                note: '贾珠之寡妻，主持稻香村；最终因贾兰中举而获封诰',
+                relations: '贾珠之妻 / 贾兰之母' },
+      baoyu: { name: '宝玉', x: 580, y: 305, house: 'rong',
+              note: '贾政与王夫人之子，全书主角；衔玉而生；最终悬崖撒手出家',
+              relations: '贾政、王夫人之子 / 黛玉之表弟 / 宝钗之表弟 / 湘云之表兄' },
+      tanchun: { name: '探春', x: 655, y: 305, house: 'rong',
+                panci: '正册 第三（与元春合幅）\n才自清明志自高，生于末世运偏消。\n清明涕送江边望，千里东风一梦遥。',
+                note: '贾政庶女（赵姨娘所出）；第 55–56 回敏探春兴利除宿弊；八十回后远嫁海外',
+                relations: '贾政之女 / 赵姨娘之亲生 / 王夫人养育' },
+      jia_zhen: { name: '贾珍', x: 730, y: 305, house: 'ning',
+                 note: '贾敬之子，宁国府袭爵；第 13 回大办秦可卿丧；与儿媳秦可卿有暧昧',
+                 relations: '贾敬之子 / 尤氏之夫 / 贾蓉之父' },
+      youshi: { name: '尤氏', x: 800, y: 305, house: 'ning', type: 'outsider',
+               note: '贾珍续弦；尤二姐、尤三姐之异母姊；性情绵弱',
+               relations: '贾珍之妻 / 尤二姐、尤三姐之异母姊' },
+      xichun: { name: '惜春', x: 875, y: 305, house: 'ning',
+               panci: '正册 第六\n勘破三春景不长，缁衣顿改昔年妆。\n可怜绣户侯门女，独卧青灯古佛旁。',
+               note: '贾敬之女，宁府小姐；自幼养于荣府；八十回后出家为尼',
+               relations: '贾敬之女 / 贾珍之妹' },
+
+      jia_lan: { name: '贾兰', x: 475, y: 420, house: 'rong',
+                note: '贾珠遗腹子；李纨之子；八十回后中举；判词"到头谁似一盆兰"',
+                relations: '贾珠、李纨之子' },
+      qiaojie: { name: '巧姐', x: 200, y: 420, house: 'rong',
+                panci: '正册 第十\n势败休云贵，家亡莫论亲。\n偶因济刘氏，巧得遇恩人。',
+                note: '凤姐之女；八十回后被狠舅奸兄所卖，刘姥姥救出后嫁板儿',
+                relations: '贾琏、王熙凤之女' },
+      jia_rong: { name: '贾蓉', x: 730, y: 420, house: 'ning',
+                 note: '贾珍之子，五品龙禁尉；秦可卿之夫',
+                 relations: '贾珍之子 / 秦可卿之夫' },
+      qinkeqing: { name: '秦可卿', x: 800, y: 420, house: 'ning', type: 'outsider',
+                  panci: '正册 第十二\n情天情海幻情身，情既相逢必主淫。\n漫言不肖皆荣出，造衅开端实在宁。',
+                  note: '兼美；秦业养女；脂批"淫丧天香楼"被作者删去，通行本改为病死',
+                  relations: '贾蓉之妻 / 与贾珍有暧昧' },
+
+      // ─── 史家（湘云：贾母之侄孙女，与宝玉同辈） ────────────
+      shi_xiangyun: { name: '史湘云', x: 60, y: 420, house: 'shi',
+                     panci: '正册 第五\n富贵又何为？襁褓之间父母违；\n展眼吊斜晖，湘江水逝楚云飞。',
+                     note: '史侯之孙女；幼失双亲，由叔父抚养；豪爽率真；八十回后命运学界争议（详 § 4）',
+                     relations: '贾母之侄孙女 / 与宝玉同辈' },
+
+      // ─── 王家 (x: 880–1040 上方) ────────────────────────────
+      wang_zilen: { name: '王子腾', x: 1080, y: 50, house: 'wang',
+                   note: '九省都检点；王夫人、薛姨妈之兄；王熙凤之伯父；贾府最重要的政治后盾',
+                   relations: '王夫人、薛姨妈之兄 / 王熙凤之伯父' },
+
+      // ─── 薛家 (x: 880–1040, 中下) ────────────────────────────
+      xueyima: { name: '薛姨妈', x: 1080, y: 170, house: 'xue',
+                note: '王子腾、王夫人之妹；薛蟠、宝钗之母；寡居',
+                relations: '王夫人之妹 / 薛蟠、宝钗之母' },
+      xue_pan: { name: '薛蟠', x: 970, y: 420, house: 'xue',
+                note: '薛姨妈之子，呆霸王；第 4 回打死冯渊夺香菱；第 79–80 回娶夏金桂',
+                relations: '薛姨妈之子 / 宝钗之兄 / 夏金桂之夫' },
+      xia_jingui: { name: '夏金桂', x: 1035, y: 420, house: 'xue', type: 'outsider',
+                   panci: '副册（与香菱合幅）\n根并荷花一茎香，平生遭际实堪伤。\n自从两地生孤木，致使香魂返故乡。',
+                   note: '薛蟠之妻；副册判词中"两地孤木"为"桂"字；逼死香菱',
+                   relations: '薛蟠之妻 / 香菱之主' },
+      xiangling: { name: '香菱', x: 1100, y: 420, house: 'xue', type: 'ya',
+                  note: '原名甄英莲（真应怜）；薛蟠之妾；副册之首；八十回后被夏金桂所害',
+                  relations: '薛蟠之妾 / 甄士隐之女（被拐）' },
+      baochai: { name: '宝钗', x: 970, y: 305, house: 'xue',
+                panci: '正册 第一（与黛玉合幅）\n可叹停机德，堪怜咏絮才。\n玉带林中挂，金簪雪里埋。',
+                note: '薛姨妈之女；端凝雍容；最终嫁宝玉；八十回后结局学界并列学说（详 § 4）',
+                relations: '薛姨妈之女 / 薛蟠之妹 / 宝玉之表姊' },
+      baoqin: { name: '宝琴', x: 1080, y: 305, house: 'xue',
+               note: '薛蝌之妹，宝钗之堂妹；博学多才；第 51 回作《怀古绝句十首》',
+               relations: '薛蟠、宝钗之堂妹' },
+
+      // ─── 林家 / 外来 (左下角) ───────────────────────────────
+      lin_ruhai: { name: '林如海', x: 60, y: 170, house: 'lin', dead: true, type: 'outsider',
+                  note: '贾敏之夫，巡盐御史；黛玉之父；第 14 回病故扬州',
+                  relations: '贾敏之夫 / 黛玉之父' },
+      daiyu: { name: '黛玉', x: 60, y: 305, house: 'lin',
+              panci: '正册 第一（与宝钗合幅）\n可叹停机德，堪怜咏絮才。\n玉带林中挂，金簪雪里埋。',
+              note: '林如海与贾敏之女；贾母外孙女；进贾府后与宝玉相恋；八十回后死法学界并列学说（详 § 4）',
+              relations: '林如海、贾敏之女 / 贾母外孙女 / 宝玉之表姊' },
+
+      // ─── 妙玉（外来，独居栊翠庵）─────────────────────────────
+      miaoyu: { name: '妙玉', x: 700, y: 540, house: 'misc', type: 'outsider',
+               panci: '正册 第七\n欲洁何曾洁，云空未必空。\n可怜金玉质，终陷淖泥中。',
+               note: '苏州人，本官宦小姐；带发修行于栊翠庵；第 41 回品茶展露孤高；八十回后被劫至瓜州渡口',
+               relations: '居于贾府栊翠庵 / 与宝玉、宝钗、黛玉皆有交往' },
+
+      // ─── 关键丫鬟（副册 / 又副册）────────────────────────────
+      xiren: { name: '袭人', x: 510, y: 540, house: 'rong', type: 'ya',
+              panci: '又副册 第二\n枉自温柔和顺，空云似桂如兰。\n堪羡优伶有福，谁知公子无缘。',
+              note: '宝玉房第一大丫鬟；本贾母之婢；八十回后嫁蒋玉菡',
+              relations: '宝玉之大丫鬟 / 蒋玉菡之妻（八十回后）' },
+      qingwen: { name: '晴雯', x: 585, y: 540, house: 'rong', type: 'ya',
+                panci: '又副册 第一\n霁月难逢，彩云易散。\n心比天高，身为下贱。\n风流灵巧招人怨，寿夭多因毁谤生。\n多情公子空牵念。',
+                note: '宝玉房大丫鬟，黛玉之"晴为黛影"；第 77 回被王夫人逐出，旋亡；第 78 回宝玉作《芙蓉女儿诔》',
+                relations: '宝玉之大丫鬟 / 王善保家所谗' },
+      pinger: { name: '平儿', x: 250, y: 540, house: 'rong', type: 'ya',
+               note: '王熙凤陪嫁丫鬟，贾琏之通房；副册重要人物（明义二十首中其十一）',
+               relations: '王熙凤之陪嫁 / 贾琏之通房' },
+      yuanyang: { name: '鸳鸯', x: 170, y: 540, house: 'rong', type: 'ya',
+                 note: '贾母大丫鬟；第 46 回拒贾赦欲娶为妾；第 110 回贾母死后自缢殉之（程高续）',
+                 relations: '贾母之大丫鬟' },
+
+      // ─── 叙事框架人物（开篇与引导） ────────────────────────────
+      zhen_shiyin: { name: '甄士隐', x: 800, y: 540, house: 'frame', type: 'outsider',
+                    note: '姑苏望族，第 1 回开篇即出场；女英莲（香菱）三岁被拐、家遭火灾、家败后随跛足道人出家；"真事隐"的人格化',
+                    relations: '英莲（香菱）之父 / 资助贾雨村 / 娇杏之主' },
+      jiaoxing: { name: '娇杏', x: 870, y: 540, house: 'frame', type: 'ya',
+                 note: '甄士隐家丫鬟，因偶回头看了贾雨村一眼，后被贾雨村续娶为妾（"侥幸"）；第 2 回出场；她的际遇是英莲悲剧的反衬',
+                 relations: '甄士隐家丫鬟 / 贾雨村之妾' },
+      jia_yucun: { name: '贾雨村', x: 940, y: 540, house: 'frame', type: 'outsider',
+                  note: '名化，字时飞，号雨村；甄士隐资助赴试中举；任林如海之西席（黛玉之师）；第 4 回判葫芦案放纵薛蟠；后官场起伏；程高续作中归结红楼梦',
+                  relations: '林黛玉之业师 / 娇杏之夫 / 与贾府有政治牵连 / "假语存"的人格化' },
+      lengzixing: { name: '冷子兴', x: 1020, y: 540, house: 'frame', type: 'outsider',
+                   note: '古董商，王夫人陪房周瑞之女婿；第 2 回与贾雨村在扬州酒店相遇，演说荣国府家族结构——是读者了解贾府全景的窗口',
+                   relations: '与贾雨村为旧识 / 王夫人陪房周瑞之女婿（间接关联贾府）' },
+    };
+
+    // ─── 边数据 (relationship edges) ────────────────────────────
+    // type: 'parent' 实线 / 'marriage' 双横线 / 'kin' 虚线
+    // fromRel / toRel: 选中 from 节点时显示的"from→to"关系，反之亦然
+    const edges = [
+      // ─── 第一代 ────────────────────────────────────────────
+      { from: 'jia_daishan', to: 'jia_mu', type: 'marriage', fromRel: '夫', toRel: '妻' },
+      { from: 'jia_mu', to: 'jia_she', type: 'parent', fromRel: '长子', toRel: '母' },
+      { from: 'jia_mu', to: 'jia_zheng', type: 'parent', fromRel: '次子', toRel: '母' },
+      { from: 'jia_mu', to: 'jia_min', type: 'parent', fromRel: '幼女', toRel: '母' },
+      { from: 'jia_daihua', to: 'jia_jing', type: 'parent', fromRel: '子', toRel: '父' },
+
+      // ─── 第二代婚姻 ────────────────────────────────────────
+      { from: 'jia_she', to: 'xing', type: 'marriage', fromRel: '续妻', toRel: '夫' },
+      { from: 'jia_zheng', to: 'wang_furen', type: 'marriage', fromRel: '正妻', toRel: '夫' },
+      { from: 'jia_min', to: 'lin_ruhai', type: 'marriage', fromRel: '夫', toRel: '妻' },
+
+      // ─── 第二代 → 第三代 ──────────────────────────────────
+      { from: 'jia_she', to: 'jia_lian', type: 'parent', fromRel: '庶长子', toRel: '父' },
+      { from: 'jia_she', to: 'yingchun', type: 'parent', fromRel: '庶女', toRel: '父' },
+      { from: 'jia_zheng', to: 'yuanchun', type: 'parent', fromRel: '长女', toRel: '父' },
+      { from: 'jia_zheng', to: 'jia_zhu', type: 'parent', fromRel: '长子', toRel: '父' },
+      { from: 'jia_zheng', to: 'baoyu', type: 'parent', fromRel: '次子', toRel: '父' },
+      { from: 'jia_zheng', to: 'tanchun', type: 'parent', fromRel: '庶女', toRel: '父' },
+      { from: 'wang_furen', to: 'yuanchun', type: 'parent', fromRel: '长女', toRel: '生母' },
+      { from: 'wang_furen', to: 'jia_zhu', type: 'parent', fromRel: '长子', toRel: '生母' },
+      { from: 'wang_furen', to: 'baoyu', type: 'parent', fromRel: '次子', toRel: '生母' },
+      { from: 'jia_jing', to: 'jia_zhen', type: 'parent', fromRel: '子', toRel: '父' },
+      { from: 'jia_jing', to: 'xichun', type: 'parent', fromRel: '女', toRel: '父' },
+      { from: 'jia_min', to: 'daiyu', type: 'parent', fromRel: '独女', toRel: '母' },
+      { from: 'lin_ruhai', to: 'daiyu', type: 'parent', fromRel: '独女', toRel: '父' },
+
+      // ─── 第三代婚姻 ────────────────────────────────────────
+      { from: 'jia_lian', to: 'xifeng', type: 'marriage', fromRel: '正妻', toRel: '夫' },
+      { from: 'jia_zhu', to: 'lihuang', type: 'marriage', fromRel: '正妻', toRel: '夫' },
+      { from: 'jia_zhen', to: 'youshi', type: 'marriage', fromRel: '续妻', toRel: '夫' },
+      { from: 'jia_rong', to: 'qinkeqing', type: 'marriage', fromRel: '原配', toRel: '夫' },
+
+      // ─── 第三代 → 第四代 ──────────────────────────────────
+      { from: 'jia_lian', to: 'qiaojie', type: 'parent', fromRel: '独女', toRel: '父' },
+      { from: 'xifeng', to: 'qiaojie', type: 'parent', fromRel: '独女', toRel: '母' },
+      { from: 'jia_zhu', to: 'jia_lan', type: 'parent', fromRel: '遗腹子', toRel: '父' },
+      { from: 'lihuang', to: 'jia_lan', type: 'parent', fromRel: '独子', toRel: '母' },
+      { from: 'jia_zhen', to: 'jia_rong', type: 'parent', fromRel: '独子', toRel: '父' },
+
+      // ─── 史家 ────────────────────────────────────────────
+      { from: 'shi_xiangyun', to: 'jia_mu', type: 'kin', fromRel: '姑奶', toRel: '侄孙女' },
+
+      // ─── 王家 ────────────────────────────────────────────
+      { from: 'wang_zilen', to: 'wang_furen', type: 'kin', fromRel: '妹', toRel: '兄' },
+      { from: 'wang_zilen', to: 'xueyima', type: 'kin', fromRel: '幼妹', toRel: '兄' },
+      { from: 'wang_zilen', to: 'xifeng', type: 'kin', fromRel: '侄女', toRel: '伯父' },
+      { from: 'wang_furen', to: 'xifeng', type: 'kin', fromRel: '内侄女', toRel: '姑母' },
+      // 王夫人 ↔ 薛姨妈
+      { from: 'wang_furen', to: 'xueyima', type: 'kin', fromRel: '妹', toRel: '姊' },
+
+      // ─── 薛家 ────────────────────────────────────────────
+      { from: 'xueyima', to: 'xue_pan', type: 'parent', fromRel: '长子', toRel: '母' },
+      { from: 'xueyima', to: 'baochai', type: 'parent', fromRel: '幼女', toRel: '母' },
+      { from: 'xue_pan', to: 'xia_jingui', type: 'marriage', fromRel: '正妻', toRel: '夫' },
+      { from: 'xue_pan', to: 'xiangling', type: 'kin', fromRel: '妾', toRel: '主子' },
+      { from: 'baochai', to: 'baoqin', type: 'kin', fromRel: '堂妹', toRel: '堂姊' },
+
+      // ─── 关键的姑表 / 姨表（与宝玉的核心三角） ──────────
+      // 宝黛：黛玉之母贾敏是宝玉之父贾政之妹；黛玉小宝玉一岁
+      { from: 'daiyu', to: 'baoyu', type: 'kin', fromRel: '姑表妹', toRel: '姑表兄' },
+      // 宝钗：王夫人之妹薛姨妈之女；宝钗大宝玉一岁多
+      { from: 'baochai', to: 'baoyu', type: 'kin', fromRel: '姨表姊', toRel: '姨表弟' },
+      // 湘云：贾母之侄孙女；湘云小宝玉
+      { from: 'shi_xiangyun', to: 'baoyu', type: 'kin', fromRel: '姑表妹', toRel: '姑表兄' },
+
+      // ─── 主仆关系（关键丫鬟） ───────────────────────────
+      { from: 'baoyu', to: 'xiren', type: 'kin', fromRel: '大丫鬟', toRel: '主子' },
+      { from: 'baoyu', to: 'qingwen', type: 'kin', fromRel: '大丫鬟', toRel: '主子' },
+      { from: 'xifeng', to: 'pinger', type: 'kin', fromRel: '陪嫁丫鬟', toRel: '主子' },
+      { from: 'jia_mu', to: 'yuanyang', type: 'kin', fromRel: '大丫鬟', toRel: '主子' },
+
+      // ─── 叙事框架人物的关系网 ────────────────────────────
+      // 甄士隐家庭
+      { from: 'zhen_shiyin', to: 'xiangling', type: 'parent', fromRel: '独女（被拐）', toRel: '父' },
+      { from: 'zhen_shiyin', to: 'jiaoxing', type: 'kin', fromRel: '丫鬟', toRel: '旧主' },
+      { from: 'zhen_shiyin', to: 'jia_yucun', type: 'kin', fromRel: '受资助者', toRel: '资助人' },
+      // 贾雨村的关系
+      { from: 'jia_yucun', to: 'jiaoxing', type: 'marriage', fromRel: '续妾', toRel: '夫' },
+      { from: 'jia_yucun', to: 'daiyu', type: 'kin', fromRel: '业师', toRel: '学生' },
+      { from: 'jia_yucun', to: 'lengzixing', type: 'kin', fromRel: '旧识', toRel: '旧识' },
+    ];
+
+    // ─── 家族区域背景 ───────────────────────────────────────────
+    const houses = [
+      { id: 'rong', label: '荣国府（贾代善一脉）', x: 100, y: 20, w: 580, h: 380 },
+      { id: 'ning', label: '宁国府（贾代化一脉）', x: 690, y: 20, w: 210, h: 380 },
+      { id: 'wang', label: '王家', x: 1020, y: 20, w: 160, h: 80 },
+      { id: 'xue', label: '薛家', x: 920, y: 130, w: 230, h: 320 },
+      { id: 'lin', label: '林家', x: 25, y: 130, w: 120, h: 215 },
+      { id: 'shi', label: '史家', x: 25, y: 380, w: 80, h: 70 },
+      { id: 'misc', label: '主仆与栊翠庵', x: 130, y: 500, w: 615, h: 80 },
+      { id: 'frame', label: '叙事框架', x: 760, y: 500, w: 320, h: 80 },
+    ];
+
+    // ─── 渲染 ──────────────────────────────────────────────────
+    function el(tag, attrs = {}) {
+      const e = document.createElementNS(SVG_NS, tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // 1. 家族背景框
+    const bgGroup = el('g', { class: 'fn-houses' });
+    houses.forEach(h => {
+      if (h.hidden) return;
+      const rect = el('rect', {
+        x: h.x, y: h.y, width: h.w, height: h.h,
+        class: 'fn-house-bg', rx: 6
+      });
+      bgGroup.appendChild(rect);
+      const lbl = el('text', {
+        x: h.x + h.w / 2, y: h.y + 18,
+        class: 'fn-house-label'
+      });
+      lbl.textContent = h.label;
+      bgGroup.appendChild(lbl);
+    });
+    svg.appendChild(bgGroup);
+
+    // 2. 边
+    const edgeGroup = el('g', { class: 'fn-edges' });
+    const edgeElements = {};
+    edges.forEach((e, idx) => {
+      const a = nodes[e.from], b = nodes[e.to];
+      if (!a || !b) { console.warn('edge missing node', e); return; }
+      const cls = e.type === 'parent' ? 'fn-edge'
+                : e.type === 'marriage' ? 'fn-edge marriage'
+                : 'fn-edge dashed';
+
+      if (e.type === 'marriage') {
+        // 双线渲染
+        const dx = b.x - a.x, dy = b.y - a.y;
+        const len = Math.hypot(dx, dy);
+        const ox = -dy / len * 1.5, oy = dx / len * 1.5;
+        const l1 = el('line', {
+          x1: a.x + ox, y1: a.y + oy, x2: b.x + ox, y2: b.y + oy,
+          class: 'fn-edge marriage', 'data-from': e.from, 'data-to': e.to
+        });
+        const l2 = el('line', {
+          x1: a.x - ox, y1: a.y - oy, x2: b.x - ox, y2: b.y - oy,
+          class: 'fn-edge marriage', 'data-from': e.from, 'data-to': e.to
+        });
+        edgeGroup.appendChild(l1);
+        edgeGroup.appendChild(l2);
+        edgeElements[e.from + '-' + e.to + '-' + idx] = [l1, l2];
+      } else {
+        const line = el('line', {
+          x1: a.x, y1: a.y, x2: b.x, y2: b.y,
+          class: cls, 'data-from': e.from, 'data-to': e.to
+        });
+        edgeGroup.appendChild(line);
+        edgeElements[e.from + '-' + e.to + '-' + idx] = [line];
+      }
+    });
+    svg.appendChild(edgeGroup);
+
+    // 3. 节点
+    const nodeGroup = el('g', { class: 'fn-nodes' });
+    const nodeElements = {};
+    Object.entries(nodes).forEach(([id, n]) => {
+      const isYa = n.type === 'ya';
+      const isOutsider = n.type === 'outsider';
+      const r = isYa ? 18 : 22;
+      const classNames = ['fn-node'];
+      if (isYa) classNames.push('ya');
+      if (n.dead) classNames.push('dead');
+      if (isOutsider) classNames.push('outsider');
+      const g = el('g', { class: classNames.join(' '), 'data-id': id, transform: `translate(${n.x}, ${n.y})` });
+      const c = el('circle', { r: r, cx: 0, cy: 0 });
+      const t = el('text');
+      t.textContent = n.name;
+      g.appendChild(c);
+      g.appendChild(t);
+      g.addEventListener('click', () => selectNode(id));
+      nodeGroup.appendChild(g);
+      nodeElements[id] = g;
+    });
+    svg.appendChild(nodeGroup);
+
+    // ─── 选择 / 详情 ────────────────────────────────────────────
+    let selected = null;
+    let labelGroup = null;  // SVG group for current relation labels
+
+    function clearLabels() {
+      if (labelGroup && labelGroup.parentNode) {
+        labelGroup.parentNode.removeChild(labelGroup);
+      }
+      labelGroup = null;
+    }
+
+    function selectNode(id) {
+      // 清除旧高亮 + 旧标签
+      Object.values(nodeElements).forEach(g => {
+        g.classList.remove('selected', 'dim');
+      });
+      Array.from(edgeGroup.querySelectorAll('.fn-edge')).forEach(e => {
+        e.classList.remove('highlight');
+      });
+      clearLabels();
+
+      if (selected === id) {
+        // 再点同一个 → 取消选择
+        selected = null;
+        renderHint();
+        return;
+      }
+
+      selected = id;
+      const node = nodes[id];
+      nodeElements[id].classList.add('selected');
+
+      // 准备渲染关系标签的 group（放在最上层）
+      labelGroup = el('g', { class: 'fn-edge-labels' });
+
+      // 高亮相关边 + 关联节点 + 添加关系标签
+      const relatedNodes = new Set([id]);
+      edges.forEach((e, idx) => {
+        if (e.from !== id && e.to !== id) return;
+
+        // 高亮边
+        const elsArr = edgeElements[e.from + '-' + e.to + '-' + idx];
+        if (elsArr) elsArr.forEach(el => el.classList.add('highlight'));
+        relatedNodes.add(e.from);
+        relatedNodes.add(e.to);
+
+        // 计算标签内容：选中节点视角
+        // selected 是 from → 标签显示 toRel（对方相对自己的关系）
+        // selected 是 to → 标签显示 fromRel
+        let labelText;
+        if (e.from === id) {
+          labelText = e.toRel;
+        } else {
+          labelText = e.fromRel;
+        }
+        if (!labelText) return;
+
+        // 计算标签位置（边的中点，向另一端偏移以避免重叠）
+        const a = nodes[e.from], b = nodes[e.to];
+        // 偏向"另一端"：让标签靠近 *对方*（即非选中节点），让阅读更直观
+        const otherEnd = (e.from === id) ? b : a;
+        const thisEnd = (e.from === id) ? a : b;
+        const mx = thisEnd.x + (otherEnd.x - thisEnd.x) * 0.62;
+        const my = thisEnd.y + (otherEnd.y - thisEnd.y) * 0.62;
+
+        // 渲染：先一个白色 stroke 作为底（halo），再渲染前景文字
+        const halo = el('text', {
+          x: mx, y: my, class: 'fn-edge-label fn-edge-label-halo'
+        });
+        halo.textContent = labelText;
+        const txt = el('text', {
+          x: mx, y: my, class: 'fn-edge-label'
+        });
+        txt.textContent = labelText;
+        labelGroup.appendChild(halo);
+        labelGroup.appendChild(txt);
+      });
+
+      // 不相关的节点淡化
+      Object.entries(nodeElements).forEach(([nid, g]) => {
+        if (!relatedNodes.has(nid)) g.classList.add('dim');
+      });
+
+      // 标签 group 加到 SVG 最末（最上层）
+      svg.appendChild(labelGroup);
+
+      renderDetail(id);
+    }
+
+    function renderHint() {
+      detail.innerHTML = '<p class="fn-hint">点击任一人物节点查看详情</p>';
+    }
+
+    function renderDetail(id) {
+      const n = nodes[id];
+      let html = `<h4>${n.name}</h4>`;
+
+      // meta
+      const houseName = {
+        rong: '荣国府', ning: '宁国府',
+        shi: '史家', wang: '王家', xue: '薛家', lin: '林家',
+        misc: '边缘人物', frame: '叙事框架'
+      }[n.house] || '';
+      const tags = [];
+      if (n.dead) tags.push('已逝');
+      if (n.type === 'ya') tags.push('丫鬟');
+      if (n.type === 'outsider') tags.push('外来');
+      const tagStr = tags.length ? ` · ${tags.join(' · ')}` : '';
+      html += `<div class="fn-meta">${houseName}${tagStr}</div>`;
+
+      // panci
+      if (n.panci) {
+        html += `<div class="fn-panci">${n.panci}</div>`;
+      }
+
+      // note
+      if (n.note) {
+        html += `<p style="margin: 0.4rem 0 0;">${n.note}</p>`;
+      }
+
+      // relations
+      if (n.relations) {
+        html += `<div class="fn-relations"><strong>关系</strong>：${n.relations}</div>`;
+      }
+
+      detail.innerHTML = html;
+    }
+
+    renderHint();
+  })();
+
 </script>
 
 </body>

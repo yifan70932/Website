@@ -891,42 +891,222 @@ body.hlm-page {
   background: var(--hlm-paper-deep);
   border: 1px solid var(--hlm-rule);
   border-radius: 4px;
-  padding: 1.5rem 1rem 1rem;
-  max-width: 56rem;
-  overflow-x: auto;
-}
-
-.hlm-page .family-network svg {
-  display: block;
-  margin: 0 auto;
+  padding: 1.4rem 1rem 1rem;
   max-width: 100%;
-  height: auto;
-  min-width: 600px;
 }
 
-.hlm-page .family-legend {
+.hlm-page .fn-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.2rem;
+  gap: 1.2rem 1.6rem;
   justify-content: center;
-  margin-top: 0.85rem;
+  margin-bottom: 1rem;
   font-family: var(--hlm-font-cn);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--hlm-ink-soft);
 }
 
-.hlm-page .family-legend .swatch {
+.hlm-page .fn-legend span {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
+  white-space: nowrap;
 }
 
-.hlm-page .family-legend .sw {
+.hlm-page .fn-legend-line {
   display: inline-block;
-  width: 0.85rem;
-  height: 0.85rem;
-  border-radius: 50%;
+  width: 1.6rem;
+  height: 0;
   vertical-align: middle;
+}
+.hlm-page .fn-legend-line.solid { border-top: 1.5px solid var(--hlm-ink-soft); }
+.hlm-page .fn-legend-line.marriage {
+  border-top: 1.5px solid var(--hlm-ink-soft);
+  border-bottom: 1.5px solid var(--hlm-ink-soft);
+  height: 4px;
+}
+.hlm-page .fn-legend-line.dashed { border-top: 1.5px dashed var(--hlm-ink-soft); }
+
+.hlm-page .fn-dot {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+}
+.hlm-page .fn-dot.zhu { background: var(--hlm-jiang); }
+.hlm-page .fn-dot.ya { background: var(--hlm-shiqing); opacity: 0.6; }
+
+.hlm-page .fn-svg-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 0 auto;
+}
+
+.hlm-page #fn-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 1100px;
+  font-family: var(--hlm-font-cn);
+}
+
+.hlm-page #fn-svg .fn-house-label {
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--hlm-ink-faint);
+  letter-spacing: 0.15em;
+  text-anchor: middle;
+}
+
+.hlm-page #fn-svg .fn-house-bg {
+  fill: var(--hlm-pale-shiqing);
+  opacity: 0.5;
+  stroke: var(--hlm-rule);
+  stroke-width: 1;
+  rx: 6;
+}
+
+.hlm-page #fn-svg .fn-edge {
+  stroke: var(--hlm-ink-faint);
+  fill: none;
+  stroke-width: 1.2;
+  opacity: 0.55;
+  pointer-events: none;
+  transition: opacity 0.2s, stroke-width 0.2s;
+}
+.hlm-page #fn-svg .fn-edge.dashed { stroke-dasharray: 4 3; }
+.hlm-page #fn-svg .fn-edge.marriage {
+  stroke-width: 1.2;
+}
+.hlm-page #fn-svg .fn-edge.highlight {
+  opacity: 1;
+  stroke: var(--hlm-jiang);
+  stroke-width: 2;
+}
+
+.hlm-page #fn-svg .fn-node {
+  cursor: pointer;
+}
+.hlm-page #fn-svg .fn-node circle {
+  fill: var(--hlm-paper);
+  stroke: var(--hlm-jiang);
+  stroke-width: 1.5;
+  transition: r 0.15s, stroke-width 0.15s;
+}
+.hlm-page #fn-svg .fn-node.ya circle {
+  stroke: var(--hlm-shiqing);
+  stroke-width: 1;
+  stroke-dasharray: none;
+}
+.hlm-page #fn-svg .fn-node.dead circle {
+  stroke-dasharray: 2 2;
+  opacity: 0.7;
+}
+.hlm-page #fn-svg .fn-node.outsider circle {
+  stroke: var(--hlm-ink-faint);
+  stroke-width: 1;
+}
+.hlm-page #fn-svg .fn-node text {
+  font-size: 11px;
+  fill: var(--hlm-ink);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+  user-select: none;
+}
+.hlm-page #fn-svg .fn-node.ya text {
+  font-size: 10px;
+  fill: var(--hlm-ink-soft);
+}
+.hlm-page #fn-svg .fn-node:hover circle {
+  stroke-width: 2.5;
+}
+.hlm-page #fn-svg .fn-node.selected circle {
+  fill: var(--hlm-jiang);
+  stroke: var(--hlm-jiang);
+}
+.hlm-page #fn-svg .fn-node.selected text {
+  fill: var(--hlm-paper);
+  font-weight: 600;
+}
+.hlm-page #fn-svg .fn-node.dim circle {
+  opacity: 0.25;
+}
+.hlm-page #fn-svg .fn-node.dim text {
+  opacity: 0.35;
+}
+
+/* 选中节点时，连线上显示的关系标签 */
+.hlm-page #fn-svg .fn-edge-label {
+  font-size: 11px;
+  font-family: var(--hlm-font-cn);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  fill: var(--hlm-jiang);
+  font-weight: 600;
+  pointer-events: none;
+  user-select: none;
+}
+.hlm-page #fn-svg .fn-edge-label-halo {
+  fill: var(--hlm-paper-deep);
+  stroke: var(--hlm-paper-deep);
+  stroke-width: 4;
+  paint-order: stroke;
+}
+
+.hlm-page .fn-detail {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  background: var(--hlm-paper);
+  border: 1px solid var(--hlm-rule);
+  border-radius: 4px;
+  min-height: 5rem;
+  font-family: var(--hlm-font-cn);
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+.hlm-page .fn-detail .fn-hint {
+  color: var(--hlm-ink-faint);
+  font-style: italic;
+  text-align: center;
+  margin: 0;
+  padding: 0.6rem 0;
+}
+
+.hlm-page .fn-detail h4 {
+  font-family: var(--hlm-font-cn);
+  font-size: 1.15rem;
+  color: var(--hlm-jiang);
+  margin: 0 0 0.4rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.hlm-page .fn-detail .fn-meta {
+  font-size: 0.82rem;
+  color: var(--hlm-ink-faint);
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.04em;
+}
+
+.hlm-page .fn-detail .fn-panci {
+  background: var(--hlm-pale-jiang);
+  border-left: 2px solid var(--hlm-jiang);
+  padding: 0.5rem 0.8rem;
+  margin: 0.5rem 0;
+  font-size: 0.88rem;
+  color: var(--hlm-ink);
+  white-space: pre-line;
+}
+
+.hlm-page .fn-detail .fn-relations {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+}
+
+.hlm-page .fn-detail .fn-relations strong {
+  color: var(--hlm-shiqing);
 }
 
 /* ─── Mobile adjustments ─────────────────────────────────────────── */
@@ -939,5 +1119,9 @@ body.hlm-page {
   }
   .hlm-page .panci-detail {
     padding: 1.1rem 1.2rem;
+  }
+  .hlm-page .fn-legend {
+    font-size: 0.72rem;
+    gap: 0.6rem 1rem;
   }
 }
