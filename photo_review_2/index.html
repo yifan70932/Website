@@ -454,6 +454,204 @@
     color: var(--ink);
   }
 
+  /* —— Sticky 侧边目录（桌面） —— */
+  .sticky-nav {
+    position: fixed;
+    top: 50%;
+    left: 24px;
+    transform: translateY(-50%);
+    z-index: 100;
+    max-width: 220px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 16px 14px;
+    background: rgba(244, 241, 236, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12.5px;
+    line-height: 1.5;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  .sticky-nav.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sticky-nav-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .sticky-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sticky-nav-list li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .sticky-nav-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 5px 6px;
+    color: var(--ink-faded);
+    text-decoration: none;
+    border-radius: 1px;
+    transition: all 0.2s ease;
+    font-size: 12.5px;
+  }
+
+  .sticky-nav-list a:hover {
+    color: var(--ink);
+    background: rgba(139, 58, 47, 0.06);
+  }
+
+  .sticky-nav-list a.active {
+    color: var(--accent);
+    background: rgba(139, 58, 47, 0.08);
+    font-weight: 500;
+  }
+
+  .sticky-nav-list a.active .nav-mini-roman {
+    color: var(--accent);
+  }
+
+  .nav-mini-roman {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--ink-faded);
+    min-width: 24px;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .nav-mini-text {
+    flex: 1;
+    line-height: 1.45;
+  }
+
+  .sticky-nav-divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 6px 4px;
+  }
+
+  /* 移动端：浮动按钮 + 抽屉 */
+  .mobile-nav-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 101;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(139, 58, 47, 0.35);
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: 0.03em;
+    padding: 0;
+  }
+
+  .mobile-nav-toggle.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-nav-toggle.open {
+    background: var(--ink);
+    transform: rotate(180deg);
+  }
+
+  .mobile-nav-toggle::before {
+    content: '☰';
+    font-size: 18px;
+    line-height: 1;
+    font-style: normal;
+  }
+
+  .mobile-nav-toggle.open::before {
+    content: '×';
+    font-size: 26px;
+    transform: rotate(180deg);
+    display: inline-block;
+  }
+
+  .mobile-nav-drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(244, 241, 236, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--rule);
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.1);
+    max-height: 70vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 24px 20px 80px;
+    display: none;
+  }
+
+  .mobile-nav-drawer.open {
+    transform: translateY(0);
+  }
+
+  .mobile-nav-drawer .sticky-nav-title {
+    text-align: center;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+  }
+
+  .mobile-nav-drawer .sticky-nav-list a {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+
+  /* 媒体查询：窄屏切换 */
+  @media (max-width: 1100px) {
+    .sticky-nav { display: none !important; }
+    .mobile-nav-toggle { display: flex; }
+    .mobile-nav-drawer { display: block; }
+  }
+
+  /* 章节平滑滚动偏移 */
+  [id^="sec-"] {
+    scroll-margin-top: 20px;
+  }
+
   /* —— 整体进阶建议 —— */
   .roadmap {
     max-width: 720px;
@@ -884,8 +1082,65 @@
 </head>
 <body>
 
+<!-- Sticky 目录（桌面端：固定在左侧；移动端：浮动按钮+抽屉） -->
+<nav class="sticky-nav" id="stickyNav" aria-label="Section navigation">
+  <div class="sticky-nav-title">目录 · Index</div>
+  <ul class="sticky-nav-list">
+    <li><a href="#sec-cover" data-target="sec-cover"><span class="nav-mini-roman">○</span><span class="nav-mini-text">封面</span></a></li>
+    <li><a href="#sec-contents" data-target="sec-contents"><span class="nav-mini-roman">○</span><span class="nav-mini-text">阅读导览</span></a></li>
+    <li><a href="#sec-preface" data-target="sec-preface"><span class="nav-mini-roman">序</span><span class="nav-mini-text">前言</span></a></li>
+    <li class="sticky-nav-divider"></li>
+    <li><a href="#sec-plate-1" data-target="sec-plate-1"><span class="nav-mini-roman">I.</span><span class="nav-mini-text">船首老者</span></a></li>
+    <li><a href="#sec-plate-2" data-target="sec-plate-2"><span class="nav-mini-roman">II.</span><span class="nav-mini-text">高位俯拍</span></a></li>
+    <li><a href="#sec-plate-3" data-target="sec-plate-3"><span class="nav-mini-roman">III.</span><span class="nav-mini-text">船头朝镜</span></a></li>
+    <li><a href="#sec-plate-4" data-target="sec-plate-4"><span class="nav-mini-roman">IV.</span><span class="nav-mini-text">右下半侧</span></a></li>
+    <li><a href="#sec-plate-5" data-target="sec-plate-5"><span class="nav-mini-roman">V.</span><span class="nav-mini-text">正侧剪影</span></a></li>
+    <li><a href="#sec-plate-6" data-target="sec-plate-6"><span class="nav-mini-roman">VI.</span><span class="nav-mini-text">空船白帆</span></a></li>
+    <li><a href="#sec-plate-7" data-target="sec-plate-7"><span class="nav-mini-roman">VII.</span><span class="nav-mini-text">居中纯剪影</span></a></li>
+    <li class="sticky-nav-divider"></li>
+    <li><a href="#sec-turning-point" data-target="sec-turning-point"><span class="nav-mini-roman">※</span><span class="nav-mini-text">转折</span></a></li>
+    <li><a href="#sec-plate-8" data-target="sec-plate-8"><span class="nav-mini-roman">VIII.</span><span class="nav-mini-text">深暗调</span></a></li>
+    <li><a href="#sec-plate-9" data-target="sec-plate-9"><span class="nav-mini-roman">IX.</span><span class="nav-mini-text">近景人物</span></a></li>
+    <li><a href="#sec-plate-10" data-target="sec-plate-10"><span class="nav-mini-roman">X.</span><span class="nav-mini-text">极简构图</span></a></li>
+    <li class="sticky-nav-divider"></li>
+    <li><a href="#sec-epilogue" data-target="sec-epilogue"><span class="nav-mini-roman">尾</span><span class="nav-mini-text">总结</span></a></li>
+    <li><a href="#sec-roadmap" data-target="sec-roadmap"><span class="nav-mini-roman">★</span><span class="nav-mini-text">整体进阶建议</span></a></li>
+    <li><a href="#sec-salon-strategy" data-target="sec-salon-strategy"><span class="nav-mini-roman">★</span><span class="nav-mini-text">摄影团内突围</span></a></li>
+  </ul>
+</nav>
+
+<!-- 移动端浮动目录按钮 -->
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="打开目录" aria-expanded="false"></button>
+
+<!-- 移动端抽屉式目录 -->
+<nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Section navigation">
+  <div class="sticky-nav-title">目录 · Index</div>
+  <ul class="sticky-nav-list">
+    <li><a href="#sec-cover" data-target="sec-cover"><span class="nav-mini-roman">○</span><span class="nav-mini-text">封面</span></a></li>
+    <li><a href="#sec-contents" data-target="sec-contents"><span class="nav-mini-roman">○</span><span class="nav-mini-text">阅读导览</span></a></li>
+    <li><a href="#sec-preface" data-target="sec-preface"><span class="nav-mini-roman">序</span><span class="nav-mini-text">前言</span></a></li>
+    <li class="sticky-nav-divider"></li>
+    <li><a href="#sec-plate-1" data-target="sec-plate-1"><span class="nav-mini-roman">I.</span><span class="nav-mini-text">船首老者,背光</span></a></li>
+    <li><a href="#sec-plate-2" data-target="sec-plate-2"><span class="nav-mini-roman">II.</span><span class="nav-mini-text">高位俯拍,全船入画</span></a></li>
+    <li><a href="#sec-plate-3" data-target="sec-plate-3"><span class="nav-mini-roman">III.</span><span class="nav-mini-text">船头朝镜,金水环绕</span></a></li>
+    <li><a href="#sec-plate-4" data-target="sec-plate-4"><span class="nav-mini-roman">IV.</span><span class="nav-mini-text">右下定位,半侧船身</span></a></li>
+    <li><a href="#sec-plate-5" data-target="sec-plate-5"><span class="nav-mini-roman">V.</span><span class="nav-mini-text">船身正侧剪影</span></a></li>
+    <li><a href="#sec-plate-6" data-target="sec-plate-6"><span class="nav-mini-roman">VI.</span><span class="nav-mini-text">空船与白帆</span></a></li>
+    <li><a href="#sec-plate-7" data-target="sec-plate-7"><span class="nav-mini-roman">VII.</span><span class="nav-mini-text">居中正侧,纯剪影</span></a></li>
+    <li class="sticky-nav-divider"></li>
+    <li><a href="#sec-turning-point" data-target="sec-turning-point"><span class="nav-mini-roman">※</span><span class="nav-mini-text">转折 · 第二组尝试</span></a></li>
+    <li><a href="#sec-plate-8" data-target="sec-plate-8"><span class="nav-mini-roman">VIII.</span><span class="nav-mini-text">深暗调中的孤舟</span></a></li>
+    <li><a href="#sec-plate-9" data-target="sec-plate-9"><span class="nav-mini-roman">IX.</span><span class="nav-mini-text">近景中的人物</span></a></li>
+    <li><a href="#sec-plate-10" data-target="sec-plate-10"><span class="nav-mini-roman">X.</span><span class="nav-mini-text">右下定位的极简构图</span></a></li>
+    <li class="sticky-nav-divider"></li>
+    <li><a href="#sec-epilogue" data-target="sec-epilogue"><span class="nav-mini-roman">尾</span><span class="nav-mini-text">总结</span></a></li>
+    <li><a href="#sec-roadmap" data-target="sec-roadmap"><span class="nav-mini-roman">★</span><span class="nav-mini-text">整体进阶建议</span></a></li>
+    <li><a href="#sec-salon-strategy" data-target="sec-salon-strategy"><span class="nav-mini-roman">★</span><span class="nav-mini-text">摄影团内突围</span></a></li>
+  </ul>
+</nav>
+
 <!-- 封面 -->
-<section class="cover">
+<section class="cover" id="sec-cover">
   <div class="cover-overline">A Photographic Review · 影像观察 II</div>
   <h1>
     渔舟与白帆
@@ -901,7 +1156,7 @@
 </section>
 
 <!-- 阅读导览 -->
-<section class="contents">
+<section class="contents" id="sec-contents">
   <span class="section-label">Contents · 阅读导览</span>
   <h2>这本评注的结构</h2>
   <p class="contents-intro">这一份与上一组高原作品的评注不同——本质问题不在技术或构图，而在<strong>题材选择本身</strong>。因此前言占的篇幅会比较长，请耐心读完。</p>
@@ -984,7 +1239,7 @@
 </section>
 
 <!-- 序言 -->
-<section class="preface">
+<section class="preface" id="sec-preface">
   <span class="section-label">Preface · 前言</span>
   <h2>关于这组作品，必须先说一件事</h2>
 
@@ -1014,7 +1269,7 @@
 </section>
 
 <!-- PLATE I -->
-<article class="plate">
+<article class="plate" id="sec-plate-1">
   <div class="plate-number">PLATE I</div>
   <h3 class="plate-title">船首老者，背光</h3>
   <p class="plate-title-en">The Old Boatman, Backlit</p>
@@ -1046,7 +1301,7 @@
 </article>
 
 <!-- PLATE II -->
-<article class="plate">
+<article class="plate" id="sec-plate-2">
   <div class="plate-number">PLATE II</div>
   <h3 class="plate-title">高位俯拍，全船入画</h3>
   <p class="plate-title-en">Boat in Full, From Above</p>
@@ -1079,7 +1334,7 @@
 </article>
 
 <!-- PLATE III -->
-<article class="plate">
+<article class="plate" id="sec-plate-3">
   <div class="plate-number">PLATE III</div>
   <h3 class="plate-title">船头朝镜，金水环绕</h3>
   <p class="plate-title-en">Bow Toward the Camera, Bathed in Gold</p>
@@ -1111,7 +1366,7 @@
 </article>
 
 <!-- PLATE IV -->
-<article class="plate">
+<article class="plate" id="sec-plate-4">
   <div class="plate-number">PLATE IV</div>
   <h3 class="plate-title">右下定位，半侧船身</h3>
   <p class="plate-title-en">Lower Right, Three-Quarter View</p>
@@ -1144,7 +1399,7 @@
 </article>
 
 <!-- PLATE V -->
-<article class="plate">
+<article class="plate" id="sec-plate-5">
   <div class="plate-number">PLATE V</div>
   <h3 class="plate-title">船身正侧剪影</h3>
   <p class="plate-title-en">A Boat in Profile, Pure Silhouette</p>
@@ -1173,7 +1428,7 @@
 </article>
 
 <!-- PLATE VI -->
-<article class="plate">
+<article class="plate" id="sec-plate-6">
   <div class="plate-number">PLATE VI</div>
   <h3 class="plate-title">空船与白帆</h3>
   <p class="plate-title-en">An Empty Boat, with the Sail</p>
@@ -1205,7 +1460,7 @@
 </article>
 
 <!-- PLATE VII -->
-<article class="plate">
+<article class="plate" id="sec-plate-7">
   <div class="plate-number">PLATE VII</div>
   <h3 class="plate-title">居中正侧，纯剪影</h3>
   <p class="plate-title-en">Centered Profile, Pure Silhouette</p>
@@ -1237,7 +1492,7 @@
 </article>
 
 <!-- 转折点：第二组尝试 -->
-<section class="turning-point">
+<section class="turning-point" id="sec-turning-point">
   <span class="turning-point-overline">A Turning Point · 转折</span>
   <div class="turning-point-title">同一艘船，第二组尝试</div>
   <div class="turning-point-subtitle">The Same Boat, Reapproached</div>
@@ -1261,7 +1516,7 @@
 </section>
 
 <!-- PLATE VIII -->
-<article class="plate">
+<article class="plate" id="sec-plate-8">
   <div class="plate-number">PLATE VIII</div>
   <h3 class="plate-title">深暗调中的孤舟</h3>
   <p class="plate-title-en">A Boat in Deeper Shadow</p>
@@ -1294,7 +1549,7 @@
 </article>
 
 <!-- PLATE IX -->
-<article class="plate">
+<article class="plate" id="sec-plate-9">
   <div class="plate-number">PLATE IX</div>
   <h3 class="plate-title">近景中的人物</h3>
   <p class="plate-title-en">The Figure, Brought Closer</p>
@@ -1328,7 +1583,7 @@
 </article>
 
 <!-- PLATE X -->
-<article class="plate">
+<article class="plate" id="sec-plate-10">
   <div class="plate-number">PLATE X</div>
   <h3 class="plate-title">右下定位的极简构图</h3>
   <p class="plate-title-en">Pushed to the Lower Right, Restrained</p>
@@ -1368,7 +1623,7 @@
 </article>
 
 <!-- 结语 -->
-<section class="epilogue">
+<section class="epilogue" id="sec-epilogue">
   <span class="section-label">Postscript · 总结</span>
   <h2>从"模特船"中走出来的可能性</h2>
 
@@ -1393,7 +1648,7 @@
 </section>
 
 <!-- 整体进阶建议（综合两组评注） -->
-<section class="roadmap">
+<section class="roadmap" id="sec-roadmap">
   <span class="roadmap-overline">A Way Forward · 整体进阶建议</span>
   <h2 class="roadmap-title">从两组作品看——下一阶段的方向</h2>
   <p class="roadmap-subtitle">From the Plateau and the Boat: A Roadmap from Here</p>
@@ -1488,7 +1743,7 @@
   </div>
 
   <!-- 沙龙团内突围篇 -->
-  <div class="salon-strategy">
+  <div class="salon-strategy" id="sec-salon-strategy">
     <span class="salon-strategy-overline">Addendum · 实操补充</span>
     <div class="salon-strategy-title">如果还是去摄影团，怎么拍出"作者性"？</div>
     <div class="salon-strategy-subtitle">Working Within the Constraints — How to Find Your Voice Inside a Tour</div>
@@ -1619,6 +1874,134 @@
     <span style="font-size: 12px; opacity: 0.7;">Two Sets of Notes, with a Roadmap for the Years Ahead</span>
   </div>
 </section>
+
+<script>
+(function() {
+  'use strict';
+
+  const stickyNav = document.getElementById('stickyNav');
+  const mobileToggle = document.getElementById('mobileNavToggle');
+  const mobileDrawer = document.getElementById('mobileNavDrawer');
+  const cover = document.getElementById('sec-cover');
+  const contents = document.getElementById('sec-contents');
+
+  // 所有章节锚点和对应的目录链接
+  const allLinks = document.querySelectorAll('.sticky-nav-list a, .mobile-nav-drawer .sticky-nav-list a');
+  const sections = Array.from(document.querySelectorAll('[id^="sec-"]'));
+
+  // —— 1. 控制目录的显示时机：滚过封面后才显示 ——
+  function updateNavVisibility() {
+    if (!cover) return;
+    const coverRect = cover.getBoundingClientRect();
+    // 滚过封面 60% 之后才显示
+    const shouldShow = coverRect.bottom < window.innerHeight * 0.4;
+
+    if (shouldShow) {
+      stickyNav.classList.add('visible');
+      mobileToggle.classList.add('visible');
+    } else {
+      stickyNav.classList.remove('visible');
+      mobileToggle.classList.remove('visible');
+      // 如果移动端抽屉是打开的,也关闭
+      if (mobileDrawer.classList.contains('open')) {
+        closeMobileDrawer();
+      }
+    }
+  }
+
+  // —— 2. 高亮当前可见的章节 ——
+  function updateActiveSection() {
+    let currentId = null;
+    const viewportMid = window.innerHeight * 0.35;
+
+    for (const sec of sections) {
+      const rect = sec.getBoundingClientRect();
+      // 章节顶部在视口 35% 上方,且底部还在视口里
+      if (rect.top <= viewportMid && rect.bottom > 0) {
+        currentId = sec.id;
+      }
+    }
+
+    allLinks.forEach(link => {
+      const target = link.dataset.target;
+      if (target === currentId) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    // 桌面端:把高亮项滚动到可见
+    if (currentId && stickyNav.classList.contains('visible')) {
+      const activeLink = stickyNav.querySelector(`a.active`);
+      if (activeLink) {
+        const navRect = stickyNav.getBoundingClientRect();
+        const linkRect = activeLink.getBoundingClientRect();
+        if (linkRect.top < navRect.top || linkRect.bottom > navRect.bottom) {
+          activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+      }
+    }
+  }
+
+  // —— 3. 移动端抽屉切换 ——
+  function openMobileDrawer() {
+    mobileDrawer.classList.add('open');
+    mobileToggle.classList.add('open');
+    mobileToggle.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMobileDrawer() {
+    mobileDrawer.classList.remove('open');
+    mobileToggle.classList.remove('open');
+    mobileToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  mobileToggle.addEventListener('click', () => {
+    if (mobileDrawer.classList.contains('open')) {
+      closeMobileDrawer();
+    } else {
+      openMobileDrawer();
+    }
+  });
+
+  // 点击移动端抽屉里的链接后,关闭抽屉
+  mobileDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      setTimeout(closeMobileDrawer, 100);
+    });
+  });
+
+  // 点击抽屉外面关闭(可选)
+  document.addEventListener('click', (e) => {
+    if (mobileDrawer.classList.contains('open') &&
+        !mobileDrawer.contains(e.target) &&
+        e.target !== mobileToggle) {
+      closeMobileDrawer();
+    }
+  });
+
+  // —— 4. 用 throttle 监听滚动 ——
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateNavVisibility();
+        updateActiveSection();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
+  // 初始触发一次
+  updateNavVisibility();
+  updateActiveSection();
+})();
+</script>
 
 </body>
 </html>
