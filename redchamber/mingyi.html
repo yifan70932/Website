@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>富察明義《題紅樓夢》二十首 · 红楼未完</title>
+<link rel="stylesheet" href="/assets/hongloumeng.css">
+<style>
+  /* 此页采用繁体竖向典籍式呈现 */
+  .mingyi-page {
+    font-family: "Noto Serif TC", "Noto Serif CJK TC", "Noto Serif SC", "Source Han Serif TC",
+                 "Source Han Serif SC", "Songti SC", "STSong", serif;
+    color: var(--hlm-ink);
+    background: var(--hlm-paper);
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+    line-height: 1.8;
+  }
+
+  .mingyi-page .breadcrumb {
+    font-family: var(--hlm-font-cn);
+    font-size: 0.85rem;
+    color: var(--hlm-ink-faint);
+    margin-bottom: 2rem;
+    letter-spacing: 0.04em;
+  }
+  .mingyi-page .breadcrumb a {
+    color: var(--hlm-shiqing);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--hlm-shiqing);
+  }
+  .mingyi-page .breadcrumb a:hover {
+    color: var(--hlm-jiang);
+    border-bottom-color: var(--hlm-jiang);
+  }
+
+  .mingyi-page h1 {
+    font-family: inherit;
+    font-size: 1.85rem;
+    color: var(--hlm-jiang);
+    text-align: center;
+    margin: 1rem 0 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  .mingyi-page .meta {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--hlm-ink-faint);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.06em;
+  }
+
+  .mingyi-page .meta-en {
+    text-align: center;
+    font-family: var(--hlm-font-ui);
+    font-size: 0.78rem;
+    color: var(--hlm-ink-faint);
+    margin-bottom: 3rem;
+    letter-spacing: 0.1em;
+    font-style: italic;
+  }
+
+  /* 序文 */
+  .mingyi-page .preface {
+    background: var(--hlm-pale-shiqing);
+    border-left: 3px solid var(--hlm-shiqing);
+    padding: 1.5rem 1.8rem;
+    margin: 2.5rem 0 3rem;
+    font-size: 1.02rem;
+    line-height: 2.0;
+    color: var(--hlm-ink);
+    text-indent: 2em;
+  }
+
+  .mingyi-page .preface-label {
+    display: block;
+    text-indent: 0;
+    font-family: var(--hlm-font-cn);
+    font-size: 0.78rem;
+    color: var(--hlm-shiqing);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.7rem;
+    font-weight: 600;
+  }
+
+  /* 诗格栅 */
+  .mingyi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.2rem 2.5rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 720px) {
+    .mingyi-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+    .mingyi-page { padding: 2rem 1.2rem 3rem; }
+  }
+
+  .poem {
+    border-top: 1px solid var(--hlm-rule);
+    padding-top: 1rem;
+    position: relative;
+  }
+
+  .poem-num {
+    font-family: var(--hlm-font-cn);
+    font-size: 0.78rem;
+    color: var(--hlm-jiang);
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .poem-body {
+    font-size: 1.18rem;
+    line-height: 2.1;
+    color: var(--hlm-ink);
+    letter-spacing: 0.04em;
+  }
+
+  .poem-body p {
+    margin: 0;
+  }
+
+  /* 诗注：对应回目 */
+  .poem-anno {
+    margin-top: 0.9rem;
+    padding-top: 0.7rem;
+    border-top: 1px dashed var(--hlm-rule);
+    font-family: var(--hlm-font-cn);
+    font-size: 0.78rem;
+    line-height: 1.65;
+  }
+
+  .poem-anno .anno-ref {
+    display: block;
+    color: var(--hlm-jiang);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.3rem;
+  }
+
+  .poem-anno .anno-note {
+    display: block;
+    color: var(--hlm-ink-faint);
+    line-height: 1.7;
+  }
+
+  /* 末注与刻本说明 */
+  .colophon {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--hlm-rule);
+    font-family: var(--hlm-font-cn);
+    font-size: 0.88rem;
+    color: var(--hlm-ink-faint);
+    line-height: 1.85;
+  }
+
+  .colophon h2 {
+    font-family: inherit;
+    font-size: 1.1rem;
+    color: var(--hlm-shiqing);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .colophon p {
+    margin: 0.6rem 0;
+  }
+
+  .colophon em {
+    color: var(--hlm-ink);
+    font-style: italic;
+  }
+</style>
+</head>
+<body class="hlm-page">
+<div class="mingyi-page">
+
+  <div class="breadcrumb">
+    <a href="../">← 返回 红楼未完</a> &nbsp;·&nbsp; <a href="../#sec-tanyi">§ 4 探佚</a>
+  </div>
+
+  <h1>題紅樓夢二十首</h1>
+  <p class="meta">清 · 富察明義 撰<br>《綠煙瑣窗集》</p>
+  <p class="meta-en">FUCHA Mingyi · Twenty Quatrains on Dream of the Red Chamber · ca. 1761–1791</p>
+
+  <div class="preface">
+    <span class="preface-label">序</span>曹子雪芹出所撰《紅樓夢》一部，備記風月繁華之盛，蓋其先人為江寧織府。其所謂"大觀園"者，即今"隨園"故址。惜其書未傳，世鮮知者。餘見其鈔本焉。
+  </div>
+
+  <div class="mingyi-grid">
+
+    <div class="poem">
+      <span class="poem-num">其 一</span>
+      <div class="poem-body">
+        <p>佳園結搆類天成，</p>
+        <p>快綠怡紅別樣名。</p>
+        <p>長檻曲欄隨處有，</p>
+        <p>春風秋月縂關情。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">总写大观园 · 前 17、18 回前后</span><span class="anno-note">总写大观园全景：'快绿怡红'指怡红院（宝玉居所），'长槛曲栏'指园中楼台。对应第 17、18 回试才题对额、元春省亲后大观园诸景的呈现</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其 二</span>
+      <div class="poem-body">
+        <p>怡紅院裏鬪嬌娥，</p>
+        <p>娣娣姨姨笑語和。</p>
+        <p>天氣不寒還不暖，</p>
+        <p>曈曨日影入簾多。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">怡红院日常 · 前 80 回</span><span class="anno-note">写怡红院众女嬉笑日常。'娣娣姨姨'指园中众姊妹。无具体一回对应</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其 三</span>
+      <div class="poem-body">
+        <p>瀟湘別院晚沉沉，</p>
+        <p>聞道多情復病心。</p>
+        <p>悄向花陰尋侍女，</p>
+        <p>問他曾否淚沾襟。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">黛玉病中 · 约第 26、27 回前后</span><span class="anno-note">写潇湘馆黛玉因情而病。'闻道多情复病心'与第 26 回'潇湘馆春困发幽情'前后情节相承</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其 四</span>
+      <div class="poem-body">
+        <p>追隨小蝶過牆來，</p>
+        <p>忽見叢花無數開。</p>
+        <p>盡力一頭還兩把，</p>
+        <p>扇紈遺却在蒼苔。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">宝钗扑蝶 · 第 27 回</span><span class="anno-note">对应第 27 回'滴翠亭杨妃戏彩蝶'——宝钗追蝶过墙、扇纨遗在苍苔的场景</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其 五</span>
+      <div class="poem-body">
+        <p>侍兒枉自費疑猜，</p>
+        <p>淚未全收笑又開。</p>
+        <p>三尺玉羅為手帕，</p>
+        <p>無端擲去復拋來。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">宝玉送旧帕 · 第 34 回</span><span class="anno-note">对应第 34 回宝玉挨打后遣晴雯送黛玉两条旧手帕，黛玉'淚未全收笑又開'的心理</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其 六</span>
+      <div class="poem-body">
+        <p>晚奩薄醉帽顏欹，</p>
+        <p>錯認猧兒嗔玉狸。</p>
+        <p>忽向內房聞語笑，</p>
+        <p>強來燈下一回嬉。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">宝玉醉归怡红 · 约第 19 回</span><span class="anno-note">写宝玉晚归薄醉、误唤猫名的场景。或对应第 19 回'情切切良宵花解语'前后</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其 七</span>
+      <div class="poem-body">
+        <p>紅樓春夢好糢糊，</p>
+        <p>不記金釵正幅圖。</p>
+        <p>往事風流真一瞬，</p>
+        <p>題詩贏得静工夫。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">宝玉游太虚幻境 · 第 5 回</span><span class="anno-note">明确对应第 5 回'游幻境指迷十二钗'。'不记金钗正幅图'即指宝玉醒后忘却所见判词</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其 八</span>
+      <div class="poem-body">
+        <p>簾櫳悄悄控金鈎，</p>
+        <p>不識多人何處遊。</p>
+        <p>留得小紅獨坐在，</p>
+        <p>笑教開鏡與梳頭。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">小红独坐梳头 · 第 24–26 回</span><span class="anno-note">对应第 24 回'痴女儿遗帕惹相思'前后小红的情节</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其 九</span>
+      <div class="poem-body">
+        <p>紅羅繡纈束纖腰，</p>
+        <p>一夜春眠魂夢嬌。</p>
+        <p>曉起自驚還自笑，</p>
+        <p>被他偷換綠雲綃。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">绿云绡偷换 · 约第 21 回</span><span class="anno-note">情节归属至今有争议。或对应第 21 回袭人与宝玉晨起、或某次衣物互换情节</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其 十</span>
+      <div class="poem-body">
+        <p>入戶愁驚座上人，</p>
+        <p>悄來階下慢逡廵。</p>
+        <p>分明窓紙兩璫影，</p>
+        <p>笑語紛絮聽不真。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">宝黛某次误会 · 约第 26 回前后</span><span class="anno-note">情节归属不明。'两璫影'指窗外二人形影；可能对应第 26 回宝黛某次隔窗误会</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其十一</span>
+      <div class="poem-body">
+        <p>可奈金殘玉正愁，</p>
+        <p>淚痕無盡笑何由。</p>
+        <p>忽然妙想傳竒語，</p>
+        <p>博得多情一轉眸。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">宝黛日常斗嘴 · 前 80 回</span><span class="anno-note">宝黛日常争执转笑的场景；无明确单一回对应</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其十二</span>
+      <div class="poem-body">
+        <p>小葉荷羹玉手將，</p>
+        <p>詒他無味要他嘗。</p>
+        <p>碗邊誤落脣紅印,</p>
+        <p>便覺新添異樣香。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">唇红印 · 约第 35 回</span><span class="anno-note">或对应第 35 回宝玉养伤期间，黛玉等众女前来探望、用小荷羹餵食的情节</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其十三</span>
+      <div class="poem-body">
+        <p>㧞取金釵當酒籌，</p>
+        <p>大家今夜極綢繆。</p>
+        <p>醉倚公子懷中睡，</p>
+        <p>明日相看笑不休。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">湘云醉卧 · 第 62 回</span><span class="anno-note">对应第 62 回'憨湘云醉眠芍药茵'——拔金钗当酒筹、醉倚公子怀中睡的著名场景</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其十四</span>
+      <div class="poem-body">
+        <p>病容愈覺勝桃花，</p>
+        <p>午汗潮回熱轉加。</p>
+        <p>猶恐意中人看出，</p>
+        <p>慰言今日較差些。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">黛玉病中 · 约第 32 回前后</span><span class="anno-note">或对应第 32 回'诉肺腑心迷活宝玉'后黛玉病情加重；'慰言今日较差些'是黛玉怕宝玉担心的隐忍</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其十五</span>
+      <div class="poem-body">
+        <p>威儀棣棣若山河，</p>
+        <p>還把風流奪綺羅。</p>
+        <p>不似小家拘束態，</p>
+        <p>笑時偏少默時多。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">写宝钗 · 前 80 回 通写</span><span class="anno-note">写宝钗整体气度。'威仪棣棣'用《诗经·邶风·柏舟》典；'笑时偏少默时多'是宝钗'任是无情也动人'的精确画像</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其十六</span>
+      <div class="poem-body">
+        <p>生小金閨性自嬌，</p>
+        <p>可堪磨折幾多宵。</p>
+        <p>芙蓉吹㫁秋風狠，</p>
+        <p>新誄空成何處招。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">晴雯死、芙蓉诔 · 第 77、78 回</span><span class="anno-note">对应第 77 回晴雯死、第 78 回宝玉作《芙蓉女儿诔》。'芙蓉吹断秋风狠'即诔中意</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其十七</span>
+      <div class="poem-body">
+        <p>錦衣公子茁蘭芽，</p>
+        <p>紅粉佳人未破瓜。</p>
+        <p>少小不妨同室榻，</p>
+        <p>夢魂多箇帳兒紗。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">宝黛幼年同居 · 第 3、5 回前后</span><span class="anno-note">对应宝黛初见、幼年同住贾母处、或第 5 回宝玉于秦可卿房中午睡入梦的情节。'少小不妨同室榻'是清代贵族幼童同处的实景</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其十八</span>
+      <div class="poem-body">
+        <p>傷心一首葬花詞，</p>
+        <p>似讖成真自不知。</p>
+        <p>安得返魂香一縷，</p>
+        <p>起卿沉痼續紅絲？</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">葬花词成谶（黛玉死后） · 八十回后 · 迷失</span><span class="anno-note">前八十回中宝玉只闻黛玉葬花词而未见黛玉之死。此首明示葬花词'似谶成真'——表明明义所见钞本中已有黛玉之死的情节，是探佚学之关键证据</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其十九</span>
+      <div class="poem-body">
+        <p>莫問金姻與玉緣，</p>
+        <p>聚如春夢散如煙。</p>
+        <p>石歸山下無靈氣，</p>
+        <p>縂使能言亦枉然。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">金玉良缘破灭、宝玉返山 · 八十回后 · 迷失</span><span class="anno-note">金姻、玉缘聚散，'石归山下无灵气'指通灵宝玉最终回归青埂峰、无人可言。表明明义所见本中已有宝玉出家、返回大荒山的结局</span></div>
+    </div>
+
+    <div class="poem">
+      <span class="poem-num">其二十</span>
+      <div class="poem-body">
+        <p>饌玉炊金未幾春，</p>
+        <p>王孫瘦損骨嶙峋。</p>
+        <p>青蛾紅粉歸何處，</p>
+        <p>慚愧當年石季倫。</p>
+      </div>
+    
+      <div class="poem-anno"><span class="anno-ref">贾府败亡、王孙瘦损 · 八十回后 · 迷失</span><span class="anno-note">石季伦即西晋富豪石崇，《金谷园》典故。'青蛾红粉归何处'指贾府众女星散，'王孙瘦损骨嶙峋'即落魄的宝玉。表明明义所见本中已有贾府彻底败亡的结局</span></div>
+    </div>
+
+  </div>
+
+  <div class="colophon">
+    <h2>關於這二十首詩</h2>
+    <p>富察明義（約 1739？–1800 後），滿洲鑲黃旗，傅恆姪、福康安堂兄弟，宗室詩人。其《綠煙瑣窗集》中收<em>《題紅樓夢》二十首</em>，是現存除脂批之外最早明確指認曹雪芹為作者、並明示《紅樓夢》鈔本於乾隆中期已在小圈子內流傳的外部文獻之一。</p>
+    <p>序文中"大觀園即今隨園故址"一語，將虛構的大觀園與當時袁枚所居的隨園（南京小倉山）聯繫起來，是大觀園地理原型討論的最早來源。此說後來引發袁枚本人的回應與後世紅學界的辯論——袁枚在《隨園詩話》中亦提及曹雪芹為其友，但隨園是否真為大觀園原型，至今仍是懸案。</p>
+    <p>二十首詩中，前十七首基本可與通行本前八十回情節對應（如其三寫黛玉、其四寫黛玉葬花前撲蝶、其十六《芙蓉誄》寫晴雯、其十七寫宝黛同榻幼年情誼）；但第十八首"安得返魂香一縷，起卿沉痼續紅絲"、第十九首"莫問金姻與玉緣，聚如春夢散如煙"、第二十首"青蛾紅粉歸何處，慚愧當年石季倫"——這三首所述情節在通行本前八十回中無從對應，被探佚學者視為<em>八十回後情節的旁證</em>：明義所見之鈔本可能含有八十回後的部分內容，或至少明義知道全書的結局走向。</p>
+    <p>關於明義生卒年代，學界仍有爭議。一般認為《綠煙瑣窗集》成書於乾隆中後期（1761 年明義獲讀紅樓鈔本至 1791 年程甲本問世之間），具體成書時間眾說紛紜。本頁所錄為《綠煙瑣窗集》通行本所載之版本。</p>
+  </div>
+
+</div>
+
+<script>
+  // 此页为静态页面，无需脚本
+</script>
+
+</body>
+</html>

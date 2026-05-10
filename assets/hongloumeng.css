@@ -1,220 +1,943 @@
-/* ============================================================
-   yifanova.com — Hongloumeng wiki page-specific styles
-   ------------------------------------------------------------
-   Loads after tokens.css and base.css. Inherits the standard
-   palette (navy / sapphire / forest) and the article grid.
-   Adds:
-     · poem block (.poem) for 判词、灯谜、葬花吟 etc.
-     · panci table (.panci-table) — three columns, the poem in
-       a serif column rendered slightly larger than body.
-     · genealogy figure styles (.genealogy)
-     · timeline figure tweaks (.versions-timeline)
-   ============================================================ */
+/* ====================================================================
+   yifanova.com/hongloumeng — self-contained stylesheet
+   Independent of base.css and tokens.css.
+   All selectors scoped under .hlm-page.
+   Single language: 中文 only (no EN/ZH toggle).
+   Sticky TOC on the left at ≥1100px; collapses inline below.
 
-/* ─── Poem block ────────────────────────────────────────────
-   Poems appear inline frequently; we want them centred,
-   slightly serif-darker, with vertical breathing room.
-   ─────────────────────────────────────────────────────────── */
-.poem {
-  margin: 1.25rem auto;
-  padding: 0.75rem 1.5rem;
-  text-align: center;
-  font-family: var(--font-cjk), var(--font-body);
-  font-size: 1.02rem;
-  line-height: 1.95;
-  color: var(--ink);
-  letter-spacing: 0.04em;
-  background: var(--rule-soft);
-  border-left: 2px solid var(--navy);
-  border-radius: 0 3px 3px 0;
-  max-width: var(--measure);
+   Palette: 绛 (jiang, crimson — 绛珠仙草, 绛云轩) +
+            石青 (shiqing, mineral blue — 青埂峰, 石头记) +
+            米黄 (paper-cream — 旧钞本纸色).
+   ==================================================================== */
+
+:root {
+  /* ─── Ink ────────────────────────────────────────────────────────── */
+  --hlm-ink:        #1a1612;     /* near-black with faint warm cast — 墨色 */
+  --hlm-ink-soft:   #4a423a;
+  --hlm-ink-faint:  #786e62;
+  --hlm-ink-faded:  #a89e8e;
+  --hlm-rule:       #e6dfd2;
+  --hlm-rule-soft:  #f3eee2;
+
+  /* ─── Surfaces ───────────────────────────────────────────────────── */
+  --hlm-paper:      #faf6ec;     /* primary page color — 旧抄本纸 */
+  --hlm-paper-deep: #f3eddc;     /* sidebar / panel — 略深的米色 */
+  --hlm-paper-warm: #f7efd9;     /* callout / def box — 偏暖的米色 */
+
+  /* ─── Accents ────────────────────────────────────────────────────── */
+  --hlm-jiang:      #8b1a1a;     /* 绛 — primary accent, deep crimson */
+  --hlm-jiang-soft: #b04a3c;     /* lighter crimson for hover/secondary */
+  --hlm-pale-jiang: #f5e3dc;     /* pale wash of jiang for blockquote */
+
+  --hlm-shiqing:    #2a5a6f;     /* 石青 — secondary accent, mineral blue-green */
+  --hlm-shiqing-soft:#4a7a8c;
+  --hlm-pale-shiqing:#dbe8ec;
+
+  --hlm-ink-stamp:  #a8341a;     /* 朱印 — vermilion for seal-like marks */
+
+  /* ─── Type families ──────────────────────────────────────────────── */
+  --hlm-font-cn:    "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", serif;
+  --hlm-font-cn-sans:"Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --hlm-font-ui:    "Inter", system-ui, -apple-system, sans-serif;
+  --hlm-font-mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
-.poem .line {
-  display: block;
-}
+.hlm-page, .hlm-page * { box-sizing: border-box; }
 
-.poem .stanza-break {
-  display: block;
-  height: 0.4rem;
-}
-
-.poem .source {
-  display: block;
-  margin-top: 0.5rem;
-  font-family: var(--font-ui), var(--font-cjk);
-  font-size: var(--fs-meta);
-  color: var(--ink-faint);
-  letter-spacing: 0.04em;
-}
-
-/* When a poem sits inside a figure, drop the background so
-   the figure's caption logic takes over. */
-figure > .poem {
-  background: transparent;
-  border-left: none;
-  padding: 0;
-  margin: 0.5rem auto 0.85rem;
-}
-
-/* ─── Panci (judgment) table ────────────────────────────────
-   Three columns: 人物 · 判词 · 释读. The middle column is the
-   poem itself, set slightly larger; the other two are UI-font.
-   ─────────────────────────────────────────────────────────── */
-.panci-table {
-  font-family: var(--font-cjk), var(--font-body);
-  font-size: 0.95rem;
-}
-
-.panci-table th {
-  font-family: var(--font-ui), var(--font-cjk);
-  font-size: var(--fs-small);
-  letter-spacing: 0.04em;
-  color: var(--ink-soft);
-}
-
-.panci-table td.who {
-  white-space: nowrap;
-  font-weight: 600;
-  color: var(--navy);
-  vertical-align: top;
-}
-
-.panci-table td.poem-cell {
-  font-family: var(--font-cjk), var(--font-body);
-  letter-spacing: 0.05em;
+body.hlm-page {
+  margin: 0;
+  background: var(--hlm-paper);
+  color: var(--hlm-ink);
+  font-family: var(--hlm-font-cn);
+  font-size: 17px;
   line-height: 1.85;
-  color: var(--ink);
+  font-feature-settings: "kern", "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Topbar ─────────────────────────────────────────────────────── */
+.hlm-page .topbar {
+  border-bottom: 1px solid var(--hlm-rule);
+  background: rgba(250, 246, 236, 0.92);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hlm-page .topbar-inner {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.hlm-page .brand {
+  font-family: var(--hlm-font-ui);
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  color: var(--hlm-ink-soft);
+}
+
+.hlm-page .brand-mark { color: var(--hlm-jiang); font-weight: 600; }
+.hlm-page .brand a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted var(--hlm-rule);
+}
+.hlm-page .brand a:hover { color: var(--hlm-jiang); border-bottom-color: var(--hlm-jiang); }
+
+.hlm-page .topbar .crumbs {
+  font-family: var(--hlm-font-cn);
+  font-size: 0.85rem;
+  color: var(--hlm-ink-faint);
+}
+
+/* ─── Two-column layout: TOC sidebar + main ──────────────────────── */
+.hlm-page .layout {
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+@media (min-width: 1100px) {
+  .hlm-page .layout {
+    display: grid;
+    grid-template-columns: 14rem 1fr;
+    gap: 3rem;
+    padding: 0 2rem 6rem;
+  }
+}
+
+.hlm-page .main {
+  max-width: 64rem;
+  padding-top: 3rem;
+  position: relative;
+}
+
+/* ─── Sticky TOC sidebar ─────────────────────────────────────────── */
+.hlm-page nav.toc {
+  font-family: var(--hlm-font-cn);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--hlm-ink-faint);
+  padding: 3rem 0 2rem;
+}
+
+@media (min-width: 1100px) {
+  .hlm-page nav.toc {
+    position: sticky;
+    top: 4rem;
+    align-self: start;
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+}
+
+.hlm-page nav.toc .toc-label {
+  font-family: var(--hlm-font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hlm-ink-faded);
+  margin-bottom: 0.85rem;
+  font-weight: 600;
+}
+
+.hlm-page nav.toc ol {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.hlm-page nav.toc li {
+  padding: 0.3rem 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.hlm-page nav.toc .toc-num {
+  font-family: var(--hlm-font-mono);
+  color: var(--hlm-ink-faded);
+  font-size: 0.72rem;
+  flex-shrink: 0;
+  min-width: 1.6rem;
+  font-weight: 500;
+}
+
+.hlm-page nav.toc a {
+  text-decoration: none;
+  color: var(--hlm-ink-soft);
+  flex-grow: 1;
+  border-bottom: 1px dotted transparent;
+  transition: color 0.12s, border-color 0.12s;
+}
+
+.hlm-page nav.toc a:hover,
+.hlm-page nav.toc a.active {
+  color: var(--hlm-jiang);
+  border-bottom-color: var(--hlm-jiang);
+}
+
+@media (max-width: 1099px) {
+  .hlm-page nav.toc {
+    background: var(--hlm-paper-deep);
+    border: 1px solid var(--hlm-rule);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0 2.5rem;
+  }
+}
+
+/* ─── Hero / article header ──────────────────────────────────────── */
+.hlm-page .hero {
+  padding: 2rem 0 2.5rem 0;
+  border-bottom: 1px solid var(--hlm-rule);
+  margin-bottom: 2.5rem;
+}
+
+.hlm-page .hero h1 {
+  font-family: var(--hlm-font-cn);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  color: var(--hlm-ink);
+}
+
+.hlm-page .hero .subtitle {
+  font-size: 1.1rem;
+  color: var(--hlm-ink-soft);
+  max-width: 48rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+}
+
+.hlm-page .hero .meta {
+  font-family: var(--hlm-font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hlm-ink-faint);
+}
+
+/* ─── Epigraphs (under hero) ─────────────────────────────────────── */
+.hlm-page .epigraphs {
+  margin: 2rem 0 0;
+  padding: 1.5rem 0 0;
+  max-width: 48rem;
+  border-top: 1px solid var(--hlm-rule);
+}
+
+.hlm-page .epigraph {
+  margin: 0 0 1.4rem 0;
+  padding: 0 0 0 1.25rem;
+  border-left: 2px solid var(--hlm-jiang);
+  background: transparent;
+  font-size: 0.98rem;
+  color: var(--hlm-ink-soft);
+  line-height: 1.7;
+}
+
+.hlm-page .epigraph .text {
+  display: block;
+  font-style: normal;
+  color: var(--hlm-ink);
+}
+
+.hlm-page .epigraph .attribution {
+  display: block;
+  font-family: var(--hlm-font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--hlm-ink-faint);
+  margin-top: 0.3rem;
+}
+
+/* ─── Headings ───────────────────────────────────────────────────── */
+.hlm-page h1, .hlm-page h2, .hlm-page h3 {
+  font-family: var(--hlm-font-cn);
+  color: var(--hlm-ink);
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.hlm-page h2 {
+  font-size: 1.65rem;
+  color: var(--hlm-jiang);
+  margin: 0 0 0.85rem 0;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--hlm-rule);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.hlm-page h3 {
+  font-size: 1.1rem;
+  margin: 2rem 0 0.55rem 0;
+  color: var(--hlm-ink);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ─── Section numbering ──────────────────────────────────────────── */
+.hlm-page section {
+  margin-bottom: 4.5rem;
+  scroll-margin-top: 4rem;
+}
+
+.hlm-page section .section-num {
+  font-family: var(--hlm-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--hlm-jiang);
+  display: block;
+  margin-top: 3rem;
+  margin-bottom: 0.45rem;
+  font-weight: 600;
+}
+
+.hlm-page section .section-num + h2 { margin-top: 0; }
+
+/* ─── Body text ──────────────────────────────────────────────────── */
+.hlm-page p {
+  margin: 0 0 1.1rem 0;
+  max-width: 48rem;
+  text-align: justify;
+}
+
+.hlm-page p.lede {
+  font-size: 1.04rem;
+  color: var(--hlm-ink-soft);
+  margin-bottom: 1.4rem;
+}
+
+.hlm-page a {
+  color: var(--hlm-shiqing);
+  text-decoration: underline;
+  text-decoration-color: var(--hlm-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s;
+}
+.hlm-page a:hover {
+  text-decoration-color: var(--hlm-shiqing);
+  color: var(--hlm-jiang);
+}
+
+.hlm-page strong { color: var(--hlm-ink); font-weight: 700; }
+.hlm-page em { color: var(--hlm-jiang-soft); font-style: normal; font-weight: 500; }
+
+/* Inline footnote-style superscript reference */
+.hlm-page sup.ref { font-size: 0.7em; line-height: 0; vertical-align: super; }
+.hlm-page sup.ref a { color: var(--hlm-shiqing); text-decoration: none; }
+.hlm-page sup.ref a:hover { text-decoration: underline; }
+
+/* ─── Term / 专名 highlight ─────────────────────────────────────── */
+.hlm-page .term {
+  color: var(--hlm-shiqing);
+  font-weight: 600;
+}
+
+/* ─── Sidenotes (margin notes) ───────────────────────────────────── */
+.hlm-page .sidenote {
+  display: block;
+  font-family: var(--hlm-font-cn);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--hlm-ink-soft);
+  margin: 0.75rem 0 1.1rem;
+  padding: 0.5rem 0 0.5rem 0.9rem;
+  border-left: 2px solid var(--hlm-shiqing);
+  max-width: 32rem;
+}
+
+@media (min-width: 1280px) {
+  .hlm-page .sidenote {
+    float: right;
+    clear: right;
+    width: 14rem;
+    max-width: 14rem;
+    margin: 0.25rem 0 1rem 1.25rem;
+    padding: 0.25rem 0 0.25rem 0.85rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* ─── Blockquote ─────────────────────────────────────────────────── */
+.hlm-page blockquote {
+  margin: 1.4rem 0;
+  padding: 0.85rem 1.3rem;
+  border-left: 3px solid var(--hlm-jiang);
+  background: var(--hlm-pale-jiang);
+  color: var(--hlm-ink);
+  max-width: 48rem;
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+.hlm-page blockquote p:last-child { margin-bottom: 0; }
+
+/* ─── 脂批 special block ──────────────────────────────────────────
+   Mimics the visual texture of a marginal commentary in a Qing抄本.
+   Pale paper, hand-stamped vermilion label, smaller type. */
+.hlm-page .zhipi {
+  margin: 1.4rem 0;
+  padding: 1rem 1.25rem 1rem 1.4rem;
+  background: var(--hlm-paper-warm);
+  border-left: 3px double var(--hlm-jiang);
+  color: var(--hlm-ink-soft);
+  max-width: 48rem;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  position: relative;
+}
+
+.hlm-page .zhipi .label {
+  display: inline-block;
+  font-family: var(--hlm-font-cn);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--hlm-paper);
+  background: var(--hlm-ink-stamp);
+  padding: 0.1rem 0.5rem;
+  margin-right: 0.55rem;
+  vertical-align: 0.15em;
+  font-weight: 600;
+  border-radius: 1px;
+}
+
+.hlm-page .zhipi .source {
+  display: block;
+  font-family: var(--hlm-font-ui);
+  font-size: 0.76rem;
+  color: var(--hlm-ink-faint);
+  margin-top: 0.4rem;
+  letter-spacing: 0.03em;
+}
+
+/* ─── Tables ─────────────────────────────────────────────────────── */
+.hlm-page table {
+  width: 100%;
+  max-width: 48rem;
+  border-collapse: collapse;
+  font-family: var(--hlm-font-cn);
+  font-size: 0.92rem;
+  margin: 1.5rem 0;
+}
+
+.hlm-page table th, .hlm-page table td {
+  text-align: left;
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--hlm-rule);
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+.hlm-page table th {
+  font-weight: 600;
+  border-bottom: 2px solid var(--hlm-ink);
+  background: var(--hlm-rule-soft);
+  color: var(--hlm-ink);
+}
+
+.hlm-page table tbody tr:nth-child(even) { background: var(--hlm-rule-soft); }
+.hlm-page table tbody tr:hover { background: var(--hlm-pale-shiqing); }
+
+/* §2 谶语表格：放宽宽度，允许形态列保持单行不换 */
+.hlm-page #sec-panci table {
+  max-width: 56rem;
+  font-size: 0.9rem;
+  table-layout: auto;
+}
+.hlm-page #sec-panci table th:nth-child(1),
+.hlm-page #sec-panci table td:nth-child(1) {
+  white-space: nowrap;
+  width: 3.5rem;
+}
+.hlm-page #sec-panci table th:nth-child(2),
+.hlm-page #sec-panci table td:nth-child(2) {
+  white-space: nowrap;
+  width: auto;
+  min-width: 8rem;
+  color: var(--hlm-shiqing);
+  font-weight: 600;
+}
+
+/* §4 探佚表格 */
+.hlm-page #sec-tanyi table {
+  max-width: 56rem;
+  font-size: 0.9rem;
+  table-layout: auto;
+}
+.hlm-page #sec-tanyi table td:nth-child(1) {
+  color: var(--hlm-shiqing);
+  font-weight: 600;
+}
+
+/* 跨页链接（如指向子页面） */
+.hlm-page .external-link {
+  font-family: var(--hlm-font-cn);
+  color: var(--hlm-jiang);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--hlm-jiang);
+  padding-bottom: 1px;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 0.3em;
+}
+.hlm-page .external-link:hover {
+  background: var(--hlm-pale-jiang, rgba(139, 26, 26, 0.08));
+  border-bottom-style: solid;
+}
+
+/* §3 网络索隐派表格 */
+.hlm-page #sec-internet table {
+  max-width: 56rem;
+  font-size: 0.9rem;
+  table-layout: auto;
+}
+.hlm-page #sec-internet table td:nth-child(1) {
+  white-space: nowrap;
+  color: var(--hlm-shiqing);
+  font-weight: 600;
+}
+
+/* §3 子节内的 h4 (四级标题) */
+.hlm-page #sec-internet h4 {
+  font-family: var(--hlm-font-cn);
+  font-size: 1.05rem;
+  color: var(--hlm-jiang);
+  margin: 1.6rem 0 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* §2 谶语表格筛选控件 */
+.hlm-page .panci-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 1rem 0 0.6rem;
+  font-family: var(--hlm-font-cn);
+  font-size: 0.92rem;
+  flex-wrap: wrap;
+}
+
+.hlm-page .panci-filter label {
+  font-family: var(--hlm-font-cn);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--hlm-ink-faint);
+  font-weight: 600;
+}
+
+.hlm-page .panci-filter select {
+  font-family: var(--hlm-font-cn);
+  font-size: 0.92rem;
+  padding: 0.35rem 0.7rem;
+  background: var(--hlm-paper);
+  color: var(--hlm-ink);
+  border: 1px solid var(--hlm-rule);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.hlm-page .panci-filter select:hover,
+.hlm-page .panci-filter select:focus {
+  border-color: var(--hlm-jiang);
+  outline: none;
+}
+
+.hlm-page .panci-filter-count {
+  font-family: var(--hlm-font-ui);
+  font-size: 0.78rem;
+  color: var(--hlm-ink-faint);
+  font-style: italic;
+}
+
+/* 曲文样式（在 panci-detail 内） */
+.hlm-page .panci-detail .panci-qu {
+  font-family: var(--hlm-font-cn);
+  font-size: 0.95rem;
+  color: var(--hlm-ink);
+  background: var(--hlm-pale-shiqing);
+  padding: 0.85rem 1.1rem;
+  border-left: 3px solid var(--hlm-shiqing);
+  margin: 0 0 1rem 0;
+  line-height: 1.85;
   white-space: pre-line;
 }
 
-.panci-table td.gloss {
-  font-family: var(--font-cjk), var(--font-body);
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-  line-height: 1.65;
-}
-
-/* ─── Versions timeline figure ──────────────────────────────
-   SVG node + rule styling for §3 timeline. Most of this is set
-   inline on the SVG, but a few base styles live here.
-   ─────────────────────────────────────────────────────────── */
-.versions-timeline {
-  margin: 2.5rem 0;
-}
-
-.versions-timeline svg {
-  max-width: 100%;
-  height: auto;
-}
-
-/* ─── Genealogy figure ──────────────────────────────────────
-   Used in §11 for the four families' lineage tree.
-   ─────────────────────────────────────────────────────────── */
-.genealogy {
-  margin: 2.5rem 0;
-}
-
-.genealogy svg {
-  max-width: 100%;
-  height: auto;
-}
-
-.genealogy .gen-label {
-  font-family: var(--font-cjk), var(--font-body);
-  font-size: 11.5px;
-  fill: var(--ink);
-}
-
-.genealogy .gen-soft {
-  font-family: var(--font-ui), var(--font-cjk);
-  font-size: 9px;
-  fill: var(--ink-faint);
-}
-
-.genealogy .gen-line {
-  stroke: var(--ink-soft);
-  stroke-width: 0.8;
-  fill: none;
-}
-
-.genealogy .gen-marriage {
-  stroke: var(--forest);
-  stroke-width: 0.8;
-  stroke-dasharray: 3 2;
-  fill: none;
-}
-
-/* ─── Sources block (per-section bibliography) ──────────────
-   A pale-tinted block at the end of dense sections, listing
-   the principal references just for that section.
-   ─────────────────────────────────────────────────────────── */
-.sources {
-  font-family: var(--font-ui), var(--font-cjk);
-  font-size: var(--fs-small);
-  color: var(--ink-soft);
-  background: var(--rule-soft);
-  border-left: 2px solid var(--forest);
-  padding: 1rem 1.25rem;
-  margin: 1.75rem 0 0;
-  line-height: 1.7;
-  max-width: var(--measure);
-  border-radius: 0 3px 3px 0;
-}
-
-html[lang^="zh"] .sources {
-  font-family: var(--font-cjk), var(--font-ui);
-}
-
-.sources .sources-label {
-  display: block;
-  font-family: var(--font-ui);
-  font-size: var(--fs-meta);
+.hlm-page .panci-detail .panci-qu-title {
+  font-family: var(--hlm-font-cn);
+  font-size: 0.85rem;
   font-weight: 600;
+  color: var(--hlm-shiqing);
+  display: block;
+  margin-bottom: 0.35rem;
   letter-spacing: 0.04em;
-  color: var(--forest);
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
 }
 
-html[lang^="zh"] .sources .sources-label {
-  font-family: var(--font-cjk), var(--font-ui);
-  text-transform: none;
+/* 判词与曲文的醒目分类标签 */
+.hlm-page .panci-detail .panci-section-label {
+  display: inline-block;
+  font-family: var(--hlm-font-cn);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  color: var(--hlm-paper);
+  background: var(--hlm-jiang);
+  padding: 0.18rem 0.55rem;
+  margin-bottom: 0.55rem;
+  margin-right: 0;
+  font-weight: 600;
+  border-radius: 1px;
+  vertical-align: 0.05em;
+}
+
+.hlm-page .panci-detail .panci-section-label-qu {
+  background: var(--hlm-shiqing);
+}
+
+.hlm-page .panci-detail .panci-text .panci-section-label,
+.hlm-page .panci-detail .panci-qu .panci-section-label {
+  display: block;
+  width: fit-content;
+}
+
+/* 图谶 inline 小标签 */
+.hlm-page .panci-detail .panci-label-inline {
+  display: inline-block;
+  font-family: var(--hlm-font-cn);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--hlm-ink-faint);
+  font-weight: 600;
+  margin-right: 0.55rem;
+  padding: 0.1rem 0.4rem;
+  background: var(--hlm-rule-soft);
+  border-radius: 1px;
+}
+
+.hlm-page table .num {
+  font-family: var(--hlm-font-mono);
+  font-size: 0.86rem;
+  color: var(--hlm-ink-soft);
+}
+
+/* Group rows in version table */
+.hlm-page table tr.group-row td {
+  background: var(--hlm-paper-deep);
+  font-family: var(--hlm-font-cn);
+  font-weight: 600;
+  color: var(--hlm-jiang);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  padding-top: 0.7rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--hlm-rule);
+}
+
+/* ─── Lists ──────────────────────────────────────────────────────── */
+.hlm-page ul, .hlm-page ol {
+  max-width: 48rem;
+  padding-left: 1.5rem;
+}
+.hlm-page ul li, .hlm-page ol li { margin-bottom: 0.45rem; line-height: 1.75; }
+
+/* ─── Definition / callout box ───────────────────────────────────── */
+.hlm-page .def {
+  background: var(--hlm-pale-shiqing);
+  border-left: 3px solid var(--hlm-shiqing);
+  padding: 0.9rem 1.15rem;
+  margin: 1.4rem 0;
+  max-width: 48rem;
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+.hlm-page .def .label {
+  font-family: var(--hlm-font-cn);
+  font-size: 0.78rem;
   letter-spacing: 0.06em;
+  color: var(--hlm-shiqing);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  display: block;
 }
 
-.sources p {
-  margin: 0 0 0.5rem;
+/* ─── Sources block (per-section bibliography) ───────────────────── */
+.hlm-page .sources {
+  margin: 2rem 0 0;
+  padding: 1.2rem 1.4rem;
+  background: var(--hlm-paper-deep);
+  border-left: 2px solid var(--hlm-ink-faded);
+  max-width: 48rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--hlm-ink-soft);
+}
+.hlm-page .sources .sources-label {
+  display: block;
+  font-family: var(--hlm-font-cn);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--hlm-ink-faint);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.hlm-page .sources p {
+  margin: 0 0 0.55rem 0;
+  font-size: 0.88rem;
 }
 
-.sources p:last-child { margin-bottom: 0; }
-
-/* ─── Lede paragraph ────────────────────────────────────────
-   The opening paragraph of each major section.
-   ─────────────────────────────────────────────────────────── */
-.lede {
-  font-size: 1.04rem;
-  border-left: 2px solid var(--rule);
-  padding-left: 1rem;
-  color: var(--ink-soft);
-  margin: 0 0 1.5rem;
-  max-width: var(--measure);
+/* ─── Footer ─────────────────────────────────────────────────────── */
+.hlm-page .page-footer {
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--hlm-rule);
+  font-family: var(--hlm-font-cn);
+  font-size: 0.85rem;
+  color: var(--hlm-ink-faint);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: 48rem;
 }
 
-html[lang^="zh"] .lede {
+.hlm-page .page-footer a {
+  color: var(--hlm-ink-faint);
+  text-decoration: none;
+  margin-left: 1rem;
+}
+.hlm-page .page-footer a:hover { color: var(--hlm-jiang); }
+
+/* ============================================================
+   ── Section-specific widgets ──
+   1. Version genealogy diagram (§1)
+   2. 判词 / 人物 / 命运 interactive table (§3)
+   3. 四大家族 relationship network (§5)
+   ============================================================ */
+
+/* ─── §1 Version genealogy ───────────────────────────────────────── */
+.hlm-page .version-tree {
+  margin: 1.8rem 0 2.2rem;
+  background: var(--hlm-paper-deep);
+  border: 1px solid var(--hlm-rule);
+  border-radius: 4px;
+  padding: 1.5rem 1rem;
+  max-width: 56rem;
+  overflow-x: auto;
+}
+
+.hlm-page .version-tree svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  min-width: 600px;
+}
+
+.hlm-page .version-tree-caption {
+  font-family: var(--hlm-font-cn);
+  font-size: 0.84rem;
+  color: var(--hlm-ink-faint);
+  margin-top: 0.85rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ─── §3 Panci (判词) interactive widget ─────────────────────────── */
+.hlm-page .panci-widget {
+  margin: 1.8rem 0 2.5rem;
+  max-width: 56rem;
+  background: var(--hlm-paper-deep);
+  border: 1px solid var(--hlm-rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.hlm-page .panci-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  background: var(--hlm-paper-warm);
+  border-bottom: 1px solid var(--hlm-rule);
+  padding: 0.5rem 0.85rem 0;
+}
+
+.hlm-page .panci-tab {
+  font-family: var(--hlm-font-cn);
+  font-size: 0.92rem;
+  padding: 0.5rem 0.95rem;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--hlm-ink-soft);
+  cursor: pointer;
+  margin-right: 0.3rem;
+  transition: color 0.12s, border-color 0.12s;
+}
+
+.hlm-page .panci-tab:hover { color: var(--hlm-jiang); }
+
+.hlm-page .panci-tab.active {
+  color: var(--hlm-jiang);
+  border-bottom-color: var(--hlm-jiang);
+  font-weight: 600;
+}
+
+.hlm-page .panci-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: 0;
+  padding: 0;
+}
+
+.hlm-page .panci-cell {
+  border-right: 1px solid var(--hlm-rule);
+  border-bottom: 1px solid var(--hlm-rule);
+  padding: 0.85rem 1rem 0.95rem;
+  cursor: pointer;
+  transition: background 0.12s;
+  background: var(--hlm-paper);
+}
+
+.hlm-page .panci-cell:hover { background: var(--hlm-paper-warm); }
+.hlm-page .panci-cell.selected {
+  background: var(--hlm-pale-jiang);
+}
+
+.hlm-page .panci-cell .name {
+  font-family: var(--hlm-font-cn);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--hlm-ink);
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.hlm-page .panci-cell .epithet {
+  font-family: var(--hlm-font-cn);
+  font-size: 0.82rem;
+  color: var(--hlm-ink-faint);
+  letter-spacing: 0.02em;
+}
+
+.hlm-page .panci-detail {
+  background: var(--hlm-paper);
+  padding: 1.4rem 1.6rem;
+  border-top: 1px solid var(--hlm-rule);
+  min-height: 12rem;
+}
+
+.hlm-page .panci-detail .panci-text {
+  font-family: var(--hlm-font-cn);
+  font-size: 1rem;
+  color: var(--hlm-jiang);
+  background: var(--hlm-pale-jiang);
+  padding: 0.85rem 1.1rem;
+  border-left: 3px solid var(--hlm-jiang);
+  margin: 0 0 1.1rem 0;
   line-height: 1.85;
+  white-space: pre-line;
 }
 
-/* ─── Inline annotations ────────────────────────────────────
-   Small parenthetical asides for dates, alternative names,
-   pinyin, etc. Stays in the text column.
-   ─────────────────────────────────────────────────────────── */
-.aside-note {
-  font-family: var(--font-ui), var(--font-cjk);
-  font-size: 0.86em;
-  color: var(--ink-faint);
+.hlm-page .panci-detail .panci-image-desc {
+  font-family: var(--hlm-font-cn);
+  font-size: 0.88rem;
+  color: var(--hlm-ink-soft);
+  font-style: italic;
+  margin: 0 0 1rem 0;
+  padding-left: 0.75rem;
+  border-left: 1px dotted var(--hlm-rule);
 }
 
-html[lang^="zh"] .aside-note {
-  font-family: var(--font-cjk), var(--font-ui);
+.hlm-page .panci-detail h4 {
+  font-family: var(--hlm-font-cn);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--hlm-shiqing);
+  margin: 1rem 0 0.4rem;
+  font-weight: 600;
+}
+
+.hlm-page .panci-detail .panci-fate {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--hlm-ink);
+  margin: 0;
+}
+
+.hlm-page .panci-detail .panci-empty {
+  color: var(--hlm-ink-faint);
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* ─── §5 Family network diagram ──────────────────────────────────── */
+.hlm-page .family-network {
+  margin: 1.8rem 0 2.2rem;
+  background: var(--hlm-paper-deep);
+  border: 1px solid var(--hlm-rule);
+  border-radius: 4px;
+  padding: 1.5rem 1rem 1rem;
+  max-width: 56rem;
+  overflow-x: auto;
+}
+
+.hlm-page .family-network svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  min-width: 600px;
+}
+
+.hlm-page .family-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+  margin-top: 0.85rem;
+  font-family: var(--hlm-font-cn);
+  font-size: 0.82rem;
+  color: var(--hlm-ink-soft);
+}
+
+.hlm-page .family-legend .swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.hlm-page .family-legend .sw {
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+/* ─── Mobile adjustments ─────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .hlm-page .hero h1 {
+    font-size: 2.1rem;
+  }
+  .hlm-page .panci-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hlm-page .panci-detail {
+    padding: 1.1rem 1.2rem;
+  }
 }
