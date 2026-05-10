@@ -360,6 +360,23 @@ body.hlm-page.fn-fullpage {
                note: '苏州人，本官宦小姐；带发修行于栊翠庵；第 41 回品茶展露孤高',
                relations: '居于贾府栊翠庵' },
 
+      // ─── 怡红院其他丫鬟与远房亲戚（y=640）────────────────────
+      shexue: { name: '麝月', x: 460, y: 640, house: 'rong', type: 'ya',
+               omens: {
+                  flower: '荼蘼「韶华胜极」：开到荼蘼花事了（第 63 回怡红夜宴）。脂批："麝月一人在怡红，宝玉身边只有一人，则书已尽矣。"——此签预示麝月是宝玉身边<em>最后留下</em>的丫鬟，"花事了"即青春群女皆散尽，宝玉出家在即。'
+                },
+               note: '宝玉房四等丫鬟之一；八十回后是宝玉身边唯一留下的丫鬟，最后亦离去',
+               relations: '宝玉之大丫鬟之一' },
+      qiuwen: { name: '秋纹', x: 540, y: 640, house: 'rong', type: 'ya',
+               note: '宝玉房二等丫鬟，与碧痕排挤过小红；性格自矜，第 37 回因得王夫人赏赐两件旧衣而骄傲',
+               relations: '宝玉之大丫鬟 / 与碧痕同伴' },
+      xiaohong: { name: '小红', x: 320, y: 640, house: 'rong', type: 'ya',
+                 note: '本名林红玉，因犯黛玉、宝玉之"玉"字而改名小红；荣府二管家林之孝之女；先在怡红院（第 24-26 回与贾芸传帕后被排挤），后转入王熙凤房；脂批伏狱神庙救宝玉、凤姐——"红玉后有宝玉大得力处"',
+                 relations: '林之孝之女 / 宝玉之前丫鬟 / 凤姐之后丫鬟 / 贾芸之妻（八十回后）' },
+      jiayun: { name: '贾芸', x: 240, y: 640, house: 'rong',
+               note: '贾府旁支主子，宝玉之"干儿子"（第 24 回玩笑话所定）；母舅卜世仁吝啬，借醉金刚倪二钱送礼于凤姐谋得花木工程差事；与小红互生情愫；脂批"伏芸哥仗义探（庵）"——后救宝玉、凤姐于狱神庙',
+               relations: '宝玉之干儿子（玩笑） / 小红之夫（八十回后） / 与醉金刚倪二有交' },
+
       // 叙事框架 y=540
       zhen_shiyin: { name: '甄士隐', x: 825, y: 540, house: 'frame', type: 'outsider',
                     omens: {
@@ -447,6 +464,13 @@ body.hlm-page.fn-fullpage {
       { from: 'baoyu', to: 'qingwen', type: 'kin', fromRel: '大丫鬟', toRel: '主子' },
       { from: 'xifeng', to: 'pinger', type: 'kin', fromRel: '陪嫁丫鬟', toRel: '主子' },
       { from: 'jia_mu', to: 'yuanyang', type: 'kin', fromRel: '大丫鬟', toRel: '主子' },
+      // 怡红院其他丫鬟与远房
+      { from: 'baoyu', to: 'shexue', type: 'kin', fromRel: '丫鬟', toRel: '主子' },
+      { from: 'baoyu', to: 'qiuwen', type: 'kin', fromRel: '丫鬟', toRel: '主子' },
+      { from: 'baoyu', to: 'xiaohong', type: 'kin', fromRel: '前丫鬟', toRel: '前主子' },
+      { from: 'xifeng', to: 'xiaohong', type: 'kin', fromRel: '丫鬟', toRel: '后主子' },
+      { from: 'baoyu', to: 'jiayun', type: 'kin', fromRel: '干儿子（玩笑）', toRel: '干父' },
+      { from: 'xiaohong', to: 'jiayun', type: 'marriage', fromRel: '夫', toRel: '妻' },
 
       // 叙事框架
       { from: 'zhen_shiyin', to: 'xiangling', type: 'parent', fromRel: '独女（被拐）', toRel: '父' },
@@ -467,6 +491,7 @@ body.hlm-page.fn-fullpage {
       { id: 'shi', label: '史家', x: 25, y: 405, w: 130, h: 75 },
       { id: 'misc', label: '主仆与栊翠庵', x: 130, y: 500, w: 620, h: 80 },
       { id: 'frame', label: '叙事框架', x: 770, y: 500, w: 350, h: 80 },
+      { id: 'yihong', label: '怡红院侍儿与远房', x: 180, y: 600, w: 470, h: 80 },
     ];
 
     // ─── 渲染：构建 fn-canvas 并注入 stage ──────────────
@@ -496,7 +521,7 @@ body.hlm-page.fn-fullpage {
     stage.appendChild(zoomHint);
 
     // ─── 缩放 / 平移状态 ─────────────────────────────
-    const VIEW = { w: 1280, h: 620 };
+    const VIEW = { w: 1280, h: 720 };
     const ZOOM_MIN = 0.5, ZOOM_MAX = 2.5, ZOOM_STEP = 1.2;
     let scale = 1, panX = 0, panY = 0;
 
@@ -670,7 +695,7 @@ body.hlm-page.fn-fullpage {
     const SVG_NS = 'http://www.w3.org/2000/svg';
     const svg = document.createElementNS(SVG_NS, 'svg');
     svg.setAttribute('class', 'fn-edges-layer');
-    svg.setAttribute('viewBox', '0 0 1280 620');
+    svg.setAttribute('viewBox', '0 0 1280 720');
     svg.setAttribute('preserveAspectRatio', 'none');
     canvas.appendChild(svg);
 
@@ -820,7 +845,7 @@ body.hlm-page.fn-fullpage {
       const houseName = {
         rong: '荣国府', ning: '宁国府',
         shi: '史家', wang: '王家', xue: '薛家', lin: '林家',
-        misc: '边缘人物', frame: '叙事框架'
+        misc: '边缘人物', frame: '叙事框架', yihong: '荣国府'
       }[n.house] || '';
       const tags = [];
       if (n.dead === 'pre') tags.push('开篇前已逝');

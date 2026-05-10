@@ -989,7 +989,7 @@ body.hlm-page {
 .hlm-page .fn-stage {
   position: relative;
   width: 100%;
-  height: 620px;  /* 固定视口高度 */
+  height: 720px;  /* 固定视口高度 */
   background: var(--hlm-paper);
   border: 1px solid var(--hlm-rule);
   border-radius: 4px;
@@ -1008,7 +1008,7 @@ body.hlm-page {
   top: 0;
   left: 0;
   width: 1280px;
-  height: 620px;
+  height: 720px;
   font-family: var(--hlm-font-cn);
   transform-origin: 0 0;
   /* 缩放/平移由 JS 通过 .style.transform 动态设置 */
