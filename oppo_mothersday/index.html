@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 
   <link rel="stylesheet" href="qixing.css">
+
+  <!-- Chart.js (UMD) for data visualization -->
+  <script src="chart.umd.min.js" defer></script>
 </head>
 
 <body class="qx-page">
@@ -107,7 +110,30 @@
 
       <p>而就在这则评论被写下的当口,民政部于 2026 年 5 月 9 日发布《2026 年 1 季度民政统计数据》:今年一季度,全国结婚登记 169.7 万对,与 2025 年同期相比减少 11.3 万对,同比下降 6.24%——这是自 2013 年有该季度统计以来的同期最低水平,甚至低于 2020 年一季度疫情暴发初期的 279 万对。<a class="fn-ref" href="#fn-6">[6]</a> 这一数字的意义不在于它的绝对值,而在于它出现的<strong>位置</strong>:由于春节传统,第一季度历来是全年结婚登记的高峰季,通常占全年总量的近三分之一。</p>
 
-      <p>这一变迁并非中国独有,而是整个东亚的共同症候,各地进程速度有差异,方向却惊人地一致。韩国 2023 年的合计特殊出生率跌至 0.72——是有现代统计以来全世界记录在案的最低数字之一,2024 年虽微升至 0.75,但仍是全球最低水平。<a class="fn-ref" href="#fn-7">[7]</a> 日本 2024 年合计特殊出生率降至 1.15,出生数 68.6 万,首次跌破 70 万——这一数字约为 1949 年峰值的四分之一;尤其值得注意的是,日本国立社会保障·人口问题研究所最新的出生动向基本调查显示,在 18 至 34 岁未婚女性中,"结婚后应当有子女"的肯定回答比例,从 2015 年的 67% 暴跌至 2021 年的 37%——这是六年间近三十个百分点的断层式下滑,而非渐进式衰退。<a class="fn-ref" href="#fn-8">[8]</a> 这种意识断层比任何人口学数字更尖锐地揭示:不仅婚姻率在下跌,婚姻与生育之间那个长期被默认的合流——"结婚就该有孩子"——也正在被反向解开。这些数字所呈现的东亚同步性,与中国近年的趋势互为印证,使得"婚姻象征位置在松动"这一判断,不再只是某一地的偶然现象。</p>
+      <p>这一变迁并非中国独有,而是整个东亚的共同症候,各地进程速度有差异,方向却惊人地一致。日本的婚姻件数从 1972 年峰值的约 109.9 万组,降至 2022 年的约 49 万组——为 1930 年代以来约九十年间的最低水平;2024 年虽因新冠后的"延期结婚补登记"微升至约 49.9 万组,但仍处于战后历史低位。<a class="fn-ref" href="#fn-7">[7]</a> 韩国的曲线更为陡峭:婚姻件数从 1996 年峰值的约 43.5 万件,降至 2022 年的约 19.2 万件,二十多年间已腰斩有余;2024 年因疫情积压结婚的释放回升至约 22.2 万件,同比 +14.9%,但同样仍远低于 2010 年代水平。<a class="fn-ref" href="#fn-8">[8]</a> 三地数据所呈现的结构高度相似——长期下降叠加一次性反弹,但反弹始终未能改变历史低位的总体格局。这种东亚同步性,与中国近年的趋势互为印证,使得"婚姻象征位置在松动"这一判断,不再只是某一地的偶然现象。</p>
+
+      <!-- ───── Data visualization figure ──────────────────────── -->
+      <figure class="data-figure">
+        <div class="chart-block">
+          <p class="chart-eyebrow">图 1 · 东亚三国结婚件数</p>
+          <h4 class="chart-title">从峰值到低位:中国、日本、韩国婚姻登记数(1972—2026)</h4>
+          <p class="chart-sub">三国分别在不同年份达到结婚件数的历史峰值——中国 2013、日本 1972、韩国 1996——此后步入长期下行轨道。疫情后均出现一次性反弹,但都未能改变历史低位的整体格局。</p>
+          <div class="chart-canvas-wrap">
+            <canvas id="chart-marriages" aria-label="三国结婚件数曲线图"></canvas>
+          </div>
+          <p class="chart-source">来源:中华人民共和国民政部历年《民政事业发展统计公报》;日本厚生劳动省《人口动态统计》;韩国统计厅《人口动向调查》。注:中国数据采用左轴(万对),日本与韩国共用右轴(万件/万组),以适配数量级差异。</p>
+        </div>
+
+        <div class="chart-block">
+          <p class="chart-eyebrow">图 2 · 中国离结比</p>
+          <h4 class="chart-title">从 3.8% 到 57.5%:中国离结比的时代曲线(1981—2024)</h4>
+          <p class="chart-sub">离结比 = 同一时期内离婚登记对数 ÷ 结婚登记对数。这一指标在最近二十年陡然攀升,且即便在 2021 年"离婚冷静期"制度的反向干预下,2024 年仍创历史新高。</p>
+          <div class="chart-canvas-wrap chart-canvas-wrap--small">
+            <canvas id="chart-divorce" aria-label="中国离结比曲线图"></canvas>
+          </div>
+          <p class="chart-source">来源:中华人民共和国民政部历年《民政事业发展统计公报》;比值历史轨迹综合自《中国统计年鉴》(国家统计局)。</p>
+        </div>
+      </figure>
 
       <p>数据呈现的这一片"加速松动"的语境,正是 OPPO 文案得以成立的土壤。文案中那位"一年见两回"的偶像,并不是婚姻的对手——他甚至不是一个具体的人;他是上述结构性变化的人格化象征。他代表的,是那些被婚姻不再容纳、却又必须找到出口的情感能量:仪式的能量、期待的能量、"为某人盛装"的能量。准社会关系(parasocial relationship)研究早就指出,这类对象之所以具有持久吸引力,恰恰因为它<strong>结构性地豁免了亲密关系的代价</strong>——不必妥协,不必目睹对方的疲惫,不必在清晨面对一张未加修饰的脸。它是低风险的高仪式感。</p>
 
@@ -208,11 +234,11 @@
         </li>
         <li id="fn-7">
           <span class="fn-num">[7]</span>
-          <span class="fn-body">韩国统计厅(Statistics Korea),《2024 年出生·死亡统计》(暫定),2025 年 2 月 26 日发布。2023 年韩国合计特殊出生率(TFR)0.72,2024 年微升至 0.75,九年来首次回升,但仍是全球已记录的最低水平。比较视角可参考 OECD <em>Family Database</em>:Total Fertility Rate 系列指标;以及 Sébastien Lechevalier 在 <em>Le Monde</em> 2024 年 1 月 26 日撰文 "La Corée du Sud, championne de la dénatalité" 中关于韩国出生率断层之原因的代际分析。</span>
+          <span class="fn-body">日本厚生劳动省,《人口动态统计》历年数据,以及 2025 年 2 月 27 日发布的《令和 6 年(2024 年)人口动态统计速报值》。日本婚姻件数自 1972 年峰值 109 万 9,984 组持续下降,2022 年降至约 49 万组——为 1930 年代以来约九十年间最低水平;2023 年战后最少约 47.5 万组;2024 年因新冠后延期婚姻的补登记效应小幅回升至约 49 万 9,999 组,但仍处战后历史低位。日本婚姻数长期变化数据可参考时事通信 2025 年 2 月 27 日报道《昨年出生数、過去最少72万人 9年連続減、婚姻は2年ぶり増》、内阁府男女共同参画局《男女共同参画白皮书》历年版,以及 e-Stat 政府统计窗口"人口动态调查 9-1 都道府县别婚姻件数·婚姻率"。</span>
         </li>
         <li id="fn-8">
           <span class="fn-num">[8]</span>
-          <span class="fn-body">日本厚生劳动省,《令和 6 年(2024 年)人口动态统计月报年计(概数)的概况》,2025 年 6 月发布;以及国立社会保障·人口问题研究所,《第 16 回出生动向基本调查(结婚と出産に関する全国调查)》最终报告书,2023 年。2024 年日本出生数 68 万 6,061 人,首次跌破 70 万;合计特殊出生率 1.15,为 1947 年有统计以来最低;1949 年峰值 269.7 万人。关于"结婚后应有子女"肯定回答率在 18—34 岁未婚女性中由 2015 年 67% 跌至 2021 年 37% 的断层式变化,出处为第 16 回出生动向基本调查独身者调查,详见报告书第三章。综合分析可参考日本综合研究所(JRI)藤波匠系列研究短信(2024—2025)。</span>
+          <span class="fn-body">韩国统计厅(Statistics Korea),《2024 年人口动向调查—婚姻·离婚统计》,2025 年 3 月发布;以及韩国统计厅历年《人口动向调查》(Population Trends Survey)。韩国婚姻件数自 1996 年峰值 43 万 4,911 件持续下降,2021 年首次跌破 20 万件(19 万 2,507 件),2022 年继续降至 19 万 1,690 件;2023 年小幅回升至约 19 万 4,000 件;2024 年因疫情积压婚姻的释放(韩国统计厅称"延期されていた婚姻の駆け込み")急升至 22 万 2,422 件,同比 +14.9%,但仍远低于 2010 年代任何一年水平。综合分析可参考 Chosun Online 2025 年 3 月 20 日报道,以及韩国保健福利部相关解读。</span>
         </li>
         <li id="fn-9">
           <span class="fn-num">[9]</span>
@@ -239,6 +265,321 @@
 
   </main>
 </div>
+
+<!-- ───── Chart initialization ──────────────────────────────────── -->
+<script>
+function initCharts() {
+  if (typeof Chart === 'undefined') {
+    // Chart.js not loaded yet — wait and retry
+    setTimeout(initCharts, 80);
+    return;
+  }
+
+  // ── Shared design tokens (read from CSS) ─────────────────────
+  var cs = getComputedStyle(document.documentElement);
+  var INK       = cs.getPropertyValue('--ink').trim()       || '#1a1f2e';
+  var INK_SOFT  = cs.getPropertyValue('--ink-soft').trim()  || '#3a4256';
+  var INK_MUTE  = cs.getPropertyValue('--ink-mute').trim()  || '#6b7488';
+  var INK_FAINT = cs.getPropertyValue('--ink-faint').trim() || '#9aa3b8';
+  var ACCENT    = cs.getPropertyValue('--accent').trim()    || '#1f3d5c';
+  var ACCENT_SOFT = cs.getPropertyValue('--accent-soft').trim() || '#4a6b8e';
+
+  var FONT_SANS = '"Noto Sans SC", "Inter", -apple-system, sans-serif';
+  var FONT_SERIF = '"Noto Serif SC", "Source Serif 4", Georgia, serif';
+
+  // Chart.js global defaults
+  Chart.defaults.font.family = FONT_SANS;
+  Chart.defaults.font.size = 11;
+  Chart.defaults.color = INK_SOFT;
+  Chart.defaults.borderColor = 'rgba(154, 163, 184, 0.18)';
+
+  // ─────────────────────────────────────────────────────────────
+  // CHART 1: Marriages in China / Japan / Korea
+  // ─────────────────────────────────────────────────────────────
+  var COLOR_CN = ACCENT;          // Prussian blue, main
+  var COLOR_JP = '#7a8aa3';       // soft slate
+  var COLOR_KR = '#9c7355';       // warm umber for contrast
+
+  // Year axis (every 2 years from 1972 to 2026)
+  var years = [];
+  for (var y = 1972; y <= 2026; y++) years.push(y);
+
+  // China marriages (万对). null = no data.
+  var cn = {
+    1985: 831.3, 1990: 950, 1995: 929.7, 2000: 848.3,
+    2005: 823.1, 2010: 1241.0, 2011: 1302.4, 2012: 1323.6,
+    2013: 1346.9, 2014: 1306.7, 2015: 1224.7, 2016: 1142.8,
+    2017: 1063.1, 2018: 1013.9, 2019: 947.1, 2020: 813.1,
+    2021: 763.6, 2022: 683.5, 2023: 768.0, 2024: 610.6,
+    2025: 676.3
+  };
+
+  // Japan marriages (万组)
+  var jp = {
+    1972: 109.9, 1975: 94.1, 1980: 77.5, 1985: 73.6,
+    1990: 72.2, 1995: 79.2, 2000: 79.8, 2005: 71.4,
+    2010: 70.0, 2013: 66.0, 2015: 63.5, 2018: 58.7,
+    2019: 60.0, 2020: 52.6, 2021: 50.1, 2022: 50.4,
+    2023: 47.5, 2024: 49.9
+  };
+
+  // Korea marriages (万件)
+  var kr = {
+    1996: 43.5, 2000: 33.4, 2005: 31.4, 2010: 32.6,
+    2013: 32.3, 2015: 30.3, 2018: 25.8, 2019: 23.9,
+    2020: 21.4, 2021: 19.3, 2022: 19.2, 2023: 19.4,
+    2024: 22.2
+  };
+
+  function toSeries(years, data) {
+    return years.map(function(y){ return (y in data) ? data[y] : null; });
+  }
+
+  var ctx1 = document.getElementById('chart-marriages').getContext('2d');
+  new Chart(ctx1, {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [
+        {
+          label: '中国(万对,左轴)',
+          data: toSeries(years, cn),
+          borderColor: COLOR_CN,
+          backgroundColor: 'rgba(31, 61, 92, 0.06)',
+          borderWidth: 2,
+          tension: 0.25,
+          spanGaps: true,
+          yAxisID: 'yLeft',
+          pointRadius: 2.5,
+          pointHoverRadius: 5,
+          pointBackgroundColor: COLOR_CN,
+          fill: false
+        },
+        {
+          label: '日本(万组,右轴)',
+          data: toSeries(years, jp),
+          borderColor: COLOR_JP,
+          borderWidth: 1.6,
+          tension: 0.25,
+          spanGaps: true,
+          yAxisID: 'yRight',
+          pointRadius: 2,
+          pointHoverRadius: 4.5,
+          pointBackgroundColor: COLOR_JP,
+          borderDash: [],
+          fill: false
+        },
+        {
+          label: '韩国(万件,右轴)',
+          data: toSeries(years, kr),
+          borderColor: COLOR_KR,
+          borderWidth: 1.6,
+          tension: 0.25,
+          spanGaps: true,
+          yAxisID: 'yRight',
+          pointRadius: 2,
+          pointHoverRadius: 4.5,
+          pointBackgroundColor: COLOR_KR,
+          borderDash: [4, 3],
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      animation: { duration: 1000, easing: 'easeOutQuart' },
+      plugins: {
+        legend: {
+          position: 'top',
+          align: 'end',
+          labels: {
+            font: { size: 11, family: FONT_SANS },
+            color: INK_SOFT,
+            padding: 14,
+            usePointStyle: true,
+            pointStyle: 'line',
+            boxWidth: 22,
+            boxHeight: 2
+          }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(26, 31, 46, 0.95)',
+          titleFont: { size: 11, family: FONT_SANS, weight: '600' },
+          bodyFont: { size: 11, family: FONT_SANS },
+          padding: 10,
+          cornerRadius: 2,
+          displayColors: true,
+          boxWidth: 8,
+          boxHeight: 8,
+          boxPadding: 4,
+          callbacks: {
+            label: function(ctx) {
+              if (ctx.parsed.y == null) return null;
+              return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1);
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          min: 1972,
+          max: 2026,
+          ticks: {
+            stepSize: 5,
+            callback: function(v){ return v; },
+            color: INK_MUTE,
+            font: { size: 10, family: FONT_SANS }
+          },
+          grid: { color: 'rgba(154, 163, 184, 0.12)', drawTicks: false },
+          border: { color: INK_FAINT }
+        },
+        yLeft: {
+          type: 'linear',
+          position: 'left',
+          beginAtZero: true,
+          max: 1400,
+          title: {
+            display: true,
+            text: '中国(万对)',
+            color: COLOR_CN,
+            font: { size: 10, family: FONT_SANS, weight: '500' }
+          },
+          ticks: {
+            color: INK_MUTE,
+            font: { size: 10, family: FONT_SANS },
+            stepSize: 200
+          },
+          grid: { color: 'rgba(154, 163, 184, 0.12)', drawTicks: false },
+          border: { color: COLOR_CN, width: 0.8 }
+        },
+        yRight: {
+          type: 'linear',
+          position: 'right',
+          beginAtZero: true,
+          max: 120,
+          title: {
+            display: true,
+            text: '日本(万组) / 韩国(万件)',
+            color: COLOR_JP,
+            font: { size: 10, family: FONT_SANS, weight: '500' }
+          },
+          ticks: {
+            color: INK_MUTE,
+            font: { size: 10, family: FONT_SANS },
+            stepSize: 20
+          },
+          grid: { drawOnChartArea: false },
+          border: { color: COLOR_JP, width: 0.8 }
+        }
+      }
+    }
+  });
+
+  // ─────────────────────────────────────────────────────────────
+  // CHART 2: China divorce-to-marriage ratio
+  // ─────────────────────────────────────────────────────────────
+  var COLOR_DIVORCE = '#8b3a3a';   // muted dark red — caution without alarm
+
+  // Major data points (官方与综合分析数据)
+  var divYears = [1981, 1985, 1990, 1993, 1995, 2000, 2005, 2010, 2013,
+                  2015, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+  var divRatio = [3.8, 5.2, 7.8, 10.0, 12.0, 16.0, 20.5, 28.0, 34.0,
+                  31.0, 40.0, 44.0, 50.7, 53.3, 31.0, 39.7, 33.8, 57.5];
+
+  var ctx2 = document.getElementById('chart-divorce').getContext('2d');
+  new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: divYears,
+      datasets: [{
+        label: '离结比(%)',
+        data: divRatio,
+        borderColor: COLOR_DIVORCE,
+        backgroundColor: 'rgba(139, 58, 58, 0.08)',
+        borderWidth: 2,
+        tension: 0.2,
+        pointRadius: 3,
+        pointHoverRadius: 6,
+        pointBackgroundColor: COLOR_DIVORCE,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      animation: { duration: 1100, easing: 'easeOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(26, 31, 46, 0.95)',
+          titleFont: { size: 11, family: FONT_SANS, weight: '600' },
+          bodyFont: { size: 11, family: FONT_SANS },
+          padding: 10,
+          cornerRadius: 2,
+          displayColors: false,
+          callbacks: {
+            label: function(ctx) {
+              return '离结比: ' + ctx.parsed.y.toFixed(1) + '%';
+            },
+            afterLabel: function(ctx) {
+              var notes = {
+                1981: '该统计起点',
+                2019: '突破 50% 关口',
+                2021: '"离婚冷静期"制度施行',
+                2024: '历史新高'
+              };
+              return notes[ctx.label] || '';
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          min: 1981,
+          max: 2024,
+          ticks: {
+            stepSize: 5,
+            color: INK_MUTE,
+            font: { size: 10, family: FONT_SANS }
+          },
+          grid: { color: 'rgba(154, 163, 184, 0.12)', drawTicks: false },
+          border: { color: INK_FAINT }
+        },
+        y: {
+          beginAtZero: true,
+          max: 65,
+          title: {
+            display: true,
+            text: '离结比(%)',
+            color: COLOR_DIVORCE,
+            font: { size: 10, family: FONT_SANS, weight: '500' }
+          },
+          ticks: {
+            color: INK_MUTE,
+            font: { size: 10, family: FONT_SANS },
+            stepSize: 10,
+            callback: function(v){ return v + '%'; }
+          },
+          grid: { color: 'rgba(154, 163, 184, 0.12)', drawTicks: false },
+          border: { color: COLOR_DIVORCE, width: 0.8 }
+        }
+      }
+    }
+  });
+}
+
+// Start init when DOM is ready (will internally wait for Chart.js)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCharts);
+} else {
+  initCharts();
+}
+</script>
 
 </body>
 </html>
