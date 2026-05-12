@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>影像与远行 · 一份私人档案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ec;
+    --bg-deep: #e8e2d8;
+    --ink: #1a1a1a;
+    --ink-soft: #3a3a3a;
+    --ink-faded: #6b6863;
+    --accent: #8b3a2f;
+    --accent-soft: #b8826a;
+    --rule: rgba(26, 26, 26, 0.12);
+    --paper-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Serif SC', 'Cormorant Garamond', Georgia, serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.85;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image:
+      radial-gradient(ellipse at top, rgba(139, 58, 47, 0.03), transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(26, 26, 26, 0.02), transparent 60%);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(139, 58, 47, 0.18);
+    color: var(--ink);
+  }
+
+  /* —— 主容器 —— */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 80px 28px 80px;
+  }
+
+  /* —— 开篇 —— */
+  .opening {
+    text-align: center;
+    padding-bottom: 50px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 60px;
+    position: relative;
+  }
+
+  .opening-overline {
+    margin-top: 60px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+
+  .opening h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 7.5vw, 56px);
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+
+  .opening h1 .accent {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.4em;
+    color: var(--accent);
+    margin-top: 16px;
+    letter-spacing: 0.05em;
+    font-weight: 400;
+  }
+
+  .opening-subtitle {
+    max-width: 540px;
+    margin: 32px auto 0;
+    font-size: 15.5px;
+    line-height: 2;
+    color: var(--ink-soft);
+  }
+
+  .opening-subtitle em {
+    font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .opening-subtitle strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* —— 中段叙事 —— */
+  .narrative {
+    max-width: 620px;
+    margin: 0 auto 60px;
+    padding: 0 4px;
+  }
+
+  .narrative p {
+    font-size: 15.5px;
+    line-height: 2;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+
+  .narrative p:last-child { margin-bottom: 0; }
+
+  .narrative strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .narrative em {
+    font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .section-label {
+    display: block;
+    text-align: center;
+    margin: 0 0 36px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  /* —— 三张大卡片 —— */
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .card {
+    display: block;
+    padding: 36px 36px 32px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--paper-shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: 0.35;
+    transition: opacity 0.35s;
+  }
+
+  .card:hover {
+    background: rgba(255, 255, 255, 0.85);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05), 0 16px 32px rgba(0,0,0,0.08);
+    border-color: var(--accent-soft);
+  }
+
+  .card:hover::before {
+    opacity: 1;
+    width: 4px;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .card-roman {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 24px;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: 0.05em;
+    font-weight: 400;
+    flex-shrink: 0;
+    min-width: 36px;
+  }
+
+  .card-title-block { flex: 1; }
+
+  .card-title {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 500;
+    font-size: clamp(20px, 4vw, 24px);
+    line-height: 1.35;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .card-title-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-faded);
+    letter-spacing: 0.06em;
+    font-weight: 400;
+  }
+
+  .card-desc {
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--rule);
+  }
+
+  .card-desc strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .card-desc em {
+    font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(26, 26, 26, 0.06);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--ink-faded);
+    letter-spacing: 0.08em;
+  }
+
+  .card-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .card-meta span::before {
+    content: '·';
+    color: var(--accent);
+  }
+
+  .card-meta span:first-child::before { content: ''; }
+
+  .card-arrow {
+    position: absolute;
+    bottom: 28px;
+    right: 36px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    transition: all 0.35s;
+  }
+
+  .card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
+  /* 第三张卡片(新疆指南)的特殊强调 */
+  .card.highlight {
+    background: linear-gradient(135deg, rgba(139, 58, 47, 0.05), rgba(255, 255, 255, 0.55));
+  }
+
+  .card.highlight::before {
+    opacity: 0.6;
+  }
+
+  .card.highlight .card-roman {
+    font-size: 28px;
+  }
+
+  /* —— 尾声 —— */
+  .closing {
+    max-width: 580px;
+    margin: 0 auto;
+    padding-top: 50px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+  }
+
+  .closing p {
+    font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+
+  .closing p strong {
+    color: var(--accent);
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  .closing-mark {
+    margin-top: 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--ink-faded);
+  }
+
+  /* 移动端微调 */
+  @media (max-width: 600px) {
+    .container { padding: 50px 22px 50px; }
+    .card { padding: 28px 24px 26px; }
+    .card-arrow {
+      bottom: 22px;
+      right: 24px;
+    }
+    .opening { padding-bottom: 40px; margin-bottom: 50px; }
+    .opening-overline { margin-top: 40px; }
+    .narrative { margin-bottom: 50px; }
+    .closing { padding-top: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 开篇 -->
+  <header class="opening">
+    <div class="opening-overline">A Private Archive · 私人档案</div>
+    <h1>
+      影像与远行
+      <span class="accent">Photographs Past, Journeys Ahead</span>
+    </h1>
+    <p class="opening-subtitle">
+      为下一程影像之旅准备的<strong>一份小型档案</strong>——<br>
+      收录对过往作品的<em>影像评注</em>,以及为即将出发的<em>远行</em>所做的读本。
+    </p>
+  </header>
+
+  <!-- 中段叙事 -->
+  <section class="narrative">
+    <p>这份档案收录的内容,大体分为<strong>两类</strong>——</p>
+    <p>一类<em>回头看</em>:对已经拍下的作品做的评注,谈"<em>如何评价</em>";另一类<em>向前看</em>:为即将出发的远行准备的读本,谈"<em>如何准备</em>"。前者沉淀已有的经验,后者储备尚未发生的判断。两类都试图回答同一个问题——<strong>影像背后是什么</strong>。</p>
+    <p>这里所有文档的视觉语言、阅读节奏、价值判断保持一致——可以作为<strong>一个整体</strong>来读,也可以按需要单独翻开。如果是第一次进入,建议先读<em>影像评注</em>,理解"哪里做得好、哪里需要打破";再翻开<em>远行读本</em>——这时带去的就不只是相机,还有一份<em>"理解后的眼光"</em>。</p>
+  </section>
+
+  <!-- 三张卡片 -->
+  <span class="section-label">Documents · 档案</span>
+
+  <div class="cards">
+
+    <a href="https://yifanova.com/photo_review/" class="card">
+      <div class="card-header">
+        <div class="card-roman">I.</div>
+        <div class="card-title-block">
+          <div class="card-title">高原牧野 · 十三帧的影像评注</div>
+          <div class="card-title-en">Notes on Thirteen Frames from the Plateau</div>
+        </div>
+      </div>
+      <p class="card-desc">对一组拍摄于<strong>四川/青海高原牧野</strong>的作品——草场、马、藏地寺院、归途——做的逐帧分析。从光线、构图、剪影、后期、人的进入五个层面,指出<em>每一张为什么是或不是一张好作品</em>,并附上<strong>伊犁拍摄备忘</strong>与行前装备清单。</p>
+      <div class="card-meta">
+        <span>十三帧</span>
+        <span>评注 + 装备清单</span>
+        <span>★ 喇嘛剪影 · 归人小屋</span>
+      </div>
+      <div class="card-arrow">阅读 →</div>
+    </a>
+
+    <a href="https://yifanova.com/photo_review_2/" class="card">
+      <div class="card-header">
+        <div class="card-roman">II.</div>
+        <div class="card-title-block">
+          <div class="card-title">渔舟与白帆 · 一次创作团题材的反思</div>
+          <div class="card-title-en">On a Set Piece, and What It Asks of Us</div>
+        </div>
+      </div>
+      <p class="card-desc">对一组来自<strong>"模特船"摄影基地</strong>的十帧作品的诚实评注。承认沙龙摄影的"组织化"本质,但同时承认 PLATE X 等几帧已经在限制中触碰到<em>"作者性"</em>。文末附<strong>整体进阶建议</strong>(拍摄/后期/艺术性三层面)与<strong>摄影团内突围篇</strong>(六条可操作策略)。</p>
+      <div class="card-meta">
+        <span>十帧</span>
+        <span>评注 + 整体建议</span>
+        <span>★ 摄影团内突围六策</span>
+      </div>
+      <div class="card-arrow">阅读 →</div>
+    </a>
+
+    <a href="https://yifanova.com/Xinjiang/" class="card highlight">
+      <div class="card-header">
+        <div class="card-roman">III.</div>
+        <div class="card-title-block">
+          <div class="card-title">伊犁纪程 · 一份西域读本</div>
+          <div class="card-title-en">A Reader's Companion for the Long Drive West</div>
+        </div>
+      </div>
+      <p class="card-desc">为即将到来的<strong>乌鲁木齐到伊犁</strong>之行准备的小型方志。八章内容覆盖<em>大地理、地质成因、古史时间线、清治与流人、边界条约、多民族、牧民转场、当下口岸</em>——其中<strong>第四、第五章为法律工作者特别准备</strong>(伊犁将军府与流放制度、1864/1881 两份关键条约),<strong>第七章详细写牧民转场</strong>(时间窗口、路线、礼仪、拍摄策略)。每章附"摄影师之眼"。</p>
+      <div class="card-meta">
+        <span>八章 · 序与尾</span>
+        <span>地理 · 历史 · 法律 · 摄影</span>
+        <span>★ 牧民转场详写</span>
+      </div>
+      <div class="card-arrow">出发 →</div>
+    </a>
+
+  </div>
+
+  <!-- 尾声 -->
+  <footer class="closing">
+    <p>"摄影不只是按下快门——<strong>它先要有眼睛,然后才有相机</strong>。"</p>
+    <p>愿这份档案,能为下一程影像之旅,提供一些<em>不只关于"如何拍"</em>的准备。</p>
+    <div class="closing-mark">— 影像与远行 · 2026 春</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
