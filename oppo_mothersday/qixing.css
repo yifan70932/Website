@@ -391,7 +391,7 @@ p.standalone {
   color: var(--accent);
   margin: var(--space-lg) auto;
   padding: 0.8rem 0;
-  max-width: 80%;
+  max-width: 100%;
   position: relative;
 }
 
