@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>伊犁纪程 · 一个法律工作者与摄影者的西域读本</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ec;
+    --bg-deep: #e8e2d8;
+    --ink: #1a1a1a;
+    --ink-soft: #3a3a3a;
+    --ink-faded: #6b6863;
+    --accent: #8b3a2f;
+    --accent-soft: #b8826a;
+    --rule: rgba(26, 26, 26, 0.12);
+    --paper-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Serif SC', 'Cormorant Garamond', Georgia, serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.85;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image:
+      radial-gradient(ellipse at top, rgba(139, 58, 47, 0.03), transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(26, 26, 26, 0.02), transparent 60%);
+  }
+
+  ::selection {
+    background: rgba(139, 58, 47, 0.18);
+    color: var(--ink);
+  }
+
+  /* —— 封面 —— */
+  .cover {
+    min-height: 96vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px 40px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 48px;
+    background: var(--ink-faded);
+    opacity: 0.4;
+  }
+
+  .cover-overline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    margin-top: 80px;
+  }
+
+  .cover h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 300;
+    font-size: clamp(38px, 9vw, 68px);
+    line-height: 1.15;
+    letter-spacing: 0.06em;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  .cover h1 .accent {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.42em;
+    color: var(--accent);
+    margin-top: 18px;
+    letter-spacing: 0.04em;
+    font-weight: 400;
+  }
+
+  .cover-subtitle {
+    max-width: 560px;
+    font-size: 15px;
+    line-height: 1.95;
+    color: var(--ink-soft);
+    margin: 32px auto 0;
+    font-weight: 400;
+  }
+
+  .cover-quote {
+    margin-top: 48px;
+    max-width: 480px;
+    font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink-faded);
+    padding: 24px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .cover-attr {
+    margin-top: 14px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faded);
+  }
+
+  .cover-meta {
+    margin-top: 56px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faded);
+  }
+
+  /* —— 阅读导览 —— */
+  .contents {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 28px 70px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .contents h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 400;
+    font-size: clamp(22px, 5vw, 28px);
+    line-height: 1.45;
+    margin-bottom: 24px;
+    letter-spacing: 0.04em;
+  }
+
+  .contents-intro {
+    font-size: 15px;
+    line-height: 1.95;
+    color: var(--ink-faded);
+    margin-bottom: 28px;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 11px 0;
+    border-bottom: 1px dashed var(--rule);
+    font-size: 15px;
+  }
+
+  .toc-list li:last-child { border-bottom: none; }
+
+  .toc-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 13px;
+    min-width: 36px;
+    letter-spacing: 0.05em;
+  }
+
+  .toc-title {
+    flex: 1;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .toc-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-faded);
+    letter-spacing: 0.05em;
+  }
+
+  /* —— 章节通用 —— */
+  .chapter {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 90px 28px 60px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .chapter-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faded);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chapter-num::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .chapter h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 400;
+    font-size: clamp(26px, 5.5vw, 34px);
+    line-height: 1.35;
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+
+  .chapter-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-faded);
+    margin-bottom: 32px;
+    letter-spacing: 0.04em;
+  }
+
+  .chapter p {
+    font-size: 16px;
+    line-height: 2;
+    margin-bottom: 20px;
+    color: var(--ink-soft);
+  }
+
+  .chapter strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .chapter em {
+    font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* 首段首字下沉（只用于章节首段） */
+  .chapter > p.lead-para:first-of-type::first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.6em;
+    font-weight: 400;
+    float: left;
+    line-height: 0.85;
+    margin: 0.08em 0.1em 0 -0.04em;
+    color: var(--accent);
+  }
+
+  .chapter h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 500;
+    font-size: 17px;
+    margin-top: 36px;
+    margin-bottom: 14px;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chapter h3::before {
+    content: '';
+    width: 18px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* 关键引文 */
+  .pull-quote {
+    margin: 28px 0;
+    padding: 22px 26px;
+    background: rgba(139, 58, 47, 0.05);
+    border-left: 3px solid var(--accent);
+    border-radius: 1px;
+  }
+
+  .pull-quote p {
+    font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink);
+    margin-bottom: 0;
+  }
+
+  /* 信息卡片 */
+  .factbox {
+    margin: 28px 0;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+  }
+
+  .factbox-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .factbox p {
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+
+  .factbox p:last-child { margin-bottom: 0; }
+
+  /* "法律工作者视角"特殊卡片 */
+  .legal-eye {
+    margin: 32px 0;
+    padding: 24px 26px;
+    background: linear-gradient(135deg, rgba(139, 58, 47, 0.06), rgba(139, 58, 47, 0.02));
+    border-left: 3px double var(--accent);
+    border-right: 1px solid var(--rule);
+    border-radius: 1px;
+    position: relative;
+  }
+
+  .legal-eye::before {
+    content: '§';
+    position: absolute;
+    top: 16px;
+    right: 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--accent);
+    opacity: 0.4;
+    line-height: 1;
+  }
+
+  .legal-eye .label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .legal-eye p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  .legal-eye p:last-child { margin-bottom: 0; }
+
+  .legal-eye strong { color: var(--ink); }
+
+  /* "摄影师之眼"卡片 */
+  .photo-eye {
+    margin: 36px 0 8px;
+    padding: 26px 28px;
+    background: rgba(244, 241, 236, 0.9);
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(139, 58, 47, 0.06);
+    position: relative;
+  }
+
+  .photo-eye::before {
+    content: '◉';
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    color: var(--accent);
+    font-size: 14px;
+    opacity: 0.5;
+  }
+
+  .photo-eye .label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .photo-eye h4 {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 14px;
+    letter-spacing: 0.05em;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--rule);
+  }
+
+  .photo-eye p {
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  .photo-eye p:last-child { margin-bottom: 0; }
+
+  .photo-eye strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .photo-eye em {
+    font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* 时间线 */
+  .timeline {
+    margin: 28px 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .timeline li {
+    position: relative;
+    padding: 12px 0 12px 110px;
+    border-bottom: 1px dashed var(--rule);
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+
+  .timeline li:last-child { border-bottom: none; }
+
+  .timeline .year {
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 96px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .timeline strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* 收尾 */
+  .epilogue {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 90px 28px 100px;
+  }
+
+  .epilogue p {
+    font-size: 16px;
+    line-height: 2;
+    margin-bottom: 20px;
+    color: var(--ink-soft);
+  }
+
+  .signature {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-faded);
+    letter-spacing: 0.1em;
+    text-align: right;
+  }
+
+  /* Sticky 导航 - 桌面 */
+  .sticky-nav {
+    position: fixed;
+    top: 50%;
+    left: calc(50% - 370px - 200px - 24px);
+    transform: translateY(-50%);
+    z-index: 100;
+    width: 190px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 16px 14px;
+    background: rgba(244, 241, 236, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12.5px;
+    line-height: 1.5;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+
+  .sticky-nav.visible { opacity: 1; visibility: visible; }
+
+  .sticky-nav-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .sticky-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sticky-nav a {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 5px 6px;
+    color: var(--ink-faded);
+    text-decoration: none;
+    border-radius: 1px;
+    transition: all 0.2s;
+    font-size: 12.5px;
+  }
+
+  .sticky-nav a:hover {
+    color: var(--ink);
+    background: rgba(139,58,47,0.06);
+  }
+
+  .sticky-nav a.active {
+    color: var(--accent);
+    background: rgba(139,58,47,0.08);
+    font-weight: 500;
+  }
+
+  .sticky-nav .nav-roman {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--ink-faded);
+    min-width: 22px;
+    flex-shrink: 0;
+  }
+
+  .sticky-nav a.active .nav-roman { color: var(--accent); }
+
+  @media (max-width: 1280px) and (min-width: 1101px) {
+    .sticky-nav { left: 16px; }
+  }
+
+  /* 移动端：浮动按钮 */
+  .mobile-nav-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 101;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(139,58,47,0.35);
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    padding: 0;
+  }
+
+  .mobile-nav-toggle.visible { opacity: 1; visibility: visible; }
+  .mobile-nav-toggle.open { background: var(--ink); }
+
+  .mobile-nav-toggle::before {
+    content: '☰';
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .mobile-nav-toggle.open::before {
+    content: '×';
+    font-size: 26px;
+  }
+
+  .mobile-nav-drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(244,241,236,0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--rule);
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.1);
+    max-height: 70vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 24px 20px 80px;
+    display: none;
+  }
+
+  .mobile-nav-drawer.open { transform: translateY(0); }
+
+  .mobile-nav-drawer .sticky-nav-title {
+    text-align: center;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+  }
+
+  .mobile-nav-drawer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mobile-nav-drawer a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px 8px;
+    color: var(--ink-faded);
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 1px;
+  }
+
+  .mobile-nav-drawer a.active {
+    color: var(--accent);
+    background: rgba(139,58,47,0.08);
+  }
+
+  .mobile-nav-drawer .nav-roman {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-faded);
+    min-width: 28px;
+  }
+
+  @media (max-width: 1100px) {
+    .sticky-nav { display: none !important; }
+    .mobile-nav-toggle { display: flex; }
+    .mobile-nav-drawer { display: block; }
+  }
+
+  [id^="ch-"] { scroll-margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<!-- Sticky 导航 -->
+<nav class="sticky-nav" id="stickyNav">
+  <div class="sticky-nav-title">目录 · Index</div>
+  <ul>
+    <li><a href="#ch-cover" data-target="ch-cover"><span class="nav-roman">○</span>封面</a></li>
+    <li><a href="#ch-contents" data-target="ch-contents"><span class="nav-roman">○</span>目录</a></li>
+    <li><a href="#ch-preface" data-target="ch-preface"><span class="nav-roman">序</span>序言</a></li>
+    <li><a href="#ch-1" data-target="ch-1"><span class="nav-roman">一</span>大地理</a></li>
+    <li><a href="#ch-2" data-target="ch-2"><span class="nav-roman">二</span>地质</a></li>
+    <li><a href="#ch-3" data-target="ch-3"><span class="nav-roman">三</span>古史</a></li>
+    <li><a href="#ch-4" data-target="ch-4"><span class="nav-roman">四</span>清治与流人</a></li>
+    <li><a href="#ch-5" data-target="ch-5"><span class="nav-roman">五</span>边界条约</a></li>
+    <li><a href="#ch-6" data-target="ch-6"><span class="nav-roman">六</span>多民族</a></li>
+    <li><a href="#ch-7" data-target="ch-7"><span class="nav-roman">七</span>牧民转场</a></li>
+    <li><a href="#ch-8" data-target="ch-8"><span class="nav-roman">八</span>当下</a></li>
+    <li><a href="#ch-epilogue" data-target="ch-epilogue"><span class="nav-roman">尾</span>结语</a></li>
+  </ul>
+</nav>
+
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="目录"></button>
+
+<nav class="mobile-nav-drawer" id="mobileNavDrawer">
+  <div class="sticky-nav-title">目录 · Index</div>
+  <ul>
+    <li><a href="#ch-cover" data-target="ch-cover"><span class="nav-roman">○</span>封面</a></li>
+    <li><a href="#ch-contents" data-target="ch-contents"><span class="nav-roman">○</span>阅读导览</a></li>
+    <li><a href="#ch-preface" data-target="ch-preface"><span class="nav-roman">序</span>序言:为什么读它</a></li>
+    <li><a href="#ch-1" data-target="ch-1"><span class="nav-roman">一</span>大地理:三山两盆一河谷</a></li>
+    <li><a href="#ch-2" data-target="ch-2"><span class="nav-roman">二</span>地质:天山如何被雕刻</a></li>
+    <li><a href="#ch-3" data-target="ch-3"><span class="nav-roman">三</span>古史:草原民族的走马灯</a></li>
+    <li><a href="#ch-4" data-target="ch-4"><span class="nav-roman">四</span>清治与流人:伊犁将军的法外之地</a></li>
+    <li><a href="#ch-5" data-target="ch-5"><span class="nav-roman">五</span>边界条约:从夷播海到巴尔喀什湖</a></li>
+    <li><a href="#ch-6" data-target="ch-6"><span class="nav-roman">六</span>多民族:十三族世居的伊犁</a></li>
+    <li><a href="#ch-7" data-target="ch-7"><span class="nav-roman">七</span>牧民转场:逐水草而居</a></li>
+    <li><a href="#ch-8" data-target="ch-8"><span class="nav-roman">八</span>当下:伊宁与霍尔果斯口岸</a></li>
+    <li><a href="#ch-epilogue" data-target="ch-epilogue"><span class="nav-roman">尾</span>结语</a></li>
+  </ul>
+</nav>
+
+<!-- 封面 -->
+<section class="cover" id="ch-cover">
+  <div class="cover-overline">A Reader's Guide · 西域读本</div>
+  <h1>
+    伊犁纪程
+    <span class="accent">A Companion to the Ili Valley<br>
+    for the Lawyer Who Also Photographs</span>
+  </h1>
+  <p class="cover-subtitle">
+    从乌鲁木齐到伊犁的一线<br>
+    一份关于地理、地质、历史、人文与<em>法律记忆</em>的札记<br>
+    兼附"摄影师之眼"
+  </p>
+  <div class="cover-quote">
+    "山围草木翠烟平,迢递新城接旧城。<br>
+    行到丛祠歌舞处,绿氍毹上看棋枰。"
+    <div class="cover-attr">— 纪晓岚,《乌鲁木齐杂诗》,乾隆三十六年(1771)东归途中追忆所作</div>
+  </div>
+  <div class="cover-meta">八章 · 一程行旅</div>
+</section>
+
+<!-- 阅读导览 -->
+<section class="contents" id="ch-contents">
+  <span class="section-label">Contents · 阅读导览</span>
+  <h2>这本读本里有什么</h2>
+  <p class="contents-intro">这不是一份旅游攻略——攻略市面上已经很多。这是一份针对您身份的<em>"专属读本"</em>:一个法律工作者+认真的摄影者,需要的是<strong>能够回答"为什么"</strong>的背景知识。下面八章按"地理→地质→古史→清治→条约→人文→转场→当下"的逻辑展开,每章后附"摄影师之眼"提示,部分章节有"法律工作者视角"加注。</p>
+
+  <ul class="toc-list">
+    <li><span class="toc-num">一.</span><span class="toc-title">大地理框架:三山两盆,一个向西敞开的河谷</span><span class="toc-tag">基础</span></li>
+    <li><span class="toc-num">二.</span><span class="toc-title">地质成因:天山如何被雕刻出来</span><span class="toc-tag">基础</span></li>
+    <li><span class="toc-num">三.</span><span class="toc-title">古史:从塞人到准噶尔——草原民族的走马灯</span><span class="toc-tag">核心</span></li>
+    <li><span class="toc-num">四.</span><span class="toc-title">清治与流人:伊犁将军府与"法外的官场"</span><span class="toc-tag">★ 法律</span></li>
+    <li><span class="toc-num">五.</span><span class="toc-title">边界条约:从夷播海到巴尔喀什湖</span><span class="toc-tag">★ 法律</span></li>
+    <li><span class="toc-num">六.</span><span class="toc-title">多民族:十三族世居的伊犁河谷</span><span class="toc-tag">人文</span></li>
+    <li><span class="toc-num">七.</span><span class="toc-title">牧民转场:一种延续千年的生活节律</span><span class="toc-tag">★ 重点</span></li>
+    <li><span class="toc-num">八.</span><span class="toc-title">当下:伊宁、霍尔果斯口岸与一带一路</span><span class="toc-tag">现代</span></li>
+  </ul>
+</section>
+
+<!-- 序言 -->
+<section class="chapter" id="ch-preface">
+  <div class="chapter-num">序</div>
+  <h2>序言:一个法律工作者为什么应该理解伊犁</h2>
+  <div class="chapter-subtitle">Why a Jurist Should Understand This Place</div>
+
+  <p class="lead-para">伊犁不是一个普通的旅游目的地。对一个普通游客来说,它意味着草原、雪山、薰衣草、牧场和油菜花;但对一个<strong>法律工作者</strong>来说,这片土地承载的东西要厚重得多——它是<em>中国近代史上最具法律意义的边疆</em>。</p>
+
+  <p>这里有<strong>清代最重要的流放地</strong>之一(纪晓岚、林则徐、洪亮吉、刘鹗都曾流放至此);这里诞生了<strong>"伊犁将军府"</strong>这种独特的军政合一治理模式,统辖天山南北 150 年;这里见证了<strong>晚清两个最关键的边界条约</strong>(1864 年《勘分西北界约》使中国失去 44 万平方公里、1881 年《伊犁条约》是晚清外交史上罕见的"<em>条件最好的不平等条约</em>");这里是<strong>当代国际河流法</strong>的重要案例(伊犁河-巴尔喀什湖跨境水资源问题);这里也是<strong>"一带一路"</strong>陆路上最关键的口岸城市霍尔果斯所在。</p>
+
+  <p>对一个摄影者而言,这片土地的"<em>美</em>"是表层;真正让影像有重量的,是<strong>这种美背后的历史厚度</strong>。一座空牧场可以拍得很美,但当你知道这片牧场上 1771 年曾迎接过土尔扈特部 17 万人东归(最后只剩 7 万)、知道脚下的这条伊犁河 1881 年差点彻底成为外国领土、知道你拍下的那位哈萨克牧民的祖先可能与林则徐握过手——影像会获得另一个维度的深度。</p>
+
+  <div class="pull-quote">
+    <p>"风景如果只是风景,它就只是表象。但当风景<strong>承载历史与法律记忆</strong>,它就变成了证据——证明这片土地曾经如何被书写、被争夺、被治理。"</p>
+  </div>
+
+  <p>下面的八章,会试图把伊犁的<em>地理骨架</em>、<em>地质成因</em>、<em>历史层积</em>、<em>法律记忆</em>、<em>人文构成</em>、<em>当下处境</em>串成一份可读的"<strong>方志</strong>"。详略上,会着重于法律史(第四、五章)和牧民转场(第七章,因为您特别想拍这个题材),其余各章控制在中等篇幅。</p>
+
+  <p>愿这份札记能让您的伊犁之行,不仅是<em>看见</em>,更是<em>读懂</em>。</p>
+</section>
+
+<!-- 第一章:大地理 -->
+<section class="chapter" id="ch-1">
+  <div class="chapter-num">一 · ONE</div>
+  <h2>大地理框架</h2>
+  <div class="chapter-subtitle">Three Mountains, Two Basins, One Open Valley</div>
+
+  <p class="lead-para">理解伊犁,先要理解整个新疆的<strong>大地骨架</strong>。新疆的地形可以用一个简单的口诀概括——"<strong>三山夹两盆</strong>":北部是<em>阿尔泰山</em>,中部是<em>天山山脉</em>,南部是<em>昆仑山-阿尔金山</em>;天山以北是<em>准噶尔盆地</em>,天山以南是<em>塔里木盆地</em>。两盆一北一南,被天山这条 2500 公里长的山脉一分为二——这就是"<strong>北疆</strong>"和"<strong>南疆</strong>"的天然分界。</p>
+
+  <p>乌鲁木齐位于天山北麓,准噶尔盆地南缘——它是连接北疆与天山的<em>枢纽城市</em>。而<strong>伊犁河谷</strong>位于天山西段的怀抱里:北面是<em>北天山(婆罗科努山、博罗科努山)</em>,南面是<em>中天山(哈尔克山)</em>,东面是它们交汇处的<em>高山地带</em>,<strong>唯独西面向哈萨克斯坦方向敞开</strong>——这就是伊犁河谷被称为"<em>三面环山,西向开口的喇叭</em>"的原因。</p>
+
+  <h3>为什么伊犁是"塞外江南"</h3>
+
+  <p>这个西向开口决定了伊犁的一切:<strong>大西洋的湿润气流</strong>从遥远的西方,沿着哈萨克丘陵一路东行,被三面的天山阻挡,在伊犁河谷上空抬升、凝结、降雨——这就是为什么这里的年降水量能达到 500–1000 毫米(山地),谷地也有 300 毫米,是<em>整个新疆降水最多的地方</em>。其他地方的新疆是戈壁、沙漠、半荒漠;唯独伊犁,有森林、草原、农田、湿地、湖泊——所以被称为"<strong>塞外江南</strong>"。</p>
+
+  <div class="factbox">
+    <span class="factbox-label">三个数字</span>
+    <p><strong>1236 km</strong> · 伊犁河全长(中国境内 442 km,余下进入哈萨克斯坦,最终注入巴尔喀什湖)。</p>
+    <p><strong>117 亿立方米</strong> · 伊犁河年径流量(中国境内),是新疆水量最大的河流——单这一条河,水量超过新疆其他河流总和的很大比例。</p>
+    <p><strong>620 km</strong> · 乌鲁木齐到伊宁的公路距离。火车 C 字头动车 3 小时,普通卧铺 9–10 小时;自驾走 G30/G312,需要 1–2 天。</p>
+  </div>
+
+  <h3>从乌鲁木齐到伊宁:你会经过什么</h3>
+
+  <p>自驾这一程,会从干旱的准噶尔盆地南缘,一路向西,跨越<strong>果子沟</strong>(进入伊犁河谷的天然门户)。沿途的地貌变化非常戏剧性——从戈壁、半荒漠,渐次过渡到草原、森林、河谷农田。这种<em>"从干到湿"的过渡</em>本身就是西北地理学最经典的剖面。</p>
+
+  <p>关键节点:<strong>奎屯</strong>(石油城)、<strong>精河</strong>(进入博尔塔拉)、<strong>赛里木湖</strong>(海拔 2073 米的高山湖泊,"大西洋的最后一滴眼泪")、<strong>果子沟</strong>(果子沟大桥是新疆最壮观的人造景观之一)、<strong>霍城</strong>(惠远古城所在地)、<strong>伊宁</strong>(伊犁哈萨克自治州首府)。</p>
+
+  <div class="photo-eye">
+    <span class="label">Photographer's Eye · 摄影师之眼</span>
+    <h4>大地理这一章可以拍什么</h4>
+    <p><strong>地貌过渡的剖面照</strong>——这是大多数摄影者忽略的题材。从乌鲁木齐西出,每隔 50–100 公里停一次车,拍一张代表当下地貌的横构图:戈壁→半荒漠→灌木丛→草原→河谷农田→雪山下的森林。回家把六七张并置展示,本身就是一组有地理学意义的<em>"剖面影像"</em>。</p>
+    <p><strong>果子沟大桥</strong>是个网红机位,但大部分人拍的是大桥本身——建议反过来,从大桥上拍下方果子沟峡谷的纵深,或者站在峡谷中拍大桥的剪影。<em>角度的反转就是作者性的开端</em>。</p>
+    <p><strong>赛里木湖</strong>5 月初刚解冻,湖面有破碎冰块漂浮,远处雪山倒影。这种"<em>冬春过渡态</em>"是 6–7 月旺季完全看不到的画面——但需要清晨或日落的低角度光。</p>
+  </div>
+</section>
+
+<!-- 第二章:地质 -->
+<section class="chapter" id="ch-2">
+  <div class="chapter-num">二 · TWO</div>
+  <h2>地质成因</h2>
+  <div class="chapter-subtitle">How the Tianshan Was Carved</div>
+
+  <p class="lead-para">天山为什么这么高?为什么北面有大盆地、南面有更大的盆地?为什么伊犁河谷会形成一个独特的"<em>三面环山的喇叭</em>"?这些问题的答案都要回到<strong>地质构造</strong>。</p>
+
+  <p>简单说:整个青藏高原-天山-帕米尔的隆起,都是<strong>印度板块持续向北推挤欧亚板块</strong>的结果。这场推挤从大约 5000 万年前开始,至今没有结束——天山仍然在以每年几毫米的速度<em>继续抬升</em>。这就是新疆<strong>地震频发</strong>的根本原因。</p>
+
+  <h3>天山的"褶皱"与盆地</h3>
+
+  <p>板块挤压让原本平坦的古海床被<em>折叠、抬升</em>,形成了天山山脉的褶皱结构。同时,在山脉之间形成的沉陷区,逐渐被水流带来的沉积物填满,形成了准噶尔盆地与塔里木盆地。整个过程中,<strong>冰川、河流、风</strong>这三种力量持续改造地貌——冰川刻出 U 形谷,河流冲刷出 V 形峡谷,风蚀塑造出雅丹地貌。</p>
+
+  <p>伊犁河谷之所以是"三面环山的喇叭",是因为它正好处在<strong>北天山与中天山交汇前的开口处</strong>——这个开口面向西方哈萨克斯坦的低地。这个地质构造决定了它的气候、农业、人类活动模式——可以说,<em>一切都是地质决定的</em>。</p>
+
+  <h3>赛里木湖:一个"构造湖"的故事</h3>
+
+  <p>5 月的赛里木湖会是您见到的<em>最纯净的蓝</em>。但很少人知道:这个湖的形成机制是<strong>"构造湖"</strong>——也就是说,它不是河流冲积形成的,也不是冰川挖凿形成的,而是<em>地壳运动直接陷落出来的洼地</em>积水。这就是为什么它的湖底极深(最深超过 90 米),湖水来源主要靠周围山地的<em>降水与雪融水</em>(没有大河流入),所以水质极其纯净——透明度可以达到 12 米以上,是新疆乃至全国最纯净的湖之一。</p>
+
+  <div class="factbox">
+    <span class="factbox-label">一个有趣的地质事实</span>
+    <p>伊犁河谷的<strong>黄土堆积</strong>是新疆少有的——西方季风带来的细颗粒物质,在三面环山的"喇叭"里被困住,堆积下来,经历几万年形成了肥沃的<em>黄土质农田</em>。这就是为什么伊犁能种小麦、玉米、葡萄、苹果——而其他新疆地区只能种棉花、瓜果。一片"塞外江南",底层是<em>地质给的礼物</em>。</p>
+  </div>
+
+  <div class="photo-eye">
+    <span class="label">Photographer's Eye · 摄影师之眼</span>
+    <h4>地质题材怎么拍</h4>
+    <p><strong>地质题材是被大多数摄影者忽略的"高级题材"</strong>。它要求你不只拍"美",还要拍"力量的痕迹"。具体可以关注:</p>
+    <p>· <strong>褶皱与断层</strong>:北天山的某些山体明显能看出岩层的褶皱形态(像被揉皱的布)——长焦把这些岩层"压"在一起拍,有一种<em>"地球的肌肉"</em>的视觉力量。</p>
+    <p>· <strong>风蚀地貌</strong>:在乌鲁木齐到伊犁的路上,有部分区域有雅丹/风蚀台地。<em>低角度侧光</em>(清晨或日落)能把它们的纹理最大化。</p>
+    <p>· <strong>赛里木湖的"构造性"</strong>:别只拍湖面倒影。试着从高处俯瞰湖与周围山脉的关系——你会看到这是一个<em>被山围出来的洼地</em>,这种"被环绕"的形态本身就是地质构造的视觉证据。</p>
+    <p>· <strong>冰川痕迹</strong>:天山仍有现代冰川,但也有大量的"古冰川 U 形谷"。在天山一号冰川附近、伊昭公路某些高海拔路段,能看到典型的 U 形山谷——这是冰川挖凿的痕迹。这种题材回家做成黑白会很有 Ansel Adams 的感觉。</p>
+  </div>
+</section>
+
+<!-- 第三章:古史 -->
+<section class="chapter" id="ch-3">
+  <div class="chapter-num">三 · THREE</div>
+  <h2>古史:草原民族的走马灯</h2>
+  <div class="chapter-subtitle">A Lantern of Steppe Peoples</div>
+
+  <p class="lead-para">伊犁河谷的人类历史至少可以追溯到<strong>青铜时代</strong>。这片土地上,几乎你能想到的每一个北方草原民族都曾在这里生活过、统治过、被驱赶过。</p>
+
+  <p>有一种说法很形象:中国北方的草原带从大兴安岭一直延伸到中亚——而伊犁,恰好是这条草原带<em>"西出阳关"的最后一段</em>。所以这里成了所有<strong>草原民族西迁、东归、流亡、扩张</strong>的必经之地。</p>
+
+  <h3>时间线:从塞人到准噶尔</h3>
+
+  <ul class="timeline">
+    <li><span class="year">公元前 7 世纪</span><strong>塞人</strong>(Saka)居住于伊犁河谷,属印欧语系。今天在伊犁河谷出土的<em>金器与青铜器</em>,大量带有典型的"斯基泰艺术"风格——动物纹样、卷曲构图。</li>
+    <li><span class="year">公元前 2 世纪</span><strong>大月氏</strong>被匈奴击败西迁,经过伊犁,继续向中亚迁徙;原本游牧于此的<strong>乌孙</strong>从河西走廊迁来,建立<em>乌孙国</em>。</li>
+    <li><span class="year">公元前 119 年</span>张骞第二次出使西域,抵达乌孙——这是<em>"丝绸之路"</em>真正开始的标志性事件之一。汉武帝将<em>细君公主、解忧公主</em>嫁给乌孙王,开启汉与西域的婚姻外交。</li>
+    <li><span class="year">公元 60 年</span>西汉设<strong>西域都护府</strong>(治所在今轮台),管辖范围包括整个伊犁河谷与<em>巴尔喀什湖以东、以南</em>的广大地区——这是<strong>中央政府首次在伊犁地区行使主权</strong>。</li>
+    <li><span class="year">7–8 世纪</span>唐朝设<strong>安西都护府</strong>(后又设北庭都护府),伊犁纳入唐疆。唐人称巴尔喀什湖为"<em>夷播海</em>",这是中国对这个湖最早的命名。</li>
+    <li><span class="year">9–13 世纪</span>突厥、回鹘、契丹相继统治。<strong>察合台汗国</strong>(1227-1369)建立后,伊犁成为蒙古察合台后王的活动区域之一。</li>
+    <li><span class="year">17 世纪</span><strong>准噶尔汗国</strong>(卫拉特蒙古一支)崛起,以伊犁为政治中心,鼎盛时控制整个新疆与中亚部分地区。</li>
+    <li><span class="year">1755-1757</span>清乾隆<strong>平定准噶尔</strong>。这是中国历史上最重要的边疆战争之一,准噶尔部在战争+瘟疫中几乎被消灭(史称"<em>准噶尔灭族</em>")。新疆从此正式纳入清朝直接治理。</li>
+    <li><span class="year">1762</span>清廷设<strong>"总统伊犁等处将军"</strong>(简称伊犁将军),驻惠远城,统辖天山南北。下一章详谈。</li>
+    <li><span class="year">1771</span><strong>土尔扈特部东归</strong>。蒙古土尔扈特部 17 万人,在首领渥巴锡率领下,从伏尔加河流域历经 8 个月的浴血迁徙,回归伊犁,最终只剩 7 万人。乾隆将他们安置在巴音布鲁克草原一带——这是<em>世界游牧民族史上最悲壮的一次集体迁徙</em>之一。</li>
+  </ul>
+
+  <div class="pull-quote">
+    <p>"渥巴锡的东归,是<strong>用生命投票</strong>——他们宁可冒 60% 死亡率的代价穿越哈萨克草原,也要回到天山脚下。这件事告诉我们:<em>"故土"对游牧民族而言不是抽象的——它是具体的草场、河流、山形,是<strong>祖先骨血所在</strong></em>。"</p>
+  </div>
+
+  <div class="legal-eye">
+    <span class="label">A Legal Footnote · 法律工作者视角</span>
+    <p><strong>"主权"概念在伊犁的特殊性</strong>:今天我们用现代国际法的"主权领土"概念去回看伊犁的历史,会发现它<em>从来不是一个干净的法律概念</em>。汉、唐、清都曾在不同程度上控制过伊犁——但中间又有几百年其他政权的统治。这些"统治"中有的是<em>朝贡式</em>的(名义上承认中央政府,实际自治),有的是<em>设官式</em>的(中央派官员直接治理),有的是<em>羁縻式</em>的(承认当地首领,但收取贡赋)。</p>
+    <p>这种<strong>多层级、多模式</strong>的主权治理,是中国传统疆域治理与西方威斯特伐利亚主权概念的根本不同——也是今天理解"<em>新疆自古以来是中国领土</em>"这一命题时,必须放进具体历史语境里去看的复杂性。</p>
+  </div>
+
+  <div class="photo-eye">
+    <span class="label">Photographer's Eye · 摄影师之眼</span>
+    <h4>古史的痕迹怎么拍</h4>
+    <p>古史不是抽象的——它在土地上留下了实物痕迹。可以专门安排时间拍这几样:</p>
+    <p>· <strong>草原石人</strong>(突厥时代,7-10 世纪):新源、昭苏、特克斯等地的草原上,散布着大量的石人雕像——这些是<em>突厥贵族墓前的镇墓石人</em>。它们立在草原中,身后是雪山,前面是牧场——一个石人,一千多年的孤独。<em>这种题材的力量在于"长时间"</em>——你拍下的不只是石头,而是一千多年没有动过的姿势。</p>
+    <p>· <strong>乌孙古墓群</strong>:在巩乃斯草原沿线,有大量的乌孙古墓——它们是大土丘的形态,几乎不像"古迹",更像自然的小山包。但俯瞰能看到它们排列的规律。<em>无人机航拍能呈现这种"地表上的考古学"</em>。</p>
+    <p>· <strong>岩画</strong>:伊犁地区有多处青铜时代到早期铁器时代的岩画。这些岩画的拍摄要点是<em>侧光</em>——只有在清晨或傍晚的低角度光下,岩石表面的浅刻痕才能被光影"<strong>抠</strong>"出来。中午的顶光下,大多数岩画几乎看不见。</p>
+  </div>
+</section>
+
+<!-- 第四章:清治与流人 -->
+<section class="chapter" id="ch-4">
+  <div class="chapter-num">四 · FOUR</div>
+  <h2>清治与流人</h2>
+  <div class="chapter-subtitle">The Ili General and the Exiled Officials</div>
+
+  <p class="lead-para">这一章是<strong>专为您写的</strong>。作为一个法律工作者,您应该会对清代<em>"伊犁流放制度"</em>有特殊的兴趣——这是中国法制史上最有研究价值的<strong>"边疆流放"个案</strong>之一。</p>
+
+  <h3>伊犁将军府:军政合一的边疆治理</h3>
+
+  <p>1762 年(乾隆二十七年),清廷设立<strong>"总统伊犁等处将军"</strong>(以下简称"伊犁将军"),驻惠远城——也就是今天霍城县境内的<em>惠远古城</em>。这是清代对新疆<strong>军政合一</strong>治理的核心。伊犁将军是<em>新疆地区最高军政长官</em>,管辖整个天山南北的军事防务、屯田、贸易、外交、行政——某种意义上,他是<em>新疆的"皇帝代理人"</em>。</p>
+
+  <p>从 1762 年到 1912 年清亡的 150 年间,共有 <strong>42 人(60 人次)</strong>担任过伊犁将军。这个职位的<em>权力极大、责任极重、风险也极高</em>——很多伊犁将军最终都因为边疆问题被革职甚至处决。最后一任伊犁将军<strong>志锐</strong>,在 1912 年辛亥革命爆发后被革命党人处决——这是清王朝在新疆军政统治的终结点。</p>
+
+  <div class="factbox">
+    <span class="factbox-label">"伊犁九城"</span>
+    <p>清廷以惠远城为中心,在伊犁河谷修建了 <strong>九座卫星城</strong>,统称"伊犁九城"——惠远(将军府所在)、惠宁、绥定、广仁、瞻德、拱宸、宁远(今伊宁)、塔尔奇、熙春。这是<em>清代在边疆构建的最完整的城市系统</em>。今天大部分已经损毁,惠远城和宁远城(即伊宁)是仅存的两处。</p>
+  </div>
+
+  <h3>"流人":一种特殊的边疆人口</h3>
+
+  <p>清代将伊犁作为<strong>仅次于宁古塔(今黑龙江)的流放重地</strong>。仅乾隆末年,流放至伊犁的"<em>遣犯</em>"就达三四千人,流放官员数百人——从封疆大吏到县尉小吏,各级别都有。这些人在历史上被称为"<strong>流人</strong>"或"<strong>谪员</strong>"。</p>
+
+  <p>但与宁古塔的<em>苦寒折磨</em>不同,伊犁的流放有一个非常特殊的现象——<strong>历任伊犁将军对流放的官员普遍宽厚甚至礼遇</strong>。原因很现实:<em>新疆极度缺乏各类人才,伊犁将军府需要仰仗有才能的流犯或废员才能更好地运转</em>。所以流放伊犁的官员,往往在到达后就被安排到将军府的实际工作岗位上——执掌粮饷处、勘查屯田、兴修水利、教育子弟、办理外交。</p>
+
+  <p>这就形成了清代历史上一个独特的现象:<strong>"流放成就了流人,也成就了伊犁"</strong>。</p>
+
+  <h3>几位重要的流人</h3>
+
+  <ul class="timeline">
+    <li><span class="year">1768</span><strong>纪晓岚</strong>(纪昀)因泄露机密,流放乌鲁木齐两年余。在新疆期间撰写《阅微草堂笔记》中的<em>"乌鲁木齐杂诗"</em>,详尽记录了新疆民俗。</li>
+    <li><span class="year">1799</span><strong>洪亮吉</strong>因直谏被流放伊犁,只待了不到 100 天就被嘉庆释放——但留下了《伊犁纪事诗》42 首,是研究清中期伊犁社会的一手史料。</li>
+    <li><span class="year">1842</span><strong>林则徐</strong>抵达惠远城(详见下节)。</li>
+    <li><span class="year">1845</span><strong>邓廷桢</strong>(与林则徐同为禁烟功臣)和林则徐在伊犁相会,共度新年。</li>
+    <li><span class="year">1908</span><strong>刘鹗</strong>(《老残游记》作者)因"私售仓粟"被流放新疆,1909 年病死于迪化(乌鲁木齐)。<em>这是一位通晓金石、医学、算学的<strong>晚清通才</strong>,流放新疆时已是 51 岁,带病上路,次年去世。</em></li>
+  </ul>
+
+  <h3>林则徐在伊犁:1842–1845</h3>
+
+  <p>这是<strong>清代流放史上最著名的案例</strong>。林则徐(1785-1850)因虎门销烟、抗击英军,被道光帝以"<em>误国病民、办理不善</em>"的罪名,革职查办,流放伊犁。</p>
+
+  <p>1841 年 6 月被下令遣戍,中途因黄河治水暂留,1842 年 12 月 10 日(道光二十二年十一月初九)抵达惠远城。流放伊犁期间共两年余。</p>
+
+  <p>到达后,伊犁将军<strong>布彦泰</strong>对他礼遇有加——亲自登门拜访、送来粮食、安排其执掌将军府<em>粮饷处主事</em>(掌管伊犁全境军饷与屯田)。在伊犁期间,林则徐完成了几件大事:</p>
+
+  <p>· <strong>修建湟渠龙口工程</strong>:他<em>"以待罪之身、年近花甲、体弱多病"</em>之状,认捐了湟渠整修过程中最艰难的龙口工程,最终从喀什河引水贯通至惠远城西北,建成<em>东西横贯伊犁河北岸的农田灌区</em>。这条水渠至今每逢春夏仍奔涌不息,被当地人称为"<strong>林公渠</strong>"。</p>
+
+  <p>· <strong>勘办南疆屯田</strong>:1845 年,他奉命前往南疆库车、阿克苏、乌什、和田、喀什等地<em>勘查可垦荒地</em>,行程三万里(史称"<em>西域遍行三万里</em>"),勘田 60 余万亩。</p>
+
+  <p>· <strong>推广坎儿井与纺车</strong>:他在勘查中向当地推广中原的<em>坎儿井</em>(地下水渠)与<em>纺车技术</em>,后世新疆人称为"<strong>林公井</strong>"和"<strong>林公车</strong>"。</p>
+
+  <p>· <strong>"塞防论"的形成</strong>:在伊犁期间,林则徐通过亲自勘查边境,深切感受到<em>沙俄</em>对中国西北的威胁——他向布彦泰提出"<em>屯田耕战,有备无患</em>",并预言"<strong>终为中国患者,其俄罗斯乎?</strong>"——这句话在他离世仅 14 年后,被 1864 年的《勘分西北界约》和此后历次中俄条约残酷验证。</p>
+
+  <div class="pull-quote">
+    <p>"林则徐在伊犁两年多时间,做的事比许多人一辈子还多。这就是<strong>清代流放制度的悖论</strong>——它本是惩罚,但因为伊犁将军府需要人才,反而成了<em>"另一种任职"</em>。林则徐说自己是"<em>戴罪之身</em>",但他的实际工作内容,几乎就是<strong>"伊犁副将军"</strong>。"</p>
+  </div>
+
+  <div class="legal-eye">
+    <span class="label">A Legal Footnote · 法律工作者视角</span>
+    <p><strong>清代"遣戍"制度的几个法理特点</strong>,可能值得您从专业角度思考:</p>
+    <p><strong>(一)惩罚与利用的统一</strong>。"遣戍"在《大清律例》中是仅次于死刑、凌迟的重刑,但执行上却兼有"<em>边疆开发</em>"的功能——这是中国传统"<em>刑赏并用</em>"思维的典型体现。与西方流放(如澳大利亚)的<em>"将罪犯运到远方就完事"</em>不同,清廷期待流人在边疆<em>继续效力</em>。</p>
+    <p><strong>(二)"效力赎罪"的法理</strong>。林则徐的判决是"<em>从重发往伊犁效力赎罪</em>"。"效力赎罪"四个字蕴含了一个独特的法理结构——<em>罪可以通过劳动/服务而被部分消解</em>。这在现代刑法中只有"减刑"概念,但中国传统的"<em>赎罪</em>"远比减刑深入——它承认<strong>罪与劳动可以相互转化</strong>。</p>
+    <p><strong>(三)边疆例外</strong>。伊犁将军在管理流人时享有相当大的自由裁量权——他可以决定流人的工作安排、生活待遇、是否上奏请求释放。这种<em>"中央立法、边疆自由裁量"</em>的二元结构,在今天的中国司法实践中仍然存在影子(比如"试点制度"、"特区立法权")。</p>
+  </div>
+
+  <div class="photo-eye">
+    <span class="label">Photographer's Eye · 摄影师之眼</span>
+    <h4>清治与流人的题材怎么拍</h4>
+    <p><strong>惠远古城是这一章题材的核心拍摄地</strong>,位于霍城县境内,距离伊宁市约 50 公里,自驾约 1 小时可到。</p>
+    <p>· <strong>伊犁将军府</strong>:四合院式建筑群,门口有两尊石狮(<em>南方雕刻风格与新疆粗犷工艺的融合</em>,极有视觉特点),院内有四棵古树(据说是 200 多年前所植)。重点拍<em>清晨/傍晚的光线穿过古树洒在屋檐</em>的瞬间——这种"时间的痕迹"是这种题材的灵魂。</p>
+    <p>· <strong>惠远钟鼓楼</strong>:23 米高的木制四层歇山顶建筑,是全疆仅存的高层木结构古建筑。从远处用长焦压缩拍它与远处天山的<em>同框关系</em>——一座汉式钟鼓楼,背后是天山雪峰,这本身就是"<strong>边疆中国</strong>"的视觉浓缩。</p>
+    <p>· <strong>林则徐纪念馆</strong>:在惠远城内有专门的纪念馆,藏有大量他在伊犁期间的手稿、信件复制品。<em>不一定能拍出"漂亮的照片",但可以记录文物的细节</em>——一个法律工作者+摄影者拍这种题材,有别人没有的视角。</p>
+    <p>· <strong>"林公渠"现状</strong>:这是一个很多游客不会去的点——但林则徐当年主持修建的水渠,现在仍在使用。你可以试着找到它今天的位置,拍一张"<strong>历史活着的证据</strong>"——一条 180 年前由一位"罪臣"主持修建的水渠,今天仍在灌溉伊犁河谷。<em>这种"长时间的延续"是中国历史最深的力量之一</em>。</p>
+  </div>
+</section>
+
+<!-- 第五章:边界条约 -->
+<section class="chapter" id="ch-5">
+  <div class="chapter-num">五 · FIVE</div>
+  <h2>边界条约:从夷播海到巴尔喀什湖</h2>
+  <div class="chapter-subtitle">From Yibo Sea to Lake Balkhash — Borders Drawn in Ink</div>
+
+  <p class="lead-para">这一章对法律工作者来说,可能是<strong>整个读本里最有思考价值的部分</strong>。我们站在今天的伊犁河边,往西望——河水流向哈萨克斯坦境内的巴尔喀什湖。但仅仅 160 年前,这一切都还<em>不是"出境"</em>——它就是中国境内的西部领土。</p>
+
+  <p>这种地理意义的剧变,是<strong>三个条约</strong>造成的——1860 年《北京条约》、1864 年《勘分西北界约》、1881 年《伊犁条约》。下面分别说。</p>
+
+  <h3>条约一:1860 年《北京条约》</h3>
+
+  <p>1860 年,第二次鸦片战争结束,英法联军攻入北京。清廷战败,被迫与英、法、俄签订《北京条约》。其中<em>中俄之间的部分</em>,确认了 1858 年《瑷珲条约》中俄国从中国手中夺取的<strong>外东北 60 万平方公里领土</strong>,并对<em>西北边界</em>做了一个原则性约定——"<em>由沙宾达巴哈至中亚浩罕边界,顺山岭、大河之流及现在中国常驻卡伦等处,作为划定西北疆界</em>"。</p>
+
+  <p>这个"<strong>顺现在中国常驻卡伦</strong>"的措辞,是<strong>致命的</strong>——因为清廷在西北边疆的"卡伦"(边防哨所)是<em>季节性的</em>,夏卡伦与冬卡伦位置不同,而且很多卡伦是<em>"游动卡伦"</em>。这个模糊措辞,为俄国后来按照对自己最有利的方式"<em>解释</em>"边界,埋下了伏笔。</p>
+
+  <h3>条约二:1864 年《勘分西北界约记》——最大的领土损失</h3>
+
+  <p>1864 年(同治三年),根据《北京条约》的原则,中俄双方派员在塔尔巴哈台(今塔城)勘定边界。结果俄国利用清廷对边疆地理的无知与不重视,以及当时<em>清廷正深陷太平天国与回乱</em>无暇西顾,将边界大幅西推——将<strong>巴尔喀什湖以东以南 44 万平方公里</strong>的中国领土,正式划入俄国版图。</p>
+
+  <p>这是<strong>中国近代历史上单次损失领土面积最大的条约之一</strong>。其中包括:</p>
+
+  <p>· 整个<strong>巴尔喀什湖</strong>(中国唐代称"夷播海",原本是中国西部边境的天然分割线)<br>
+  · 斋桑湖<br>
+  · 楚河、塔拉斯河流域<br>
+  · 伊塞克湖以北地区</p>
+
+  <div class="factbox">
+    <span class="factbox-label">数字感</span>
+    <p>44 万平方公里——约等于<strong>四个浙江省</strong>,或<strong>整个甘肃省的面积</strong>。一纸条约,签字之间,失去。</p>
+  </div>
+
+  <h3>条约三:1881 年《伊犁条约》——晚清外交的"小胜"</h3>
+
+  <p>1864 年的灾难还没结束。1871 年,趁着新疆陷入<em>同治回乱</em>的混乱,俄国以"<strong>代收代守</strong>"为名,出兵占领整个伊犁地区(包括伊犁九城)——这是<strong>赤裸裸的军事占领</strong>,但清廷因为当时正集中力量对付陕甘回乱,只能默认。</p>
+
+  <p>转机出现在 1875 年——清廷启用<strong>左宗棠</strong>督办新疆军务。左宗棠的战略是"<em>先北后南、缓进急战</em>",到 1878 年基本收复新疆主体(除伊犁外)。1880 年,左宗棠"<strong>抬棺进疆</strong>",做出准备与俄国开战的姿态——他知道清廷的军事实力远不及俄国,但<em>他赌的是"俄国不愿为伊犁开战"</em>。</p>
+
+  <p>这一赌赌对了。在<em>军事压力</em>与<em>国际形势</em>(英俄当时也在中亚博弈)的双重作用下,俄国同意谈判。1881 年 2 月,中俄签订《伊犁条约》:</p>
+
+  <p>· 俄国归还<strong>伊犁九城与河谷主体</strong>;<br>
+  · 但中国仍然<strong>失去霍尔果斯河以西、特克斯河流域北部</strong>的部分领土(约 7 万平方公里);<br>
+  · 中国向俄国赔偿"<em>代守</em>"费用 900 万银卢布;<br>
+  · 俄国在新疆获得免税通商、设领事馆等特权。</p>
+
+  <p>这个条约在晚清外交史上被评价为"<strong>条件最好的不平等条约</strong>"——因为它<em>夺回了大部分被占领土</em>,虽然代价惨重。这是晚清在与列强签订的所有条约中,<em>唯一一份成功收回部分土地</em>的条约。</p>
+
+  <div class="pull-quote">
+    <p>"左宗棠的'<em>抬棺进疆</em>'和 1881 年《伊犁条约》的'惨胜',是中国近代史上少有的<strong>"以军事姿态推动外交成功"</strong>的案例。它告诉我们一个朴素的道理:<em>外交桌上谈出来的边界,从来都是用兵力撑起来的</em>。"</p>
+  </div>
+
+  <h3>当代:伊犁河-巴尔喀什湖的国际河流法问题</h3>
+
+  <p>故事并没有在 1881 年结束。伊犁河自此成为<strong>跨越中国与哈萨克斯坦的国际河流</strong>——它发源于中国境内的天山,流经伊犁河谷,在霍尔果斯进入哈萨克斯坦,最终注入巴尔喀什湖。<em>巴尔喀什湖 78% 的入湖水量来自伊犁河</em>。</p>
+
+  <p>这就形成了一个<strong>典型的"上下游"国际水法问题</strong>:中国作为上游国家,如果<em>大幅增加</em>对伊犁河水的利用(灌溉、水电),会直接影响哈萨克斯坦境内巴尔喀什湖的水量,可能加速这个内陆湖的萎缩——重蹈<em>咸海</em>的悲剧(咸海因苏联时期的过度灌溉,已经基本干涸)。</p>
+
+  <p>反过来,哈萨克斯坦在 1969 年修建的<strong>卡普恰盖水库</strong>(伊犁河下游)也影响了下游生态。中哈两国从 2001 年起开始正式谈判国际河流合作,2011 年签订《中哈环境保护合作协定》,目前两国设有<em>定期协商机制</em>来处理跨境水资源问题。</p>
+
+  <div class="legal-eye">
+    <span class="label">A Legal Footnote · 法律工作者视角</span>
+    <p><strong>国际河流法是一门相对年轻但极重要的法律领域</strong>。1997 年《联合国国际水道非航行使用法公约》确立了几个核心原则:</p>
+    <p>· <em>"公平合理利用"</em>原则(equitable and reasonable utilization)——上下游国家都有权合理利用国际水道,但要考虑其他国家的需求。</p>
+    <p>· <em>"不造成重大损害"</em>原则(no significant harm)——上游国家在利用国际河流时不得对下游国家造成实质性损害。</p>
+    <p>· <em>"事先通知与协商"</em>原则——计划新建可能影响水道的设施前,必须通知并协商。</p>
+    <p>中国到 2025 年仍未加入这一公约,但在<em>伊犁河-巴尔喀什湖</em>、<em>额尔齐斯河-鄂毕河</em>(中国-哈萨克斯坦-俄罗斯)、<em>澜沧江-湄公河</em>等多条跨境河流问题上,实际上是按照这些原则进行管理的。这是中国"<strong>软法律</strong>"实践的典型案例——<em>不加入公约,但遵守公约精神</em>。</p>
+    <p>对您来说,站在伊犁河边时,会有一个特别的体验:<strong>这条河承载了三层法律意义</strong>——19 世纪是边界条约的客体、20 世纪是水资源开发的对象、21 世纪是国际河流法的实验场。一条河,三层法律史。</p>
+  </div>
+
+  <div class="photo-eye">
+    <span class="label">Photographer's Eye · 摄影师之眼</span>
+    <h4>边界与条约题材怎么拍</h4>
+    <p>这一章的拍摄难点是——<strong>抽象的法律史如何被影像呈现?</strong>边界没有"实物",条约更没有"风景"。但有几个具体的拍摄点能承载这种历史感:</p>
+    <p>· <strong>伊犁河大桥</strong>(伊宁市附近):拍伊犁河本身——河水流向西方,流出国境,流向巴尔喀什湖。<em>低角度的傍晚光线,水面是金黄色的,但你知道这水"将去往何处"</em>——这种"<strong>知道感</strong>"会让画面厚重起来。</p>
+    <p>· <strong>霍尔果斯口岸</strong>:这是<em>"今天的边界"</em>。中哈合作中心(也叫"中哈霍尔果斯国际边境合作中心")是世界上唯一的<em>跨国境合作区</em>——你可以拍一边是中国汉字招牌、一边是俄文/哈萨克文招牌的<em>"双语并置"</em>画面。这是当代边界的视觉浓缩。</p>
+    <p>· <strong>果子沟</strong>:这条山谷历史上是<em>"丝绸之路北道"</em>的关键通道,也是 1755 年清军平定准噶尔的进军路线。今天的果子沟大桥横跨其上,但下面的山谷里仍有古道痕迹。<em>"古道与新桥同框"</em>——这是边界的时间剖面。</p>
+    <p>· <strong>赛里木湖</strong>:这是 1881 年《伊犁条约》后的<em>"新边界"</em>所在地之一——湖的西岸,几公里之外就是哈萨克斯坦。站在湖东岸拍向西,有一种特殊的"<strong>知识的重量</strong>"——你知道你拍下的远山,曾经是中国的内地,现在已经是别国。</p>
+  </div>
+</section>
+
+<!-- 第六章:多民族 -->
+<section class="chapter" id="ch-6">
+  <div class="chapter-num">六 · SIX</div>
+  <h2>多民族:十三族世居的伊犁河谷</h2>
+  <div class="chapter-subtitle">The Thirteen Indigenous Peoples</div>
+
+  <p class="lead-para">新疆有 13 个世居民族,伊犁河谷可以说是<strong>其中民族构成最复杂的一片土地</strong>。这种复杂性不是巧合——它是 150 年清代屯垦+流放+迁徙+战争+开放的<em>历史沉积</em>。</p>
+
+  <h3>主要民族</h3>
+
+  <p><strong>哈萨克族</strong>是伊犁哈萨克自治州的主体民族之一(自治州因此得名)。他们的祖先是中亚草原上的游牧民族,语言属突厥语系。哈萨克族是<em>典型的游牧民族</em>——直到今天,大部分哈萨克牧民仍然保留着<strong>季节性转场</strong>的生活方式(详见下一章)。</p>
+
+  <p><strong>维吾尔族</strong>是新疆的主体民族,在伊犁也有大量分布,主要从事农业和商业。<em>伊宁市内的喀赞其</em>是著名的维吾尔民俗区——蓝色门窗、土黄色墙面、葡萄架下喝茶,这是典型的<em>"伊犁维吾尔家庭院落"</em>风格。</p>
+
+  <p><strong>锡伯族</strong>——这是伊犁的"<em>历史活化石</em>"。1764 年(乾隆二十九年),清廷从盛京(今沈阳)调遣 1000 余名锡伯族官兵及其家属共 4000 多人,<em>历时一年</em>跋涉到伊犁屯垦戍边。这就是著名的<strong>"锡伯族西迁"</strong>。他们的后代至今聚居在伊犁河南岸的<em>察布查尔锡伯自治县</em>。神奇的是——<strong>东北的锡伯族母语早已不再使用,而伊犁的锡伯族至今仍说着 18 世纪的锡伯语和满语</strong>。一个被时间封存的语言活化石。</p>
+
+  <p><strong>回族、汉族、蒙古族、塔吉克族</strong>——这些是其他主要的民族。蒙古族主要是 1771 年东归的<em>土尔扈特后裔</em>。汉族主要是清代屯垦兵+建国后内地移民的后代。回族大多是清代陕甘回民起义后<em>被遣散</em>的难民及其后代。</p>
+
+  <p><strong>俄罗斯族、塔塔尔族、乌兹别克族、东乡族</strong>——这些是因为伊犁靠近俄国/中亚而形成的<em>边境民族</em>。19 世纪后期到 20 世纪初,有大量俄罗斯人、塔塔尔人通过霍尔果斯进入伊犁经商;1944-1949 年的<em>"三区革命"</em>时期更有大量人口流入。</p>
+
+  <div class="factbox">
+    <span class="factbox-label">伊宁六星街</span>
+    <p>伊宁市内有一个特殊的街区叫<strong>"六星街"</strong>——它建于 1934 年(民国 23 年),原是<em>瑞典传教士盖斯林</em>设计的,模仿欧洲城市规划:从中心向外辐射出 6 条街道,形成一个完整的几何六边形。这里曾是<em>俄罗斯人、塔塔尔人、维吾尔人、回族</em>混居的街区,至今仍保留着<em>俄式建筑、维吾尔民居、清真寺、东正教堂</em>并存的城市肌理。是中国境内极为罕见的<strong>欧式规划+多民族混居</strong>城市标本。</p>
+  </div>
+
+  <div class="photo-eye">
+    <span class="label">Photographer's Eye · 摄影师之眼</span>
+    <h4>多民族题材怎么拍</h4>
+    <p>这是<strong>整个伊犁之行最有创作可能性的题材之一</strong>——但也最难。原因前面在评注里已经说过——人文纪实拍得好的关键是<em>"和被拍者建立真实联系"</em>,而不是端着长焦"偷拍"。</p>
+    <p>· <strong>喀赞其民俗村(伊宁市内)</strong>:维吾尔家庭院落,蓝色门窗特别上镜。但建议<strong>放下长焦,带 35mm 或 50mm 定焦走近</strong>。可以付一点钱进入某户家庭(当地有付费参观的成熟模式),坐下喝茶,慢慢拍。你会发现<em>每个家庭的院落构图都不一样</em>——这是 50 张同质化游客照拍不到的细节。</p>
+    <p>· <strong>察布查尔锡伯自治县</strong>(从伊宁出发约 1 小时):这里有<strong>锡伯族家庙</strong>、<em>箭术比赛</em>(锡伯族传统)、<em>"西迁节"</em>(每年农历四月十八)。如果运气好赶上西迁节,是一年中最好的人文摄影机会。</p>
+    <p>· <strong>六星街</strong>:5 月初这里没有什么花,但建筑本身极具视觉张力。<em>建议清晨去</em>——人少光斜,能拍到俄式建筑、清真寺、东正教堂的几何关系。</p>
+    <p>· <strong>巴扎(集市)</strong>:伊宁周日大巴扎是<em>北疆最大的集市之一</em>。如果时间允许,值得专门安排一个上午。<strong>瓜果、干果、小吃、布料、刀具、马具</strong>——每一类摊位都是一个独立题材。<em>拍巴扎的核心是"密度"——色彩、人、商品的密度——这种密度本身就是一种视觉语言</em>。</p>
+    <p>· <strong>一个忠告</strong>:在新疆,部分宗教场所(清真寺内)<em>不允许拍照</em>;在某些区域,拍摄军警、政府机关、边境哨所等<em>是被禁止的</em>。遇到拒绝拍摄的人或建筑,立刻收起相机——这不只是礼貌问题,在某些情况下是<em>法律问题</em>(您应该比我更清楚)。</p>
+  </div>
+</section>
+
+<!-- 第七章:牧民转场 -->
+<section class="chapter" id="ch-7">
+  <div class="chapter-num">七 · SEVEN</div>
+  <h2>牧民转场:逐水草而居</h2>
+  <div class="chapter-subtitle">The Seasonal Migration — A Rhythm of a Thousand Years</div>
+
+  <p class="lead-para">这是您特别想拍的题材——所以这一章会写得详细一些。<strong>牧民转场</strong>是哈萨克族(以及部分蒙古族、柯尔克孜族)<em>延续了一千多年</em>的生活节律,也是世界范围内仍在持续的<strong>少数几种"<strong>大规模季节性游牧</strong>"实践之一。</p>
+
+  <h3>什么是"转场"?</h3>
+
+  <p>简单说:<strong>随着季节和草场状态的变化,牧民将牲畜赶往不同海拔的牧场,逐水草而居</strong>。这是游牧文明对天山地形的最优适应——天山的<em>立体气候</em>使得不同海拔的草场在不同季节最适合放牧:</p>
+
+  <ul class="timeline">
+    <li><span class="year">春牧场</span><strong>海拔 1000-1500 米的山地阳坡</strong>。早春雪融,阳坡先返青,牧民赶着牲畜从冬窝子上来。停留时间较短,因为草还不茂盛。</li>
+    <li><span class="year">夏牧场</span><strong>海拔 2000-3500 米的高山草甸</strong>。这是一年中草最好、温度最舒适、风景最美的牧场。哈萨克语称之为"<em>Jaylau</em>(夏牧场)"——是哈萨克文化的精神中心。<strong>那拉提、喀拉峻、巴音布鲁克</strong>等著名草原,都是传统的夏牧场。</li>
+    <li><span class="year">秋牧场</span>夏天结束,高山开始下雪。牧民说"<em>秋天雪赶羊</em>"——雪从高处往下追,牲畜必须向下转移。秋牧场通常在<em>中海拔 1500-2000 米</em>的森林草原带,停留时间也较短。</li>
+    <li><span class="year">冬牧场</span><strong>海拔较低的平原盆地,称为"<em>冬窝子</em>"</strong>。这里地面雪薄(甚至无雪),牲畜能觅食牧草;同时背风、有水源、便于过冬。冬窝子是牧民停留时间最长的牧场,通常是<em>固定的房屋+畜栏</em>。</li>
+  </ul>
+
+  <div class="pull-quote">
+    <p>"哈萨克牧民形象地说:<strong>'夏天上山,人赶着雪跑;冬天下山,雪赶着人跑。'</strong> 这句谚语浓缩了游牧民族对自然规律的几千年观察——<em>人不是自然的主宰,人是自然的<strong>合作者</strong></em>。"</p>
+  </div>
+
+  <h3>转场的具体时间</h3>
+
+  <p>转场是<strong>一年四次</strong>的大型迁徙活动。每次转场需要<strong>3-15 天</strong>不等(取决于路线长度与天气),全程几十到几百公里,跋涉海拔从 800 米到 3500 米的<em>巨大落差</em>。</p>
+
+  <p>对您 5 月的行程来说,关键是<strong>"春转夏"</strong>这次——也就是从春牧场往夏牧场的转场。具体时间:</p>
+
+  <div class="factbox">
+    <span class="factbox-label">春→夏转场时间窗口</span>
+    <p><strong>4 月中下旬到 6 月初</strong>是哈萨克牧民从冬窝子/春牧场转向夏牧场的高峰期。具体哪一周转场,取决于<em>当年的气温与草场状态</em>——所以无法精确预知。一般来说:</p>
+    <p>· <strong>4 月下旬</strong>:从冬窝子上春牧场。<br>
+    · <strong>5 月中下旬</strong>:从春牧场继续上夏牧场(高海拔草原)。<br>
+    · 您 5 月初到伊犁,最有可能赶上的是<em>春牧场上的牧民</em>、<em>正在向春牧场转移的途中</em>,或者<em>少数早开始上夏牧场的家庭</em>。</p>
+  </div>
+
+  <h3>转场的"路线"</h3>
+
+  <p>转场不是随便走的——每个牧民家庭都有<strong>世代相传的转场路线</strong>(哈萨克语称<em>"köş"</em>)。这些路线是几百年来踩出来的<em>"牧道"</em>,有固定的水源点、扎营点、休息点。在伊犁,著名的转场路线包括:</p>
+
+  <p>· <strong>那拉提-巩乃斯转场路线</strong>:从那拉提冬窝子向巩乃斯草原方向。<br>
+  · <strong>特克斯-喀拉峻转场路线</strong>:经过特克斯县,上到喀拉峻"空中草原"。<br>
+  · <strong>琼库什台路线</strong>:这是一个相对原始的<em>哈萨克古村</em>,转场仍保持非常传统的方式——<em>骑马+骆驼驮帐篷</em>,而不是用卡车。这里是<strong>摄影爱好者公认的转场最佳拍摄地之一</strong>。</p>
+
+  <h3>转场的现代变化</h3>
+
+  <p>需要诚实地说:<strong>过去 20 年,牧民转场正在快速现代化</strong>。一部分牧民已经放弃骑马转场,改用<em>卡车把羊群运到夏牧场</em>;一部分牧民因为<em>定居化政策</em>已经不再转场;还有一部分牧民只在夏天上去几天"<em>表演式转场</em>"给游客看。</p>
+
+  <p>真正<strong>"原生态"的转场</strong>仍然存在,但需要深入到偏远地区——比如<em>琼库什台、夏特、莫乎尔</em>这些地方。它们没有完全被旅游业覆盖,牧民仍按传统方式转场。但每年都在减少。<em>这就是您应该尽早去拍的原因——再过 10 年,这种题材可能就基本消失了</em>。</p>
+
+  <div class="pull-quote">
+    <p>"这是一个<strong>正在消逝的题材</strong>。20 世纪 50 年代到 21 世纪初,游牧民族的<em>季节性大迁徙</em>在全世界范围内大规模消失——非洲马赛族、北欧萨米族、中亚游牧民族、蒙古游牧——都在被定居化、城镇化、农业化所替代。中国的哈萨克牧民转场是<em>世界上仅存的几个仍在大规模进行的游牧迁徙之一</em>。"</p>
+  </div>
+
+  <h3>遇到转场队伍时,要做什么(和不做什么)</h3>
+
+  <p>如果您足够幸运,在路上遇到转场队伍——可能是几百只羊、几十头牛、几匹马、几头骆驼,一家老小骑马跟随,有的家庭还带着<em>毡房零件</em>用骆驼驮着。这种场景是摄影爱好者梦寐以求的。</p>
+
+  <p><strong>正确的做法</strong>:</p>
+  <p>· <strong>停车,但停得离队伍远一些</strong>(50-100 米),不要堵住他们的路线;<br>
+  · <strong>下车,先看,不要立刻拿出相机</strong>——转场是他们的"严肃工作",不是表演;<br>
+  · <strong>等队伍接近,可以微笑、招手、用简单的"<em>Salem(你好)</em>"打招呼</strong>;<br>
+  · <strong>拍摄前最好<em>用手势征求许可</em></strong>——指一下相机,看对方反应;<br>
+  · 如果对方点头/无明显反对——可以拍。<strong>如果对方摇头/躲闪——立刻收起相机</strong>;<br>
+  · <strong>拍完后可以掏出手机,把照片给他们看</strong>——这是表达尊重的好方式;<br>
+  · 如果有机会,<em>给小孩一些糖果、给大人一杯水或一支烟</em>——这是当地的礼仪,也是建立联系的方式。</p>
+
+  <p><strong>不要做的事</strong>:</p>
+  <p>· 不要骚扰羊群(挤过去拍特写、用闪光灯);<br>
+  · 不要用无人机近距离飞过头顶(羊会受惊,牧民会反感);<br>
+  · 不要追着转场队伍跑——他们一天要走 20-40 公里,你跟不上的;<br>
+  · 不要把对方当作"道具"——他们的衣服、骆驼、马,都不是你的"<em>素材</em>"。</p>
+
+  <div class="photo-eye">
+    <span class="label">Photographer's Eye · 摄影师之眼</span>
+    <h4>牧民转场怎么拍——具体策略</h4>
+    <p>这是您下次去伊犁<em>最重要的一个拍摄目标</em>。给一些具体的策略建议:</p>
+    <p><strong>策略一:去琼库什台</strong>(从伊宁经特克斯,自驾约 4-5 小时,部分路段是土路,需 SUV)。这是中国摄影圈公认的<em>"最原始的转场拍摄地"</em>。在这里待 2-3 天,几乎一定能遇到转场队伍。村里有<em>哈萨克民宿</em>,可以住在牧民家里。</p>
+    <p><strong>策略二:雇当地向导</strong>。这是关键。一个好的当地向导能<em>(a)知道哪些家庭今年什么时候转场</em>、<em>(b)和这些家庭有亲戚或邻居关系</em>、<em>(c)带你去观察(而不是干扰)</em>。一天的向导费用 300-500 元,值得。</p>
+    <p><strong>策略三:拍"路上"而不只是"队伍"</strong>。大多数人拍转场,只拍羊群+骑马的牧民。但真正动人的是<em>"路上的细节"</em>——一只走累了的小羊被牧民抱在马上、一头驮着毡房零件的骆驼、一个孩子坐在父亲马背前打瞌睡、傍晚扎营时升起的第一缕炊烟。这些<strong>细节的密度</strong>比一张"羊群滚滚"的大片更有作者性。</p>
+    <p><strong>策略四:用长焦+广角各拍一组</strong>。长焦(200-300mm)拍队伍的<em>"压缩感"</em>——把羊群、马、雪山压在一个平面上;广角(16-35mm)拍<em>"环境感"</em>——表现游牧民族在天山下的渺小与坚韧。两种语言并置,作品才完整。</p>
+    <p><strong>策略五:留出"扎营时段"</strong>。转场途中,牧民每天傍晚会扎营。<em>这是最好的拍摄时段</em>——光线最美、人物最放松(开始喝茶吃饭)、动作最丰富(搭帐篷、煮饭、照顾牲畜)。如果你能跟随一支队伍走一天,傍晚的扎营是回报最高的拍摄机会。</p>
+    <p><strong>最后的提醒</strong>:转场是一种<em>"消失中的生活方式"</em>。您拍它,本质上是在<strong>记录历史</strong>——和拍 19 世纪美洲印第安人最后的迁徙、20 世纪初蒙古游牧最后的状态,在性质上是一样的。这种题材的价值不在于<em>"美"</em>,而在于<em>"证明"</em>——证明这种生活方式存在过。<strong>带着这种心态去拍,你的影像才会有重量</strong>。</p>
+  </div>
+</section>
+
+<!-- 第八章:当下 -->
+<section class="chapter" id="ch-8">
+  <div class="chapter-num">八 · EIGHT</div>
+  <h2>当下:伊宁、霍尔果斯与一带一路</h2>
+  <div class="chapter-subtitle">Yining, Khorgos, and the New Silk Road</div>
+
+  <p class="lead-para">这一章简短一些——但要交代清楚<strong>"当下的伊犁"</strong>是什么样的,因为它不只是历史标本,更是一片<em>活的、正在变化的</em>土地。</p>
+
+  <h3>伊宁:州首府的双重身份</h3>
+
+  <p><strong>伊宁市</strong>是伊犁哈萨克自治州的首府,人口约 70 万。它的双重身份是:<em>"地理上的边境城市</em>+<em>历史上的'宁远城'</em>"。今天的伊宁,有现代化的城区(高楼、商场、商业街),也有民国遗留的六星街,也有维吾尔风格的喀赞其老城——三种时代的城市肌理叠加在一起。</p>
+
+  <p>对您的旅行,伊宁会是<strong>主要的住宿基地</strong>。建议至少安排 2-3 个晚上在伊宁市内——夜晚走走六星街、巴扎,白天作为辐射式出行的中心。</p>
+
+  <h3>霍尔果斯:中国最年轻的城市</h3>
+
+  <p><strong>霍尔果斯</strong>(伊犁州下辖)是中国与哈萨克斯坦之间最重要的陆路口岸。这里是<em>"一带一路"陆路上最关键的节点之一</em>——通过这里,中国的商品(电子产品、纺织品、机械)进入中亚,中亚的能源(石油、天然气)和资源(铁矿、铜矿)进入中国。</p>
+
+  <p>霍尔果斯口岸独特之处在于:它有<strong>世界上唯一的跨国境合作中心</strong>——<em>中哈霍尔果斯国际边境合作中心</em>。中国和哈萨克斯坦各划出一块土地(总面积约 5.6 平方公里),作为<em>"无国境"的免税商业区</em>。游客可以从中国一侧自由步行进入,在区内购物、品尝两国食物、感受<em>"在中国脚下踩着哈萨克斯坦的土地"</em>的奇妙体验。</p>
+
+  <div class="legal-eye">
+    <span class="label">A Legal Footnote · 法律工作者视角</span>
+    <p><strong>中哈霍尔果斯国际边境合作中心</strong>是一个法律上极有意思的案例。它是<em>世界上极少数的"<strong>跨国境特殊管辖区</strong>"</em>之一——区域内同时适用<em>两国法律</em>,但又有<em>双边协定豁免</em>的特殊安排:</p>
+    <p>· 在区内,中国公民和哈萨克斯坦公民均可<em>免签</em>进入(不需要签证);<br>
+    · 货物在区内交易<em>免征关税</em>;<br>
+    · 但出区时,如果带的货物超过免税额度,要按各自国家的关税法纳税;<br>
+    · 区内有<em>"双语司法办公室"</em>处理涉及两国法律的争议。</p>
+    <p>这种模式被一些法学者称为"<strong>21 世纪丝绸之路法律实验</strong>"——它如果成功,可能成为未来跨境合作的模板。对您的专业来说,这是一个值得专门安排半天考察的地点。</p>
+  </div>
+
+  <div class="photo-eye">
+    <span class="label">Photographer's Eye · 摄影师之眼</span>
+    <h4>当下的题材怎么拍</h4>
+    <p>· <strong>霍尔果斯口岸国门</strong>:可以拍中国国门、双语招牌、过境的卡车队伍。这是<em>"当代边界"</em>的视觉浓缩。</p>
+    <p>· <strong>伊宁夜市</strong>:维吾尔烤肉、回族抓饭、汉族烧烤、哈萨克奶茶——一条街上全是不同民族的食物。<em>夜市光线复杂、人流密集,适合用 35mm 定焦记录街景</em>。</p>
+    <p>· <strong>六星街星期日集市</strong>:5 月初这里的杏花、海棠花可能还在开。<em>六条街的几何形态俯瞰最美,但实际旅游者通常拍不到航拍视角——可以试着登上街区周围的高层建筑</em>。</p>
+    <p>· <strong>"一带一路"的视觉证据</strong>:在霍尔果斯到伊宁的路上,你会看到<em>大量中亚牌照的卡车</em>——白底蓝字的哈萨克斯坦车牌、绿底白字的塔吉克斯坦车牌。这些卡车排队的画面,是<strong>当代欧亚陆地贸易最真实的视觉证据</strong>。</p>
+  </div>
+</section>
+
+<!-- 结语 -->
+<section class="chapter" id="ch-epilogue">
+  <div class="chapter-num">尾</div>
+  <h2>结语:一份札记,一程行旅</h2>
+  <div class="chapter-subtitle">In Closing</div>
+
+  <p class="lead-para">写到这里,这份札记接近尾声。如果您耐心读完了,会发现一件事——<strong>伊犁不是任何一个简单标签可以概括的</strong>。它不只是"塞外江南",不只是"草原天堂",不只是"边境地区",不只是"摄影圣地"——它是<em>所有这些的综合</em>,而且每一层都有自己的历史厚度。</p>
+
+  <p>对一个法律工作者来说,伊犁特别意味着——<strong>"边疆治理"是中国法律史中最复杂、最有思辨价值的领域</strong>。从乌孙国到都护府,从将军府到自治州,从《勘分西北界约》到《中哈环境保护合作协定》——这片土地承载了 2000 年的"<em>边疆与中央</em>"的对话。每一次对话,都留下了具体的法律文本、制度安排、人事轨迹。如果说北京是中国法律史的"<em>中央</em>"叙事,那伊犁就是这本史书里最厚重的<em>"边疆"</em>章节。</p>
+
+  <p>对一个摄影者来说,伊犁意味着——<strong>"美"背后的"重"</strong>。这片土地最美的时候,正是它最沧桑的时候——草原上的牧民,可能是 1771 年东归土尔扈特的后裔;山下的小村,可能是 1764 年从沈阳西迁的锡伯族驻防点;河边的水渠,可能是 1844 年林则徐主持开凿的"<em>林公渠</em>";水边的湖,可能是 1864 年才划归别国的"<em>夷播海</em>"。<em>每一张影像都可以承载这些</em>——只要您带着这些知识去看、去拍。</p>
+
+  <div class="pull-quote">
+    <p>"<strong>读懂一片土地,需要时间。拍下一片土地,需要瞬间。但好的影像,永远是<em>"读懂"在前、"拍下"在后</em>的。</strong>"</p>
+  </div>
+
+  <p>祝您的伊犁之行,既是一程<em>地理的位移</em>,也是一程<strong>知识的旅程</strong>。愿您带回的影像,不只是漂亮的风光,也是<em>"理解后的影像"</em>。</p>
+
+  <p style="margin-top: 32px;">最后想再说一句:这份札记只是<em>入门级</em>的——伊犁的复杂性远超它能承载的篇幅。如果回来后有兴趣深入,推荐三本书:</p>
+
+  <p>· 王炎森《<strong>清代新疆和卓家族研究</strong>》——理解清代南疆治理的关键<br>
+  · 林则徐《<strong>荷戈纪程</strong>》——他从西安到伊犁的日记,可读性极高<br>
+  · 王力雄《<strong>我的西域,你的东土</strong>》——当代视角下的新疆思考(争议性较大,可选读)</p>
+
+  <p style="margin-top: 32px;">愿光与您同行。</p>
+
+  <div class="signature">
+    — 伊犁纪程 · 2026 春<br>
+    <span style="font-size: 12px; opacity: 0.7;">A Reader's Companion for the Long Drive West</span>
+  </div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+
+  const stickyNav = document.getElementById('stickyNav');
+  const mobileToggle = document.getElementById('mobileNavToggle');
+  const mobileDrawer = document.getElementById('mobileNavDrawer');
+  const cover = document.getElementById('ch-cover');
+
+  const allLinks = document.querySelectorAll('.sticky-nav a, .mobile-nav-drawer a');
+  const sections = Array.from(document.querySelectorAll('[id^="ch-"]'));
+
+  function updateNavVisibility() {
+    if (!cover) return;
+    const coverRect = cover.getBoundingClientRect();
+    const shouldShow = coverRect.bottom < window.innerHeight * 0.4;
+    if (shouldShow) {
+      stickyNav.classList.add('visible');
+      mobileToggle.classList.add('visible');
+    } else {
+      stickyNav.classList.remove('visible');
+      mobileToggle.classList.remove('visible');
+      if (mobileDrawer.classList.contains('open')) {
+        closeMobileDrawer();
+      }
+    }
+  }
+
+  function updateActiveSection() {
+    let currentId = null;
+    const viewportMid = window.innerHeight * 0.35;
+    for (const sec of sections) {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= viewportMid && rect.bottom > 0) {
+        currentId = sec.id;
+      }
+    }
+    allLinks.forEach(link => {
+      const target = link.dataset.target;
+      if (target === currentId) link.classList.add('active');
+      else link.classList.remove('active');
+    });
+    if (currentId && stickyNav.classList.contains('visible')) {
+      const activeLink = stickyNav.querySelector('a.active');
+      if (activeLink) {
+        const navRect = stickyNav.getBoundingClientRect();
+        const linkRect = activeLink.getBoundingClientRect();
+        if (linkRect.top < navRect.top || linkRect.bottom > navRect.bottom) {
+          activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+      }
+    }
+  }
+
+  function openMobileDrawer() {
+    mobileDrawer.classList.add('open');
+    mobileToggle.classList.add('open');
+  }
+  function closeMobileDrawer() {
+    mobileDrawer.classList.remove('open');
+    mobileToggle.classList.remove('open');
+  }
+
+  mobileToggle.addEventListener('click', () => {
+    if (mobileDrawer.classList.contains('open')) closeMobileDrawer();
+    else openMobileDrawer();
+  });
+
+  mobileDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      setTimeout(closeMobileDrawer, 100);
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (mobileDrawer.classList.contains('open') &&
+        !mobileDrawer.contains(e.target) &&
+        e.target !== mobileToggle) {
+      closeMobileDrawer();
+    }
+  });
+
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateNavVisibility();
+        updateActiveSection();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
+  updateNavVisibility();
+  updateActiveSection();
+})();
+</script>
+
+</body>
+</html>
