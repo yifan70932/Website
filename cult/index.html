@@ -35,8 +35,8 @@
     --mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
 
     /* Layout */
-    --reading-width: 68ch;
-    --medium-width: 90ch;
+    --reading-width: 900px;
+    --medium-width: 1000px;
     --wide-width: min(94vw, 1080px);
     --bfo-width: min(94vw, 1150px);
     --container-max: 1320px;
@@ -440,6 +440,7 @@
     border: 1px solid var(--rule);
     border-radius: 2px;
     margin-bottom: 18px;
+    max-width: var(--reading-width);
     transition: box-shadow 0.2s ease, border-color 0.2s ease;
   }
   .critique:hover { box-shadow: var(--shadow-sm); }
@@ -1321,7 +1322,7 @@
   /* === Figures and visualizations === */
   figure.diagram {
     margin: 32px 0;
-    max-width: var(--medium-width);
+    max-width: var(--reading-width);
   }
   figure.diagram.wide {
     max-width: var(--medium-width);
