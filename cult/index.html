@@ -36,7 +36,9 @@
 
     /* Layout */
     --reading-width: 68ch;
-    --wide-width: min(94vw, 1280px);
+    --medium-width: 90ch;
+    --wide-width: min(94vw, 1080px);
+    --bfo-width: min(94vw, 1150px);
     --container-max: 1320px;
     --container-wide: 1600px;
   }
@@ -212,7 +214,7 @@
   }
 
   .hero-intro {
-    max-width: var(--reading-width);
+    max-width: 760px;
     margin-top: 28px;
   }
   .hero-epigraph {
@@ -224,7 +226,6 @@
     border-left: 2px solid var(--accent);
     padding: 6px 0 6px 22px;
     margin-bottom: 28px;
-    max-width: 56ch;
   }
   body[data-lang="zh"] .hero-epigraph {
     font-family: var(--sans-cn);
@@ -1320,10 +1321,10 @@
   /* === Figures and visualizations === */
   figure.diagram {
     margin: 32px 0;
-    max-width: var(--reading-width);
+    max-width: var(--medium-width);
   }
   figure.diagram.wide {
-    max-width: none;
+    max-width: var(--medium-width);
     width: 100%;
   }
   figure.diagram svg {
@@ -1378,7 +1379,7 @@
   /* ========== BFO Widget ========== */
   .bfo-widget {
     margin: 24px 0;
-    max-width: var(--wide-width);
+    max-width: var(--bfo-width);
     position: relative;
   }
   .bfo-widget-shell {
