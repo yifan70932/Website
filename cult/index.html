@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Grand Inquisitor's Categories · An Ontology of Cults</title>
+<title>An Exile Beyond Fact and Fiction · An Ontology of Cults</title>
 <meta name="description" content="An ontological and philosophical survey of cults: definition, mechanisms, case studies, and the terminological politics surrounding the New Religious Movements framework." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,6 +36,7 @@
 
     /* Layout */
     --reading-width: 68ch;
+    --wide-width: min(94vw, 1280px);
     --container-max: 1320px;
     --container-wide: 1600px;
   }
@@ -164,11 +165,15 @@
     color: var(--ink);
     margin-bottom: 28px;
     max-width: 18ch;
+    text-wrap: balance;
   }
   body[data-lang="zh"] h1 {
     font-family: var(--sans-cn);
     font-weight: 700;
     letter-spacing: -0.01em;
+    font-size: clamp(34px, 4.6vw, 64px);
+    max-width: 22ch;
+    word-break: keep-all;
   }
   h1 em {
     font-style: italic;
@@ -179,6 +184,10 @@
     font-style: normal;
     font-weight: 700;
     color: var(--accent);
+  }
+  /* CJK no-break unit for h1 — prevents single-character orphans */
+  h1 .nb {
+    white-space: nowrap;
   }
 
   .hero-prelude {
@@ -753,7 +762,7 @@
   /* Catalogue table — for Chapter XI cult census */
   .catalogue-group {
     margin: 32px 0 20px;
-    max-width: var(--reading-width);
+    max-width: var(--wide-width);
   }
   .catalogue-group-heading {
     font-family: var(--mono);
@@ -779,6 +788,7 @@
     color: var(--ink-soft);
     margin-bottom: 14px;
     font-style: italic;
+    max-width: var(--reading-width);
   }
   body[data-lang="zh"] .catalogue-group-intro {
     font-family: var(--serif-cn, var(--serif));
@@ -788,19 +798,19 @@
   .catalogue-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 12.5px;
-    line-height: 1.55;
+    font-size: 13.5px;
+    line-height: 1.6;
   }
-  body[data-lang="zh"] .catalogue-table { font-size: 13px; }
+  body[data-lang="zh"] .catalogue-table { font-size: 14px; }
   .catalogue-table thead th {
     font-family: var(--mono);
-    font-size: 9.5px;
+    font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink-faded);
     text-align: left;
-    padding: 6px 10px;
+    padding: 8px 12px;
     border-bottom: 1px solid var(--rule);
     vertical-align: bottom;
     white-space: nowrap;
@@ -809,7 +819,7 @@
     font-family: var(--sans-cn);
     text-transform: none;
     letter-spacing: 0.05em;
-    font-size: 11px;
+    font-size: 12px;
   }
   .catalogue-table thead th:nth-child(1) { width: 18%; }
   .catalogue-table thead th:nth-child(2) { width: 14%; }
@@ -818,7 +828,7 @@
   .catalogue-table thead th:nth-child(5) { width: 10%; }
   .catalogue-table thead th:nth-child(6) { width: 36%; }
   .catalogue-table tbody td {
-    padding: 9px 10px;
+    padding: 11px 12px;
     border-bottom: 1px solid var(--rule-faint);
     vertical-align: top;
     color: var(--ink-soft);
@@ -830,11 +840,11 @@
   }
   .catalogue-table td.name em {
     display: block;
-    font-size: 11px;
+    font-size: 12px;
     color: var(--ink-mid);
     font-weight: 400;
     font-style: italic;
-    margin-top: 2px;
+    margin-top: 3px;
   }
   body[data-lang="zh"] .catalogue-table td.name em {
     font-style: normal;
@@ -866,6 +876,7 @@
     font-size: 13px;
     line-height: 1.7;
     color: var(--ink-soft);
+    max-width: var(--reading-width);
   }
 
   /* Catalogue intro / scope statement */
@@ -1367,7 +1378,7 @@
   /* ========== BFO Widget ========== */
   .bfo-widget {
     margin: 24px 0;
-    max-width: var(--reading-width);
+    max-width: var(--wide-width);
     position: relative;
   }
   .bfo-widget-shell {
@@ -1436,18 +1447,24 @@
 
   .bfo-canvas {
     overflow: auto;
-    max-height: 720px;
+    max-height: 820px;
     background:
       linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px) 0 0 / 24px 24px,
       linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px) 0 0 / 24px 24px,
       #fafafa;
+    cursor: grab;
+    touch-action: none; /* enable custom touch handling */
   }
+  .bfo-canvas.is-dragging { cursor: grabbing; }
+  .bfo-canvas .bfo-toggle,
+  .bfo-canvas button,
+  .bfo-canvas a { cursor: pointer; }
   .bfo-stage {
     transform-origin: 0 0;
-    transition: transform 0.18s ease-out;
     display: inline-block;
     padding: 14px;
   }
+  .bfo-stage.is-smooth { transition: transform 0.18s ease-out; }
 
   /* SVG inside widget */
   .bfo-svg { display: block; }
@@ -1463,19 +1480,19 @@
 
   .bfo-text {
     font-family: var(--mono);
-    font-size: 10.5px;
+    font-size: 12px;
     fill: #222;
     pointer-events: none;
     user-select: none;
   }
   body[data-lang="zh"] .bfo-text {
     font-family: var(--sans-cn);
-    font-size: 11.5px;
+    font-size: 13px;
   }
-  .bfo-text.root { font-size: 12px; font-weight: 600; }
-  body[data-lang="zh"] .bfo-text.root { font-size: 13px; }
-  .bfo-text.lvl1 { font-size: 11.5px; font-weight: 600; }
-  body[data-lang="zh"] .bfo-text.lvl1 { font-size: 12.5px; }
+  .bfo-text.root { font-size: 14px; font-weight: 600; }
+  body[data-lang="zh"] .bfo-text.root { font-size: 15px; }
+  .bfo-text.lvl1 { font-size: 13px; font-weight: 600; }
+  body[data-lang="zh"] .bfo-text.lvl1 { font-size: 14px; }
 
   .bfo-edge {
     stroke: #444;
@@ -1494,7 +1511,7 @@
 
   .cult-text {
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11.5px;
     fill: var(--accent);
     font-weight: 500;
     pointer-events: none;
@@ -1502,7 +1519,7 @@
   }
   body[data-lang="zh"] .cult-text {
     font-family: var(--sans-cn);
-    font-size: 11px;
+    font-size: 12.5px;
   }
   .cult-edge {
     stroke: var(--accent);
@@ -1592,8 +1609,8 @@
   <div class="topbar-inner">
     <div class="brand">
       <span class="brand-mark">§</span>
-      <span data-lang-content="en">Inquisitor's Categories</span>
-      <span data-lang-content="zh">大法官的范畴</span>
+      <span data-lang-content="en">Exile Beyond Fact and Fiction</span>
+      <span data-lang-content="zh">事实与虚构消亡的流放地</span>
     </div>
     <div class="topbar-controls">
       <div class="lang-toggle" role="group" aria-label="Language toggle">
@@ -1613,29 +1630,37 @@
       <span data-lang-content="zh">邪教本体论</span>
     </div>
     <h1>
-      <span data-lang-content="en">The Grand Inquisitor's <em>Categories</em></span>
-      <span data-lang-content="zh">宗教大法官的<em>范畴</em></span>
+      <span data-lang-content="en">An Exile Beyond <em>Fact and Fiction</em></span>
+      <span data-lang-content="zh"><em><span class="nb">事实与虚构消亡</span></em><span class="nb">的流放地</span></span>
     </h1>
 
     <div class="hero-intro" data-lang-content="en">
+      <div class="hero-epigraph">
+        The ideal subject of totalitarian rule is not the convinced Nazi or the convinced Communist, but people for whom the distinction between fact and fiction (i.e., the reality of experience) and the distinction between true and false (i.e., the standards of thought) no longer exist.
+        <cite>Hannah Arendt, <em>The Origins of Totalitarianism</em> (1951)</cite>
+      </div>
       <div class="hero-epigraph">
         There are three powers, three powers alone, able to conquer and to hold captive forever the conscience of these impotent rebels for their happiness — those forces are miracle, mystery, and authority.
         <cite>Fyodor Dostoevsky, <em>The Brothers Karamazov</em>, "The Grand Inquisitor" (1880)</cite>
       </div>
       <div class="hero-epigraph">
-        There is no more ceaseless or tormenting care for man, as long as he remains free, than to find someone to bow down to as soon as possible.
-        <cite>Fyodor Dostoevsky, ibid.</cite>
+        The thought-reform program is a milieu in which everyone speaks in the language of redemption, but no one is permitted to ask, "redemption from what?"
+        <cite>Robert Jay Lifton, <em>Thought Reform and the Psychology of Totalism</em> (1961)</cite>
       </div>
     </div>
 
     <div class="hero-intro" data-lang-content="zh">
       <div class="hero-epigraph">
+        极权统治的理想对象不是坚定的纳粹或坚定的共产党人,而是事实与虚构的区分(即经验之实在性)与真假的区分(即思想之标准)对他们而言不复存在的人。
+        <cite>汉娜·阿伦特《极权主义的起源》(1951)</cite>
+      </div>
+      <div class="hero-epigraph">
         三种力量,惟此三种力量,足以永远征服并俘虏这些无能反叛者的良心——为了他们的幸福——这些力量是:神迹、神秘与权威。
         <cite>陀思妥耶夫斯基,《卡拉马佐夫兄弟》"宗教大法官"(1880)</cite>
       </div>
       <div class="hero-epigraph">
-        人只要仍然自由,就没有比"尽快找一个可以跪拜之人"更不停歇、更折磨的牵挂了。
-        <cite>陀思妥耶夫斯基,同上</cite>
+        思想改造之程序所在之环境是这样的:其中每个人都说着救赎的语言,但没有人被允许问:"从什么之中救赎?"
+        <cite>罗伯特·杰伊·利夫顿《思想改造与极权主义心理学》(1961)</cite>
       </div>
     </div>
   </header>
@@ -2746,9 +2771,9 @@
                   </div>
                 </div>
 
-                <p style="font-size: 12.5px; color: var(--ink-mid); margin-top: 10px; line-height: 1.6;">
-                  <span data-lang-content="en"><em>Figure II.1.</em> BFO 2020 entity hierarchy (in dark) extended with the cult-ontology classes (in red, dashed connectors). Click the <code>+</code>/<code>−</code> circles to fold or unfold subtrees; use the toolbar to zoom; <kbd>Ctrl</kbd>+wheel zooms within the canvas. Adapted from the BFO 2020 reference diagram in the BFO User's Guide.</span>
-                  <span data-lang-content="zh"><em>图 II.1。</em>BFO 2020 实体层级(深色)及其邪教本体论扩展(红色虚线)。点击 <code>+</code>/<code>−</code> 圆按钮折叠或展开子树;用工具栏缩放;在画布内 <kbd>Ctrl</kbd>+滚轮可缩放。改编自《BFO 用户指南》中 BFO 2020 参考图。</span>
+                <p style="font-size: 12.5px; color: var(--ink-mid); margin-top: 10px; line-height: 1.6; max-width: var(--reading-width);">
+                  <span data-lang-content="en"><em>Figure II.1.</em> BFO 2020 entity hierarchy (in dark) extended with the cult-ontology classes (in green, dashed connectors). Click the <code>+</code>/<code>−</code> circles to fold or unfold subtrees. Scroll-wheel zooms; click-and-drag pans; pinch to zoom on touch. Adapted from the BFO 2020 reference diagram in the BFO User's Guide.</span>
+                  <span data-lang-content="zh"><em>图 II.1。</em>BFO 2020 实体层级(深色)及其邪教本体论扩展(绿色虚线)。点击 <code>+</code>/<code>−</code> 圆按钮折叠或展开子树。滚轮缩放;鼠标拖动平移;触屏双指缩放。改编自《BFO 用户指南》中 BFO 2020 参考图。</span>
                 </p>
               </div>
 
@@ -6665,7 +6690,7 @@
     chapterMap.forEach((_, ch) => observer.observe(ch));
   }
 
-  /* ========== BFO Widget controls (fold / zoom / reset) ========== */
+  /* ========== BFO Widget controls (fold / zoom / pan) ========== */
   (function initBfoWidgets() {
     const widgets = document.querySelectorAll('.bfo-widget');
     widgets.forEach((widget) => {
@@ -6674,49 +6699,188 @@
       if (!stage || !canvas) return;
 
       let zoom = 1.0;
-      const ZOOM_MIN = 0.4, ZOOM_MAX = 2.4, ZOOM_STEP = 0.15;
+      const ZOOM_MIN = 0.4, ZOOM_MAX = 3.0;
+      const ZOOM_STEP_BUTTON = 0.15;     // discrete step for + / − buttons
+      const ZOOM_STEP_WHEEL  = 0.0015;   // smooth wheel scaling factor
 
-      function applyZoom() {
+      // Apply zoom, optionally preserving a focal point in canvas coords
+      // focal = { canvasX, canvasY } — relative to canvas viewport (0..canvas.clientWidth/Height)
+      function setZoom(newZoom, focal) {
+        const oldZoom = zoom;
+        newZoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, newZoom));
+        if (newZoom === oldZoom) return;
+
+        // Where the focal point is in unscaled stage coords (relative to stage origin)
+        // stage scrollLeft offsets the stage; transform-origin is 0 0; scale factor is zoom
+        // Point in stage coords = (focal.canvasX + canvas.scrollLeft) / oldZoom
+        let scrollLeftAfter, scrollTopAfter;
+        if (focal) {
+          const stageX = (focal.canvasX + canvas.scrollLeft) / oldZoom;
+          const stageY = (focal.canvasY + canvas.scrollTop)  / oldZoom;
+          // After scaling: the same stageX,Y is now at canvas position (stageX*newZoom - focal.canvasX, ...)
+          scrollLeftAfter = stageX * newZoom - focal.canvasX;
+          scrollTopAfter  = stageY * newZoom - focal.canvasY;
+        }
+
+        zoom = newZoom;
         stage.style.transform = `scale(${zoom})`;
+
+        if (focal) {
+          canvas.scrollLeft = Math.max(0, scrollLeftAfter);
+          canvas.scrollTop  = Math.max(0, scrollTopAfter);
+        }
       }
 
-      // Zoom buttons
-      const zoomIn = widget.querySelector('[data-act="zoom-in"]');
-      const zoomOut = widget.querySelector('[data-act="zoom-out"]');
+      // Smooth zoom helper for buttons (centered on canvas)
+      function smoothZoomBy(delta) {
+        stage.classList.add('is-smooth');
+        const focal = {
+          canvasX: canvas.clientWidth / 2,
+          canvasY: canvas.clientHeight / 2,
+        };
+        setZoom(zoom + delta, focal);
+        window.setTimeout(() => stage.classList.remove('is-smooth'), 220);
+      }
+
+      // ===== Toolbar buttons =====
+      const zoomIn    = widget.querySelector('[data-act="zoom-in"]');
+      const zoomOut   = widget.querySelector('[data-act="zoom-out"]');
       const zoomReset = widget.querySelector('[data-act="zoom-reset"]');
       const collapseAll = widget.querySelector('[data-act="collapse-all"]');
-      const expandAll = widget.querySelector('[data-act="expand-all"]');
+      const expandAll   = widget.querySelector('[data-act="expand-all"]');
 
-      if (zoomIn) zoomIn.addEventListener('click', () => {
-        zoom = Math.min(ZOOM_MAX, zoom + ZOOM_STEP);
-        applyZoom();
-      });
-      if (zoomOut) zoomOut.addEventListener('click', () => {
-        zoom = Math.max(ZOOM_MIN, zoom - ZOOM_STEP);
-        applyZoom();
-      });
+      if (zoomIn)  zoomIn.addEventListener('click',  () => smoothZoomBy(+ZOOM_STEP_BUTTON));
+      if (zoomOut) zoomOut.addEventListener('click', () => smoothZoomBy(-ZOOM_STEP_BUTTON));
       if (zoomReset) zoomReset.addEventListener('click', () => {
+        stage.classList.add('is-smooth');
         zoom = 1.0;
-        applyZoom();
-        // also reset scroll
+        stage.style.transform = 'scale(1)';
         canvas.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        window.setTimeout(() => stage.classList.remove('is-smooth'), 350);
       });
 
-      // Ctrl+wheel zoom
+      // ===== Wheel zoom (no modifier required, focal at mouse) =====
       canvas.addEventListener('wheel', (ev) => {
-        if (!ev.ctrlKey && !ev.metaKey) return;
         ev.preventDefault();
-        if (ev.deltaY < 0) {
-          zoom = Math.min(ZOOM_MAX, zoom + ZOOM_STEP);
-        } else {
-          zoom = Math.max(ZOOM_MIN, zoom - ZOOM_STEP);
-        }
-        applyZoom();
+        const rect = canvas.getBoundingClientRect();
+        const focal = {
+          canvasX: ev.clientX - rect.left,
+          canvasY: ev.clientY - rect.top,
+        };
+        // deltaY > 0 → scroll down → zoom out. Smoothly scaled.
+        const factor = Math.exp(-ev.deltaY * ZOOM_STEP_WHEEL);
+        setZoom(zoom * factor, focal);
       }, { passive: false });
 
-      // Folding: every <g class="bfo-subtree" data-parent="ID"> can be hidden;
-      // its toggle is <g class="bfo-toggle" data-target="ID">.
-      const subtrees = widget.querySelectorAll('.bfo-subtree');
+      // ===== Click-and-drag pan (mouse) =====
+      let isDragging = false;
+      let dragStartX = 0, dragStartY = 0;
+      let scrollStartX = 0, scrollStartY = 0;
+      let mouseDownTarget = null;
+
+      canvas.addEventListener('mousedown', (ev) => {
+        // Don't start a drag if user clicked a toggle / button / interactive element
+        if (ev.button !== 0) return;
+        const t = ev.target;
+        if (t.closest('.bfo-toggle') || t.closest('button') || t.closest('a')) return;
+
+        isDragging = true;
+        mouseDownTarget = t;
+        dragStartX = ev.clientX;
+        dragStartY = ev.clientY;
+        scrollStartX = canvas.scrollLeft;
+        scrollStartY = canvas.scrollTop;
+        canvas.classList.add('is-dragging');
+        ev.preventDefault();
+      });
+
+      window.addEventListener('mousemove', (ev) => {
+        if (!isDragging) return;
+        const dx = ev.clientX - dragStartX;
+        const dy = ev.clientY - dragStartY;
+        canvas.scrollLeft = scrollStartX - dx;
+        canvas.scrollTop  = scrollStartY - dy;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        canvas.classList.remove('is-dragging');
+      });
+
+      // ===== Touch: single-finger pan, two-finger pinch =====
+      let touchMode = null; // 'pan' | 'pinch' | null
+      let touchStartX = 0, touchStartY = 0;
+      let touchScrollStartX = 0, touchScrollStartY = 0;
+      let pinchStartDist = 0, pinchStartZoom = 1.0;
+      let pinchStartFocal = null;
+
+      function getTouchDist(t1, t2) {
+        const dx = t2.clientX - t1.clientX;
+        const dy = t2.clientY - t1.clientY;
+        return Math.sqrt(dx * dx + dy * dy);
+      }
+      function getTouchMidpoint(t1, t2) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+          canvasX: (t1.clientX + t2.clientX) / 2 - rect.left,
+          canvasY: (t1.clientY + t2.clientY) / 2 - rect.top,
+        };
+      }
+
+      canvas.addEventListener('touchstart', (ev) => {
+        if (ev.touches.length === 1) {
+          // Don't start pan on a toggle tap
+          const t = ev.target;
+          if (t.closest('.bfo-toggle') || t.closest('button') || t.closest('a')) {
+            touchMode = null;
+            return;
+          }
+          touchMode = 'pan';
+          touchStartX = ev.touches[0].clientX;
+          touchStartY = ev.touches[0].clientY;
+          touchScrollStartX = canvas.scrollLeft;
+          touchScrollStartY = canvas.scrollTop;
+        } else if (ev.touches.length === 2) {
+          touchMode = 'pinch';
+          pinchStartDist = getTouchDist(ev.touches[0], ev.touches[1]);
+          pinchStartZoom = zoom;
+          pinchStartFocal = getTouchMidpoint(ev.touches[0], ev.touches[1]);
+          ev.preventDefault();
+        }
+      }, { passive: false });
+
+      canvas.addEventListener('touchmove', (ev) => {
+        if (touchMode === 'pan' && ev.touches.length === 1) {
+          const dx = ev.touches[0].clientX - touchStartX;
+          const dy = ev.touches[0].clientY - touchStartY;
+          canvas.scrollLeft = touchScrollStartX - dx;
+          canvas.scrollTop  = touchScrollStartY - dy;
+          ev.preventDefault();
+        } else if (touchMode === 'pinch' && ev.touches.length === 2) {
+          const dist = getTouchDist(ev.touches[0], ev.touches[1]);
+          if (pinchStartDist > 0) {
+            const newZoom = pinchStartZoom * (dist / pinchStartDist);
+            setZoom(newZoom, pinchStartFocal);
+          }
+          ev.preventDefault();
+        }
+      }, { passive: false });
+
+      canvas.addEventListener('touchend', (ev) => {
+        if (ev.touches.length === 0) {
+          touchMode = null;
+        } else if (ev.touches.length === 1 && touchMode === 'pinch') {
+          // Transition pinch → pan
+          touchMode = 'pan';
+          touchStartX = ev.touches[0].clientX;
+          touchStartY = ev.touches[0].clientY;
+          touchScrollStartX = canvas.scrollLeft;
+          touchScrollStartY = canvas.scrollTop;
+        }
+      });
+
+      // ===== Folding: subtrees and toggles =====
       const toggles = widget.querySelectorAll('.bfo-toggle');
 
       function setSubtreeVisible(id, visible) {
@@ -6742,7 +6906,6 @@
 
       // Collapse / expand all
       if (collapseAll) collapseAll.addEventListener('click', () => {
-        // Only collapse "leaf level" (level-4) subtrees, keeping main BFO trunk visible
         widget.querySelectorAll('.bfo-subtree[data-collapsible="leaf"]').forEach(s => {
           const id = s.getAttribute('data-parent');
           setSubtreeVisible(id, false);
