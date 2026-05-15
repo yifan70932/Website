@@ -1,0 +1,718 @@
+/* ====================================================================
+   yifanova.com/antinatalism — self-contained stylesheet
+   Independent of base.css and tokens.css.
+   All selectors scoped under .antinatalism-page.
+   Matches the visual identity of /flying, /ski, /religion:
+     - Atkinson Hyperlegible body + Inter UI + Noto Serif SC zh
+     - Sticky TOC sidebar at ≥1100px, collapses to top on narrow
+     - Navy #0a3d62 accent, paper background
+   Personal wiki: no reader-facing prose, no editorial framing.
+   ==================================================================== */
+
+:root {
+  --an-ink:        #1f2328;
+  --an-ink-soft:   #4a5159;
+  --an-ink-faint:  #6b7280;
+  --an-ink-faded:  #9ca3af;
+  --an-rule:       #e5e7eb;
+  --an-rule-soft:  #f1f3f5;
+  --an-paper:      #fafaf7;
+  --an-paper-deep: #f5f4ee;
+  --an-navy:       #0a3d62;
+  --an-sapphire:   #1e5fa8;
+  --an-graphite:   #2c2e30;     /* secondary accent for diagrams */
+  --an-rust:       #8b3a2a;     /* used sparingly for contrast */
+  --an-pale-blue:  #e8f1f8;
+  --an-pale-gray:  #eceef1;
+
+  --an-font-body:  "Atkinson Hyperlegible", "Source Sans 3", system-ui, -apple-system, sans-serif;
+  --an-font-ui:    "Inter", system-ui, sans-serif;
+  --an-font-cn:    "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", serif;
+  --an-font-mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.antinatalism-page, .antinatalism-page * { box-sizing: border-box; }
+
+body.antinatalism-page {
+  margin: 0;
+  background: var(--an-paper);
+  color: var(--an-ink);
+  font-family: var(--an-font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  font-feature-settings: "kern", "liga", "calt";
+  -webkit-font-smoothing: antialiased;
+}
+
+body.antinatalism-page[data-lang="zh"] {
+  font-family: var(--an-font-cn);
+  line-height: 1.78;
+}
+
+/* ─── Language switching ─────────────────────────────────────────── */
+.antinatalism-page [data-lang-content] { display: none; }
+.antinatalism-page[data-lang="en"] [data-lang-content="en"] { display: revert; }
+.antinatalism-page[data-lang="zh"] [data-lang-content="zh"] { display: revert; }
+
+/* ─── Topbar ─────────────────────────────────────────────────────── */
+.antinatalism-page .topbar {
+  border-bottom: 1px solid var(--an-rule);
+  background: rgba(250, 250, 247, 0.92);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.antinatalism-page .topbar-inner {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.antinatalism-page .brand {
+  font-family: var(--an-font-ui);
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  color: var(--an-ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.antinatalism-page .brand-mark { color: var(--an-navy); font-weight: 600; }
+.antinatalism-page .brand-sep { color: var(--an-ink-faded); }
+.antinatalism-page .brand-page { color: var(--an-ink-soft); }
+
+/* ─── Language toggle ────────────────────────────────────────────── */
+.antinatalism-page .lang-toggle {
+  display: inline-flex;
+  border: 1px solid var(--an-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--an-paper-deep);
+}
+
+.antinatalism-page .lang-toggle button {
+  font-family: var(--an-font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.7rem;
+  background: transparent;
+  border: 0;
+  color: var(--an-ink-faint);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.antinatalism-page .lang-toggle button.active { background: var(--an-navy); color: white; }
+.antinatalism-page .lang-toggle button:not(.active):hover { color: var(--an-navy); background: var(--an-pale-blue); }
+
+/* ─── Two-column layout: TOC sidebar + main content ──────────────── */
+.antinatalism-page .layout {
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+@media (min-width: 1100px) {
+  .antinatalism-page .layout {
+    display: grid;
+    grid-template-columns: 14rem 1fr;
+    gap: 3rem;
+    align-items: start;
+    padding: 0 2rem 6rem;
+    padding-top: 2rem;
+  }
+}
+
+.antinatalism-page .main {
+  max-width: 64rem;
+  padding-top: 3rem;
+  position: relative;
+}
+
+@media (min-width: 1100px) {
+  .antinatalism-page .main {
+    max-width: 64rem;
+    padding-top: 0;
+  }
+}
+
+/* ─── Article header ─────────────────────────────────────────────── */
+.antinatalism-page .article-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--an-rule);
+}
+
+.antinatalism-page .kicker {
+  font-family: var(--an-font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--an-ink-faint);
+  margin: 0 0 0.85rem;
+  max-width: 50rem;
+}
+.antinatalism-page[data-lang="zh"] .kicker {
+  font-family: var(--an-font-cn);
+  letter-spacing: 0.08em;
+  text-transform: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.antinatalism-page h1 {
+  font-weight: 700;
+  font-size: clamp(2rem, 4.2vw, 2.6rem);
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--an-ink);
+  margin: 0 0 0.6rem;
+  max-width: 50rem;
+}
+
+.antinatalism-page .subtitle {
+  font-size: 1.1rem;
+  color: var(--an-ink-soft);
+  font-style: italic;
+  margin: 0 0 1.5rem;
+  max-width: 50rem;
+}
+.antinatalism-page[data-lang="zh"] .subtitle { font-style: normal; }
+
+.antinatalism-page .epigraph {
+  font-family: var(--an-font-body);
+  font-style: italic;
+  color: var(--an-ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 1.75rem 0 0 2.5rem;
+  max-width: 42rem;
+}
+.antinatalism-page[data-lang="zh"] .epigraph {
+  font-family: var(--an-font-cn);
+  font-style: normal;
+  line-height: 1.85;
+}
+.antinatalism-page .epigraph .attribution {
+  display: block;
+  font-style: normal;
+  font-family: var(--an-font-body);
+  font-size: 0.85rem;
+  color: var(--an-ink-faint);
+  margin-top: 0.5rem;
+}
+.antinatalism-page .epigraph .attribution::before { content: "— "; }
+.antinatalism-page[data-lang="zh"] .epigraph .attribution {
+  font-family: var(--an-font-cn);
+}
+
+.antinatalism-page .epigraph + .epigraph {
+  margin-top: 1.1rem;
+}
+
+/* ─── Headings inside the body ───────────────────────────────────── */
+.antinatalism-page h2 {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--an-navy);
+  line-height: 1.25;
+  margin: 3.2rem 0 1rem;
+  letter-spacing: -0.005em;
+  max-width: 50rem;
+}
+
+.antinatalism-page h2 .sec-num {
+  display: inline-block;
+  font-family: var(--an-font-ui);
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--an-ink-faint);
+  margin-right: 0.5em;
+  letter-spacing: 0.04em;
+}
+.antinatalism-page[data-lang="zh"] h2 .sec-num {
+  font-family: var(--an-font-cn);
+}
+
+.antinatalism-page h3 {
+  font-family: var(--an-font-ui);
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--an-ink-soft);
+  margin: 2rem 0 0.5rem;
+  max-width: 50rem;
+}
+.antinatalism-page[data-lang="zh"] h3 {
+  font-family: var(--an-font-cn);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.antinatalism-page h4 {
+  font-family: var(--an-font-body);
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--an-ink);
+  margin: 1.5rem 0 0.4rem;
+  letter-spacing: 0;
+  max-width: 50rem;
+}
+.antinatalism-page[data-lang="zh"] h4 {
+  font-family: var(--an-font-cn);
+}
+
+/* ─── Anchor offset for TOC nav ─────────────────────────────────── */
+.antinatalism-page h2[id] { scroll-margin-top: 4rem; }
+html { scroll-behavior: smooth; }
+
+/* ─── Body prose ─────────────────────────────────────────────────── */
+.antinatalism-page p {
+  margin: 0 0 1.1em;
+  max-width: 50rem;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.antinatalism-page[data-lang="zh"] p {
+  hyphens: none;
+  -webkit-hyphens: none;
+  text-align: justify;
+}
+
+.antinatalism-page a {
+  color: var(--an-navy);
+  text-decoration: underline;
+  text-decoration-color: var(--an-rule);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.15s ease;
+}
+.antinatalism-page a:hover { text-decoration-color: var(--an-navy); }
+
+.antinatalism-page em { font-style: italic; }
+.antinatalism-page strong { font-weight: 700; color: var(--an-ink); }
+
+.antinatalism-page .term {
+  font-family: var(--an-font-ui);
+  font-weight: 600;
+  color: var(--an-navy);
+  font-size: 0.96em;
+}
+.antinatalism-page[data-lang="zh"] .term {
+  font-family: var(--an-font-cn);
+}
+
+.antinatalism-page .lat { font-style: italic; }
+.antinatalism-page[data-lang="zh"] .lat { font-style: italic; font-family: var(--an-font-body); }
+.antinatalism-page .cjk { font-family: var(--an-font-cn); font-style: normal; }
+
+/* ─── Lists ──────────────────────────────────────────────────────── */
+.antinatalism-page ul, .antinatalism-page ol {
+  max-width: 50rem;
+  padding-left: 1.5rem;
+  margin: 0.4rem 0 1.2rem;
+}
+.antinatalism-page li {
+  margin-bottom: 0.4em;
+}
+.antinatalism-page li > ul, .antinatalism-page li > ol {
+  margin: 0.4em 0 0.4em;
+}
+.antinatalism-page ul.compact, .antinatalism-page ol.compact {
+  margin: 0.2rem 0 0.6rem;
+}
+.antinatalism-page ul.compact li, .antinatalism-page ol.compact li {
+  margin-bottom: 0.15em;
+}
+
+/* Definition lists for concept entries */
+.antinatalism-page dl {
+  max-width: 50rem;
+  margin: 1rem 0 1.4rem;
+}
+.antinatalism-page dt {
+  font-family: var(--an-font-ui);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--an-navy);
+  margin-top: 0.85rem;
+  letter-spacing: 0.01em;
+}
+.antinatalism-page[data-lang="zh"] dt {
+  font-family: var(--an-font-cn);
+  letter-spacing: 0;
+}
+.antinatalism-page dd {
+  margin: 0.2rem 0 0.7rem 0;
+  color: var(--an-ink);
+}
+
+/* ─── Block elements ─────────────────────────────────────────────── */
+.antinatalism-page blockquote {
+  margin: 1.5rem 0;
+  padding: 0.9rem 1.25rem;
+  border-left: 3px solid var(--an-navy);
+  background: var(--an-pale-blue);
+  border-radius: 0 3px 3px 0;
+  color: var(--an-ink-soft);
+  font-style: italic;
+  max-width: 50rem;
+}
+.antinatalism-page blockquote p:last-child { margin-bottom: 0; }
+.antinatalism-page[data-lang="zh"] blockquote { font-style: normal; }
+
+.antinatalism-page blockquote .attribution {
+  display: block;
+  font-style: normal;
+  font-family: var(--an-font-ui);
+  font-size: 0.82rem;
+  color: var(--an-ink-faint);
+  margin-top: 0.45rem;
+  letter-spacing: 0.02em;
+}
+.antinatalism-page blockquote .attribution::before { content: "— "; }
+.antinatalism-page[data-lang="zh"] blockquote .attribution {
+  font-family: var(--an-font-cn);
+}
+
+.antinatalism-page hr {
+  border: none;
+  border-top: 1px solid var(--an-rule);
+  margin: 3rem 0;
+  max-width: 50rem;
+}
+
+/* ─── Figures ────────────────────────────────────────────────────── */
+.antinatalism-page figure {
+  margin: 2.5rem 0;
+  max-width: 50rem;
+}
+
+.antinatalism-page figure svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.antinatalism-page figcaption {
+  font-family: var(--an-font-ui);
+  font-size: 0.82rem;
+  color: var(--an-ink-faint);
+  margin-top: 0.85rem;
+  line-height: 1.55;
+}
+.antinatalism-page[data-lang="zh"] figcaption {
+  font-family: var(--an-font-cn);
+  line-height: 1.7;
+}
+
+/* ─── Sidenotes ──────────────────────────────────────────────────── */
+.antinatalism-page .sidenote {
+  font-family: var(--an-font-ui);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--an-ink-soft);
+  background: var(--an-rule-soft);
+  border-left: 2px solid var(--an-sapphire);
+  padding: 0.75rem 1rem;
+  margin: 1.5rem 0;
+  border-radius: 0 3px 3px 0;
+  max-width: 50rem;
+}
+.antinatalism-page[data-lang="zh"] .sidenote {
+  font-family: var(--an-font-cn);
+  line-height: 1.7;
+}
+
+/* ─── Tables ─────────────────────────────────────────────────────── */
+.antinatalism-page .table-wrap {
+  max-width: 50rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+.antinatalism-page table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+  font-family: var(--an-font-body);
+}
+.antinatalism-page[data-lang="zh"] table {
+  font-family: var(--an-font-cn);
+  font-size: 0.95rem;
+}
+.antinatalism-page th, .antinatalism-page td {
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--an-rule);
+  line-height: 1.45;
+}
+.antinatalism-page[data-lang="zh"] th, .antinatalism-page[data-lang="zh"] td {
+  line-height: 1.65;
+}
+.antinatalism-page th {
+  font-family: var(--an-font-ui);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--an-ink-soft);
+  border-bottom: 1.5px solid var(--an-ink-soft);
+  background: var(--an-paper-deep);
+}
+.antinatalism-page[data-lang="zh"] th {
+  font-family: var(--an-font-cn);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.88rem;
+}
+.antinatalism-page tbody tr:hover { background: var(--an-rule-soft); }
+
+/* ─── Table of contents ──────────────────────────────────────────── */
+.antinatalism-page .toc {
+  font-family: var(--an-font-ui);
+  font-size: 0.88rem;
+  color: var(--an-ink-soft);
+  line-height: 1.5;
+}
+.antinatalism-page[data-lang="zh"] .toc {
+  font-family: var(--an-font-cn);
+}
+
+@media (min-width: 1100px) {
+  .antinatalism-page .toc {
+    position: sticky;
+    top: 4.5rem;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+}
+
+.antinatalism-page .toc-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--an-ink-faint);
+  margin: 0 0 0.7rem;
+  font-weight: 600;
+}
+.antinatalism-page[data-lang="zh"] .toc-title {
+  text-transform: none;
+  letter-spacing: 0.05em;
+  font-size: 0.82rem;
+}
+
+.antinatalism-page .toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.antinatalism-page .toc > .toc-list-wrapper > ol > li {
+  margin: 0 0 0.35rem;
+}
+.antinatalism-page .toc a {
+  color: var(--an-ink-soft);
+  text-decoration: none;
+  border: none;
+  display: block;
+  padding: 0.2rem 0;
+  transition: color 0.15s ease;
+}
+.antinatalism-page .toc a:hover { color: var(--an-navy); }
+.antinatalism-page .toc-sublist {
+  margin-top: 0.2rem;
+  margin-left: 0.7rem;
+  font-size: 0.82rem;
+  color: var(--an-ink-faint);
+}
+.antinatalism-page .toc-sublist li { margin: 0.15rem 0; }
+
+/* Mobile collapsible TOC */
+.antinatalism-page .toc-mobile-toggle {
+  display: none;
+}
+
+@media (max-width: 1099px) {
+  .antinatalism-page .toc {
+    margin: 1.5rem 0 1rem;
+    padding: 0.8rem 1rem;
+    background: var(--an-paper-deep);
+    border: 1px solid var(--an-rule);
+    border-radius: 4px;
+  }
+  .antinatalism-page .toc-title { display: none; }
+  .antinatalism-page .toc-mobile-toggle {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: 0;
+    font-family: var(--an-font-ui);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--an-navy);
+    text-align: left;
+    cursor: pointer;
+    padding: 0;
+    letter-spacing: 0.04em;
+  }
+  .antinatalism-page[data-lang="zh"] .toc-mobile-toggle {
+    font-family: var(--an-font-cn);
+    letter-spacing: 0.02em;
+  }
+  .antinatalism-page .toc-mobile-toggle::after {
+    content: " ▾";
+    font-size: 0.7rem;
+    color: var(--an-ink-faint);
+  }
+  .antinatalism-page .toc-mobile-toggle[aria-expanded="true"]::after { content: " ▴"; }
+  .antinatalism-page .toc-list-wrapper {
+    display: none;
+    margin-top: 0.7rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--an-rule);
+  }
+  .antinatalism-page .toc-mobile-toggle[aria-expanded="true"] + .toc-list-wrapper {
+    display: block;
+  }
+}
+
+/* ─── Reference list ─────────────────────────────────────────────── */
+.antinatalism-page .references {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 50rem;
+  padding-left: 0;
+  list-style: none;
+}
+.antinatalism-page .references li {
+  margin-bottom: 0.65rem;
+  padding-left: 1.5rem;
+  text-indent: -1.5rem;
+  hyphens: auto;
+}
+.antinatalism-page[data-lang="zh"] .references li {
+  hyphens: none;
+  padding-left: 0;
+  text-indent: 0;
+  margin-bottom: 0.7rem;
+}
+.antinatalism-page .references .ref-author { font-weight: 600; }
+.antinatalism-page .references .ref-title { font-style: italic; }
+.antinatalism-page[data-lang="zh"] .references .ref-title { font-style: normal; }
+
+/* ─── Two-column inline glosses (for translation/original pairs) ── */
+.antinatalism-page .gloss {
+  display: block;
+  font-family: var(--an-font-body);
+  font-size: 0.85em;
+  color: var(--an-ink-faint);
+  margin-left: 0.5em;
+}
+.antinatalism-page[data-lang="zh"] .gloss {
+  font-family: var(--an-font-body);
+}
+
+/* ─── Concept boxes (for definitional callouts) ──────────────────── */
+.antinatalism-page .concept {
+  border: 1px solid var(--an-rule);
+  background: var(--an-paper-deep);
+  padding: 1rem 1.2rem 0.8rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+  max-width: 50rem;
+}
+.antinatalism-page .concept .concept-label {
+  display: block;
+  font-family: var(--an-font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--an-navy);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.antinatalism-page[data-lang="zh"] .concept .concept-label {
+  font-family: var(--an-font-cn);
+  text-transform: none;
+  letter-spacing: 0.03em;
+  font-size: 0.82rem;
+}
+.antinatalism-page .concept p:last-child { margin-bottom: 0; }
+
+/* ─── Argument layout (premise–conclusion blocks) ────────────────── */
+.antinatalism-page .argument {
+  font-family: var(--an-font-body);
+  font-size: 0.95rem;
+  background: var(--an-paper-deep);
+  border-left: 3px solid var(--an-graphite);
+  padding: 0.9rem 1.2rem;
+  margin: 1.4rem 0;
+  max-width: 50rem;
+  line-height: 1.6;
+}
+.antinatalism-page[data-lang="zh"] .argument {
+  font-family: var(--an-font-cn);
+  line-height: 1.75;
+}
+.antinatalism-page .argument ol {
+  padding-left: 1.6rem;
+  margin: 0.3rem 0 0.5rem;
+}
+.antinatalism-page .argument li { margin-bottom: 0.35em; }
+.antinatalism-page .argument .conclusion {
+  border-top: 1px solid var(--an-rule);
+  padding-top: 0.55rem;
+  margin-top: 0.55rem;
+  font-weight: 600;
+}
+.antinatalism-page .argument .label {
+  font-family: var(--an-font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--an-ink-faint);
+  font-weight: 600;
+  margin-right: 0.4rem;
+}
+.antinatalism-page[data-lang="zh"] .argument .label {
+  font-family: var(--an-font-cn);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Diagrams: shared SVG styling ───────────────────────────────── */
+.antinatalism-page .diagram-svg .axis-label,
+.antinatalism-page .diagram-svg .cell-label {
+  font-family: var(--an-font-ui);
+  fill: var(--an-ink-soft);
+}
+.antinatalism-page[data-lang="zh"] .diagram-svg .axis-label,
+.antinatalism-page[data-lang="zh"] .diagram-svg .cell-label {
+  font-family: var(--an-font-cn);
+}
+
+.antinatalism-page .diagram-svg .ink-line { stroke: var(--an-ink-soft); }
+.antinatalism-page .diagram-svg .ink-fill { fill: var(--an-ink); }
+
+/* Print styles — clean output if ever printed */
+@media print {
+  .antinatalism-page .topbar, .antinatalism-page .toc, .antinatalism-page .lang-toggle { display: none; }
+  .antinatalism-page .layout { display: block; padding: 0; }
+  .antinatalism-page .main { max-width: none; padding: 0; }
+  body.antinatalism-page { background: white; font-size: 11pt; }
+}

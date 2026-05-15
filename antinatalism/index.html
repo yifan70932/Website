@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Dream Not Recommended — yifanova.com</title>
+  <meta name="description" content="Personal wiki on antinatalism — analytic philosophy, literary pessimism, Eastern traditions, contemporary feminist work, demographic background, and counter-arguments. Bilingual EN / 中文.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
+
+  <link rel="stylesheet" href="antinatalism.css">
+</head>
+
+<body class="antinatalism-page" data-lang="en">
+
+<!-- ─── Topbar ─────────────────────────────────────────────────── -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">Yifanova Personal Wiki</span>
+      <span class="brand-sep">|</span>
+      <span class="brand-page">Antinatalism</span>
+    </div>
+    <div class="lang-toggle" role="tablist" aria-label="Language">
+      <button type="button" data-lang-set="en" class="active">EN</button>
+      <button type="button" data-lang-set="zh">中文</button>
+    </div>
+  </div>
+</header>
+
+<!-- ─── Layout: TOC sidebar + main column ──────────────────────── -->
+<div class="layout">
+
+  <!-- ───── Table of contents ──────────────────────────────────── -->
+  <nav class="toc" aria-label="Table of contents">
+    <button class="toc-mobile-toggle" type="button" aria-expanded="false">
+      <span data-lang-content="en">Contents</span>
+      <span data-lang-content="zh">目录</span>
+    </button>
+    <p class="toc-title">
+      <span data-lang-content="en">Contents</span>
+      <span data-lang-content="zh">目录</span>
+    </p>
+    <div class="toc-list-wrapper">
+      <ol>
+        <li><a href="#sec-concepts">
+          <span data-lang-content="en">1 · Concepts &amp; Distinctions</span>
+          <span data-lang-content="zh">一 · 概念与区分</span>
+        </a></li>
+        <li><a href="#sec-history">
+          <span data-lang-content="en">2 · Historical Lineage</span>
+          <span data-lang-content="zh">二 · 思想史脉络</span>
+        </a></li>
+        <li><a href="#sec-analytic">
+          <span data-lang-content="en">3 · Analytic Tradition</span>
+          <span data-lang-content="zh">三 · 分析哲学传统</span>
+        </a></li>
+        <li><a href="#sec-literary">
+          <span data-lang-content="en">4 · Literary &amp; Pessimist Tradition</span>
+          <span data-lang-content="zh">四 · 文学与悲观主义传统</span>
+        </a></li>
+        <li><a href="#sec-eastern">
+          <span data-lang-content="en">5 · Eastern Traditions</span>
+          <span data-lang-content="zh">五 · 东方传统</span>
+        </a></li>
+        <li><a href="#sec-feminist">
+          <span data-lang-content="en">6 · Feminist Antinatalism</span>
+          <span data-lang-content="zh">六 · 女性主义反生育</span>
+        </a></li>
+        <li><a href="#sec-empirical">
+          <span data-lang-content="en">7 · Empirical Background</span>
+          <span data-lang-content="zh">七 · 经验背景</span>
+        </a></li>
+        <li><a href="#sec-objections">
+          <span data-lang-content="en">8 · Objections &amp; Replies</span>
+          <span data-lang-content="zh">八 · 反驳与回应</span>
+        </a></li>
+        <li><a href="#sec-adjacent">
+          <span data-lang-content="en">9 · Adjacent Positions</span>
+          <span data-lang-content="zh">九 · 邻近立场</span>
+        </a></li>
+        <li><a href="#sec-references">
+          <span data-lang-content="en">10 · References</span>
+          <span data-lang-content="zh">十 · 参考文献</span>
+        </a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ───── Main column ────────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- ───── Article header ──────────────────────────────────── -->
+    <header class="article-header">
+      <p class="kicker">
+        <span data-lang-content="en">On Antinatalism</span>
+        <span data-lang-content="zh">论反生育主义</span>
+      </p>
+      <h1>
+        <span data-lang-content="en">A Dream Not Recommended</span>
+        <span data-lang-content="zh">荒唐一梦，不复推荐</span>
+      </h1>
+
+      <blockquote class="epigraph">
+        <span data-lang-content="en">
+          <em class="cjk">悲喜千般同幻渺，古今一梦尽荒唐。</em><br>
+          A thousand sorrows and joys, all alike phantoms; past and present alike, a single dream of absurdity.
+          <span class="attribution">Cao Xueqin, <em>Honglou Meng</em>, Chapter 1, closing poem</span>
+        </span>
+        <span data-lang-content="zh">
+          <em>悲喜千般同幻渺，古今一梦尽荒唐。</em>
+          <span class="attribution">曹雪芹，《红楼梦》第一回末诗</span>
+        </span>
+      </blockquote>
+
+      <blockquote class="epigraph">
+        <span data-lang-content="en">
+          <em>Μὴ φῦναι τὸν ἅπαντα νικᾷ λόγον· τὸ δ' ἐπεὶ φανῇ, βῆναι κεῖθεν ὅθεν περ ἥκει πολὺ δεύτερον ὡς τάχιστα.</em><br>
+          Not to be born is, beyond all estimation, best; but when a man has seen the light of day, the next best thing is to go whence he came as quickly as may be.
+          <span class="attribution">Sophocles, <em>Oedipus at Colonus</em> 1224–1227</span>
+        </span>
+        <span data-lang-content="zh">
+          <em>Μὴ φῦναι τὸν ἅπαντα νικᾷ λόγον· τὸ δ' ἐπεὶ φανῇ, βῆναι κεῖθεν ὅθεν περ ἥκει πολὺ δεύτερον ὡς τάχιστα.</em><br>
+          不生为最善——此论无可辩驳；既已见天日，则速归来处为次善。
+          <span class="attribution">索福克勒斯，《俄狄浦斯在科罗诺斯》 1224–1227 行</span>
+        </span>
+      </blockquote>
+    </header>
+
+    <!-- ───── §1 Concepts & Distinctions ──────────────────────── -->
+    <h2 id="sec-concepts"><span class="sec-num">1 ·</span>
+      <span data-lang-content="en">Concepts &amp; Distinctions</span>
+      <span data-lang-content="zh">概念与区分</span>
+    </h2>
+
+    <h3>
+      <span data-lang-content="en">Definition</span>
+      <span data-lang-content="zh">定义</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p><span class="term">Antinatalism</span> is the view that procreation is morally wrong, or at minimum that it is not morally good and never required. The term covers a family of positions sharing the conclusion that bringing new sentient beings into existence cannot be justified — by appeal to the interests of those beings, or by appeal to broader consequences, or by appeal to the consent that cannot be given by the non-existent.</p>
+
+      <p>The position is not a claim that existing lives should end (that would be <em>promortalism</em>). It is not a claim that one finds one's own life unbearable (that would be a clinical or biographical claim). It is a claim about <em>future</em> sentient beings: that the act of starting a new life cannot be defended on their behalf, because they cannot be benefited by being brought into existence in any sense that survives scrutiny.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p><span class="term">反生育主义</span>（antinatalism）是这样一种立场：生育在道德上是错误的，或者至少不是道德上好的，也从不是被要求的。这一术语涵盖一族相关立场，它们共享如下结论——将新感知主体带入存在不能被辩护：既不能诉诸该主体本身的利益，也不能诉诸更广泛的后果，也不能诉诸尚未存在者无法给出的同意。</p>
+
+      <p>这不是「已经存在的生命应当终结」的主张（那是<em>促死主义</em>，promortalism）；也不是「我发现自己的生命无法忍受」的主张（那是临床或自传性的陈述）。它是关于<em>未来</em>感知主体的主张：开启一个新生命这一行为，不能以该新生命的名义被辩护——因为「被带入存在」并不能在任何经得起审视的意义上构成对它的造益。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Core distinctions</span>
+      <span data-lang-content="zh">核心区分</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <dl>
+        <dt>Philanthropic vs. misanthropic antinatalism</dt>
+        <dd>Benatar's distinction (2015). <em>Philanthropic</em> antinatalism is grounded in concern for the potential being who will be brought into existence: do not procreate because the new life will contain harms that are not adequately offset. <em>Misanthropic</em> antinatalism is grounded in the harms that the new being will inflict on the world: do not procreate because humans cause disproportionate suffering to other humans, animals, and ecosystems. The two arguments are logically independent; either alone is sufficient.</dd>
+
+        <dt>Axiological vs. deontological</dt>
+        <dd><em>Axiological</em> antinatalism claims that coming into existence is, in some evaluative sense, bad (or at least never positively good). <em>Deontological</em> antinatalism claims that the <em>act</em> of procreating violates a moral norm — typically a non-consent or harm-imposition norm — independently of whether the resulting life is on balance good or bad.</dd>
+
+        <dt>Strong vs. weak antinatalism</dt>
+        <dd><em>Strong</em>: it is always morally wrong to procreate. <em>Weak</em>: it is sometimes morally wrong, or there is always a moral reason against procreation that may or may not be overridden by other considerations.</dd>
+
+        <dt>Universal vs. species-relative</dt>
+        <dd>Whether the position applies to all sentient procreation or specifically to human procreation. Most analytic antinatalists (Benatar, Cabrera) take universal positions; some environmental antinatalists target humans specifically.</dd>
+
+        <dt>Antinatalism vs. childfree</dt>
+        <dd>Personal childfree-by-choice is a lifestyle position. Antinatalism is a normative philosophical claim that <em>others</em> also have reason not to procreate. Not all childfree people are antinatalists; not all antinatalists frame their position as a lifestyle.</dd>
+      </dl>
+    </div>
+
+    <div data-lang-content="zh">
+      <dl>
+        <dt>仁爱式 vs. 厌世式反生育</dt>
+        <dd>Benatar 的区分（2015）。<em>仁爱式</em>（philanthropic）反生育主义出于对潜在新生命的关切：不要生育，因为新生命将包含无法被充分抵偿的伤害。<em>厌世式</em>（misanthropic）反生育主义出于对新生命将施加于世界的伤害的考量：不要生育，因为人类对其他人类、动物和生态系统造成不成比例的痛苦。这两组论证在逻辑上相互独立，任一独立成立。</dd>
+
+        <dt>价值论 vs. 义务论</dt>
+        <dd><em>价值论</em>（axiological）反生育主张：被带入存在在某种评价意义上是坏的（或至少永远不是积极地好的）。<em>义务论</em>（deontological）反生育主张：生育这一<em>行为</em>本身违反某项道德规范——通常是非同意或不可施害规范——这与所导致的生命整体而言是好是坏无关。</dd>
+
+        <dt>强 vs. 弱反生育</dt>
+        <dd><em>强</em>：生育在任何情况下都是道德上错误的。<em>弱</em>：生育在某些情况下是错误的，或者始终存在一个反对生育的道德理由，但该理由可能被其他考量所压倒。</dd>
+
+        <dt>普遍 vs. 物种相对</dt>
+        <dd>立场是否适用于所有感知主体的繁殖，还是仅针对人类的繁殖。多数分析传统的反生育者（Benatar、Cabrera）持普遍立场；某些环境反生育者则专门针对人类。</dd>
+
+        <dt>反生育主义 vs. 自愿无子</dt>
+        <dd>自愿无子（childfree）是一种生活方式选择。反生育主义则是规范性的哲学主张：<em>他人</em>同样有理由不要生育。并非所有自愿无子者都是反生育主义者；也并非所有反生育主义者都将自己的立场表述为生活方式。</dd>
+      </dl>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">The structure of the disagreement</span>
+      <span data-lang-content="zh">分歧的结构</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Disagreement with antinatalism takes three characteristic forms. The first denies the empirical premise that life contains the harms claimed (call this <em>optimist</em> opposition). The second grants the empirical premise but denies the inference from harm-to-some to wrongness-of-procreation, typically by appealing to the goods of existence (call this <em>balance</em> opposition). The third denies that the framework of consent and harm applies to procreation at all, because the potential being has no interests that pre-exist its creation (call this <em>non-identity</em> opposition; see §8).</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>与反生育主义的分歧通常呈三种典型形态。其一否认其经验前提——否认生命包含所主张的那些伤害（称为<em>乐观主义式</em>反对）。其二接受其经验前提，但否认从「存在伤害」到「生育为错」的推论，通常通过诉诸存在所带来的善（称为<em>权衡式</em>反对）。其三否认同意与伤害的框架适用于生育这一行为本身，因为潜在主体在被创造之前并不具有任何利益（称为<em>非同一性式</em>反对；见 §8）。</p>
+    </div>
+
+    <!-- ───── §2 Historical Lineage ───────────────────────────── -->
+    <h2 id="sec-history"><span class="sec-num">2 ·</span>
+      <span data-lang-content="en">Historical Lineage</span>
+      <span data-lang-content="zh">思想史脉络</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>Antinatalism is older than the term. The thought that it would have been better not to have been born appears in archaic Greek poetry (Theognis, Sophocles), in early Buddhist texts and Hindu renunciate traditions, in Gnostic literature, in Schopenhauer, and recurs through the nineteenth-century philosophical pessimists. The contemporary analytic term <em>antinatalism</em> is usually traced to the South African philosopher David Benatar's 1997 paper "Why It Is Better Never to Come into Existence" and the 2006 book of similar title; the German <em>Antinatalismus</em> was used earlier in continental discussions. The position has both a deep continuous lineage and a recent analytic formalization; the literature does not always recognize how much the latter owes to the former.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>反生育主义比这一术语本身要古老得多。「不生为最善」的思想出现在古希腊抒情诗（忒奥格尼斯、索福克勒斯）、早期佛教典籍与印度教遁世传统、诺斯替文献、叔本华，并在十九世纪悲观主义哲学家中反复出现。当代分析传统中的术语 <em>antinatalism</em> 通常追溯至南非哲学家 David Benatar 1997 年的论文〈为何永不来到存在是更好的〉及 2006 年同名专著；德语 <em>Antinatalismus</em> 在欧陆讨论中出现更早。这一立场既有一条深远而连续的脉络，也有一次晚近的分析形式化；后续文献并不总能意识到后者从前者那里继承了多少。</p>
+    </div>
+
+    <figure>
+      <svg class="diagram-svg" viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="timeline-title">
+        <title id="timeline-title">Antinatalist thought through history</title>
+
+        <!-- Broken-axis layout:
+             LEFT  region (x = 40–420):  ancient/medieval, −600 BCE → +1600 CE  (2200 yr → 380 px, ~5.8 yr/px)
+             BREAK (x = 420–460):        visual break marker
+             RIGHT region (x = 460–680): modern/contemporary, 1800 → 2025  (225 yr → 220 px, ~1.0 yr/px)
+             This concentrates label space where the cluster is densest. -->
+
+        <!-- LEFT axis baseline -->
+        <line x1="40"  y1="320" x2="420" y2="320" class="ink-line" stroke-width="1.2"/>
+        <!-- RIGHT axis baseline -->
+        <line x1="460" y1="320" x2="680" y2="320" class="ink-line" stroke-width="1.2"/>
+
+        <!-- break-mark: two short diagonal slashes -->
+        <line x1="424" y1="316" x2="436" y2="324" stroke="#9ca3af" stroke-width="1.2"/>
+        <line x1="444" y1="316" x2="456" y2="324" stroke="#9ca3af" stroke-width="1.2"/>
+
+        <!-- LEFT-region year ticks  (year y → x = 40 + (y + 600)/2200 * 380) -->
+        <g font-family="Inter, sans-serif" font-size="9" fill="#6b7280">
+          <!-- −500 → x ≈ 57 -->
+          <line x1="57"  y1="320" x2="57"  y2="326" stroke="#9ca3af" stroke-width="1"/>
+          <text x="57"  y="340" text-anchor="middle">−500</text>
+          <!-- 0 → x ≈ 144 -->
+          <line x1="144" y1="320" x2="144" y2="326" stroke="#9ca3af" stroke-width="1"/>
+          <text x="144" y="340" text-anchor="middle">0</text>
+          <!-- 500 → x ≈ 230 -->
+          <line x1="230" y1="320" x2="230" y2="326" stroke="#9ca3af" stroke-width="1"/>
+          <text x="230" y="340" text-anchor="middle">500</text>
+          <!-- 1000 → x ≈ 317 -->
+          <line x1="317" y1="320" x2="317" y2="326" stroke="#9ca3af" stroke-width="1"/>
+          <text x="317" y="340" text-anchor="middle">1000</text>
+          <!-- 1500 → x ≈ 403 -->
+          <line x1="403" y1="320" x2="403" y2="326" stroke="#9ca3af" stroke-width="1"/>
+          <text x="403" y="340" text-anchor="middle">1500</text>
+        </g>
+
+        <!-- RIGHT-region year ticks  (year y → x = 460 + (y − 1800)/225 * 220) -->
+        <g font-family="Inter, sans-serif" font-size="9" fill="#6b7280">
+          <!-- 1800 → x = 460 -->
+          <line x1="460" y1="320" x2="460" y2="326" stroke="#9ca3af" stroke-width="1"/>
+          <text x="460" y="340" text-anchor="middle">1800</text>
+          <!-- 1850 → x ≈ 509 -->
+          <line x1="509" y1="320" x2="509" y2="326" stroke="#9ca3af" stroke-width="1"/>
+          <text x="509" y="340" text-anchor="middle">1850</text>
+          <!-- 1900 → x ≈ 558 -->
+          <line x1="558" y1="320" x2="558" y2="326" stroke="#9ca3af" stroke-width="1"/>
+          <text x="558" y="340" text-anchor="middle">1900</text>
+          <!-- 1950 → x ≈ 607 -->
+          <line x1="607" y1="320" x2="607" y2="326" stroke="#9ca3af" stroke-width="1"/>
+          <text x="607" y="340" text-anchor="middle">1950</text>
+          <!-- 2000 → x ≈ 656 -->
+          <line x1="656" y1="320" x2="656" y2="326" stroke="#9ca3af" stroke-width="1"/>
+          <text x="656" y="340" text-anchor="middle">2000</text>
+        </g>
+
+        <!-- region labels -->
+        <text x="230" y="362" font-family="Inter, sans-serif" font-size="9.5" fill="#9ca3af" text-anchor="middle" letter-spacing="0.08em" data-lang-content="en">ANCIENT · MEDIEVAL</text>
+        <text x="230" y="362" font-family="'Noto Serif SC', serif" font-size="10.5" fill="#9ca3af" text-anchor="middle" data-lang-content="zh">古代 · 中世纪</text>
+        <text x="570" y="362" font-family="Inter, sans-serif" font-size="9.5" fill="#9ca3af" text-anchor="middle" letter-spacing="0.08em" data-lang-content="en">MODERN · CONTEMPORARY</text>
+        <text x="570" y="362" font-family="'Noto Serif SC', serif" font-size="10.5" fill="#9ca3af" text-anchor="middle" data-lang-content="zh">现代 · 当代</text>
+
+        <!-- ─── Entries ─────────────────────────────────────────── -->
+        <g class="cell-label" font-size="10">
+
+          <!-- LEFT REGION: linear scale on −600 → 1600 -->
+          <!-- Each entry: x_left = 40 + (year + 600)/2200 * 380 -->
+
+          <!-- Theognis ~ −540 → x ≈ 50 -->
+          <circle cx="50" cy="320" r="3" fill="#6b7280"/>
+          <line x1="50" y1="316" x2="50" y2="232" class="ink-line" stroke-width="0.6"/>
+          <text x="50" y="224" text-anchor="middle" data-lang-content="en">Theognis</text>
+          <text x="50" y="224" text-anchor="middle" data-lang-content="zh">忒奥格尼斯</text>
+          <text x="50" y="212" text-anchor="middle" fill="#9ca3af" font-size="8.5">c. −540</text>
+
+          <!-- Silenus / Sophocles ~ −440 → x ≈ 68 -->
+          <circle cx="68" cy="320" r="3.5" fill="#0a3d62"/>
+          <line x1="68" y1="316" x2="68" y2="280" class="ink-line" stroke-width="0.8"/>
+          <text x="68" y="272" text-anchor="middle" data-lang-content="en">Silenus · Sophocles</text>
+          <text x="68" y="272" text-anchor="middle" data-lang-content="zh">西勒诺斯 · 索福克勒斯</text>
+          <text x="68" y="260" text-anchor="middle" fill="#9ca3af" font-size="8.5">c. −440</text>
+
+          <!-- Early Buddhism ~ −500 → x ≈ 57 -->
+          <circle cx="57" cy="320" r="4" fill="#0a3d62"/>
+          <line x1="57" y1="316" x2="57" y2="190" class="ink-line" stroke-width="0.9"/>
+          <text x="57" y="182" text-anchor="middle" font-weight="600" fill="#0a3d62" data-lang-content="en">Early Buddhism</text>
+          <text x="57" y="182" text-anchor="middle" font-weight="600" fill="#0a3d62" data-lang-content="zh">早期佛教</text>
+          <text x="57" y="170" text-anchor="middle" fill="#9ca3af" font-size="8.5">c. −500</text>
+
+          <!-- Zhuangzi ~ −350 → x ≈ 83 -->
+          <circle cx="83" cy="320" r="3" fill="#6b7280"/>
+          <line x1="83" y1="316" x2="83" y2="148" class="ink-line" stroke-width="0.6"/>
+          <text x="83" y="140" text-anchor="middle" data-lang-content="en">Zhuangzi</text>
+          <text x="83" y="140" text-anchor="middle" data-lang-content="zh">庄子</text>
+          <text x="83" y="128" text-anchor="middle" fill="#9ca3af" font-size="8.5">c. −350</text>
+
+          <!-- Hegesias ~ −290 → x ≈ 94 -->
+          <circle cx="94" cy="320" r="3" fill="#6b7280"/>
+          <line x1="94" y1="316" x2="94" y2="106" class="ink-line" stroke-width="0.6"/>
+          <text x="94" y="98" text-anchor="middle" data-lang-content="en">Hegesias</text>
+          <text x="94" y="98" text-anchor="middle" data-lang-content="zh">赫格西亚</text>
+          <text x="94" y="86" text-anchor="middle" fill="#9ca3af" font-size="8.5">c. −290</text>
+
+          <!-- Gnostics / Marcion ~ 150 → x ≈ 170 -->
+          <circle cx="170" cy="320" r="3" fill="#6b7280"/>
+          <line x1="170" y1="316" x2="170" y2="248" class="ink-line" stroke-width="0.6"/>
+          <text x="170" y="240" text-anchor="middle" data-lang-content="en">Gnostics · Marcion</text>
+          <text x="170" y="240" text-anchor="middle" data-lang-content="zh">诺斯替 · 马吉安</text>
+          <text x="170" y="228" text-anchor="middle" fill="#9ca3af" font-size="8.5">c. 150</text>
+
+          <!-- Cathars ~ 1200 → x ≈ 351 -->
+          <circle cx="351" cy="320" r="3" fill="#6b7280"/>
+          <line x1="351" y1="316" x2="351" y2="190" class="ink-line" stroke-width="0.6"/>
+          <text x="351" y="182" text-anchor="middle" data-lang-content="en">Cathars</text>
+          <text x="351" y="182" text-anchor="middle" data-lang-content="zh">清洁派</text>
+          <text x="351" y="170" text-anchor="middle" fill="#9ca3af" font-size="8.5">c. 1200</text>
+
+          <!-- RIGHT REGION: linear scale on 1800 → 2025 -->
+          <!-- Each entry: x_right = 460 + (year - 1800)/225 * 220 -->
+
+          <!-- Schopenhauer 1819 → x ≈ 478.6 -->
+          <circle cx="479" cy="320" r="5" fill="#0a3d62"/>
+          <line x1="479" y1="316" x2="479" y2="232" class="ink-line" stroke-width="1.2"/>
+          <text x="479" y="224" text-anchor="middle" font-weight="700" fill="#0a3d62" data-lang-content="en">Schopenhauer</text>
+          <text x="479" y="224" text-anchor="middle" font-weight="700" fill="#0a3d62" data-lang-content="zh">叔本华</text>
+          <text x="479" y="212" text-anchor="middle" fill="#9ca3af" font-size="8.5">1819</text>
+
+          <!-- Leopardi 1827 → x ≈ 486.4 -->
+          <circle cx="486" cy="320" r="3" fill="#6b7280"/>
+          <line x1="486" y1="316" x2="486" y2="148" class="ink-line" stroke-width="0.6"/>
+          <text x="486" y="140" text-anchor="middle" data-lang-content="en">Leopardi</text>
+          <text x="486" y="140" text-anchor="middle" data-lang-content="zh">莱奥帕尔迪</text>
+          <text x="486" y="128" text-anchor="middle" fill="#9ca3af" font-size="8.5">1827</text>
+
+          <!-- Mainländer 1876 → x ≈ 534.3 -->
+          <circle cx="534" cy="320" r="3" fill="#6b7280"/>
+          <line x1="534" y1="316" x2="534" y2="280" class="ink-line" stroke-width="0.6"/>
+          <text x="534" y="272" text-anchor="middle" data-lang-content="en">Mainländer</text>
+          <text x="534" y="272" text-anchor="middle" data-lang-content="zh">迈兰德</text>
+          <text x="534" y="260" text-anchor="middle" fill="#9ca3af" font-size="8.5">1876</text>
+
+          <!-- Zapffe 1933 → x ≈ 590.0 -->
+          <circle cx="590" cy="320" r="3.5" fill="#0a3d62"/>
+          <line x1="590" y1="316" x2="590" y2="190" class="ink-line" stroke-width="0.8"/>
+          <text x="590" y="182" text-anchor="middle" data-lang-content="en">Zapffe</text>
+          <text x="590" y="182" text-anchor="middle" data-lang-content="zh">扎普菲</text>
+          <text x="590" y="170" text-anchor="middle" fill="#9ca3af" font-size="8.5">1933</text>
+
+          <!-- Cioran 1973 → x ≈ 629.1 -->
+          <circle cx="629" cy="320" r="3.5" fill="#0a3d62"/>
+          <line x1="629" y1="316" x2="629" y2="232" class="ink-line" stroke-width="0.8"/>
+          <text x="629" y="224" text-anchor="middle" data-lang-content="en">Cioran</text>
+          <text x="629" y="224" text-anchor="middle" data-lang-content="zh">齐奥朗</text>
+          <text x="629" y="212" text-anchor="middle" fill="#9ca3af" font-size="8.5">1973</text>
+
+          <!-- Shiffrin 1999 → x ≈ 654.6 -->
+          <circle cx="655" cy="320" r="3" fill="#6b7280"/>
+          <line x1="655" y1="316" x2="655" y2="148" class="ink-line" stroke-width="0.6"/>
+          <text x="655" y="140" text-anchor="middle" data-lang-content="en">Shiffrin</text>
+          <text x="655" y="140" text-anchor="middle" data-lang-content="zh">希夫林</text>
+          <text x="655" y="128" text-anchor="middle" fill="#9ca3af" font-size="8.5">1999</text>
+
+          <!-- Benatar 2006 → x ≈ 661.4 (overlaps Shiffrin tightly; offset label down) -->
+          <circle cx="662" cy="320" r="5" fill="#0a3d62"/>
+          <line x1="662" y1="316" x2="662" y2="106" class="ink-line" stroke-width="1.2"/>
+          <text x="662" y="98" text-anchor="middle" font-weight="700" fill="#0a3d62" data-lang-content="en">Benatar</text>
+          <text x="662" y="98" text-anchor="middle" font-weight="700" fill="#0a3d62" data-lang-content="zh">贝纳塔</text>
+          <text x="662" y="86" text-anchor="middle" fill="#9ca3af" font-size="8.5">2006</text>
+
+          <!-- Overall 2012 → x ≈ 667.3 -->
+          <circle cx="667" cy="320" r="3" fill="#6b7280"/>
+          <line x1="667" y1="316" x2="667" y2="280" class="ink-line" stroke-width="0.6"/>
+          <text x="667" y="272" text-anchor="middle" data-lang-content="en">Overall</text>
+          <text x="667" y="272" text-anchor="middle" data-lang-content="zh">奥维罗</text>
+          <text x="667" y="260" text-anchor="middle" fill="#9ca3af" font-size="8.5">2012</text>
+
+          <!-- Cabrera 2014 → x ≈ 669.3 (offset to right with curved leader to avoid clash) -->
+          <circle cx="669" cy="320" r="3.5" fill="#0a3d62"/>
+          <line x1="669" y1="316" x2="684" y2="190" class="ink-line" stroke-width="0.6"/>
+          <text x="684" y="182" text-anchor="end" data-lang-content="en">Cabrera</text>
+          <text x="684" y="182" text-anchor="end" data-lang-content="zh">卡布雷拉</text>
+          <text x="684" y="170" text-anchor="end" fill="#9ca3af" font-size="8.5">2014</text>
+
+          <!-- Häyry 2024 → x ≈ 679.1 -->
+          <circle cx="679" cy="320" r="3" fill="#6b7280"/>
+          <line x1="679" y1="316" x2="679" y2="60" class="ink-line" stroke-width="0.6"/>
+          <text x="684" y="56" text-anchor="end" data-lang-content="en">Häyry</text>
+          <text x="684" y="56" text-anchor="end" data-lang-content="zh">海于里</text>
+          <text x="684" y="44" text-anchor="end" fill="#9ca3af" font-size="8.5">2024</text>
+
+        </g>
+
+        <!-- legend -->
+        <g font-family="Inter, sans-serif" font-size="9" fill="#6b7280">
+          <circle cx="50" cy="395" r="4" fill="#0a3d62"/>
+          <text x="60" y="398" data-lang-content="en">major figure</text>
+          <text x="60" y="398" data-lang-content="zh">主要人物</text>
+          <circle cx="200" cy="395" r="3" fill="#6b7280"/>
+          <text x="208" y="398" data-lang-content="en">supporting figure</text>
+          <text x="208" y="398" data-lang-content="zh">次要人物</text>
+        </g>
+      </svg>
+      <figcaption>
+        <span data-lang-content="en">Fig. 1 — Antinatalist or proximate-antinatalist thinkers across 2,500 years. The chronological clustering on the right (Schopenhauer onward) does not indicate that the position is "modern" so much as that it became <em>nameable</em> in the modern period; the deep past contains the same conclusions reached by other routes (religious renunciation, lyric pessimism, esoteric soteriology).</span>
+        <span data-lang-content="zh">图 1 — 跨越约 2500 年的反生育或近反生育思想家。右侧密集的现代簇并不表明该立场是「现代的」，而是说明它在现代之后变得<em>可命名</em>；古代以其他路径（宗教遁世、抒情悲观、奥秘救赎论）达至相同结论。</span>
+      </figcaption>
+    </figure>
+
+    <h3>
+      <span data-lang-content="en">Periodization</span>
+      <span data-lang-content="zh">分期</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p><strong>Ancient (pre-modern).</strong> The thought is present but not theorized as a normative claim about procreation specifically. The Silenus saying ("best not to be born, second best to die quickly"), the Buddhist diagnosis of birth as the first of the unsatisfactorinesses (<em>jāti dukkha</em>), Zhuangzi's framing of life as labor and death as rest, and the Gnostic and later Cathar conviction that material generation is the work of a malign or inferior deity — all reach antinatalist conclusions through different ontologies.</p>
+
+      <p><strong>Nineteenth-century pessimism.</strong> Schopenhauer (1819, 1844) gives the first sustained <em>philosophical</em> argument: the will is a blind insatiable striving; existence is a project of pain only intermittently relieved by boredom; the next generation should not be brought into this. Mainländer (1876) radicalizes Schopenhauer into a metaphysics of God's self-annihilation and recommends voluntary extinction. Leopardi, in <em>Operette morali</em>, treats the same conclusions in a literary register.</p>
+
+      <p><strong>Twentieth-century existential and literary.</strong> Zapffe ("The Last Messiah," 1933) reframes the problem biologically — humans are equipped with cognitive surplus that detects the meaninglessness their environment offers — and prescribes <em>anchoring</em>, <em>isolation</em>, <em>distraction</em>, and <em>sublimation</em> as the four mechanisms by which the species avoids confronting the conclusion. Cioran (1973) writes the entire genre as aphorism. Ligotti (2010) revives Zapffe for an Anglophone audience.</p>
+
+      <p><strong>Contemporary analytic.</strong> Benatar (1997, 2006) gives an explicit asymmetry argument cast in possible-worlds and value-theoretic terms. Shiffrin (1999) gives a consent-based argument from harm. Cabrera (2014) gives a negative-ethics version. Overall (2012) and Häyry (2024) develop feminist and policy-oriented versions. The contemporary literature treats the question as a serious topic in normative ethics and population ethics rather than as a literary or temperamental position.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p><strong>古代（前现代）。</strong>这一思想存在，但尚未被理论化为专门关于生育的规范主张。西勒诺斯之言（「不生为最善，速死为次善」）、佛教将「生」作为诸苦之首的诊断（<em>jāti dukkha</em>）、庄子将生视为劳役、将死视为休憩的表述，以及诺斯替派与后来的清洁派关于物质繁殖是恶神或低等神之业的信念——它们通过不同的本体论途径，抵达了反生育的结论。</p>
+
+      <p><strong>十九世纪悲观主义。</strong>叔本华（1819、1844）给出了第一个持续的<em>哲学</em>论证：意志是盲目而无餍的挣扎；存在是一项痛苦的事业，仅被无聊间或缓解；下一代不应被带入此处。迈兰德（1876）将叔本华激进化为一种「神之自我消亡」的形而上学，并主张自愿绝灭。莱奥帕尔迪在《道德小品》中以文学语调处理相同结论。</p>
+
+      <p><strong>二十世纪存在主义与文学传统。</strong>扎普菲（〈最后的弥赛亚〉, 1933）将问题置于生物学框架下重述——人具有过剩的认知能力，足以察觉环境所提供的无意义——并将<em>锚定</em>（anchoring）、<em>隔离</em>（isolation）、<em>分心</em>（distraction）、<em>升华</em>（sublimation）描述为物种用以回避此结论的四种机制。齐奥朗（1973）将整个传统写成箴言。Ligotti（2010）将扎普菲传入英语圈。</p>
+
+      <p><strong>当代分析传统。</strong>Benatar（1997、2006）在可能世界与价值论框架下给出明确的不对称性论证。Shiffrin（1999）给出基于同意的伤害论证。Cabrera（2014）给出否定伦理学版本。Overall（2012）与 Häyry（2024）展开女性主义与政策导向的版本。当代文献将这一问题视为规范伦理学与人口伦理学中的严肃议题，而非仅是文学或气质性的立场。</p>
+    </div>
+
+    <!-- ───── §3 Analytic Tradition ───────────────────────────── -->
+    <h2 id="sec-analytic"><span class="sec-num">3 ·</span>
+      <span data-lang-content="en">Analytic Tradition</span>
+      <span data-lang-content="zh">分析哲学传统</span>
+    </h2>
+
+    <h3>
+      <span data-lang-content="en">Schopenhauer · the metaphysical foundation</span>
+      <span data-lang-content="zh">叔本华 · 形而上学奠基</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p><em>Die Welt als Wille und Vorstellung</em> (1819, 1844) and the late essays in <em>Parerga und Paralipomena</em> (1851), especially "Über die Nichtigkeit und das Leiden des Lebens" and "Über den Selbstmord," contain the first sustained philosophical argument against procreation. The argument depends on a metaphysical picture: the world as representation is grounded in the world as Will, a single blind insatiable striving that individuates itself into countless centers of need.</p>
+
+      <p>The structural argument runs: (i) all willing arises from lack, and lack is suffering; (ii) satisfaction of a want is the cessation of one suffering, immediately replaced either by a new want or, in the rare interval, by boredom — which is itself a refined suffering; (iii) the pendulum between wanting and boredom is the basic form of existence, not an unfortunate accident of it; (iv) the goods of life (pleasure, satisfaction) are <em>negative</em> in character — they consist in the absence of pain — while the evils are <em>positive</em>; (v) therefore an existence is, structurally and on average, an excess of suffering over satisfaction; (vi) to procreate is to inflict such an existence on a new center of will, without that center's consent.</p>
+
+      <p>The asymmetry of positive evil and negative good (point iv) is the move that Benatar will later reformulate in possible-worlds terms. Schopenhauer takes himself to be giving an empirical-phenomenological description: this is what willing <em>is</em>, not what some willing happens to be like.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>《作为意志和表象的世界》（1819、1844）以及《附录与补遗》（1851）中的晚期论文——尤其〈论生存的虚无〉与〈论自杀〉——包含了第一个持续的反生育哲学论证。该论证依赖于一幅形而上学图景：作为表象的世界以作为意志的世界为根据，意志是单一的、盲目的、无餍的挣扎，自我个体化为无数需求中心。</p>
+
+      <p>结构性论证：（i）一切意欲皆源于匮乏，而匮乏即痛苦；（ii）某一欲求的满足只是某一痛苦的终止，旋即被新的欲求取代——或在罕有的间隙中被无聊取代，而无聊本身是一种精致的痛苦；（iii）「欲望—无聊」的钟摆即是存在的基本形式，而非其偶然事故；（iv）生命中的好（快乐、满足）在性质上是<em>消极的</em>——它们在于痛苦的暂时缺席；而恶则是<em>积极的</em>；（v）因此存在在结构上、平均而言，是痛苦相对于满足的过剩；（vi）生育即是将此种存在强加于一个新的意志中心，而该中心无从同意。</p>
+
+      <p>其中「积极的恶—消极的善」的不对称性（第 iv 点），正是 Benatar 日后以可能世界框架重述的那一步。叔本华本人将此视作经验—现象学描述：这就是意欲<em>所是</em>，而非某些意欲恰好如此。</p>
+    </div>
+
+    <blockquote>
+      <span data-lang-content="en">
+        <em>Wenn man den fürchterlichen Schmerz und die endlose Mühsal des Lebens bedenkt, müßte man sagen, daß es besser wäre, gar nicht da zu sein.</em><br>
+        If we consider the terrible pain and the endless toil of life, we would have to say that it would be better not to be at all.
+        <span class="attribution">Schopenhauer, <em>Parerga und Paralipomena</em>, Vol. II, §156</span>
+      </span>
+      <span data-lang-content="zh">
+        <em>Wenn man den fürchterlichen Schmerz und die endlose Mühsal des Lebens bedenkt, müßte man sagen, daß es besser wäre, gar nicht da zu sein.</em><br>
+        若念及人生可怕的痛苦与无尽的劳役，便不得不说：根本不存在才是更好的。
+        <span class="attribution">叔本华，《附录与补遗》卷二，§156</span>
+      </span>
+    </blockquote>
+
+    <h3>
+      <span data-lang-content="en">Benatar · the asymmetry argument</span>
+      <span data-lang-content="zh">Benatar · 不对称性论证</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>David Benatar's <em>Better Never to Have Been: The Harm of Coming into Existence</em> (Oxford, 2006) and the earlier paper "Why It Is Better Never to Come into Existence" (1997) give the most-cited contemporary argument. The central move is the <em>asymmetry of pleasure and pain</em>.</p>
+
+      <p>Consider two scenarios:</p>
+
+      <ul>
+        <li><strong>A.</strong> A person exists and undergoes pleasures and pains.</li>
+        <li><strong>B.</strong> The same person never exists.</li>
+      </ul>
+
+      <p>For pain: in (A) pain is bad; in (B) the absence of pain is good — even though there is no one to enjoy the absence. For pleasure: in (A) pleasure is good; in (B) the absence of pleasure is <em>not bad</em>, because there is no one for whom the absence is a deprivation. Hence:</p>
+
+      <div class="argument">
+        <span class="label" data-lang-content="en">The four-fold asymmetry</span>
+        <span class="label" data-lang-content="zh">四重不对称性</span>
+        <ol>
+          <li>The presence of pain is <strong>bad</strong>.</li>
+          <li>The presence of pleasure is <strong>good</strong>.</li>
+          <li>The absence of pain is <strong>good</strong>, even if there is no one to enjoy it.</li>
+          <li>The absence of pleasure is <strong>not bad</strong> unless there is someone for whom the absence is a deprivation.</li>
+        </ol>
+        <p class="conclusion" data-lang-content="en">Coming into existence is always a net harm. The good of being is outweighed by the bad of being, while the good of non-being requires no balancing.</p>
+        <p class="conclusion" data-lang-content="zh">来到存在永远是净伤害。存在之善被存在之恶所超过，而非存在之善则无需任何抵偿。</p>
+      </div>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>David Benatar 的《永不存在更好：来到存在之伤害》（牛津，2006）以及更早的论文〈为何永不来到存在是更好的〉（1997）给出了被引用最多的当代论证。其核心步骤是<em>苦乐的不对称性</em>。</p>
+
+      <p>考虑两种情形：</p>
+
+      <ul>
+        <li><strong>甲</strong>：某人存在，经历快乐与痛苦。</li>
+        <li><strong>乙</strong>：同一人从未存在。</li>
+      </ul>
+
+      <p>就痛苦而言：在甲中，痛苦为坏；在乙中，痛苦的缺席为好——尽管并无人在享受这种缺席。就快乐而言：在甲中，快乐为好；在乙中，快乐的缺席<em>并非坏</em>，因为不存在某个对其缺席感到剥夺的主体。由此：</p>
+    </div>
+
+    <figure>
+      <svg class="diagram-svg" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="asym-title">
+        <title id="asym-title">Benatar's four-fold asymmetry</title>
+
+        <!-- column headers -->
+        <text x="200" y="32" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#1f2328" data-lang-content="en">Scenario A — Person exists</text>
+        <text x="200" y="32" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#1f2328" data-lang-content="zh">情形甲 · 此人存在</text>
+
+        <text x="450" y="32" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#1f2328" data-lang-content="en">Scenario B — Person never exists</text>
+        <text x="450" y="32" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#1f2328" data-lang-content="zh">情形乙 · 此人从未存在</text>
+
+        <!-- row labels -->
+        <text x="40" y="118" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#4a5159" data-lang-content="en">Pain</text>
+        <text x="40" y="118" font-family="'Noto Serif SC', serif" font-size="13" font-weight="600" fill="#4a5159" data-lang-content="zh">痛苦</text>
+
+        <text x="40" y="220" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#4a5159" data-lang-content="en">Pleasure</text>
+        <text x="40" y="220" font-family="'Noto Serif SC', serif" font-size="13" font-weight="600" fill="#4a5159" data-lang-content="zh">快乐</text>
+
+        <!-- horizontal divider -->
+        <line x1="80" y1="160" x2="560" y2="160" stroke="#e5e7eb" stroke-width="1"/>
+        <!-- vertical divider -->
+        <line x1="320" y1="55" x2="320" y2="280" stroke="#e5e7eb" stroke-width="1"/>
+
+        <!-- A: pain present → BAD -->
+        <rect x="100" y="78" width="200" height="60" rx="3" fill="#8b3a2a" opacity="0.12" stroke="#8b3a2a" stroke-width="1"/>
+        <text x="200" y="103" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#6b7280" data-lang-content="en">(1) Presence of pain</text>
+        <text x="200" y="103" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="11" fill="#6b7280" data-lang-content="zh">（一）痛苦在场</text>
+        <text x="200" y="125" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#8b3a2a" data-lang-content="en">BAD</text>
+        <text x="200" y="125" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="15" font-weight="700" fill="#8b3a2a" data-lang-content="zh">恶</text>
+
+        <!-- B: pain absent → GOOD -->
+        <rect x="350" y="78" width="200" height="60" rx="3" fill="#0a3d62" opacity="0.10" stroke="#0a3d62" stroke-width="1"/>
+        <text x="450" y="103" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#6b7280" data-lang-content="en">(3) Absence of pain</text>
+        <text x="450" y="103" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="11" fill="#6b7280" data-lang-content="zh">（三）痛苦缺席</text>
+        <text x="450" y="125" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0a3d62" data-lang-content="en">GOOD</text>
+        <text x="450" y="125" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="15" font-weight="700" fill="#0a3d62" data-lang-content="zh">善</text>
+
+        <!-- A: pleasure present → GOOD -->
+        <rect x="100" y="180" width="200" height="60" rx="3" fill="#0a3d62" opacity="0.10" stroke="#0a3d62" stroke-width="1"/>
+        <text x="200" y="205" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#6b7280" data-lang-content="en">(2) Presence of pleasure</text>
+        <text x="200" y="205" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="11" fill="#6b7280" data-lang-content="zh">（二）快乐在场</text>
+        <text x="200" y="227" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0a3d62" data-lang-content="en">GOOD</text>
+        <text x="200" y="227" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="15" font-weight="700" fill="#0a3d62" data-lang-content="zh">善</text>
+
+        <!-- B: pleasure absent → NOT BAD -->
+        <rect x="350" y="180" width="200" height="60" rx="3" fill="#6b7280" opacity="0.08" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="450" y="205" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#6b7280" data-lang-content="en">(4) Absence of pleasure</text>
+        <text x="450" y="205" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="11" fill="#6b7280" data-lang-content="zh">（四）快乐缺席</text>
+        <text x="450" y="227" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#4a5159" data-lang-content="en">NOT BAD</text>
+        <text x="450" y="227" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="14" font-weight="700" fill="#4a5159" data-lang-content="zh">非恶</text>
+
+        <!-- comparison arrow / conclusion -->
+        <line x1="200" y1="265" x2="200" y2="285" stroke="#9ca3af" stroke-width="1"/>
+        <line x1="450" y1="265" x2="450" y2="285" stroke="#9ca3af" stroke-width="1"/>
+        <text x="200" y="298" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4a5159" data-lang-content="en">A = bad + good</text>
+        <text x="200" y="298" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="12" fill="#4a5159" data-lang-content="zh">甲 = 恶 + 善</text>
+        <text x="450" y="298" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#0a3d62" data-lang-content="en">B = good + not bad ✓</text>
+        <text x="450" y="298" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="12" font-weight="600" fill="#0a3d62" data-lang-content="zh">乙 = 善 + 非恶 ✓</text>
+
+        <text x="300" y="315" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#9ca3af" data-lang-content="en">B is always better than A; coming into existence is a net harm.</text>
+        <text x="300" y="315" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="10.5" fill="#9ca3af" data-lang-content="zh">乙永远优于甲；来到存在永为净伤害。</text>
+      </svg>
+      <figcaption>
+        <span data-lang-content="en">Fig. 2 — Benatar's four-fold asymmetry. Cells (1) and (2) are uncontroversial; cell (3) — the goodness of pain's absence even when no one exists to enjoy it — is the load-bearing premise. Benatar defends it by appeal to the four independent asymmetries (1997, 2006): (a) the asymmetry of duty (we have a duty to avoid creating suffering, no duty to create happy people), (b) the asymmetry of retrospective judgment, (c) the asymmetry of absent suffering vs. absent happiness in moral deliberation, (d) the asymmetry of distant suffering vs. distant happiness.</span>
+        <span data-lang-content="zh">图 2 — Benatar 的四重不对称性。格 (1)、(2) 没有争议；格 (3) ——即「即便无人享有该缺席，痛苦缺席仍为善」——是承重前提。Benatar 通过四个独立的不对称性来辩护之（1997, 2006）：(a) 义务的不对称（我们有避免制造痛苦的义务，却无制造幸福者的义务）；(b) 回顾性判断的不对称；(c) 道德审议中「无人之苦缺席」与「无人之福缺席」的不对称；(d) 远方苦与远方福的不对称。</span>
+      </figcaption>
+    </figure>
+
+    <h3>
+      <span data-lang-content="en">Shiffrin · the consent-based harm argument</span>
+      <span data-lang-content="zh">Shiffrin · 基于同意的伤害论证</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Seana Shiffrin, "Wrongful Life, Procreative Responsibility, and the Significance of Harm" (<em>Legal Theory</em> 5, 1999) gives a structurally different argument. Procreation imposes serious, foreseeable, and morally significant <em>harms</em> on a being who cannot consent to them. In ordinary morality, imposing such harms without consent is prima facie wrong, even when the imposition also brings benefits that the agent would (counterfactually, if she existed) endorse.</p>
+
+      <p>Shiffrin uses the analogy of the rich neighbor who tosses gold bricks into a sleeping person's yard, breaking their arm in the process. The recipient may end up better off overall, but the act is wrong because (i) the harm was foreseeable, (ii) it was significant, (iii) it was imposed without consent, (iv) there was no pure benefit (no preexisting interest of the recipient that was being served), and (v) the recipient could survive without it. Procreation, Shiffrin argues, shares all five features.</p>
+
+      <p>This argument is independent of the asymmetry argument: it does not require that life be on balance bad. It only requires that life contain significant harms and that there is no preexisting subject whose interests demanded the creation.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>Seana Shiffrin〈生育之过、生育责任与伤害的意义〉（<em>Legal Theory</em> 5, 1999）给出了一个结构上不同的论证。生育对一个无法同意的主体施加了严重的、可预见的、道德上有意义的<em>伤害</em>。在通常道德中，未经同意施加此类伤害，初步即为错——即便该施加同时也带来了某些益处（假定该主体已存在）她也会认可。</p>
+
+      <p>Shiffrin 使用「金砖邻居」的类比：富有的邻居将金砖扔入熟睡者的院子，过程中砸断了后者的胳膊。受赠者最终或许整体上更好，但此行为是错误的，因为：（i）伤害可预见；（ii）伤害严重；（iii）伤害未经同意；（iv）并不存在纯粹的造益（不存在某个先在的主体利益要求此行为）；（v）受赠者本可不依赖此行为而生存。Shiffrin 论证：生育同时具备这五条特征。</p>
+
+      <p>此论证独立于不对称性论证：它并不要求生命整体而言是坏的，只要求生命包含重大伤害，且不存在某个先在主体的利益要求其被创造。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Cabrera · negative ethics &amp; moral disqualification</span>
+      <span data-lang-content="zh">Cabrera · 否定伦理学与道德资格的失格</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Julio Cabrera, in <em>A Critique of Affirmative Morality: A Reflection on Death, Birth and the Value of Life</em> (1989) and <em>Discomfort and Moral Impediment</em> (2014, English 2018), develops a tradition called <em>ética negativa</em>. The central concepts are <em>terminality of being</em> (every being is structured toward death and decay), <em>discomfort</em> (<em>desconforto</em> — the structural friction of being in time, scarcity, and mortality), and <em>moral disqualification</em> (the structural impossibility of acting morally without thereby harming or restricting others).</p>
+
+      <p>Cabrera's argument is that to bring a being into existence is to insert it into a condition where genuinely moral action is structurally impossible. Procreation is not merely the imposition of suffering (Benatar) or of harm (Shiffrin); it is the imposition of <em>a condition in which the imposed being cannot avoid wronging others</em>. This adds a deontic dimension absent in pure suffering-based accounts.</p>
+
+      <p>Cabrera also defends <em>negative ethics</em> as compatible with engaged and ethically demanding life: one accepts the moral disqualification of one's own existence (one is already here) without compounding it by creating new disqualified existents.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>Julio Cabrera 在《对肯定道德的批判：关于死亡、出生与生命价值的反思》（1989）与《不适与道德障碍》（2014；英译 2018）中发展了一个被称为<em>否定伦理学</em>（ética negativa）的传统。核心概念包括：<em>存在的终结性</em>（每一存在在结构上趋向死亡与衰朽）、<em>不适</em>（desconforto——存在于时间、稀缺与有死性中的结构性摩擦）、以及<em>道德资格的失格</em>（moral disqualification——在不伤害或限制他人的情况下进行真正道德行动的结构性不可能）。</p>
+
+      <p>Cabrera 的论证是：将一个存在者带入存在，即是将其置入一种「真正道德的行动在结构上不可能」的处境中。生育不仅是施加痛苦（Benatar）或施加伤害（Shiffrin）；它是施加<em>一种处境，使被施加者无法不伤害他人</em>。这为单纯基于痛苦的进路所缺乏的义务论维度。</p>
+
+      <p>Cabrera 同时主张：否定伦理学与积极投入、伦理上要求严格的生活相容——人可以接受自身存在的道德失格（既已身在此地）而不通过创造新的失格存在者来累加之。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Other analytic contributions</span>
+      <span data-lang-content="zh">其他分析传统贡献</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <ul>
+        <li><strong>Gerald Harrison &amp; Julia Tanner</strong> ("Better Not to Have Children," 2011) — a risk-based argument: even if life is usually worth living, the probability of a seriously bad life is high enough that imposing the risk without consent is wrong.</li>
+        <li><strong>Asheel Singh</strong> ("Assessing Anti-Natalism," 2018) — taxonomy of antinatalist arguments and assessment of which premises do the work.</li>
+        <li><strong>Nicholas Smyth</strong> — argues that Benatar's asymmetry can be defended by appeal to the intuitive moral significance of agent-relative reasons.</li>
+        <li><strong>Rivka Weinberg</strong> (<em>The Risk of a Lifetime</em>, 2015) — develops a contractualist analogue: procreation is permissible only if the prospective parent could justify the act to the future child under reasonable standards of risk-imposition. Reaches a partial pro-natalist conclusion, but the framework is widely cited by antinatalists.</li>
+      </ul>
+    </div>
+
+    <div data-lang-content="zh">
+      <ul>
+        <li><strong>Gerald Harrison 与 Julia Tanner</strong>（〈不要生育更好〉, 2011）——基于风险的论证：即便生命通常值得活，严重糟糕生命的概率仍足够高，以致未经同意施加此风险即为错。</li>
+        <li><strong>Asheel Singh</strong>（〈评估反生育主义〉, 2018）——对反生育论证的分类学整理，分析哪些前提承担论证负担。</li>
+        <li><strong>Nicholas Smyth</strong>——论证 Benatar 的不对称性可通过诉诸主体相对理由的直觉性道德意义来辩护。</li>
+        <li><strong>Rivka Weinberg</strong>（《一生的风险》, 2015）——发展契约主义类比：生育唯有在准父母可在合理风险施加标准下向未来的孩子辩护时才是被允许的。其结论部分支持生育，但框架在反生育文献中被广泛引用。</li>
+      </ul>
+    </div>
+
+    <!-- ───── §4 Literary & Pessimist Tradition ─────────────────── -->
+    <h2 id="sec-literary"><span class="sec-num">4 ·</span>
+      <span data-lang-content="en">Literary &amp; Pessimist Tradition</span>
+      <span data-lang-content="zh">文学与悲观主义传统</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>The literary tradition reaches antinatalist conclusions by different means than the analytic. Where the analytic argues from premises about harm, consent, or value, the literary <em>shows</em> the structural features of existence — boredom, repetition, decay, the dissolution of love, the betrayals of memory, the futility of effort — and leaves the reader to draw the conclusion. The form is sometimes more powerful than the argument because the form rules out the easy reply ("you are exaggerating") by sheer accumulation of accurate detail.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>文学传统通过不同于分析传统的手段抵达反生育的结论。分析传统从关于伤害、同意或价值的前提出发，而文学传统则<em>展示</em>存在的结构性特征——无聊、重复、衰朽、爱的瓦解、记忆的背叛、努力的徒劳——并将结论留给读者自得。其形式有时比论证更有力，因为通过精确细节的纯然累积，文学排除了那种简易回应（「你夸大了」）的可能。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Silenus &amp; the Greek lyric</span>
+      <span data-lang-content="zh">西勒诺斯与希腊抒情诗</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The saying attributed to <strong>Silenus</strong>, preserved in Aristotle's lost <em>Eudemus</em> and in Plutarch's <em>Consolatio ad Apollonium</em>: <em>"Best of all for mortal beings is never to have been born at all; second-best is to die as soon as possible."</em> Nietzsche cites this in <em>The Birth of Tragedy</em> §3 as the wisdom that Greek tragedy was constructed to mask. Whether or not the saying represents an "old" Greek view or a post-Platonic literary construction, it became a topos. <strong>Theognis</strong> of Megara (6th c. BCE) versifies the same thought in elegies 425–428.</p>
+
+      <p><strong>Sophocles</strong>, <em>Oedipus at Colonus</em> 1224–1238 (the epigraph to this page) gives the most often-quoted form. The Greek phrase <em>mē phūnai</em> ("not to be born") becomes a stock element in later pessimist citation. <strong>Hegesias of Cyrene</strong> ("the death-persuader," 3rd c. BCE) reportedly argued that life contains more pain than pleasure and that one should welcome death; Ptolemy II is said to have banned his teaching in Alexandria after a wave of suicides.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>归于<strong>西勒诺斯</strong>之言，保存于亚里士多德佚作《欧德谟》与普鲁塔克《致阿波罗尼乌斯的慰文》中：<em>「对凡人而言，最好的事是从未出生；次好的事是尽快死去。」</em>尼采在《悲剧的诞生》§3 中引用此言，将其视为希腊悲剧所欲掩盖的智慧。无论此言代表「古老」希腊观念还是某种后柏拉图的文学构造，它都成为了一个文学母题（topos）。<strong>忒奥格尼斯</strong>（公元前 6 世纪）在哀歌 425–428 行中以韵文表达相同思想。</p>
+
+      <p><strong>索福克勒斯</strong>《俄狄浦斯在科罗诺斯》1224–1238 行（本页题词）给出最常被引用的形式。希腊语短语 <em>mē phūnai</em>（「不要被生出」）成为后世悲观主义引文中的固定元素。<strong>昔兰尼的赫格西亚</strong>（公元前 3 世纪，被称为「劝死者」）据说论证：生命中痛苦多于快乐，应当迎接死亡；据传托勒密二世在亚历山大里亚因一波自杀潮而禁止其讲学。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Leopardi · the cosmic indifference</span>
+      <span data-lang-content="zh">莱奥帕尔迪 · 宇宙的冷漠</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Giacomo Leopardi (1798–1837), particularly <em>Operette morali</em> (1827) and the <em>Zibaldone</em>, develops a philosophical pessimism that approaches antinatalism through the doctrine of <em>infelicità necessaria</em> (necessary unhappiness). The "Dialogue of Nature and an Icelander" stages Nature as an indifferent productive force that creates beings whose only function is, in their living and dying, to maintain the cosmic cycle — without any concern for their welfare. Reproduction, in this view, is not the propagation of any good but the perpetuation of the same indifferent process.</p>
+
+      <p>Leopardi distinguishes <em>storical</em> pessimism (a critique of his own age) from <em>cosmic</em> pessimism (a structural account of existence as such); only the latter has antinatalist implications.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>Giacomo Leopardi（1798–1837），尤其是《道德小品》（1827）与《杂记》（<em>Zibaldone</em>），发展了一种通过<em>必然不幸</em>（infelicità necessaria）学说接近反生育主义的哲学悲观主义。〈自然与冰岛人的对话〉将自然置为一种漠然的生产力，它创造存在者，使其在生死间维持宇宙循环——而不关心其福祉。在此视角下，生育不是任何善的繁衍，而是同一漠然过程的延续。</p>
+
+      <p>Leopardi 区分<em>历史性</em>悲观主义（对其时代的批判）与<em>宇宙性</em>悲观主义（对存在本身的结构性描述）；仅后者具有反生育的蕴含。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Mainländer · the will to nothingness</span>
+      <span data-lang-content="zh">迈兰德 · 趋向虚无的意志</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Philipp Mainländer (1841–1876), <em>Die Philosophie der Erlösung</em> (1876) radicalizes Schopenhauer. The metaphysical move is daring: God existed but, finding existence intolerable, chose self-annihilation. The Big Bang is the moment of this self-annihilation; the universe is the slow decay of God's fragments. Each individual existent therefore contains, as its deepest tendency, a <em>will to die</em> — a will to return to the divine nothingness. Reproduction prolongs the decay; voluntary non-reproduction accelerates the return.</p>
+
+      <p>Mainländer is also notable for the biographical coda: he completed <em>Die Philosophie der Erlösung</em> in 1876, received the printed first volume, and hanged himself the same night using the stacked copies as a platform. He cannot be cited without this fact; the question of whether the fact strengthens or weakens his argument is unresolved.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>Philipp Mainländer（1841–1876），《救赎的哲学》（1876）将叔本华激进化。其形而上学的步法极为大胆：神曾存在，但因发现存在不可忍受而选择自我消亡。大爆炸即此自我消亡之刻；宇宙是神之碎片的缓慢衰朽。因此，每一个体存在者其最深的倾向中包含一种<em>趋死的意志</em>——一种归返神之虚无的意志。生育延长此衰朽；自愿不生育则加速此归返。</p>
+
+      <p>Mainländer 还以其传记尾声著名：他在 1876 年完成《救赎的哲学》，收到第一卷印刷本，并于同夜将自杀——以一摞印本作为台座上吊。引用他时不可不附此事；至于此事强化抑或削弱其论证，悬而未决。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Zapffe · the four mechanisms</span>
+      <span data-lang-content="zh">扎普菲 · 四种机制</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Peter Wessel Zapffe (1899–1990), "The Last Messiah" (<em>Den sidste Messias</em>, 1933) and <em>On the Tragic</em> (<em>Om det tragiske</em>, 1941) reframes the antinatalist conclusion through a biological asymmetry. Humans evolved cognitive capacities — for self-awareness, anticipation of death, moral consideration of others — that exceed the meanings their evolutionary environment can supply. The result is a structural mismatch: humans are equipped to recognize the meaninglessness of their condition but unequipped to live with that recognition.</p>
+
+      <p>Zapffe identifies four mechanisms by which the species defends itself against this recognition:</p>
+
+      <dl>
+        <dt>1. Anchoring (<em>forankring</em>)</dt>
+        <dd>Fixing attention on social roles, institutions, ideologies, gods, nations — frameworks that supply borrowed meaning. The frameworks are perceived as natural rather than as defenses.</dd>
+        <dt>2. Isolation (<em>isolasjon</em>)</dt>
+        <dd>Excluding disturbing thoughts from awareness. The conclusions of pessimist philosophy are tolerated as ideas but not allowed to bear on daily decisions.</dd>
+        <dt>3. Distraction (<em>distraksjon</em>)</dt>
+        <dd>Continuous occupation of attention with stimuli — entertainment, work, ambition, romance — that prevent the recognition from rising. The function of an information environment is, in part, to make introspection costly.</dd>
+        <dt>4. Sublimation (<em>sublimasjon</em>)</dt>
+        <dd>Transforming the recognition into aesthetic form — tragedy, lyric poetry, philosophy. This is the only mechanism that does not deny the recognition; it converts it into something the species can survive contemplating. The text you are reading is itself an instance.</dd>
+      </dl>
+
+      <p>The "Last Messiah" of the title is the figure who would tell humans the truth that they should stop reproducing. Zapffe predicts that such a messiah would be killed or, more likely, simply ignored.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>Peter Wessel Zapffe（1899–1990），〈最后的弥赛亚〉（<em>Den sidste Messias</em>, 1933）与《论悲剧》（<em>Om det tragiske</em>, 1941）通过一种生物学不对称性重述反生育结论。人类演化出了认知能力——自我意识、对死亡的预期、对他人的道德考量——这些能力超出了其演化环境所能提供的意义。结果是一种结构性错配：人类被装备得足以察觉自身境况的无意义，却未被装备得足以与此察觉共存。</p>
+
+      <p>Zapffe 列出物种用以抵御此察觉的四种机制：</p>
+
+      <dl>
+        <dt>1. 锚定（forankring）</dt>
+        <dd>将注意力固定在社会角色、制度、意识形态、神祇、民族等借贷意义的框架上。这些框架被感知为自然，而非作为防御。</dd>
+        <dt>2. 隔离（isolasjon）</dt>
+        <dd>将令人不安的思想排除出意识。悲观主义哲学的结论作为「观念」被容忍，但不被允许影响日常决策。</dd>
+        <dt>3. 分心（distraksjon）</dt>
+        <dd>用连续的刺激——娱乐、工作、抱负、爱情——占据注意力，阻止察觉浮现。信息环境的功能之一即是使内省变得代价高昂。</dd>
+        <dt>4. 升华（sublimasjon）</dt>
+        <dd>将察觉转化为美学形式——悲剧、抒情诗、哲学。这是唯一不否认察觉的机制；它将察觉转化为该物种能在凝视下存活的东西。你正在阅读的文本本身即是一个实例。</dd>
+      </dl>
+
+      <p>标题中的「最后的弥赛亚」是那位将向人类传达「应当停止繁殖」之真理者。Zapffe 预言：这样的弥赛亚将被杀害，或更可能地——被简单地忽视。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Cioran · the aphorist of nativity</span>
+      <span data-lang-content="zh">齐奥朗 · 出生的箴言家</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Emil Cioran (1911–1995), <em>De l'inconvénient d'être né</em> (<em>The Trouble with Being Born</em>, 1973) is the antinatalist position rendered entirely as aphorism. Cioran does not argue; he formulates the recognition in the most compressed possible verbal forms and repeats it until accumulation does the work of demonstration. Representative claim: birth is a fall not from grace but from possibility; we existed potentially in countless better ways, and existing actually in this one way is the loss of all of them.</p>
+
+      <p>Cioran is also distinctive for not framing the position morally. He does not say procreation is wrong; he says being born is unfortunate, and he leaves the inference to procreation as an exercise. This rhetorical move is sometimes more effective than the explicit moral claim because it makes the conclusion harder to dismiss as moralism.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>Emil Cioran（1911–1995），《诞生之不便》（<em>De l'inconvénient d'être né</em>, 1973）将反生育立场完全以箴言形式呈现。Cioran 不论证；他以最简约的语言形式表述察觉，并通过重复让累积本身完成论证。代表性主张：出生不是从恩典中的堕落，而是从可能性中的堕落——我们本可在无数种更好的方式中潜在地存在，而实际地以此一种方式存在即是失去其余所有种。</p>
+
+      <p>Cioran 的另一独特之处是不将立场道德化。他不说生育为错；他说被生即不幸，将向生育的推论作为练习留给读者。这一修辞步法有时比明确的道德主张更有效，因为它使得结论更难被作为「道德说教」轻易驳回。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Ligotti · horror as philosophy</span>
+      <span data-lang-content="zh">Ligotti · 作为哲学的恐怖</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Thomas Ligotti, <em>The Conspiracy against the Human Race</em> (2010), is a non-fiction work by an American horror writer that systematizes Zapffe, Schopenhauer, and Mainländer for an Anglophone readership. The central thesis is that consciousness is a malignant accident — that to be a conscious being is to be a piece of inert matter that has accidentally acquired the capacity to recognize what it is, and that horror fiction is the literary form most honest about this recognition. The cosmic-horror tradition (Lovecraft, Chambers, Machen) is read as antinatalism in genre code.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>Thomas Ligotti，《针对人类的阴谋》（<em>The Conspiracy against the Human Race</em>, 2010），是一位美国恐怖小说作家所著的非虚构著作，将 Zapffe、叔本华、Mainländer 为英语读者系统化。核心论点：意识是一种恶性的偶然——成为意识主体即是成为一块惰性物质，偶然获得了认识自身所是的能力；而恐怖文学是对此察觉最为诚实的文学形式。宇宙恐怖传统（洛夫克拉夫特、Chambers、Machen）被解读为类型化编码下的反生育主义。</p>
+    </div>
+
+    <!-- ───── §5 Eastern Traditions ─────────────────────────────── -->
+    <h2 id="sec-eastern"><span class="sec-num">5 ·</span>
+      <span data-lang-content="en">Eastern Traditions</span>
+      <span data-lang-content="zh">东方传统</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>The Eastern traditions reach antinatalist conclusions through different metaphysical frames — most commonly through a soteriology in which birth itself is the condition to be escaped, and reproduction is the act that perpetuates the bondage. The conclusions overlap with Western antinatalism but the argumentative routes are different; conflation flattens both.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>东方传统通过不同的形而上学框架抵达反生育结论——最常见的是一种救赎论：出生本身即是应被脱离的境况，繁殖即是延续此束缚之行。其结论与西方反生育主义重合，但论证路径不同；混同会同时削弱两者。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Buddhism · birth as the first dukkha</span>
+      <span data-lang-content="zh">佛教 · 生为初苦</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The Four Noble Truths open with the enumeration of <em>dukkha</em> (often translated "suffering" but more accurately "unsatisfactoriness," <em>asantosa</em>). The standard formula begins: <em>jāti pi dukkhā</em> — "birth is dukkha." The list continues: aging is dukkha, illness is dukkha, death is dukkha, encountering what is unpleasant is dukkha, separation from what is pleasant is dukkha, not getting what one wants is dukkha; in short, the five aggregates of clinging are dukkha. Birth is not one item among others; it is the condition from which the others follow.</p>
+
+      <p>The goal of the Buddhist path is the cessation of rebirth (<em>punabbhava-nirodha</em>): not death of the present body, which is merely transition, but the breaking of the cycle that produces new births. Within Pāli Buddhism, <em>ajāta</em> ("the unborn") is one of the canonical epithets of nibbāna. The position is structurally antinatalist at the soteriological level: the goal is the cessation of new births. Whether this implies a normative claim against ordinary procreation is debated within the tradition; monastic life (which implies non-procreation) is one resolution.</p>
+
+      <p>The Mahāyāna development complicates this. The Bodhisattva vow — to remain in saṃsāra until all beings are liberated — converts non-rebirth from a goal into a deferred goal. But the underlying valuation of <em>jāti</em> as a condition to be escaped is preserved.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>四圣谛以「苦」（<em>dukkha</em>，常译「苦」，更精确为「不满足」，<em>asantosa</em>）的列举开始。标准表述始于：<em>jāti pi dukkhā</em>——「生是苦」。列举继续：老是苦、病是苦、死是苦、怨憎会是苦、爱别离是苦、求不得是苦；简言之，五取蕴是苦。生不是众苦中的一项，而是其余诸苦由之而出的境况。</p>
+
+      <p>佛教道路的目标是「再生之止息」（<em>punabbhava-nirodha</em>）：不是当下身的死亡——那只是转换——而是产生新生的循环的破断。在巴利佛教中，<em>ajāta</em>（「不生」）是涅槃的标准称谓之一。在救赎论层面，此立场结构上即是反生育的：目标即是新生的止息。这是否蕴含对普通生育的规范性反对，传统内部有争论；僧团生活（蕴含不生育）是其中一种解决。</p>
+
+      <p>大乘的发展使此问题更为复杂。菩萨愿——留在轮回直至一切众生得脱——将「不再生」从目标转为延期的目标。但 <em>jāti</em> 作为「应被脱离的境况」这一根本评价仍被保留。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Hindu renunciate &amp; Jain traditions</span>
+      <span data-lang-content="zh">印度教遁世传统与耆那教</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The renunciate (<em>saṃnyāsa</em>) tradition in Hinduism treats withdrawal from procreation and household life as the final and highest of the four life stages (<em>āśramas</em>). The pattern is biographical-developmental rather than antinatalist as a universal claim: householders are expected to procreate (the stage of <em>gṛhastha</em>); only the post-householder is expected to renounce. The valuation, however, places non-procreation higher.</p>
+
+      <p>Jain ethics is more directly antinatalist in its implications. Strict ahiṃsā (non-violence) extends to all sentient life, including the microscopic organisms in food and water; the logical endpoint of perfect ahiṃsā is <em>sallekhanā</em>, the ritual fast unto death. Reproduction is the production of more beings who will inevitably commit himsa. Jain monastic celibacy is therefore not only continence but doctrinal non-procreation.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>印度教中的遁世（<em>saṃnyāsa</em>）传统将从生育与家庭生活中退出，视为四个人生阶段（<em>āśramas</em>）中的最终与最高阶段。这一模式是传记—发展性的，而非作为普遍主张的反生育：家主（<em>gṛhastha</em>）阶段被期望生育；唯有家主之后才被期望放弃。但其价值评价仍将不生育置于更高位置。</p>
+
+      <p>耆那教伦理在其蕴含上更直接地反生育。严格的「不害」（ahiṃsā）延及一切有情，包括食物与水中的微小生物；完美不害的逻辑终点是<em>sallekhanā</em>，禁食至死的仪式。生育即产生更多必然将施害的存在者。因此，耆那教僧团的禁欲不仅是节制，更是教义性的不生育。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Zhuangzi · life as labor, death as rest</span>
+      <span data-lang-content="zh">庄子 · 生为劳役，死为休憩</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Zhuangzi 6 (Dazongshi 大宗师): <em>"大块载我以形，劳我以生，佚我以老，息我以死。故善吾生者，乃所以善吾死也。"</em> ("The Great Lump burdens me with form, labors me with life, eases me with old age, and rests me with death. Therefore, that which makes my life good is the same that makes my death good.") The framing treats existence as labor and death as relief. The implication is not a strict normative claim against procreation, but the evaluative orientation of the whole tradition — that the wise person does not cling to life, that distinctions between life and death are perspectival, that "having been born" is a contingency one need not particularly celebrate — is antinatalist-adjacent.</p>
+
+      <p>Zhuangzi 18 (Zhile 至乐) contains the famous episode of Zhuangzi singing while his wife is mourned: the framing is not lack of feeling but recognition that the transformation she has undergone is a return to the same cosmic process from which she briefly individuated. Both birth and death are transitions within a cycle that has no preferred state.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>《庄子·大宗师》：<em>「大块载我以形，劳我以生，佚我以老，息我以死。故善吾生者，乃所以善吾死也。」</em>此表述将存在视为劳役，死亡视为休止。其蕴含并非对生育的严格规范性反对，但整个传统的评价取向——智者不执着于生、生死之别是视角性的、「曾被生」是无须特别庆祝的偶然——与反生育主义相邻。</p>
+
+      <p>《庄子·至乐》收录庄子鼓盆而歌的著名段落：所表达的并非无情，而是对其妻所经历之转化的认知——她正归返于她曾短暂个体化而出的同一宇宙过程。生与死皆是无偏好状态之循环中的转换。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Honglou Meng &amp; the dream of vanity</span>
+      <span data-lang-content="zh">《红楼梦》与一梦荒唐</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The opening chapter of <em>Honglou Meng</em> (Cao Xueqin, mid-18th c.) supplies the framework for the entire novel: the "Hao Liao Ge" (好了歌) and Zhen Shiyin's gloss on it. The pattern is that every form of human striving — wealth, love, status, scholarly achievement, even the parental relation — is shown across time to dissolve into vanity. The famous closing lines of Shiyin's gloss: <em>"乱烘烘你方唱罢我登场，反认他乡是故乡。甚荒唐，到头来都是为他人作嫁衣裳。"</em> ("In a noisy confusion you finish singing and I take the stage; we mistake the foreign place for home. How absurd — in the end, we are all sewing wedding clothes for others.")</p>
+
+      <p>The frame is Buddhist–Daoist: the world of forms is impermanent and ultimately empty; attachment to any of its objects, including descendants, is the engine of suffering. The poem at the end of the first chapter — <em>"满纸荒唐言，一把辛酸泪。都云作者痴，谁解其中味。"</em> ("Pages of absurd words, a handful of bitter tears. They all say the author is mad; who understands the taste within?") — frames the entire 120-chapter narrative as evidence for the conclusion. The narrative is not an argument that procreation is wrong; it is a 800,000-character demonstration that the goods one would procreate <em>for</em> are not what they appear.</p>
+
+      <p>The line that supplies this wiki's title — <em>"悲喜千般同幻渺，古今一梦尽荒唐"</em> ("a thousand sorrows and joys all alike are phantoms; past and present alike, a single dream of absurdity") — is from the closing poem of Chapter 1, placed by the author as the work's epistemic frame. The English half of the title (<em>A Dream Not Recommended</em>) joins the second half of this couplet to a private skiing analogy (see §8, the "why not suicide" reply).</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>《红楼梦》（曹雪芹，18 世纪中叶）开篇为整部小说提供了框架：〈好了歌〉以及甄士隐对它的注解。其模式是：人世一切奋斗——财富、爱情、地位、学问、乃至亲子关系——在时间中皆显示为终归虚空。士隐注的著名收束：<em>「乱烘烘你方唱罢我登场，反认他乡是故乡。甚荒唐，到头来都是为他人作嫁衣裳。」</em></p>
+
+      <p>此框架为佛—道式的：形相之世无常而终空；对其任何对象——包括子嗣——的执着，即是苦的发动机。第一回末诗：<em>「满纸荒唐言，一把辛酸泪。都云作者痴，谁解其中味。」</em>将整部 120 回叙事置为此结论的证据。叙事并非「生育为错」的论证；它是一次以八十万字呈现的展示：人为之生育的那些善，并非其所显现的样子。</p>
+
+      <p>本页标题取「荒唐一梦」一句——<em>「悲喜千般同幻渺，古今一梦尽荒唐」</em>——即出第一回末诗，由作者作为全作的认识论框架而置之。题目英文部分（<em>A Dream Not Recommended</em>）将此句下半与一则私人滑雪类比缀接（见 §8「为何不自杀」一节之回应）。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Tao Yuanming &amp; the return to nothing</span>
+      <span data-lang-content="zh">陶渊明 · 归于空无</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Tao Yuanming (365–427) gives the framing in lyric form. The most cited line: <em>"人生似幻化，终当归空无"</em> (《归园田居·其四》) — "Human life is like an apparition, in the end returning to emptiness." The framing is more Daoist than Buddhist (Tao predates Chinese Buddhism's full reception); the conclusion is the same.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>陶渊明（365–427）以抒情诗形式给出此框架。最常被引用之句：<em>「人生似幻化，终当归空无」</em>（《归园田居·其四》）。其框架较佛教更近道家（陶活动早于汉地佛教完成接受期）；其结论则相同。</p>
+    </div>
+
+    <!-- ───── §6 Feminist Antinatalism ─────────────────────────── -->
+    <h2 id="sec-feminist"><span class="sec-num">6 ·</span>
+      <span data-lang-content="en">Feminist Antinatalism</span>
+      <span data-lang-content="zh">女性主义反生育</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>The feminist contribution to antinatalism is distinct in three ways. First, it shifts the burden of proof: rather than asking whether refusing to procreate requires justification, it asks whether <em>procreating</em> requires justification — a reversal that fits poorly with the dominant cultural framing but well with ordinary moral reasoning about other significant actions. Second, it foregrounds the asymmetric burdens of procreation on women's lives, bodies, and labor. Third, it engages directly with the policy and rights questions (reproductive autonomy, pronatalist incentives, climate-driven reproductive ethics) that the analytic tradition often brackets.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>女性主义对反生育主义的贡献在三个方面有别。其一，它翻转举证责任：不是问「拒绝生育是否需要辩护」，而是问<em>生育本身</em>是否需要辩护——这一翻转与主流文化框架不合，却与我们对其他重大行动的通常道德推理相合。其二，它将生育对女性的生活、身体、劳动所造成的不对称负担置于前景。其三，它直接介入政策与权利议题（生育自主权、亲生育激励、气候驱动的生殖伦理），而这些常被分析传统所搁置。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Overall · the burden of proof reversed</span>
+      <span data-lang-content="zh">Overall · 举证责任的翻转</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Christine Overall, <em>Why Have Children? The Ethical Debate</em> (MIT Press, 2012), opens with the observation that the question is asked only of the childfree. Those who have children are not normally expected to explain themselves; those who do not are. Overall argues that this distribution of the explanatory burden is unjustifiable: bringing a new sentient being into existence is by any measure a more consequential action than not doing so, and ordinary moral reasoning places the burden of justification on the more consequential side.</p>
+
+      <p>Overall does not argue for strong antinatalism. Her conclusion is a procedural reversal: procreation requires positive moral reasons; non-procreation requires none. She also argues that the strongest pro-natalist reasons (continuation of family lineage, social expectation, parental fulfillment) do not survive examination when stated explicitly.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>Christine Overall，《为何要有孩子？伦理之辩》（MIT, 2012），开篇即指出：这个问题仅被向无子者提出。有子者通常不被期望解释自己；无子者被期望。Overall 论证：此种解释负担的分布不可辩护——将一个新感知主体带入存在，无论从何标准看都是比不做更重大的行动，而通常道德推理将辩护责任置于较重大的一方。</p>
+
+      <p>Overall 并未论证强反生育主义。她的结论是程序性的翻转：生育需要积极的道德理由；不生育不需要。她同时论证：最强的亲生育理由（家族延续、社会期待、为人父母的满足）在被明确陈述后均经不起审视。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Häyry · procreative permissibility</span>
+      <span data-lang-content="zh">Häyry · 生育的可容许性</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Matti Häyry, in <em>If You Must Make Babies</em> (Cambridge, 2024) and earlier work, develops a structured framework for thinking about procreative permissibility. The framework distinguishes five positions on a continuum from <em>pronatalism</em> (procreation is good) through <em>permissive</em> and <em>cautious</em> views to <em>restrictive</em> antinatalism (procreation is wrong in most cases) and finally <em>strict</em> antinatalism (procreation is always wrong). Häyry argues that the cautious-to-restrictive positions are best supported on independently plausible moral premises.</p>
+
+      <p>The book is also methodologically distinctive: rather than arguing for one position, it provides a structured map and shows what each position commits its proponents to. This serves the policy purpose well — it makes visible the choices buried in pronatalist defaults.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>Matti Häyry，《如果你必须要生孩子》（剑桥, 2024）及更早作品，发展出一套关于「生育可容许性」的结构化框架。该框架在连续谱上区分五种立场：<em>亲生育</em>（生育为善）、<em>容许性</em>、<em>谨慎</em>、<em>限制性反生育</em>（大多数情况下生育为错）、<em>严格反生育</em>（生育始终为错）。Häyry 论证：在独立而可信的道德前提之下，谨慎—限制立场获得最佳支持。</p>
+
+      <p>该书在方法论上独特：与其论证某一立场，不如提供一张结构化地图，并显示每一立场对其支持者构成什么承诺。这对政策目的颇有助益——它使得隐藏在「亲生育默认」中的选择得以显现。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Other feminist contributions</span>
+      <span data-lang-content="zh">其他女性主义贡献</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <ul>
+        <li><strong>Tina Rulli</strong>, "The Ethics of Procreation and Adoption" (<em>Philosophy Compass</em>, 2016) — argues an asymmetry between procreation and adoption: existing children in need of homes ground reasons to adopt that are stronger than reasons to procreate.</li>
+        <li><strong>Sarah Conly</strong>, <em>One Child: Do We Have a Right to More?</em> (Oxford, 2016) — argues for procreative restriction on environmental and welfare grounds. Not strictly antinatalist but adjacent.</li>
+        <li><strong>Trevor Hedberg</strong>, <em>The Environmental Impact of Overpopulation</em> (Routledge, 2020) — environmental case for procreative restraint; engages with both Benatar and Conly.</li>
+        <li><strong>Adelita Sherinian</strong>, work on disability and antinatalism — argues against ableist forms of antinatalism while preserving the general structure.</li>
+        <li><strong>Kerstin Knopf</strong> and others in the German <em>Antinatalismus</em> tradition — connect the position to ecological ethics and degrowth.</li>
+      </ul>
+    </div>
+
+    <div data-lang-content="zh">
+      <ul>
+        <li><strong>Tina Rulli</strong>，〈生育与领养的伦理〉（<em>Philosophy Compass</em>, 2016）——论证生育与领养之间存在不对称性：现存需要家庭的孩子构成了比生育理由更强的领养理由。</li>
+        <li><strong>Sarah Conly</strong>，《一个孩子：我们有权要更多吗？》（牛津, 2016）——基于环境与福祉理由论证生育限制。严格而言非反生育，但相邻。</li>
+        <li><strong>Trevor Hedberg</strong>，《人口过剩的环境影响》（Routledge, 2020）——生育克制的环境论据；与 Benatar 和 Conly 均有对话。</li>
+        <li><strong>Adelita Sherinian</strong>，关于残障与反生育的工作——在保留一般结构的同时反对其能力歧视形式。</li>
+        <li><strong>Kerstin Knopf</strong> 及德国 <em>Antinatalismus</em> 传统中的其他作者——将此立场与生态伦理及去增长（degrowth）相联系。</li>
+      </ul>
+    </div>
+
+    <!-- ───── §7 Empirical Background ───────────────────────────── -->
+    <h2 id="sec-empirical"><span class="sec-num">7 ·</span>
+      <span data-lang-content="en">Empirical Background: Why Parenthood Is the Default &amp; Why TFR Is Falling</span>
+      <span data-lang-content="zh">经验背景：为何「为人父母」是默认人生轨迹，以及全球总和生育率为何下降</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>The normative arguments in §§3–6 take place against a social fact: in most cultures and most periods, procreation has been the default life trajectory, and the burden of justification has fallen on those who deviate from it. The descriptive question — <em>why</em> this is so — is logically separable from the normative question, but the two interact: the social fact shapes the moral intuitions on which the normative arguments draw, and the recent reversal of the fact (rapid TFR decline) provides an empirical setting in which the normative arguments are received differently than they would have been a century ago. This section sets out the descriptive background.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>§§3–6 中的规范论证发生于这样一个社会事实之上：在大多数文化、大多数时期，生育是默认的人生轨迹，而辩护责任落在偏离默认者身上。「为何如此」这一描述性问题在逻辑上可与规范性问题分离，但两者相互作用：社会事实塑造了规范论证所依据的道德直觉；而该事实近期的反转——全球总和生育率（TFR）的迅速下降——为规范论证提供了一个不同于一个世纪以前的接收语境。本节梳理这一描述性背景。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Why parenthood is the default: pronatalist ideology</span>
+      <span data-lang-content="zh">为何「为人父母」是默认：亲生育意识形态</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The sociological literature names the default <em>pronatalism</em>: the family of beliefs, practices, and institutional arrangements that treat procreation as the normal, valuable, and expected adult activity, and treat non-procreation as a deviation requiring explanation. The term traces to demographic policy literature of the early twentieth century but was developed as a critical concept by feminist sociology beginning in the 1970s. Veevers (1975) and later Park (2002) document the patterns of stigma management among the voluntarily childless; Meyers (2001) identifies two cultural mechanisms that sustain the norm — the <em>glorification of motherhood</em> (the idealization of parenthood's emotional rewards while difficulties are minimized) and the <em>matrigyno-idolatry</em> (the conflation of female value with reproductive capacity). Fikslin (2021) reviews the contemporary psychological literature and shows that pronatalist norms operate across cultural, ideological, psychological, and political levels simultaneously.</p>
+
+      <p>Four structural mechanisms recur in the sociological accounts.</p>
+
+      <dl>
+        <dt>1. Institutional reinforcement</dt>
+        <dd>Marriage, family law, religious doctrine, tax systems, housing markets, and welfare arrangements have historically been organized around the expectation of child-rearing households. Even where individual institutions have liberalized (e.g., legal recognition of childfree marriage), the institutional ecosystem still treats parenthood as the unmarked case.</dd>
+        <dt>2. State pronatalism</dt>
+        <dd>As of 2019, 28 per cent of UN member states reported policies explicitly aimed at raising fertility — up from 20 per cent in 2005. Examples include South Korea's child allowances, Hungary's housing-loan forgiveness conditional on children, France's <em>quotient familial</em>, and Italy's <em>assegno unico</em>. The increase tracks the spread of below-replacement fertility, which states interpret as a crisis requiring intervention rather than as an aggregate outcome of individual choices.</dd>
+        <dt>3. The asymmetric burden of explanation</dt>
+        <dd>Overall's observation (§6) operationalized: in survey research, those without children are more often asked why and more often provide justifications than those with children. The default does not need to argue for itself; deviations from it do. This asymmetry is itself a marker of normative force, not a neutral feature of the conversation.</dd>
+        <dt>4. Psychological mechanisms</dt>
+        <dd>Zapffe's four mechanisms (anchoring, isolation, distraction, sublimation; see §4) apply to procreative decision-making. The structure of a procreative life provides anchoring (a multi-decade project with built-in milestones), isolation (the urgency of parenting tasks crowds out reflection on whether to have undertaken them), and distraction. Carroll (2012), summarizing the sociological literature: "very few [people] ponder if parenthood is desirable or that it befits their lifestyle." The non-decision is the modal case.</dd>
+      </dl>
+
+      <p>The four mechanisms are mutually reinforcing. A young adult considering procreation is rarely conducting an independent calculation; the calculation has been pre-structured by institutions, partially subsidized by state policy, treated as the default in conversational defaults, and supplied with a ready-made life-project structure. The Overall (§6) reversal of the explanatory burden, on this analysis, is not a rhetorical move but a corrective to a documented structural asymmetry.</p>
+
+      <aside class="sidenote">It is sometimes argued that the procreative impulse is biologically innate and therefore not in need of cultural explanation. This argument confuses two questions. That sexual desire and pair-bonding are evolved is well-supported; that the <em>decision</em> to bear and raise a child is the same kind of biological reflex is not. Veenhoven (1974), reviewing the cross-cultural variation, concludes that "the desire to procreate ... is not necessarily instinctive." The default-ness of procreation is a cultural fact partially constructed on a biological substrate, not a direct readout of biology.</aside>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>社会学文献将这一默认称为<em>亲生育主义</em>（pronatalism）：一组将生育视为正常、有价值、被期待的成人活动，而将不生育视为需要解释的偏离的信念、实践与制度安排。该术语可追溯至二十世纪初的人口政策文献，但作为批判性概念由 1970 年代起的女性主义社会学所发展。Veevers（1975）及后来的 Park（2002）记录了自愿无子女者的污名管理模式；Meyers（2001）指出维持此规范的两种文化机制——<em>母职的颂扬</em>（理想化为人父母的情感回报、淡化其困难）与<em>母性—女性偶像化</em>（将女性价值等同于生育能力）。Fikslin（2021）综述当代心理学文献，指出亲生育规范同时作用于文化、意识形态、心理与政治四个层面。</p>
+
+      <p>社会学论述中反复出现四种结构性机制。</p>
+
+      <dl>
+        <dt>1. 制度强化</dt>
+        <dd>婚姻、家庭法、宗教教义、税收体系、住房市场、福利安排，历来围绕「养育子女的家庭」这一预期组织。即便个别制度已自由化（如对自愿无子婚姻的法律承认），整个制度生态仍将「为人父母」视为无标记之常态。</dd>
+        <dt>2. 国家亲生育政策</dt>
+        <dd>截至 2019 年，联合国成员国中 28% 报告有明确以提高生育率为目标的政策，较 2005 年的 20% 有上升。例子包括韩国的育儿津贴、匈牙利以子女数为条件的住房贷款减免、法国的<em>家庭份额</em>（quotient familial）、意大利的<em>单一津贴</em>（assegno unico）。这一上升与低于更替水平的生育率的扩散同步——国家将其解读为需要干预的危机，而非个体选择的总体后果。</dd>
+        <dt>3. 解释负担的不对称</dt>
+        <dd>Overall（§6）观察的可操作化表达：在调查研究中，无子女者更频繁地被问及理由，并更频繁地提供辩护，而有子女者则不必。默认本身无需为自身辩护；偏离默认者才需要。此不对称本身即是规范力量的标记，而非对话的中性特征。</dd>
+        <dt>4. 心理机制</dt>
+        <dd>Zapffe 的四种机制（锚定、隔离、分心、升华，见 §4）适用于生育决策。养育生活的结构提供了锚定（一个有内建里程碑的数十年计划）、隔离（养育任务的紧迫性排挤了对「是否本应承担」的反思）以及分心。Carroll（2012）综述社会学文献时写道：「极少有人会考虑为人父母是否值得、是否契合自己的生活方式。」<em>非决策</em>是常态。</dd>
+      </dl>
+
+      <p>这四种机制相互加强。一个考虑生育的年轻人极少在进行独立计算；该计算已被制度预先结构化、被国家政策部分补贴、被默认为对话基线、并被供给了现成的人生项目结构。Overall（§6）对解释负担的翻转，在此分析下，并非修辞策略，而是对一项有据可考的结构性不对称的纠偏。</p>
+
+      <aside class="sidenote">有时有论者主张：生育冲动是生物学先天的，因而无需文化解释。此论证混淆了两个问题。性欲与配偶结合是演化形成的，证据充分；而<em>生育并养育一个孩子的决策</em>是同种生物反射，则无充分证据。Veenhoven（1974）综述跨文化变异后得出：「生育的欲望……并非必然是本能的。」生育之所以为默认，是部分建立在生物基底上的文化事实，而非生物学的直接输出。</aside>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">The proximate determinants framework</span>
+      <span data-lang-content="zh">近端决定因素框架</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The standard demographic framework for explaining variation in fertility levels is the <em>proximate determinants</em> model developed by Davis and Blake (1956) and operationalized in numerical form by Bongaarts (1978, 2015). The framework distinguishes <em>distal</em> determinants (socio-economic conditions, education, cultural norms) from <em>proximate</em> determinants (the biological-behavioral mechanisms through which any distal cause must operate). The original eight proximate determinants were reduced to four that account for approximately 96 per cent of cross-national variation in TFR:</p>
+
+      <ol>
+        <li><strong>Proportion of women in sexual union</strong> (essentially: age at first marriage / cohabitation, divorce rates, never-married rates)</li>
+        <li><strong>Contraceptive use and effectiveness</strong></li>
+        <li><strong>Induced abortion</strong> (where legal access exists and is exercised)</li>
+        <li><strong>Postpartum infecundability</strong> (mainly a function of breastfeeding duration)</li>
+      </ol>
+
+      <p>The framework is a useful clarifying device because it forces the distinction between mechanisms (proximate) and reasons (distal). Education, income, and ideology do not cause low TFR directly; they cause delayed marriage, increased contraceptive use, and shorter breastfeeding (or rather, the substitution of formula feeding in contexts where mothers work), which cause low TFR. Bongaarts (2015) updates the original model with adjustments for the post-transition setting; subsequent applications to specific national declines (Ethiopia 2005–2016, India 2015–16, Bangladesh 1996–2011) show varying combinations of the four mechanisms.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>解释生育水平差异的标准人口学框架是 Davis 与 Blake（1956）提出、由 Bongaarts（1978、2015）以数量形式操作化的<em>近端决定因素</em>（proximate determinants）模型。该框架区分<em>远端</em>决定因素（社会经济条件、教育、文化规范）与<em>近端</em>决定因素（任何远端原因都必须通过其起作用的生物—行为机制）。最初的八项近端因素被简化为四项，可解释约 96% 的跨国 TFR 变异：</p>
+
+      <ol>
+        <li><strong>处于性结合关系中的女性比例</strong>（即首婚或同居年龄、离婚率、终身未婚率）</li>
+        <li><strong>避孕的使用率与有效性</strong></li>
+        <li><strong>人工流产</strong>（在合法可及并被实际使用的地方）</li>
+        <li><strong>产后不育期</strong>（主要由哺乳期长度决定）</li>
+      </ol>
+
+      <p>该框架的澄清作用在于：它强制区分机制（近端）与理由（远端）。教育、收入、意识形态并不直接导致低 TFR；它们导致延后的婚姻、增加的避孕、缩短的哺乳期（或更准确地说，在母亲工作的环境中以配方奶粉替代母乳），而这些才直接导致低 TFR。Bongaarts（2015）针对人口转型后的情境对原模型进行调整；后续对特定国家下降过程的应用（埃塞俄比亚 2005–2016、印度 2015–16、孟加拉国 1996–2011）显示出这四种机制的不同组合。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Distal determinants: what drives the proximate</span>
+      <span data-lang-content="zh">远端决定因素：什么驱动了近端</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The substantive question is what causes the proximate mechanisms to shift. The literature converges on a small number of distal factors, though their relative weight is debated.</p>
+
+      <h4>Women's education</h4>
+      <p>The most robust single predictor. Murtin (2013), a regression analysis on time-series data from 1870 to 2000, concludes that "average years of primary schooling among the adult population, rather than income standards, child mortality, or total mortality rates" accounts for 40–80 per cent of the fertility decline as schooling rises from 0 to 7 years. Lutz and Skirbekk (2014) and Lutz (2017) argue that female educational attainment is the single most important determinant of fertility trajectory and that population projections should be educational-attainment-stratified rather than country-stratified. The mechanism operates through several channels: later age at marriage, higher labor-force participation, increased autonomy in fertility decisions, increased contraceptive knowledge, and rising opportunity cost of time spent on childcare.</p>
+
+      <h4>The cost-of-time mechanism (the "new economics of fertility")</h4>
+      <p>Becker's (1960) household-production theory of fertility predicted that rising women's wages would reduce fertility by raising the opportunity cost of time spent on childcare. The prediction held for the early period of demographic transition. Doepke, Hannusch, Kindermann, and Tertilt (2023), in "The New Economics of Fertility," argue that the simple Becker prediction has broken down: in high-income countries with strong career-family compatibility infrastructure (Sweden, Denmark, France), high female labor-force participation now correlates with higher, not lower, fertility, while countries with weak compatibility infrastructure (Italy, Spain, Japan, South Korea) combine high female education with very low fertility. The relevant variable is not female wages per se but the institutional and cultural <em>compatibility</em> of career and family — measured by childcare availability, parental leave provisions, men's domestic labor share, and workplace flexibility.</p>
+
+      <h4>Child survival and the quantity–quality tradeoff</h4>
+      <p>Historically, the demographic transition has begun with the decline in child mortality, which removes one major reason for high fertility (insuring against child loss). The Becker (1960) quantity–quality model adds that as parents invest more per child (education, health, opportunity), the marginal cost of an additional child rises, pushing optimal family size down. The historical sequence in most countries: child mortality falls first, fertility falls with a lag of one to several decades, the population goes through a period of rapid growth, and the demographic transition completes when fertility reaches replacement or lower.</p>
+
+      <h4>Urbanization</h4>
+      <p>Urbanization correlates with reduced fertility through several channels: weaker extended-family support for childcare, higher housing costs, higher costs of urban child-rearing relative to rural, and exposure to lower-fertility reference groups. The relationship is robust but moderate in effect size and partially mediated by education and women's labor-force participation.</p>
+
+      <h4>Cultural diffusion &amp; ideational change</h4>
+      <p>The "second demographic transition" framework (Lesthaeghe 1995, 2010) argues that classic socio-economic determinants are insufficient to explain post-1970s declines in already-low-fertility countries. The additional driver is <em>ideational</em>: the spread of secularization, individualism, gender-egalitarian norms, and the cultural acceptability of non-traditional family forms. Southeast Asian fertility transitions that occurred before substantial economic development (Knodel et al., on Thailand and Indonesia) provide evidence that ideational diffusion can precede the standard economic preconditions.</p>
+
+      <h4>Reduced religious influence</h4>
+      <p>Cross-national studies (Skirbekk et al. 2015; the BMC Public Health analysis of 2020) find that religiosity is correlated with higher TFR and with delayed onset of fertility decline, particularly in sub-Saharan Africa and among ultra-orthodox subpopulations within otherwise low-fertility countries (e.g., Israeli Haredim, U.S. Old-Order Anabaptists). The relationship is mediated by educational attainment (more religious populations are often less educated) but a residual effect of religious-doctrinal commitment to procreation appears to persist after controlling for education.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>实质性问题是：什么导致了近端机制的位移？文献在少数几项远端因素上趋于共识，尽管它们的相对权重仍有争论。</p>
+
+      <h4>女性教育</h4>
+      <p>最稳健的单一预测变量。Murtin（2013）对 1870–2000 年时间序列数据的回归分析表明，「成人人口的平均初等教育年限，而非收入水平、儿童死亡率或总死亡率」可解释教育年限从 0 升至 7 年所伴随生育率下降的 40–80%。Lutz 与 Skirbekk（2014）以及 Lutz（2017）主张女性教育水平是生育轨迹最重要的单一决定因素，并主张人口预测应按教育水平分层而非按国家分层。其作用机制经多条路径：推迟初婚年龄、提高劳动参与率、增加生育决策自主性、增加避孕知识、提高用于育儿的时间机会成本。</p>
+
+      <h4>时间机会成本机制（「新生育经济学」）</h4>
+      <p>Becker（1960）的家庭生产理论预测：女性工资上升将通过提高育儿时间的机会成本而降低生育率。该预测在人口转型早期成立。Doepke、Hannusch、Kindermann 与 Tertilt（2023）的〈新生育经济学〉论证：简单的 Becker 预测已经失效——在具备强「事业—家庭兼容性」制度基础的高收入国家（瑞典、丹麦、法国），高女性劳动参与率如今与<em>更高</em>而非更低的生育率相关；而在兼容性制度薄弱的国家（意大利、西班牙、日本、韩国），高女性教育水平与极低生育率并存。相关变量并非女性工资本身，而是事业与家庭的制度与文化<em>兼容性</em>——以育儿可及性、育儿假规定、男性家务分担份额、工作时间灵活性来衡量。</p>
+
+      <h4>儿童存活率与「数量—质量」权衡</h4>
+      <p>历史上，人口转型通常以儿童死亡率下降为开端，这去除了高生育的一大主因（即对子女夭亡的保险）。Becker（1960）的「数量—质量」模型补充：随着父母对每个孩子的投入增加（教育、健康、机会），增加一个孩子的边际成本上升，最优家庭规模下移。多数国家的历史顺序为：儿童死亡率先降，生育率随之延后一至数十年下降，人口经历一段快速增长期，待生育率达到或低于更替水平时人口转型完成。</p>
+
+      <h4>城市化</h4>
+      <p>城市化通过多条路径与低生育率相关：扩展家庭对育儿的支持减弱、住房成本提高、城市育儿成本相对乡村更高、暴露于低生育参照群体。这一关系稳健但效应规模中等，部分由教育与女性劳动参与率所中介。</p>
+
+      <h4>文化扩散与观念变迁</h4>
+      <p>「第二次人口转型」框架（Lesthaeghe 1995、2010）主张：经典的社会经济决定因素不足以解释 1970 年代以来已处于低生育水平国家的进一步下降。补充驱动力是<em>观念性</em>的：世俗化、个人主义、性别平等规范的传播，以及非传统家庭形式的文化可接受性。东南亚在显著经济发展之前发生的生育转型（Knodel 等人关于泰国与印度尼西亚的研究）为「观念扩散可先于标准经济前提条件」提供了证据。</p>
+
+      <h4>宗教影响的减弱</h4>
+      <p>跨国研究（Skirbekk 等 2015；BMC Public Health 2020 综述）发现：宗教性与较高的 TFR 及生育率下降的延后启动相关，尤其在撒哈拉以南非洲，以及在低生育国家内部的极端正统亚群体中（如以色列的极端正统犹太人、美国旧派再洗礼派）。该关系部分由教育水平中介（宗教性较强的人口往往教育程度较低），但在控制教育之后，「教义性生育承诺」的残余效应似乎仍然存在。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">The current global picture</span>
+      <span data-lang-content="zh">当前全球图景</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The United Nations <em>World Population Prospects 2024</em> (28th revision, October 2024) supplies the current consensus estimates. Headline figures:</p>
+
+      <ul>
+        <li><strong>Global TFR in 2024: 2.2 births per woman</strong>, down from 3.3 in 1990 and approximately 4.8 in 1970. The global rate has approximately halved over half a century.</li>
+        <li><strong>131 of 237 countries and areas (55 per cent)</strong> are now below the replacement level of approximately 2.1 births per woman. These countries account for <strong>68 per cent of the global population</strong>.</li>
+        <li><strong>Approximately one fifth of countries</strong> — including China, Italy, South Korea, Spain, Japan, and several Eastern European states — are at "ultra-low" fertility (under 1.4 births per woman). South Korea's TFR fell below 1.0 in 2022; China reached approximately 1.0 in 2023–2024.</li>
+        <li><strong>The global rate is projected to reach 2.1 (replacement) by 2050</strong> and approximately 1.8 by 2100. The 95 per cent confidence interval for 2100 lies between 1.6 and 2.2.</li>
+        <li><strong>The probability that the global population peaks before 2100 is now estimated at ~80 per cent</strong>, with the peak projected for the mid-2080s at approximately 10.3 billion, down from previous (2013) projections that did not anticipate a peak this century.</li>
+        <li>Africa remains the regional exception: TFR of approximately 4.0 in 2024, nearly double the global average. Sub-Saharan Africa drives most projected population growth through 2054.</li>
+      </ul>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>联合国《世界人口展望 2024》（第 28 次修订版，2024 年 10 月）提供了当前的共识估计值。主要数据：</p>
+
+      <ul>
+        <li><strong>2024 年全球 TFR：每位女性 2.2 个孩子</strong>，较 1990 年的 3.3 与 1970 年代的约 4.8 显著下降。全球生育率在半个世纪内大约减半。</li>
+        <li><strong>237 个国家与地区中，131 个（55%）</strong>当前低于约 2.1 的更替水平。这些国家与地区占全球人口的 <strong>68%</strong>。</li>
+        <li><strong>约五分之一的国家</strong>——包括中国、意大利、韩国、西班牙、日本及若干东欧国家——处于「超低生育率」（每位女性少于 1.4 个孩子）。韩国 TFR 于 2022 年降至 1.0 以下；中国于 2023–2024 年间达约 1.0。</li>
+        <li><strong>全球 TFR 预计将于 2050 年达至 2.1（更替水平）</strong>，至 2100 年降至约 1.8。2100 年的 95% 置信区间介于 1.6 与 2.2 之间。</li>
+        <li><strong>全球人口于 2100 年前达到峰值的概率现估为约 80%</strong>，峰值预计出现在 2080 年代中期，约 103 亿——较 2013 年未预期本世纪达峰的版本明显前移。</li>
+        <li>非洲仍是地区性例外：2024 年 TFR 约 4.0，接近全球平均的两倍。撒哈拉以南非洲将贡献 2054 年前预期人口增长的大部分。</li>
+      </ul>
+    </div>
+
+    <figure>
+      <svg class="diagram-svg" viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="tfr-title">
+        <title id="tfr-title">Global total fertility rate, 1950–2100</title>
+
+        <!-- plot area: x in [60, 670], y in [40, 290] -->
+        <!-- year axis 1950 → 2100, so x = 60 + (year - 1950)/150 * 610 -->
+        <!-- TFR axis 0 → 6, so y = 290 - tfr/6 * 250 -->
+
+        <!-- axes -->
+        <line x1="60"  y1="290" x2="670" y2="290" stroke="#9ca3af" stroke-width="1"/>
+        <line x1="60"  y1="40"  x2="60"  y2="290" stroke="#9ca3af" stroke-width="1"/>
+
+        <!-- y gridlines & labels -->
+        <g font-family="Inter, sans-serif" font-size="9" fill="#6b7280">
+          <line x1="60" y1="290" x2="670" y2="290" stroke="#e5e7eb" stroke-width="0.5"/>
+          <text x="55" y="293" text-anchor="end">0</text>
+          <line x1="60" y1="248" x2="670" y2="248" stroke="#e5e7eb" stroke-width="0.5"/>
+          <text x="55" y="251" text-anchor="end">1</text>
+          <line x1="60" y1="207" x2="670" y2="207" stroke="#e5e7eb" stroke-width="0.5"/>
+          <text x="55" y="210" text-anchor="end">2</text>
+          <line x1="60" y1="165" x2="670" y2="165" stroke="#e5e7eb" stroke-width="0.5"/>
+          <text x="55" y="168" text-anchor="end">3</text>
+          <line x1="60" y1="123" x2="670" y2="123" stroke="#e5e7eb" stroke-width="0.5"/>
+          <text x="55" y="126" text-anchor="end">4</text>
+          <line x1="60" y1="82"  x2="670" y2="82"  stroke="#e5e7eb" stroke-width="0.5"/>
+          <text x="55" y="85" text-anchor="end">5</text>
+          <line x1="60" y1="40"  x2="670" y2="40"  stroke="#e5e7eb" stroke-width="0.5"/>
+          <text x="55" y="43" text-anchor="end">6</text>
+        </g>
+
+        <!-- x ticks & labels -->
+        <g font-family="Inter, sans-serif" font-size="9" fill="#6b7280">
+          <line x1="60"  y1="290" x2="60"  y2="294" stroke="#9ca3af"/>
+          <text x="60"  y="307" text-anchor="middle">1950</text>
+          <line x1="161" y1="290" x2="161" y2="294" stroke="#9ca3af"/>
+          <text x="161" y="307" text-anchor="middle">1975</text>
+          <line x1="263" y1="290" x2="263" y2="294" stroke="#9ca3af"/>
+          <text x="263" y="307" text-anchor="middle">2000</text>
+          <line x1="365" y1="290" x2="365" y2="294" stroke="#9ca3af"/>
+          <text x="365" y="307" text-anchor="middle">2024</text>
+          <line x1="466" y1="290" x2="466" y2="294" stroke="#9ca3af"/>
+          <text x="466" y="307" text-anchor="middle">2050</text>
+          <line x1="568" y1="290" x2="568" y2="294" stroke="#9ca3af"/>
+          <text x="568" y="307" text-anchor="middle">2075</text>
+          <line x1="670" y1="290" x2="670" y2="294" stroke="#9ca3af"/>
+          <text x="670" y="307" text-anchor="middle">2100</text>
+        </g>
+
+        <!-- replacement level reference line at TFR=2.1, y = 290 - 2.1/6 * 250 = 290 - 87.5 = 202.5 -->
+        <line x1="60" y1="202.5" x2="670" y2="202.5" stroke="#8b3a2a" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.5"/>
+        <text x="666" y="198" text-anchor="end" font-family="Inter, sans-serif" font-size="9" fill="#8b3a2a" data-lang-content="en">replacement level (≈ 2.1)</text>
+        <text x="666" y="198" text-anchor="end" font-family="'Noto Serif SC', serif" font-size="9.5" fill="#8b3a2a" data-lang-content="zh">更替水平（约 2.1）</text>
+
+        <!-- Estimates line: 1950–2024 (solid)
+             Data (UN WPP 2024 medium variant, world TFR):
+              1950 → 4.97  → y = 290 - 4.97/6 * 250 = 290 - 207 = 83
+              1960 → 5.31  → y ≈ 69
+              1970 → 4.80  → y ≈ 90
+              1980 → 3.85  → y ≈ 130
+              1990 → 3.31  → y ≈ 152
+              2000 → 2.72  → y ≈ 177
+              2010 → 2.50  → y ≈ 186
+              2020 → 2.29  → y ≈ 195
+              2024 → 2.24  → y ≈ 197
+              x mapping: x = 60 + (year - 1950)/150 * 610
+              1950→60, 1960→100.7, 1970→141.3, 1980→182, 1990→222.7,
+              2000→263.3, 2010→304, 2020→344.7, 2024→360.9 -->
+        <polyline points="60,83 101,69 141,90 182,130 223,152 263,177 304,186 345,195 361,197"
+                  fill="none" stroke="#0a3d62" stroke-width="2.2"/>
+
+        <!-- Projection line: 2024–2100 (dashed, medium variant)
+              2024 → 2.24 (y ≈ 197)
+              2030 → 2.20 (y ≈ 199)
+              2050 → 2.10 (y ≈ 203)   ← replacement crossing
+              2075 → 1.95 (y ≈ 209)
+              2100 → 1.84 (y ≈ 213)
+              x mapping continues:
+              2024→360.9, 2030→385.3, 2050→466.7, 2075→568.3, 2100→670 -->
+        <polyline points="361,197 385,199 467,203 568,209 670,213"
+                  fill="none" stroke="#0a3d62" stroke-width="2.2" stroke-dasharray="5,3"/>
+
+        <!-- 95% CI shading (rough envelope for projection, medium variant + low/high) -->
+        <!-- High variant 2100 ≈ 2.2 → y ≈ 198; Low variant 2100 ≈ 1.6 → y ≈ 223 -->
+        <path d="M 361,197 L 670,198 L 670,223 L 568,219 L 467,210 L 385,202 Z"
+              fill="#0a3d62" opacity="0.10"/>
+
+        <!-- Key annotations -->
+        <!-- 1950 marker -->
+        <circle cx="60" cy="83" r="3" fill="#0a3d62"/>
+        <text x="68" y="78" font-family="Inter, sans-serif" font-size="9.5" fill="#1f2328" font-weight="600">4.97</text>
+        <text x="68" y="65" font-family="Inter, sans-serif" font-size="8.5" fill="#6b7280" data-lang-content="en">1950</text>
+        <text x="68" y="65" font-family="'Noto Serif SC', serif" font-size="9" fill="#6b7280" data-lang-content="zh">1950</text>
+
+        <!-- 2024 marker -->
+        <circle cx="361" cy="197" r="4" fill="#0a3d62"/>
+        <text x="370" y="195" font-family="Inter, sans-serif" font-size="9.5" fill="#1f2328" font-weight="600">2.24</text>
+        <text x="370" y="183" font-family="Inter, sans-serif" font-size="8.5" fill="#6b7280" data-lang-content="en">2024 (today)</text>
+        <text x="370" y="183" font-family="'Noto Serif SC', serif" font-size="9" fill="#6b7280" data-lang-content="zh">2024（当前）</text>
+
+        <!-- 2100 marker -->
+        <circle cx="670" cy="213" r="3" fill="#0a3d62"/>
+        <text x="664" y="232" font-family="Inter, sans-serif" font-size="9.5" fill="#1f2328" font-weight="600" text-anchor="end">1.84</text>
+        <text x="664" y="245" font-family="Inter, sans-serif" font-size="8.5" fill="#6b7280" text-anchor="end" data-lang-content="en">2100 (projected)</text>
+        <text x="664" y="245" font-family="'Noto Serif SC', serif" font-size="9" fill="#6b7280" text-anchor="end" data-lang-content="zh">2100（预测）</text>
+
+        <!-- axis labels -->
+        <text x="365" y="332" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#4a5159" data-lang-content="en">Year</text>
+        <text x="365" y="332" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="11" fill="#4a5159" data-lang-content="zh">年份</text>
+
+        <text x="20" y="165" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#4a5159" transform="rotate(-90 20 165)" data-lang-content="en">Total fertility rate</text>
+        <text x="20" y="165" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="11" fill="#4a5159" transform="rotate(-90 20 165)" data-lang-content="zh">总和生育率</text>
+
+        <!-- Legend -->
+        <g font-family="Inter, sans-serif" font-size="9" fill="#6b7280">
+          <line x1="80" y1="350" x2="105" y2="350" stroke="#0a3d62" stroke-width="2.2"/>
+          <text x="110" y="353" data-lang-content="en">estimates 1950–2024</text>
+          <text x="110" y="353" data-lang-content="zh">估算 1950–2024</text>
+          <line x1="240" y1="350" x2="265" y2="350" stroke="#0a3d62" stroke-width="2.2" stroke-dasharray="5,3"/>
+          <text x="270" y="353" data-lang-content="en">projections (medium variant)</text>
+          <text x="270" y="353" data-lang-content="zh">预测（中位方案）</text>
+          <rect x="450" y="345" width="20" height="10" fill="#0a3d62" opacity="0.10"/>
+          <text x="475" y="353" data-lang-content="en">95% prediction interval</text>
+          <text x="475" y="353" data-lang-content="zh">95% 预测区间</text>
+        </g>
+      </svg>
+      <figcaption>
+        <span data-lang-content="en">Fig. 3 — Global total fertility rate, 1950–2100. Estimates 1950–2024 and medium-variant projections to 2100 with 95% prediction interval. Data: United Nations, <em>World Population Prospects 2024</em> (Department of Economic and Social Affairs, Population Division). The global rate crosses approximate replacement around 2050 in the medium scenario; the lower bound of the prediction interval reaches 1.6 by 2100.</span>
+        <span data-lang-content="zh">图 3 — 全球总和生育率，1950–2100。1950–2024 年为估算值，至 2100 年为中位方案预测，附 95% 预测区间。数据来源：联合国《世界人口展望 2024》（经济和社会事务部人口司）。在中位方案下，全球生育率约于 2050 年穿越更替水平；预测区间下界至 2100 年降至 1.6。</span>
+      </figcaption>
+    </figure>
+
+    <h3>
+      <span data-lang-content="en">Note: the descriptive does not equal the normative</span>
+      <span data-lang-content="zh">附注：描述性事实不等于规范性结论</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The convergence of two facts — that procreation has been the default trajectory, and that the trajectory is now being widely abandoned — does not by itself constitute an argument for antinatalism. The empirical literature is largely about <em>why</em> people are having fewer children, not about whether they <em>ought</em> to. The reasons that the demographic literature identifies (education, opportunity cost, cost of housing, weak career-family compatibility, ideational change, declining religiosity) are mostly not antinatalist reasons in the philosophical sense. They are reasons specific individuals have for postponing or limiting their own procreation, not reasons grounded in the asymmetry argument, the consent objection, or the harm-imposition framework.</p>
+
+      <p>The relationship between the empirical and the normative is one of partial convergence on a normative conclusion reached for unrelated reasons. The philosophical argument against procreation is not strengthened by the fact that fewer people are doing it; the descriptive trend is not weakened by the fact that most of its drivers are non-philosophical. Both can be true simultaneously: the philosophical case for not procreating can be sound, and the empirical decline in procreation can be largely a side-effect of education, economics, and changed norms. The two are independent.</p>
+
+      <p>What the empirical literature does establish, however, is that the explanatory burden Overall identified (§6) is not just a philosopher's observation but a documented social structure. The default exists; it is sustained by institutions, policies, and norms; it is currently weakening for largely non-philosophical reasons; and the philosophical critique of it would have had different reception conditions in 1900, in 1970, and in 2024.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>两项事实的并存——生育曾为默认轨迹、该轨迹正被广泛舍弃——本身并不构成对反生育主义的论证。经验文献主要回答<em>为何</em>人们在少生，而非他们<em>是否应当</em>少生。人口学文献所识别的原因（教育、机会成本、住房成本、薄弱的事业—家庭兼容性、观念变迁、宗教性下降）多数并非哲学意义上的反生育理由。它们是特定个体推迟或限制自身生育的理由，而非建立在不对称性论证、同意反驳、伤害施加框架之上的理由。</p>
+
+      <p>经验事实与规范结论的关系，是「双方因不相关的理由部分汇合于同一规范结论」。少有人生育这一事实，并未强化反生育的哲学论证；多数驱动因素为非哲学性这一事实，也未削弱描述性趋势。两者可同时为真：反生育的哲学论证可以成立；而生育率下降可以大体上是教育、经济、规范变迁的副产物。两者相互独立。</p>
+
+      <p>然而经验文献确实建立了一点：Overall（§6）所识别的解释负担不仅是一项哲学家的观察，而是一项有据可考的社会结构。默认是真实存在的；它被制度、政策与规范所维持；它当前正因大体上非哲学的原因而减弱；而对它的哲学批判，在 1900 年、1970 年、2024 年这三个时点上的接收语境是不同的。</p>
+    </div>
+
+    <!-- ───── §8 Objections & Replies ──────────────────────────── -->
+    <h2 id="sec-objections"><span class="sec-num">8 ·</span>
+      <span data-lang-content="en">Objections &amp; Replies</span>
+      <span data-lang-content="zh">反驳与回应</span>
+    </h2>
+
+    <h3>
+      <span data-lang-content="en">The non-identity problem</span>
+      <span data-lang-content="zh">非同一性问题</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The strongest principled objection. Derek Parfit, <em>Reasons and Persons</em> (1984) §16, observes: if we change procreative decisions, we change which person comes into existence. The person who would have come into existence under the original choice does not also exist under the alternative; a different person exists, or none. Therefore the original person cannot be <em>worse off</em> in the original world than in the alternative, because in the alternative she does not exist to be compared to.</p>
+
+      <p>The challenge for antinatalism: if a person's existence cannot be compared to their non-existence (because there is no subject of comparison), then claims like "this person was harmed by being brought into existence" become metaphysically suspect. Benatar's reply is that the asymmetry argument does not require a comparison <em>between</em> two states of the same subject; it requires only the evaluative truths about the four cells. The absence of pain is good in an impersonal sense, not in the sense of being good <em>for</em> a particular non-existing person.</p>
+
+      <p>Whether Benatar's reply succeeds is the central technical debate in the literature. Elizabeth Harman, "Critical Study of <em>Better Never to Have Been</em>" (<em>Noûs</em>, 2009), and Ben Bradley, "Benatar and the Logic of Betterness" (<em>Journal of Ethics &amp; Social Philosophy</em>, 2010), argue that the impersonal reading is unstable. David Boonin, <em>The Non-Identity Problem and the Ethics of Future People</em> (2014), surveys the field.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>最强的原则性反驳。Derek Parfit，《理由与人格》（1984）§16 指出：若我们改变生育决策，便改变了来到存在的是哪个人。原决策下将出现的那个人，在替代决策下并不<em>同时</em>存在；那里是另一个人，或没有人。因此，原决策下的那个人，在原世界中不可能比在替代世界中<em>更糟</em>，因为在替代世界中她根本不存在以供比较。</p>
+
+      <p>对反生育主义的挑战：若一个人的存在不能与其非存在相比较（因为无比较主体），那么「此人因被带入存在而受损」之类的主张便在形而上学上可疑。Benatar 的回应是：不对称性论证并不要求在同一主体的两个状态间作比较；它仅要求关于四格的评价性真。痛苦的缺席在<em>非人称</em>意义上是善，而非在「对某个非存在的特定人而言为善」的意义上是善。</p>
+
+      <p>Benatar 的回应是否成功，是文献中的核心技术争议。Elizabeth Harman，〈对《永不存在更好》的批评性研究〉（<em>Noûs</em>, 2009），以及 Ben Bradley，〈Benatar 与「更好」之逻辑〉（<em>JESP</em>, 2010），论证非人称式解读不稳定。David Boonin，《非同一性问题与未来人之伦理》（2014），对此领域作综述。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">The "life is worth living" reply</span>
+      <span data-lang-content="zh">「人生值得活」反驳</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The most common informal reply: most people, when asked, judge their lives to be on balance good and would not prefer to have never existed. Therefore the asymmetry argument's premise that life is on balance bad is empirically false; therefore the conclusion does not follow.</p>
+
+      <p>The standard antinatalist replies are three. First, Benatar argues that the self-assessment is systematically biased — by Pollyanna-effect optimism bias, by adaptation effects, by comparison to imagined worse counterfactuals, and by the unavailability of the non-existence comparison class. People's reports of life-satisfaction are not a reliable measure of life's actual quality. Second, even if life is on balance good for the existing person, the asymmetry argument does not require it to be bad; it requires only that the absence of pleasure (in the non-existence case) is not bad. Third, Shiffrin-style consent-based arguments do not require life to be on balance bad at all; they require only that life contains serious harms imposed without consent.</p>
+
+      <p>The dispute over Pollyanna-effect bias is empirically tractable in principle but contested in practice. See Daniel Kahneman's work on experienced versus remembered utility, which complicates the assumption that self-reported life satisfaction tracks actual welfare.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>最常见的非形式反驳：多数人在被问及时判断自己的人生整体而言是好的，并不希望自己从未存在。因此，不对称性论证「人生整体为坏」的前提在经验上为假；其结论亦不成立。</p>
+
+      <p>反生育方的标准回应有三。其一，Benatar 论证：此种自我评估存在系统性偏差——「乐观花女偏差」（Pollyanna effect）、适应效应、与想象中更坏反事实的比较、以及非存在比较类的不可获得性。人对生命满意度的报告不是其实际质量的可靠度量。其二，即便对于已存在者而言其生命整体上是好的，不对称性论证亦不要求其为坏；它仅要求快乐之缺席（在非存在情形中）<em>非坏</em>。其三，Shiffrin 式基于同意的论证完全不要求生命整体为坏；它仅要求生命包含未经同意所施加的严重伤害。</p>
+
+      <p>关于乐观花女偏差的经验之争原则上可处理但实际颇具争议。参见 Kahneman 关于「经验效用」与「记忆效用」之别的研究——其复杂化了「自报生命满意度追踪实际福祉」之假设。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">The evolutionary debunking objection</span>
+      <span data-lang-content="zh">演化拆穿式反驳</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Reproduction is the central activity of biological life. The capacity to find reproduction valuable is, by selection, deeply embedded in human psychology. An evolutionary debunker might argue that the antinatalist's contrary intuitions are themselves products of selection-relaxed environments or of pathological cognitive states; the pro-natalist intuitions, by contrast, are the ones that have been vindicated by 3.5 billion years of biological success.</p>
+
+      <p>The antinatalist reply has two parts. First, the genetic etiology of an intuition does not settle its rational standing — that would commit the genetic fallacy. Selection vindicates whatever conduces to reproduction; it does not vindicate the rational permissibility of that conduct. Second, the same debunking move applies symmetrically: pro-natalist intuitions are also evolutionarily produced and thus equally suspect; the question of which intuitions to credit must be settled on grounds other than their evolutionary provenance.</p>
+
+      <p>The deeper version of this objection — that there is no Archimedean point outside biology from which to assess biology's products — is a real challenge to all of normative ethics, not specifically to antinatalism.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>繁殖是生物生命的核心活动。「将繁殖视为有价值」的能力，经由选择，被深深嵌入人类心理。演化拆穿式反驳者或可论证：反生育者的反向直觉本身是选择压力放松的环境或病态认知状态的产物；亲生育的直觉则相反，已被 35 亿年生物成功所验证。</p>
+
+      <p>反生育方的回应有二。其一，直觉的发生学起源不决定其理性地位——否则即犯发生学谬误。选择验证一切有助于繁殖之事；它并不验证此种行为的理性可容许性。其二，同一拆穿步法对称适用：亲生育直觉同样为演化所产生，因而同样可疑；究竟应相信哪些直觉，必须以其演化来源之外的根据来裁定。</p>
+
+      <p>此反驳的更深版本——即不存在生物学之外的阿基米德点以评估生物学之产物——是对整个规范伦理学的真正挑战，而非专门针对反生育主义。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">The "would you kill yourself, then?" objection</span>
+      <span data-lang-content="zh">「那么你为何不自杀？」反驳</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>A common rhetorical move: if non-existence is preferable to existence, why does the antinatalist continue to live? The objection assumes that <em>not procreating</em> and <em>committing suicide</em> are evaluatively equivalent.</p>
+
+      <p>They are not. Benatar (2006, ch. 7) is explicit: it is a category mistake to infer pro-mortalism from antinatalism. The reasons against bringing a new existence into being are different from the reasons against ending an existence already underway. An ongoing life has formed interests, attachments, projects, relationships; ending it is a serious harm to the existing subject and a serious harm to those connected to her. A potential life has none of these; refusing to start it is no harm to anyone. The asymmetry of the two acts is roughly the asymmetry of cells (3) and (4) in figure 2.</p>
+
+      <p>Schopenhauer makes the same point: suicide is the affirmation of will (the will to escape suffering is still will); the proper response is the calm refusal to renew the will in others. The recurring pessimist tradition (Schopenhauer, Mainländer's biographical exception aside, Cioran, Zapffe) holds that ongoing life is to be lived out with whatever grace is available, while procreation is the act that has actual normative weight.</p>
+
+      <p>The skiing analogy serves the same purpose: <em>"I went to a place; the experience is not worth recommending. Why am I not leaving? Because I am already here, and while I am here I will ski well. But I will not come again, and I will not tell anyone to come."</em> The two clauses are independent.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>常见的修辞式反驳：若非存在优于存在，反生育者为何继续活着？此反驳假定<em>不生育</em>与<em>自杀</em>在评价上等同。</p>
+
+      <p>它们并不等同。Benatar（2006, 第 7 章）明确指出：从反生育推出促死主义是范畴错误。反对将新存在带入存在的理由，不同于反对终止已在进行中的存在的理由。已在进行中的生命已形成了利益、依恋、计划、关系；终止它对该存在主体是严重的伤害，对与她相关者亦是严重的伤害。潜在的生命则无此一切；拒绝开启它并不伤害任何人。两种行为之不对称大致对应于图 2 中第 (3)、(4) 格之不对称。</p>
+
+      <p>叔本华亦如此说：自杀是意志的肯定（欲逃离痛苦的意志仍是意志）；恰当的回应是平静地拒绝在他者中重启意志。反复出现的悲观主义传统（叔本华、暂置 Mainländer 的传记例外、Cioran、Zapffe）均持：在世之生应以可得之优雅活下去；生育才是真正具有规范分量的行为。</p>
+
+      <p>滑雪类比正是此意：<em>「我去了一个地方；那里的体验不值得推荐。我为何不离开？因为我既已在此，便在此好好滑一会。但我不会再来，也不会告诉任何人来。」</em>两个分句相互独立。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">The "if everyone did this, humanity would end" objection</span>
+      <span data-lang-content="zh">「若众人皆如此，则人类绝灭」反驳</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>A Kantian universalizability objection: if the maxim "do not procreate" were universalized, the species would go extinct; the extinction of the species is bad; therefore the maxim cannot be universalized; therefore it is not a permissible maxim.</p>
+
+      <p>The antinatalist replies vary. Some accept the conclusion of human extinction and deny that it is bad: the cessation of a species that produces the suffering at issue is, on this view, not a bad outcome but the natural completion of the antinatalist argument. The Voluntary Human Extinction Movement (see §9) is the explicit form. Others argue that the objection conflates an individual normative claim with a collective coordination problem: a single act of non-procreation has a vanishingly small effect on aggregate fertility, and the assessment of the act does not depend on counterfactual universal compliance. Still others (Cabrera) point out that the Kantian framework's claim that species extinction is intrinsically bad is itself unargued.</p>
+
+      <p>The deeper version of this exchange concerns whether non-existence of a sentient species is a loss in any sense that matters. If the answer is "no" (because there is no subject of the loss, as in the asymmetry argument), then the universalizability objection has no bite.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>康德式普遍化反驳：若将「不要生育」的格言普遍化，物种将绝灭；物种绝灭为坏；故此格言不可普遍化；故不可被允许。</p>
+
+      <p>反生育方的回应不一。一些人接受人类绝灭的结论并否认其为坏：在此观点下，产生上述痛苦的物种之停止，并非坏的结局，而是反生育论证之自然完成。「自愿人类灭绝运动」（见 §8）是其明确形式。另一些人指出此反驳混淆了个体规范主张与集体协调问题：单一不生育行为对总生育率的影响微不可察，对该行为的评估不依赖于「反事实式的普遍遵从」。再有一些人（Cabrera）指出：康德框架中「物种绝灭本身为坏」之主张本身未经论证。</p>
+
+      <p>此交锋更深的版本关涉：感知物种之不存在是否在任何有意义的意义上是「失去」。若答案为「否」（因失去无主体，如不对称性论证所示），则普遍化反驳便无效力。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">The "but new experiences are valuable" reply</span>
+      <span data-lang-content="zh">「但新经验是有价值的」反驳</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>A pro-natalist line of reply, sometimes called the <em>experience-machine inversion</em>: even granting that life contains harms, the goods of existence — love, knowledge, beauty, accomplishment — are themselves valuable and could not exist without the existence of the beings that experience them. To refuse to procreate is to refuse to bring these goods into the world.</p>
+
+      <p>The antinatalist reply, again, is the asymmetry. The world without the new being is not deprived of the goods, because there is no subject of deprivation. The pro-natalist argument has rhetorical force because we imagine the not-yet-existent child as a kind of waiting presence whose chance at goods we are denying. But this is precisely the projection that the asymmetry argument is designed to dissolve: the non-existent has no chance to be denied.</p>
+
+      <p>A subsidiary observation: if the value of new experiences could justify creating new beings, the same value could justify forcibly creating new beings in all available niches, since each new being would bring new goods into the world. This conclusion is universally rejected, which suggests that the principle being invoked is doing less work than it appears.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>一条亲生育进路，可称之为<em>经验机器反演</em>：即便承认生命包含伤害，存在所带来的善——爱、知识、美、成就——本身有价值，没有体验者的存在，这些善便不能存在。拒绝生育即是拒绝将这些善带入世界。</p>
+
+      <p>反生育方的回应仍是不对称性：没有新生命的世界并不被「剥夺」这些善，因为不存在被剥夺的主体。亲生育论证之所以具有修辞力，是因为我们想象一个尚未存在的孩子如一种「等待中的在场」，我们正在剥夺其获得善的机会。但这恰恰是不对称性论证所要消解的投射：非存在者没有可被剥夺的机会。</p>
+
+      <p>附带观察：若新经验之价值足以辩护「创造新存在者」，则同一价值足以辩护「在一切可用生态位中强制创造新存在者」，因为每一新存在者都将为世界带来新的善。此结论被普遍拒斥，这表明被援引的原则承担的辩护比其表面少。</p>
+    </div>
+
+    <!-- ───── §9 Adjacent Positions ────────────────────────────── -->
+    <h2 id="sec-adjacent"><span class="sec-num">9 ·</span>
+      <span data-lang-content="en">Adjacent Positions</span>
+      <span data-lang-content="zh">邻近立场</span>
+    </h2>
+
+    <h3>
+      <span data-lang-content="en">Promortalism</span>
+      <span data-lang-content="zh">促死主义</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The view that, for at least some existing sentient beings, it would be better to die than to continue existing. Promortalism is logically independent of antinatalism: one can hold either without the other. Hegesias of Cyrene is the historical exemplar; in contemporary philosophy, the view is rarely defended in pure form, though it lurks in some readings of Mainländer. The standard antinatalist position explicitly rejects the promortalist inference (see §8).</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>主张：对至少某些现存感知主体而言，死亡比继续存在更好。促死主义与反生育主义在逻辑上相互独立：可分别持有任一而不持另一。昔兰尼的赫格西亚是历史范例；当代哲学中此立场少有以纯粹形式被辩护，虽在某些对 Mainländer 的解读中潜行。标准反生育立场明确拒绝向促死主义的推论（见 §8）。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Efilism</span>
+      <span data-lang-content="zh">Efilism（生命反转主义）</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>An online-philosophy radicalization of antinatalism, coined by the YouTube philosopher Inmendham (Gary Mosher). The position extends antinatalism to all sentient life: not merely human procreation should cease, but the entire biosphere — insofar as it produces suffering — should cease. The term is "life" spelled backward. Efilism is rarely engaged with by academic philosophers but has a real online following; its relationship to mainstream antinatalism is the same as the relationship between any radicalized internet position and its more sober academic counterpart.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>反生育主义的一种网络哲学激进化形式，由 YouTube 哲学家 Inmendham（Gary Mosher）所造词。该立场将反生育延伸至一切感知生命：不仅人类生育应当停止，整个生物圈——只要它生产痛苦——皆应停止。「Efilism」是「life」反写。学院哲学家少有与之对话，但在网络上有实际拥趸；其与主流反生育主义的关系，正如任何被网络激进化之立场与其更冷静的学术对应物之间的关系。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Voluntary Human Extinction Movement (VHEMT)</span>
+      <span data-lang-content="zh">自愿人类灭绝运动（VHEMT）</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Founded by Les U. Knight in 1991. Slogan: <em>"May we live long and die out."</em> Argues that the voluntary cessation of human reproduction is the most ethical response to the harm humanity inflicts on other species and ecosystems. VHEMT is misanthropic-antinatalist in Benatar's typology (focused on harm <em>by</em> humans rather than harm <em>to</em> the prospective humans), and is more activist than scholarly. The movement explicitly distances itself from coercion: it advocates voluntary non-reproduction, not population control by force.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>由 Les U. Knight 于 1991 年创立。口号：<em>「愿我们长生而后绝。」</em>主张：人类自愿停止繁殖是对人类施加于其他物种与生态系统之伤害最伦理的回应。VHEMT 在 Benatar 的类型学中属厌世式反生育（关注人类<em>所施</em>之害，而非人类<em>所受</em>之害），更具行动主义气质而非学术气质。该运动明确与强制保持距离：它倡导自愿不育，而非以武力进行人口控制。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Childfree movement</span>
+      <span data-lang-content="zh">自愿无子运动</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>A sociological category for adults who choose not to have children. The childfree position is a lifestyle stance rather than a philosophical thesis: it makes no claim about whether others should procreate, only about the chooser's own life. The distinction from antinatalism is real and important — most childfree people are not antinatalists, and the conflation in popular writing tends to weaken both. The literature includes Laura S. Scott, <em>Two Is Enough</em> (2009); Amy Blackstone, <em>Childfree by Choice</em> (2019); the documentary <em>My So-Called Selfish Life</em> (2021).</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>关于选择不要孩子的成年人的社会学范畴。自愿无子立场是一种生活方式选择，而非哲学论题：它不就他人是否应当生育作出主张，仅关涉选择者自身的生命。它与反生育主义的区别真实而重要——多数自愿无子者并非反生育主义者，大众书写中的混同往往同时削弱两者。相关文献包括 Laura S. Scott，《两个就够》（2009）；Amy Blackstone，《自愿无子》（2019）；纪录片《我所谓自私的人生》（2021）。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Longtermism &amp; the population-ethics tension</span>
+      <span data-lang-content="zh">长期主义与人口伦理学张力</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The longtermist position within effective altruism (William MacAskill, <em>What We Owe the Future</em>, 2022) holds that bringing into existence very large numbers of future flourishing beings is one of the most morally important things present generations can do. This is the structural opposite of antinatalism. The disagreement turns on the same asymmetry: longtermism treats absent flourishing as a loss; Benatar treats it as no loss. Population ethics as a subfield exists in part because these two views generate mathematically incompatible conclusions about the value of large future populations.</p>
+
+      <p>Parfit's <em>repugnant conclusion</em> (a world of many barely-worth-living lives is better than a world of fewer flourishing lives, under standard total utilitarian aggregation) is the formal point at which both sides meet: neither longtermism nor antinatalism accepts the repugnant conclusion as ordinarily formulated, but they avoid it in opposite directions.</p>
+    </div>
+
+    <div data-lang-content="zh">
+      <p>有效利他主义中的长期主义立场（William MacAskill，《我们对未来的责任》, 2022）主张：将极大数量的未来繁荣存在者带入存在，是当前世代在道德上最为重要的事情之一。这是反生育主义的结构性对立面。分歧仍系于同一不对称性：长期主义将「未在场的繁荣」视为损失；Benatar 视之为非损失。人口伦理学作为一个子领域之所以存在，部分原因即在于这两种观点对「大规模未来人口的价值」生出数学上不相容的结论。</p>
+
+      <p>Parfit 的<em>令人厌恶的结论</em>（在标准全总和功利主义聚合下，许多刚刚值得活的生命组成的世界优于较少繁荣生命组成的世界）是双方相遇的形式节点：长期主义与反生育主义在通常表述下均不接受此结论，但避开它的方向相反。</p>
+    </div>
+
+    <!-- ───── §10 References ─────────────────────────────────────── -->
+    <h2 id="sec-references"><span class="sec-num">10 ·</span>
+      <span data-lang-content="en">References</span>
+      <span data-lang-content="zh">参考文献</span>
+    </h2>
+
+    <h3>
+      <span data-lang-content="en">Primary analytic sources</span>
+      <span data-lang-content="zh">分析传统主要文献</span>
+    </h3>
+
+    <ol class="references">
+      <li><span class="ref-author">Benatar, David.</span> 1997. "Why It Is Better Never to Come into Existence." <span class="ref-title">American Philosophical Quarterly</span> 34 (3): 345–355.</li>
+      <li><span class="ref-author">Benatar, David.</span> 2006. <span class="ref-title">Better Never to Have Been: The Harm of Coming into Existence.</span> Oxford: Oxford University Press.</li>
+      <li><span class="ref-author">Benatar, David.</span> 2015. "The Misanthropic Argument for Anti-natalism." In <span class="ref-title">Permissible Progeny?</span>, edited by S. Hannan, S. Brennan, and R. Vernon, 34–64. Oxford University Press.</li>
+      <li><span class="ref-author">Benatar, David, and David Wasserman.</span> 2015. <span class="ref-title">Debating Procreation: Is It Wrong to Reproduce?</span> Oxford University Press.</li>
+      <li><span class="ref-author">Cabrera, Julio.</span> 1989. <span class="ref-title">Proyecto de ética negativa.</span> Madrid: Ediciones Libertarias.</li>
+      <li><span class="ref-author">Cabrera, Julio.</span> 2018. <span class="ref-title">Discomfort and Moral Impediment: The Human Situation, Radical Bioethics and Procreation.</span> Newcastle: Cambridge Scholars. [Spanish orig. 2014]</li>
+      <li><span class="ref-author">Harrison, Gerald, and Julia Tanner.</span> 2011. "Better Not to Have Children." <span class="ref-title">Think</span> 10 (27): 113–121.</li>
+      <li><span class="ref-author">Häyry, Matti.</span> 2024. <span class="ref-title">If You Must Make Babies, Then at Least Be Sad about It.</span> Cambridge: Cambridge University Press.</li>
+      <li><span class="ref-author">Overall, Christine.</span> 2012. <span class="ref-title">Why Have Children? The Ethical Debate.</span> Cambridge, MA: MIT Press.</li>
+      <li><span class="ref-author">Shiffrin, Seana V.</span> 1999. "Wrongful Life, Procreative Responsibility, and the Significance of Harm." <span class="ref-title">Legal Theory</span> 5 (2): 117–148.</li>
+      <li><span class="ref-author">Singh, Asheel.</span> 2018. "Assessing Anti-Natalism: A Philosophical Examination of the Morality of Procreation." PhD thesis, University of Johannesburg.</li>
+      <li><span class="ref-author">Weinberg, Rivka.</span> 2015. <span class="ref-title">The Risk of a Lifetime: How, When, and Why Procreation May Be Permissible.</span> Oxford University Press.</li>
+    </ol>
+
+    <h3>
+      <span data-lang-content="en">Historical &amp; pessimist sources</span>
+      <span data-lang-content="zh">历史与悲观主义文献</span>
+    </h3>
+
+    <ol class="references">
+      <li><span class="ref-author">Cioran, Emil.</span> 1973. <span class="ref-title">De l'inconvénient d'être né.</span> Paris: Gallimard. English: <span class="ref-title">The Trouble with Being Born</span>, trans. Richard Howard. New York: Seaver, 1976.</li>
+      <li><span class="ref-author">Leopardi, Giacomo.</span> 1827. <span class="ref-title">Operette morali.</span> Milan. English: <span class="ref-title">The Moral Essays</span>, trans. Patrick Creagh. New York: Columbia University Press, 1983.</li>
+      <li><span class="ref-author">Ligotti, Thomas.</span> 2010. <span class="ref-title">The Conspiracy against the Human Race: A Contrivance of Horror.</span> New York: Hippocampus Press.</li>
+      <li><span class="ref-author">Mainländer, Philipp.</span> 1876. <span class="ref-title">Die Philosophie der Erlösung.</span> Berlin: Theodor Hofmann.</li>
+      <li><span class="ref-author">Schopenhauer, Arthur.</span> 1819 / 1844. <span class="ref-title">Die Welt als Wille und Vorstellung.</span> Vols. I &amp; II. Leipzig: Brockhaus.</li>
+      <li><span class="ref-author">Schopenhauer, Arthur.</span> 1851. <span class="ref-title">Parerga und Paralipomena.</span> 2 vols. Berlin: Hayn.</li>
+      <li><span class="ref-author">Zapffe, Peter Wessel.</span> 1933. "Den sidste Messias." <span class="ref-title">Janus</span> 9. English trans. by Gisle R. Tangenes, "The Last Messiah," <span class="ref-title">Philosophy Now</span> 45 (2004).</li>
+      <li><span class="ref-author">Zapffe, Peter Wessel.</span> 1941. <span class="ref-title">Om det tragiske.</span> Oslo: Gyldendal.</li>
+    </ol>
+
+    <h3>
+      <span data-lang-content="en">Critical &amp; opposing literature</span>
+      <span data-lang-content="zh">批评与反对方文献</span>
+    </h3>
+
+    <ol class="references">
+      <li><span class="ref-author">Boonin, David.</span> 2014. <span class="ref-title">The Non-Identity Problem and the Ethics of Future People.</span> Oxford University Press.</li>
+      <li><span class="ref-author">Bradley, Ben.</span> 2010. "Benatar and the Logic of Betterness." <span class="ref-title">Journal of Ethics &amp; Social Philosophy</span>, March 2010: 1–5.</li>
+      <li><span class="ref-author">Harman, Elizabeth.</span> 2009. "Critical Study: David Benatar, <span class="ref-title">Better Never to Have Been</span>." <span class="ref-title">Noûs</span> 43 (4): 776–785.</li>
+      <li><span class="ref-author">MacAskill, William.</span> 2022. <span class="ref-title">What We Owe the Future.</span> New York: Basic Books.</li>
+      <li><span class="ref-author">Parfit, Derek.</span> 1984. <span class="ref-title">Reasons and Persons.</span> Oxford: Clarendon Press.</li>
+      <li><span class="ref-author">Rulli, Tina.</span> 2016. "The Ethics of Procreation and Adoption." <span class="ref-title">Philosophy Compass</span> 11 (6): 305–315.</li>
+    </ol>
+
+    <h3>
+      <span data-lang-content="en">Eastern primary sources</span>
+      <span data-lang-content="zh">东方原典</span>
+    </h3>
+
+    <ol class="references">
+      <li><span class="ref-author">Cao Xueqin 曹雪芹.</span> 《红楼梦》 (<span class="ref-title">Honglou Meng / Dream of the Red Chamber</span>), mid-18th century. Bibliographically the Cheng-Gao 程甲本 edition of 1791 for the 120-chapter form; the Cao-only first 80 chapters are extant in the Geng-chen 庚辰 manuscript and related.</li>
+      <li><span class="ref-author">Tao Yuanming 陶渊明.</span> 《陶渊明集》. Particularly 《归园田居》, 《饮酒》, 《形影神》三首.</li>
+      <li><span class="ref-author">Zhuangzi 庄子.</span> 《庄子》. Particularly 内篇〈大宗师〉, 〈齐物论〉; 外篇〈至乐〉.</li>
+      <li>The Pāli Nikāyas. <span class="ref-title">Saṃyutta Nikāya</span> 56 (the Sacca-saṃyutta) and <span class="ref-title">Majjhima Nikāya</span> 9 (Sammādiṭṭhi Sutta) for the dukkha formula and its analysis.</li>
+      <li><span class="ref-author">Nāgārjuna.</span> <span class="ref-title">Mūlamadhyamakakārikā.</span> Chapters on dependent origination and emptiness, relevant to the soteriological framing of birth.</li>
+    </ol>
+
+    <h3>
+      <span data-lang-content="en">Empirical &amp; demographic sources (§7)</span>
+      <span data-lang-content="zh">经验与人口学文献（§7）</span>
+    </h3>
+
+    <ol class="references">
+      <li><span class="ref-author">Becker, Gary S.</span> 1960. "An Economic Analysis of Fertility." In <span class="ref-title">Demographic and Economic Change in Developed Countries</span>, edited by NBER, 209–240. Princeton University Press.</li>
+      <li><span class="ref-author">Bongaarts, John.</span> 1978. "A Framework for Analyzing the Proximate Determinants of Fertility." <span class="ref-title">Population and Development Review</span> 4 (1): 105–132.</li>
+      <li><span class="ref-author">Bongaarts, John.</span> 2015. "Modeling the Fertility Impact of the Proximate Determinants: Time for a Tune-Up." <span class="ref-title">Demographic Research</span> 33 (19): 535–560.</li>
+      <li><span class="ref-author">Carroll, Laura.</span> 2012. <span class="ref-title">The Baby Matrix: Why Freeing Our Minds from Outmoded Thinking About Parenthood and Reproduction Will Create a Better World.</span> Live True Books.</li>
+      <li><span class="ref-author">Davis, Kingsley, and Judith Blake.</span> 1956. "Social Structure and Fertility: An Analytic Framework." <span class="ref-title">Economic Development and Cultural Change</span> 4 (3): 211–235.</li>
+      <li><span class="ref-author">Doepke, Matthias, Anne Hannusch, Fabian Kindermann, and Michèle Tertilt.</span> 2023. "The New Economics of Fertility." <span class="ref-title">Finance &amp; Development</span> (IMF), September 2023. Also available as NBER Working Paper w29948 (2022).</li>
+      <li><span class="ref-author">Fikslin, Rachel A.</span> 2021. "Toward an Intersectional Psychological Science of Reproductive Norms: Generating Research Across the Natalism Spectrum." <span class="ref-title">Psychology of Women Quarterly</span> 45 (4): 421–438.</li>
+      <li><span class="ref-author">Lesthaeghe, Ron.</span> 1995. "The Second Demographic Transition in Western Countries: An Interpretation." In <span class="ref-title">Gender and Family Change in Industrialized Countries</span>, edited by K. O. Mason and A.-M. Jensen, 17–62. Clarendon Press.</li>
+      <li><span class="ref-author">Lesthaeghe, Ron.</span> 2010. "The Unfolding Story of the Second Demographic Transition." <span class="ref-title">Population and Development Review</span> 36 (2): 211–251.</li>
+      <li><span class="ref-author">Lutz, Wolfgang, and Vegard Skirbekk.</span> 2014. "How Education Drives Demography and Knowledge Informs Projections." In <span class="ref-title">World Population &amp; Human Capital in the Twenty-First Century</span>, edited by W. Lutz, W. P. Butz, and S. K.C., 14–38. Oxford University Press.</li>
+      <li><span class="ref-author">Meyers, Diana Tietjens.</span> 2001. "The Rush to Motherhood: Pronatalist Discourse and Women's Autonomy." <span class="ref-title">Signs: Journal of Women in Culture and Society</span> 26 (3): 735–773.</li>
+      <li><span class="ref-author">Murtin, Fabrice.</span> 2013. "Long-Term Determinants of the Demographic Transition, 1870–2000." <span class="ref-title">Review of Economics and Statistics</span> 95 (2): 617–631.</li>
+      <li><span class="ref-author">Park, Kristin.</span> 2002. "Stigma Management among the Voluntarily Childless." <span class="ref-title">Sociological Perspectives</span> 45 (1): 21–45.</li>
+      <li><span class="ref-author">Skirbekk, Vegard.</span> 2022. <span class="ref-title">Decline and Prosper! Changing Global Birth Rates and the Advantages of Fewer Children.</span> Palgrave Macmillan.</li>
+      <li><span class="ref-author">United Nations, Department of Economic and Social Affairs, Population Division.</span> 2024. <span class="ref-title">World Population Prospects 2024: Summary of Results.</span> UN DESA/POP/2024/TR/NO. 9. New York: United Nations.</li>
+      <li><span class="ref-author">United Nations, Department of Economic and Social Affairs, Population Division.</span> 2025. <span class="ref-title">World Fertility 2024.</span> New York: United Nations.</li>
+      <li><span class="ref-author">Veenhoven, Ruut.</span> 1974. "Is There an Innate Need for Children?" <span class="ref-title">European Journal of Social Psychology</span> 4 (4): 495–501.</li>
+      <li><span class="ref-author">Veevers, Jean E.</span> 1975. "The Moral Careers of Voluntarily Childless Wives: Notes on the Defense of a Variant World View." <span class="ref-title">The Family Coordinator</span> 24 (4): 473–487.</li>
+    </ol>
+
+    <h3>
+      <span data-lang-content="en">Reference &amp; survey works</span>
+      <span data-lang-content="zh">综述与工具书</span>
+    </h3>
+
+    <ol class="references">
+      <li><span class="ref-author">Beiser, Frederick C.</span> 2016. <span class="ref-title">Weltschmerz: Pessimism in German Philosophy, 1860–1900.</span> Oxford University Press. [Mainländer, Bahnsen, Hartmann; the post-Schopenhauer generation.]</li>
+      <li><span class="ref-author">Dienstag, Joshua Foa.</span> 2006. <span class="ref-title">Pessimism: Philosophy, Ethic, Spirit.</span> Princeton University Press.</li>
+      <li><span class="ref-author">Magnusson, Erik.</span> 2022. "How to Reject Benatar's Asymmetry Argument." <span class="ref-title">Bioethics</span> 36 (8): 911–919.</li>
+      <li><span class="ref-author">Smyth, Nicholas.</span> 2020. "The Practical Stance Approach to the Asymmetry of Procreative Ethics." <span class="ref-title">Philosophical Studies</span> 177 (10): 2843–2860.</li>
+      <li><span class="ref-author">Stanford Encyclopedia of Philosophy.</span> "The Non-Identity Problem" (M.A. Roberts); "Population Ethics" (Hilary Greaves and others); "Pessimism" entries as updated.</li>
+    </ol>
+
+  </main>
+</div>
+
+<!-- ─── Language toggle script ─────────────────────────────────── -->
+<script>
+(function() {
+  'use strict';
+
+  var body = document.body;
+  var buttons = document.querySelectorAll('.lang-toggle button[data-lang-set]');
+
+  function setLang(lang) {
+    body.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh' : 'en');
+    buttons.forEach(function(b) {
+      if (b.getAttribute('data-lang-set') === lang) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+    try { localStorage.setItem('yifanova-lang', lang); } catch (e) { /* ignore */ }
+  }
+
+  // Restore language preference if previously set
+  try {
+    var saved = localStorage.getItem('yifanova-lang');
+    if (saved === 'en' || saved === 'zh') {
+      setLang(saved);
+    }
+  } catch (e) { /* ignore */ }
+
+  buttons.forEach(function(b) {
+    b.addEventListener('click', function() {
+      setLang(b.getAttribute('data-lang-set'));
+    });
+  });
+
+  // Mobile TOC toggle
+  var tocToggle = document.querySelector('.toc-mobile-toggle');
+  if (tocToggle) {
+    tocToggle.addEventListener('click', function() {
+      var expanded = tocToggle.getAttribute('aria-expanded') === 'true';
+      tocToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+    // Auto-close mobile TOC when a link is clicked
+    document.querySelectorAll('.toc-list-wrapper a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        if (window.innerWidth < 1100) {
+          tocToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
