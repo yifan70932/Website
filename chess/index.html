@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chess — yifanova.com</title>
-  <meta name="description" content="A working set of notes on chess: its history from chaturanga to the present, the modern rules and time controls, Zermelo's theorem and the game tree, how engines decide, tools and databases, findings from engine-driven research, the Elo rating system, opening theory, the philosophy of game-playing, and chess in literature.">
+  <meta name="description" content="A working set of notes on chess: its history from chaturanga to the present, the modern rules and time controls, Zermelo's theorem and the game tree, how engines decide, tools and databases, findings from engine-driven research, the Elo rating system, opening theory, the philosophy of game-playing, and chess in literature. Bilingual EN / 中文.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,26 +14,100 @@
   <link rel="stylesheet" href="/assets/base.css">
   <link rel="stylesheet" href="/assets/gametree.css">
   <link rel="stylesheet" href="/assets/chess.css">
+
+  <style>
+    /* ── Sticky header + single-file language toggle ─────────────── */
+    /* Scoped to this page only; does not touch the global colophon
+       style used elsewhere. */
+
+    header.colophon {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule, #e5e7eb);
+    }
+
+    /* Language toggle buttons (replacing two <a> links) */
+    .colophon .lang-toggle {
+      display: inline-flex;
+      gap: 0.25rem;
+    }
+    .colophon .lang-toggle button {
+      font: inherit;
+      color: var(--ink-faint, #6b7280);
+      background: transparent;
+      border: none;
+      padding: 0 0.35rem;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+    .colophon .lang-toggle button:hover {
+      color: var(--navy, #0a3d62);
+    }
+    .colophon .lang-toggle button.active {
+      color: var(--ink, #1f2328);
+      font-weight: 600;
+    }
+
+    /* Language switching: hide opposite-lang content blocks */
+    [data-lang-content] { display: none; }
+    body[data-lang="en"] [data-lang-content="en"] { display: revert; }
+    body[data-lang="zh"] [data-lang-content="zh"] { display: revert; }
+
+    /* SVG text nodes need a different display value */
+    body[data-lang="en"] text[data-lang-content="en"],
+    body[data-lang="zh"] text[data-lang-content="zh"] {
+      display: inline;
+    }
+
+    /* When in Chinese, swap body font to Noto Serif SC */
+    body[data-lang="zh"] {
+      font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+      line-height: 1.78;
+    }
+    body[data-lang="zh"] code,
+    body[data-lang="zh"] .term,
+    body[data-lang="zh"] th,
+    body[data-lang="zh"] .toc-mobile-toggle {
+      font-family: 'Noto Serif SC', serif;
+    }
+
+    /* TOC sticky offset under the now-sticky header (only when applicable) */
+    .toc { scroll-margin-top: 4rem; }
+
+    /* Anchor scroll offset so section headers don't hide under sticky header */
+    h2[id], h3[id] { scroll-margin-top: 4rem; }
+  </style>
 </head>
 
-<body>
+<body data-lang="en">
 
 <div class="page">
 
   <header class="colophon">
-    <span><a href="/">Yifanova Personal Wiki</a> | Chess</span>
-    <span class="lang-toggle">
-      <a href="/chess/" class="active">EN</a>
-      <a href="/chess/zh.html">中文</a>
+    <span>
+      <a href="/">Yifanova Personal Wiki</a> |
+      <span data-lang-content="en">Chess</span><span data-lang-content="zh">国际象棋</span>
+    </span>
+    <span class="lang-toggle" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en" class="active" aria-pressed="true">EN</button>
+      <button type="button" data-lang-set="zh" aria-pressed="false">中文</button>
     </span>
   </header>
 
 
   <nav class="toc" aria-label="Table of contents">
-    <button class="toc-mobile-toggle" aria-expanded="false">Contents</button>
-    <p class="toc-title">Contents</p>
+    <button class="toc-mobile-toggle" aria-expanded="false">
+      <span data-lang-content="en">Contents</span><span data-lang-content="zh">目录</span>
+    </button>
+    <p class="toc-title">
+      <span data-lang-content="en">Contents</span><span data-lang-content="zh">目录</span>
+    </p>
     <div class="toc-list-wrapper">
-      <ol>
+      <ol data-lang-content="en">
         <li><a href="#sec-history">1 · History</a></li>
         <li><a href="#sec-comparison">2 · International chess and Chinese chess</a></li>
         <li><a href="#sec-rules">3 · Modern rules and time controls</a></li>
@@ -50,28 +124,69 @@
         <li><a href="#sec-personal-notes">14 · Personal notes</a></li>
         <li><a href="#sec-further-reading">15 · Further reading</a></li>
       </ol>
+      <ol data-lang-content="zh">
+        <li><a href="#sec-history">一 · 历史</a></li>
+        <li><a href="#sec-comparison">二 · 国际象棋与中国象棋</a></li>
+        <li><a href="#sec-rules">三 · 现代规则与时间控制</a></li>
+        <li><a href="#sec-game-theory">四 · 博弈论与博弈树</a></li>
+        <li><a href="#sec-engines">五 · 引擎</a></li>
+        <li><a href="#sec-how-engines-decide">六 · 引擎是怎么决策的</a></li>
+        <li><a href="#sec-tools">七 · 工具与数据库</a></li>
+        <li><a href="#sec-findings">八 · 引擎驱动研究的发现</a></li>
+        <li><a href="#sec-elo">九 · Elo 与评分系统</a></li>
+        <li><a href="#sec-opening-theory">十 · 开局理论</a></li>
+        <li><a href="#sec-suits">十一 · Suits 与游戏哲学</a></li>
+        <li><a href="#sec-literature">十二 · 文学与电影中的象棋</a></li>
+        <li><a href="#sec-tournaments">十三 · 锦标赛与头衔</a></li>
+        <li><a href="#sec-personal-notes">十四 · 个人备忘</a></li>
+        <li><a href="#sec-further-reading">十五 · 延伸阅读</a></li>
+      </ol>
     </div>
   </nav>
 
   <article>
 
     <header class="article-header">
-      <h1>An Inexhaustible Tree</h1>
-      <p class="subtitle">Chess as four distinct ontological objects</p>
+      <h1>
+        <span data-lang-content="en">An Inexhaustible Tree</span>
+        <span data-lang-content="zh">一棵无法穷尽的树</span>
+      </h1>
+      <p class="subtitle">
+        <span data-lang-content="en">Chess as four distinct ontological objects</span>
+        <span data-lang-content="zh">国际象棋作为四种不同的本体论对象</span>
+      </p>
     </header>
 
-    <p>The word <em>chess</em> names not one object but four. It is a finite combinatorial game tree of roughly 10<sup>120</sup> nodes, the object of Zermelo's 1913 theorem. It is a rule-package — a particular nineteenth-century convention that turns an otherwise infinite activity into a finite one. It is a <em>lusory activity</em> in Bernard Suits's sense, a structure of voluntarily-accepted constraints. And lastly, it is a fifteen-hundred-year cultural-historical practice descending from <em>chaturanga</em>. 
+    <div data-lang-content="en">
+      <p>The word <em>chess</em> names not one object but four. It is a finite combinatorial game tree of roughly 10<sup>120</sup> nodes, the object of Zermelo's 1913 theorem. It is a rule-package — a particular nineteenth-century convention that turns an otherwise infinite activity into a finite one. It is a <em>lusory activity</em> in Bernard Suits's sense, a structure of voluntarily-accepted constraints. And lastly, it is a fifteen-hundred-year cultural-historical practice descending from <em>chaturanga</em>.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p><em>国际象棋</em>这个词所指的不是一个对象，而是四个。它是一棵约 10<sup>120</sup> 节点的有限组合博弈树——策梅洛 1913 年定理所谈的对象；它是一份规则包——一个把原本无限的活动转换成有限的、特定的十九世纪规约；它是 Bernard Suits 意义上的<em>游戏行为</em>——一组被自愿接受的限制的结构；它还是一种从印度 chaturanga 延续至今、跨越一千五百年的文化历史实践。</p>
+    </div>
 
     <figure class="full-bleed chess-widget-figure" aria-label="Interactive chess board">
-      <p class="chess-caption">An interactive board with a <a href="https://stockfishchess.org/" rel="noopener">Stockfish</a> engine running in your browser.</p>
+      <p class="chess-caption">
+        <span data-lang-content="en">An interactive board with a <a href="https://stockfishchess.org/" rel="noopener">Stockfish</a> engine running in your browser.</span>
+        <span data-lang-content="zh">一个嵌入了 <a href="https://stockfishchess.org/" rel="noopener">Stockfish</a> 引擎的交互式棋盘。</span>
+      </p>
       <div class="chess-widget"></div>
     </figure>
 
-    <h2 id="sec-history">1 · History</h2>
+    <h2 id="sec-history">
+      <span data-lang-content="en">1 · History</span>
+      <span data-lang-content="zh">一 · 历史</span>
+    </h2>
 
-    <p>Chess descends from <em>chaturanga</em> (Sanskrit <span class="cjk">चतुरङ्ग</span>, "four limbs"), a north-Indian game attested in Bāṇabhaṭṭa's <em>Harshacharita</em> by the early seventh century CE. The four limbs were the divisions of the classical Indian army — infantry, cavalry, elephants, chariots — surviving on the modern board as pawn, knight, bishop, and rook. The 8×8 <em>ashtāpada</em> board was older still, originally used for race games; the war-simulation overlay was the new contribution.</p>
+    <div data-lang-content="en">
+      <p>Chess descends from <em>chaturanga</em> (Sanskrit <span class="cjk">चतुरङ्ग</span>, "four limbs"), a north-Indian game attested in Bāṇabhaṭṭa's <em>Harshacharita</em> by the early seventh century CE. The four limbs were the divisions of the classical Indian army — infantry, cavalry, elephants, chariots — surviving on the modern board as pawn, knight, bishop, and rook. The 8×8 <em>ashtāpada</em> board was older still, originally used for race games; the war-simulation overlay was the new contribution.</p>
 
-    <p>From India the game travelled west into Sasanian Persia as <em>chatrang</em>, into the Arab world as <em>shatranj</em> after the seventh-century conquests, and through Moorish Spain and Sicily into medieval Europe by roughly 900 CE. It also travelled east, becoming Chinese <em>xiangqi</em> <span class="cjk">象棋</span>, Japanese <em>shōgi</em> <span class="cjk">将棋</span>, Korean <em>janggi</em>, and Thai <em>makruk</em>, each a parallel descendant rather than a translation.</p>
+      <p>From India the game travelled west into Sasanian Persia as <em>chatrang</em>, into the Arab world as <em>shatranj</em> after the seventh-century conquests, and through Moorish Spain and Sicily into medieval Europe by roughly 900 CE. It also travelled east, becoming Chinese <em>xiangqi</em> <span class="cjk">象棋</span>, Japanese <em>shōgi</em> <span class="cjk">将棋</span>, Korean <em>janggi</em>, and Thai <em>makruk</em>, each a parallel descendant rather than a translation.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>国际象棋的源头是古印度的 <em>chaturanga</em>（梵文 <span class="cjk">चतुरङ्ग</span>，意为"四肢"或"四军"）。最早不容置疑的文献证据出现在 Bāṇabhaṭṭa（巴纳）公元七世纪初的《Harshacharita》中。"四军"指印度古代军队的四个兵种——步兵、骑兵、象兵、战车——它们今日仍以兵、马、象、车的形式存在于棋盘上。8×8 的 ashtāpada 棋盘比 chaturanga 出现得更早，最初用于赛跑类游戏；战争模拟的覆盖层是新的添加。</p>
+
+      <p>从印度向西，游戏先后传入萨珊波斯（chatrang）、阿拉伯世界（shatranj，七世纪后）、约公元十世纪经摩尔人统治的西班牙和西西里进入中世纪欧洲。同时它也向东扩散：演化为中国的 <span class="cjk">象棋</span>（xiangqi）、日本的 <span class="cjk">将棋</span>（shōgi）、朝鲜的 janggi、泰国的 makruk，每一支都是平行的后裔，而非翻译。</p>
+    </div>
 
     <figure>
       <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Timeline of chess transmission from India westward and eastward, 6th to 15th century">
@@ -80,13 +195,18 @@
             .axis { stroke: var(--ink-soft); stroke-width: 1; }
             .tick { stroke: var(--ink-faint); stroke-width: 0.7; }
             .tick-label { font-family: 'Inter', sans-serif; font-size: 9.5px; fill: var(--ink-faint); }
-            .lane-label { font-family: 'Inter', sans-serif; font-size: 10.5px; fill: var(--ink-soft); font-style: italic; }
+            .lane-label-en { font-family: 'Inter', sans-serif; font-size: 10.5px; fill: var(--ink-soft); font-style: italic; }
+            .lane-label-zh { font-family: 'Noto Serif SC', serif; font-size: 11px; fill: var(--ink-soft); }
             .node-w { fill: var(--bg); stroke: var(--navy); stroke-width: 1.5; }
             .node-origin { fill: var(--navy); stroke: var(--navy); stroke-width: 1.5; }
-            .node-label { font-family: 'Inter', sans-serif; font-size: 10.5px; fill: var(--ink); font-weight: 500; }
+            .node-label-en { font-family: 'Inter', sans-serif; font-size: 10.5px; fill: var(--ink); font-weight: 500; }
+            .node-label-zh { font-family: 'Noto Serif SC', serif; font-size: 11px; fill: var(--ink); font-weight: 500; }
             .node-soft { font-family: 'Inter', sans-serif; font-size: 9px; fill: var(--ink-faint); font-style: italic; }
+            .node-soft-zh { font-family: 'Noto Serif SC', serif; font-size: 10px; fill: var(--ink-faint); }
             .conn { stroke: var(--sapphire); stroke-width: 1.4; fill: none; stroke-dasharray: 3 3; }
             .conn-east { stroke: var(--forest); }
+            .title-en { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 11px; fill: var(--ink); }
+            .title-zh { font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 11px; fill: var(--ink); }
           </style>
         </defs>
 
@@ -98,36 +218,51 @@
           <line x1="424" y1="178" x2="424" y2="184" class="tick"/>
           <line x1="552" y1="178" x2="552" y2="184" class="tick"/>
           <line x1="680" y1="178" x2="680" y2="184" class="tick"/>
-          <text x="40"  y="198" text-anchor="middle" class="tick-label">6c</text>
-          <text x="168" y="198" text-anchor="middle" class="tick-label">8c</text>
-          <text x="296" y="198" text-anchor="middle" class="tick-label">10c</text>
-          <text x="424" y="198" text-anchor="middle" class="tick-label">12c</text>
-          <text x="552" y="198" text-anchor="middle" class="tick-label">14c</text>
-          <text x="680" y="198" text-anchor="middle" class="tick-label">16c</text>
+          <text x="40"  y="198" text-anchor="middle" class="tick-label" data-lang-content="en">6c</text>
+          <text x="168" y="198" text-anchor="middle" class="tick-label" data-lang-content="en">8c</text>
+          <text x="296" y="198" text-anchor="middle" class="tick-label" data-lang-content="en">10c</text>
+          <text x="424" y="198" text-anchor="middle" class="tick-label" data-lang-content="en">12c</text>
+          <text x="552" y="198" text-anchor="middle" class="tick-label" data-lang-content="en">14c</text>
+          <text x="680" y="198" text-anchor="middle" class="tick-label" data-lang-content="en">16c</text>
+          <text x="40"  y="198" text-anchor="middle" class="tick-label" data-lang-content="zh">6世纪</text>
+          <text x="168" y="198" text-anchor="middle" class="tick-label" data-lang-content="zh">8世纪</text>
+          <text x="296" y="198" text-anchor="middle" class="tick-label" data-lang-content="zh">10世纪</text>
+          <text x="424" y="198" text-anchor="middle" class="tick-label" data-lang-content="zh">12世纪</text>
+          <text x="552" y="198" text-anchor="middle" class="tick-label" data-lang-content="zh">14世纪</text>
+          <text x="680" y="198" text-anchor="middle" class="tick-label" data-lang-content="zh">16世纪</text>
         </g>
 
-        <text x="40" y="35" class="lane-label">westward</text>
+        <text x="40" y="35" class="lane-label-en" data-lang-content="en">westward</text>
+        <text x="40" y="35" class="lane-label-zh" data-lang-content="zh">向西</text>
+
         <circle cx="55" cy="80" r="6" class="node-origin"/>
-        <text x="55" y="62" text-anchor="middle" class="node-label">India</text>
+        <text x="55" y="62" text-anchor="middle" class="node-label-en" data-lang-content="en">India</text>
+        <text x="55" y="62" text-anchor="middle" class="node-label-zh" data-lang-content="zh">印度</text>
         <text x="55" y="100" text-anchor="middle" class="node-soft">chaturanga</text>
 
         <circle cx="105" cy="80" r="4.5" class="node-w"/>
-        <text x="105" y="62" text-anchor="middle" class="node-label">Persia</text>
+        <text x="105" y="62" text-anchor="middle" class="node-label-en" data-lang-content="en">Persia</text>
+        <text x="105" y="62" text-anchor="middle" class="node-label-zh" data-lang-content="zh">波斯</text>
         <text x="105" y="100" text-anchor="middle" class="node-soft">chatrang</text>
 
         <circle cx="170" cy="80" r="4.5" class="node-w"/>
-        <text x="170" y="62" text-anchor="middle" class="node-label">Arab world</text>
+        <text x="170" y="62" text-anchor="middle" class="node-label-en" data-lang-content="en">Arab world</text>
+        <text x="170" y="62" text-anchor="middle" class="node-label-zh" data-lang-content="zh">阿拉伯世界</text>
         <text x="170" y="100" text-anchor="middle" class="node-soft">shatranj</text>
 
         <circle cx="265" cy="80" r="4.5" class="node-w"/>
-        <text x="265" y="62" text-anchor="middle" class="node-label">al-Andalus, Sicily</text>
+        <text x="265" y="62" text-anchor="middle" class="node-label-en" data-lang-content="en">al-Andalus, Sicily</text>
+        <text x="265" y="62" text-anchor="middle" class="node-label-zh" data-lang-content="zh">安达卢斯、西西里</text>
 
         <circle cx="380" cy="80" r="4.5" class="node-w"/>
-        <text x="380" y="62" text-anchor="middle" class="node-label">Latin Europe</text>
+        <text x="380" y="62" text-anchor="middle" class="node-label-en" data-lang-content="en">Latin Europe</text>
+        <text x="380" y="62" text-anchor="middle" class="node-label-zh" data-lang-content="zh">拉丁欧洲</text>
 
         <circle cx="555" cy="80" r="5.5" class="node-origin"/>
-        <text x="555" y="62" text-anchor="middle" class="node-label">queen reform</text>
-        <text x="555" y="100" text-anchor="middle" class="node-soft">1475 (Iberia/Italy)</text>
+        <text x="555" y="62" text-anchor="middle" class="node-label-en" data-lang-content="en">queen reform</text>
+        <text x="555" y="62" text-anchor="middle" class="node-label-zh" data-lang-content="zh">疯王后改革</text>
+        <text x="555" y="100" text-anchor="middle" class="node-soft" data-lang-content="en">1475 (Iberia/Italy)</text>
+        <text x="555" y="100" text-anchor="middle" class="node-soft-zh" data-lang-content="zh">1475 (伊比利亚 / 意大利)</text>
 
         <path d="M 61 80 L 100 80" class="conn"/>
         <path d="M 110 80 L 165 80" class="conn"/>
@@ -135,85 +270,179 @@
         <path d="M 270 80 L 375 80" class="conn"/>
         <path d="M 385 80 L 549 80" class="conn"/>
 
-        <text x="40" y="155" class="lane-label">eastward</text>
+        <text x="40" y="155" class="lane-label-en" data-lang-content="en">eastward</text>
+        <text x="40" y="155" class="lane-label-zh" data-lang-content="zh">向东</text>
 
         <circle cx="170" cy="135" r="4.5" class="node-w"/>
-        <text x="170" y="127" text-anchor="end" class="node-label" dx="-7">China</text>
-        <text x="170" y="155" text-anchor="end" class="node-soft" dx="-7">xiangqi</text>
+        <text x="170" y="127" text-anchor="end" class="node-label-en" dx="-7" data-lang-content="en">China</text>
+        <text x="170" y="127" text-anchor="end" class="node-label-zh" dx="-7" data-lang-content="zh">中国</text>
+        <text x="170" y="155" text-anchor="end" class="node-soft" dx="-7" data-lang-content="en">xiangqi</text>
+        <text x="170" y="155" text-anchor="end" class="node-soft-zh" dx="-7" data-lang-content="zh">象棋</text>
 
         <circle cx="265" cy="135" r="4.5" class="node-w"/>
-        <text x="265" y="127" text-anchor="end" class="node-label" dx="-7">Japan</text>
-        <text x="265" y="155" text-anchor="end" class="node-soft" dx="-7">shōgi</text>
+        <text x="265" y="127" text-anchor="end" class="node-label-en" dx="-7" data-lang-content="en">Japan</text>
+        <text x="265" y="127" text-anchor="end" class="node-label-zh" dx="-7" data-lang-content="zh">日本</text>
+        <text x="265" y="155" text-anchor="end" class="node-soft" dx="-7" data-lang-content="en">shōgi</text>
+        <text x="265" y="155" text-anchor="end" class="node-soft-zh" dx="-7" data-lang-content="zh">将棋</text>
 
         <circle cx="295" cy="135" r="4.5" class="node-w"/>
-        <text x="320" y="127" class="node-label">SE Asia</text>
+        <text x="320" y="127" class="node-label-en" data-lang-content="en">SE Asia</text>
+        <text x="320" y="127" class="node-label-zh" data-lang-content="zh">东南亚</text>
         <text x="320" y="155" class="node-soft">makruk</text>
 
         <path d="M 55 86 Q 55 110 90 122 Q 130 132 165 134" class="conn conn-east"/>
         <path d="M 175 135 L 260 135" class="conn conn-east"/>
         <path d="M 175 135 L 290 135" class="conn conn-east"/>
 
-        <text x="350" y="20" text-anchor="middle" class="lane-label" style="font-style:normal;font-weight:600;font-size:11px;fill:var(--ink)">Transmission of chess from India, 6th–15th century</text>
+        <text x="350" y="20" text-anchor="middle" class="title-en" data-lang-content="en">Transmission of chess from India, 6th–15th century</text>
+        <text x="350" y="20" text-anchor="middle" class="title-zh" data-lang-content="zh">国际象棋自印度的传播，6–15 世纪</text>
       </svg>
-      <figcaption>Two parallel diffusion lanes from a common Indian origin. Dates are first attestation; westward and eastward traditions diverged early and developed largely independently. The 1475 "mad queen" reform — when the queen and bishop acquired their long-range moves — is what made the European game now played worldwide.</figcaption>
+      <figcaption>
+        <span data-lang-content="en">Two parallel diffusion lanes from a common Indian origin. Dates are first attestation; westward and eastward traditions diverged early and developed largely independently. The 1475 "mad queen" reform — when the queen and bishop acquired their long-range moves — is what made the European game now played worldwide.</span>
+        <span data-lang-content="zh">从印度的同一起点出发的两条平行扩散路线。所标年代为最早可考的存在年代；东西两支早在中世纪就分流，此后基本独立发展。1475 年的"疯王后"改革——后与象获得长程能力——才造就了今天全球通行的欧洲版本。</span>
+      </figcaption>
     </figure>
 
-    <p>The decisive transformation of the European game happened around 1475 in Iberia or northern Italy. Before, the queen could move only one square diagonally; the bishop could leap two squares. After the reform — Italians called it <em>scacchi alla rabiosa</em>, "mad chess" — both became long-range pieces and the game's tempo accelerated. The first printed chess book, Lucena's <em>Repetición de Amores y Arte de Ajedrez</em> (Salamanca, 1497), already used the modern moves. Castling, <em>en passant</em>, and pawn promotion stabilized over the next two centuries; the fifty-move rule and threefold repetition were nineteenth-century additions.</p>
+    <div data-lang-content="en">
+      <p>The decisive transformation of the European game happened around 1475 in Iberia or northern Italy. Before, the queen could move only one square diagonally; the bishop could leap two squares. After the reform — Italians called it <em>scacchi alla rabiosa</em>, "mad chess" — both became long-range pieces and the game's tempo accelerated. The first printed chess book, Lucena's <em>Repetición de Amores y Arte de Ajedrez</em> (Salamanca, 1497), already used the modern moves. Castling, <em>en passant</em>, and pawn promotion stabilized over the next two centuries; the fifty-move rule and threefold repetition were nineteenth-century additions.</p>
 
-    <p>The first international tournament was held in London in 1851 (won by Adolf Anderssen). The World Chess Championship dates from the 1886 match between Wilhelm Steinitz and Johannes Zukertort in New Orleans. FIDE — the <em>Fédération Internationale des Échecs</em>, the game's international governing body — was founded in Paris in 1924, took over the world championship after Alekhine's death in 1946, and has codified the rules ever since.</p>
+      <p>The first international tournament was held in London in 1851 (won by Adolf Anderssen). The World Chess Championship dates from the 1886 match between Wilhelm Steinitz and Johannes Zukertort in New Orleans. FIDE — the <em>Fédération Internationale des Échecs</em>, the game's international governing body — was founded in Paris in 1924, took over the world championship after Alekhine's death in 1946, and has codified the rules ever since.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>欧洲游戏本身的决定性变革发生在 1475 年前后的伊比利亚或意大利北部。改革之前，后只能斜走一格、象只能斜跳两格；改革之后两者都获得长程能力，棋局节奏剧烈加速。意大利人当时称之为 <em>scacchi alla rabiosa</em>——"疯王后象棋"。第一本印刷出版的国际象棋著作 Lucena 的《Repetición de Amores y Arte de Ajedrez》（萨拉曼卡，1497）已经使用了现代走子规则。王车易位、吃过路兵、兵升变在此后两个世纪内逐步定型；五十步规则与三次重复局面规则则是十九世纪的添加。</p>
 
-    <h2 id="sec-comparison">2 · International chess and Chinese chess: a comparison</h2>
+      <p>第一次国际比赛于 1851 年在伦敦举办（Adolf Anderssen 夺冠）。世界冠军赛起源于 1886 年 Wilhelm Steinitz 与 Johannes Zukertort 在新奥尔良的对弈。FIDE——国际象棋联合会（<em>Fédération Internationale des Échecs</em>）——1924 年于巴黎成立，1946 年 Alekhine 去世后接管世界冠军赛事务，至今规范着全球的比赛规则。</p>
+    </div>
 
-    <p>The two games are siblings, not translations. Both descend from the same Indian root some twelve hundred years ago and share a common deep structure — two-player, perfect-information, zero-sum, finite — but the surface rules diverged early enough, and so completely, that a master of one is a beginner at the other.</p>
+    <h2 id="sec-comparison">
+      <span data-lang-content="en">2 · International chess and Chinese chess: a comparison</span>
+      <span data-lang-content="zh">二 · 国际象棋与中国象棋：一个比较</span>
+    </h2>
 
+    <div data-lang-content="en">
+      <p>The two games are siblings, not translations. Both descend from the same Indian root some twelve hundred years ago and share a common deep structure — two-player, perfect-information, zero-sum, finite — but the surface rules diverged early enough, and so completely, that a master of one is a beginner at the other.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>这两个游戏是兄弟，不是翻译的关系。它们都源自约一千二百年前同一个印度根源，共享同一深层结构——二人、完全信息、零和、有限——但表面规则的分流足够早、足够彻底，使得任何一种游戏的大师在另一种游戏中都是初学者。</p>
+    </div>
 
-    <h3>Boards and pieces</h3>
+    <h3>
+      <span data-lang-content="en">Boards and pieces</span>
+      <span data-lang-content="zh">棋盘与子力</span>
+    </h3>
 
-    <p>International chess is played on an 8×8 grid of squares, with pieces standing <em>on</em> the squares. Chinese chess (<em>xiangqi</em>, <span class="cjk">象棋</span>) is played on a 9×10 grid of <em>intersections</em>, with pieces standing <em>at</em> the intersection points. The board is bisected by a horizontal "river" (<span class="cjk">河界</span>) between the fifth and sixth ranks, and each side has a 3×3 "palace" (<span class="cjk">九宫</span>, "nine palace") centered on the back rank. Both pieces and rules are organized around these features.</p>
+    <div data-lang-content="en">
+      <p>International chess is played on an 8×8 grid of squares, with pieces standing <em>on</em> the squares. Chinese chess (<em>xiangqi</em>, <span class="cjk">象棋</span>) is played on a 9×10 grid of <em>intersections</em>, with pieces standing <em>at</em> the intersection points. The board is bisected by a horizontal "river" (<span class="cjk">河界</span>) between the fifth and sixth ranks, and each side has a 3×3 "palace" (<span class="cjk">九宫</span>, "nine palace") centered on the back rank. Both pieces and rules are organized around these features.</p>
 
-    <p>The piece roster is also different. Each side in xiangqi has 16 pieces — one general, two advisors, two elephants, two horses, two chariots, two cannons, and five soldiers. The cannon (<span class="cjk">炮</span>) has no counterpart in international chess: it moves like a chariot (rook) but captures only by jumping <em>over</em> exactly one intervening piece (the "screen" or <span class="cjk">炮架</span>). The advisor (<span class="cjk">士</span>) is confined to the palace and moves one square diagonally; the elephant (<span class="cjk">象</span> or <span class="cjk">相</span>) moves exactly two points diagonally and cannot cross the river. The general (<span class="cjk">将</span> or <span class="cjk">帥</span>) is confined to the palace and moves one point orthogonally; an additional rule forbids the two generals from facing each other along an open file ("flying general," <span class="cjk">飞将</span>). Soldiers (<span class="cjk">卒</span> or <span class="cjk">兵</span>) move one point forward, but gain the ability to also move sideways once they cross the river — and they never promote.</p>
+      <p>The piece roster is also different. Each side in xiangqi has 16 pieces — one general, two advisors, two elephants, two horses, two chariots, two cannons, and five soldiers. The cannon (<span class="cjk">炮</span>) has no counterpart in international chess: it moves like a chariot (rook) but captures only by jumping <em>over</em> exactly one intervening piece (the "screen" or <span class="cjk">炮架</span>). The advisor (<span class="cjk">士</span>) is confined to the palace and moves one square diagonally; the elephant (<span class="cjk">象</span> or <span class="cjk">相</span>) moves exactly two points diagonally and cannot cross the river. The general (<span class="cjk">将</span> or <span class="cjk">帥</span>) is confined to the palace and moves one point orthogonally; an additional rule forbids the two generals from facing each other along an open file ("flying general," <span class="cjk">飞将</span>). Soldiers (<span class="cjk">卒</span> or <span class="cjk">兵</span>) move one point forward, but gain the ability to also move sideways once they cross the river — and they never promote.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>国际象棋下在 8×8 的方格上，子力立<em>于</em>方格中。中国象棋下在 9×10 的网格<em>交点</em>上，子力立<em>于</em>线条交点上。棋盘正中有一条横向的"河界"分割五六两横排，每方各有一个 3×3 的"九宫"位于本方底排中央。子力与规则都围绕这些特征组织。</p>
 
-    <h3>Tactical character</h3>
+      <p>子力配置也不同。中国象棋每方 16 子——一将（帥）、两士、两象（相）、两马、两车、两炮、五卒（兵）。<em>炮</em>在国际象棋中没有对应物：它走法如车（即可以沿直线走任意距离），但吃子时必须有一个且仅一个介于其与目标之间的"炮架"作为跳越中介。<em>士</em>限于九宫之内，斜走一格；<em>象（相）</em>固定走"田字"（恰好斜走两个交点），且不可过河；<em>将（帥）</em>限于九宫，单步直行——并有一条额外规则："飞将"——双方将帥不可在无子阻隔的同一直线上面对。<em>卒（兵）</em>仅可前进一格，过河后获得横向走子能力，但永远不升变。</p>
+    </div>
 
-    <p>The differences in mobility produce a fundamentally different tactical character. The chariots (analogous to rooks) are extremely powerful from the opening because there are no bishops or queens to compete for long files, and pawns do not block them as densely. The cannon is the most distinctive piece: its capture-by-screen rule means that placing or removing a single piece anywhere on a line can radically change which captures are legal, making cannon tactics deeply non-local. Knights, which jump as in international chess, can be blocked at the adjacent point ("hobbling the horse's leg," <span class="cjk">蹩马腿</span>) — a knight on a square with friendly or enemy pieces on its orthogonal neighbors cannot move through that direction. The result is that xiangqi tactics emphasize long-range piece coordination and screen play; international chess tactics emphasize local pawn structure and outpost squares for minor pieces.</p>
+    <h3>
+      <span data-lang-content="en">Tactical character</span>
+      <span data-lang-content="zh">战术特征</span>
+    </h3>
 
-    <p>Stalemate and draws are also handled differently. In xiangqi, stalemate (the side to move has no legal move) is a loss for the stalemated side, not a draw. Perpetual check is also a loss for the checking side. The rules around perpetual chasing and mutual perpetual chase are notoriously intricate — the World Xiangqi Federation manual contains 110 example diagrams adjudicating different repetition cases, and even the leading engines do not implement all of them correctly.<a href="#sn-2" class="sn-ref">2</a> The handling of repetition is the single most complex difference between the two rule sets.</p>
+    <div data-lang-content="en">
+      <p>The differences in mobility produce a fundamentally different tactical character. The chariots (analogous to rooks) are extremely powerful from the opening because there are no bishops or queens to compete for long files, and pawns do not block them as densely. The cannon is the most distinctive piece: its capture-by-screen rule means that placing or removing a single piece anywhere on a line can radically change which captures are legal, making cannon tactics deeply non-local. Knights, which jump as in international chess, can be blocked at the adjacent point ("hobbling the horse's leg," <span class="cjk">蹩马腿</span>) — a knight on a square with friendly or enemy pieces on its orthogonal neighbors cannot move through that direction. The result is that xiangqi tactics emphasize long-range piece coordination and screen play; international chess tactics emphasize local pawn structure and outpost squares for minor pieces.</p>
+
+      <p>Stalemate and draws are also handled differently. In xiangqi, stalemate (the side to move has no legal move) is a loss for the stalemated side, not a draw. Perpetual check is also a loss for the checking side. The rules around perpetual chasing and mutual perpetual chase are notoriously intricate — the World Xiangqi Federation manual contains 110 example diagrams adjudicating different repetition cases, and even the leading engines do not implement all of them correctly.<a href="#sn-2" class="sn-ref">2</a> The handling of repetition is the single most complex difference between the two rule sets.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>子力机动性的差异造就了完全不同的战术风格。车（与国际象棋的车类似）从开局起就极其强力，因为没有相、后与之争夺长直线，兵的密度也较低、不会构成同样多的阻挡。炮是最具特色的子：它的"隔山打牛"规则意味着，棋盘上任何一线上单子的放置或移除，都可能根本性地改变哪些吃子是合法的——这使得炮的战术深度具有非局部性。马的走法与国际象棋一致（日字）但可被"蹩腿"——若与马呈直线相邻的位置上有任何子，马便不能从该方向起跳。结果是中国象棋的战术着重于长距子力协同与隔架配合；国际象棋的战术着重于局部兵形与轻子据点。</p>
+
+      <p>逼和与和棋的处理方式也不同。在中国象棋中，逼和（轮到走子的一方无合法走子）算被逼和方负。"长将"亦判将方负。围绕"长捉"与"互不变着"的规则极为复杂——世界象棋联合会的规则手册罗列了 110 个例图来裁定不同的重复局面，即便顶级引擎也未能正确实现全部情形<a href="#sn-2" class="sn-ref">2</a>。重复局面的处理是两套规则间最复杂的差异。</p>
+    </div>
 
     <aside class="sidenote" id="sn-2">
-      <span class="sidenote-num">2</span>The asymmetry is structural, not arbitrary: international chess treats threefold repetition as evidence of mutual inability to make progress, hence a draw; xiangqi treats persistent harassment of an opponent's piece (the "chase") as a losing pattern for the chaser. The rule package therefore encodes two different theories of what repetition <em>means</em>, not just two different conventions.
+      <span class="sidenote-num">2</span>
+      <span data-lang-content="en">The asymmetry is structural, not arbitrary: international chess treats threefold repetition as evidence of mutual inability to make progress, hence a draw; xiangqi treats persistent harassment of an opponent's piece (the "chase") as a losing pattern for the chaser. The rule package therefore encodes two different theories of what repetition <em>means</em>, not just two different conventions.</span>
+      <span data-lang-content="zh">这种不对称是结构性的，而非约定性的：国际象棋把三次重复视作双方都无法取得进展的证据，因此判和；中国象棋把对对方某一子的持续骚扰（"长捉"）视作一种判负的着法。两套规则因此编码了关于"重复"<em>意味着什么</em>的两种不同理论，而不仅仅是两种不同的约定。</span>
     </aside>
 
-    <h3>First-move advantage</h3>
+    <h3>
+      <span data-lang-content="en">First-move advantage</span>
+      <span data-lang-content="zh">先手优势</span>
+    </h3>
 
-    <p>Both games have a measurable first-move advantage. In international chess, White scores about 54-56% in master-level decisive games (with a draw counted as half a point); the asymmetry is real but modest. In xiangqi, Red moves first and the corresponding advantage is generally estimated as somewhat larger — historical statistics from professional play put Red's score at roughly 55-58% depending on time control and era, and xiangqi opening theory explicitly speaks of Red's "initiative" (<span class="cjk">先手</span>) as a quantifiable resource of half a move to a full move that Black must spend opening moves to neutralize. There is no consensus that perfect play in either game is anything other than a draw, but the practical impact of moving first is widely thought to be larger in xiangqi.</p>
+    <div data-lang-content="en">
+      <p>Both games have a measurable first-move advantage. In international chess, White scores about 54-56% in master-level decisive games (with a draw counted as half a point); the asymmetry is real but modest. In xiangqi, Red moves first and the corresponding advantage is generally estimated as somewhat larger — historical statistics from professional play put Red's score at roughly 55-58% depending on time control and era, and xiangqi opening theory explicitly speaks of Red's "initiative" (<span class="cjk">先手</span>) as a quantifiable resource of half a move to a full move that Black must spend opening moves to neutralize. There is no consensus that perfect play in either game is anything other than a draw, but the practical impact of moving first is widely thought to be larger in xiangqi.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>两种游戏都有可量化的先手优势。在国际象棋里，大师水平的非和棋对局中白方得分约 54-56%（和棋按 0.5 分计入）；先手优势真实但温和。中国象棋中红方先行，对应的先手优势通常被认为略大——职业比赛的历史统计显示红方得分约 55-58%（依时间控制与时代不同）；中国象棋开局理论也明确把红方的"先手"视为可量化的资源，约相当于半步到一步的优势，黑方需要花几步开局来抵消。两种游戏完美博弈的结果都不被认为是和棋以外的什么——但先手在实战中的影响，被普遍认为在中国象棋中更大。</p>
+    </div>
 
-    <h3>Engines and current state</h3>
+    <h3>
+      <span data-lang-content="en">Engines and current state</span>
+      <span data-lang-content="zh">引擎与现状</span>
+    </h3>
 
-    <p>For most of computer-chess history, xiangqi engines lagged behind international chess engines by a wide margin — the Asian player communities were smaller, the open-source ecosystem younger, and there was no equivalent of Kasparov or Deep Blue marquee match to drive investment. This changed in the early 2020s. <span class="term"><a href="https://pikafish.org/" rel="noopener">Pikafish</a></span> — an open-source engine forked from Stockfish and adapted to xiangqi, complete with an NNUE evaluation trained on billions of xiangqi positions — emerged in 2021 and is now estimated to be hundreds of Elo above the strongest human xiangqi grandmasters. The transfer of techniques from Stockfish to Pikafish was direct: the same alpha-beta search architecture, the same NNUE incremental-update trick (with the feature set adapted to xiangqi's larger board and different piece types), the same UCI protocol. Earlier engines like <a href="https://github.com/xqbase/eleeye" rel="noopener">ElephantEye</a> (the open-source classical-evaluation engine), Cyclone, and XieXieMaster (proprietary) preceded Pikafish and remain in use, but Pikafish is now the standard reference engine.</p>
+    <div data-lang-content="en">
+      <p>For most of computer-chess history, xiangqi engines lagged behind international chess engines by a wide margin — the Asian player communities were smaller, the open-source ecosystem younger, and there was no equivalent of Kasparov or Deep Blue marquee match to drive investment. This changed in the early 2020s. <span class="term"><a href="https://pikafish.org/" rel="noopener">Pikafish</a></span> — an open-source engine forked from Stockfish and adapted to xiangqi, complete with an NNUE evaluation trained on billions of xiangqi positions — emerged in 2021 and is now estimated to be hundreds of Elo above the strongest human xiangqi grandmasters. The transfer of techniques from Stockfish to Pikafish was direct: the same alpha-beta search architecture, the same NNUE incremental-update trick (with the feature set adapted to xiangqi's larger board and different piece types), the same UCI protocol. Earlier engines like <a href="https://github.com/xqbase/eleeye" rel="noopener">ElephantEye</a> (the open-source classical-evaluation engine), Cyclone, and XieXieMaster (proprietary) preceded Pikafish and remain in use, but Pikafish is now the standard reference engine.</p>
 
-    <p>Neural-network engines from the AlphaZero family also exist for xiangqi. <em>Pika Xiangqi Zero</em> trains a neural network through self-play (its data are then used to train Pikafish's NNUE). <em><a href="https://arxiv.org/abs/2308.04719" rel="noopener">JiangJun</a></em> (Wang et al., 2023) is a research engine combining Monte Carlo Tree Search with Policy-Space Response Oracles to handle the non-transitivity that arises in xiangqi self-play; deployed as a WeChat mini-program, it reported a 99.4% win rate against human players over thousands of games. The current frontier is similar to international chess's: hybrid systems that combine deep search, neural evaluation, and self-play training.</p>
+      <p>Neural-network engines from the AlphaZero family also exist for xiangqi. <em>Pika Xiangqi Zero</em> trains a neural network through self-play (its data are then used to train Pikafish's NNUE). <em><a href="https://arxiv.org/abs/2308.04719" rel="noopener">JiangJun</a></em> (Wang et al., 2023) is a research engine combining Monte Carlo Tree Search with Policy-Space Response Oracles to handle the non-transitivity that arises in xiangqi self-play; deployed as a WeChat mini-program, it reported a 99.4% win rate against human players over thousands of games. The current frontier is similar to international chess's: hybrid systems that combine deep search, neural evaluation, and self-play training.</p>
 
-    <p>The state of xiangqi as a played game is robust. China alone has tens of millions of casual players and several thousand professionals; the Chinese Xiangqi Association's national tournaments are major events. Vietnam (where the game is called <em>cờ tướng</em>) has its own strong professional scene. The World Xiangqi Federation organizes international competitions; xiangqi has been included in the Asian Games (1998, 2006, 2010). Compared with international chess's globally homogeneous community, xiangqi remains overwhelmingly East and Southeast Asian, which is one reason its engine and theory development was slower to globalize but does not affect its depth as a game.</p>
+      <p>The state of xiangqi as a played game is robust. China alone has tens of millions of casual players and several thousand professionals; the Chinese Xiangqi Association's national tournaments are major events. Vietnam (where the game is called <em>cờ tướng</em>) has its own strong professional scene. The World Xiangqi Federation organizes international competitions; xiangqi has been included in the Asian Games (1998, 2006, 2010). Compared with international chess's globally homogeneous community, xiangqi remains overwhelmingly East and Southeast Asian, which is one reason its engine and theory development was slower to globalize but does not affect its depth as a game.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>计算机国际象棋史上的大部分时间里，中国象棋引擎都落后于国际象棋引擎相当多——亚洲棋手社群较小、开源生态系统起步较晚，也没有"Kasparov 对深蓝"那种戏剧性事件来吸引大量投入。这一情形在 2020 年代初改变。<span class="term"><a href="https://pikafish.org/" rel="noopener">Pikafish</a></span>——从 Stockfish 派生、改造为中国象棋的开源引擎，配套有用数十亿中国象棋局面训练的 NNUE 评估——于 2021 年问世，目前估计强度比最强人类特级大师高出数百 Elo。从 Stockfish 到 Pikafish 的技术迁移是直接的：同样的 α-β 搜索架构、同样的 NNUE 增量更新技巧（特征集适配到中国象棋更大的棋盘与不同子类型）、同样的 UCI 协议。早期引擎如 <a href="https://github.com/xqbase/eleeye" rel="noopener">ElephantEye</a>（开源、古典评估）、Cyclone、XieXieMaster（专有）在 Pikafish 之前出现，目前仍在使用，但 Pikafish 已是当前的参考标准。</p>
 
-    <h2 id="sec-rules">3 · Modern rules and time controls</h2>
+      <p>AlphaZero 系的神经网络引擎也存在于中国象棋。<em>Pika Xiangqi Zero</em>通过自对弈训练神经网络（其数据反过来用于训练 Pikafish 的 NNUE）。<em><a href="https://arxiv.org/abs/2308.04719" rel="noopener">JiangJun</a></em>（Wang 等，2023）是把蒙特卡洛树搜索与策略空间响应预言机（PSRO）结合的研究引擎，专门处理中国象棋自对弈中出现的非传递性问题；以微信小程序部署后，在数千局对人类的比赛中报告了 99.4% 的胜率。前沿状况与国际象棋类似：深度搜索、神经评估、自对弈训练相结合的混合系统。</p>
 
-    <p>The basic rules are codified in the FIDE Laws of Chess, updated periodically. The board is 8×8 with alternating light and dark squares; each side begins with sixteen pieces (one king, one queen, two rooks, two bishops, two knights, eight pawns). White moves first. The game ends in checkmate, resignation, stalemate, or draw by one of several technical rules below.</p>
+      <p>作为活的游戏，中国象棋的状况是稳健的。中国本土有数千万业余棋手与数千名职业棋手；中国象棋协会的全国性赛事是重要赛事。越南（当地称为 <em>cờ tướng</em>）也有自己强大的职业体系。世界象棋联合会组织国际比赛；象棋已被列入亚运会比赛项目（1998、2006、2010）。与国际象棋全球同质化的社群相比，中国象棋仍主要分布于东亚和东南亚——这是它的引擎与理论发展全球化较慢的一个原因，但与作为一种游戏的深度无关。</p>
+    </div>
 
-    <h3>Draws</h3>
+    <h2 id="sec-rules">
+      <span data-lang-content="en">3 · Modern rules and time controls</span>
+      <span data-lang-content="zh">三 · 现代规则与时间控制</span>
+    </h2>
 
-    <p>Several conditions force a draw. <span class="term">Stalemate</span>: the side to move has no legal move but is not in check. <span class="term">Threefold repetition</span>: the same position arises three times with the same player to move and the same available moves (this is what allows perpetual check to draw). <span class="term">Fifty-move rule</span>: fifty consecutive moves by each side without a pawn move or capture forces a draw on claim. <span class="term">Insufficient material</span>: positions where checkmate is impossible (e.g. king vs king, king vs king and bishop). <span class="term">Mutual agreement</span>: both players consent to a draw, the most common form in master play.</p>
+    <div data-lang-content="en">
+      <p>The basic rules are codified in the FIDE Laws of Chess, updated periodically. The board is 8×8 with alternating light and dark squares; each side begins with sixteen pieces (one king, one queen, two rooks, two bishops, two knights, eight pawns). White moves first. The game ends in checkmate, resignation, stalemate, or draw by one of several technical rules below.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>基本规则编纂于《FIDE 国际象棋规则》中，定期修订。棋盘 8×8，黑白格相间；每方起始 16 子（一王、一后、两车、两象、两马、八兵）。白方先行。游戏以将杀、认输、逼和（stalemate）或下文若干"技术性和棋"中的一种结束。</p>
+    </div>
 
-    <p>The fifty-move rule has a tablebase footnote. When seven-piece tablebases became available in 2012, several endgames were discovered that require more than fifty moves of perfect play to convert. FIDE has at various times granted exceptions for specific endgames (e.g. extending to seventy-five or one hundred moves for known classes of position) and at others reverted to the strict fifty-move limit. The current rule is fifty moves with no exceptions.</p>
+    <h3>
+      <span data-lang-content="en">Draws</span>
+      <span data-lang-content="zh">和棋</span>
+    </h3>
 
-    <h3>Time controls</h3>
+    <div data-lang-content="en">
+      <p>Several conditions force a draw. <span class="term">Stalemate</span>: the side to move has no legal move but is not in check. <span class="term">Threefold repetition</span>: the same position arises three times with the same player to move and the same available moves (this is what allows perpetual check to draw). <span class="term">Fifty-move rule</span>: fifty consecutive moves by each side without a pawn move or capture forces a draw on claim. <span class="term">Insufficient material</span>: positions where checkmate is impossible (e.g. king vs king, king vs king and bishop). <span class="term">Mutual agreement</span>: both players consent to a draw, the most common form in master play.</p>
 
-    <p>FIDE classifies competitive games into four bands based on time per side, expressed as base minutes plus increment seconds per move. Increment is the modern default — invented and patented by Bobby Fischer in 1988 — and adds the specified seconds to the player's clock after each move, ensuring no game ends in a flag-fall after two hours of mutual time-pressure.<a href="#sn-3" class="sn-ref">3</a></p>
+      <p>The fifty-move rule has a tablebase footnote. When seven-piece tablebases became available in 2012, several endgames were discovered that require more than fifty moves of perfect play to convert. FIDE has at various times granted exceptions for specific endgames (e.g. extending to seventy-five or one hundred moves for known classes of position) and at others reverted to the strict fifty-move limit. The current rule is fifty moves with no exceptions.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>多种条件可强制和棋。<span class="term">逼和</span>：轮到走子的一方没有合法走子，但其王不在被攻击中。<span class="term">三次重复局面</span>：相同局面、同一方走子、同一组可选走子在棋局中出现三次（这是允许"长将和棋"的依据）。<span class="term">五十步规则</span>：连续五十回合（双方各五十步）内既无吃子也无兵的走动，可申请和棋。<span class="term">子力不足</span>：将杀已不可能的局面（如王对王、王对王象）。<span class="term">协议和棋</span>：双方同意和棋，是大师对弈中最常见的和棋形式。</p>
+
+      <p>五十步规则有一个值得记下的"表数据库脚注"。2012 年七子残局表完成后，发现若干残局需要超过五十步的完美应对才能完成将杀。FIDE 曾在不同时期为某些已知的残局类别允许例外（如延长至七十五步或一百步），后又恢复严格的五十步限制。当前规则不设例外。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Time controls</span>
+      <span data-lang-content="zh">时间控制</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>FIDE classifies competitive games into four bands based on time per side, expressed as base minutes plus increment seconds per move. Increment is the modern default — invented and patented by Bobby Fischer in 1988 — and adds the specified seconds to the player's clock after each move, ensuring no game ends in a flag-fall after two hours of mutual time-pressure.<a href="#sn-3" class="sn-ref">3</a></p>
+    </div>
+    <div data-lang-content="zh">
+      <p>FIDE 根据每方时间，将正式比赛分为四档，记为"基础分钟+每步加秒"。"加秒"（增量）是现代默认设置——由 Bobby Fischer 于 1988 年发明并申请专利——每方走完一步后向其时钟添加规定秒数，避免双方在两小时的相互时间压力后以"超时"告终<a href="#sn-3" class="sn-ref">3</a>。</p>
+    </div>
 
     <aside class="sidenote" id="sn-3">
-      <span class="sidenote-num">3</span>The earlier Bronstein delay (1973) is sometimes confused with Fischer's increment. The difference is consequential: Bronstein delay holds the clock for the first <em>n</em> seconds of each move and only deducts time used beyond that — so unused time is forfeited move-to-move; Fischer increment <em>adds</em> the full <em>n</em> seconds whether or not they were used, allowing time to accumulate. Tournaments wanting to discourage time-banking still occasionally specify Bronstein.
+      <span class="sidenote-num">3</span>
+      <span data-lang-content="en">The earlier Bronstein delay (1973) is sometimes confused with Fischer's increment. The difference is consequential: Bronstein delay holds the clock for the first <em>n</em> seconds of each move and only deducts time used beyond that — so unused time is forfeited move-to-move; Fischer increment <em>adds</em> the full <em>n</em> seconds whether or not they were used, allowing time to accumulate. Tournaments wanting to discourage time-banking still occasionally specify Bronstein.</span>
+      <span data-lang-content="zh">更早的 Bronstein 延时（1973）有时与 Fischer 的增量被混为一谈。两者差别其实重要：Bronstein 延时在每步开始时先冻结时钟 <em>n</em> 秒，只对超出该秒数的部分扣时——未用完的时间不能累积；Fischer 增量则<em>无条件</em>添加完整的 <em>n</em> 秒，无论是否使用，时间因此可以累积。某些不希望选手"囤时间"的赛事，至今仍指定使用 Bronstein 模式。</span>
     </aside>
 
-    <table>
+    <table data-lang-content="en">
       <thead>
         <tr><th>Format</th><th>Time per player</th><th>Typical control</th><th>Use</th></tr>
       </thead>
@@ -224,34 +453,81 @@
         <tr><td>Bullet</td><td>&lt; 3 min</td><td>1+0, 2+1</td><td>Online platforms only — not a FIDE rating category</td></tr>
       </tbody>
     </table>
+    <table data-lang-content="zh">
+      <thead>
+        <tr><th>类型</th><th>每方时间</th><th>典型设置</th><th>用途</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>慢棋（Classical）</td><td>≥ 60 分钟</td><td>前 40 步 90 分钟 + 30 分钟 + 30 秒/步</td><td>世界冠军赛；主要邀请赛</td></tr>
+        <tr><td>快棋（Rapid）</td><td>10–60 分钟</td><td>15+10（FIDE 世界快棋赛）</td><td>开放赛与快棋锦标；附加赛</td></tr>
+        <tr><td>闪电棋（Blitz）</td><td>3–10 分钟</td><td>3+2（FIDE 世界闪电棋赛）</td><td>闪电棋锦标；网络对弈</td></tr>
+        <tr><td>子弹棋（Bullet）</td><td>&lt; 3 分钟</td><td>1+0、2+1</td><td>仅网络平台——FIDE 不评分</td></tr>
+      </tbody>
+    </table>
 
-    <p>FIDE maintains separate rating lists for classical, rapid, and blitz play. Bullet has no FIDE rating but is rated separately on Chess.com and Lichess. Chess960 (Fischer Random) — invented by Fischer in 1996 to defeat opening preparation, in which the back rank is randomized — has its own World Championship since 2019, alongside the recently launched Freestyle Chess events.</p>
+    <div data-lang-content="en">
+      <p>FIDE maintains separate rating lists for classical, rapid, and blitz play. Bullet has no FIDE rating but is rated separately on Chess.com and Lichess. Chess960 (Fischer Random) — invented by Fischer in 1996 to defeat opening preparation, in which the back rank is randomized — has its own World Championship since 2019, alongside the recently launched Freestyle Chess events.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>FIDE 对慢棋、快棋、闪电棋分别维护独立的评分榜。子弹棋无 FIDE 评分，但 Chess.com 与 Lichess 各自对其评分。Chess960（也称 Fischer Random，由 Fischer 1996 年提出，以打乱后排顺序的方式抵消开局准备）自 2019 年起设有独立的世界冠军赛，新近兴起的 Freestyle Chess 系列亦属此类。</p>
+    </div>
 
-    <h2 id="sec-game-theory">4 · Game theory and the tree</h2>
+    <h2 id="sec-game-theory">
+      <span data-lang-content="en">4 · Game theory and the tree</span>
+      <span data-lang-content="zh">四 · 博弈论与博弈树</span>
+    </h2>
 
-    <p>Chess sits at the intersection of several game-theoretic categories. It is <span class="term">two-player</span>, <span class="term">zero-sum</span>, <span class="term">perfect-information</span>, <span class="term">deterministic</span>, and — under the modern rules with stopping conventions — <span class="term">finite</span>. This cluster of properties is exactly the one for which the foundational theorems of game theory hold most cleanly.</p>
+    <div data-lang-content="en">
+      <p>Chess sits at the intersection of several game-theoretic categories. It is <span class="term">two-player</span>, <span class="term">zero-sum</span>, <span class="term">perfect-information</span>, <span class="term">deterministic</span>, and — under the modern rules with stopping conventions — <span class="term">finite</span>. This cluster of properties is exactly the one for which the foundational theorems of game theory hold most cleanly.</p>
 
-    <p>The earliest of those theorems was published by Ernst Zermelo in 1913, in a four-page paper titled <em>Über eine Anwendung der Mengenlehre auf die Theorie des Schachspiels</em>. Zermelo proved that in any finite, deterministic, two-player, perfect-information, zero-sum game, exactly one of the following holds: White has a strategy that forces a win against any Black play; Black has such a strategy; or both sides can force at least a draw. The game has a determinate <span class="term">game-theoretic value</span>. There is a fact of the matter about what perfect play yields, even if no one knows what that fact is.</p>
+      <p>The earliest of those theorems was published by Ernst Zermelo in 1913, in a four-page paper titled <em>Über eine Anwendung der Mengenlehre auf die Theorie des Schachspiels</em>. Zermelo proved that in any finite, deterministic, two-player, perfect-information, zero-sum game, exactly one of the following holds: White has a strategy that forces a win against any Black play; Black has such a strategy; or both sides can force at least a draw. The game has a determinate <span class="term">game-theoretic value</span>. There is a fact of the matter about what perfect play yields, even if no one knows what that fact is.</p>
 
-    <p>The proof reconstructs as follows. Consider the game tree: a finite, branching tree where each node is a position and each edge is a legal move. By finiteness, every path terminates in a leaf labelled +1 (White wins), 0 (draw), or −1 (Black wins). Propagate values upward by <span class="term">backward induction</span>: at any node where White moves, White picks the child node with the highest value; at any node where Black moves, Black picks the lowest. By induction the root receives a unique value. That value is the game-theoretic value of chess.</p>
+      <p>The proof reconstructs as follows. Consider the game tree: a finite, branching tree where each node is a position and each edge is a legal move. By finiteness, every path terminates in a leaf labelled +1 (White wins), 0 (draw), or −1 (Black wins). Propagate values upward by <span class="term">backward induction</span>: at any node where White moves, White picks the child node with the highest value; at any node where Black moves, Black picks the lowest. By induction the root receives a unique value. That value is the game-theoretic value of chess.</p>
 
-    <p>The diagram below is a schematic game tree with branching factor three and three plies. The subtrees below each level-one node are collapsed under "…" by default — click any stub to expand, or use the button to expand the whole tree and animate the propagation of values from leaves to root.</p>
+      <p>The diagram below is a schematic game tree with branching factor three and three plies. The subtrees below each level-one node are collapsed under "…" by default — click any stub to expand, or use the button to expand the whole tree and animate the propagation of values from leaves to root.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>国际象棋恰好坐落在几个博弈论分类轴的一个特别干净的交点上：<span class="term">二人</span>、<span class="term">零和</span>、<span class="term">完全信息</span>、<span class="term">确定</span>，并在现代规则的终止规约下是<span class="term">有限</span>的。这一组性质恰好对应着古典博弈论中最锋利的几个定理最有力地适用的范围。</p>
+
+      <p>这些定理中最早一条，由 Ernst Zermelo 于 1913 年发表，是一篇仅四页的论文，题为 <em>Über eine Anwendung der Mengenlehre auf die Theorie des Schachspiels</em>（《集合论在国际象棋理论中的一个应用》）。策梅洛证明：在任何有限的、确定的、二人、完全信息、零和博弈中，下列三者必有且仅有一种成立——白方有面对黑方任何走法都能强制取胜的策略；黑方有这样的策略；或双方都至少能强制和棋。这个游戏拥有一个确定的<span class="term">博弈论值</span>。关于"完美博弈结果"存在一个事实，尽管没有任何人类或机器知道这个事实是什么。</p>
+
+      <p>证明可以这样重构。考虑博弈树：一棵有限的、分叉的树，每个节点是一个局面，每条边是一步合法走子。由有限性，每条从根出发的路径都终止于某个叶节点——白胜（+1）、和棋（0）、或黑胜（−1）。用<span class="term">逆向归纳</span>把值自下而上传播：在轮到白方走的节点，白方选择值最高的子节点；在轮到黑方的节点，黑方选择值最低的。归纳保证根节点获得唯一的值。这个值就是国际象棋的博弈论值。</p>
+
+      <p>下方是一棵分支因子为 3、深度为 3 层的示意博弈树。每一层的子树默认折叠为"…"，点击任一折叠节点可展开；或点击按钮自动展开整棵树并播放从叶子到根的逆向归纳动画。</p>
+    </div>
 
     <div id="game-tree-demo" class="full-bleed"></div>
 
-    <p>The point of the demonstration is the determinacy of the procedure: it produces a single value for the root no matter how it is run, and depends only on the leaf labels and the alternation of max / min. Once the tree is finite and every leaf has a determinate outcome, the value of the root is forced.</p>
+    <div data-lang-content="en">
+      <p>The point of the demonstration is the determinacy of the procedure: it produces a single value for the root no matter how it is run, and depends only on the leaf labels and the alternation of max / min. Once the tree is finite and every leaf has a determinate outcome, the value of the root is forced.</p>
 
-    <p>Now multiply this tree by a factor of about 10<sup>118</sup>. Claude Shannon's 1950 estimate of the chess game tree puts it at roughly 10<sup>120</sup> nodes — the <span class="term">Shannon number</span> — which dwarfs the count of atoms in the observable universe by some forty orders of magnitude. The state space (distinct legal positions, ignoring move history) is smaller, on the order of 10<sup>43</sup>–10<sup>50</sup>, but still beyond any conceivable enumeration.<a href="#sn-1" class="sn-ref">1</a> Backward induction over a tree this size is not slow; it is physically impossible. What chess therefore <em>has</em> is a game-theoretic value that is determinate but inaccessible.</p>
+      <p>Now multiply this tree by a factor of about 10<sup>118</sup>. Claude Shannon's 1950 estimate of the chess game tree puts it at roughly 10<sup>120</sup> nodes — the <span class="term">Shannon number</span> — which dwarfs the count of atoms in the observable universe by some forty orders of magnitude. The state space (distinct legal positions, ignoring move history) is smaller, on the order of 10<sup>43</sup>–10<sup>50</sup>, but still beyond any conceivable enumeration.<a href="#sn-1" class="sn-ref">1</a> Backward induction over a tree this size is not slow; it is physically impossible. What chess therefore <em>has</em> is a game-theoretic value that is determinate but inaccessible.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>演示的重点在于这个程序的确定性：它对根产生唯一一个值，并且只依赖于叶子的标签和 max/min 的交替。一旦树是有限的、且每个叶子都有确定的结果，根的值就被强制了。</p>
+
+      <p>现在把这棵树乘以约 10<sup>118</sup> 倍。Claude Shannon 1950 年估算的国际象棋博弈树规模约为 10<sup>120</sup> 节点——所谓的<span class="term">香农数</span>——比可观测宇宙中的原子数还多约四十个数量级。状态空间（不计走子历史的、彼此不同的合法局面）较小，约为 10<sup>43</sup>–10<sup>50</sup>，但仍远超任何可设想的枚举<a href="#sn-1" class="sn-ref">1</a>。在这样规模的树上做逆向归纳，不是慢，而是物理上不可能。所以国际象棋作为组合对象<em>所拥有的</em>，是一个确定但无法访问的博弈论值。</p>
+    </div>
 
     <aside class="sidenote" id="sn-1">
-      <span class="sidenote-num">1</span>Worth noting: chess is finite only because of the fifty-move and threefold repetition rules. Without them the game tree would be infinite and Zermelo's theorem in its standard form would not directly apply. The determinacy of chess is a consequence of stopping conventions added in the nineteenth century.
+      <span class="sidenote-num">1</span>
+      <span data-lang-content="en">Worth noting: chess is finite only because of the fifty-move and threefold repetition rules. Without them the game tree would be infinite and Zermelo's theorem in its standard form would not directly apply. The determinacy of chess is a consequence of stopping conventions added in the nineteenth century.</span>
+      <span data-lang-content="zh">顺带一提：国际象棋之所以有限，仅仅是因为五十步规则与三次重复局面规则。如果没有这些终止规约，博弈树将是无限的，策梅洛定理的标准形式就不直接适用。"国际象棋是确定的"这件事，是十九世纪才补充的终止规约带来的后果。</span>
     </aside>
 
-    <h3>Solved games</h3>
+    <h3>
+      <span data-lang-content="en">Solved games</span>
+      <span data-lang-content="zh">已解游戏</span>
+    </h3>
 
-    <p>"Solved" admits three senses, distinguished by Victor Allis in his 1994 thesis. <span class="term">Ultra-weakly solved</span>: the game-theoretic value is known but no strategy is given. <span class="term">Weakly solved</span>: an algorithm plays optimally from the initial position. <span class="term">Strongly solved</span>: an algorithm plays optimally from any legal position.</p>
+    <div data-lang-content="en">
+      <p>"Solved" admits three senses, distinguished by Victor Allis in his 1994 thesis. <span class="term">Ultra-weakly solved</span>: the game-theoretic value is known but no strategy is given. <span class="term">Weakly solved</span>: an algorithm plays optimally from the initial position. <span class="term">Strongly solved</span>: an algorithm plays optimally from any legal position.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>"已解"本身有三层含义，由 Victor Allis 在 1994 年的博士论文中区分。<span class="term">超弱解</span>：博弈论值已知但未给出策略。<span class="term">弱解</span>：存在从初始局面出发执行最优应对的算法。<span class="term">强解</span>：存在对任何合法局面给出最优应对的算法。</p>
+    </div>
 
-    <table>
+    <table data-lang-content="en">
       <thead>
         <tr>
           <th>Game</th>
@@ -305,223 +581,587 @@
         </tr>
       </tbody>
     </table>
+    <table data-lang-content="zh">
+      <thead>
+        <tr>
+          <th>游戏</th>
+          <th>状态空间（约）</th>
+          <th>状态</th>
+          <th>结果与年份</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>井字棋<br><span class="lat" style="font-size:0.85em;color:var(--ink-faint)">tic-tac-toe</span></td>
+          <td>10<sup>3</sup></td>
+          <td><span class="status status-strong">强解</span></td>
+          <td>和棋，前现代已知</td>
+        </tr>
+        <tr>
+          <td>四子棋<br><span class="lat" style="font-size:0.85em;color:var(--ink-faint)">Connect Four</span></td>
+          <td>10<sup>13</sup></td>
+          <td><span class="status status-weak">弱解</span></td>
+          <td>先手胜，Allis &amp; Allen，1988</td>
+        </tr>
+        <tr>
+          <td>九子棋<br><span class="lat" style="font-size:0.85em;color:var(--ink-faint)">Nine Men's Morris</span></td>
+          <td>10<sup>10</sup></td>
+          <td><span class="status status-weak">弱解</span></td>
+          <td>和棋，Gasser，1993</td>
+        </tr>
+        <tr>
+          <td>跳棋（8×8）<br><span class="lat" style="font-size:0.85em;color:var(--ink-faint)">Checkers / Draughts</span></td>
+          <td>5 × 10<sup>20</sup></td>
+          <td><span class="status status-weak">弱解</span></td>
+          <td>和棋，Schaeffer 等，2007</td>
+        </tr>
+        <tr>
+          <td>Hex（一般 N×N）</td>
+          <td>—</td>
+          <td><span class="status status-ultra">超弱解</span></td>
+          <td>先手胜（Nash，1949）</td>
+        </tr>
+        <tr>
+          <td>国际象棋<br><span class="lat" style="font-size:0.85em;color:var(--ink-faint)">Chess</span></td>
+          <td>10<sup>43</sup>–10<sup>50</sup></td>
+          <td><span class="status status-unsolved">未解</span></td>
+          <td>七子残局已强解（Lomonosov, 2012）；初始局面推测为和棋</td>
+        </tr>
+        <tr>
+          <td>围棋（19×19）<br><span class="lat" style="font-size:0.85em;color:var(--ink-faint)">Go</span></td>
+          <td>10<sup>170</sup></td>
+          <td><span class="status status-unsolved">未解</span></td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
 
-    <p>Schaeffer's 2007 weak solution of checkers is the most complex result in this table. The Alberta team worked on it for nearly two decades, with up to 200 machines in parallel; the final proof combined a 39-trillion-position endgame database (built by retrograde analysis from terminal positions) with a forward proof tree from the opening.</p>
+    <div data-lang-content="en">
+      <p>Schaeffer's 2007 weak solution of checkers is the most complex result in this table. The Alberta team worked on it for nearly two decades, with up to 200 machines in parallel; the final proof combined a 39-trillion-position endgame database (built by retrograde analysis from terminal positions) with a forward proof tree from the opening.</p>
 
-    <p>Chess remains unsolved at the start position. Only fragments are known: the Lomonosov and Syzygy tablebases give perfect play for any position with seven or fewer pieces, and have already revealed forced mates of more than 500 moves that no human could play correctly without lookup. The longest known forced mate in the seven-piece tablebase is 549 moves (ignoring the fifty-move rule). The eight-piece tablebase is partially complete; a 2022 result includes a forced mate of 584 moves.</p>
+      <p>Chess remains unsolved at the start position. Only fragments are known: the Lomonosov and Syzygy tablebases give perfect play for any position with seven or fewer pieces, and have already revealed forced mates of more than 500 moves that no human could play correctly without lookup. The longest known forced mate in the seven-piece tablebase is 549 moves (ignoring the fifty-move rule). The eight-piece tablebase is partially complete; a 2022 result includes a forced mate of 584 moves.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>2007 年 Schaeffer 团队对跳棋的弱解，是这张表中最复杂的成果。阿尔伯塔大学的他们为这个证明工作了近二十年，最高峰时有约 200 台机器并行运行；最终的证明结合了一个 39 万亿局面的残局数据库（自终局向前回溯计算）与一棵自开局向前的证明树。</p>
 
-    <h2 id="sec-engines">5 · Engines</h2>
+      <p>国际象棋在初始局面上仍未解。仅有片段被解出：Lomonosov 与 Syzygy 表给出了任何七子或更少局面下的完美应对，并已揭示了一些超过 500 步的强制将杀，没有任何人类能在不查表的情况下走对。七子残局表中已知最长的强制将杀为 549 步（不计五十步规则）。八子残局表部分完成；2022 年发现的最长强制将杀为 584 步。</p>
+    </div>
 
-    <p>The history of chess computing is, oddly, older than the history of computing. Alan Turing and David Champernowne wrote a chess-playing algorithm in 1948, before any machine existed that could run it. Turing later executed the program by hand in a 1952 game against his colleague Alick Glennie, taking up to half an hour per move; the algorithm — sometimes called <em>Turochamp</em> or "the paper machine" — lost in 29 moves, but the game is recorded and preserved.<a href="#sn-4" class="sn-ref">4</a> Two years earlier Claude Shannon had published <em><a href="https://www.computerhistory.org/chess/doc-431614f453dde/" rel="noopener">Programming a Computer for Playing Chess</a></em> (1950), which set out the basic minimax search and the evaluation-function framework that would dominate the next half century of engine design.</p>
+    <h2 id="sec-engines">
+      <span data-lang-content="en">5 · Engines</span>
+      <span data-lang-content="zh">五 · 引擎</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>The history of chess computing is, oddly, older than the history of computing. Alan Turing and David Champernowne wrote a chess-playing algorithm in 1948, before any machine existed that could run it. Turing later executed the program by hand in a 1952 game against his colleague Alick Glennie, taking up to half an hour per move; the algorithm — sometimes called <em>Turochamp</em> or "the paper machine" — lost in 29 moves, but the game is recorded and preserved.<a href="#sn-4" class="sn-ref">4</a> Two years earlier Claude Shannon had published <em><a href="https://www.computerhistory.org/chess/doc-431614f453dde/" rel="noopener">Programming a Computer for Playing Chess</a></em> (1950), which set out the basic minimax search and the evaluation-function framework that would dominate the next half century of engine design.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>下棋计算的历史很奇怪——比"计算机"本身的历史还要早。Alan Turing 与 David Champernowne 在 1948 年写出了一个下棋算法，那时还没有任何机器能运行它。1952 年 Turing 在一局对弈中亲自手工执行算法（对手是他的同事 Alick Glennie），每步耗时约半小时；这个算法——有时叫 <em>Turochamp</em> 或"纸上机器"——以 29 步落败，但棋局被记录下来保存至今<a href="#sn-4" class="sn-ref">4</a>。两年前 Claude Shannon 已发表 <a href="https://www.computerhistory.org/chess/doc-431614f453dde/" rel="noopener">《Programming a Computer for Playing Chess》</a>（1950），奠定了未来半个世纪引擎设计的两大支柱：极小化极大搜索与评估函数。</p>
+    </div>
 
     <aside class="sidenote" id="sn-4">
-      <span class="sidenote-num">4</span>Turochamp searched two ply with a hand-tuned material-and-mobility evaluation; the move sequence Turing executed against Glennie is preserved as <a href="https://en.chessbase.com/post/rebuilding-turing-s-paper-machine" rel="noopener">a complete PGN</a>. Kasparov played a brief simulation of the algorithm in 2012 to mark the centenary of Turing's birth, and won easily — but the historical interest is that the program existed at all, three years before any machine could run it.
+      <span class="sidenote-num">4</span>
+      <span data-lang-content="en">Turochamp searched two ply with a hand-tuned material-and-mobility evaluation; the move sequence Turing executed against Glennie is preserved as <a href="https://en.chessbase.com/post/rebuilding-turing-s-paper-machine" rel="noopener">a complete PGN</a>. Kasparov played a brief simulation of the algorithm in 2012 to mark the centenary of Turing's birth, and won easily — but the historical interest is that the program existed at all, three years before any machine could run it.</span>
+      <span data-lang-content="zh">Turochamp 进行 2 层（two-ply）搜索，配以人工调校的"子力 + 机动性"评估函数；Turing 与 Glennie 那盘对局的完整 PGN 至今<a href="https://en.chessbase.com/post/rebuilding-turing-s-paper-machine" rel="noopener">仍有保存</a>。Kasparov 在 2012 年图灵百年诞辰时曾与算法的模拟版本短暂对弈，轻松取胜——但历史意义在于：在任何机器能运行它之前的整整三年，这个程序就已经存在了。</span>
     </aside>
 
-    <p>Through the 1960s and '70s engines remained weak. MIT's <em>Mac Hack VI</em> (Greenblatt, 1967) became the first program to compete in a human tournament, scoring a USCF rating around 1400. <em>Belle</em>, a custom-hardware engine built by Ken Thompson and Joe Condon at Bell Labs in the late 1970s, was the first machine to reach master strength.</p>
+    <div data-lang-content="en">
+      <p>Through the 1960s and '70s engines remained weak. MIT's <em>Mac Hack VI</em> (Greenblatt, 1967) became the first program to compete in a human tournament, scoring a USCF rating around 1400. <em>Belle</em>, a custom-hardware engine built by Ken Thompson and Joe Condon at Bell Labs in the late 1970s, was the first machine to reach master strength.</p>
 
-    <p>The decisive moment in human–machine chess came in May 1997, when IBM's <em>Deep Blue</em> defeated Garry Kasparov 3.5–2.5 in a six-game match in New York. Deep Blue evaluated about 200 million positions per second using custom VLSI chess chips. The match remains controversial: Kasparov accused IBM of human intervention during the games (an accusation IBM denied), refused a rematch, and IBM dismantled the machine immediately afterward. What is uncontroversial is that after 1997, the question of whether machines could outplay the world's best humans was settled.</p>
+      <p>The decisive moment in human–machine chess came in May 1997, when IBM's <em>Deep Blue</em> defeated Garry Kasparov 3.5–2.5 in a six-game match in New York. Deep Blue evaluated about 200 million positions per second using custom VLSI chess chips. The match remains controversial: Kasparov accused IBM of human intervention during the games (an accusation IBM denied), refused a rematch, and IBM dismantled the machine immediately afterward. What is uncontroversial is that after 1997, the question of whether machines could outplay the world's best humans was settled.</p>
 
-    <p>The two decades after Deep Blue belonged to <span class="term">alpha-beta engines</span> with hand-tuned evaluation functions running on commodity hardware. <em>Fritz</em>, <em>Rybka</em>, <em>Houdini</em>, <em>Komodo</em>, and the open-source <em><a href="https://stockfishchess.org/" rel="noopener">Stockfish</a></em> (begun 2008, by Tord Romstad, Marco Costalba, and Joona Kiiski) traded the top of the rating lists. By the mid-2010s these engines were rated around 3300–3400 Elo, several hundred points above any human.</p>
+      <p>The two decades after Deep Blue belonged to <span class="term">alpha-beta engines</span> with hand-tuned evaluation functions running on commodity hardware. <em>Fritz</em>, <em>Rybka</em>, <em>Houdini</em>, <em>Komodo</em>, and the open-source <em><a href="https://stockfishchess.org/" rel="noopener">Stockfish</a></em> (begun 2008, by Tord Romstad, Marco Costalba, and Joona Kiiski) traded the top of the rating lists. By the mid-2010s these engines were rated around 3300–3400 Elo, several hundred points above any human.</p>
 
-    <p>December 2017 brought a discontinuity. DeepMind's <em><a href="https://arxiv.org/abs/1712.01815" rel="noopener">AlphaZero</a></em> — a single neural-network architecture that learned chess, shōgi, and Go from self-play, with no opening books or endgame tables, and no human knowledge beyond the rules — defeated Stockfish 8 in a 100-game match: 28 wins, 0 losses, 72 draws, with all 28 wins as White.<a href="#sn-5" class="sn-ref">5</a> Training took a few hours on Google's custom TPU hardware. Grandmasters who studied the games described AlphaZero's style as "Martian" — willing to sacrifice material for long-term positional pressure in ways that no engine had previously considered viable. Garry Kasparov said it was a pleasure to watch.</p>
+      <p>December 2017 brought a discontinuity. DeepMind's <em><a href="https://arxiv.org/abs/1712.01815" rel="noopener">AlphaZero</a></em> — a single neural-network architecture that learned chess, shōgi, and Go from self-play, with no opening books or endgame tables, and no human knowledge beyond the rules — defeated Stockfish 8 in a 100-game match: 28 wins, 0 losses, 72 draws, with all 28 wins as White.<a href="#sn-5" class="sn-ref">5</a> Training took a few hours on Google's custom TPU hardware. Grandmasters who studied the games described AlphaZero's style as "Martian" — willing to sacrifice material for long-term positional pressure in ways that no engine had previously considered viable. Garry Kasparov said it was a pleasure to watch.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>整个 1960、70 年代，引擎仍然弱。MIT 的 <em>Mac Hack VI</em>（Greenblatt，1967）成为第一个参加人类比赛的程序，USCF 评分约 1400。贝尔实验室的 Ken Thompson 与 Joe Condon 在 1970 年代末用专用硬件做的 <em>Belle</em>，是第一个达到大师强度的机器。</p>
+
+      <p>人机对弈的决定性时刻出现在 1997 年 5 月：IBM 的 <em>Deep Blue</em>（深蓝）在纽约六番棋赛中以 3.5–2.5 击败 Garry Kasparov。深蓝使用专用 VLSI 棋类芯片，每秒评估约两亿个局面。这场比赛至今仍有争议：Kasparov 指控 IBM 在比赛中有人工干预（IBM 否认），他拒绝了重赛要求，IBM 随后立刻拆除了机器。无可争议的是：1997 年之后，"机器能否击败最强人类"这个问题不再悬而未决。</p>
+
+      <p>深蓝之后的二十年属于<span class="term">α-β 引擎</span>——在通用硬件上运行的、带有手工调优评估函数的搜索程序。<em>Fritz</em>、<em>Rybka</em>、<em>Houdini</em>、<em>Komodo</em>、与开源的 <em><a href="https://stockfishchess.org/" rel="noopener">Stockfish</a></em>（始于 2008，由 Tord Romstad、Marco Costalba、Joona Kiiski 启动）轮流占据评分榜首。到 2010 年代中期，这些引擎评分已达 3300–3400 Elo，比任何人类高出数百分。</p>
+
+      <p>2017 年 12 月出现了一个断点。DeepMind 的 <em><a href="https://arxiv.org/abs/1712.01815" rel="noopener">AlphaZero</a></em>——一个统一的神经网络架构，仅靠自我对弈学习国际象棋、将棋、围棋，没有开局库、没有残局表、除规则外没有任何人类知识——在 100 局比赛中击败 Stockfish 8：28 胜 0 负 72 和，全部 28 胜均执白<a href="#sn-5" class="sn-ref">5</a>。训练耗时数小时，运行在 Google 的专用 TPU 硬件上。研究过比赛的特级大师们形容 AlphaZero 的风格"像火星人"——以前没有任何引擎认为可行的、用子力换长期空间压力的牺牲手法，AlphaZero 把它们当作家常便饭。Garry Kasparov 说看 AlphaZero 下棋是一种享受。</p>
+    </div>
 
     <aside class="sidenote" id="sn-5">
-      <span class="sidenote-num">5</span>The match conditions were widely criticised. Stockfish ran with a 1 GB hash table (small for a serious time control), without an opening book, without endgame tablebases, on hardware that did not match its tuning — while AlphaZero ran on TPUs designed for it. The 2018 Science follow-up paper repeated the experiment under fairer conditions and AlphaZero still won decisively, so the result holds; but the original 2017 score was not measuring what was claimed.
+      <span class="sidenote-num">5</span>
+      <span data-lang-content="en">The match conditions were widely criticised. Stockfish ran with a 1 GB hash table (small for a serious time control), without an opening book, without endgame tablebases, on hardware that did not match its tuning — while AlphaZero ran on TPUs designed for it. The 2018 Science follow-up paper repeated the experiment under fairer conditions and AlphaZero still won decisively, so the result holds; but the original 2017 score was not measuring what was claimed.</span>
+      <span data-lang-content="zh">这场比赛的条件后来受到广泛批评。Stockfish 在 1 GB 哈希表（对正式比赛而言偏小）下运行，没用开局库、没用残局表，硬件也未对其调优——而 AlphaZero 跑在为它专门设计的 TPU 上。2018 年发表在 <em>Science</em> 的后续论文在更公平的条件下重做实验，AlphaZero 仍然占绝对优势，因此结论本身站得住；但 2017 年最初公布的比分并不衡量它所声称要衡量的东西。</span>
     </aside>
 
-    <p>The community's response was swift. <em><a href="https://lczero.org/" rel="noopener">Leela Chess Zero</a></em> (Lc0), a distributed open-source reimplementation of AlphaZero's ideas, began training in 2018 and is now competitive with Stockfish at the top of the engine rating lists. Stockfish itself, in 2020, integrated <span class="term">NNUE</span> (Efficiently Updatable Neural Network) — a small neural network used as the evaluation function inside an otherwise classical alpha-beta search. The current top engines are hybrids of the two paradigms.</p>
+    <div data-lang-content="en">
+      <p>The community's response was swift. <em><a href="https://lczero.org/" rel="noopener">Leela Chess Zero</a></em> (Lc0), a distributed open-source reimplementation of AlphaZero's ideas, began training in 2018 and is now competitive with Stockfish at the top of the engine rating lists. Stockfish itself, in 2020, integrated <span class="term">NNUE</span> (Efficiently Updatable Neural Network) — a small neural network used as the evaluation function inside an otherwise classical alpha-beta search. The current top engines are hybrids of the two paradigms.</p>
 
-    <p>An interesting consequence is that Stockfish and Lc0 still play differently. Stockfish, with its enormous search tree and crisp neural evaluation, plays a tactical and concrete style. Lc0, with its smaller search and full neural evaluation, plays in a long, positional, AlphaZero-flavoured idiom. The two engines sometimes disagree about which side stands better in a given position, and not by a small margin — a situation in which the game has a single mathematical truth, but two of the strongest evaluators on earth, looking at the same position, can return materially different verdicts.</p>
+      <p>An interesting consequence is that Stockfish and Lc0 still play differently. Stockfish, with its enormous search tree and crisp neural evaluation, plays a tactical and concrete style. Lc0, with its smaller search and full neural evaluation, plays in a long, positional, AlphaZero-flavoured idiom. The two engines sometimes disagree about which side stands better in a given position, and not by a small margin — a situation in which the game has a single mathematical truth, but two of the strongest evaluators on earth, looking at the same position, can return materially different verdicts.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>社区的回应迅速。<em><a href="https://lczero.org/" rel="noopener">Leela Chess Zero</a></em>（Lc0）——AlphaZero 思路的分布式开源实现——2018 年开始训练，现已与 Stockfish 在引擎评分榜顶端胶着。Stockfish 自身在 2020 年集成了 <span class="term">NNUE</span>（Efficiently Updatable Neural Network，可高效更新的神经网络）——在原本古典的 α-β 搜索内部使用一个小型神经网络作为评估函数。当前顶级引擎是这两种范式的混合体。</p>
 
-    <h2 id="sec-how-engines-decide">6 · How engines decide</h2>
+      <p>一个有意思的推论是：Stockfish 与 Lc0 的下法仍然不同。Stockfish 凭借巨大的搜索树与精炼的神经评估，下法更具体、更战术；Lc0 搜索量较小但完全依赖神经网络评估，下法更长程、更"位置"、带有 AlphaZero 风格。两者有时会对同一局面"谁更好"给出实质不同的判断，且差距不小——这构成了一个有趣的局面：游戏只有一个数学真值，但地球上两个最强的评估器面对同一局面，却可能给出实质不同的判决。</p>
+    </div>
 
-    <p>If the chess game tree cannot be enumerated, what do engines actually do? The answer is that all modern engines combine two components — a <span class="term">search</span> over a small fraction of the tree, and an <span class="term">evaluation function</span> that assigns numerical scores to the leaf positions of that partial search — and the major engine traditions differ mainly in how each component is built.</p>
+    <h2 id="sec-how-engines-decide">
+      <span data-lang-content="en">6 · How engines decide</span>
+      <span data-lang-content="zh">六 · 引擎是怎么决策的</span>
+    </h2>
 
-    <h3>The classical alpha-beta tradition</h3>
+    <div data-lang-content="en">
+      <p>If the chess game tree cannot be enumerated, what do engines actually do? The answer is that all modern engines combine two components — a <span class="term">search</span> over a small fraction of the tree, and an <span class="term">evaluation function</span> that assigns numerical scores to the leaf positions of that partial search — and the major engine traditions differ mainly in how each component is built.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>如果博弈树无法被遍历，引擎实际上是怎么下棋的？答案是：所有现代引擎都由两个组件构成——对树的一小部分进行<span class="term">搜索</span>，加上为该部分搜索的叶子局面赋值的<span class="term">评估函数</span>——主要的引擎传统的差别就在于这两个组件各自是怎么实现的。</p>
+    </div>
 
-    <p>The framework laid down by Shannon's 1950 paper, and elaborated by every engine from Turochamp through Stockfish, runs <span class="term">minimax</span> over a partial game tree of perhaps fifteen to forty plies, with a hand-tuned (or, lately, learned) evaluation function called at the leaves. Naive minimax over a tree of branching factor 35 to depth 20 would require 35<sup>20</sup> ≈ 10<sup>30</sup> evaluations, which is infeasible. The engines that work do so because of a long sequence of optimizations layered onto the basic minimax search.</p>
+    <h3>
+      <span data-lang-content="en">The classical alpha-beta tradition</span>
+      <span data-lang-content="zh">古典 alpha-beta 传统</span>
+    </h3>
 
-    <p><span class="term">Alpha-beta pruning</span> (Knuth and Moore, 1975, formalizing earlier informal versions) is the most important. While exploring a node, the algorithm tracks the best score each side has been guaranteed so far elsewhere in the tree; whenever a branch is found that cannot improve on those bounds, the rest of the branch is discarded without evaluation. With perfect move ordering, alpha-beta examines O(b<sup>d/2</sup>) nodes instead of O(b<sup>d</sup>) — an exponential reduction that turns a 10<sup>30</sup>-evaluation problem into a 10<sup>15</sup>-evaluation problem. Move ordering is therefore the central engineering challenge: heuristics like the killer move, history, and continuation history tables exist to feed the most promising moves into the search first.</p>
+    <div data-lang-content="en">
+      <p>The framework laid down by Shannon's 1950 paper, and elaborated by every engine from Turochamp through Stockfish, runs <span class="term">minimax</span> over a partial game tree of perhaps fifteen to forty plies, with a hand-tuned (or, lately, learned) evaluation function called at the leaves. Naive minimax over a tree of branching factor 35 to depth 20 would require 35<sup>20</sup> ≈ 10<sup>30</sup> evaluations, which is infeasible. The engines that work do so because of a long sequence of optimizations layered onto the basic minimax search.</p>
 
-    <p>Modern engines layer many further refinements on top of alpha-beta. <span class="term">Iterative deepening</span> searches first to depth 1, then 2, 3, and so on, using the move-ordering output of each shallower search to improve the next deeper one — counter-intuitively, this is faster than searching to the target depth directly. <span class="term">Transposition tables</span> cache evaluation results keyed by Zobrist hash so that positions reachable through different move orders are not re-evaluated. <span class="term">Null move pruning</span> tests whether passing one's turn would still leave the position bad, and if not, prunes hard. <span class="term">Late move reductions</span> search the first few candidate moves at full depth and the rest at reduced depth, re-searching only if the reduced search is unexpectedly promising. <span class="term">Quiescence search</span> extends the search past the nominal depth limit through forced sequences of captures and checks, to avoid the "horizon effect" where a tactical refutation lurks just past where the engine stopped looking. Combined with good move ordering, these techniques bring the effective branching factor down below 2, which is what allows Stockfish to search past depth 30 in seconds on commodity hardware.</p>
+      <p><span class="term">Alpha-beta pruning</span> (Knuth and Moore, 1975, formalizing earlier informal versions) is the most important. While exploring a node, the algorithm tracks the best score each side has been guaranteed so far elsewhere in the tree; whenever a branch is found that cannot improve on those bounds, the rest of the branch is discarded without evaluation. With perfect move ordering, alpha-beta examines O(b<sup>d/2</sup>) nodes instead of O(b<sup>d</sup>) — an exponential reduction that turns a 10<sup>30</sup>-evaluation problem into a 10<sup>15</sup>-evaluation problem. Move ordering is therefore the central engineering challenge: heuristics like the killer move, history, and continuation history tables exist to feed the most promising moves into the search first.</p>
 
-    <p>The leaf evaluation function was, until recently, hand-crafted: piece-square tables, mobility, king safety, pawn structure, and dozens of other features summed with hand-tuned weights, the parameters refined over years through self-play tournaments. The largest single change in this tradition came in 2020, when Stockfish adopted <span class="term">NNUE</span> (Efficiently Updatable Neural Network) — an evaluation method invented by Yu Nasu in 2018 for shōgi and ported to chess by the Stockfish team. NNUE replaces the hand-crafted evaluation with a small, shallow neural network designed for two specific properties: low input sparsity (only a small number of inputs are non-zero at any time) and incremental updatability (when a piece moves, only the affected inputs change, and the network's first-layer output can be updated rather than recomputed). The network runs in 8-bit integer arithmetic on the CPU at roughly a microsecond per evaluation — fast enough to be called from inside an alpha-beta search at millions of nodes per second. Stockfish 16 (2023) removed classical evaluation entirely; current Stockfish runs alpha-beta search over an NNUE evaluation, with two different network sizes selected dynamically based on material balance.</p>
+      <p>Modern engines layer many further refinements on top of alpha-beta. <span class="term">Iterative deepening</span> searches first to depth 1, then 2, 3, and so on, using the move-ordering output of each shallower search to improve the next deeper one — counter-intuitively, this is faster than searching to the target depth directly. <span class="term">Transposition tables</span> cache evaluation results keyed by Zobrist hash so that positions reachable through different move orders are not re-evaluated. <span class="term">Null move pruning</span> tests whether passing one's turn would still leave the position bad, and if not, prunes hard. <span class="term">Late move reductions</span> search the first few candidate moves at full depth and the rest at reduced depth, re-searching only if the reduced search is unexpectedly promising. <span class="term">Quiescence search</span> extends the search past the nominal depth limit through forced sequences of captures and checks, to avoid the "horizon effect" where a tactical refutation lurks just past where the engine stopped looking. Combined with good move ordering, these techniques bring the effective branching factor down below 2, which is what allows Stockfish to search past depth 30 in seconds on commodity hardware.</p>
 
-    <h3>The MCTS tradition</h3>
+      <p>The leaf evaluation function was, until recently, hand-crafted: piece-square tables, mobility, king safety, pawn structure, and dozens of other features summed with hand-tuned weights, the parameters refined over years through self-play tournaments. The largest single change in this tradition came in 2020, when Stockfish adopted <span class="term">NNUE</span> (Efficiently Updatable Neural Network) — an evaluation method invented by Yu Nasu in 2018 for shōgi and ported to chess by the Stockfish team. NNUE replaces the hand-crafted evaluation with a small, shallow neural network designed for two specific properties: low input sparsity (only a small number of inputs are non-zero at any time) and incremental updatability (when a piece moves, only the affected inputs change, and the network's first-layer output can be updated rather than recomputed). The network runs in 8-bit integer arithmetic on the CPU at roughly a microsecond per evaluation — fast enough to be called from inside an alpha-beta search at millions of nodes per second. Stockfish 16 (2023) removed classical evaluation entirely; current Stockfish runs alpha-beta search over an NNUE evaluation, with two different network sizes selected dynamically based on material balance.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>从 Shannon 1950 年的论文奠定的框架开始，从 Turochamp 一直到 Stockfish，所有古典引擎都是在一棵深度大约 15–40 层的局部博弈树上运行<span class="term">极小化极大搜索</span>，并在叶子节点调用一个手工调优（或近年改为学习得到）的评估函数。在分支因子 35、深度 20 的树上做朴素的极小化极大要做 35<sup>20</sup>≈10<sup>30</sup> 次评估，物理上不可行。能跑得动的引擎之所以跑得动，是因为在朴素搜索之上叠加了一长串优化技术。</p>
 
-    <p>The other paradigm originated with AlphaZero (2017) and continues in Leela Chess Zero. Instead of alpha-beta with quick leaf evaluations, this approach uses <span class="term">Monte Carlo Tree Search</span> guided by a deep neural network with two output heads: a <span class="term">policy</span> (a probability distribution over legal moves, indicating which moves are likely to be best) and a <span class="term">value</span> (an estimate of the expected outcome of the position, on a scale from −1 for a sure loss to +1 for a sure win).</p>
+      <p>最重要的是 <span class="term">α-β 剪枝</span>（Knuth 与 Moore 在 1975 年的形式化，更早期已有非正式版本）。在探索某个节点时，算法跟踪两边目前已经确保的最优分数；一旦发现某条分支不可能改进这些边界，整条分支就被丢弃、不再评估。在最优着法排序下，α-β 把检查节点数从 O(b<sup>d</sup>) 降到 O(b<sup>d/2</sup>)——一个指数级下降，把 10<sup>30</sup> 次评估的问题压缩到 10<sup>15</sup> 次评估的问题。所以"着法排序"成为引擎工程的核心难题：killer move、history、continuation history 等一系列启发式表的存在，正是为了让最有希望的着法被最先送入搜索。</p>
 
-    <p>The MCTS variant used is <span class="term">PUCT</span> (Predictor + Upper Confidence Bound applied to Trees, an extension of UCT due to Christopher Rosin). The search builds a tree iteratively: from the root, repeatedly descend along the path that maximizes a combination of the current empirical value estimate and an exploration bonus weighted by the policy network's prior probability. When a leaf is reached, evaluate it with the neural network, and propagate the value back up the tree. After a fixed number of iterations (or a time limit), the move at the root with the most visits is played. This is fundamentally different from alpha-beta: instead of evaluating millions of positions per second with a cheap evaluation, AlphaZero-style engines evaluate only tens of thousands per second with an expensive one, and the policy network is what makes this work — it concentrates the search on the small subset of moves that are plausibly best.</p>
+      <p>现代引擎在 α-β 之上又叠加了多层优化。<span class="term">迭代加深</span>先搜索深度 1，再搜深度 2、3……每一层使用上一层的着法排序信息来改善下一层——反直觉的是，这比直接搜目标深度还要快。<span class="term">转置表</span>用 Zobrist 哈希作为键，缓存评估结果，使得通过不同次序到达的同一局面无需重新评估。<span class="term">空着剪枝</span>测试"如果这一步什么都不做，局面是否仍然不利"，若不利则做激进剪枝。<span class="term">迟到着法削减</span>对前几个候选着法用全深度搜索、对其余着法用削减深度搜索，只有当削减搜索的结果出乎意料地好时才重新做全深度搜索。<span class="term">静态搜索</span>把搜索沿强迫序列（吃子、将军等）延伸到名义深度之外，避免"地平线效应"——战术致命点恰好在引擎停止搜索之处之外。这些技术配合好的着法排序，把有效分支因子压到 2 以下，这就是为什么 Stockfish 可以在普通硬件上几秒内搜过 30 层。</p>
 
-    <p>Both networks are trained from scratch by self-play. The system starts with random weights and plays games against itself; the moves chosen and the eventual outcomes are used as training targets for the policy and value heads respectively. The trained network is then used in a stronger MCTS, which generates better self-play games, which train a stronger network, in an iterative loop. AlphaZero reached top-engine strength in nine hours of training on Google TPU hardware; Lc0, distributing the training across thousands of volunteer GPUs, took longer but has now run more than 2.5 billion self-play games.</p>
+      <p>叶子节点的评估函数过去一直是手工设计的：子力价值、子力机动性、王的安全性、兵形结构等几十项特征加权求和，权重通过多年的自对弈调优。这一传统最大的单次变革发生在 2020 年——Stockfish 采用了 <span class="term">NNUE</span>（Efficiently Updatable Neural Network，可高效更新的神经网络）——一种由 Yu Nasu 在 2018 年为日本将棋发明、随后由 Stockfish 团队移植到国际象棋的评估方法。NNUE 用一个浅层小型神经网络替换手工评估，专为两个性质而设计：输入稀疏性低（任意时刻只有少数输入非零）和增量可更新（一子移动时，只有受影响的输入改变，第一层输出可以增量更新而非重算）。这个网络在 CPU 上以 8 位整数运算，每次评估约一微秒——足以在 α-β 搜索内部以每秒数百万节点的速率被反复调用。Stockfish 16（2023）已经完全删除了古典评估；当前的 Stockfish 是在 NNUE 评估之上跑 α-β 搜索，并根据子力平衡动态切换两个不同规模的网络。</p>
+    </div>
 
-    <p>The two paradigms differ in what they are good at. Stockfish's alpha-beta + NNUE is faster and more tactical — it sees forced sequences with great precision and depth. Lc0's MCTS + deep network plays more positionally, sometimes accepting material loss for long-term structural advantages that alpha-beta search cannot easily verify within its horizon. Recent developments narrow the gap: Stockfish's NNUE imports neural evaluation into the alpha-beta tradition, and Lc0's transformer-based networks (since 2022) have substantially improved its positional and tactical accuracy. The strongest current engines are hybrids that draw from both traditions; both are estimated above 3500 Elo and well beyond any human's reach.</p>
+    <h3>
+      <span data-lang-content="en">The MCTS tradition</span>
+      <span data-lang-content="zh">MCTS 传统</span>
+    </h3>
 
-    <h2 id="sec-tools">7 · Tools and databases</h2>
+    <div data-lang-content="en">
+      <p>The other paradigm originated with AlphaZero (2017) and continues in Leela Chess Zero. Instead of alpha-beta with quick leaf evaluations, this approach uses <span class="term">Monte Carlo Tree Search</span> guided by a deep neural network with two output heads: a <span class="term">policy</span> (a probability distribution over legal moves, indicating which moves are likely to be best) and a <span class="term">value</span> (an estimate of the expected outcome of the position, on a scale from −1 for a sure loss to +1 for a sure win).</p>
 
-    <p>Modern chess research and serious play depend on a small number of specialized tools.</p>
+      <p>The MCTS variant used is <span class="term">PUCT</span> (Predictor + Upper Confidence Bound applied to Trees, an extension of UCT due to Christopher Rosin). The search builds a tree iteratively: from the root, repeatedly descend along the path that maximizes a combination of the current empirical value estimate and an exploration bonus weighted by the policy network's prior probability. When a leaf is reached, evaluate it with the neural network, and propagate the value back up the tree. After a fixed number of iterations (or a time limit), the move at the root with the most visits is played. This is fundamentally different from alpha-beta: instead of evaluating millions of positions per second with a cheap evaluation, AlphaZero-style engines evaluate only tens of thousands per second with an expensive one, and the policy network is what makes this work — it concentrates the search on the small subset of moves that are plausibly best.</p>
 
-    <h3>Game databases</h3>
+      <p>Both networks are trained from scratch by self-play. The system starts with random weights and plays games against itself; the moves chosen and the eventual outcomes are used as training targets for the policy and value heads respectively. The trained network is then used in a stronger MCTS, which generates better self-play games, which train a stronger network, in an iterative loop. AlphaZero reached top-engine strength in nine hours of training on Google TPU hardware; Lc0, distributing the training across thousands of volunteer GPUs, took longer but has now run more than 2.5 billion self-play games.</p>
 
-    <p>Comprehensive game databases are the basic infrastructure of opening preparation, opponent research, and historical study. The two main commercial ones are <span class="term"><a href="https://shop.chessbase.com/en/categories/databases" rel="noopener">ChessBase Mega Database</a></span> (~10 million games from 1560 to the present, with about 90,000 grandmaster-annotated; €190 for a one-off purchase, weekly updates by subscription) and <span class="term">ChessOK</span>. The free options have grown substantially: the <span class="term"><a href="https://database.lichess.org/" rel="noopener">Lichess Open Database</a></span> publishes the full set of games played on Lichess in standard PGN format, currently approaching seven billion games released as monthly archives; the <span class="term">Lichess Elite Database</span> filters this down to games where both players were rated above 2400; <span class="term">Caissabase</span> and <span class="term"><a href="https://lumbrasgigabase.com/" rel="noopener">LumbrasGigabase</a></span> aggregate freely available historical sources (such as <a href="https://theweekinchess.com/" rel="noopener">TWIC</a> and the older MillionBase) into curated collections of several million high-quality over-the-board games. The standard portable format across all of these is <span class="term">PGN</span> (Portable Game Notation), a plain-text format with a tagged metadata header followed by the moves in algebraic notation; nearly every engine, GUI, and database tool reads it.</p>
+      <p>The two paradigms differ in what they are good at. Stockfish's alpha-beta + NNUE is faster and more tactical — it sees forced sequences with great precision and depth. Lc0's MCTS + deep network plays more positionally, sometimes accepting material loss for long-term structural advantages that alpha-beta search cannot easily verify within its horizon. Recent developments narrow the gap: Stockfish's NNUE imports neural evaluation into the alpha-beta tradition, and Lc0's transformer-based networks (since 2022) have substantially improved its positional and tactical accuracy. The strongest current engines are hybrids that draw from both traditions; both are estimated above 3500 Elo and well beyond any human's reach.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>另一种范式由 AlphaZero（2017）开创、由 Leela Chess Zero 延续。它不用 α-β + 快速叶子评估，而是用<span class="term">蒙特卡洛树搜索</span>，由一个具有两个输出头的深度神经网络指导：<span class="term">策略</span>头（合法着法上的概率分布，指出哪些着法很可能是最好的）和<span class="term">价值</span>头（对局面预期结果的估计，从 −1 必输到 +1 必胜）。</p>
 
-    <p>The free PGN/database tool ecosystem is centered on <span class="term"><a href="http://scidvspc.sourceforge.net/" rel="noopener">SCID</a></span> (Shane's Chess Information Database) and its successors — open-source GUIs that index PGN files into searchable databases. For the use case of "find me all games starting with this position" in a database of millions of games, these tools index the position graph rather than the move-list, allowing transposition-aware lookup in milliseconds.</p>
+      <p>所采用的 MCTS 变种叫 <span class="term">PUCT</span>（Predictor + Upper Confidence Bound applied to Trees，Christopher Rosin 提出的 UCT 扩展）。搜索从根节点出发反复迭代构建一棵树：每次沿着"当前经验估值 + 受策略网络先验加权的探索奖励"最大的路径下行；到达叶子时用神经网络评估它，并把该值反向传播回树。在固定迭代次数（或时间限制）后，根节点访问次数最多的着法被走出。这与 α-β 在性质上完全不同：AlphaZero 风格的引擎不像 α-β 那样每秒评估数百万局面用一个便宜的评估，而是每秒只评估数万个局面用一个昂贵的评估——是策略网络让这件事可行，因为它把搜索集中到那一小部分有可能是最好的着法上。</p>
 
-    <h3>Endgame tablebases</h3>
+      <p>这两个网络都是从零开始通过自对弈训练出来的。系统从随机权重起步、与自己对弈；走出的着法和最终结果分别作为策略头和价值头的训练目标。训练好的网络回到更强的 MCTS 中、产生更好的自对弈数据、训练出更强的网络——如此迭代循环。AlphaZero 在 Google TPU 硬件上训练了九小时就达到了顶级引擎水平；Lc0 把训练分散到数千台志愿者 GPU 上，耗时较长但至今已运行了超过 25 亿局自对弈。</p>
 
-    <p><span class="term">Endgame tablebases</span> are exhaustive enumerations of all positions with at most a fixed number of pieces, computed by retrograde analysis from terminal positions and storing the perfect result and distance-to-conversion for every legal position. The 7-piece <span class="term"><a href="https://syzygy-tables.info/" rel="noopener">Syzygy tablebase</a></span> (Ronald de Man, 2013) is freely available and standard in serious engines; the <span class="term">Lomonosov 7-piece tablebase</span> (2012) was the first 7-piece project completed and includes distance-to-mate metrics. The 8-piece project began in the late 2010s and is partially complete; full 8-piece tablebases will likely require several petabytes of storage. These databases have already revealed that some technical endgames require more than 500 moves of perfect play to convert — well beyond any human's capacity without lookup, and well beyond the fifty-move rule. Lichess provides a free public API to the 7-piece Syzygy tables, allowing any user to query the perfect result of any 7-piece position in their browser.</p>
+      <p>两种范式各有所长。Stockfish 的 α-β + NNUE 更快、更战术——它对强迫序列看得极为精准、极为深远。Lc0 的 MCTS + 深度网络则更"位置"——它有时会接受子力损失换取 α-β 在其搜索视野内难以验证的长期结构性优势。近期发展使两者趋同：Stockfish 的 NNUE 把神经评估引入了 α-β 传统；Lc0 自 2022 年起改用 transformer 网络，位置和战术精度都大幅提升。当前最强的引擎都是这两种传统的某种混合。两者的估值都在 3500 Elo 以上，远超任何人类。</p>
+    </div>
 
-    <h3>Engines and analysis tools</h3>
+    <h2 id="sec-tools">
+      <span data-lang-content="en">7 · Tools and databases</span>
+      <span data-lang-content="zh">七 · 工具与数据库</span>
+    </h2>
 
-    <p>The leading open-source engines — Stockfish and Leela Chess Zero — are freely downloadable and run on consumer hardware. Stockfish is CPU-bound and requires no specialized hardware; Lc0 is GPU-bound and benefits from a modern graphics card. Both expose the <span class="term">UCI protocol</span> (Universal Chess Interface), the de-facto API standard, which any chess GUI (ChessBase, Arena, Cute Chess, Lichess analysis) can speak to. The <span class="term"><a href="https://tcec-chess.com/" rel="noopener">Top Chess Engine Championship</a></span> (TCEC) and <span class="term"><a href="https://www.chess.com/computer-chess-championship" rel="noopener">Computer Chess Championship</a></span> (CCCC, run on Chess.com) are the two main computer-vs-computer tournament series, and their match archives are themselves a research resource — they document how the strongest available engines play in long-time-control engine-vs-engine games.</p>
+    <div data-lang-content="en">
+      <p>Modern chess research and serious play depend on a small number of specialized tools.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>现代国际象棋研究与严肃的实战准备依赖于一些专门工具。</p>
+    </div>
 
-    <h3>Puzzle and training databases</h3>
+    <h3>
+      <span data-lang-content="en">Game databases</span>
+      <span data-lang-content="zh">对局数据库</span>
+    </h3>
 
-    <p>For tactical training, the <span class="term"><a href="https://database.lichess.org/#puzzles" rel="noopener">Lichess Puzzle Database</a></span> contains over four million tactical puzzles automatically extracted from played games and re-analyzed at high depth; each puzzle has a Glicko-rated difficulty. <span class="term"><a href="https://chesstempo.com/" rel="noopener">ChessTempo</a></span> is a similar resource. For chess composition (the artistic tradition of constructed problems rather than positions from games), the <span class="term"><a href="https://yacpdb.org/" rel="noopener">Yacpdb</a></span> database aggregates historical and contemporary chess problems with structured metadata.</p>
+    <div data-lang-content="en">
+      <p>Large game databases are the infrastructure of opening preparation, opponent study, and historical research. The two major commercial databases are <span class="term"><a href="https://shop.chessbase.com/en/categories/databases" rel="noopener">ChessBase Mega Database</a></span> (around 10 million games from 1560 to present, with about 90,000 GM-annotated; one-time purchase €190, weekly subscription updates) and <span class="term">ChessOK</span>. The free options have grown substantially: <span class="term"><a href="https://database.lichess.org/" rel="noopener">Lichess Open Database</a></span> releases the complete PGN of all games played on Lichess (approaching 7 billion games and counting; monthly releases); the <span class="term">Lichess Elite Database</span> is a filtered subset of games with both players rated above 2400; <span class="term">Caissabase</span> and <span class="term"><a href="https://lumbrasgigabase.com/" rel="noopener">LumbrasGigabase</a></span> aggregate freely-available historical sources (such as <a href="https://theweekinchess.com/" rel="noopener">TWIC</a> and the older MillionBase) into curated multi-million-game collections of formal play. The standard portable format for all of these is <span class="term">PGN</span> (Portable Game Notation), a plain text format consisting of a tagged metadata header and a sequence of moves in algebraic notation, readable by every engine, GUI, and database tool.</p>
 
-    <h2 id="sec-findings">8 · Findings from engine-driven research</h2>
+      <p>The hub of the free PGN/database tool ecosystem is <span class="term"><a href="http://scidvspc.sourceforge.net/" rel="noopener">SCID</a></span> (Shane's Chess Information Database) and its derivatives — open-source GUIs that index PGN files as searchable databases. For typical queries like "find all games from a particular position in a database of 10 million games," these tools index by the position graph rather than the move sequence, making transposition-aware queries return in milliseconds.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>大型对局数据库是开局准备、对手研究、历史考证的基础设施。两个主要的商业数据库是 <span class="term"><a href="https://shop.chessbase.com/en/categories/databases" rel="noopener">ChessBase Mega Database</a></span>（约 1000 万局，从 1560 年至今，其中约 9 万局有特级大师注释；一次性购买 €190，订阅可每周更新）与 <span class="term">ChessOK</span>。免费选项近年壮大可观：<span class="term"><a href="https://database.lichess.org/" rel="noopener">Lichess Open Database</a></span> 公开了 Lichess 上所有对局的完整 PGN，目前已接近 70 亿局，按月发布；<span class="term">Lichess Elite Database</span> 是其中双方等级分均在 2400 以上的对局过滤版；<span class="term">Caissabase</span> 与 <span class="term"><a href="https://lumbrasgigabase.com/" rel="noopener">LumbrasGigabase</a></span> 把免费可得的历史来源（如 <a href="https://theweekinchess.com/" rel="noopener">TWIC</a> 与较早的 MillionBase）汇总成几百万局的高质量正式比赛数据集。所有这些数据集的标准便携格式是 <span class="term">PGN</span>（Portable Game Notation）——一种纯文本格式，含一组带标签的元数据头部加上代数记谱法的着法序列；几乎所有引擎、GUI、数据库工具都能读它。</p>
 
-    <p>Stockfish and Lc0 are now both above grandmaster level by hundreds of Elo. This makes them, beyond their competitive use, instruments of empirical research into chess itself — instruments whose results have to be interpreted as data about the game, not about the engines that produced them.</p>
+      <p>免费 PGN/数据库工具生态的中心是 <span class="term"><a href="http://scidvspc.sourceforge.net/" rel="noopener">SCID</a></span>（Shane's Chess Information Database）及其衍生项目——把 PGN 文件索引为可检索数据库的开源 GUI。对于"从一千万局中找出所有从某一局面起的对局"这一典型用例，这些工具索引的是局面图而非着法序列，使支持移位（transposition）的查询能在毫秒级返回结果。</p>
+    </div>
 
-    <h3>AlphaZero's opening preferences</h3>
+    <h3>
+      <span data-lang-content="en">Endgame tablebases</span>
+      <span data-lang-content="zh">残局表数据库</span>
+    </h3>
 
-    <p>The most discussed early result was AlphaZero's revealed preferences over the standard repertoire. Trained from scratch through self-play, AlphaZero settled on a small number of openings as its main weapons. As White, it gravitated toward 1.d4 and 1.c4 (the English Opening), with the <span class="term">Queen's Gambit</span> and the <span class="term">English Opening</span> appearing most often in its self-play games. As Black, it played the Queen's Gambit Declined, the Berlin Defence to the Ruy López, and (interestingly) a non-trivial amount of the French Defence. It largely avoided 1.e4 e5 lines other than the Berlin, and it gradually moved away from the King's Indian Defence over training.</p>
+    <div data-lang-content="en">
+      <p><span class="term">Endgame tablebases</span> are exhaustive enumerations of all positions with up to some number of pieces, computed by retrograde analysis from terminal positions, storing the perfect-play result and distance-to-mate for each legal position. The seven-piece <span class="term"><a href="https://syzygy-tables.info/" rel="noopener">Syzygy tablebases</a></span> (Ronald de Man, 2013) are free, available online, and used by all serious engines; the <span class="term">Lomonosov seven-piece tablebase</span> (2012) was the first complete seven-piece project and includes distance-to-mate metrics. The eight-piece project began in the late 2010s and is partially complete; a complete eight-piece tablebase is expected to require petabytes of storage. These databases have already revealed that some technical endgames require more than 500 moves of perfect play to convert — well beyond any human capacity without lookup, and well beyond the fifty-move rule. Lichess provides a free public API for querying the 7-piece Syzygy tablebases, allowing any user to look up perfect-play results for any 7-piece position from their browser.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p><span class="term">残局表数据库</span>是对一定子数以下所有局面的穷尽枚举，由从终局向前的回溯分析计算得出，存储每个合法局面的完美结果与到将杀的距离。七子的 <span class="term"><a href="https://syzygy-tables.info/" rel="noopener">Syzygy 表</a></span>（Ronald de Man，2013）免费可用，已是严肃引擎的标配；<span class="term">Lomonosov 七子表</span>（2012）是第一个完成的七子项目，并包含到将杀步数指标。八子表项目自 2010 年代后期启动、目前部分完成；完整的八子表预计需要数 PB 存储。这些数据库已经揭示出某些技术性残局需要超过 500 步的完美应对才能完成将杀——远超任何人类不查表的能力，也远超五十步规则。Lichess 提供了一个免费公开的 7 子 Syzygy 查询 API，任何用户都可在浏览器中查询任意 7 子局面的完美结果。</p>
+    </div>
 
-    <p>When DeepMind forced AlphaZero to play through twelve of the most common human openings in 1200 games against Stockfish 8, it scored 61% overall — slightly worse than its 64% in unconstrained play, suggesting modest but real preferences. Particularly striking: it scored 78% with the White side of the French Defence and remained undefeated as White in that line over 50 games. This was the kind of result that drew the chess world's attention. After more than a century of human consensus that 1.e4 was at least as good as 1.d4, an entity that had learned chess from scratch with no human bias arrived at a different verdict.</p>
+    <h3>
+      <span data-lang-content="en">Engines and analysis tools</span>
+      <span data-lang-content="zh">引擎与分析工具</span>
+    </h3>
 
-    <p>The PNAS paper <a href="https://www.pnas.org/doi/10.1073/pnas.2206625119" rel="noopener">"Acquisition of chess knowledge in AlphaZero"</a> (McGrath et al., 2022) probed deeper. Even within a single opening, individual training runs of AlphaZero often converge to strong preferences for one move over another in positions where humans see the choice as roughly equivalent — and different training seeds converge on different preferences. The authors interpret this as evidence that those positions actually <em>are</em> roughly equivalent (otherwise different training runs would settle on the same answer), reinforcing rather than overturning the human assessment.</p>
+    <div data-lang-content="en">
+      <p>The major open-source engines — Stockfish and Leela Chess Zero — are free to download and run on consumer hardware. Stockfish is CPU-bound and requires no specialized hardware; Lc0 is GPU-bound and benefits substantially from a modern graphics card. Both follow the <span class="term">UCI protocol</span> (Universal Chess Interface), the de facto API standard used by every chess GUI (ChessBase, Arena, Cute Chess, Lichess analysis). <span class="term"><a href="https://tcec-chess.com/" rel="noopener">TCEC</a></span> (Top Chess Engine Championship) and <span class="term"><a href="https://www.chess.com/computer-chess-championship" rel="noopener">CCCC</a></span> (Computer Chess Championship, hosted on Chess.com) are the two main engine-vs-engine tournaments, and their game archives are themselves a research resource — documenting how the strongest engines actually play against each other at long time controls.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>主要开源引擎——Stockfish 与 Leela Chess Zero——都免费可下载、可在普通消费级硬件上运行。Stockfish 是 CPU 密集型，无需特殊硬件；Lc0 是 GPU 密集型，配现代显卡时受益更多。两者都遵循 <span class="term">UCI 协议</span>（Universal Chess Interface），这是事实上的 API 标准，所有国际象棋 GUI（ChessBase、Arena、Cute Chess、Lichess analysis）都能与之通信。<span class="term"><a href="https://tcec-chess.com/" rel="noopener">TCEC</a></span>（Top Chess Engine Championship）与 <span class="term"><a href="https://www.chess.com/computer-chess-championship" rel="noopener">CCCC</a></span>（Computer Chess Championship，运行在 Chess.com 上）是两大主要的引擎对引擎锦标赛，它们的对局存档本身即一项研究资源——记录了当前最强引擎在长时间控制下相互对抗的实际表现。</p>
+    </div>
 
-    <h3>The draw problem</h3>
+    <h3>
+      <span data-lang-content="en">Puzzle and training databases</span>
+      <span data-lang-content="zh">谜题与训练数据库</span>
+    </h3>
 
-    <p>Engine-vs-engine play at long time controls is dominated by draws. In TCEC superfinals, the proportion of decisive games at the top level has dropped to roughly 15-25% in many seasons. The trend extends to elite human play: Carlsen and others have noted that with both sides having access to engine preparation 25-30 moves into mainline openings, the practical difficulty of generating winning positions out of standard openings has grown substantially. This is the empirical backdrop against which Vladimir Kramnik's proposal for "no-castling chess" was made — and the DeepMind paper <a href="https://cacm.acm.org/research/reimagining-chess-with-alphazero/" rel="noopener">"Assessing Game Balance with AlphaZero"</a> (Tomašev et al., 2020) used AlphaZero precisely as a tool to study which rule modifications would restore decisiveness without breaking the game's fundamental character. They found that no-castling chess yields more decisive games while preserving most of the strategic substance, and that several pawn-mobility variants ("torpedo chess," "pawn-back chess") are interestingly different but less natural.</p>
+    <div data-lang-content="en">
+      <p>For tactical training, the <span class="term"><a href="https://database.lichess.org/#puzzles" rel="noopener">Lichess Puzzle Database</a></span> contains over 4 million tactical positions automatically extracted from played games and re-verified by deep engine analysis, each with a Glicko-rated difficulty. <span class="term"><a href="https://chesstempo.com/" rel="noopener">ChessTempo</a></span> is a similar resource. For chess composition (the constructive-puzzle artistic tradition, distinct from positions from played games), the <span class="term"><a href="https://yacpdb.org/" rel="noopener">Yacpdb</a></span> database aggregates historical and contemporary chess problems with structured metadata.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>战术训练方面，<span class="term"><a href="https://database.lichess.org/#puzzles" rel="noopener">Lichess Puzzle Database</a></span> 包含从已下对局中自动提取并由高深度重新分析的 400 万以上战术谜题，每个谜题有 Glicko 评级的难度。<span class="term"><a href="https://chesstempo.com/" rel="noopener">ChessTempo</a></span> 是类似的资源。对国际象棋构图（构造性谜题的艺术传统、不同于来自实战的局面），<span class="term"><a href="https://yacpdb.org/" rel="noopener">Yacpdb</a></span> 数据库以结构化元数据汇总了历史与当代的国际象棋构图。</p>
+    </div>
 
-    <h3>Stylistic findings</h3>
+    <h2 id="sec-findings">
+      <span data-lang-content="en">8 · Findings from engine-driven research</span>
+      <span data-lang-content="zh">八 · 引擎驱动研究的发现</span>
+    </h2>
 
-    <p>The Sadler and Regan book <em>Game Changer</em> (2019), drawing on hundreds of AlphaZero games, identified several recurring patterns: a willingness to sacrifice material (especially exchange sacrifices, giving up a rook for a bishop or knight) for long-term positional pressure; a preference for restricting the opponent's pieces over capturing them; a use of the king as an active piece earlier than human players typically risk; and a strong preference for keeping pawns flexible rather than fixing them in early structural decisions. Many of these findings have since been absorbed into top-level human practice.</p>
+    <div data-lang-content="en">
+      <p>Stockfish and Lc0 are now several hundred Elo above the strongest human players. This makes them, in addition to practical tools, instruments for empirical research on chess itself — but their output has to be interpreted as data about the game, not data about the engines producing it.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>Stockfish 与 Lc0 现在都比顶级人类高出数百 Elo。这使它们除了实战工具外，也成为对国际象棋本身进行经验研究的仪器——但它们的输出必须被解释为关于游戏的数据，而不是关于产生它们的引擎的数据。</p>
+    </div>
 
-    <h3>Endgame discoveries</h3>
+    <h3>
+      <span data-lang-content="en">AlphaZero's opening preferences</span>
+      <span data-lang-content="zh">AlphaZero 的开局偏好</span>
+    </h3>
 
-    <p>The 7-piece tablebases revealed positions with forced wins requiring well over 500 moves of perfect play — sequences that look completely random to a human observer but in fact compose a single forced victory. The longest known forced mate in 7-piece is 549 moves; in the partial 8-piece project it has reached 584 moves as of 2022. These positions have no human-graspable plan; they are pure consequences of the perfect information of the database. Whether they say anything about chess as humans understand it is itself an interesting question — they exist in the game tree but lie outside any practical horizon of play.</p>
+    <div data-lang-content="en">
+      <p>The earliest widely-discussed finding was AlphaZero's preferences over the standard opening repertoire. Trained from zero with self-play, AlphaZero converged on a relatively small set of preferred openings. As White it strongly preferred 1.d4 and 1.c4 (the English Opening); in particular the <span class="term">Queen's Gambit</span> and <span class="term">English</span> dominated its self-play frequency. As Black it favoured the Queen's Gambit Declined, the Berlin Defence to the Ruy López, and — notably — substantial amounts of the French Defence. It essentially avoided 1.e4 e5 outside the Berlin, and discarded the King's Indian Defence over the course of training.</p>
 
-    <h2 id="sec-elo">9 · Elo and rating systems</h2>
+      <p>When DeepMind forced AlphaZero to play 1200 games against Stockfish 8 starting from the twelve most popular human openings, it scored 61% overall — a touch below the 64% it scored from the unconstrained starting position, indicating that its preferences are mild but real. One particularly striking result: as White in the French Defence, AlphaZero scored 78% over 50 games without losing a single game. This is the kind of finding that gets the attention of the entire chess world. After a hundred years of human consensus that 1.e4 is at least no worse than 1.d4, an unbiased self-taught entity says otherwise.</p>
 
-    <p>The standard chess rating system is the work of Arpad Elo (1903–1992), a Hungarian-American physics professor and US chess master. Elo's system, designed in the 1950s as an improvement on the Harkness system then in use, assumes that each player has a true skill level that produces normally-distributed performances around it; the rating is a maximum-likelihood estimate of that skill level given the player's results.<a href="#sn-6" class="sn-ref">6</a> The USCF adopted it in 1960; FIDE in 1970.</p>
+      <p>The PNAS paper <a href="https://www.pnas.org/doi/10.1073/pnas.2206625119" rel="noopener">"Acquisition of chess knowledge in AlphaZero"</a> (McGrath et al., 2022) probed deeper. Even within a single opening, individual training runs of AlphaZero often converge to strong preferences for one move over another in positions where humans see the choice as roughly equivalent — and different training seeds converge on different preferences. The authors interpret this as evidence that those positions actually <em>are</em> roughly equivalent (otherwise different training runs would settle on the same answer), reinforcing rather than overturning the human assessment.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>最早被广泛讨论的发现，是 AlphaZero 在标准开局曲目中表现出的偏好。从零开始通过自对弈训练，AlphaZero 在自对弈中收敛到了一小部分主力开局。执白时它倾向于 1.d4 与 1.c4（英格兰开局），其中<span class="term">王后弃兵</span>与<span class="term">英格兰开局</span>在它的自对弈中出现频率最高。执黑时它走王后弃兵拒绝、西班牙开局的柏林防御，以及（值得注意）相当数量的法兰西防御。它基本上不走柏林防御以外的 1.e4 e5 系列，并在训练中逐步抛弃了王翼印度防御。</p>
+
+      <p>当 DeepMind 强迫 AlphaZero 在 1200 局比赛中以人类最常见的十二个开局对阵 Stockfish 8 时，它取得了 61% 的总成绩——比无约束情况下的 64% 略低，说明它的偏好是温和但真实的。一个特别醒目的结果：执白法兰西防御时它得分 78%，且在 50 局中保持不败。这是引起整个国际象棋世界注意的那种结果。在人类一个多世纪的共识下"1.e4 至少不输于 1.d4"，一个完全没有人类偏见、从零自学的存在却得出了不同的判断。</p>
+
+      <p>PNAS 论文 <a href="https://www.pnas.org/doi/10.1073/pnas.2206625119" rel="noopener">《Acquisition of chess knowledge in AlphaZero》</a>（McGrath 等，2022）做了更深入的探究。即便在同一开局内，AlphaZero 的不同训练种子常常对人类视为大致等价的两个着法表现出强烈但相反的偏好——而不同的训练种子收敛到不同的偏好上。作者将此解释为这些局面<em>真的</em>是大致等价的（否则不同训练应当收敛到同一个答案），这一证据反倒强化而非推翻了人类的评估。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">The draw problem</span>
+      <span data-lang-content="zh">"和棋问题"</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>Engine-vs-engine play at long time controls is dominated by draws. In TCEC superfinals, the proportion of decisive games at the top level has dropped to roughly 15-25% in many seasons. The trend extends to elite human play: Carlsen and others have noted that with both sides having access to engine preparation 25-30 moves into mainline openings, the practical difficulty of generating winning positions out of standard openings has grown substantially. This is the empirical backdrop against which Vladimir Kramnik's proposal for "no-castling chess" was made — and the DeepMind paper <a href="https://cacm.acm.org/research/reimagining-chess-with-alphazero/" rel="noopener">"Assessing Game Balance with AlphaZero"</a> (Tomašev et al., 2020) used AlphaZero precisely as a tool to study which rule modifications would restore decisiveness without breaking the game's fundamental character. They found that no-castling chess yields more decisive games while preserving most of the strategic substance, and that several pawn-mobility variants ("torpedo chess," "pawn-back chess") are interestingly different but less natural.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>长时间控制下的引擎对引擎比赛被和棋主导。在 TCEC 决赛中，许多季度的胜负局比例已降至大约 15-25%。这一趋势延伸到精英人类比赛：Carlsen 等人指出，在双方都能用引擎准备到主力开局 25-30 步深的当下，从标准开局中产出胜势的实战难度大大上升。这是 Vladimir Kramnik 提出"无王车易位国际象棋"（no-castling chess）的经验背景——而 DeepMind 论文 <a href="https://cacm.acm.org/research/reimagining-chess-with-alphazero/" rel="noopener">《Assessing Game Balance with AlphaZero》</a>（Tomašev 等，2020）正是把 AlphaZero 用作研究工具：研究哪些规则修改可以恢复胜负的频率而不破坏游戏的根本性质。他们发现，无王车易位象棋既能产生更多胜负局，又保留了大部分战略实质；而某些"鱼雷象棋"、"兵后退象棋"等兵移动变体虽然有趣，但不够自然。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Stylistic findings</span>
+      <span data-lang-content="zh">风格上的发现</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The Sadler and Regan book <em>Game Changer</em> (2019), drawing on hundreds of AlphaZero games, identified several recurring patterns: a willingness to sacrifice material (especially exchange sacrifices, giving up a rook for a bishop or knight) for long-term positional pressure; a preference for restricting the opponent's pieces over capturing them; a use of the king as an active piece earlier than human players typically risk; and a strong preference for keeping pawns flexible rather than fixing them in early structural decisions. Many of these findings have since been absorbed into top-level human practice.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>Sadler 与 Regan 的《Game Changer》（2019）通过分析数百局 AlphaZero 对局，识别出几种反复出现的模式：愿意为长期局面压力牺牲子力（尤其是"换质"——用车换象或马）；偏好限制对方子力的活动空间，而不是直接吃子；比人类棋手更早、更敢把王作为活子使用；强烈倾向于让兵保持灵活，避免在开局阶段过早做出固定的结构决定。这些发现中的许多如今已被吸收进顶级人类实战。</p>
+    </div>
+
+    <h3>
+      <span data-lang-content="en">Endgame discoveries</span>
+      <span data-lang-content="zh">残局发现</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>The 7-piece tablebases revealed positions with forced wins requiring well over 500 moves of perfect play — sequences that look completely random to a human observer but in fact compose a single forced victory. The longest known forced mate in 7-piece is 549 moves; in the partial 8-piece project it has reached 584 moves as of 2022. These positions have no human-graspable plan; they are pure consequences of the perfect information of the database. Whether they say anything about chess as humans understand it is itself an interesting question — they exist in the game tree but lie outside any practical horizon of play.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>七子残局表揭示出了一些需要远超 500 步完美应对的强制取胜局面——在人类观察者看来完全像随机走子，实际上却构成一条完整的强制胜利路径。七子残局表中已知最长的强制将杀为 549 步；八子部分项目至 2022 年已发现 584 步的强制将杀。这些局面没有任何人类可把握的"计划"——它们是数据库完美信息的纯粹后果。它们对"人类所理解的国际象棋"是否还说出了什么——这本身就是一个有意思的问题。它们存在于博弈树中，但坐落于任何实战可达视域之外。</p>
+    </div>
+
+    <h2 id="sec-elo">
+      <span data-lang-content="en">9 · Elo and rating systems</span>
+      <span data-lang-content="zh">九 · Elo 与评分系统</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>The standard chess rating system is the work of Arpad Elo (1903–1992), a Hungarian-American physics professor and US chess master. Elo's system, designed in the 1950s as an improvement on the Harkness system then in use, assumes that each player has a true skill level that produces normally-distributed performances around it; the rating is a maximum-likelihood estimate of that skill level given the player's results.<a href="#sn-6" class="sn-ref">6</a> The USCF adopted it in 1960; FIDE in 1970.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>标准的国际象棋评分系统出自 Arpad Elo（1903–1992），匈牙利裔美国物理教授兼美国国际象棋大师。他设计的系统在 1950 年代提出，以改进当时使用的 Harkness 系统；其假设是：每位棋手都有一个真实的实力水平，围绕该水平产生正态分布的表现值；评分则是给定历史成绩下对该水平的极大似然估计<a href="#sn-6" class="sn-ref">6</a>。USCF 1960 年采纳；FIDE 1970 年跟进。</p>
+    </div>
 
     <aside class="sidenote" id="sn-6">
-      <span class="sidenote-num">6</span>The normal-distribution assumption was an empirical convenience, not a result. FIDE in fact computes expected scores using the <em>logistic</em> distribution (its tails are heavier and the curve is easier to tabulate); USCF retains a normal-curve formulation. The two diverge measurably at large rating gaps. Strictly, "Elo" denotes the rating procedure, not the statistical model — different organisations implementing Elo can disagree about what the underlying performance distribution is.
+      <span class="sidenote-num">6</span>
+      <span data-lang-content="en">The normal-distribution assumption was an empirical convenience, not a result. FIDE in fact computes expected scores using the <em>logistic</em> distribution (its tails are heavier and the curve is easier to tabulate); USCF retains a normal-curve formulation. The two diverge measurably at large rating gaps. Strictly, "Elo" denotes the rating procedure, not the statistical model — different organisations implementing Elo can disagree about what the underlying performance distribution is.</span>
+      <span data-lang-content="zh">正态分布假设是经验上的便利之选，并非定理推论。FIDE 实际计算预期得分时使用<em>逻辑斯蒂</em>分布（尾部更厚、查表更方便）；USCF 至今仍沿用正态曲线公式。两套公式在大评分差时会出现可量度的偏离。严格说，"Elo"指评分程序本身，而非某个特定统计模型——不同组织在实现 Elo 时，关于"表现服从什么分布"可以有不同选择。</span>
     </aside>
 
-    <p>The mechanics. Each game is a zero-sum exchange of rating points. Before the game, each player has an <em>expected score</em> based on the rating difference (a 200-point gap implies roughly 76 % for the higher-rated player; a 400-point gap implies 92 %). After the game, the actual score (1 for a win, 0.5 for a draw, 0 for a loss) is compared with the expected score; the rating moves by <em>K</em> times the difference. The <em>K-factor</em> controls volatility. FIDE currently uses K = 40 for new players (under 30 rated games), K = 20 for established players under 2400, and K = 10 for players rated 2400 and above.</p>
+    <div data-lang-content="en">
+      <p>The mechanics. Each game is a zero-sum exchange of rating points. Before the game, each player has an <em>expected score</em> based on the rating difference (a 200-point gap implies roughly 76 % for the higher-rated player; a 400-point gap implies 92 %). After the game, the actual score (1 for a win, 0.5 for a draw, 0 for a loss) is compared with the expected score; the rating moves by <em>K</em> times the difference. The <em>K-factor</em> controls volatility. FIDE currently uses K = 40 for new players (under 30 rated games), K = 20 for established players under 2400, and K = 10 for players rated 2400 and above.</p>
 
-    <p>FIDE rating bands are widely understood as follows: above 2700 is "Super-Grandmaster" (about 50 players in the world at any time); 2500 is the threshold for the Grandmaster (GM) title; 2400 for the International Master (IM); 2300 for FIDE Master (FM); 2200 for Candidate Master (CM). Magnus Carlsen holds the all-time peak at 2882, achieved in May 2014.</p>
+      <p>FIDE rating bands are widely understood as follows: above 2700 is "Super-Grandmaster" (about 50 players in the world at any time); 2500 is the threshold for the Grandmaster (GM) title; 2400 for the International Master (IM); 2300 for FIDE Master (FM); 2200 for Candidate Master (CM). Magnus Carlsen holds the all-time peak at 2882, achieved in May 2014.</p>
 
-    <p>Two technical caveats are worth noting. First, ratings are <em>relative</em>: they measure performance against other rated players, not absolute strength. Comparing ratings across eras is fraught — a 2700 in 1972 was a different population from a 2700 today. Second, the closed-loop rating pool is in principle conservative, but inflation can creep in through new players entering with overrated provisional ratings, the rating floor, and the asymmetric K-factor. Jeff Sonas's analyses suggest mild inflation since the mid-1980s; Regan and Haworth, using engine analysis to assess move quality directly, find little inflation. The debate is ongoing.</p>
+      <p>Two technical caveats are worth noting. First, ratings are <em>relative</em>: they measure performance against other rated players, not absolute strength. Comparing ratings across eras is fraught — a 2700 in 1972 was a different population from a 2700 today. Second, the closed-loop rating pool is in principle conservative, but inflation can creep in through new players entering with overrated provisional ratings, the rating floor, and the asymmetric K-factor. Jeff Sonas's analyses suggest mild inflation since the mid-1980s; Regan and Haworth, using engine analysis to assess move quality directly, find little inflation. The debate is ongoing.</p>
 
-    <p>Online platforms use variants. Chess.com runs a Glicko-style system; Lichess uses <a href="http://www.glicko.net/glicko.html" rel="noopener">Glicko-2</a> (Mark Glickman, 1995, 2012), which adds a rating deviation parameter to track confidence and a volatility parameter to track recent change. Ratings on these platforms are not directly comparable with FIDE ratings — Lichess tends to run several hundred points higher than FIDE for the same player; Chess.com somewhere between.</p>
+      <p>Online platforms use variants. Chess.com runs a Glicko-style system; Lichess uses <a href="http://www.glicko.net/glicko.html" rel="noopener">Glicko-2</a> (Mark Glickman, 1995, 2012), which adds a rating deviation parameter to track confidence and a volatility parameter to track recent change. Ratings on these platforms are not directly comparable with FIDE ratings — Lichess tends to run several hundred points higher than FIDE for the same player; Chess.com somewhere between.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>机制简述。每局对弈是评分点的零和交换。开局前，根据双方评分差计算<em>预期得分</em>（差 200 分时高分方预期约 76%；差 400 分时约 92%）。赛后将实际得分（胜 1、和 0.5、负 0）与预期得分相减，乘以 K 系数得到评分变化。<em>K 系数</em>控制波动幅度。FIDE 当前规则：新人（不足 30 局）用 K=40；评分低于 2400 的成熟棋手用 K=20；2400 及以上的精英棋手用 K=10。</p>
 
-    <h2 id="sec-opening-theory">10 · Opening theory</h2>
+      <p>FIDE 评分段位被普遍这样理解：2700 以上为"超级特级大师"（任何时点世界范围内约 50 人）；2500 为特级大师（GM）头衔门槛；2400 为国际大师（IM）；2300 为 FIDE 大师（FM）；2200 为候补大师（CM）。Magnus Carlsen 保持着历史最高的 2882 纪录，达到于 2014 年 5 月。</p>
 
-    <p>Opening theory is the codified knowledge of strong continuations from the starting position, organized around variations that have been played, analyzed, and scored over centuries. A typical strong player has prepared lines twenty or thirty moves deep in their main repertoire, with sidelines to handle deviations. The most widely-used taxonomy is the <em>Encyclopaedia of Chess Openings</em> (ECO), published in five volumes by the Yugoslav publisher Šahovski Informator from the 1960s onward; ECO codes (A00–E99) are the standard reference.</p>
+      <p>有两个技术点值得记下。其一：评分是<em>相对的</em>，衡量的是对其他评分棋手的成绩，不是绝对实力。跨时代比较评分是有问题的——1972 年的 2700 与今天的 2700 所对应的棋手群体并不同。其二：闭环的评分池原则上是守恒的，但通胀仍可能从几个渠道渗入——新棋手以偏高的临时分入场、评分下限、不对称的 K 系数等。Jeff Sonas 的分析表明 1980 年代中期以来存在轻微通胀；Regan 与 Haworth 用引擎分析直接评估走法质量，结论则是几乎没有通胀。这场争论仍在继续。</p>
 
-    <p>A non-exhaustive map of the major opening families:</p>
+      <p>网络平台使用 Elo 的变体。Chess.com 用 Glicko 风格的系统；Lichess 用 <a href="http://www.glicko.net/glicko.html" rel="noopener">Glicko-2</a>（Mark Glickman，1995、2012），后者额外引入"评分偏差"参数追踪不确定性、"波动性"参数追踪近期变化。这些平台的评分与 FIDE 评分不能直接比较——同一棋手的 Lichess 评分通常比 FIDE 高几百分；Chess.com 介于二者之间。</p>
+    </div>
 
-    <ul>
-      <li><strong>Open games</strong> (1.e4 e5): Italian Game, Ruy López, Petroff Defence, King's Gambit (now rare at top level)</li>
-      <li><strong>Semi-open games</strong> (1.e4, Black does not play 1...e5): Sicilian Defence (most popular Black response in master play), French Defence, Caro-Kann, Pirc, Scandinavian, Alekhine</li>
-      <li><strong>Closed games</strong> (1.d4 d5): Queen's Gambit (Accepted, Declined, Slav), Catalan</li>
-      <li><strong>Indian defences</strong> (1.d4 Nf6): King's Indian, Nimzo-Indian, Queen's Indian, Grünfeld, Bogo-Indian</li>
-      <li><strong>Flank openings</strong>: English (1.c4), Réti (1.Nf3 d5 2.c4), King's Indian Attack</li>
-      <li><strong>Hypermodern</strong>: a school of thought from the 1920s (Réti, Nimzowitsch, Tartakower) emphasizing control of the centre from the flanks rather than direct occupation</li>
-    </ul>
+    <h2 id="sec-opening-theory">
+      <span data-lang-content="en">10 · Opening theory</span>
+      <span data-lang-content="zh">十 · 开局理论</span>
+    </h2>
 
-    <p>The Sicilian Defence (1.e4 c5) is the most analyzed opening in the history of chess; its Najdorf and Sveshnikov variations have been the laboratories of generations of grandmasters. The Berlin Defence to the Ruy López (1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6) was revived by Vladimir Kramnik in his 2000 World Championship match against Kasparov and has held up at the top level since, prompting some discussion about whether 1.e4 still produces a meaningful advantage at the highest levels of computer-prepared play.</p>
+    <div data-lang-content="en">
+      <p>Opening theory is the codified knowledge of strong continuations from the starting position, organized around variations that have been played, analyzed, and scored over centuries. A typical strong player has prepared lines twenty or thirty moves deep in their main repertoire, with sidelines to handle deviations. The most widely-used taxonomy is the <em>Encyclopaedia of Chess Openings</em> (ECO), published in five volumes by the Yugoslav publisher Šahovski Informator from the 1960s onward; ECO codes (A00–E99) are the standard reference.</p>
 
-    <p>Engines have shifted opening theory considerably. Many lines once thought playable have been refuted to draws or worse; conversely, lines once thought dubious (the Berlin, the Petroff) are now mainline. AlphaZero in particular preferred the Queen's Gambit and English Opening over the more popular human choices, and its games sparked a brief revival of the Queen's Indian and Catalan in elite play.</p>
+      <p>A non-exhaustive map of the major opening families:</p>
 
-    <h2 id="sec-suits">11 · Suits, lusory activity, and the philosophy of games</h2>
+      <ul>
+        <li><strong>Open games</strong> (1.e4 e5): Italian Game, Ruy López, Petroff Defence, King's Gambit (now rare at top level)</li>
+        <li><strong>Semi-open games</strong> (1.e4, Black does not play 1...e5): Sicilian Defence (most popular Black response in master play), French Defence, Caro-Kann, Pirc, Scandinavian, Alekhine</li>
+        <li><strong>Closed games</strong> (1.d4 d5): Queen's Gambit (Accepted, Declined, Slav), Catalan</li>
+        <li><strong>Indian defences</strong> (1.d4 Nf6): King's Indian, Nimzo-Indian, Queen's Indian, Grünfeld, Bogo-Indian</li>
+        <li><strong>Flank openings</strong>: English (1.c4), Réti (1.Nf3 d5 2.c4), King's Indian Attack</li>
+        <li><strong>Hypermodern</strong>: a school of thought from the 1920s (Réti, Nimzowitsch, Tartakower) emphasizing control of the centre from the flanks rather than direct occupation</li>
+      </ul>
 
-    <p>Bernard Suits's 1978 book <em><a href="https://broadviewpress.com/product/the-grasshopper-third-edition/" rel="noopener">The Grasshopper: Games, Life and Utopia</a></em> remains the most influential analytic account of what it means to play a game.<a href="#sn-7" class="sn-ref">7</a> The book is structured as a Socratic dialogue between a dying Grasshopper — playful, idle, philosophically committed to play as the highest good — and his disciples. The Grasshopper proposes that game-playing has four interlocking elements.</p>
+      <p>The Sicilian Defence (1.e4 c5) is the most analyzed opening in the history of chess; its Najdorf and Sveshnikov variations have been the laboratories of generations of grandmasters. The Berlin Defence to the Ruy López (1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6) was revived by Vladimir Kramnik in his 2000 World Championship match against Kasparov and has held up at the top level since, prompting some discussion about whether 1.e4 still produces a meaningful advantage at the highest levels of computer-prepared play.</p>
+
+      <p>Engines have shifted opening theory considerably. Many lines once thought playable have been refuted to draws or worse; conversely, lines once thought dubious (the Berlin, the Petroff) are now mainline. AlphaZero in particular preferred the Queen's Gambit and English Opening over the more popular human choices, and its games sparked a brief revival of the Queen's Indian and Catalan in elite play.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>开局理论是从初始局面出发的"已成体系的延续"知识，围绕着已被实战、分析、统计的变化展开。一名强力棋手通常在自己的主力曲目里准备到 20–30 步深，并备有支线应对偏差。最广泛使用的分类是《国际象棋开局百科》（Encyclopaedia of Chess Openings, ECO），由南斯拉夫出版商 Šahovski Informator 自 1960 年代起出版的五卷大书；ECO 编码（A00–E99）已是通用引用标准。</p>
+
+      <p>主要开局家族（不完整列表）：</p>
+
+      <ul>
+        <li><strong>开放性开局</strong>（1.e4 e5）：意大利开局、西班牙开局（Ruy López）、彼得罗夫防御、王翼弃兵（顶级比赛已罕见）</li>
+        <li><strong>半开放性开局</strong>（1.e4，黑方不走 1...e5）：西西里防御（顶级比赛中黑方最常用的回应）、法兰西防御、卡罗-康防御、比尔克防御、斯堪的纳维亚、阿廖欣</li>
+        <li><strong>封闭性开局</strong>（1.d4 d5）：王后弃兵（接受、拒绝、斯拉夫）、加泰罗尼亚</li>
+        <li><strong>印度防御</strong>（1.d4 Nf6）：王翼印度、尼姆佐-印度、王后翼印度、格林菲尔德、博戈-印度</li>
+        <li><strong>侧翼开局</strong>：英格兰开局（1.c4）、雷蒂开局（1.Nf3 d5 2.c4）、王翼印度进攻系统</li>
+        <li><strong>超现代主义</strong>：1920 年代由 Réti、Nimzowitsch、Tartakower 等推动的思想流派——主张通过侧翼控制中心，而非直接占据中心</li>
+      </ul>
+
+      <p>西西里防御（1.e4 c5）是国际象棋史上分析得最多的开局；其 Najdorf 与 Sveshnikov 变化是几代特级大师的实验室。西班牙开局的柏林防御（1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6）经 Vladimir Kramnik 在 2000 年世界冠军赛对 Kasparov 一战中复兴后，至今在顶级比赛中坚不可摧——这甚至引发了顶级电脑准备水平下"1.e4 是否仍能取得有意义优势"的讨论。</p>
+
+      <p>引擎大幅改写了开局理论。许多曾被认为可行的变化已被证明强行和棋或更糟；反过来，一些曾被视为可疑的变化（柏林、彼得罗夫）现在是主流。AlphaZero 尤其偏爱王后弃兵与英格兰开局，超过人类常用的选择；它的对局还短暂复兴了精英比赛中的王后翼印度与加泰罗尼亚。</p>
+    </div>
+
+    <h2 id="sec-suits">
+      <span data-lang-content="en">11 · Suits, lusory activity, and the philosophy of games</span>
+      <span data-lang-content="zh">十一 · Suits 与游戏哲学</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>Bernard Suits's 1978 book <em><a href="https://broadviewpress.com/product/the-grasshopper-third-edition/" rel="noopener">The Grasshopper: Games, Life and Utopia</a></em> remains the most influential analytic account of what it means to play a game.<a href="#sn-7" class="sn-ref">7</a> The book is structured as a Socratic dialogue between a dying Grasshopper — playful, idle, philosophically committed to play as the highest good — and his disciples. The Grasshopper proposes that game-playing has four interlocking elements.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>Bernard Suits 1978 年的著作《<em><a href="https://broadviewpress.com/product/the-grasshopper-third-edition/" rel="noopener">The Grasshopper: Games, Life and Utopia</a></em>》（《蚱蜢：游戏、生命与乌托邦》）至今仍是关于"玩游戏意味着什么"最有影响力的分析性论述<a href="#sn-7" class="sn-ref">7</a>。这本书采用苏格拉底对话的形式，主角是濒死的蚱蜢——一只游戏成性、悠闲、在哲学上把"玩"视作至善的昆虫——和他的几位弟子。蚱蜢提出，"玩游戏"包含四个相互嵌套的要素。</p>
+    </div>
 
     <aside class="sidenote" id="sn-7">
-      <span class="sidenote-num">7</span>Suits is in part responding to <a href="https://en.wikipedia.org/wiki/Family_resemblance" rel="noopener">Wittgenstein's <em>Philosophical Investigations</em></a> §66–67, where the concept of "game" is the central example of the doctrine of family resemblance: there is no single feature common to all games, only a network of overlapping similarities. Suits's project is to refute this — to provide a single closed definition that captures all and only games. Whether he succeeds is itself a substantive philosophical question. Most contemporary philosophers of games take Suits's analysis as the strongest counterexample to Wittgenstein on this particular concept, while remaining agnostic about how far the argument generalises.
+      <span class="sidenote-num">7</span>
+      <span data-lang-content="en">Suits is in part responding to <a href="https://en.wikipedia.org/wiki/Family_resemblance" rel="noopener">Wittgenstein's <em>Philosophical Investigations</em></a> §66–67, where the concept of "game" is the central example of the doctrine of family resemblance: there is no single feature common to all games, only a network of overlapping similarities. Suits's project is to refute this — to provide a single closed definition that captures all and only games. Whether he succeeds is itself a substantive philosophical question. Most contemporary philosophers of games take Suits's analysis as the strongest counterexample to Wittgenstein on this particular concept, while remaining agnostic about how far the argument generalises.</span>
+      <span data-lang-content="zh">Suits 在某种程度上是在回应<a href="https://en.wikipedia.org/wiki/Family_resemblance" rel="noopener">维特根斯坦《哲学研究》</a>§66–67——在那里，"游戏"概念恰是"家族相似性"学说的核心例子：游戏没有任何唯一共同特征，只有一张交叠相似性的网络。Suits 的工程是反驳这一点——给出一个能涵盖全部游戏、且仅涵盖游戏的封闭定义。他是否成功，本身仍是一个开放的哲学问题。当代游戏哲学界大多把 Suits 的分析视作针对维特根斯坦"游戏"这个具体例子的最有力反例，但对该论证能否扩展到其他概念则保持谨慎。</span>
     </aside>
 
-    <p>The <span class="term">prelusory goal</span> is a state of affairs that can be specified independently of the rules — described in terms a non-player would understand. In chess it is the geometric configuration in which one king is attacking the other with no legal escape. The configuration can be reached by any number of means; one of them is playing chess.</p>
+    <div data-lang-content="en">
+      <p>The <span class="term">prelusory goal</span> is a state of affairs that can be specified independently of the rules — described in terms a non-player would understand. In chess it is the geometric configuration in which one king is attacking the other with no legal escape. The configuration can be reached by any number of means; one of them is playing chess.</p>
 
-    <p>The <span class="term">lusory means</span> are the means permitted for reaching that goal. In chess they are the legal moves of each piece, the alternation of turns, the prohibition on moving into check, castling, <em>en passant</em>. They are <em>more restrictive</em> than the means available to one who simply pursued the prelusory goal directly — one could put the opposing king in checkmate by reaching across the table and rearranging the pieces.</p>
+      <p>The <span class="term">lusory means</span> are the means permitted for reaching that goal. In chess they are the legal moves of each piece, the alternation of turns, the prohibition on moving into check, castling, <em>en passant</em>. They are <em>more restrictive</em> than the means available to one who simply pursued the prelusory goal directly — one could put the opposing king in checkmate by reaching across the table and rearranging the pieces.</p>
 
-    <p>The <span class="term">lusory attitude</span> is the player's voluntary acceptance of the lusory means, accepted just because they make the activity possible. Suits's compact formulation: <em>To play a game is to attempt to achieve a specific state of affairs, using only means permitted by rules, where the rules prohibit more efficient in favour of less efficient means, and where the rules are accepted just because they make the activity possible.</em> A game, in his summary, is the voluntary attempt to overcome unnecessary obstacles.</p>
+      <p>The <span class="term">lusory attitude</span> is the player's voluntary acceptance of the lusory means, accepted just because they make the activity possible. Suits's compact formulation: <em>To play a game is to attempt to achieve a specific state of affairs, using only means permitted by rules, where the rules prohibit more efficient in favour of less efficient means, and where the rules are accepted just because they make the activity possible.</em> A game, in his summary, is the voluntary attempt to overcome unnecessary obstacles.</p>
 
-    <p>The fourth element is the <em>rules</em> themselves, which Suits takes to be constitutive rather than regulative — they do not merely tell you how to play after you have decided to play; they make the activity exist at all. Without the rules there is just a board with pieces; there is no game.</p>
+      <p>The fourth element is the <em>rules</em> themselves, which Suits takes to be constitutive rather than regulative — they do not merely tell you how to play after you have decided to play; they make the activity exist at all. Without the rules there is just a board with pieces; there is no game.</p>
 
-    <p>The book ends with a paradox developed at length. Imagine Utopia: a world where every instrumental need is met. Suits argues that in such a world, game-playing would be the only activity left that retained any point — we would not <em>need</em> to do anything, but we could still take up unnecessary obstacles for the sake of overcoming them. Game-playing, on this view, is the activity that survives the elimination of necessity. The Grasshopper, who plays through the summer while the Ants prepare for winter, turns out to have understood the human condition better than his industrious cousins.</p>
+      <p>The book ends with a paradox developed at length. Imagine Utopia: a world where every instrumental need is met. Suits argues that in such a world, game-playing would be the only activity left that retained any point — we would not <em>need</em> to do anything, but we could still take up unnecessary obstacles for the sake of overcoming them. Game-playing, on this view, is the activity that survives the elimination of necessity. The Grasshopper, who plays through the summer while the Ants prepare for winter, turns out to have understood the human condition better than his industrious cousins.</p>
 
-    <p>Suits's framework gives precise language for a recurring confusion about chess. Stockfish does not "play" chess in his sense — it computes optimal moves within the lusory-means structure, but does not <em>accept</em> the structure. The distinction is not available in the language of game theory by itself.</p>
+      <p>Suits's framework gives precise language for a recurring confusion about chess. Stockfish does not "play" chess in his sense — it computes optimal moves within the lusory-means structure, but does not <em>accept</em> the structure. The distinction is not available in the language of game theory by itself.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p><span class="term">前游戏目标</span>是一种不依赖游戏规则就能描述的事态——一个非玩家也能听懂的状态。在国际象棋中，前游戏目标是一种几何状态：一方的王正受到另一方的王（及其子力）的攻击且无合法逃路。这种状态可以通过任何方式达成；下棋只是其中的一种。</p>
 
-    <h2 id="sec-literature">12 · Chess in literature and film</h2>
+      <p><span class="term">游戏手段</span>指为达成前游戏目标而被允许使用的手段。在国际象棋中，这是各子的合法走法、轮流走子、不得让己方王处于被攻击状态、王车易位、吃过路兵。它们比"直接追求前游戏目标"的手段要<em>更受限制</em>——你完全可以伸手把对方的王拿走，从而达成那个几何状态。</p>
 
-    <p>Chess is one of the most over-used metaphors in writing about thinking, war, love, and politics — and a recurring subject in serious fiction. A short, partial canon:</p>
+      <p><span class="term">游戏态度</span>是玩家自愿接受游戏手段——之所以接受，正是因为这些手段使得活动得以存在。Suits 给出了一个浓缩的定义：<em>玩游戏，就是去尝试达成某个特定状态，使用规则允许的手段，其中规则禁止较高效手段而支持较低效手段，且规则之所以被接受，正因为它们使该活动得以可能。</em>简言之：游戏是"自愿尝试克服不必要障碍"。</p>
 
-    <p>Vladimir Nabokov's <em>The Defense</em> (<em>Защита Лужина</em>, 1930) follows the Russian grandmaster Aleksandr Luzhin from his isolated childhood through his career and breakdown. Nabokov was himself a strong amateur and a serious chess problem composer; the novel's chess content is technically precise. Stefan Zweig's <em>Schachnovelle</em> (<em>The Royal Game</em>, 1942 — published the year of Zweig's suicide) is a novella set on a transatlantic ship, where a man who learned chess in solitary confinement under the Gestapo finds himself playing the world champion. It is widely regarded as one of the most important short fictions about chess in any language.</p>
+      <p>第四个要素是<em>规则</em>本身。Suits 认为规则是<em>构成性</em>而非<em>规约性</em>的——它们不仅在你已经决定下棋之后告诉你怎么下；它们使"下棋"这种活动得以存在。如果没有规则，棋盘和棋子不过是棋盘和棋子，根本没有"游戏"。</p>
 
-    <p>Lewis Carroll's <em>Through the Looking-Glass</em> (1871) is structured as a chess game, with Alice as a pawn on the second rank promoting to a queen on the eighth. The moves are listed in the front matter; many of them are not legal, but the structural conceit is the point.</p>
+      <p>这本书在一个详细展开的悖论中收尾。设想"乌托邦"：一个一切工具性需求都被满足的世界。Suits 论证，在这样的世界里，游戏行为将是唯一仍然保留意义的活动——我们不<em>需要</em>做任何事，但仍然可以为了"克服"本身而自愿接纳不必要的障碍。游戏行为，按这个观点，是必然性被消除之后仍然存活下来的活动。蚱蜢——那个夏天里只玩耍而不像蚂蚁一样为冬天做准备的家伙——其实比他勤劳的兄弟们更深刻地理解了人之处境。</p>
 
-    <p>Walter Tevis's <em>The Queen's Gambit</em> (1983) was largely overlooked at publication and became a worldwide phenomenon thirty-seven years later through the 2020 Netflix adaptation, which prompted a measurable global increase in chess set sales and online tournament registrations. Bruce Pandolfini consulted on the book; Garry Kasparov on the series. Ingmar Bergman's <em>Det sjunde inseglet</em> (<em>The Seventh Seal</em>, 1957), in which the knight Antonius Block plays chess with Death on a Swedish beach, is the source of much of the subsequent "playing chess with Death" iconography in Western culture.</p>
+      <p>Suits 的框架对围绕国际象棋的一种常见混淆给出了精确的语言：Stockfish 并不"在 Suits 意义上"下棋——它在游戏手段所规定的结构内计算最优解，但它没有"接受"那个结构。这一区分在博弈论自身的语言中是无法做出的。</p>
+    </div>
 
-    <p>Other notable appearances of chess in literature: Jorge Luis Borges's poem "Ajedrez" treats the chess pieces as a metaphor for the player as himself a piece in a larger game, played by a god who is in turn a piece in some larger game still. Italo Calvino's <em>Invisible Cities</em> (1972) closes with a scene in which Marco Polo and Kublai Khan read their conversations into the marquetry of an empty chessboard. Vikram Seth's <em>The Golden Gate</em> (1986) and Elena Ferrante's <em>The Days of Abandonment</em> (2002) each contain a substantial chess scene.</p>
+    <h2 id="sec-literature">
+      <span data-lang-content="en">12 · Chess in literature and film</span>
+      <span data-lang-content="zh">十二 · 文学与电影中的象棋</span>
+    </h2>
 
-    <h2 id="sec-tournaments">13 · Notes on tournaments and titles</h2>
+    <div data-lang-content="en">
+      <p>Chess is one of the most over-used metaphors in writing about thinking, war, love, and politics — and a recurring subject in serious fiction. A short, partial canon:</p>
 
-    <p>The <span class="term">World Chess Championship</span> has been held since 1886. Champions in roughly the modern era: Botvinnik (1948–1963, with interruptions), Petrosian (1963–1969), Spassky (1969–1972), Fischer (1972–1975, who refused to defend), Karpov (1975–1985, by default), Kasparov (1985–2000), Kramnik (2000–2007), Anand (2007–2013), Carlsen (2013–2023, voluntarily relinquished), Ding Liren (2023–2024), Gukesh Dommaraju (2024–present). Carlsen's withdrawal — he said he no longer felt sufficient motivation to defend — was a significant moment. Ding's title win and Gukesh's subsequent victory at age 18 marked the entry of the championship into a post-Carlsen era.</p>
+      <p>Vladimir Nabokov's <em>The Defense</em> (<em>Защита Лужина</em>, 1930) follows the Russian grandmaster Aleksandr Luzhin from his isolated childhood through his career and breakdown. Nabokov was himself a strong amateur and a serious chess problem composer; the novel's chess content is technically precise. Stefan Zweig's <em>Schachnovelle</em> (<em>The Royal Game</em>, 1942 — published the year of Zweig's suicide) is a novella set on a transatlantic ship, where a man who learned chess in solitary confinement under the Gestapo finds himself playing the world champion. It is widely regarded as one of the most important short fictions about chess in any language.</p>
 
-    <p>The <span class="term">Candidates Tournament</span> selects the challenger; format has varied (knockout, double round-robin, currently an eight-player double round-robin). The <span class="term">FIDE World Cup</span> (knockout, 128 or 206 players) has run roughly biennially. The <span class="term">Chess Olympiad</span> is a biennial team event; the <span class="term">Tata Steel Chess Tournament</span> in Wijk aan Zee (Netherlands, since 1938) is the longest-running invitational super-tournament.</p>
+      <p>Lewis Carroll's <em>Through the Looking-Glass</em> (1871) is structured as a chess game, with Alice as a pawn on the second rank promoting to a queen on the eighth. The moves are listed in the front matter; many of them are not legal, but the structural conceit is the point.</p>
 
-    <p>Major titles, in descending order: Grandmaster (GM, 2500+ with three norms), International Master (IM, 2400+), FIDE Master (FM, 2300+), Candidate Master (CM, 2200+). Women's titles (WGM, WIM, WFM, WCM) sit 200 points lower; titled women are not separately ranked from men in the open lists.</p>
+      <p>Walter Tevis's <em>The Queen's Gambit</em> (1983) was largely overlooked at publication and became a worldwide phenomenon thirty-seven years later through the 2020 Netflix adaptation, which prompted a measurable global increase in chess set sales and online tournament registrations. Bruce Pandolfini consulted on the book; Garry Kasparov on the series. Ingmar Bergman's <em>Det sjunde inseglet</em> (<em>The Seventh Seal</em>, 1957), in which the knight Antonius Block plays chess with Death on a Swedish beach, is the source of much of the subsequent "playing chess with Death" iconography in Western culture.</p>
 
-    <h2 id="sec-personal-notes">14 · Personal notes</h2>
+      <p>Other notable appearances of chess in literature: Jorge Luis Borges's poem "Ajedrez" treats the chess pieces as a metaphor for the player as himself a piece in a larger game, played by a god who is in turn a piece in some larger game still. Italo Calvino's <em>Invisible Cities</em> (1972) closes with a scene in which Marco Polo and Kublai Khan read their conversations into the marquetry of an empty chessboard. Vikram Seth's <em>The Golden Gate</em> (1986) and Elena Ferrante's <em>The Days of Abandonment</em> (2002) each contain a substantial chess scene.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>国际象棋在写作中是关于"思考""战争""爱情""政治"被过度使用的隐喻——同时也是严肃文学反复处理的对象。一份不完整的私人正典：</p>
 
-    <h3>On checkmate, not development</h3>
+      <p>Vladimir Nabokov 的《Защита Лужина》（《卢仁的防御》/《The Defense》，1930）讲述俄罗斯特级大师 Aleksandr Luzhin 从孤僻的童年到职业生涯到精神崩溃的过程。Nabokov 自己是一名强力业余棋手，并是一位严肃的国际象棋构图作者；这本书的国际象棋内容在技术上准确。Stefan Zweig 的《Schachnovelle》（《象棋的故事》，1942——茨威格自尽那一年出版）是一篇设定在跨大西洋客船上的中篇：一个曾在盖世太保单独监禁中靠下棋自救的人，在船上发现自己在与世界冠军对弈。它被广泛认为是关于国际象棋的最重要的中篇之一。</p>
 
-    <p>One observation, after a fair amount of play and engine review: most losses at the club level come from prioritizing piece development and material preservation over the actual goal of the game, which is to mate the opposing king. Stockfish review tends to confirm this — the moments where the evaluation swings against the losing side are usually moments where one player keeps maneuvering pieces into "good squares" while the other player is already coordinating an attack on the king.</p>
+      <p>Lewis Carroll 的《Through the Looking-Glass》（《镜中奇遇》，1871）整体结构是一局国际象棋，Alice 作为兵从第二排走到第八排升变为后。走子序列列在书前；其中许多并不合法，但结构上的设计本身才是重点。</p>
 
-    <p>This connects to a point worth recalling from §11 above: in Suits's analysis, the prelusory goal of chess is the geometric configuration of the opposing king under attack with no legal escape. Material is not the goal. Position is not the goal. The king is the goal. Suits's framework is sometimes accused of being too abstract; this is a case in which it gives a very practical reminder.</p>
+      <p>Walter Tevis 的《The Queen's Gambit》（《后翼弃兵》，1983）出版时基本无人注意；37 年后凭借 2020 年的 Netflix 改编一夜风靡，全球范围内可量化地推动了棋具销售与网络比赛报名数的增长。Bruce Pandolfini 是原书的国际象棋顾问；剧集请的是 Garry Kasparov。Ingmar Bergman 的《<em>Det sjunde inseglet</em>》（《第七封印》，1957）中骑士 Antonius Block 在瑞典海滩上与死神下棋的画面，是西方文化中后续大量"与死神下棋"意象的重要源头。</p>
 
-    <p>Personal preference, derived from this observation: trade pieces aggressively and head into the endgame as soon as the resulting position is no worse than equal. Endgames have a higher ratio of "what does the king actually need to do" to "where do these pieces want to be," which suits the stripped-down logic of the prelusory goal.</p>
+      <p>国际象棋在文学中的其他显著出现：Jorge Luis Borges 的诗《Ajedrez》（《国际象棋》）将棋子作为一个隐喻——棋手本人也是更大游戏中的棋子，而那个更大游戏的棋手又是更大游戏的棋子。Italo Calvino 的《看不见的城市》（1972）以 Marco Polo 与忽必烈把他们的对话读进一块空棋盘的镶嵌纹理中作结。Vikram Seth 的《The Golden Gate》（1986）与 Elena Ferrante 的《被遗弃的日子》（2002）各自含有一段重要的国际象棋场景。</p>
+    </div>
 
-    <h3>On chess in the engine era</h3>
+    <h2 id="sec-tournaments">
+      <span data-lang-content="en">13 · Notes on tournaments and titles</span>
+      <span data-lang-content="zh">十三 · 锦标赛与头衔</span>
+    </h2>
 
-    <p>A more critical thought, advanced as a position rather than as a settled view. Running is something humans do that machines do differently: when humans run, the activity is not a slow approximation of what a car does. A car gets from A to B; a runner does not approximate that. This is why people still race despite the existence of cars. Chess seems to me different in kind. It is at its core an analytical activity over a finite combinatorial structure — and any analytical activity over that structure that a human performs is, in some real sense, a slower and weaker version of what an engine does. The engine is not a different way of playing chess; it is the same activity carried out with more computational throughput. The analogy with running breaks. Once Stockfish exists, what does it mean to celebrate human performance at the activity? My view is that it cannot mean what it once meant. Chess in the present is a symbol — a thing that once stood for the human capacity for thought, that produced game theory and a substantial body of philosophy along the way, and that survives now as a cultural and traditional practice. The empirical evidence is consonant with this read. Top players openly study engine output and try to internalize engine-recommended ideas; Carlsen withdrew from the World Championship in 2023 saying he no longer found sufficient motivation to defend his title; engine-vs-engine play at long time controls draws at rates that have many tournament organizers worried about competitive interest.</p>
+    <div data-lang-content="en">
+      <p>The <span class="term">World Chess Championship</span> has been held since 1886. Champions in roughly the modern era: Botvinnik (1948–1963, with interruptions), Petrosian (1963–1969), Spassky (1969–1972), Fischer (1972–1975, who refused to defend), Karpov (1975–1985, by default), Kasparov (1985–2000), Kramnik (2000–2007), Anand (2007–2013), Carlsen (2013–2023, voluntarily relinquished), Ding Liren (2023–2024), Gukesh Dommaraju (2024–present). Carlsen's withdrawal — he said he no longer felt sufficient motivation to defend — was a significant moment. Ding's title win and Gukesh's subsequent victory at age 18 marked the entry of the championship into a post-Carlsen era.</p>
 
-    <p>This is a strong claim and it is worth recording the strongest objections to it.</p>
+      <p>The <span class="term">Candidates Tournament</span> selects the challenger; format has varied (knockout, double round-robin, currently an eight-player double round-robin). The <span class="term">FIDE World Cup</span> (knockout, 128 or 206 players) has run roughly biennially. The <span class="term">Chess Olympiad</span> is a biennial team event; the <span class="term">Tata Steel Chess Tournament</span> in Wijk aan Zee (Netherlands, since 1938) is the longest-running invitational super-tournament.</p>
 
-    <p>The first is that the "computer-equivalence" premise — that human chess analysis is the same activity as engine analysis, only slower — is exactly what <a href="https://en.wikipedia.org/wiki/Hubert_Dreyfus's_views_on_artificial_intelligence" rel="noopener">Hubert Dreyfus</a> spent his career arguing against, beginning with his 1965 RAND paper <em>Alchemy and Artificial Intelligence</em> and his 1972 book <em>What Computers Can't Do</em>. Dreyfus's case, drawn from Heidegger and Merleau-Ponty, was that human expert performance — explicitly including chess — is not a slow form of symbolic computation but a different kind of activity altogether: situated, embodied, structured by a non-formalizable understanding of relevance. He famously lost a game to MIT's Mac Hack VI in 1967, when Seymour Papert organized the match to embarrass him; but his theoretical argument did not depend on humans being able to defeat machines. It depended on the activities being phenomenologically distinct. If Dreyfus is right, the analogy with running may not break at all: human chess and engine chess are two activities that share a name, the way human running and a car share the relation of "covering ground."</p>
+      <p>Major titles, in descending order: Grandmaster (GM, 2500+ with three norms), International Master (IM, 2400+), FIDE Master (FM, 2300+), Candidate Master (CM, 2200+). Women's titles (WGM, WIM, WFM, WCM) sit 200 points lower; titled women are not separately ranked from men in the open lists.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p><span class="term">世界冠军赛</span>始于 1886 年。大致现代时段的冠军更替：Botvinnik（1948–1963，中间有间断）、Petrosian（1963–1969）、Spassky（1969–1972）、Fischer（1972–1975，拒绝卫冕）、Karpov（1975–1985，因 Fischer 弃权而获冕）、Kasparov（1985–2000）、Kramnik（2000–2007）、Anand（2007–2013）、Carlsen（2013–2023，主动放弃卫冕）、Ding Liren / 丁立人（2023–2024）、Gukesh Dommaraju（2024–至今）。Carlsen 的退出——他说自己已不再有足够的动力卫冕——是个标志性事件。丁立人夺冠以及随后 Gukesh 18 岁夺冠，标志着冠军赛进入"后 Carlsen 时代"。</p>
 
-    <p>The second is that even granting partial computer-equivalence, the argument may apply to <em>producing the strongest moves</em> rather than to <em>playing</em>. A four-hour classical game is not won by approximating Stockfish at one position per second; it is won by translating engine-derived ideas into heuristics that fit a four-hour time budget and a finite human attention span. Top players in the engine era often describe their work as the inverse of what an engine does — extracting from engines a small number of generalizable patterns that survive translation into a human player's actual cognitive resources. This connects directly to §11 above: in Suits's framework, what a player does is to voluntarily accept the lusory means and inhabit the resulting structure. The engine optimizes; it does not <em>play</em> in Suits's sense. So even if the engine produces stronger moves, that is not the activity human chess consists in.</p>
+      <p><span class="term">候选人赛</span>选拔挑战者；赛制经历过多次变化（淘汰制、双循环，目前为八人双循环）。<span class="term">FIDE 世界杯</span>（淘汰制，128 或 206 人）大约每两年一届。<span class="term">国际象棋奥林匹克</span>是双年团体赛；<span class="term">威克安泽塔塔钢铁国际象棋赛</span>（荷兰，自 1938 年起）是历史最长的邀请性超级赛。</p>
 
-    <p>The third is that "symbol" is not as deflationary a category as it sounds. <a href="https://en.wikipedia.org/wiki/The_Work_of_Art_in_the_Age_of_Mechanical_Reproduction" rel="noopener">Walter Benjamin's 1935 essay</a> on art in the age of mechanical reproduction argued that mechanical reproduction did not destroy artworks; it changed what they were for, dissolving their cultic <em>aura</em> while opening new functions. The same structure may apply here: Deep Blue and AlphaZero may have dissolved chess's aura as the symbolic apex of human thought without dissolving the game. The activity continues; the symbolic role has changed. C. Thi Nguyen's <em><a href="https://global.oup.com/academic/product/games-9780190052089" rel="noopener">Games: Agency as Art</a></em> (2020) offers a complementary view — games provide what Nguyen calls "temporary agencies," structured experiences whose value is not reducible to optimal play. The point of playing chess on this view is not to compute the best move (engines have settled that question) but to inhabit a particular kind of bounded, alternating-turn agency for the duration of a game. That value is unaffected by the existence of stronger players, human or otherwise.</p>
+      <p>主要头衔，由高至低：特级大师（GM，2500+，需三个 norm）、国际大师（IM，2400+）、FIDE 大师（FM，2300+）、候补大师（CM，2200+）。女子头衔（WGM、WIM、WFM、WCM）门槛低 200 分；女棋手在公开榜上与男棋手不分开排名。</p>
+    </div>
 
-    <p>Where this leaves the position. The deflationary part of the argument — that chess has been demoted from "site of human intellectual contest" to "cultural and traditional practice" — survives. Carlsen's withdrawal is hard to read otherwise, and the engine-era empirical situation is what it is. But the further claim that the human activity itself reduces to slow computer simulation does not survive Dreyfus, and the deflationary reading of "symbol" does not survive Benjamin and Nguyen. The cleanest way to put what remains: the four ontological objects this page opened with are still four. The combinatorial-tree object has been near-exhausted by engines (this much is conceded). The lusory activity in Suits's sense has not. The cultural-historical practice has not, though its cultural meaning has changed. To insist that all four reduce to the first is to make exactly the conflation the opening paragraph warned against.</p>
+    <h2 id="sec-personal-notes">
+      <span data-lang-content="en">14 · Personal notes</span>
+      <span data-lang-content="zh">十四 · 个人备忘</span>
+    </h2>
 
-    <h2 id="sec-further-reading">15 · Further reading and resources</h2>
+    <h3>
+      <span data-lang-content="en">On checkmate, not development</span>
+      <span data-lang-content="zh">关于"杀王而非展开子力"</span>
+    </h3>
 
-    <p>Histories: Murray's <em>A History of Chess</em> (1913) is encyclopedic and unsurpassed in scope, though English-Asian transmission accounts have been refined since. Yalom's <em>Birth of the Chess Queen</em> (2004) tracks the queen piece — its rise, the 1475 reform, and the larger cultural symbolism — through a thousand years of European history.</p>
+    <div data-lang-content="en">
+      <p>One observation, after a fair amount of play and engine review: most losses at the club level come from prioritizing piece development and material preservation over the actual goal of the game, which is to mate the opposing king. Stockfish review tends to confirm this — the moments where the evaluation swings against the losing side are usually moments where one player keeps maneuvering pieces into "good squares" while the other player is already coordinating an attack on the king.</p>
 
-    <p>Game theory: Schwalbe and Walker's <em><a href="https://www.sciencedirect.com/science/article/pii/S0899825601908440" rel="noopener">Zermelo and the early history of game theory</a></em> (Games and Economic Behavior, 2001) is the canonical reconstruction of Zermelo 1913 and includes the standard English translation. Allis's PhD thesis (Limburg, 1994) is the source for the typology of solved games. Schaeffer et al.'s <em><a href="https://www.science.org/doi/10.1126/science.1144079" rel="noopener">Checkers Is Solved</a></em> (Science, 2007) is the best technical writing on a real solving project.</p>
+      <p>This connects to a point worth recalling from §11 above: in Suits's analysis, the prelusory goal of chess is the geometric configuration of the opposing king under attack with no legal escape. Material is not the goal. Position is not the goal. The king is the goal. Suits's framework is sometimes accused of being too abstract; this is a case in which it gives a very practical reminder.</p>
 
-    <p>Engines and AI: Silver et al.'s AlphaZero papers (<a href="https://arxiv.org/abs/1712.01815" rel="noopener">2017 preprint</a> and <a href="https://www.science.org/doi/10.1126/science.aar6404" rel="noopener">2018 Science paper</a>) are accessible reading. Matthew Sadler and Natasha Regan's <em><a href="https://www.newinchess.com/game-changer" rel="noopener">Game Changer</a></em> (2019) is the strongest book-length engagement with AlphaZero's playing style by working chess professionals. <em>Behind Deep Blue</em> by Feng-hsiung Hsu (2002) is the inside account of the 1997 match.</p>
+      <p>Personal preference, derived from this observation: trade pieces aggressively and head into the endgame as soon as the resulting position is no worse than equal. Endgames have a higher ratio of "what does the king actually need to do" to "where do these pieces want to be," which suits the stripped-down logic of the prelusory goal.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>在下了一定数量的对局并用引擎复盘之后，可以观察到一个反复出现的模式：俱乐部水平的失局，绝大多数都是因为把"发展子力"与"保留物质"放在了"将杀对方王"之前。Stockfish 的复盘往往印证这一点——评估值偏离的关键时刻，通常是一方仍在把子调向"好格子"，而另一方已经在协调对王的攻击。</p>
 
-    <p>Practical play and resources: <em><a href="https://lichess.org/" rel="noopener">Lichess.org</a></em> is free, open source, and has the best free training tools in existence (puzzle racer, Studies, opening explorer, the seven-piece tablebase API). The <a href="https://www.youtube.com/@STLChessClub" rel="noopener">Saint Louis Chess Club's YouTube channel</a> and <em>chess24</em> archives contain decades of grandmaster commentary. ChessBase software (commercial) is the standard for opening preparation at a serious level. For pure problem-solving and the aesthetic of the chess composition tradition, the <em>Yacpdb</em> chess problem database and the journals <em>The Problemist</em> and <em>EG</em> are unmatched.</p>
+      <p>这与第十一节关于 Suits 的内容有所呼应：在 Suits 的分析中，国际象棋的前游戏目标，是对方的王受到攻击且无合法逃路这一几何状态。子力不是目标。阵型不是目标。王才是目标。Suits 的框架有时被批评为过于抽象；这是一个它给出了非常实用的提醒的例子。</p>
 
-    <p>Suits and the philosophy of games: <em>The Grasshopper</em> (1978; Broadview reissue 2014, with introduction by Thomas Hurka) is the primary text. C. Thi Nguyen's <em><a href="https://global.oup.com/academic/product/games-9780190052089" rel="noopener">Games: Agency as Art</a></em> (2020) extends Suits in directions that are productive and disagreeable in roughly equal measure.</p>
+      <p>由这个观察派生出的个人偏好：在不会陷入劣势的前提下，主动兑子以尽快进入残局。残局有更高的"王到底需要做什么"对"子力想去哪里"的比例，这与前游戏目标的精简逻辑更一致。</p>
+    </div>
 
-    <p>Literature: Nabokov's <em>The Defense</em> (English translation by Michael Scammell with the author, 1964) and Zweig's <em>Schachnovelle</em> (any of several English translations) are the two essentials. Walter Tevis's <em>The Queen's Gambit</em> (Vintage reissue 2020) is worth reading even after the series.</p>
+    <h3>
+      <span data-lang-content="en">On chess in the engine era</span>
+      <span data-lang-content="zh">关于引擎时代的国际象棋</span>
+    </h3>
+
+    <div data-lang-content="en">
+      <p>A more critical thought, advanced as a position rather than as a settled view. Running is something humans do that machines do differently: when humans run, the activity is not a slow approximation of what a car does. A car gets from A to B; a runner does not approximate that. This is why people still race despite the existence of cars. Chess seems to me different in kind. It is at its core an analytical activity over a finite combinatorial structure — and any analytical activity over that structure that a human performs is, in some real sense, a slower and weaker version of what an engine does. The engine is not a different way of playing chess; it is the same activity carried out with more computational throughput. The analogy with running breaks. Once Stockfish exists, what does it mean to celebrate human performance at the activity? My view is that it cannot mean what it once meant. Chess in the present is a symbol — a thing that once stood for the human capacity for thought, that produced game theory and a substantial body of philosophy along the way, and that survives now as a cultural and traditional practice. The empirical evidence is consonant with this read. Top players openly study engine output and try to internalize engine-recommended ideas; Carlsen withdrew from the World Championship in 2023 saying he no longer found sufficient motivation to defend his title; engine-vs-engine play at long time controls draws at rates that have many tournament organizers worried about competitive interest.</p>
+
+      <p>This is a strong claim and it is worth recording the strongest objections to it.</p>
+
+      <p>The first is that the "computer-equivalence" premise — that human chess analysis is the same activity as engine analysis, only slower — is exactly what <a href="https://en.wikipedia.org/wiki/Hubert_Dreyfus's_views_on_artificial_intelligence" rel="noopener">Hubert Dreyfus</a> spent his career arguing against, beginning with his 1965 RAND paper <em>Alchemy and Artificial Intelligence</em> and his 1972 book <em>What Computers Can't Do</em>. Dreyfus's case, drawn from Heidegger and Merleau-Ponty, was that human expert performance — explicitly including chess — is not a slow form of symbolic computation but a different kind of activity altogether: situated, embodied, structured by a non-formalizable understanding of relevance. He famously lost a game to MIT's Mac Hack VI in 1967, when Seymour Papert organized the match to embarrass him; but his theoretical argument did not depend on humans being able to defeat machines. It depended on the activities being phenomenologically distinct. If Dreyfus is right, the analogy with running may not break at all: human chess and engine chess are two activities that share a name, the way human running and a car share the relation of "covering ground."</p>
+
+      <p>The second is that even granting partial computer-equivalence, the argument may apply to <em>producing the strongest moves</em> rather than to <em>playing</em>. A four-hour classical game is not won by approximating Stockfish at one position per second; it is won by translating engine-derived ideas into heuristics that fit a four-hour time budget and a finite human attention span. Top players in the engine era often describe their work as the inverse of what an engine does — extracting from engines a small number of generalizable patterns that survive translation into a human player's actual cognitive resources. This connects directly to §11 above: in Suits's framework, what a player does is to voluntarily accept the lusory means and inhabit the resulting structure. The engine optimizes; it does not <em>play</em> in Suits's sense. So even if the engine produces stronger moves, that is not the activity human chess consists in.</p>
+
+      <p>The third is that "symbol" is not as deflationary a category as it sounds. <a href="https://en.wikipedia.org/wiki/The_Work_of_Art_in_the_Age_of_Mechanical_Reproduction" rel="noopener">Walter Benjamin's 1935 essay</a> on art in the age of mechanical reproduction argued that mechanical reproduction did not destroy artworks; it changed what they were for, dissolving their cultic <em>aura</em> while opening new functions. The same structure may apply here: Deep Blue and AlphaZero may have dissolved chess's aura as the symbolic apex of human thought without dissolving the game. The activity continues; the symbolic role has changed. C. Thi Nguyen's <em><a href="https://global.oup.com/academic/product/games-9780190052089" rel="noopener">Games: Agency as Art</a></em> (2020) offers a complementary view — games provide what Nguyen calls "temporary agencies," structured experiences whose value is not reducible to optimal play. The point of playing chess on this view is not to compute the best move (engines have settled that question) but to inhabit a particular kind of bounded, alternating-turn agency for the duration of a game. That value is unaffected by the existence of stronger players, human or otherwise.</p>
+
+      <p>Where this leaves the position. The deflationary part of the argument — that chess has been demoted from "site of human intellectual contest" to "cultural and traditional practice" — survives. Carlsen's withdrawal is hard to read otherwise, and the engine-era empirical situation is what it is. But the further claim that the human activity itself reduces to slow computer simulation does not survive Dreyfus, and the deflationary reading of "symbol" does not survive Benjamin and Nguyen. The cleanest way to put what remains: the four ontological objects this page opened with are still four. The combinatorial-tree object has been near-exhausted by engines (this much is conceded). The lusory activity in Suits's sense has not. The cultural-historical practice has not, though its cultural meaning has changed. To insist that all four reduce to the first is to make exactly the conflation the opening paragraph warned against.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>一个更具批判性的想法，作为一种立场而非定论。跑步是人类做的、机器以不同方式做的事——人在跑步时所做的活动，并不是对一辆汽车所做之事的某种缓慢逼近。汽车从 A 到 B；跑者并不是在逼近这件事。这是为什么有了汽车之后人们仍然赛跑。在我看来国际象棋则是性质上不同的事。它在核心上就是在一个有限组合结构上做分析；任何人类在这个结构上做的分析活动，从某种实在的意义上说，都是引擎所做的事的一种较慢、较弱的版本。引擎不是另一种下棋方式；它是同一活动以更高计算吞吐量进行的形式。所以与跑步的类比不成立。Stockfish 存在之后，"为人类在这项活动中的表现而欢呼"还能意味着什么？在我看来，它已经不能意味着原来意味的事。今日的国际象棋是一个符号——一件曾经代表人类思考能力、曾经孕育博弈论与大量哲学思想的东西，现在作为文化与传统实践存活。经验事实与这个读法一致。顶级棋手公开学习引擎结论，努力将引擎建议的思路内化；Carlsen 2023 年退出世界冠军赛体系，表示他对卫冕已无足够动力；长时间控制下的引擎对引擎比赛的高和棋率，已让许多比赛组织者担心竞技性。</p>
+
+      <p>这是一个有力的主张，值得记下针对它最强的几个反驳。</p>
+
+      <p>第一个反驳针对"计算机等价性"前提——即人类的国际象棋分析与引擎分析是同一种活动、只是更慢。这正是 <a href="https://en.wikipedia.org/wiki/Hubert_Dreyfus's_views_on_artificial_intelligence" rel="noopener">Hubert Dreyfus</a> 终其一生所反对的，从他 1965 年 RAND 论文《Alchemy and Artificial Intelligence》开始，到 1972 年的《What Computers Can't Do》。Dreyfus 的论证取自 Heidegger 与 Merleau-Ponty，他主张人类的专家表现——明确包括下棋——并不是一种缓慢的符号计算，而是性质上根本不同的活动：情境化的、具身的、由一种无法被形式化的"相关性"理解所构造。他确实在 1967 年输给了 MIT 的 Mac Hack VI（Seymour Papert 安排这场比赛正是为了让他难堪），但他的理论论证并不依赖于人类能否击败机器，而依赖于这两种活动在现象学上的非同质性。如果 Dreyfus 是对的，与跑步的类比可能根本不破裂：人类下棋与引擎下棋是两种共享一个名字的不同活动，正如人类跑步与汽车共享"位移"这一关系。</p>
+
+      <p>第二个反驳是：即使部分接受计算机等价性，这一论证更适用于"<em>产生最强着法</em>"，而较少适用于"<em>下棋</em>"。一场四小时的慢棋不是靠以"每秒一个局面"的速度逼近 Stockfish 来赢的；它是靠把引擎得出的思路转译为适合四小时时间预算与有限人类注意力的启发式来赢的。引擎时代的顶级棋手常这样描述自己的工作——它是引擎所做之事的<em>逆操作</em>：从引擎中提取少量可推广的模式，使其能在人类实际的认知资源中存活下来。这一点直接关联到第十一节：在 Suits 的框架下，棋手所做的就是自愿接受游戏手段、并栖居于由此构成的结构之中。引擎做的是优化，而非 Suits 意义上的"<em>下棋</em>"。所以即便引擎产出的着法更强，那也不是人类下棋这项活动所构成的东西。</p>
+
+      <p>第三个反驳是："符号"也并不是听起来那么贬义的范畴。<a href="https://en.wikipedia.org/wiki/The_Work_of_Art_in_the_Age_of_Mechanical_Reproduction" rel="noopener">Walter Benjamin 1935 年关于机械复制时代艺术作品的著名文章</a>论证：机械复制并不毁掉艺术品，而是改变了它们的功能——溶解了它们崇拜性的<em>灵韵</em>（aura），同时开启了新的功能。同样的结构也许适用于这里：深蓝与 AlphaZero 也许溶解了国际象棋作为人类思想顶峰的符号灵韵，但并未溶解游戏本身。活动延续，符号角色改变。C. Thi Nguyen 的<a href="https://global.oup.com/academic/product/games-9780190052089" rel="noopener">《Games: Agency as Art》</a>（2020）提供了一个互补的视角——游戏给予的是 Nguyen 所说的"临时代理性"（temporary agencies），一种结构化的体验，其价值不可被还原为最优应对。按此观点，下国际象棋的意义并不在于计算最佳着法（这个问题已被引擎解决），而在于在一局棋的时长里栖居于某种特定的、有界的、轮替式的代理形态。无论是否存在更强的棋手——人类或其他——这一价值都不受影响。</p>
+
+      <p>权衡之下，立场如下。论证中带贬义读法的部分——即国际象棋已从"人类智力竞技场"被降格为"文化与传统实践"——保留下来。Carlsen 的退冕很难有别的读法，引擎时代的经验状况就是这样。但更进一步的主张——即人类活动本身被还原为缓慢的计算机模拟——经不起 Dreyfus 的批评；而对"符号"的贬义读法也经不起 Benjamin 与 Nguyen 的反驳。最干净的总结是：本页开头提出的四个本体论对象，仍然是四个。组合博弈树这个对象已被引擎接近耗尽（这一点须承认）；Suits 意义上的游戏行为这个对象没有；文化—历史实践这个对象没有，尽管其文化含义已经改变。坚持把这四个全都还原为第一个，正是开篇所警示的那种混淆。</p>
+    </div>
+
+    <h2 id="sec-further-reading">
+      <span data-lang-content="en">15 · Further reading and resources</span>
+      <span data-lang-content="zh">十五 · 延伸阅读</span>
+    </h2>
+
+    <div data-lang-content="en">
+      <p>Histories: Murray's <em>A History of Chess</em> (1913) is encyclopedic and unsurpassed in scope, though English-Asian transmission accounts have been refined since. Yalom's <em>Birth of the Chess Queen</em> (2004) tracks the queen piece — its rise, the 1475 reform, and the larger cultural symbolism — through a thousand years of European history.</p>
+
+      <p>Game theory: Schwalbe and Walker's <em><a href="https://www.sciencedirect.com/science/article/pii/S0899825601908440" rel="noopener">Zermelo and the early history of game theory</a></em> (Games and Economic Behavior, 2001) is the canonical reconstruction of Zermelo 1913 and includes the standard English translation. Allis's PhD thesis (Limburg, 1994) is the source for the typology of solved games. Schaeffer et al.'s <em><a href="https://www.science.org/doi/10.1126/science.1144079" rel="noopener">Checkers Is Solved</a></em> (Science, 2007) is the best technical writing on a real solving project.</p>
+
+      <p>Engines and AI: Silver et al.'s AlphaZero papers (<a href="https://arxiv.org/abs/1712.01815" rel="noopener">2017 preprint</a> and <a href="https://www.science.org/doi/10.1126/science.aar6404" rel="noopener">2018 Science paper</a>) are accessible reading. Matthew Sadler and Natasha Regan's <em><a href="https://www.newinchess.com/game-changer" rel="noopener">Game Changer</a></em> (2019) is the strongest book-length engagement with AlphaZero's playing style by working chess professionals. <em>Behind Deep Blue</em> by Feng-hsiung Hsu (2002) is the inside account of the 1997 match.</p>
+
+      <p>Practical play and resources: <em><a href="https://lichess.org/" rel="noopener">Lichess.org</a></em> is free, open source, and has the best free training tools in existence (puzzle racer, Studies, opening explorer, the seven-piece tablebase API). The <a href="https://www.youtube.com/@STLChessClub" rel="noopener">Saint Louis Chess Club's YouTube channel</a> and <em>chess24</em> archives contain decades of grandmaster commentary. ChessBase software (commercial) is the standard for opening preparation at a serious level. For pure problem-solving and the aesthetic of the chess composition tradition, the <em>Yacpdb</em> chess problem database and the journals <em>The Problemist</em> and <em>EG</em> are unmatched.</p>
+
+      <p>Suits and the philosophy of games: <em>The Grasshopper</em> (1978; Broadview reissue 2014, with introduction by Thomas Hurka) is the primary text. C. Thi Nguyen's <em><a href="https://global.oup.com/academic/product/games-9780190052089" rel="noopener">Games: Agency as Art</a></em> (2020) extends Suits in directions that are productive and disagreeable in roughly equal measure.</p>
+
+      <p>Literature: Nabokov's <em>The Defense</em> (English translation by Michael Scammell with the author, 1964) and Zweig's <em>Schachnovelle</em> (any of several English translations) are the two essentials. Walter Tevis's <em>The Queen's Gambit</em> (Vintage reissue 2020) is worth reading even after the series.</p>
+    </div>
+    <div data-lang-content="zh">
+      <p>历史：Murray 的《A History of Chess》（1913）至今规模上无人超越，尽管关于英印-亚洲传播的部分已有后续修正。Yalom 的《Birth of the Chess Queen》（2004）追踪后这枚棋子——它的崛起、1475 年的改革，及背后更大的文化象征——穿过欧洲一千年的历史。</p>
+
+      <p>博弈论：Schwalbe 与 Walker 的 <a href="https://www.sciencedirect.com/science/article/pii/S0899825601908440" rel="noopener">《Zermelo and the early history of game theory》</a>（《Games and Economic Behavior》，2001）是策梅洛 1913 论文的规范重构，附标准英译。Allis 的博士论文（林堡，1994）是已解游戏分类的来源。Schaeffer 等人的 <a href="https://www.science.org/doi/10.1126/science.1144079" rel="noopener">《Checkers Is Solved》</a>（《Science》，2007）是关于实际"解出"工程的最佳技术写作。</p>
+
+      <p>引擎与人工智能：Silver 等人的 AlphaZero 论文（<a href="https://arxiv.org/abs/1712.01815" rel="noopener">2017 预印本</a>与 <a href="https://www.science.org/doi/10.1126/science.aar6404" rel="noopener">2018 《Science》论文</a>）相对易读。Matthew Sadler 与 Natasha Regan 合著的 <a href="https://www.newinchess.com/game-changer" rel="noopener">《Game Changer》</a>（2019）是工作棋手与 AlphaZero 风格最深入的对话。Feng-hsiung Hsu（许峰雄）的《Behind Deep Blue》（2002）是 1997 年比赛的内部记述。</p>
+
+      <p>实战与资源：<em><a href="https://lichess.org/" rel="noopener">Lichess.org</a></em> 免费、开源，并且拥有现存最好的免费训练工具（puzzle racer、Studies、开局浏览器、七子残局表 API）。<a href="https://www.youtube.com/@STLChessClub" rel="noopener">Saint Louis Chess Club 的 YouTube 频道</a>与 chess24 的存档收藏了几十年的特级大师讲解。ChessBase 软件（商业）是严肃备战中的开局准备标准。对于纯粹的解题与构图传统，Yacpdb 数据库与杂志《The Problemist》和《EG》无可替代。</p>
+
+      <p>Suits 与游戏哲学：《The Grasshopper》（1978；Broadview 2014 重印版有 Thomas Hurka 导言）是核心文本。C. Thi Nguyen 的<a href="https://global.oup.com/academic/product/games-9780190052089" rel="noopener">《Games: Agency as Art》</a>（2020）在 Suits 之上做出了一些既富启发又值得商榷的延伸。</p>
+
+      <p>文学：Nabokov 的《卢仁的防御》（Michael Scammell 与作者本人合译的英译本，1964）与 Zweig 的《象棋的故事》（多种英译本、中译本均可）是两部最值得读的文学作品。Walter Tevis 的《后翼弃兵》（Vintage 2020 重印版）即使在剧集之后仍值得一读。</p>
+    </div>
 
     <hr>
 
     <footer class="page-footer">
       <span>yifanova.com / chess</span>
-      <span>last updated April 2026</span>
+      <span>
+        <span data-lang-content="en">last updated April 2026</span>
+        <span data-lang-content="zh">最近更新于 2026 年 4 月</span>
+      </span>
       <span><a href="/religion">/religion</a></span>
     </footer>
 
@@ -530,12 +1170,54 @@
 </div>
 
 <script src="/assets/gametree.js"></script>
-<script>
-  new GameTree('game-tree-demo', { lang: 'en' });
-</script>
-
 <script src="/assets/chess.js"></script>
 <script src="/assets/toc.js"></script>
+
+<script>
+  /* ── Language toggle and game-tree (re-)initialization ─────────── */
+  (function () {
+    const body = document.body;
+    const buttons = document.querySelectorAll('.lang-toggle button[data-lang-set]');
+    const htmlEl = document.documentElement;
+
+    // Track game-tree instance so we can rebuild on lang switch
+    let gameTree = null;
+    function initGameTree(lang) {
+      const container = document.getElementById('game-tree-demo');
+      if (!container) return;
+      container.innerHTML = '';  // clear any previous render
+      gameTree = new GameTree('game-tree-demo', { lang: lang });
+    }
+
+    function setLang(lang) {
+      body.setAttribute('data-lang', lang);
+      htmlEl.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+      buttons.forEach(btn => {
+        const active = btn.getAttribute('data-lang-set') === lang;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      // Rebuild the game-tree widget with the new language
+      initGameTree(lang);
+      // Persist for future visits within this site
+      try { localStorage.setItem('yifanova-lang', lang); } catch (e) {}
+    }
+
+    // Restore stored preference if any; otherwise default to EN
+    let initial = 'en';
+    try {
+      const stored = localStorage.getItem('yifanova-lang');
+      if (stored === 'en' || stored === 'zh') initial = stored;
+    } catch (e) {}
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang-set')));
+    });
+
+    // Apply initial language (also handles game-tree init)
+    setLang(initial);
+  })();
+</script>
 
 </body>
 </html>
