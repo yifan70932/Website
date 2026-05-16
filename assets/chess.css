@@ -147,7 +147,7 @@
   font-family: var(--font-ui);
 }
 
-html[lang^="zh"] .chess-info {
+body[data-lang="zh"] .chess-info {
   font-family: var(--font-cjk), var(--font-ui);
 }
 
@@ -163,7 +163,7 @@ html[lang^="zh"] .chess-info {
   border-left: 3px solid var(--sapphire);
   text-align: center;
 }
-html[lang^="zh"] .chess-status {
+body[data-lang="zh"] .chess-status {
   letter-spacing: 0.02em;
   text-transform: none;
 }
@@ -197,7 +197,7 @@ html[lang^="zh"] .chess-status {
   cursor: pointer;
   transition: background 0.12s, color 0.12s, border-color 0.12s;
 }
-html[lang^="zh"] .chess-controls button {
+body[data-lang="zh"] .chess-controls button {
   font-family: var(--font-cjk), var(--font-ui);
   letter-spacing: 0.02em;
   text-transform: none;
@@ -235,7 +235,7 @@ html[lang^="zh"] .chess-controls button {
   margin-top: 0.2rem;
   font-family: var(--font-ui);
 }
-html[lang^="zh"] .chess-sf {
+body[data-lang="zh"] .chess-sf {
   font-family: var(--font-cjk), var(--font-ui);
 }
 
@@ -285,7 +285,7 @@ html[lang^="zh"] .chess-sf {
   font-size: var(--fs-small);
   color: var(--ink-faint);
 }
-html[lang^="zh"] .chess-sf-detail {
+body[data-lang="zh"] .chess-sf-detail {
   letter-spacing: 0.02em;
   text-transform: none;
 }
@@ -309,7 +309,7 @@ html[lang^="zh"] .chess-sf-detail {
   color: var(--ink-soft);
   text-align: left;
 }
-html[lang^="zh"] .chess-caption {
+body[data-lang="zh"] .chess-caption {
   font-family: var(--font-cjk), var(--font-body);
   line-height: 1.7;
 }
