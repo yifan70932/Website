@@ -123,11 +123,26 @@ body.antinatalism-page[data-lang="zh"] {
 @media (min-width: 1100px) {
   .antinatalism-page .layout {
     display: grid;
-    grid-template-columns: 14rem 1fr;
-    gap: 3rem;
+    grid-template-columns: 14rem 1px 1fr;
+    column-gap: 2rem;
     align-items: start;
     padding: 0 2rem 6rem;
     padding-top: 2rem;
+    position: relative;
+  }
+
+  /* Sticky vertical divider between TOC and main content.
+     Inserted as a grid item via ::before on .layout. */
+  .antinatalism-page .layout::before {
+    content: "";
+    grid-column: 2;
+    grid-row: 1;
+    width: 1px;
+    background: var(--an-rule);
+    position: sticky;
+    top: 4.5rem;
+    height: calc(100vh - 6rem);
+    align-self: start;
   }
 }
 
