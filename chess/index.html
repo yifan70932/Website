@@ -30,26 +30,36 @@
       border-bottom: 1px solid var(--rule, #e5e7eb);
     }
 
-    /* Language toggle buttons (replacing two <a> links) */
+    /* Language toggle: capsule segmented control matching antinatalism page */
     .colophon .lang-toggle {
       display: inline-flex;
-      gap: 0.25rem;
+      border: 1px solid var(--rule, #e5e7eb);
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--paper-deep, #f5f4ee);
     }
     .colophon .lang-toggle button {
-      font: inherit;
-      color: var(--ink-faint, #6b7280);
+      font-family: var(--font-ui, 'Inter', system-ui, sans-serif);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.7rem;
       background: transparent;
-      border: none;
-      padding: 0 0.35rem;
+      border: 0;
+      color: var(--ink-faint, #6b7280);
       cursor: pointer;
-      letter-spacing: 0.02em;
-    }
-    .colophon .lang-toggle button:hover {
-      color: var(--navy, #0a3d62);
+      transition: background 0.15s, color 0.15s;
     }
     .colophon .lang-toggle button.active {
-      color: var(--ink, #1f2328);
-      font-weight: 600;
+      background: var(--navy, #0a3d62);
+      color: #ffffff;
+    }
+    .colophon .lang-toggle button:not(.active):hover {
+      color: var(--navy, #0a3d62);
+      background: var(--pale-blue, #e8f1f8);
+    }
+    /* In Chinese, drop uppercase letter-spacing widening */
+    body[data-lang="zh"] .colophon .lang-toggle button {
+      letter-spacing: 0.02em;
     }
 
     /* Language switching: hide opposite-lang content blocks */
@@ -77,6 +87,23 @@
 
     /* TOC sticky offset under the now-sticky header (only when applicable) */
     .toc { scroll-margin-top: 4rem; }
+
+    /* Vertical divider between TOC and article, matching antinatalism page.
+       Only applies on wide viewports where TOC is a sidebar (≥1100px).
+       The sticky positioning ensures the divider follows the viewport so it
+       does not visually end where TOC content ends. */
+    @media (min-width: 1100px) {
+      nav.toc {
+        position: sticky;
+        top: 4.5rem;
+        align-self: start;
+        max-height: calc(100vh - 6rem);
+        overflow-y: auto;
+        padding-right: 1.5rem;
+        border-right: 1px solid var(--rule, #e5e7eb);
+        margin-right: 1.5rem;
+      }
+    }
 
     /* Anchor scroll offset so section headers don't hide under sticky header */
     h2[id], h3[id] { scroll-margin-top: 4rem; }
