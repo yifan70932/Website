@@ -186,16 +186,16 @@ body[data-lang="zh"] .chess-status {
 
 .chess-controls button {
   font-family: var(--font-ui);
-  font-size: var(--fs-meta);
-  letter-spacing: 0.04em;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  padding: 0.5rem 0.9rem;
+  padding: 0.4rem 0.8rem;
   background: var(--bg);
   color: var(--ink-soft);
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 body[data-lang="zh"] .chess-controls button {
   font-family: var(--font-cjk), var(--font-ui);
