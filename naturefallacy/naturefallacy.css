@@ -1,0 +1,998 @@
+/* ====================================================================
+   yifanova.com/naturefallacy — self-contained stylesheet
+   Independent of base.css and tokens.css.
+   All selectors scoped under .nature-page.
+   Matches the visual identity of /antinatalism, /ski, /religion:
+     - Atkinson Hyperlegible body + Inter UI + Noto Serif SC zh
+     - Sticky TOC sidebar at ≥1100px, collapses to top on narrow
+     - Navy #0a3d62 accent, paper background
+   Personal wiki: no reader-facing prose, no editorial framing.
+   ==================================================================== */
+
+:root {
+  --mil-ink:        #1f2328;
+  --mil-ink-soft:   #4a5159;
+  --mil-ink-faint:  #6b7280;
+  --mil-ink-faded:  #9ca3af;
+  --mil-rule:       #e5e7eb;
+  --mil-rule-soft:  #f1f3f5;
+  --mil-paper:      #fafaf7;
+  --mil-paper-deep: #f5f4ee;
+  --mil-navy:       #0a3d62;
+  --mil-sapphire:   #1e5fa8;
+  --mil-graphite:   #2c2e30;     /* secondary accent for diagrams */
+  --mil-rust:       #8b3a2a;     /* used sparingly for contrast */
+  --mil-pale-blue:  #e8f1f8;
+  --mil-pale-gray:  #eceef1;
+
+  --mil-font-body:  "Atkinson Hyperlegible", "Source Sans 3", system-ui, -apple-system, sans-serif;
+  --mil-font-ui:    "Inter", system-ui, sans-serif;
+  --mil-font-cn:    "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", serif;
+  --mil-font-mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.nature-page, .nature-page * { box-sizing: border-box; }
+
+body.nature-page {
+  margin: 0;
+  background: var(--mil-paper);
+  color: var(--mil-ink);
+  font-family: var(--mil-font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  font-feature-settings: "kern", "liga", "calt";
+  -webkit-font-smoothing: antialiased;
+}
+
+body.nature-page[data-lang="zh"] {
+  font-family: var(--mil-font-cn);
+  line-height: 1.78;
+}
+
+/* ─── Language switching ─────────────────────────────────────────── */
+.nature-page [data-lang-content] { display: none; }
+.nature-page[data-lang="en"] [data-lang-content="en"] { display: revert; }
+.nature-page[data-lang="zh"] [data-lang-content="zh"] { display: revert; }
+
+/* ─── Topbar ─────────────────────────────────────────────────────── */
+.nature-page .topbar {
+  border-bottom: 1px solid var(--mil-rule);
+  background: rgba(250, 250, 247, 0.92);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.nature-page .topbar-inner {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nature-page .brand {
+  font-family: var(--mil-font-ui);
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  color: var(--mil-ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nature-page .brand-mark { color: var(--mil-navy); font-weight: 600; }
+.nature-page .brand-sep { color: var(--mil-ink-faded); }
+.nature-page .brand-page { color: var(--mil-ink-soft); }
+
+/* ─── Language toggle ────────────────────────────────────────────── */
+.nature-page .lang-toggle {
+  display: inline-flex;
+  border: 1px solid var(--mil-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--mil-paper-deep);
+}
+
+.nature-page .lang-toggle button {
+  font-family: var(--mil-font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.7rem;
+  background: transparent;
+  border: 0;
+  color: var(--mil-ink-faint);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nature-page .lang-toggle button.active { background: var(--mil-navy); color: white; }
+.nature-page .lang-toggle button:not(.active):hover { color: var(--mil-navy); background: var(--mil-pale-blue); }
+
+/* ─── Two-column layout: TOC sidebar + main content ──────────────── */
+.nature-page .layout {
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+@media (min-width: 1100px) {
+  .nature-page .layout {
+    display: grid;
+    grid-template-columns: 14rem 1px 1fr;
+    column-gap: 2rem;
+    align-items: start;
+    padding: 0 2rem 6rem;
+    padding-top: 2rem;
+    position: relative;
+  }
+
+  /* Sticky vertical divider between TOC and main content.
+     Inserted as a grid item via ::before on .layout. */
+  .nature-page .layout::before {
+    content: "";
+    grid-column: 2;
+    grid-row: 1;
+    width: 1px;
+    background: var(--mil-rule);
+    position: sticky;
+    top: 4.5rem;
+    height: calc(100vh - 6rem);
+    align-self: start;
+  }
+}
+
+.nature-page .main {
+  max-width: 64rem;
+  padding-top: 3rem;
+  position: relative;
+}
+
+@media (min-width: 1100px) {
+  .nature-page .main {
+    max-width: 64rem;
+    padding-top: 0;
+  }
+}
+
+/* ─── Article header ─────────────────────────────────────────────── */
+.nature-page .article-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--mil-rule);
+}
+
+.nature-page .kicker {
+  font-family: var(--mil-font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mil-ink-faint);
+  margin: 0 0 0.85rem;
+  max-width: 50rem;
+}
+.nature-page[data-lang="zh"] .kicker {
+  font-family: var(--mil-font-cn);
+  letter-spacing: 0.08em;
+  text-transform: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.nature-page h1 {
+  font-weight: 700;
+  font-size: clamp(2rem, 4.2vw, 2.6rem);
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--mil-ink);
+  margin: 0 0 0.6rem;
+  max-width: 50rem;
+}
+
+.nature-page .subtitle {
+  font-size: 1.1rem;
+  color: var(--mil-ink-soft);
+  font-style: italic;
+  margin: 0 0 1.5rem;
+  max-width: 50rem;
+}
+.nature-page[data-lang="zh"] .subtitle { font-style: normal; }
+
+.nature-page .epigraph {
+  font-family: var(--mil-font-body);
+  font-style: italic;
+  color: var(--mil-ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 1.75rem 0 0 2.5rem;
+  max-width: 42rem;
+}
+.nature-page[data-lang="zh"] .epigraph {
+  font-family: var(--mil-font-cn);
+  font-style: normal;
+  line-height: 1.85;
+}
+.nature-page .epigraph .attribution {
+  display: block;
+  font-style: normal;
+  font-family: var(--mil-font-body);
+  font-size: 0.85rem;
+  color: var(--mil-ink-faint);
+  margin-top: 0.5rem;
+}
+.nature-page .epigraph .attribution::before { content: "— "; }
+.nature-page[data-lang="zh"] .epigraph .attribution {
+  font-family: var(--mil-font-cn);
+}
+
+.nature-page .epigraph + .epigraph {
+  margin-top: 1.1rem;
+}
+
+/* ─── Headings inside the body ───────────────────────────────────── */
+.nature-page h2 {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--mil-navy);
+  line-height: 1.25;
+  margin: 3.2rem 0 1rem;
+  letter-spacing: -0.005em;
+  max-width: 50rem;
+}
+
+.nature-page h2 .sec-num {
+  display: inline-block;
+  font-family: var(--mil-font-ui);
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--mil-ink-faint);
+  margin-right: 0.5em;
+  letter-spacing: 0.04em;
+}
+.nature-page[data-lang="zh"] h2 .sec-num {
+  font-family: var(--mil-font-cn);
+}
+
+.nature-page h3 {
+  font-family: var(--mil-font-ui);
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mil-ink-soft);
+  margin: 2rem 0 0.5rem;
+  max-width: 50rem;
+}
+.nature-page[data-lang="zh"] h3 {
+  font-family: var(--mil-font-cn);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.nature-page h4 {
+  font-family: var(--mil-font-body);
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--mil-ink);
+  margin: 1.5rem 0 0.4rem;
+  letter-spacing: 0;
+  max-width: 50rem;
+}
+.nature-page[data-lang="zh"] h4 {
+  font-family: var(--mil-font-cn);
+}
+
+/* ─── Anchor offset for TOC nav ─────────────────────────────────── */
+.nature-page h2[id] { scroll-margin-top: 4rem; }
+html { scroll-behavior: smooth; }
+
+/* ─── Body prose ─────────────────────────────────────────────────── */
+.nature-page p {
+  margin: 0 0 1.1em;
+  max-width: 50rem;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.nature-page[data-lang="zh"] p {
+  hyphens: none;
+  -webkit-hyphens: none;
+  text-align: justify;
+}
+
+.nature-page a {
+  color: var(--mil-navy);
+  text-decoration: underline;
+  text-decoration-color: var(--mil-rule);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.15s ease;
+}
+.nature-page a:hover { text-decoration-color: var(--mil-navy); }
+
+.nature-page em { font-style: italic; }
+.nature-page strong { font-weight: 700; color: var(--mil-ink); }
+
+.nature-page .term {
+  font-family: var(--mil-font-ui);
+  font-weight: 600;
+  color: var(--mil-navy);
+  font-size: 0.96em;
+}
+.nature-page[data-lang="zh"] .term {
+  font-family: var(--mil-font-cn);
+}
+
+.nature-page .lat { font-style: italic; }
+.nature-page[data-lang="zh"] .lat { font-style: italic; font-family: var(--mil-font-body); }
+.nature-page .cjk { font-family: var(--mil-font-cn); font-style: normal; }
+
+/* ─── Lists ──────────────────────────────────────────────────────── */
+.nature-page ul, .nature-page ol {
+  max-width: 50rem;
+  padding-left: 1.5rem;
+  margin: 0.4rem 0 1.2rem;
+}
+.nature-page li {
+  margin-bottom: 0.4em;
+}
+.nature-page li > ul, .nature-page li > ol {
+  margin: 0.4em 0 0.4em;
+}
+.nature-page ul.compact, .nature-page ol.compact {
+  margin: 0.2rem 0 0.6rem;
+}
+.nature-page ul.compact li, .nature-page ol.compact li {
+  margin-bottom: 0.15em;
+}
+
+/* Definition lists for concept entries */
+.nature-page dl {
+  max-width: 50rem;
+  margin: 1rem 0 1.4rem;
+}
+.nature-page dt {
+  font-family: var(--mil-font-ui);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--mil-navy);
+  margin-top: 0.85rem;
+  letter-spacing: 0.01em;
+}
+.nature-page[data-lang="zh"] dt {
+  font-family: var(--mil-font-cn);
+  letter-spacing: 0;
+}
+.nature-page dd {
+  margin: 0.2rem 0 0.7rem 0;
+  color: var(--mil-ink);
+}
+
+/* ─── Block elements ─────────────────────────────────────────────── */
+.nature-page blockquote {
+  margin: 1.5rem 0;
+  padding: 0.9rem 1.25rem;
+  border-left: 3px solid var(--mil-navy);
+  background: var(--mil-pale-blue);
+  border-radius: 0 3px 3px 0;
+  color: var(--mil-ink-soft);
+  font-style: italic;
+  max-width: 50rem;
+}
+.nature-page blockquote p:last-child { margin-bottom: 0; }
+.nature-page[data-lang="zh"] blockquote { font-style: normal; }
+
+.nature-page blockquote .attribution {
+  display: block;
+  font-style: normal;
+  font-family: var(--mil-font-ui);
+  font-size: 0.82rem;
+  color: var(--mil-ink-faint);
+  margin-top: 0.45rem;
+  letter-spacing: 0.02em;
+}
+.nature-page blockquote .attribution::before { content: "— "; }
+.nature-page[data-lang="zh"] blockquote .attribution {
+  font-family: var(--mil-font-cn);
+}
+
+.nature-page hr {
+  border: none;
+  border-top: 1px solid var(--mil-rule);
+  margin: 3rem 0;
+  max-width: 50rem;
+}
+
+/* ─── Figures ────────────────────────────────────────────────────── */
+.nature-page figure {
+  margin: 2.5rem 0;
+  max-width: 50rem;
+}
+
+.nature-page figure svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.nature-page figcaption {
+  font-family: var(--mil-font-ui);
+  font-size: 0.82rem;
+  color: var(--mil-ink-faint);
+  margin-top: 0.85rem;
+  line-height: 1.55;
+}
+.nature-page[data-lang="zh"] figcaption {
+  font-family: var(--mil-font-cn);
+  line-height: 1.7;
+}
+
+/* ─── Sidenotes ──────────────────────────────────────────────────── */
+.nature-page .sidenote {
+  font-family: var(--mil-font-ui);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--mil-ink-soft);
+  background: var(--mil-rule-soft);
+  border-left: 2px solid var(--mil-sapphire);
+  padding: 0.75rem 1rem;
+  margin: 1.5rem 0;
+  border-radius: 0 3px 3px 0;
+  max-width: 50rem;
+}
+.nature-page[data-lang="zh"] .sidenote {
+  font-family: var(--mil-font-cn);
+  line-height: 1.7;
+}
+
+/* ─── Tables ─────────────────────────────────────────────────────── */
+.nature-page .table-wrap {
+  max-width: 50rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+.nature-page table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+  font-family: var(--mil-font-body);
+}
+.nature-page[data-lang="zh"] table {
+  font-family: var(--mil-font-cn);
+  font-size: 0.95rem;
+}
+.nature-page th, .nature-page td {
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--mil-rule);
+  line-height: 1.45;
+}
+.nature-page[data-lang="zh"] th, .nature-page[data-lang="zh"] td {
+  line-height: 1.65;
+}
+.nature-page th {
+  font-family: var(--mil-font-ui);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mil-ink-soft);
+  border-bottom: 1.5px solid var(--mil-ink-soft);
+  background: var(--mil-paper-deep);
+}
+.nature-page[data-lang="zh"] th {
+  font-family: var(--mil-font-cn);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.88rem;
+}
+.nature-page tbody tr:hover { background: var(--mil-rule-soft); }
+
+/* ─── Table of contents ──────────────────────────────────────────── */
+.nature-page .toc {
+  font-family: var(--mil-font-ui);
+  font-size: 0.88rem;
+  color: var(--mil-ink-soft);
+  line-height: 1.5;
+}
+.nature-page[data-lang="zh"] .toc {
+  font-family: var(--mil-font-cn);
+}
+
+@media (min-width: 1100px) {
+  .nature-page .toc {
+    position: sticky;
+    top: 4.5rem;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+}
+
+.nature-page .toc-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mil-ink-faint);
+  margin: 0 0 0.7rem;
+  font-weight: 600;
+}
+.nature-page[data-lang="zh"] .toc-title {
+  text-transform: none;
+  letter-spacing: 0.05em;
+  font-size: 0.82rem;
+}
+
+.nature-page .toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nature-page .toc > .toc-list-wrapper > ol > li {
+  margin: 0 0 0.35rem;
+}
+.nature-page .toc a {
+  color: var(--mil-ink-soft);
+  text-decoration: none;
+  border: none;
+  display: block;
+  padding: 0.2rem 0;
+  transition: color 0.15s ease;
+}
+.nature-page .toc a:hover { color: var(--mil-navy); }
+.nature-page .toc-sublist {
+  margin-top: 0.2rem;
+  margin-left: 0.7rem;
+  font-size: 0.82rem;
+  color: var(--mil-ink-faint);
+}
+.nature-page .toc-sublist li { margin: 0.15rem 0; }
+
+/* Mobile collapsible TOC */
+.nature-page .toc-mobile-toggle {
+  display: none;
+}
+
+@media (max-width: 1099px) {
+  .nature-page .toc {
+    margin: 1.5rem 0 1rem;
+    padding: 0.8rem 1rem;
+    background: var(--mil-paper-deep);
+    border: 1px solid var(--mil-rule);
+    border-radius: 4px;
+  }
+  .nature-page .toc-title { display: none; }
+  .nature-page .toc-mobile-toggle {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: 0;
+    font-family: var(--mil-font-ui);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--mil-navy);
+    text-align: left;
+    cursor: pointer;
+    padding: 0;
+    letter-spacing: 0.04em;
+  }
+  .nature-page[data-lang="zh"] .toc-mobile-toggle {
+    font-family: var(--mil-font-cn);
+    letter-spacing: 0.02em;
+  }
+  .nature-page .toc-mobile-toggle::after {
+    content: " ▾";
+    font-size: 0.7rem;
+    color: var(--mil-ink-faint);
+  }
+  .nature-page .toc-mobile-toggle[aria-expanded="true"]::after { content: " ▴"; }
+  .nature-page .toc-list-wrapper {
+    display: none;
+    margin-top: 0.7rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--mil-rule);
+  }
+  .nature-page .toc-mobile-toggle[aria-expanded="true"] + .toc-list-wrapper {
+    display: block;
+  }
+}
+
+/* ─── Reference list ─────────────────────────────────────────────── */
+.nature-page .references {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 50rem;
+  padding-left: 0;
+  list-style: none;
+}
+.nature-page .references li {
+  margin-bottom: 0.65rem;
+  padding-left: 1.5rem;
+  text-indent: -1.5rem;
+  hyphens: auto;
+}
+.nature-page[data-lang="zh"] .references li {
+  hyphens: none;
+  padding-left: 0;
+  text-indent: 0;
+  margin-bottom: 0.7rem;
+}
+.nature-page .references .ref-author { font-weight: 600; }
+.nature-page .references .ref-title { font-style: italic; }
+.nature-page[data-lang="zh"] .references .ref-title { font-style: normal; }
+
+/* ─── Two-column inline glosses (for translation/original pairs) ── */
+.nature-page .gloss {
+  display: block;
+  font-family: var(--mil-font-body);
+  font-size: 0.85em;
+  color: var(--mil-ink-faint);
+  margin-left: 0.5em;
+}
+.nature-page[data-lang="zh"] .gloss {
+  font-family: var(--mil-font-body);
+}
+
+/* ─── Concept boxes (for definitional callouts) ──────────────────── */
+.nature-page .concept {
+  border: 1px solid var(--mil-rule);
+  background: var(--mil-paper-deep);
+  padding: 1rem 1.2rem 0.8rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+  max-width: 50rem;
+}
+.nature-page .concept .concept-label {
+  display: block;
+  font-family: var(--mil-font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mil-navy);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.nature-page[data-lang="zh"] .concept .concept-label {
+  font-family: var(--mil-font-cn);
+  text-transform: none;
+  letter-spacing: 0.03em;
+  font-size: 0.82rem;
+}
+.nature-page .concept p:last-child { margin-bottom: 0; }
+
+/* ─── Argument layout (premise–conclusion blocks) ────────────────── */
+.nature-page .argument {
+  font-family: var(--mil-font-body);
+  font-size: 0.95rem;
+  background: var(--mil-paper-deep);
+  border-left: 3px solid var(--mil-graphite);
+  padding: 0.9rem 1.2rem;
+  margin: 1.4rem 0;
+  max-width: 50rem;
+  line-height: 1.6;
+}
+.nature-page[data-lang="zh"] .argument {
+  font-family: var(--mil-font-cn);
+  line-height: 1.75;
+}
+.nature-page .argument ol {
+  padding-left: 1.6rem;
+  margin: 0.3rem 0 0.5rem;
+}
+.nature-page .argument li { margin-bottom: 0.35em; }
+.nature-page .argument .conclusion {
+  border-top: 1px solid var(--mil-rule);
+  padding-top: 0.55rem;
+  margin-top: 0.55rem;
+  font-weight: 600;
+}
+.nature-page .argument .label {
+  font-family: var(--mil-font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mil-ink-faint);
+  font-weight: 600;
+  margin-right: 0.4rem;
+}
+.nature-page[data-lang="zh"] .argument .label {
+  font-family: var(--mil-font-cn);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Diagrams: shared SVG styling ───────────────────────────────── */
+.nature-page .diagram-svg .axis-label,
+.nature-page .diagram-svg .cell-label {
+  font-family: var(--mil-font-ui);
+  fill: var(--mil-ink-soft);
+}
+.nature-page[data-lang="zh"] .diagram-svg .axis-label,
+.nature-page[data-lang="zh"] .diagram-svg .cell-label {
+  font-family: var(--mil-font-cn);
+}
+
+.nature-page .diagram-svg .ink-line { stroke: var(--mil-ink-soft); }
+.nature-page .diagram-svg .ink-fill { fill: var(--mil-ink); }
+
+/* Print styles — clean output if ever printed */
+@media print {
+  .nature-page .topbar, .nature-page .toc, .nature-page .lang-toggle { display: none; }
+  .nature-page .layout { display: block; padding: 0; }
+  .nature-page .main { max-width: none; padding: 0; }
+  body.nature-page { background: white; font-size: 11pt; }
+}
+
+/* ─── Quiz component (opening single-choice questions) ─────────────
+   Two single-choice questions at the head of the page.
+   Selecting an option (a) marks it correct/incorrect inline,
+   (b) reveals the explanation panel below the options.
+   No localStorage — refresh resets state, by design. */
+
+.nature-page .quiz-set {
+  margin: 2.5rem 0 3rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--mil-rule);
+  border-bottom: 1px solid var(--mil-rule);
+  max-width: 50rem;
+}
+
+.nature-page .quiz-set-label {
+  font-family: var(--mil-font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mil-ink-faint);
+  font-weight: 600;
+  margin: 0 0 1.2rem;
+}
+.nature-page[data-lang="zh"] .quiz-set-label {
+  font-family: var(--mil-font-cn);
+  text-transform: none;
+  letter-spacing: 0.05em;
+  font-size: 0.82rem;
+}
+
+.nature-page .quiz {
+  margin-bottom: 2rem;
+}
+.nature-page .quiz:last-child { margin-bottom: 0; }
+
+.nature-page .quiz-question {
+  font-family: var(--mil-font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--mil-ink);
+  margin: 0 0 0.9rem;
+  line-height: 1.5;
+}
+.nature-page[data-lang="zh"] .quiz-question {
+  font-family: var(--mil-font-cn);
+  line-height: 1.7;
+}
+.nature-page .quiz-question .qnum {
+  display: inline-block;
+  font-family: var(--mil-font-ui);
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--mil-navy);
+  margin-right: 0.45em;
+  letter-spacing: 0.04em;
+}
+.nature-page[data-lang="zh"] .quiz-question .qnum {
+  font-family: var(--mil-font-cn);
+}
+
+.nature-page .quiz-options {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.nature-page .quiz-option {
+  display: block;
+  font-family: var(--mil-font-body);
+  font-size: 0.95rem;
+  background: var(--mil-paper-deep);
+  border: 1px solid var(--mil-rule);
+  border-radius: 4px;
+  padding: 0.65rem 0.95rem;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  color: var(--mil-ink);
+  line-height: 1.5;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.nature-page[data-lang="zh"] .quiz-option {
+  font-family: var(--mil-font-cn);
+  line-height: 1.65;
+}
+.nature-page .quiz-option:hover:not(:disabled) {
+  background: var(--mil-pale-blue);
+  border-color: var(--mil-sapphire);
+}
+
+.nature-page .quiz-option .opt-letter {
+  display: inline-block;
+  font-family: var(--mil-font-ui);
+  font-weight: 600;
+  color: var(--mil-ink-faint);
+  margin-right: 0.6em;
+  min-width: 1.2em;
+}
+.nature-page[data-lang="zh"] .quiz-option .opt-letter {
+  font-family: var(--mil-font-cn);
+}
+
+/* Answered state */
+.nature-page .quiz[data-answered="true"] .quiz-option {
+  cursor: default;
+  opacity: 0.6;
+}
+.nature-page .quiz[data-answered="true"] .quiz-option.selected.correct {
+  background: #e6f4ea;
+  border-color: #2f7d32;
+  color: #1b5e20;
+  opacity: 1;
+}
+.nature-page .quiz[data-answered="true"] .quiz-option.selected.incorrect {
+  background: #fbecec;
+  border-color: #a8312a;
+  color: #762020;
+  opacity: 1;
+}
+.nature-page .quiz[data-answered="true"] .quiz-option.correct:not(.selected) {
+  background: #e6f4ea;
+  border-color: #2f7d32;
+  color: #1b5e20;
+  opacity: 1;
+}
+.nature-page .quiz[data-answered="true"] .quiz-option .opt-letter {
+  color: inherit;
+}
+
+/* Explanation panel — hidden by default, revealed after answering */
+.nature-page .quiz-explanation {
+  display: none;
+  margin: 0.9rem 0 0;
+  padding: 0.9rem 1.1rem;
+  background: var(--mil-pale-blue);
+  border-left: 3px solid var(--mil-sapphire);
+  border-radius: 0 3px 3px 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--mil-ink);
+}
+.nature-page[data-lang="zh"] .quiz-explanation {
+  font-family: var(--mil-font-cn);
+  line-height: 1.75;
+}
+.nature-page .quiz[data-answered="true"] .quiz-explanation {
+  display: block;
+}
+.nature-page .quiz-explanation p { margin: 0 0 0.7em; max-width: none; }
+.nature-page .quiz-explanation p:last-child { margin-bottom: 0; }
+.nature-page .quiz-explanation .answer-tag {
+  display: inline-block;
+  font-family: var(--mil-font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--mil-navy);
+  color: white;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  margin-right: 0.5rem;
+  vertical-align: 0.1em;
+}
+.nature-page[data-lang="zh"] .quiz-explanation .answer-tag {
+  font-family: var(--mil-font-cn);
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-size: 0.78rem;
+}
+.nature-page .quiz-explanation .ref-cite {
+  font-family: var(--mil-font-ui);
+  font-size: 0.82rem;
+  color: var(--mil-ink-faint);
+  display: block;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+.nature-page[data-lang="zh"] .quiz-explanation .ref-cite {
+  font-family: var(--mil-font-cn);
+  font-style: normal;
+}
+
+/* ─── Footnote markers ───────────────────────────────────────────── */
+.nature-page .fn-ref {
+  font-family: var(--mil-font-ui);
+  font-size: 0.72em;
+  font-weight: 600;
+  color: var(--mil-navy);
+  text-decoration: none;
+  vertical-align: super;
+  line-height: 1;
+  padding: 0 0.15em;
+  border: none;
+}
+.nature-page .fn-ref::before { content: "["; color: var(--mil-ink-faint); }
+.nature-page .fn-ref::after  { content: "]"; color: var(--mil-ink-faint); }
+.nature-page .fn-ref:hover { color: var(--mil-rust); text-decoration: none; }
+
+/* ─── Glossary tables (final §) ──────────────────────────────────── */
+.nature-page .glossary h3 {
+  margin-top: 2rem;
+}
+.nature-page .glossary table {
+  font-size: 0.9rem;
+}
+.nature-page .glossary td:first-child {
+  white-space: nowrap;
+}
+
+/* ─── Italic Latin within Chinese context ────────────────────────── */
+.nature-page[data-lang="zh"] em {
+  font-family: var(--mil-font-body);
+  font-style: italic;
+}
+
+/* ─── Standalone punctuated paragraph (for short isolated lines) ── */
+.nature-page p.standalone {
+  font-style: italic;
+  color: var(--mil-ink-soft);
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 30rem;
+  font-size: 1.02rem;
+}
+.nature-page[data-lang="zh"] p.standalone {
+  font-style: normal;
+  font-family: var(--mil-font-cn);
+}
+
+/* ─── Dialogue block (for the opening conversation in §4.1) ──────── */
+.nature-page .dialogue {
+  background: var(--mil-paper-deep);
+  border-left: 3px solid var(--mil-graphite);
+  padding: 0.95rem 1.2rem;
+  margin: 1.5rem 0;
+  max-width: 50rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.nature-page[data-lang="zh"] .dialogue {
+  font-family: var(--mil-font-cn);
+  line-height: 1.75;
+}
+.nature-page .dialogue .speaker {
+  font-family: var(--mil-font-ui);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mil-ink-faint);
+  margin-right: 0.4em;
+}
+.nature-page[data-lang="zh"] .dialogue .speaker {
+  font-family: var(--mil-font-cn);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.88rem;
+}
+.nature-page .dialogue p { margin: 0 0 0.5em; max-width: none; }
+.nature-page .dialogue p:last-child { margin-bottom: 0; }
