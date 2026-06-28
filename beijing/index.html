@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>北京·现在进行时 · 一份关于拍摄当下中国的提案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+SC:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f1ec; --bg-deep:#e8e2d8; --ink:#1a1a1a; --ink-soft:#3a3a3a;
+    --ink-faded:#6b6863; --accent:#8b3a2f; --navy:#2c3a4a;
+    --rule:rgba(26,26,26,0.12); --paper-shadow:0 1px 2px rgba(0,0,0,0.04),0 8px 24px rgba(0,0,0,0.06);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Serif SC','Cormorant Garamond',Georgia,serif;
+    background:var(--bg); color:var(--ink); line-height:1.85; font-weight:400;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    background-image:radial-gradient(ellipse at top,rgba(44,58,74,0.035),transparent 60%),radial-gradient(ellipse at bottom,rgba(139,58,47,0.025),transparent 60%);
+  }
+
+  /* —— 封面 —— */
+  .cover{
+    min-height:96vh; display:flex; flex-direction:column; justify-content:center;
+    align-items:center; text-align:center; padding:60px 24px 48px;
+    border-bottom:1px solid var(--rule); position:relative;
+  }
+  .cover::before{
+    content:''; position:absolute; top:36px; left:50%; transform:translateX(-50%);
+    width:1px; height:56px; background:var(--ink-faded); opacity:0.4;
+  }
+  .cover-overline{
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:14px;
+    letter-spacing:0.32em; color:var(--ink-faded); text-transform:uppercase;
+    margin-top:84px; margin-bottom:34px;
+  }
+  .cover h1{
+    font-family:'Noto Serif SC',serif; font-weight:200;
+    font-size:clamp(40px,11vw,76px); line-height:1.18; letter-spacing:0.08em;
+    color:var(--ink); margin-bottom:8px;
+  }
+  .cover h1 .br-en{
+    display:block; font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-weight:300; font-size:0.4em; color:var(--accent);
+    margin-top:22px; letter-spacing:0.04em;
+  }
+  .cover-subtitle{
+    max-width:560px; font-size:15.5px; line-height:2.0; color:var(--ink-soft);
+    margin:34px auto 0; font-weight:300;
+  }
+  .cover-rule{width:64px; height:1px; background:var(--ink-faded); margin:42px auto 26px; opacity:0.5;}
+  .cover-meta{
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px;
+    letter-spacing:0.16em; color:var(--ink-faded);
+  }
+
+  /* —— 章节通用 —— */
+  .section{
+    max-width:680px; margin:0 auto; padding:88px 28px 72px;
+    border-bottom:1px solid var(--rule);
+  }
+  .section-label{
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px;
+    letter-spacing:0.26em; color:var(--accent); text-transform:uppercase;
+    margin-bottom:22px; display:block;
+  }
+  .section h2{
+    font-family:'Noto Serif SC',serif; font-weight:400;
+    font-size:clamp(25px,5.5vw,34px); line-height:1.42; margin-bottom:32px;
+    letter-spacing:0.03em;
+  }
+  .section p{font-size:16.5px; line-height:2.0; margin-bottom:20px; color:var(--ink-soft); font-weight:400;}
+  .section p.lead-first::first-letter{
+    font-family:'Cormorant Garamond',serif; font-size:3.8em; font-weight:400;
+    float:left; line-height:0.82; margin:0.08em 0.1em 0 -0.03em; color:var(--accent);
+  }
+  .section strong{color:var(--ink); font-weight:600;}
+  .section em{font-family:'Cormorant Garamond','Noto Serif SC',serif; font-style:italic; color:var(--ink); font-weight:400;}
+
+  /* 主音句 / 强调块 */
+  .refrain{
+    margin:30px 0; padding:26px 30px; background:rgba(44,58,74,0.05);
+    border-left:3px solid var(--navy); border-radius:1px;
+  }
+  .refrain p{
+    font-family:'Cormorant Garamond','Noto Serif SC',serif; font-style:italic;
+    font-size:18px; line-height:1.9; color:var(--ink); margin-bottom:0; font-weight:400;
+  }
+  .key-claim{
+    margin:30px 0; padding:26px 30px; background:rgba(139,58,47,0.05);
+    border-left:3px solid var(--accent); border-radius:1px;
+  }
+  .key-claim p{
+    font-family:'Cormorant Garamond','Noto Serif SC',serif; font-style:italic;
+    font-size:17px; line-height:1.88; color:var(--ink); margin-bottom:0; font-weight:400;
+  }
+
+  /* 缝隙三连排比 */
+  .crevice{margin:24px 0 8px; padding-left:22px; border-left:2px solid var(--rule);}
+  .crevice p{font-size:16px; line-height:1.9; margin-bottom:14px; color:var(--ink-soft);}
+  .crevice p:last-child{margin-bottom:0;}
+  .crevice .not{color:var(--ink-faded);}
+  .crevice .but{color:var(--ink); font-weight:500;}
+
+  /* —— 题材块 —— */
+  .topic{
+    max-width:720px; margin:0 auto; padding:80px 28px 64px;
+    border-bottom:1px solid var(--rule);
+  }
+  .topic-num{
+    font-family:'Cormorant Garamond',serif; font-size:14px; letter-spacing:0.3em;
+    color:var(--ink-faded); margin-bottom:12px; display:flex; align-items:center; gap:12px;
+  }
+  .topic-num::after{content:''; flex:1; height:1px; background:var(--rule);}
+  .topic-title{
+    font-family:'Noto Serif SC',serif; font-weight:500;
+    font-size:clamp(24px,5.5vw,32px); letter-spacing:0.04em; line-height:1.35;
+    margin-bottom:6px;
+  }
+  .topic-title .mark{color:var(--accent);}
+  .topic-en{
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px;
+    color:var(--ink-faded); margin-bottom:18px; letter-spacing:0.04em;
+  }
+  .topic-tagline{
+    font-family:'Cormorant Garamond','Noto Serif SC',serif; font-style:italic;
+    font-size:18px; color:var(--navy); padding:14px 0 18px 20px;
+    border-left:2px solid var(--navy); margin-bottom:28px; background:rgba(44,58,74,0.03);
+    font-weight:400;
+  }
+  .topic p{font-size:16.5px; line-height:2.0; margin-bottom:20px; color:var(--ink-soft);}
+  .topic strong{color:var(--ink); font-weight:600;}
+  .topic em{font-family:'Cormorant Garamond','Noto Serif SC',serif; font-style:italic; color:var(--ink);}
+  .topic h3{
+    font-family:'Noto Serif SC',serif; font-weight:500; font-size:15px;
+    letter-spacing:0.14em; color:var(--ink); margin:32px 0 14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .topic h3::before{content:''; width:16px; height:1px; background:var(--accent);}
+
+  /* —— 总览结构图 —— */
+  .blueprint{max-width:780px; margin:0 auto; padding:84px 28px 30px; border-bottom:1px solid var(--rule);}
+  .bp-creed{
+    margin:0 0 6px; padding:30px 32px; background:rgba(44,58,74,0.055);
+    border:1px solid rgba(44,58,74,0.18); border-radius:2px; text-align:center;
+  }
+  .bp-creed .bp-creed-label{
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:12.5px;
+    letter-spacing:0.26em; color:var(--navy); text-transform:uppercase; margin-bottom:16px;
+  }
+  .bp-creed p{
+    font-family:'Noto Serif SC',serif; font-weight:400; font-size:clamp(17px,3.6vw,20px);
+    line-height:1.78; color:var(--ink); margin:0; letter-spacing:0.02em;
+  }
+  .bp-creed p em{font-family:'Cormorant Garamond','Noto Serif SC',serif; font-style:italic; color:var(--accent); font-weight:400;}
+  .bp-stem{width:1px; height:34px; background:var(--navy); opacity:0.35; margin:0 auto;}
+  .bp-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; margin-top:6px;}
+  .bp-col{
+    background:var(--bg); border:1px solid var(--rule); border-top:2px solid var(--accent);
+    border-radius:2px; padding:24px 20px 26px; display:flex; flex-direction:column;
+  }
+  .bp-col .bp-no{
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:12.5px;
+    letter-spacing:0.2em; color:var(--ink-faded); margin-bottom:10px;
+  }
+  .bp-col .bp-name{
+    font-family:'Noto Serif SC',serif; font-weight:500; font-size:19px;
+    letter-spacing:0.04em; color:var(--ink); margin-bottom:4px;
+  }
+  .bp-col .bp-en{
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:12.5px;
+    color:var(--ink-faded); margin-bottom:16px; line-height:1.4;
+  }
+  .bp-col .bp-row{margin-bottom:13px;}
+  .bp-col .bp-row:last-child{margin-bottom:0;}
+  .bp-col .bp-k{
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:11.5px;
+    letter-spacing:0.14em; color:var(--accent); text-transform:uppercase; display:block; margin-bottom:3px;
+  }
+  .bp-col .bp-v{font-size:14px; line-height:1.7; color:var(--ink-soft);}
+  .bp-col .bp-v strong{color:var(--ink); font-weight:600;}
+  @media (max-width:640px){
+    .bp-grid{grid-template-columns:1fr; gap:0;}
+    .bp-col{border-top:1px solid var(--rule); border-left:2px solid var(--accent);}
+    .bp-col:first-child{border-top:1px solid var(--rule);}
+  }
+
+  /* —— 收束章 —— */
+  .coda{max-width:680px; margin:0 auto; padding:72px 28px 80px; border-bottom:1px solid var(--rule);}
+  .coda .triad{margin:8px 0 30px; padding-left:22px; border-left:2px solid var(--accent);}
+  .coda .triad p{font-size:16.5px; line-height:1.9; margin-bottom:12px; color:var(--ink-soft);}
+  .coda .triad strong{color:var(--ink); font-weight:600;}
+  .coda .final{
+    font-family:'Noto Serif SC',serif; font-weight:400; font-size:clamp(22px,5vw,28px);
+    line-height:1.6; letter-spacing:0.04em; color:var(--ink); text-align:center;
+    margin:44px 0 12px;
+  }
+  .coda .final em{font-family:'Cormorant Garamond','Noto Serif SC',serif; font-style:italic; color:var(--accent);}
+
+  /* —— 导览词（参照阅读） —— */
+  .annex{max-width:680px; margin:0 auto; padding:84px 28px 64px;}
+  .annex-intro{
+    font-family:'Cormorant Garamond','Noto Serif SC',serif; font-style:italic;
+    font-size:15.5px; line-height:1.95; color:var(--ink-faded);
+    padding:0 0 0 22px; border-left:2px solid var(--rule); margin-bottom:48px;
+  }
+  .annex h2{
+    font-family:'Noto Serif SC',serif; font-weight:300;
+    font-size:clamp(28px,6vw,40px); letter-spacing:0.1em; text-align:center;
+    margin-bottom:8px; color:var(--ink);
+  }
+  .annex .annex-en{
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:14px;
+    letter-spacing:0.12em; color:var(--ink-faded); text-align:center; margin-bottom:44px;
+  }
+  .annex p{font-size:16px; line-height:2.0; margin-bottom:18px; color:var(--ink-soft);}
+  .annex p.drop::first-letter{
+    font-family:'Cormorant Garamond',serif; font-size:3.4em; font-weight:400;
+    float:left; line-height:0.82; margin:0.08em 0.1em 0 -0.03em; color:var(--navy);
+  }
+  .annex strong{color:var(--ink); font-weight:500;}
+  .annex em{font-family:'Cormorant Garamond','Noto Serif SC',serif; font-style:italic; color:var(--ink);}
+  .annex .annex-close{
+    margin-top:30px; padding-top:28px; border-top:1px solid var(--rule);
+    font-size:16px; line-height:2.05; color:var(--ink-soft);
+  }
+  .annex .annex-close p{margin-bottom:14px;}
+
+  .colophon{
+    text-align:center; padding:56px 24px 72px; color:var(--ink-faded);
+    font-family:'Cormorant Garamond','Noto Serif SC',serif; font-style:italic;
+    font-size:14px; letter-spacing:0.1em; line-height:1.9;
+  }
+
+  @media (max-width:600px){
+    .section,.topic,.coda,.annex{padding-left:20px; padding-right:20px;}
+    .section,.coda,.annex{padding-top:64px; padding-bottom:52px;}
+    .topic{padding-top:60px; padding-bottom:48px;}
+    .refrain,.key-claim{padding:22px 22px;}
+    .cover h1{letter-spacing:0.04em;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 封面 ============ -->
+<header class="cover">
+  <div class="cover-overline">A Proposal &middot; 关于拍摄当下中国</div>
+  <h1>北京<br>现在进行时<span class="br-en">Beijing, in the Present Tense</span></h1>
+  <div class="cover-subtitle">
+    一份关于拍摄当下中国的提案。<br>
+    不拍那个被怀旧规定的旧中国，也不拍那个被宣传规定的新中国；<br>
+    只拍此刻真实运转着的、普通人正在其中讨生活、过日子的——当下的北京。
+  </div>
+  <div class="cover-rule"></div>
+  <div class="cover-meta">三个题材 &middot; 一个纲领 &middot; 2026</div>
+</header>
+
+<!-- ============ 一 ============ -->
+<section class="section">
+  <span class="section-label">I &middot; 一个常常令人出神的瞬间</span>
+  <h2>他们爱上的，似乎多是一个「古老的中国」</h2>
+  <p class="lead-first">这几年，越来越多的外国人去中国旅行，然后真心实意地赞叹它。这是好事。</p>
+  <p>但每次看那些旅行视频，那一张张兴奋的脸，却<strong>不禁让人嘴角微笑、眉头又轻轻锁起</strong>。因为镜头里的中国，来来去去常是那几样：在西安的大唐不夜城穿一身古装，在广西的漓江坐一程竹筏，登长城，逛天坛，看一场仿古的演出……</p>
+  <p>这些当然都有趣，也都值得。可是看得多了，会渐渐注意到一件事——他们爱上的，似乎多是一个<em>古老的中国</em>。一个文明悠久、神秘、值得凭吊的中国。一个被妥帖地安放在<strong>过去时</strong>里的中国。</p>
+  <p>这中间藏着一个细微却要紧的错位。竹筏和长城说的是「中国曾经很了不起」；可是，<strong>很少有什么在说「中国人此刻正怎样活着」。</strong></p>
+  <p>而一个或许更值得被看见的中国，其实是另一句朴素得多的话：</p>
+  <div class="refrain"><p>中国人也过着不好不坏的、普普通通的现代生活，和世界上任何地方的人一样。</p></div>
+  <p>他们也会在周末去美术馆看一场展览，去听一场歌剧，会为生计在清晨五点出摊，会在堵车的长龙里盯着导航发呆，会用手机扫码买一份煎饼，会在冬天滑雪。这种生活，谈不上多么辉煌，也并不悲情——它就是<em>普通的、当下的、与巴黎人纽约人结构相同的现代日子</em>。</p>
+  <p>而恰恰是这个「普通」，几乎从没有被好好地拍过。</p>
+  <p>让人惊叹「中国好强大」并不难；难的、也更动人的，是让人安静地意识到——<strong>中国就活在此刻，既没有停在过去，也没有飞向某个许诺的未来。</strong>这件事，往往比宏大的赞叹更有说服力——因为它不是炫耀，是平视。</p>
+</section>
+
+<!-- ============ 二 ============ -->
+<section class="section">
+  <span class="section-label">II &middot; 为什么偏偏少有人拍「此刻」</span>
+  <h2>真正被拍滥的，是一整套「什么才配被拍」的眼光</h2>
+  <p class="lead-first">外国人镜头里的中国之所以常是「古老」的，其实不能全怪他们。因为很多时候，连中国的摄影圈自己，也在拍那个古老的中国。</p>
+  <p>翻开今天的摄影展、摄影画册，扑面而来的多还是那几样：四合院、胡同、故宫的角楼、看不懂的藻井、牧民转场、瓯江帆影、最后的马帮……它们美则美矣，却常共享着同一个隐秘的前提——<strong>都在拍一个已经完成了的、停在过去的中国。</strong></p>
+  <p>这种拍法之所以流行，很大程度上是因为它安全。</p>
+  <p>这些题材<strong>自带「美」的现成认证</strong>，镜头一对准就「像一张好照片」——它近乎一种审美上的搭便车，借被摄物本身的文化光环，替代了摄影者自己的眼光。它还<strong>自带「抢救文化」「记录乡愁」的道德正当性</strong>，几乎没人会追问一句「你为什么拍这个」。</p>
+  <p>于是一代又一代人，容易终其一生都在复制那个<em>被预先批准的中国形象</em>：要古，要旧，要有少数民族，要有袅袅炊烟。而窗外那个真实发生着的、剧烈变化着的、<strong>此刻</strong>的中国，反倒成了盲区。</p>
+  <div class="key-claim"><p>所以，真正被拍滥的，或许从来不是哪一个亭子、哪一棵树。被拍滥的，是一整套「什么才配被拍」的眼光。换一个没人去过的新地方，如果带着的还是这套旧眼光，多半照样拍出平庸的新题材。</p></div>
+  <p>掉转镜头的时机，到了。</p>
+</section>
+
+<!-- ============ 三 ============ -->
+<section class="section">
+  <span class="section-label">III &middot; 两个值得避开的坑</span>
+  <h2>怀旧，与它的反面——宣传画</h2>
+  <p class="lead-first">把镜头转向「此刻」，听起来简单，但路的两边各有一个坑，稍不留神就会掉进去。</p>
+  <p><strong>第一个坑，是怀旧。</strong>这个好懂——就是上面说的那一切，拍「正在消失的」，而不是「正在发生的」。绕开它，大抵只需时时记得：镜头要对准当下，不对准昨天。</p>
+  <p><strong>第二个坑更隐蔽，也更危险——它是怀旧的反面：宣传画。</strong></p>
+  <p>一个想拍「现代中国」的人，最容易一头扎进的，往往是玻璃幕墙的天际线、飞驰的高铁、璀璨的 CBD 夜景、「扫码支付真方便」。那一套光鲜亮丽的现代化奇观，是政府宣传片和招商画册的语言。它看起来和胡同乡愁截然相反，<strong>骨子里却常是同一回事</strong>——</p>
+  <p>一个是被外人的想象规定好的中国，一个是被官方的叙事规定好的中国。<em>两者都未必是你亲眼看见的中国。</em></p>
+  <p>这里的分界线，是「<strong>繁荣</strong>」和「<strong>同时代性</strong>」之间的差别。繁荣在炫耀，它的潜台词是「你看我们多厉害」；同时代性在平视，它说的是——<strong>这里的人，就活在此刻这个当下。</strong>前者要的是高楼和数据，后者要的是那个<em>在高楼底下、为生活奔忙的具体的人</em>。</p>
+  <p>一张真正有力量的当代影像，往往不在「光鲜繁荣」的正面，而藏在<strong>崭新与陈旧、宏大与卑微之间那些尴尬的、尚未被任何叙事收编的缝隙里</strong>——</p>
+  <div class="crevice">
+    <p><span class="not">不是</span>地铁站光鲜的效果图，<span class="but">是那个贴满野广告、被电动车堵着、栏杆歪斜的真实出入口；</span></p>
+    <p><span class="not">不是</span>网约车广告里的微笑司机，<span class="but">是堵车长龙里那个沉默的、脖颈前倾的、已经开了十二小时的背影；</span></p>
+    <p><span class="not">不是</span>「中华美食」的精修大片，<span class="but">是煎饼摊塑料棚布下的那枚收款码、推车上的油渍、和城管来时随时要收摊的临时感。</span></p>
+  </div>
+  <div class="refrain"><p>真实，往往比繁荣更有说服力；也往往比繁荣，更难被任何人收编。</p></div>
+</section>
+
+<!-- ============ 四 ============ -->
+<section class="section">
+  <span class="section-label">IV &middot; 一座桥</span>
+  <h2>奇观里，要有人</h2>
+  <p class="lead-first">避开了两个坑，还有最后一道关要过。</p>
+  <p>当目标定为「拍此刻的中国」，脑子里很容易冒出一串宏大的现场：世界最大的铁路枢纽、连成片的黑土地、国家大剧院、世界级的雪场……这些确实都是当下中国最生动的地方。但请务必警惕——</p>
+  <p><strong>把郑州的铁路枢纽拍成一张壮丽的航拍大片，所犯的错，和把故宫角楼拍成糖水片，可能一模一样。</strong></p>
+  <p>因为奇观就是奇观，无论它古老还是现代。一旦被景观本身的壮观主导、人退到了它身后，就又一次成了那个「替美景搭便车」的人——只不过这一次搭的，是「现代化」这班车。<em>现代化的风光片，说到底，依然是风光片。</em></p>
+  <p>那么，怎么过这一关？一个可靠的答案是：<strong>让奇观里，有人。</strong>把宏大的现场，还原成现场里那个具体的、当下的人——</p>
+  <div class="crevice">
+    <p><span class="not">不是</span>「国家大剧院」这栋建筑，<span class="but">是一个普通人坐在剧场里，仰头听一场歌剧；</span></p>
+    <p><span class="not">不是</span>「黑土地」这片地，<span class="but">是一个农民坐在巨大的拖拉机驾驶室里，盯着卫星导航的屏幕种地；</span></p>
+    <p><span class="not">不是</span>「铁路枢纽」这项工程，<span class="but">是调度室里那个盯着几百条线路、彻夜未眠的人。</span></p>
+  </div>
+  <p>只要焦点落在人身上，往往三件事会同时发生：它躲开了宣传画（因为拍的是生活，不是成就）；它有了温度（因为人比物动人）；它最终说出了那句最朴素的话——</p>
+  <div class="refrain"><p>这里的人，不活在过去，不活在未来，而是普普通通地、现代地活着。</p></div>
+</section>
+
+<!-- ============ 题材一 ============ -->
+<section class="topic">
+  <div class="topic-num">题材一 &middot; TOPIC ONE</div>
+  <div class="topic-title">〈站口〉<span class="mark">·</span> 北京地铁的类型学</div>
+  <div class="topic-en">The Mouths of the Metro &middot; A Typology</div>
+  <div class="topic-tagline">这座城运转的骨架。</div>
+  <p>用最严格的类型学方法，去拍北京每一座地铁站的地面出入口。</p>
+  <p>这条路有它光荣的源头。德国的贝歇夫妇（Bernd &amp; Hilla Becher），用一辈子，以同样的角度、同样的阴天光线、同样的画幅，拍遍了水塔、高炉、谷仓，从而奠定了整个<em>类型学摄影</em>，影响了此后半个世纪的当代影像。</p>
+  <p>它的方法，是一种近乎苦行的纪律：永远正面、平视、出入口居中；永远选阴天或散射光，以消灭一切戏剧性的阴影；永远用同一段焦距、同一个高度。</p>
+  <p>而它的魔力在于——<strong>当一致性被推到极致，个体之间最细微的差异，反而会被放大。</strong>这一座的雨棚多一道弧线，那一座的招牌歪了，这一座新刷了漆，那一座爬满野广告……当几十张、上百张这样的照片并排挂成一面墙，意义便从单张照片里溢出，降临到<em>整面阵列</em>之上。那时，这些沉默的水泥盒子会一齐开口，讲述一个关于标准化、关于扩张、关于一座超级城市如何生长的当代寓言。</p>
+  <p>这是三个题材里<strong>概念最硬、也最考验意志</strong>的一个。它不靠灵感，靠系统和脚力——北京数百座车站，要一座一座地、在对的光线里、用对的方法去啃。但也正因如此，<em>它最有可能，成为一件真正的代表作</em>。</p>
+  <p>地铁，是这座二十一世纪都市的毛细血管。少有什么，比它更适合作为这件作品的骨架。</p>
+</section>
+
+<!-- ============ 题材二 ============ -->
+<section class="topic">
+  <div class="topic-num">题材二 &middot; TOPIC TWO</div>
+  <div class="topic-title">〈载客〉<span class="mark">·</span> 新时代的骆驼祥子</div>
+  <div class="topic-en">Rickshaw Boy, a Century On</div>
+  <div class="topic-tagline">这座城里，劳作着、并被推着向前的人。</div>
+  <p>坐进车里，用超广角镜头向前拍。出租车、公交车、胡同里的三轮游览车都可以，而每一张画面里，都要有那个<strong>司机的背影</strong>。</p>
+  <p>这个机位本身，就是一句沉默而有力的话：<em>每一个人，都坐在一个由他人驾驶的容器里，穿过这座飞速变化的城。</em></p>
+  <p>而「新时代的骆驼祥子」这个题目，会瞬间把整组照片接上一条沉重的文学血脉。老舍笔下的祥子，拉着人力洋车，在旧北京的尘土里讨生活；今天，祥子的子孙们握着方向盘、扫着二维码，在堵车的长龙与导航的提示音里，讨着同样艰辛的生活。<strong>从人力洋车到内燃机，从铜板到手机支付——「发展」这两个字，就这样具体地、不容辩驳地，长在了这个题材的骨头里。</strong></p>
+  <p>这是三个题材里<em>最有「人」、也最有温度的一个</em>，最可能让人立刻拍出既动人又有分量的作品，因为它本就饱含情感。</p>
+  <h3>几句要紧的提醒</h3>
+  <p><strong>别让背影变小。</strong>超广角向前，街景会汹涌地扑进画面，稍不留神，司机就缩成角落里小小的一团，「祥子」也就没了。要让那个背影稳稳占住画面的分量——他的脖颈、搭在方向盘上的手、后视镜里映出的半张脸，<em>那才是真正的题眼</em>，而非挡风玻璃外的车流。</p>
+  <p><strong>这一次，不妨用彩色。</strong>出租车的明黄、公交车的红、胡同三轮上褪色的遮阳布——这些颜色本身，就是「北京」「当下」的一部分。黑白会把它们抽象成「永恒」，而这个题材要的，恰恰是此时此刻、不可替代的当代质感。</p>
+</section>
+
+<!-- ============ 题材三 ============ -->
+<section class="topic">
+  <div class="topic-num">题材三 &middot; TOPIC THREE</div>
+  <div class="topic-title">〈营生〉<span class="mark">·</span> 街头小吃车</div>
+  <div class="topic-en">The Street Carts &middot; A Living</div>
+  <div class="topic-tagline">这座城最鲜活的烟火，与喂养它的人。</div>
+  <p>卖煎饼的、卖臭豆腐的、卖烤冷面的、卖炒栗子的……去拍北京街头那些形形色色的小吃车。</p>
+  <p>它和〈载客〉，其实是同一个母题的两半——<strong>一个拍「载人讨生活的」，一个拍「喂人讨生活的」</strong>，合起来，就是这座城里那些无名劳动者的两副面孔。不妨把它们放在同一个母题之下：<em>这座城里，所有靠一双手讨生活的人。</em></p>
+  <p>这个题材最鲜活，有烟火、有蒸汽、有夜灯、有满满的人间气。但下笔前要先想清一件事：拍的，是冷峻的「车」，还是滚烫的「人」？</p>
+  <p>若走纯类型学一路，只作车与车的并置比较，小吃车那种天然的杂乱与临时，恐怕撑不起贝歇式的肃穆，反而两头不靠。<strong>所以更建议往「人与现场」走</strong>：蒸腾的热气、夜里的暖灯、摊主被油烟熏出的神情、那双翻动烤冷面的手——以及，别忘了那枚贴在推车上的收款码，那是这个时代最不动声色、却最确凿的注脚。</p>
+  <p>这一个，会让人直面陌生人。如果攀谈令人为难，那就把镜头收低一些：不拍正脸，只拍那双手、那团蒸汽、那辆挂满家什的不锈钢推车。<em>有时候，一双手，比一张脸，说得更多。</em></p>
+</section>
+
+<!-- ============ 总览：一个纲领 · 三个题材 ============ -->
+<section class="blueprint">
+  <span class="section-label" style="display:block; text-align:center;">V &middot; 一个纲领，三个题材</span>
+  <div class="bp-creed">
+    <div class="bp-creed-label">The Creed &middot; 纲领</div>
+    <p>不拍那个被怀旧规定的旧中国，也不拍那个被宣传规定的新中国；<br>拍此刻真实运转着的、普通人正在其中讨生活、过日子的——<em>当下的北京</em>。</p>
+  </div>
+  <div class="bp-stem"></div>
+  <div class="bp-grid">
+    <div class="bp-col">
+      <div class="bp-no">题材一 · I</div>
+      <div class="bp-name">〈站口〉</div>
+      <div class="bp-en">北京地铁的类型学<br>The Mouths of the Metro</div>
+      <div class="bp-row"><span class="bp-k">尺度</span><span class="bp-v">基础设施 · 城的骨架</span></div>
+      <div class="bp-row"><span class="bp-k">母题</span><span class="bp-v">支撑这座城运转的<strong>当代造物</strong></span></div>
+      <div class="bp-row"><span class="bp-k">方法</span><span class="bp-v">贝歇式类型学：统一光线、机位、画幅，以网格阵列见微差</span></div>
+    </div>
+    <div class="bp-col">
+      <div class="bp-no">题材二 · II</div>
+      <div class="bp-name">〈载客〉</div>
+      <div class="bp-en">新时代的骆驼祥子<br>Rickshaw Boy, a Century On</div>
+      <div class="bp-row"><span class="bp-k">尺度</span><span class="bp-v">街头 · 劳作的人</span></div>
+      <div class="bp-row"><span class="bp-k">母题</span><span class="bp-v">劳作着、并<strong>被推着向前</strong>的人</span></div>
+      <div class="bp-row"><span class="bp-k">方法</span><span class="bp-v">车内超广角向前，纳入司机背影；彩色</span></div>
+    </div>
+    <div class="bp-col">
+      <div class="bp-no">题材三 · III</div>
+      <div class="bp-name">〈营生〉</div>
+      <div class="bp-en">街头小吃车<br>The Street Carts</div>
+      <div class="bp-row"><span class="bp-k">尺度</span><span class="bp-v">街头 · 烟火与生计</span></div>
+      <div class="bp-row"><span class="bp-k">母题</span><span class="bp-v">靠<strong>一双手</strong>讨生活的人</span></div>
+      <div class="bp-row"><span class="bp-k">方法</span><span class="bp-v">弃冷峻类型学，走人与现场：蒸汽、暖灯、手、收款码</span></div>
+    </div>
+  </div>
+  <p style="text-align:center; font-size:14.5px; color:var(--ink-faded); margin-top:26px; line-height:1.85;">
+    〈载客〉与〈营生〉同属一个母题的两半——<em style="font-family:'Cormorant Garamond','Noto Serif SC',serif; font-style:italic; color:var(--ink);">一个载人讨生活，一个喂人讨生活</em>。
+  </p>
+</section>
+
+<!-- ============ 收束 ============ -->
+<section class="coda">
+  <span class="section-label">Coda &middot; 同一句话</span>
+  <h2>它们说的，是同一句话</h2>
+  <div class="triad">
+    <p>〈站口〉，是这座城运转的<strong>骨架</strong>；</p>
+    <p>〈载客〉，是这座城里<strong>劳作着、并被推着向前的人</strong>；</p>
+    <p>〈营生〉，是这座城<strong>最鲜活的烟火与生计</strong>。</p>
+  </div>
+  <p>它们合起来，映照出一个正活在<em>「现在进行时」</em>里的北京：它的造物在生长，它的人民在奔忙、在讨生活、在一个与全世界同步的当下里，认真地活着。</p>
+  <p>这不是一个供人凭吊的旧中国，也不是一个用来炫耀的新中国。</p>
+  <div class="final">这是一个，和你我，<br><em>活在同一个时代里的中国。</em></div>
+  <p style="text-align:center; margin-top:32px; color:var(--ink-faded); font-size:15.5px;">而要拍下它，不必去远方，不必等奇遇。只需换一双眼睛，<br>然后走到楼下那个地铁口——按下第一次快门。</p>
+</section>
+
+<!-- ============ 附:导览词 ============ -->
+<section class="annex">
+  <div class="annex-intro">
+    以下是一段或许能作为参照的文字。它原是一篇美术馆的展览导览词，谈的是绘画，但它说的那件事——艺术如何成为它所处时代的镜子——或许正可以照见上面这份提案真正想做的事。读它，不为别的，只为在动身之前，先确认一遍脚下站着的，是怎样一片值得被记录的土地。
+  </div>
+  <h2>时代的镜子</h2>
+  <div class="annex-en">A Mirror of Its Age</div>
+  <p class="drop">康定斯基在《艺术中的精神》一书中开篇就提到：艺术诞生于它的时代，也孕育着我们的情感。</p>
+  <p>艺术，从来都不是与时代无关的存在。它像一面镜子，照见的不只是色彩与明暗，更是一个时代的呼吸与灵魂。</p>
+  <p>十七世纪的镜子，映照着信仰与权力的辉煌。那是教堂穹顶高耸、光线神圣的时代，艺术为神与王冠而生，描绘的是永恒与荣耀，是人类仰望天国的姿态。卡拉瓦乔、鲁本斯、伦勃朗，他们的光影与情感，让信仰第一次以人的形象出现。</p>
+  <p>十八世纪的镜子，映出了理性与启蒙的光辉。思想的火花在欧洲燃起，科学与自由的理念让人类开始用理性理解世界。艺术家不再只歌颂神，而是塑造人——描绘公民的勇气、社会的秩序与道德的美德。那是人类第一次在艺术中学会正视自己。</p>
+  <p>十九世纪的镜子，照出了工业革命的轰鸣与变革。蒸汽与机器改变了城市的节奏，艺术家开始关注现实、描绘劳动、以及社会的矛盾与希望。那时的画布上，闪烁着工厂的火光和现代化的黎明。</p>
+  <p>而今天，我们脚下这片土地——二十一世纪的中国，又该用怎样的镜子来映照呢？</p>
+  <p>其实，答案就在我们每个人的身上。艺术家们手中的画笔，映照的正是我们——是工程师描绘的城市蓝图，是医生守护的万家灯火，是老师点亮的未来希望，是工人、农民、学生、科学家……也是每一位为生活付出的普通人。</p>
+  <p>我们共同经历的这一切，构成了艺术家创作的土壤。所以，即使是一件看似只表达个人情感的作品，它的根，也深深扎在我们这个时代的土地里。</p>
+  <p>当代中国艺术，正是我们这个伟大时代的镜子。它映照着社会的形状，也映照着每一个普通人的命运。它让我们在看艺术家创作的同时，也重新看到自己。</p>
+  <p>而正因为如此，这些正在被创作的作品，并不只是属于今天。它们将会成为未来理解我们这个时代的钥匙——让后人从中看到我们的生活方式、我们的理想、我们的心跳与光芒。</p>
+  <div class="annex-close">
+    <p>未来的中国艺术史里，一定会有我们这一代人的篇章，那画卷上最动人的，正是我们每个奋斗的身影；</p>
+    <p>未来的世界艺术史里，也一定会有属于二十一世纪中国的华彩，而构成那片华彩的，正是您为这个时代付出的心血与光热。</p>
+  </div>
+</section>
+
+<div class="colophon">
+  北京·现在进行时 &middot; 一份关于拍摄当下中国的提案<br>
+  Beijing, in the Present Tense &middot; 2026
+</div>
+
+</body>
+</html>
