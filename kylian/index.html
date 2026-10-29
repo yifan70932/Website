@@ -14,6 +14,15 @@
   <style>
     /* 两条题记之间留出间距；可并入 doubao.css */
     .epigraphs .epigraph + .epigraph { margin-top: 1.6rem; }
+    /* 节内题记与正文之间留出间距（hero 里的题记已由 doubao.css 处理） */
+    body.qx-page section .epigraphs { margin-bottom: 2.4rem; }
+    /* 本页图片较宽（信件、推文、声明截图），放大 receipt-figure；可并入 doubao.css */
+    body.qx-page .receipt-figure { max-width: 100%; width: 100%; }
+    body.qx-page .receipt-figure .receipt-frame { max-width: 980px; margin-left: auto; margin-right: auto; }
+    body.qx-page .receipt-figure .receipt-frame img { width: 100%; height: auto; display: block; }
+    body.qx-page .receipt-figure figcaption { max-width: 980px; margin-left: auto; margin-right: auto; }
+    body.qx-page .poster-figure .poster-frame { max-width: 640px; margin-left: auto; margin-right: auto; }
+    body.qx-page .poster-figure .poster-frame img { width: 100%; height: auto; display: block; }
   </style>
 </head>
 
